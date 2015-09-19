@@ -1,6 +1,6 @@
 # [Angular](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric).
 
-[![Slack Network](http://slack.ngofficeuifabric.com/badge.svg)](http://slack.ngofficeuifabric.com/)
+[![Slack Network](http://slack.ngofficeuifabric.com/badge.svg)](http://goo.gl/forms/ZPx1JmtUnq)
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
 [![devDependency Status](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric/dev-status.svg)](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric#info=devDependencies)
 
@@ -56,7 +56,7 @@ Directives from this repo are automatically tested with the following browsers
 
 ## Need Help?
 
-Join the Slack team https://ngofficeuifabric.slack.com to join the discussion... if you aren't a member [request an invite](http://slack.ngofficeuifabric.com/).
+Join the Slack team https://ngofficeuifabric.slack.com to join the discussion... if you aren't a member [request an invite](http://goo.gl/forms/ZPx1JmtUnq).
 
 **Please do not create new issues in this repo to ask a question about using the ng-OfficeUIFabric.**
 
@@ -66,4 +66,4 @@ Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabr
 
 # Contributing to the Project
 
-We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Contribution-Guide) for guidelines and jump in the Slack team to discuss how you can help: https://ngofficeuifabric.slack.com... if you aren't a member [request an invite](http://slack.ngofficeuifabric.com/).
+We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Contribution-Guide) for guidelines and jump in the Slack team to discuss how you can help: https://ngofficeuifabric.slack.com... if you aren't a member [request an invite](http://goo.gl/forms/ZPx1JmtUnq).
