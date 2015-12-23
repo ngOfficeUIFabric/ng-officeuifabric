@@ -13,4 +13,4 @@ before_script:
   - tsc -p ./
 
 script:
-  - "./node_modules/karma/bin/karma start ./build/karma.conf.js"
+  - "./node_modules/karma/bin/karma start ./build/karma.conf.js --single-run"
