@@ -8,7 +8,7 @@ import * as yargs from 'yargs';
 let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
- * Removes all generated JavaScript from TypeScript used in the app as the gulp task 'clean-app-ts'.
+ * Removes all generated JavaScript from TypeScript used in the app as the gulp task 'clean-lib-ts'.
  * 
  * @class
  */

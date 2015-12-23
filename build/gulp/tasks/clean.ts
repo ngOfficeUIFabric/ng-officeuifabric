@@ -4,7 +4,7 @@ import {BaseGulpTask} from '../BaseGulpTask';
 import {Utils} from '../utils';
 
 /**
- * Removes all built files as the gulp task 'clean'.
+ * Removes all transpiled TypeScript files as the gulp task 'clean'.
  * 
  * @class
  */
@@ -13,7 +13,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Removes all built files';
+  public static description: string = 'Removes all transpiled TypeScript files';
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -30,7 +30,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['clean-app-ts', 'clean-build-ts'];
+  public static dependencies: string[] = ['clean-build-ts', 'clean-lib-ts'];
 
   /** @constructor */
   constructor() {
