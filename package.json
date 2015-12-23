@@ -70,6 +70,7 @@
     "run-sequence": "^1.1.5",
     "ts-loader": "^0.7.2",
     "tslint": "^3.2.0",
+    "webpack": "^1.12.9",
     "yargs": "^3.31.0"
   }
 }
