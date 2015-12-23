@@ -12,7 +12,7 @@ branches:
 node_js:
   - stable
 
-install:
+after_install:
   # install dependencies
   - npm install -g gulp
   - npm install -g typescript
