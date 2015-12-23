@@ -1,5 +1,7 @@
 sudo: false
 language: node_js
+node_js:
+  - "stable"
 
 before_script:
   # install utils
@@ -11,4 +13,4 @@ before_script:
   - tsc -p ./
 
 script:
-  - "./node_modules/karma/bin/karma start start ./build/karma.conf.js"
+  - "./node_modules/karma/bin/karma start ./build/karma.conf.js"
