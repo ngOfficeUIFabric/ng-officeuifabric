@@ -21,7 +21,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
    */
-  public static aliases: string[] = ['b'];
+  public static aliases: string[] = ['tts'];
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
