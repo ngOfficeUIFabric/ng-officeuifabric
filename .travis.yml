@@ -14,12 +14,12 @@ before_script:
   - tsc -p ./
 
 script:
-  # execute all tests with code coverage analysis
-  - "./node_modules/istanbul/lib/cli.js cover ./node_modules/karma/bin/karma -- start ./build/karma.conf.js --single-run"
+  # execute all tests & gen code coverage report
+  - "./node_modules/karma/bin/karma start ./build/karma.conf.js --single-run"
 
 after_script:
   # send code coverage report to coveralls.io
-  - "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  - "cat ./coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 notifications:
   slack:
