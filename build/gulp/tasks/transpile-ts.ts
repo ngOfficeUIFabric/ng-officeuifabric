@@ -7,7 +7,7 @@ import * as yargs from 'yargs';
 let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
- * Builds all TypeScript as JavaScript as the gulp task 'build-ts'.
+ * Transpiles all TypeScript as JavaScript as the gulp task 'transpile-ts'.
  * 
  * @class
  */
