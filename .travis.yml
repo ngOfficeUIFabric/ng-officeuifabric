@@ -1,15 +1,26 @@
 sudo: false
 language: node_js
 
+git:
+  depth: 3
+
+branches:
+  only:
+    - master
+    - dev
+
 node_js:
   - stable
 
-before_script:
+install:
   # install dependencies
   - npm install -g gulp
+  - npm install -g typescript
   - npm install -g tsd
   # download type definitions
   - tsd install -r -o --save-dev
+
+before_script:
   # compile typescript
   - tsc -p ./
 
