@@ -8,6 +8,10 @@
     "email": "me@andrewconnell.com",
     "url": "http://www.andrewconnell.com"
   },
+  "contributors":[
+    "Connell, Andrew <me@andrewconnell.com>",
+    "Oldengarm, Roland <me@rolandoldengarm.com>"
+  ],
   "homepage": "https://github.com/ngOfficeUIFabric/ng-officeuifabric#readme",
   "repository": {
     "type": "git",
