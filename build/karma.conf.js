@@ -20,7 +20,6 @@ module.exports = function (config) {
       'node_modules/jquery/dist/jquery.min.js',
       'src/core/*.js',
       'src/components/*/*.js'
-
     ],
 
 
@@ -32,8 +31,8 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/core/*.js': 'coverage',
-      'src/components/*/*.js': 'coverage'
+      'src/core/**/*.js': 'coverage',
+      'src/components/*/!(*spec).js': 'coverage'
     },
 
     // test results reporter to use
