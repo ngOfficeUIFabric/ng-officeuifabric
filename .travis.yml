@@ -1,8 +1,14 @@
 sudo: false
 language: node_js
 
-script:
-  npm run-script test-travis
+before_script:
+  # install utils
+  - npm install -g gulp
+  - npm install -g tsd
+  # download all type definitions
+  - tsd install -r -o --save-dev
+  # compile all typescript
+  - tsc -p ./
 
-after_script:
-  "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+script:
+  - "./node_modules/karma/bin/karma start start ./build/karma.conf.js
