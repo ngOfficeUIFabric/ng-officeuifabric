@@ -41,9 +41,9 @@ export class GulpTask extends BaseGulpTask {
     };
 
     // get all build JS files
-    let tempFiles: string[] = BuildConfig.APP_JS;
+    let tempFiles: string[] = BuildConfig.LIB_JS;
     // less the JS that should be kept
-    BuildConfig.APP_KEEP_JS.forEach((keepFile: string) => {
+    BuildConfig.LIB_KEEP_JS.forEach((keepFile: string) => {
       tempFiles.push('!' + keepFile);
     });
 
