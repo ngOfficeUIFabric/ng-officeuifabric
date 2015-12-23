@@ -2,6 +2,7 @@
 
 [![Slack Network](http://slack.ngofficeuifabric.com/badge.svg)](http://slack.ngofficeuifabric.com)
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=setup-auto-test)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric)[![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=setup-auto-test&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=setup-auto-test)
 [![devDependency Status](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric/dev-status.svg)](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric#info=devDependencies)
 
 - [Installation](#installation)
@@ -20,7 +21,7 @@
 Other than manually downloading the library, the ng-OfficeUIFabric will be available in the following options:
 
 ## CDN via [cdnjs.com](https://cdnjs.com)
-##Bower
+## Bower
 
 > TODO: actual install instructions coming soon... once we have something to distribute :)
 
