@@ -1,8 +1,8 @@
 # [Angular](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric).
 
-[![Slack Network](http://slack.ngofficeuifabric.com/badge.svg)](http://slack.ngofficeuifabric.com)
+[![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=setup-auto-test)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric)[![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=setup-auto-test&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=setup-auto-test)
+[![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric)[![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric)
 [![devDependency Status](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric/dev-status.svg)](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric#info=devDependencies)
 
 - [Installation](#installation)
@@ -57,7 +57,7 @@ Directives from this repo are automatically tested with the following browsers
 
 ## Need Help?
 
-Join the Slack team https://ngofficeuifabric.slack.com to join the discussion... if you aren't a member [request an invite](http://slack.ngofficeuifabric.com).
+Join the Slack team http://ngofficeuifabric-slackin.azurewebsites.net to join the discussion... if you aren't a member [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
 
 **Please do not create new issues in this repo to ask a question about using the ng-OfficeUIFabric.**
 
@@ -67,4 +67,4 @@ Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabr
 
 # Contributing to the Project
 
-We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Contribution-Guide) for guidelines and jump in the Slack team to discuss how you can help: https://ngofficeuifabric.slack.com... if you aren't a member [request an invite](http://slack.ngofficeuifabric.com).
+We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Contribution-Guide) for guidelines and jump in the Slack team to discuss how you can help: http://ngofficeuifabric-slackin.azurewebsites.net... if you aren't a member [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
