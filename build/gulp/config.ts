@@ -36,13 +36,15 @@ export class BuildConfig {
     BuildConfig.BUILD_PATH + '/gulp/**/*.ts',
     'gulpfile.ts'
   ];
-  public static APP_TYPESCRIPT: string[] = [
-    BuildConfig.SOURCE + '/**/*.ts'
+  public static LIB_TYPESCRIPT: string[] = [
+    BuildConfig.SOURCE + '/core/**/*.ts',
+    BuildConfig.SOURCE + '/components/**/*.ts'
   ];
-  public static APP_TEST_TYPESCRIPT: string[] = [
-    BuildConfig.SOURCE + '/**/*.tests.ts'
+  public static LIB_TEST_TYPESCRIPT: string[] = [
+    BuildConfig.SOURCE + '/core/**/*.tests.ts',
+    BuildConfig.SOURCE + '/components/**/*.tests.ts'
   ];
   public static ALL_TYPESCRIPT: string[] = BuildConfig.BUILD_TYPESCRIPT
-    .concat(BuildConfig.APP_TYPESCRIPT)
-    .concat(BuildConfig.APP_TEST_TYPESCRIPT);
+    .concat(BuildConfig.LIB_TYPESCRIPT)
+    .concat(BuildConfig.LIB_TEST_TYPESCRIPT);
 }
