@@ -1,9 +1,16 @@
+'use strict';
+
+import * as yargs from 'yargs';
+
 export class BuildConfig {
   public static ROOT: string = '.';
   public static NODE_MODULES: string = 'node_modules';
   public static BUILD_PATH: string = BuildConfig.ROOT + '/build';
   public static GULP_TASKS: string = BuildConfig.BUILD_PATH + '/gulp/tasks';
   public static SOURCE: string = BuildConfig.ROOT + '/src';
+
+  // get version number
+  public static VERSION: number = yargs.argv.version || require('../../package.json').version;
 
   // banner added to all output
   public static BANNER_JS: string =
@@ -12,7 +19,7 @@ export class BuildConfig {
   ' * http://ngofficeuifabric.com\n' +
   ' * Angular 1.x directives for Microsoft\'s Office UI Fabric\n' +
   ' * https://angularjs.org & https://dev.office.com/fabric\n' +
-  ' * v1.0.0\n' +
+  ' * v' + BuildConfig.VERSION + '\n' +
   ' */\n';
 
   // build library paths

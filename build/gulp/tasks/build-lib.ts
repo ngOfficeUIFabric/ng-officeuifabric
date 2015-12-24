@@ -33,7 +33,8 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library'
+    'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
+    'version': 'Version number to set build library (if omitted, version from package.json is used)'
   };
 
   /**
@@ -47,7 +48,7 @@ export class GulpTask extends BaseGulpTask {
     Utils.log('Concatenating & Minifying JavaScript files');
 
     // build manifest of deployable JavaScript files
-    let depFiles: string[] = []
+    let depFiles: string[] = [];
     // ... include 3rd party dependencies
     depFiles = BuildConfig.LIB_KEEP_JS;
     // ... include transpiled TypeScript
@@ -58,15 +59,15 @@ export class GulpTask extends BaseGulpTask {
     });
 
     // concat & minify all JavaScript
-    gulp.src(depFiles)
+    return gulp.src(depFiles)
       .pipe($.stripComments())
       .pipe($.if(this._args.verbose, $.print()))
-      .pipe($.concat('ngOfficeUiFabric-1.0.0.js'))
+      .pipe($.concat(BuildConfig.OUTPUT_LIB_NAME + '-' + BuildConfig.VERSION + '.js'))
       .pipe($.insert.prepend(BuildConfig.BANNER_JS))
-      .pipe(gulp.dest('./dist'))
+      .pipe(gulp.dest(BuildConfig.OUTPUT_PATH))
       .pipe($.uglify({ preserveComments: 'all' }))
       .pipe($.rename({ extname: '.min.js' }))
-      .pipe(gulp.dest('./dist'));
+      .pipe(gulp.dest(BuildConfig.OUTPUT_PATH));
 
   }
 
