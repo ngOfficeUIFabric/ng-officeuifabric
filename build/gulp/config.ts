@@ -15,6 +15,13 @@ export class BuildConfig {
   ' * v1.0.0\n' +
   ' */\n';
 
+  // build library paths
+  public static OUTPUT_PATH: string = BuildConfig.ROOT + '/dist';
+  public static OUTPUT_LIB_NAME: string = 'ngOfficeUiFabric';
+
+  // code coverage reports
+  public static COVERAGE_PATH: string = BuildConfig.ROOT + '/coverage';
+
   /*
    * JavaScript files
    */

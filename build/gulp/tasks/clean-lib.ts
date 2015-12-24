@@ -8,7 +8,7 @@ import * as yargs from 'yargs';
 let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
- * Removes all generated JavaScript from TypeScript used in the build as the gulp task 'clean-build-ts'.
+ * Removes all generated JavaScript from TypeScript used in the app as the gulp task 'clean-lib-ts'.
  * 
  * @class
  */
@@ -17,7 +17,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Removes all generated JavaScript from TypeScript used in the build';
+  public static description: string = 'Removes all generated JavaScript from TypeScript used in the app';
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
@@ -34,23 +34,22 @@ export class GulpTask extends BaseGulpTask {
   /** @constructor */
   constructor() {
     super();
-    Utils.log('Removing generated build JavaScript files from source tree');
+    Utils.log('Removing generated app JavaScript files from source tree');
 
     let options: gulp.SrcOptions = {
       read: false
     };
 
     // get all build JS files
-    let tempFiles: string[] = BuildConfig.BUILD_JS;
-    // less the JS that should be kept
-    BuildConfig.BUILD_KEEP_JS.forEach((keepFile: string) => {
+    let tempFiles: string[] = BuildConfig.LIB_JS;
+    // .. add output files
+    tempFiles.push(BuildConfig.OUTPUT_PATH);
+    // .. less the JS that should be kept
+    BuildConfig.LIB_KEEP_JS.forEach((keepFile: string) => {
       tempFiles.push('!' + keepFile);
     });
 
-    return gulp.src(
-      tempFiles,
-      options
-    )
+    return gulp.src(tempFiles, options)
       .pipe($.if(this._args.verbose, $.print()))
       .pipe($.rimraf());
   }

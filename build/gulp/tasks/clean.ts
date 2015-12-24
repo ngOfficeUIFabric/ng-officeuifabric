@@ -30,7 +30,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['clean-build-ts', 'clean-lib-ts'];
+  public static dependencies: string[] = ['clean-build', 'clean-lib'];
 
   /** @constructor */
   constructor() {
