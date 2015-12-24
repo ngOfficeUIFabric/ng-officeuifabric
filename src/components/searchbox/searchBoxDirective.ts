@@ -19,11 +19,14 @@ class SearchBoxDirective implements ng.IDirective {
    
     link(scope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes) {
 
-        if (!this.uniqueId)
+        if (!this.uniqueId) {
             this.uniqueId = 1;
+        }
+       
         scope.uniqueId = this.uniqueId++;
         var cancel = false;
         var focus = false;
+      
         elem.find('.ms-SearchBox-field').on('focus', function () {
             /** Hide the label on focus. */
             $(this).siblings('.ms-SearchBox-label').hide();
@@ -56,13 +59,15 @@ class SearchBoxDirective implements ng.IDirective {
         });
 
         scope.$watch("value", function (val) {
-
-            if (!focus) {
-                if (val&&val != "") {
-                    elem.find('.ms-SearchBox-label').hide();
+          
+            if (!focus && elem!=null) {
+                if (val && val != "") {
+                    var elemLabel = elem.find('.ms-SearchBox-label');
+                    typeof (elemLabel.hide) == "function" && elemLabel.hide();
                 }
                 else {
-                    elem.find('.ms-SearchBox-label').show();
+                    var elemLabel = elem.find('.ms-SearchBox-label');
+                    typeof (elemLabel.show) == "function" && elemLabel.show();
                 }
             }
         });
