@@ -1,26 +1,38 @@
 # [Angular](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric).
 
-[![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric)[![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric)
+[![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 [![devDependency Status](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric/dev-status.svg)](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric#info=devDependencies)
+[![Issue Stats](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric/badge/pr)](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric)
+[![Issue Stats](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric/badge/issue)](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric)
+
+### Branch Status:
+master | dev
+:------: | :---:
+[![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=master)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=dev)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
+[![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=master&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=dev&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
+
+This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of Angular 1.x directives to make it easier to use in Angular-based applications. ngOfficeUIFabric is modeled after the Google sponsored project [Angular Material](https://material.angularjs.org).
+
+Basic installation & usage information is found on this page... additional docs are in the [project wiki](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki). 
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
-  - [FAQ](#faq)
+  - [FAQ](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/FAQ)
   - [Supported Browsers](#supported-browsers)
   - [Need Help?](#need-help)
   - [Found a Bug?](#think-you-found-a-bug)
 - [Contributing to the Project](#contributing-to-the-project)
 
-> NOTE: I'm still working on setting up this repository & the entire organization on github. I'm setting this up now and making it public as I've received a bunch of inquiries on how to follow and keep in touch, so here youg o. For the time being, just star/watch this repo & join the Slack team (_links above & below_) to stay in touch and stay updated. Thanks! - @andrewconnell
-
 # Installation
 
-Other than manually downloading the library, the ng-OfficeUIFabric will be available in the following options:
+Other than manually downloading the library, **ng-OfficeUIFabric** will be available in the following options:
 
-## CDN via [cdnjs.com](https://cdnjs.com)
+## CDN
+
+> TODO: usage instructions coming soon: [cdnjs.com](https://cdnjs.com)
+
 ## Bower
 
 > TODO: actual install instructions coming soon... once we have something to distribute :)
@@ -33,38 +45,26 @@ Other than manually downloading the library, the ng-OfficeUIFabric will be avail
 
 > TODO: actual install instructions coming soon... once we have something to distribute :)
 
-# Usage
-
-> TODO: actual install instructions coming soon... once we have something to distribute to use :)
-
 # Support
-
-## FAQ
-
-https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/FAQ
 
 ## Supported Browsers
 
-Directives from this repo are automatically tested with the following browsers
+All directives in ng-OfficeUIFabric will work against the same versions that are commonly supported between the [Office UI Fabric](http://dev.office.com/fabric/resources-and-faq) & [Anuglar 1.x](https://docs.angularjs.org/guide/ie).
 
-- Google Chrome (_versions TBD_)
+- Google Chrome ()
 - Firefox
-- Internet Explorer (_versions TBD_)
-- Opera
+- Internet Explorer (IE9+)
+- Edge
 - Safari
-
-> TODO: test suite & samples coming soon... refer to the [Developer Testing](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Developer-Testing) page for details.
 
 ## Need Help?
 
-Join the Slack team http://ngofficeuifabric-slackin.azurewebsites.net to join the discussion... if you aren't a member [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
-
-**Please do not create new issues in this repo to ask a question about using the ng-OfficeUIFabric.**
+Jump into the [ngOfficeUIFabric Slack team](http://ngofficeuifabric.slack.com) to join the discussion... if you aren't a member [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
 
 ## Think You Found a Bug?
 
-Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Contribution-Guide) and submit your [issue](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues).
+First check the [issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) list to see if someone else has already found it and there's an ongoing discussion. If not, submit an [issue](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) or jump in the .
 
 # Contributing to the Project
 
-We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/Contribution-Guide) for guidelines and jump in the Slack team to discuss how you can help: http://ngofficeuifabric-slackin.azurewebsites.net... if you aren't a member [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
+We want help! Please take a look at the [Contribution Guide](CONTRIBUTING.md) for guidelines and jump in the Slack team to discuss how you can help: http://ngofficeuifabric-slackin.azurewebsites.net... if you aren't a member of the Slack team yet, [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
