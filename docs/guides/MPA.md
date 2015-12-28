@@ -1,3 +1,7 @@
+# Minimal Path to Awesome
+
+This page will help you get up to speed as quickly as possible. You will learn how to get a copy of the repository, install the few dependencies required by the project, compile, run tests and check code coverage for the project. 
+
 - [Install Dependencies](#install-dependencies)
   - [Node.js & NPM](#nodejs--npm)
   - [Global NPM Packages](#global-npm-packages)
@@ -7,8 +11,6 @@
 - [List All Gulp Tasks](#list-all-gulp-tasks)
 - [Execute All Unit Tests](#execute-all-unit-tests)
 - [View Code Coverage Reports](#view-code-coverage-reports)
-
-This page will help you get up to speed as quickly as possible. You will learn how to get a copy of the repository, install the few dependencies required by the project, compile, run tests and check code coverage for the project. 
 
 ## Install Dependencies
 
