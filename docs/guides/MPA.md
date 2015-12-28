@@ -143,7 +143,7 @@ Available tasks
 To execute all unit tests using Karma with the headless browser PhantomJS on the project, execute the following command:
 
 ```bash
-$ gulp 
+$ gulp test
 
 [07:11:14] Using gulpfile ~/Dev/Scratch/ng-officeuifabric/gulpfile.js
 [07:11:14] Starting 'test'...
