@@ -12,14 +12,13 @@ master | dev
 [![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=master)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=dev)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
 [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=master&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=dev&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
 
-This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of Angular 1.x directives to make it easier to use in Angular-based applications. ngOfficeUIFabric is modeled after the Google sponsored project [Angular Material](https://material.angularjs.org).
+This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of Angular 1.x directives to make it easier to use in Angular-based applications. **ngOfficeUIFabric** is modeled after the Google sponsored project [Angular Material](https://material.angularjs.org).
 
-Basic installation & usage information is found on this page... additional docs are in the [project wiki](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki). 
+Basic installation & usage information is found on this page... additional docs are in the [docs guides](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/master/docs/guides). 
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
-  - [FAQ](https://github.com/ngOfficeUIFabric/ng-officeuifabric/wiki/FAQ)
   - [Supported Browsers](#supported-browsers)
   - [Need Help?](#need-help)
   - [Found a Bug?](#think-you-found-a-bug)
