@@ -25,14 +25,17 @@ describe("searchBoxDirective", () => {
         var $scope = $rootScope.$new();
         $scope.textBoxValue = "Test 1";
         var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-        $scope.$apply();
+        $scope.$digest();
         
         var textField = $(textBox[0]).find('.ms-SearchBox-field');
        // expect(textField.length).toBe(1);
+        
         expect(textField.val()).toBe('Test 1');
 
         $scope.textBoxValue = "Test 2";
-        $scope.$apply();
+        $scope.$digest();
+        
+        console.log("testfield value " + $(textBox[0]).find('.ms-SearchBox-field').val());
         expect(textField.val()).toBe('Test 2');
 
         textField.val('Test 3');
@@ -43,4 +46,18 @@ describe("searchBoxDirective", () => {
         // todo: In the browser this works fine. Not sure why not here :(
         // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
     }));
+    //it("hide the label", inject(($compile, $rootScope) => {
+    //    var $scope = $rootScope.$new();
+    //    $scope.textBoxValue = "Test 1";
+    //    var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
+    //    $scope.$digest();
+
+    //    var textField = $(textBox[0]).find('.ms-SearchBox-field').trigger('focus');
+    //    $scope.$digest();
+    //    // expect(textField.length).toBe(1);
+    //    expect($(textBox[0]).find('.ms-SearchBox').hasClass('is-active')).toBe(true);
+
+    //    // todo: In the browser this works fine. Not sure why not here :(
+    //    // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
+    //}));
 });

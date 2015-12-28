@@ -1,88 +1,94 @@
 ﻿
+namespace Fabric.UI.Components.SearchBox {
 
+    export class SearchBoxController {
 
-class SearchBoxDirective implements ng.IDirective {
+        public isFocus = false;
+        public isCancel = false;
+        public isLabelHidden = false;
+        public isActive = false;
+        public value: string;
+        public search: string;
 
-    template= '<div class="ms-SearchBox">' +
-    '<input class="ms-SearchBox-field" ng-model="value" id="{{\'searchBox_\'+uniqueId}}" >' +
-    '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}"><i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{search}}</label>' +
-    '<button class="ms-SearchBox-closeButton"  type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
-    '</div>';
-    constructor() {
-    }
-    uniqueId = 1;
-    scope = {
-        value: "=value",
-        search: "=",
-        close: "&close"
-    }
-   
-    link(scope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes) {
-
-        if (!this.uniqueId) {
-            this.uniqueId = 1;
+        public focus(): void {
+            console.log("focus called");
+            this.isFocus = true;
+            this.isLabelHidden = true;
+            this.isActive = true;
         }
-       
-        scope.uniqueId = this.uniqueId++;
-        var cancel = false;
-        var focus = false;
-      
-        elem.find('.ms-SearchBox-field').on('focus', function () {
-            /** Hide the label on focus. */
-            $(this).siblings('.ms-SearchBox-label').hide();
-            // Show cancel button by adding is-active class
-            $(this).parent('.ms-SearchBox').addClass('is-active');
-            focus = true;
-        });
-        elem.find('.ms-SearchBox-closeButton').on('mousedown', function () {
-            cancel = true;
-        });
-        elem.find('.ms-SearchBox-field').on('blur', function () {
-            var that = this;
-            if (cancel) {
-                scope.$apply(function () {
-
-                    scope.value = "";
-                });
-                $(this).siblings('.ms-SearchBox-label').show();
-              
-
+        public mousedown(): void {
+            this.isCancel = true;
+        }
+        public blur(): void {
+            if (this.isCancel) {
+                this.value = "";
+                this.isLabelHidden = false;
             }
-			
-			  $(this).parent('.ms-SearchBox').removeClass('is-active');
-            if (scope.value.length === 0) {
-                $(this).siblings('.ms-SearchBox-label').show();
+            this.isActive = false;
+            if (this.value == "") {
+                this.isLabelHidden = false;
             }
 
-            cancel = false;
-            focus = false;
-        });
+            this.isFocus = this.isCancel = false;
 
-        scope.$watch("value", function (val) {
-          
-            if (!focus && elem!=null) {
-                if (val && val != "") {
-                    var elemLabel = elem.find('.ms-SearchBox-label');
-                    typeof (elemLabel.hide) == "function" && elemLabel.hide();
-                }
-                else {
-                    var elemLabel = elem.find('.ms-SearchBox-label');
-                    typeof (elemLabel.show) == "function" && elemLabel.show();
-                }
-            }
-        });
-
-
-
+        }
     }
 
-    static factory(): ng.IDirectiveFactory {
-        const directive = () => new SearchBoxDirective();
+    export class SearchBoxDirective implements ng.IDirective {
 
-        return directive;
+        public template = '<div class="ms-SearchBox" ng-class="{\'is-active\':controller.isActive}">' +
+        '<input class="ms-SearchBox-field" ng-focus="controller.focus()" ng-blur="controller.blur()" ng-model="controller.value" id="{{\'searchBox_\'+uniqueId}}" >' +
+        '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}" ng-hide="controller.isLabelHidden"><i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{controller.search}}</label>' +
+        '<button class="ms-SearchBox-closeButton" ng-mousedown="controller.mousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
+        '</div>';
+        constructor() {
+        }
+        public uniqueId = 1;
+        public scope = {
+            value: "=value",
+            search: "=",
+            close: "&close"
+        }
+        public controller: any = SearchBoxController;
+        link(scope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: SearchBoxController) {
+
+            if (!this.uniqueId) {
+                this.uniqueId = 1;
+            }
+
+            scope.uniqueId = this.uniqueId++;
+
+            scope.controller = controller;
+            scope.controller.value = scope.value;
+            scope.controller.search = scope.search;
+
+
+            scope.$watch("value", function (val) {
+                if (!controller.isFocus) {
+                    if (val && val != "") {
+                        controller.isLabelHidden = true;
+                    } else {
+                        controller.isLabelHidden = false;
+                    }
+                    controller.value = val;
+                }
+
+            });
+
+            scope.$watch("search", function (search) {
+                controller.search = search;
+            });
+
+
+        }
+
+        static factory(): ng.IDirectiveFactory {
+            const directive = () => new SearchBoxDirective();
+
+            return directive;
+        }
     }
 }
-
 angular.module("fabric.ui.components.searchbox", ['fabric.ui.components'])
-    .directive("uifSearchbox", SearchBoxDirective.factory()); 
+    .directive("uifSearchbox", Fabric.UI.Components.SearchBox.SearchBoxDirective.factory()); 
 
