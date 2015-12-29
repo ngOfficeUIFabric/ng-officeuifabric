@@ -19,7 +19,7 @@ To bring in a pull request, first create a new branch for that pull request off 
 For example assuming the user John Doe is submitting a PR #35 that adds a widget directive & they did all work in a branch `feat-widgetdirective`:
 
 ```bash
-git checkout -b pr35-widgetdirective dev
+git checkout -b pr35 dev
 git pull https://github.com/johndoe/ng-officeuifabric.git feat-widgetdirective
 ```
 
@@ -39,7 +39,7 @@ commits in our local history.
 To interactively rebase all of your commits that occur after the latest in `ngofficeuifabric:dev`, run:
 
 ```bash
-git rebase --interactive origin/dev
+git rebase -i origin/dev
 ```
 
 This will bring up an interactive dialog in your text editor. Follow the instructions
@@ -115,7 +115,7 @@ git pull --rebase origin dev
 And finally, rebase your pull request in from your WIP pull request branch:
 
 ```bash
-git rebase pr35-widgetdirective
+git rebase pr35
 ```
 
 This will rebase the commits from `pr35-widgetdirective` into dev.
@@ -141,5 +141,5 @@ git push origin dev
 Lastly, be sure to cleanup any branches that you were using for this pull request.
 
 ```bash
-git branch -D pr35-widgetdirective
+git branch -D pr35
 ```
