@@ -34,7 +34,7 @@ Before you submit your pull request consider the following guidelines:
   - Monitor the automated checks that are performed on your PR when submitted by both Travis CI & Coveralls. If either fails you need to address the issues prior to your submission to be considered for merge. If you need help with this process, jump in the [ngofficeuifabric Slack team](https://ngofficeuifabric.slack.com) and ask for help.
 - If we suggest changes then:
   - Make the required updates.
-  - Re-run the Angular Material test suite to ensure tests are still passing.
+  - Re-run the test suite to ensure tests are still passing.
   - Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
 
     ```bash
