@@ -50,7 +50,7 @@ Other than manually downloading the library, **ng-OfficeUIFabric** will be avail
 
 All directives in ng-OfficeUIFabric will work against the same versions that are commonly supported between the [Office UI Fabric](http://dev.office.com/fabric/resources-and-faq) & [Anuglar 1.x](https://docs.angularjs.org/guide/ie).
 
-- Google Chrome ()
+- Google Chrome
 - Firefox
 - Internet Explorer (IE9+)
 - Edge
