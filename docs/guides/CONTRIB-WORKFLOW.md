@@ -26,7 +26,7 @@ The following is recommended for contributing to the repo:
 - Create a personal fork of the repository on GitHub (if you don't already have one).
   - If you already have a fork, ensure it is up to date with the upstream repo (this repo). 
 
-    > **NOTE**: Refer to the **[Pull Requests](Pull-Requests.md)** page for more details on this.
+    > **NOTE**: Refer to the **[PULL-REQUESTS](PULL-REQUESTS.md)** page for more details on this.
 
 - Create a branch off master: `git checkout -b mybranch`
   - Name the branch so that it clearly communicates your intentions such as **issue-123** or **githubhandle-issue123**
@@ -41,7 +41,7 @@ The following is recommended for contributing to the repo:
 - Create a pull request (PR) against the upstream repository's **MASTER** branch.
   - Include details in the PR comment what the PR is for. Include a reference to the issue (by number & link).
 
-  > **NOTE**: Refer to the **[Pull Requests](Pull-Requests.md)** page for more details on this.
+  > **NOTE**: Refer to the **[PULL-REQUESTS](PULL-REQUESTS.md)** page for more details on this.
 
 
 It is OK to create your PR as a "WIP" (work in progress) on the upstream repo before the implementation is done. This can be useful if you'd like to start the feedback process concurrent with your implementation. **State this this is the case in the initial PR comment.**
