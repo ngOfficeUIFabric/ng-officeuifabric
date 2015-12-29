@@ -14,7 +14,6 @@ Before you submit your pull request consider the following guidelines:
   - [CONTRIBUTING](/ngOfficeUIFabric/ng-officeuifabric/blob/master/CONTRIBUTING.md)
   - [CONTRIB-WORKFLOW](CONTRIB-WORKFLOW.md)
   - [CODING](CODING.md)
-  - [DEV-GUIDE](DEV-GUIDE.md)
   - [TESTING](TESTING.md)
 - **Include appropriate test cases.**
 - Run the full ngOfficeUIFabric test suite, as described in the [TESTING](TESTING.md), and ensure that all tests pass.

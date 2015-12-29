@@ -26,7 +26,7 @@ To submit a big or issue, use the [Issues](/ngOfficeUIFabric/ng-officeuifabric/i
 
 ## DO's & DON'Ts
 
-- **DO** follow the coding style described in the [Developer Guide](Developer-Guide) & [Coding Conventions & Guidelines](Coding-Conventions-and-Guidelines.md).
+- **DO** follow the coding style described in the [CODING](CODING.md)
 - **DO** follow the same project and test structure as the existing project
 - **DO** include tests when adding new functionality and features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
 - **DO** keep discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the conversation.
