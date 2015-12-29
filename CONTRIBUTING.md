@@ -12,7 +12,7 @@ Please do not open issues for general support questions as the GitHub issues lis
 
 Typos are embarrassing! Most PR's that fix typos will be accepted. In order to make it easier to review the PR, please narrow the focus instead of sending a huge PR of fixes.
 
-Be sure to review the **[Pull Requests](Pull-Requests.md)** page before submitting PRs.
+Be sure to review the **[Pull Requests](/ng-officeuifabric/blob/docs-update/docs/guides/PULL-REQUESTS.md)** page before submitting PRs.
 
 ## Think You've Found a Bug?
 
@@ -22,11 +22,11 @@ Minimal reproduction steps & an example will be required in order to save develo
 
 If you don't provide reproduction steps, your issue can't be investigated. If you file an issue without repro steps, you'll be asked for a repro scenario. If you don't provide it then your issue is going to be closed because you didn't supply enough info. Help others help you!
 
-To submit a big or issue, use the [Issues](/ngOfficeUIFabric/ng-officeuifabric/issues) list for this repo.
+To submit a big or issue, use the [Issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) list for this repo.
 
 ## DO's & DON'Ts
 
-- **DO** follow the coding style described in the [CODING](CODING.md)
+- **DO** follow the coding style described in the [CODING](/ng-officeuifabric/blob/docs-update/docs/guides/CODING.md)
 - **DO** follow the same project and test structure as the existing project
 - **DO** include tests when adding new functionality and features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
 - **DO** keep discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the conversation.
@@ -36,7 +36,7 @@ To submit a big or issue, use the [Issues](/ngOfficeUIFabric/ng-officeuifabric/i
 - **DO NOT** submit PR's that refactoring existing code without a discussion first. 
 
 ## Submitting Feature Requests & Design Change Requests
-Feature requests and Design Change Requests (DCRs) are an important part of the lifecycle of any software project. Please log these as [Issues](/ngOfficeUIFabric/ng-officeuifabric/issues) in the repo. 
+Feature requests and Design Change Requests (DCRs) are an important part of the life cycle of any software project. Please log these as [Issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) in the repo. 
 
 When opening any feature requests, consider including as much information as possible, including: 
 

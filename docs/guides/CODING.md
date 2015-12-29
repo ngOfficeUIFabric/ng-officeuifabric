@@ -80,7 +80,7 @@ All code should be clear & well commented.
 - All components must have valid & passing unit tests.
 - All features / bug fixes must be tested by one or more specs.
 
-> **NOTE:** See **[Developer Testing](Developer-Testing.md)** for more information on testing.
+> **NOTE:** See **[Developer Testing](/ng-officeuifabric/blob/docs-update/docs/guides/TESTING.md)** for more information on testing.
 
 ### Coding
 

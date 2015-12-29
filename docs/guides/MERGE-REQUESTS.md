@@ -5,6 +5,7 @@ These instructions are primarily for the repo manager(s) and shared here so cont
 The "auto-merge" process that GitHub provides is not used as it doesn't provide enough control. As such, all merge's are implemented offline in a repo manager's local git.
 
 Process to merge pull requests (PR's) into the main codebase:
+
 1. [Copy the PR into a local branch](#bring-a-pr-into-local-git)
 1. [Squashing everything into one commit](#squashing-everything-into-one-commit)
 1. [Dealing with Conflicts](#dealing-with-conflicts)

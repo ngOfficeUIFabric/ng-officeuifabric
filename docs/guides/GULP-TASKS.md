@@ -2,9 +2,9 @@
 
 This page describes the tasks, aliases & command line switches you can use within the project for various tasks.
 
-- [About Tasks](#about-tasks)
-- [Common Task Options](#common-task-options)
-- [Task List](#tasks)
+- [About Gulp Tasks](#about-gulp-tasks)
+- [Common Task Arguments (options)](#common-task-arguments-options)
+- [Task List](#task-list)
 
 ## About Gulp Tasks
 
