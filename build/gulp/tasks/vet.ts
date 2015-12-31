@@ -18,7 +18,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['vet-ts'];
+  public static dependencies: string[] = ['vet-build-ts', 'vet-lib-ts'];
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
