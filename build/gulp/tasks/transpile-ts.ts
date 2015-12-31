@@ -7,7 +7,7 @@ import * as yargs from 'yargs';
 let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
- * Builds all TypeScript as JavaScript as the gulp task 'build-ts'.
+ * Transpiles all TypeScript as JavaScript as the gulp task 'transpile-ts'.
  * 
  * @class
  */
@@ -21,7 +21,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
    */
-  public static aliases: string[] = ['b'];
+  public static aliases: string[] = ['tts'];
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.

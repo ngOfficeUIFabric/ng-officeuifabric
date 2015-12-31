@@ -8,6 +8,10 @@
     "email": "me@andrewconnell.com",
     "url": "http://www.andrewconnell.com"
   },
+  "contributors":[
+    "Connell, Andrew <me@andrewconnell.com>",
+    "Oldengarm, Roland <me@rolandoldengarm.com>"
+  ],
   "homepage": "https://github.com/ngOfficeUIFabric/ng-officeuifabric#readme",
   "repository": {
     "type": "git",
@@ -31,17 +35,22 @@
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
     "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
     "gulp-debug": "^2.1.2",
     "gulp-help": "^1.6.1",
     "gulp-if": "^2.0.0",
+    "gulp-insert": "^0.5.0",
     "gulp-istanbul": "^0.10.3",
     "gulp-load-plugins": "^1.1.0",
     "gulp-print": "^2.0.1",
+    "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-strip-comments": "^1.1.2",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",
+    "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "istanbul": "^0.4.1",
     "jasmine-core": "^2.4.1",
