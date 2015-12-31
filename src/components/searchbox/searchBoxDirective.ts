@@ -1,5 +1,5 @@
-﻿
-namespace Fabric.UI.Components.SearchBox {
+﻿'use strict';
+import * as ng from 'angular';
 
     export class SearchBoxController {
 
@@ -88,7 +88,6 @@ namespace Fabric.UI.Components.SearchBox {
             return directive;
         }
     }
-}
-angular.module("fabric.ui.components.searchbox", ['fabric.ui.components'])
-    .directive("uifSearchbox", Fabric.UI.Components.SearchBox.SearchBoxDirective.factory()); 
+export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
+    .directive('uifTextfield', SearchBoxDirective.factory());
 
