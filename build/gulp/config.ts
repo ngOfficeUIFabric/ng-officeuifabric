@@ -14,13 +14,11 @@ export class BuildConfig {
 
   // banner added to all output
   public static BANNER_JS: string =
-  '/*\n' +
-  ' * ngOfficeUIFabric\n' +
-  ' * http://ngofficeuifabric.com\n' +
-  ' * Angular 1.x directives for Microsoft\'s Office UI Fabric\n' +
-  ' * https://angularjs.org & https://dev.office.com/fabric\n' +
-  ' * v' + BuildConfig.VERSION + '\n' +
-  ' */\n';
+  'ngOfficeUIFabric\n' +
+  'http://ngofficeuifabric.com\n' +
+  'Angular 1.x directives for Microsoft\'s Office UI Fabric\n' +
+  'https://angularjs.org & https://dev.office.com/fabric\n' +
+  'v' + BuildConfig.VERSION;
 
   // build library paths
   public static OUTPUT_PATH: string = BuildConfig.ROOT + '/dist';
@@ -60,6 +58,7 @@ export class BuildConfig {
    */
   public static TYPESCRIPT_DEFINITIONS: string = BuildConfig.BUILD_PATH + '/typings/**/*.d.ts';
   public static BUILD_TYPESCRIPT: string[] = [
+    BuildConfig.BUILD_PATH + '/*.ts',
     BuildConfig.BUILD_PATH + '/gulp/**/*.ts',
     'gulpfile.ts'
   ];
