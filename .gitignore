@@ -12,5 +12,4 @@ coverage/
 *.js.map
 
 # .. except these javascript files... these must stay
-!build/karma.conf.js
 !src/externals/PickaDate.js

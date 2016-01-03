@@ -47,8 +47,7 @@ export class BuildConfig {
     .concat(BuildConfig.LIB_TEST_JS);
 
   // files not dynamically built & should not be purged
-  public static BUILD_KEEP_JS: string[] = [
-    BuildConfig.BUILD_PATH + '/karma.conf.js'];
+  public static BUILD_KEEP_JS: string[] = [];
   public static LIB_KEEP_JS: string[] = [
     BuildConfig.SOURCE + '/externals/PickaDate.js'
   ];
