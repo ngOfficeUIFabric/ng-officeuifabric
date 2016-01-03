@@ -37,6 +37,7 @@ The following is recommended for contributing to the repo:
   - Make sure that the builds are clean.
   - Make sure that the tests are all passing, including your new tests.
   - Make sure the code coverage % is no lower than the upstream repo.
+- Verify your new or updated directive adheres to all the items in the [DIRECTIVE-CHECKLIST](DIRECTIVE-CHECKLIST.md).
 - Push changes to your fork on GitHub.
 - Create a pull request (PR) against the upstream repository's **dev** branch.
   - Include details in the PR comment what the PR is for. Include a reference to the issue (by number & link).
