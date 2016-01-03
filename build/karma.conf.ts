@@ -1,6 +1,8 @@
 'use strict';
 
 import * as karma from 'karma';
+import * as webpack from 'webpack';
+import * as webpackConfig from './webpack.conf';
 
 /**
  * Karma configuration.
@@ -11,7 +13,13 @@ import * as karma from 'karma';
  * 
  */
 module.exports = (config: karma.Config) => {
-  config.set(<IKarmaConfig>{
+  // load webpack config settings
+  let webpackSettings: webpack.Configuration = new webpackConfig.WebPackConfig();
+  webpackSettings.entry = {};
+  webpackSettings.devtool = 'inline-source-map';
+
+  // create karma config
+  let karmaConfig: IKarmaConfig = <IKarmaConfig>{
     autoWatch: true,
     basePath: '../',
     browsers: ['PhantomJS'],
@@ -29,14 +37,23 @@ module.exports = (config: karma.Config) => {
     ],
     frameworks: ['jasmine'],
     logLevel: config.LOG_INFO,
+    plugins: ['karma-*'],
     port: 5793,
     preprocessors: {
+      'src/**/*.js': ['webpack', 'sourcemap'],
       'src/core/**/*.js': 'coverage',
       'src/components/*/!(*spec).js': 'coverage'
     },
     reporters: ['progress', 'coverage'],
-    singleRun: false
-  });
+    singleRun: false,
+    webpack: webpackSettings,
+    webpackMiddleware: {
+      noInfo: true
+    }
+  };
+
+  // set karma configuration
+  config.set(karmaConfig);
 };
 
 /**
@@ -58,8 +75,10 @@ interface IKarmaCoverageReporterConfigurationOptions {
  * 
  * @typedef karmaConfig
  * @augments karma.Config
- * @property {Object}
+ * @property {IKarmaCoverageReporterConfigurationOptions} coverageReporter - Settings for karma-coverage.
+ * @property {webpack.Configuration}  webpack - Webpack configuration settings.
  */
 interface IKarmaConfig extends karma.ConfigOptions {
-  coverageReporter?: any;
+  coverageReporter?: IKarmaCoverageReporterConfigurationOptions;
+  webpack?: webpack.Configuration;
 }
