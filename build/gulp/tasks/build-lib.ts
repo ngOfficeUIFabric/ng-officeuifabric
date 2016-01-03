@@ -5,6 +5,8 @@ import {BuildConfig} from '../config';
 import {Utils} from '../utils';
 import * as gulp from 'gulp';
 import * as yargs from 'yargs';
+import * as webpack from 'webpack';
+import * as webpackConfig from '../../webpack.conf';
 let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
@@ -22,7 +24,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['transpile-ts'];
+  public static dependencies: string[] = [];
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -33,6 +35,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
+    'debug': 'Create unminified version of the library with source maps & comments (otherwise, production bundle created)',
     'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
     'version': 'Version number to set build library (if omitted, version from package.json is used)'
   };
@@ -43,32 +46,42 @@ export class GulpTask extends BaseGulpTask {
   private _args: ICommandLineArgs = yargs.argv;
 
   /** @constructor */
-  constructor() {
+  constructor(done: gulp.TaskCallback) {
     super();
-    Utils.log('Concatenating & Minifying JavaScript files');
+    Utils.log('Packaging library using webpack');
 
-    // build manifest of deployable JavaScript files
-    let depFiles: string[] = [];
-    // ... include 3rd party dependencies
-    depFiles = BuildConfig.LIB_KEEP_JS;
-    // ... include transpiled TypeScript
-    depFiles = depFiles.concat(BuildConfig.LIB_JS);
-    // ... exclude specs
-    BuildConfig.LIB_TEST_JS.forEach((file: string) => {
-      depFiles.push('!' + file);
-    });
+    // load webpack config settings
+    let config: webpack.Configuration = new webpackConfig.WebPackConfig();
 
-    // concat & minify all JavaScript
-    return gulp.src(depFiles)
-      .pipe($.stripComments())
-      .pipe($.if(this._args.verbose, $.print()))
-      .pipe($.concat(BuildConfig.OUTPUT_LIB_NAME + '-' + BuildConfig.VERSION + '.js'))
-      .pipe($.insert.prepend(BuildConfig.BANNER_JS))
-      .pipe(gulp.dest(BuildConfig.OUTPUT_PATH))
-      .pipe($.uglify({ preserveComments: 'all' }))
-      .pipe($.rename({ extname: '.min.js' }))
+    let webpackPlugins: webpack.Plugin[] = [];
+    // if debug mode, write source maps & keep comments
+    if (!this._args.debug) {
+      config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.min.js';
+      // use uglify plugin to remove comments & sourcemaps
+      webpackPlugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+          output: {
+            comments: false
+          },
+          sourceMap: false
+        })
+      );
+    } else { // else gen un-uglified & include inline sourcemaps
+      config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.js';
+      config.devtool = 'inline-source-map';
+    }
+
+    // add banner to the generated file
+    webpackPlugins.push(
+      new webpack.BannerPlugin(BuildConfig.BANNER_JS, null)
+    );
+
+    // add plugins to config
+    config.plugins = webpackPlugins;
+
+    // build unminified
+    return gulp.src(__dirname + '/../../../' + BuildConfig.SOURCE + '/core/core.ts')
+      .pipe($.webpack(config))
       .pipe(gulp.dest(BuildConfig.OUTPUT_PATH));
-
   }
-
 }

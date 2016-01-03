@@ -88,6 +88,9 @@
     },
     "gulp-rename/gulp-rename.d.ts": {
       "commit": "5e960679e6f9ae6ce905b1db0ad36fc189cd2eca"
+    },
+    "webpack/webpack.d.ts": {
+      "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
     }
   }
 }

@@ -1,8 +1,7 @@
 # Coding Guidelines
 
 - [Project Structure](#project-structure)
-- [Angular Directive Types](#angular-directive-types)
-- [Angular Directive Prefix](#angular-directive-prefix)
+- [Angular Directives](#angular-directives)
 - [Coding Style & Rules](#coding-style--rules)
 - [Documentation](#documentation)
 - [TypeScript, JavaScript (ES5) or EcmaScript 2015 (ES6)?](#typescript-javascript-es5-or-ecmascript-2015-es6)
@@ -31,8 +30,6 @@ The components within the ngOfficeUIFabric are organized as follows:
     └── core.ts
 ```
 
-> **NOTE**: You can use TypeScript or JavaScript in the authoring of components. Refer to the section [TypeScript, JavaScript (ES5) or EcmaScript 2015 (ES6)?](#typescript-javascript-es5-or-ecmascript-2015-es6) for more information.
-
 All components will share the `core.ts` file which contains the top-level module declaration of the library.
 
 Each component should have at least a `demoBasicUsage` folder that contains the HTML & script that demonstrates how the component should be used. Additional demo folders can be provided for alternate implementations of the component. use the naming convention `demo[..]` for these alternate implementations. In addition, feel free to include a `README.md` within the demo folders for additional explanation when warranted.
@@ -47,23 +44,9 @@ Components are compiled and distributed as a library to:
 
 > **NOTE**: The `dist` folder is not version controlled.
 
-## Angular Directive Types
+## Angular Directives
 
-All directives should be element directives, not attribute directives.
-
-## Angular Directive Prefix
-
-All directives should use the prefix **uif-**
-
-```html
-<uif-choicefield-group id="choiceValue" name="choiceValue" label="Select something"
-                       ng-model="choiceValue" 
-                       ng-required="choiceRequired">
-	<uif-choicefield value="Test1"><a href="#">Test 1</a></uif-choicefield>
-	<uif-choicefield value="Test2"><a href="#">Test 2</a></uif-choicefield>
-	<uif-choicefield value="Test3"><a href="#">Test 3</a></uif-choicefield>
-</uif-choicefield-group>
-```
+Refer to the [DIRECTIVE-CHECKLIST](DIRECTIVE-CHECKLIST.md) for a list of all the requirements and guidelines for creating new or updating existing directives
 
 ## Coding Style & Rules
 
@@ -80,7 +63,7 @@ All code should be clear & well commented.
 - All components must have valid & passing unit tests.
 - All features / bug fixes must be tested by one or more specs.
 
-> **NOTE:** See **[Developer Testing](/ng-officeuifabric/blob/docs-update/docs/guides/TESTING.md)** for more information on testing.
+> **NOTE:** See **[Developer Testing](TESTING.md)** for more information on testing.
 
 ### Coding
 
@@ -116,15 +99,7 @@ Refer to the Angular Material project for good examples of directive documentati
 
 ## TypeScript, JavaScript (ES5) or EcmaScript 2015 (ES6)?
 
-The use of TypeScript is not required, but it is encouraged. Both JavaScript (ES5) and EcmaScript 2015 (ES6 / ES2015) are permitted. 
-
-  > **NOTE:** At the present time, all directives are authored using TypeScript. Contact the project owner(s) if you are going to write a directive in JavaScript so the project documentation & build rules can be setup accordingly.
-
-Do not author components using CoffeeScript or other languages that need to be transpiled to JavaScript.
-
-If your directive needs to include JavaScript, manually add an override line item in the `.gitignore` and `BuildConfig.APP_KEEP_JS` property found in the `\build\gulp\config.ts` file to ensure the file is:
-  1. not deleted by the cleanup process
-  1. are included in source control
+All directives should be authored in TypeScript
 
 ## Commit Messages
 
@@ -135,4 +110,3 @@ Do your best to factor commits appropriately, i.e not too large with unrelated t
 We use [semver](http://semver.org/) for versioning with one exception: the goal is to march to 1.0.0 which means this project has complete component & theming coverage with the Office UI Fabric 1.0.0 release.
 
 With each new component, we will bump the minor version and with each bug fix / patch we'll bump the patch version.
-
