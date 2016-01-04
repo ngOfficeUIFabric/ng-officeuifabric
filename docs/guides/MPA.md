@@ -11,6 +11,8 @@ This page will help you get up to speed as quickly as possible. You will learn h
 - [List All Gulp Tasks](#list-all-gulp-tasks)
 - [Execute All Unit Tests](#execute-all-unit-tests)
 - [View Code Coverage Reports](#view-code-coverage-reports)
+- [Build the Library](#build-the-library)
+- [See a Working Directive](#see-a-working-directive)
 
 ## Install Dependencies
 
@@ -143,14 +145,25 @@ Available tasks
 To execute all unit tests using Karma with the headless browser PhantomJS on the project, execute the following command:
 
 ```bash
-$ gulp test
+$ gulp test --specs
 
-[07:11:14] Using gulpfile ~/Dev/Scratch/ng-officeuifabric/gulpfile.js
-[07:11:14] Starting 'test'...
-[07:11:14] Testing code with Karma
-PhantomJS 1.9.8 (Mac OS X 0.0.0): Executed 6 of 6 SUCCESS (0.004 secs / 0.05 secs)
-[07:11:15] Karma test run completed
-[07:11:15] Finished 'test' after 1.7 s
+[18:28:28] Using gulpfile ~/repos/ac-ng-officeuifabric/gulpfile.js
+[18:28:28] Starting 'transpile-ts'...
+[18:28:28] Transpiling app TypeScript files to JavaScript
+[18:28:32] Finished 'transpile-ts' after 3.45 s
+[18:28:32] Starting 'test'...
+[18:28:32] Testing code with Karma
+
+  iconDirective: <uif-icon />
+    ✓ should render correct HTML
+    ✓ should render correct Office UI Fabric CSS classes
+    ✓ should render correct aria-hidden attribute
+
+PhantomJS 1.9.8 (Mac OS X 0.0.0): Executed 3 of 3 SUCCESS (0.004 secs / 0.021 secs)
+TOTAL: 3 SUCCESS
+
+[18:28:34] Karma test run completed
+[18:28:34] Finished 'test' after 2.93 s
 ```
 
 ## View Code Coverage Reports

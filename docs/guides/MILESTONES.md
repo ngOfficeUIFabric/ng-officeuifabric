@@ -6,7 +6,7 @@ We use **[Semantic Versioning](http://semver.org/)** for this project. You can r
 
 ## MAJOR
 
-Typically this is only used when a release happens that introduces breaking changes from a previous version. However we wil use it to match the current released version of the **[Office UI Fabric](http://dev.office.com/fabric) released version.
+Typically this is only used when a release happens that introduces breaking changes from a previous version. However we will use it to match the current released version of the **[Office UI Fabric](http://dev.office.com/fabric)** released version.
 
 ## MINOR
 
