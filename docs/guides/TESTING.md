@@ -13,9 +13,21 @@ This describes the guidelines developer should follow to run & create tests.
 
 Run all tests using the provided gulp task **test**:
 
-```
+```shell
 $ gulp test
 ```
+
+This includes two Karma reporters: 
+ - **progress**: This writes a summary of the test results & details for any failing tests.
+ - **coverage**. This is used to create the code coverage reports with Istanbul.
+
+To view each test that's run, use the `--specs` argument:
+
+```shell
+$ gulp test --specs
+```
+
+This will replace the **progress** reporter with the **spec** reporter and write each test & outcome to the console.
 
 ## Test Validation
 

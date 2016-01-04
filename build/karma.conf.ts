@@ -35,7 +35,7 @@ module.exports = (config: karma.Config) => {
       'src/core/*.js',
       'src/components/*/*.js'
     ],
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine-jquery', 'jasmine'],
     logLevel: config.LOG_INFO,
     plugins: ['karma-*'],
     port: 5793,
