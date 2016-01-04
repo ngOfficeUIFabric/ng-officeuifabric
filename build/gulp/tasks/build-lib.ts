@@ -79,8 +79,10 @@ export class GulpTask extends BaseGulpTask {
     // add plugins to config
     config.plugins = webpackPlugins;
 
-    // build unminified
-    return gulp.src(__dirname + '/../../../' + BuildConfig.SOURCE + '/core/core.ts')
+    let rootSource: string = __dirname + '/../../../' + BuildConfig.SOURCE;
+
+    // build webpack bundle
+    return gulp.src([rootSource + '/core/core.ts', rootSource + '/core/components.ts'])
       .pipe($.webpack(config))
       .pipe(gulp.dest(BuildConfig.OUTPUT_PATH));
   }
