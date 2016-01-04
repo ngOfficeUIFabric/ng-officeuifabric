@@ -148,9 +148,6 @@ $ gulp test
 [07:11:14] Using gulpfile ~/Dev/Scratch/ng-officeuifabric/gulpfile.js
 [07:11:14] Starting 'test'...
 [07:11:14] Testing code with Karma
-28 12 2015 07:11:14.673:INFO [karma]: Karma v0.13.16 server started at http://localhost:5793/
-28 12 2015 07:11:14.683:INFO [launcher]: Starting browser PhantomJS
-28 12 2015 07:11:15.746:INFO [PhantomJS 1.9.8 (Mac OS X 0.0.0)]: Connected on socket ctT9RymieRGTnkMoAAAA with id 91363192
 PhantomJS 1.9.8 (Mac OS X 0.0.0): Executed 6 of 6 SUCCESS (0.004 secs / 0.05 secs)
 [07:11:15] Karma test run completed
 [07:11:15] Finished 'test' after 1.7 s
@@ -162,6 +159,22 @@ Karma always generates a code coverage report showing the percentages & lines of
 
 ```
 ng-officeuifabric/coverage/PhantomJS 1.9.8 (Mac OS X 0.0.0)/lcov-report/index.html
+```
+
+## Build the Library
+
+Build the library in debug mode so you can try one of the examples:
+
+```bash
+$ gulp build-lib --debug
+```
+
+## See a Working Directive
+
+To see a working directive, open the following file in a browser to see the `<uif-icon />` directive in action:
+
+```
+$ open src/components/icon/demo/index.html
 ```
 
 **TADA!!! Minimal Path to Awesome!**
