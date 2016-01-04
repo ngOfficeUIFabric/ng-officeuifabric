@@ -91,6 +91,9 @@
     },
     "webpack/webpack.d.ts": {
       "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
+    },
+    "jasmine-jquery/jasmine-jquery.d.ts": {
+      "commit": "0d66537e353802f996a3f67ca1b711f63835f9e7"
     }
   }
 }
