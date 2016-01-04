@@ -11,7 +11,7 @@ Before you submit your pull request consider the following guidelines:
   ```
 
 - Be familiar with and adhere to things stated in:
-  - [CONTRIBUTING](/ngOfficeUIFabric/ng-officeuifabric/blob/master/CONTRIBUTING.md)
+  - [CONTRIBUTING](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/CONTRIBUTING.md)
   - [CONTRIB-WORKFLOW](CONTRIB-WORKFLOW.md)
   - [CODING](CODING.md)
   - [TESTING](TESTING.md)

@@ -15,34 +15,45 @@ The components within the ngOfficeUIFabric are organized as follows:
 /src
 ├── components
 │   ├── <component folder>
-│   │   └── demoBasicUsage
+│   │   ├── demo
 │   │   │   ├── index.html
 │   │   │   └── index.ts
 │   │   ├── <component>Directive.spec.ts
 │   │   ├── <component>Directive.ts
-│   └── textfield
+│   │   ├── demoBasicUsage
+│   │   │   ├── index.html
+│   │   │   └── index.ts
+│   │   ├── <component>Directive.spec.ts
+│   │   ├── <component>Directive.ts
+│   └── icon
+│       ├── demo
+│       │   ├── index.html
+│       │   └── index.ts
 │       ├── demoBasicUsage
 │       │   ├── index.html
 │       │   └── index.ts
-│       ├── textBoxDirective.spec.ts
-│       └── textBoxDirective.ts
+│       ├── iconDirective.spec.ts
+│       └── iconDirective.ts
 └── core
+    ├── components.spec.ts
+    ├── components.ts
+    ├── core.spec.ts
     └── core.ts
 ```
 
-All components will share the `core.ts` file which contains the top-level module declaration of the library.
+All components will depend on the `core.ts` file which contains the shared assets in the library. The `components.ts` file contains the `officeuidabric.components` module declaration which consumers can use to import all components rather than one at a time.
 
-Each component should have at least a `demoBasicUsage` folder that contains the HTML & script that demonstrates how the component should be used. Additional demo folders can be provided for alternate implementations of the component. use the naming convention `demo[..]` for these alternate implementations. In addition, feel free to include a `README.md` within the demo folders for additional explanation when warranted.
+Each component should have at least a `demo` folder that contains the HTML & script that demonstrates how the component can be used. This should be a fully working sample. Additional demo folders can be provided for alternate implementations of the component. use the naming convention `demo[..]` for these alternate implementations. In addition, feel free to include a `README.md` within the demo folders for additional explanation when warranted.
 
 Components are compiled and distributed as a library to:
 
 ```
 /dist
-├── ngOfficeUiFabric-0.1.0.js
-└── ngOfficeUiFabric-0.1.0.min.js
+├── ngOfficeUiFabric.js
+└── ngOfficeUiFabric.min.js
 ```
 
-> **NOTE**: The `dist` folder is not version controlled.
+> **NOTE**: The `dist` folder is not version controlled. In addition, both files are generated based on the parameters passed to the gulp **build-lib** task.
 
 ## Angular Directives
 
@@ -53,8 +64,8 @@ Refer to the [DIRECTIVE-CHECKLIST](DIRECTIVE-CHECKLIST.md) for a list of all the
 All code should be clear & well commented.
 
 ### Coding Conventions
-- All components must depend on the `fabric.ui.components` module.
-- All components must have unique & understandable module names prefixed with `fabric.ui.components`, such as `fabric.ui.components.choidefield`.
+- All components must depend on the `officeuifabric.components` module.
+- All components must have unique & understandable module names prefixed with `officeuifabric.components`, such as `officeuifabric.components.iconß`.
 - All directives must use the `uif-` prefix for both the directive names & any directive attributes.
 - Directive templates should be defined inline.
 
@@ -67,7 +78,7 @@ All code should be clear & well commented.
 
 ### Coding
 
-- All code styles are defined in the [tslint.json](/ngOfficeUIFabric/ng-officeuifabric/blob/master/tslint.json) file. 
+- All code styles are defined in the [tslint.json](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/tslint.json) file. 
 
   > **NOTE:** At the present time, all directives are authored using TypeScript. Contact the project owner(s) if you are going to write a directive in JavaScript so the appropriate linting can be setup in the project.
 
