@@ -11,5 +11,8 @@ coverage/
 *.js
 *.js.map
 
+# .. except javascript files used in demos
+!src/components/*/demo*/*.js
+
 # .. except these javascript files... these must stay
 !src/externals/PickaDate.js

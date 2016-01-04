@@ -9,4 +9,4 @@ import * as ng from 'angular';
  * @description Office UI Fabric Angular directives core module with shared components in the library.
  * 
  */
-export var module: ng.IModule = ng.module('officeuifabric.core');
+export var module: ng.IModule = ng.module('officeuifabric.core', []);

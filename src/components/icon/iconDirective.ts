@@ -1,4 +1,23 @@
+'use strict';
 
+import * as ng from 'angular';
+
+/**
+ * @ngdoc directive
+ * @name uifIcon
+ * @module officeuifabric.components.icon
+ * 
+ * @restrict E
+ * 
+ * @description 
+ * `<uif-icon>` is an icon directive.
+ * 
+ * @see {link http://dev.office.com/fabric/styles}
+ * 
+ * @usage
+ * 
+ * <uif-icon uif-type="arrowDownLeft" />
+ */
 export class IconDirective implements ng.IDirective {
 
   public restrict: string = 'E';
@@ -14,9 +33,15 @@ export class IconDirective implements ng.IDirective {
   }
 }
 
-angular.module('fabric.ui.components.icon', ['fabric.ui.components'])
+/**
+ * @ngdoc module
+ * @name officeuifabric.components.icon
+ * 
+ * @description 
+ * Icon
+ * 
+ */
+export var module: ng.IModule = ng.module('officeuifabric.components.icon', [
+    'officeuifabric.components'
+  ])
   .directive('uifIcon', IconDirective.factory());
-
-// - two way binding
-// - set from code & watch directive change
-// - verbose comment
