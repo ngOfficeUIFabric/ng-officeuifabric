@@ -81,7 +81,9 @@ Deletes all generated JavaScript files for the Angular directives, except those 
 
 ### $ gulp [test](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/test.ts)
 
-Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/build/karma.conf.js` file. 
+Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/build/karma.conf.js` file.
+
+If you specify the argument `--specs` the tests (and their results) will be written to the console as they are run. By default the *progress* reporter is used which just summarizes the results and writes out any failing tests.
 
 Karma also runs *Istanbul* for generation of a code coverage report.
 

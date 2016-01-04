@@ -8,7 +8,7 @@
     "email": "me@andrewconnell.com",
     "url": "http://www.andrewconnell.com"
   },
-  "contributors":[
+  "contributors": [
     "Connell, Andrew <me@andrewconnell.com>",
     "Oldengarm, Roland <me@rolandoldengarm.com>"
   ],
@@ -52,6 +52,7 @@
     "gulp-typescript": "^2.10.0",
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
+    "gulp-webpack": "^1.5.0",
     "istanbul": "^0.4.1",
     "jasmine-core": "^2.4.1",
     "jquery": "^2.1.4",
@@ -59,10 +60,14 @@
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6",
+    "karma-jasmine-jquery": "^0.1.1",
     "karma-phantomjs-launcher": "^0.2.1",
-    "karma-typescript-preprocessor": "0.0.21",
+    "karma-sourcemap-loader": "^0.3.6",
+    "karma-spec-reporter": "0.0.23",
+    "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.19",
     "run-sequence": "^1.1.5",
+    "ts-loader": "^0.7.2",
     "tslint": "^3.2.0",
     "yargs": "^3.31.0"
   }
