@@ -28,7 +28,7 @@ The following is recommended for contributing to the repo:
 
     > **NOTE**: Refer to the **[PULL-REQUESTS](PULL-REQUESTS.md)** page for more details on this.
 
-- Create a branch off master: `git checkout -b mybranch`
+- Create a branch off **dev**: `git checkout -b mybranch`
   - Name the branch so that it clearly communicates your intentions such as **issue-123** or **githubhandle-issue123**
   - Branches are useful since they isolate your changes from incoming changes from upstream. They also enable you to create multiple PRs from the same fork.
 - Make & commit your changes
@@ -37,8 +37,9 @@ The following is recommended for contributing to the repo:
   - Make sure that the builds are clean.
   - Make sure that the tests are all passing, including your new tests.
   - Make sure the code coverage % is no lower than the upstream repo.
+- Verify your new or updated directive adheres to all the items in the [DIRECTIVE-CHECKLIST](DIRECTIVE-CHECKLIST.md).
 - Push changes to your fork on GitHub.
-- Create a pull request (PR) against the upstream repository's **MASTER** branch.
+- Create a pull request (PR) against the upstream repository's **dev** branch.
   - Include details in the PR comment what the PR is for. Include a reference to the issue (by number & link).
 
   > **NOTE**: Refer to the **[PULL-REQUESTS](PULL-REQUESTS.md)** page for more details on this.

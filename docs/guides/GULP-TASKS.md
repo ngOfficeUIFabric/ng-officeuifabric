@@ -49,7 +49,9 @@ The most common one is `--verbose`. Depending on the task, this will usually out
 
 ### $ gulp [build-ts](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/build-ts.ts)
 
-After transpiling all TypeScript files (*using the `transpile-ts` task), it creates two combined libraries of all Angular components with the version number in the file name. One file is the un-minified version & one is the minified version. These files are saved to the folder `/dist` as defined in `/build/config.ts`.
+This task uses [webpack](http://webpack.github.io/) to transpile all TypeScript files and then create a webpack bundle. 
+
+By default, it creates a minified file with no comments or source maps. If the `--debug` argument is supplied, an un-minified bundle with an inline sourcemap is provided. These files are saved to the folder `/dist` as defined in `/build/config.ts`.
 
 The contents of the transpiled `/src/core/core.ts` is the first file added to the project.
 
@@ -81,7 +83,9 @@ Deletes all generated JavaScript files for the Angular directives, except those 
 
 ### $ gulp [test](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/test.ts)
 
-Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/build/karma.conf.js` file. 
+Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/build/karma.conf.js` file.
+
+If you specify the argument `--specs` the tests (and their results) will be written to the console as they are run. By default the *progress* reporter is used which just summarizes the results and writes out any failing tests.
 
 Karma also runs *Istanbul* for generation of a code coverage report.
 

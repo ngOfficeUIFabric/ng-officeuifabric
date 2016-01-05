@@ -26,8 +26,9 @@ To submit a big or issue, use the [Issues](https://github.com/ngOfficeUIFabric/n
 
 ## DO's & DON'Ts
 
-- **DO** follow the coding style described in the [CODING](/ng-officeuifabric/blob/docs-update/docs/guides/CODING.md)
-- **DO** follow the same project and test structure as the existing project
+- **DO** follow the coding style described in the [CODING](/ng-officeuifabric/blob/docs-update/docs/guides/CODING.md).
+- **DO** follow the directive checklist described in the [DIRECTIVE-CHECKLIST](/ng-officeuifabric/blob/docs-update/docs/guides/DIRECTIVE-CHECKLIST.md); we will check it when you submit a PR that includes a new / updated directive.
+- **DO** follow the same project and test structure as the existing project.
 - **DO** include tests when adding new functionality and features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
 - **DO** keep discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the conversation.
 - **DO NOT** submit PR's for coding style changes.
