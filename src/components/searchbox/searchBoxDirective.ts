@@ -7,8 +7,8 @@ import * as ng from 'angular';
         public isCancel = false;
         public isLabelHidden = false;
         public isActive = false;
-        public value: string;
-        public search: string;
+        public uifValue: string;
+        public uifSearch: string;
 
         public focus(): void {
             console.log("focus called");
@@ -21,11 +21,11 @@ import * as ng from 'angular';
         }
         public blur(): void {
             if (this.isCancel) {
-                this.value = "";
+                this.uifValue = "";
                 this.isLabelHidden = false;
             }
             this.isActive = false;
-            if (this.value == "") {
+            if (this.uifValue == "") {
                 this.isLabelHidden = false;
             }
 
@@ -33,7 +33,22 @@ import * as ng from 'angular';
 
         }
     }
-
+/**
+ * @ngdoc directive
+ * @name uifSearchbox
+ * @module officeuifabric.components.searchbox
+ * 
+ * @restrict E
+ * 
+ * @description 
+ * `<uif-searchbox>` is an searchbox directive.
+ * 
+ * @see {link http://dev.office.com/fabric/components/searchbox}
+ * 
+ * @usage
+ * 
+ * <uif-searchbox uif-value="''" uif-search />
+ */
     export class SearchBoxDirective implements ng.IDirective {
 
         public template = '<div class="ms-SearchBox" ng-class="{\'is-active\':controller.isActive}">' +
@@ -41,13 +56,15 @@ import * as ng from 'angular';
         '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}" ng-hide="controller.isLabelHidden"><i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{controller.search}}</label>' +
         '<button class="ms-SearchBox-closeButton" ng-mousedown="controller.mousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
         '</div>';
-        constructor() {
-        }
+        
         public uniqueId = 1;
-        public scope = {
-            value: "=value",
-            search: "=",
-            close: "&close"
+        public scope: {} = {
+            uifValue: "=",
+            uifSearch: "=",
+           // uifClose: "&"
+        }
+
+        constructor() {
         }
         public controller: any = SearchBoxController;
         link(scope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: SearchBoxController) {
@@ -59,24 +76,24 @@ import * as ng from 'angular';
             scope.uniqueId = this.uniqueId++;
 
             scope.controller = controller;
-            scope.controller.value = scope.value;
-            scope.controller.search = scope.search;
+            scope.controller.uifValue = scope.uifValue;
+            scope.controller.uifSearch = scope.uifSearch;
 
 
-            scope.$watch("value", function (val) {
+            scope.$watch("uifValue", function (val) {
                 if (!controller.isFocus) {
                     if (val && val != "") {
                         controller.isLabelHidden = true;
                     } else {
                         controller.isLabelHidden = false;
                     }
-                    controller.value = val;
+                    controller.uifValue = val;
                 }
 
             });
 
-            scope.$watch("search", function (search) {
-                controller.search = search;
+            scope.$watch("uifSearch", function (search) {
+                controller.uifSearch= search;
             });
 
 
@@ -88,6 +105,15 @@ import * as ng from 'angular';
             return directive;
         }
     }
+/**
+ * @ngdoc module
+ * @name officeuifabric.components.searchbox
+ * 
+ * @description 
+ * Icon
+ * 
+ */
+
 export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
     .directive('uifTextfield', SearchBoxDirective.factory());
 

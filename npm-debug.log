@@ -1,0 +1,105 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'git://github.com/bower/bower#master' ]
+2 info using npm@3.3.6
+3 info using node@v5.0.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData git://github.com/bower/bower#master
+8 silly fetchOtherPackageData git://github.com/bower/bower#master
+9 silly cache add args [ 'git://github.com/bower/bower#master', null ]
+10 verbose cache add spec git://github.com/bower/bower#master
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: 'git://github.com/bower/bower#master',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'git://github.com/bower/bower#master',
+11 silly cache add   spec: 'git://github.com/bower/bower.git#master',
+11 silly cache add   type: 'hosted',
+11 silly cache add   hosted:
+11 silly cache add    { type: 'github',
+11 silly cache add      ssh: 'git@github.com:bower/bower.git#master',
+11 silly cache add      sshUrl: 'git+ssh://git@github.com/bower/bower.git#master',
+11 silly cache add      httpsUrl: 'git+https://github.com/bower/bower.git#master',
+11 silly cache add      gitUrl: 'git://github.com/bower/bower.git#master',
+11 silly cache add      shortcut: 'github:bower/bower#master',
+11 silly cache add      directUrl: 'https://raw.githubusercontent.com/bower/bower/master/package.json' } }
+12 verbose addRemoteGit caching git://github.com/bower/bower#master
+13 verbose addRemoteGit git://github.com/bower/bower.git#master is a repository hosted by github
+14 silly tryClone cloning git://github.com/bower/bower.git#master via git://github.com/bower/bower.git#master
+15 verbose tryClone git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18 not in flight; caching
+16 info git [ 'clone',
+16 info git   '--template=C:\\Users\\gdi\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates',
+16 info git   '--mirror',
+16 info git   'git://github.com/bower/bower.git',
+16 info git   'C:\\Users\\gdi\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18' ]
+17 error git clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18: Cloning into bare repository 'C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18'...
+17 error git clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18: fatal: Could not read from remote repository.
+17 error git clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18:
+17 error git clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18: Please make sure you have the correct access rights
+17 error git clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18: and the repository exists.
+18 silly fetchPackageMetaData Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18
+18 silly fetchPackageMetaData Cloning into bare repository 'C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18'...
+18 silly fetchPackageMetaData fatal: Could not read from remote repository.
+18 silly fetchPackageMetaData
+18 silly fetchPackageMetaData Please make sure you have the correct access rights
+18 silly fetchPackageMetaData and the repository exists.
+18 silly fetchPackageMetaData
+18 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:203:12)
+18 silly fetchPackageMetaData     at emitTwo (events.js:87:13)
+18 silly fetchPackageMetaData     at ChildProcess.emit (events.js:172:7)
+18 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:818:16)
+18 silly fetchPackageMetaData     at Socket.<anonymous> (internal/child_process.js:319:11)
+18 silly fetchPackageMetaData     at emitOne (events.js:77:13)
+18 silly fetchPackageMetaData     at Socket.emit (events.js:169:7)
+18 silly fetchPackageMetaData     at Pipe._onclose (net.js:469:12)
+18 silly fetchPackageMetaData  error for git://github.com/bower/bower#master { [Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18
+18 silly fetchPackageMetaData Cloning into bare repository 'C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18'...
+18 silly fetchPackageMetaData fatal: Could not read from remote repository.
+18 silly fetchPackageMetaData
+18 silly fetchPackageMetaData Please make sure you have the correct access rights
+18 silly fetchPackageMetaData and the repository exists.
+18 silly fetchPackageMetaData ]
+18 silly fetchPackageMetaData   killed: false,
+18 silly fetchPackageMetaData   code: 128,
+18 silly fetchPackageMetaData   signal: null,
+18 silly fetchPackageMetaData   cmd: 'git -c core.longpaths=true clone --template=C:\\Users\\gdi\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates --mirror git://github.com/bower/bower.git C:\\Users\\gdi\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18' }
+19 silly rollbackFailedOptional Starting
+20 silly rollbackFailedOptional Finishing
+21 silly runTopLevelLifecycles Starting
+22 silly runTopLevelLifecycles Finishing
+23 silly install printInstalled
+24 verbose stack Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18
+24 verbose stack Cloning into bare repository 'C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18'...
+24 verbose stack fatal: Could not read from remote repository.
+24 verbose stack
+24 verbose stack Please make sure you have the correct access rights
+24 verbose stack and the repository exists.
+24 verbose stack
+24 verbose stack     at ChildProcess.exithandler (child_process.js:203:12)
+24 verbose stack     at emitTwo (events.js:87:13)
+24 verbose stack     at ChildProcess.emit (events.js:172:7)
+24 verbose stack     at maybeClose (internal/child_process.js:818:16)
+24 verbose stack     at Socket.<anonymous> (internal/child_process.js:319:11)
+24 verbose stack     at emitOne (events.js:77:13)
+24 verbose stack     at Socket.emit (events.js:169:7)
+24 verbose stack     at Pipe._onclose (net.js:469:12)
+25 verbose cwd D:\Code\Git\jigargandhi\ng-officeuifabric
+26 error Windows_NT 6.1.7601
+27 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "git://github.com/bower/bower#master"
+28 error node v5.0.0
+29 error npm  v3.3.6
+30 error code 128
+31 error Command failed: git -c core.longpaths=true clone --template=C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/bower/bower.git C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18
+31 error Cloning into bare repository 'C:\Users\gdi\AppData\Roaming\npm-cache\_git-remotes\git-github-com-bower-bower-git-master-c185ea7f72eb36f94fe7452024ff4c18'...
+31 error fatal: Could not read from remote repository.
+31 error
+31 error Please make sure you have the correct access rights
+31 error and the repository exists.
+32 error If you need help, you may report this error at:
+32 error     <https://github.com/npm/npm/issues>
+33 verbose exit [ 1, true ]

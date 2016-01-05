@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-Icon demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" />
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">Icon Demo | &lt;uif-icon&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <p>
+        Use the attribute <code>uif-type</code> to specify the icon to display. This must be one of the icons listed on the page: <a href="http://dev.office.com/fabric/styles">Office UI Fabric - Sytles - Icons</a>.
+    </p>
+
+    <p>
+        This markup: <br />
+        <code>
+            &lt;uif-search uif-value="'Searchbox'" /&gt;
+        </code>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+       <uif-searchbox uif-value="" uif-search="'Placeholder'" />
+    </p>
+
+    <h2>Modifiers</h2>
+    <p>
+        Change the size &amp; color using standard CSS sizing techniques: <code>style="font-size:32px; color:red;"</code>:<br />
+        <uif-icon uif-type="arrowDownLeft" style="font-size:32px; color:red;" />
+    </p>
+
+    <h2>Changing the Icon</h2>
+    <div ng-controller="demoController">
+        <select ng-model="selectedIcon"
+                ng-options="icon.name for icon in icons track by icon.id"></select>
+
+        <div>
+            Selected icon = <code>{{selectedIcon}}</code><br />
+            Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}" />
+        </div>
+    </div>
+
+</body>
+
+</html>

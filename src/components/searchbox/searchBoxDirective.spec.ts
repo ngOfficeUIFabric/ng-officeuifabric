@@ -1,4 +1,6 @@
-﻿
+﻿'use strict';
+
+import * as ng from 'angular';
 describe("searchBoxDirective", () => {
     beforeEach(() => {
         angular.mock.module('fabric.ui.components.searchbox');

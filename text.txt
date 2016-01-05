@@ -1,0 +1,15 @@
+[09:39:50] Using gulpfile D:\Code\Git\jigargandhi\ng-officeuifabric\gulpfile.js
+[09:39:50] Starting 'test'...
+[09:39:50] Testing code with Karma
+[33m28 12 2015 09:39:50.346:WARN [watcher]: [39mPattern "D:/Code/Git/jigargandhi/ng-officeuifabric/src/externals/*.js" does not match any file.
+[32m28 12 2015 09:39:50.375:INFO [karma]: [39mKarma v0.13.15 server started at http://localhost:5793/
+[32m28 12 2015 09:39:50.388:INFO [launcher]: [39mStarting browser PhantomJS
+[32m28 12 2015 09:39:51.154:INFO [PhantomJS 1.9.8 (Windows 7 0.0.0)]: [39mConnected on socket 2lzWaAjUuMHO6JTQAAAA with id 90283533
+PhantomJS 1.9.8 (Windows 7 0.0.0): Executed 0 of 2 SUCCESS (0 secs / 0 secs)
+[1A[2KPhantomJS 1.9.8 (Windows 7 0.0.0): Executed 1 of 2 SUCCESS (0 secs / 0.034 secs)
+[1A[2KLOG: 'testfield value Test 2'
+PhantomJS 1.9.8 (Windows 7 0.0.0): Executed 1 of 2 SUCCESS (0 secs / 0.034 secs)
+[1A[2KPhantomJS 1.9.8 (Windows 7 0.0.0): Executed 2 of 2 SUCCESS (0 secs / 0.043 secs)
+[1A[2KPhantomJS 1.9.8 (Windows 7 0.0.0): Executed 2 of 2 SUCCESS (0.004 secs / 0.043 secs)
+[09:39:51] Karma test run completed
+[09:39:51] Finished 'test' after 1.21 s
