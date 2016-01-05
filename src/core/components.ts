@@ -2,6 +2,8 @@
 
 import * as ng from 'angular';
 import * as iconModule from '../components/icon/iconDirective';
+import * as textFieldModule from '../components/textfield/textFieldDirective';
+
 
 /**
  * @ngdoc module
@@ -13,5 +15,6 @@ import * as iconModule from '../components/icon/iconDirective';
  * 
  */
 export var module: ng.IModule = ng.module('officeuifabric.components', [
-    iconModule.module.name
+    iconModule.module.name,
+    textFieldModule.module.name
   ]);
