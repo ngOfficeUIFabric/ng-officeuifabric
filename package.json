@@ -46,7 +46,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-strip-comments": "^1.1.2",
+    "gulp-strip-comments": "2.1.1",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",
