@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="demoApp">
 
 <head>
-  <title>ngOfficeUiFabric | uif-Icon demo</title>
+  <title>ngOfficeUiFabric | uif-Textfield demo</title>
   <meta charset="utf-8" />
 
   <!-- office ui fabric css -->
@@ -15,25 +15,29 @@
   <script src="index.js"></script>
 </head>
 
-<body ng-app="demoApp">
+<body ng-controller="demoController">
 
-  <h1 class="ms-font-su">Icon Demo | &lt;uif-icon&gt;</h1> 
+  <h1 class="ms-font-su">Textfield Demo | &lt;uif-textfield&gt;</h1> 
   <em>In order for this demo to work you must first build the library in debug mode.</em>
 
+  <h2>Basic usage</h2>
   <p>
     This markup: <br />
     <code>
-      &lt;uif-textfield description=&quot;This is the description&quot; placeholder=&quot;This is the placeholder&quot; /&gt;
+      &lt;uif-textfield label=&quot;This is the label&quot; ng-model=&quot;textValue&quot; description=&quot;This is the description&quot; /&gt;
     </code>
   </p>
 
   <p>
     Renders this:
     <br />
-    <uif-textfield description="This is the description" placeholder="This is the placeholder" />
+    <uif-textfield label="This is the label" ng-model="textValue" description="This is the description" />  
+  </p>
+  <p>
+    <span>textValue: {{textValue}}</span>
   </p>
 
-
+  <h2>Underlined</h2>
   <p>
     This markup: <br />
     <code>
@@ -46,25 +50,20 @@
     <br />
     <uif-textfield label="This is the label" underlined />
   </p>
-
-  <!--<h2>Modifiers</h2>
-  <p>
-    Change the size &amp; color using standard CSS sizing techniques: <code>style="font-size:32px; color:red;"</code>:<br />
-    <uif-icon uif-type="arrowDownLeft" style="font-size:32px; color:red;" />
-  </p>
   
-  <h2>Changing the Icon</h2>
-  <div ng-controller="demoController">
-    <select ng-model="selectedIcon"
-            ng-options="icon.name for icon in icons track by icon.id">
-    </select>
-    
-    <div>
-      Selected icon = <code>{{selectedIcon}}</code><br />
-      Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}" />
-    </div>
-  </div>-->
+  <h2>Placeholder</h2>
+   <p>
+    This markup: <br />
+    <code>
+      &lt;uif-textfield placeholder=&quot;This is the placeholder&quot; /&gt;
+    </code>
+  </p>
 
+  <p>
+    Renders this:
+    <br />
+    <uif-textfield placeholder="This is the placeholder" />  
+  </p>
 </body>
 
 </html>

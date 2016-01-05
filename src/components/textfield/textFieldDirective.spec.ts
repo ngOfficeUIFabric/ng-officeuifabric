@@ -44,11 +44,17 @@ describe('textFieldDirective', () => {
     }));
     it('should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
+
         let textBox: JQuery = $compile('<uif-textfield placeholder="Placeholder contents"></uif-textfield>')($scope);
         $scope.$apply();
 
         let label: JQuery = textBox.find('div.ms-TextField--placeholder label.ms-Label');
         expect(label.html()).toBe('Placeholder contents');
+        expect(label.hasClass('ng-hide')).toBe(false, 'Label should be visible before click');
+
+        let input: JQuery = textBox.find('input');
+        input.click();
+        expect(label.hasClass('ng-hide')).toBe(true, 'Label should be hidden after click');
     }));
 
 });
