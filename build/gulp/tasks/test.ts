@@ -32,8 +32,9 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'verbose': 'Output all TypeScript files being built',
-    'specs': 'Output all tests being run'
+    'debug': 'Set karma log level to DEBUG',
+    'specs': 'Output all tests being run',
+    'verbose': 'Output all TypeScript files being built & set karma log level to INFO'
   };
 
   /**
@@ -55,6 +56,13 @@ export class GulpTask extends BaseGulpTask {
     // if in spec mode, change reporters from progress => spec
     if (this._args.specs) {
       karmaConfig.reporters = ['spec', 'coverage'];
+    }
+
+    // set log level accordingly
+    if (this._args.debug) {
+      karmaConfig.logLevel = 'DEBUG';
+    } else if (this._args.verbose) {
+      karmaConfig.logLevel = 'INFO';
     }
 
     // create karma server
