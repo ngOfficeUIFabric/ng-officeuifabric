@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <title>ngOfficeUiFabric | uif-Textfield demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.min.css" />
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-controller="demoController">
+
+  <h1 class="ms-font-su">Textfield Demo | &lt;uif-textfield&gt;</h1> 
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <h2>Basic usage</h2>
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-textfield label=&quot;This is the label&quot; ng-model=&quot;textValue&quot; description=&quot;This is the description&quot; /&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-textfield label="This is the label" ng-model="textValue" description="This is the description" />  
+  </p>
+  <p>
+    <span>textValue: {{textValue}}</span>
+  </p>
+
+  <h2>Underlined</h2>
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-textfield label=&quot;This is the label&quot; underlined /&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-textfield label="This is the label" underlined />
+  </p>
+  
+  <h2>Placeholder</h2>
+   <p>
+    This markup: <br />
+    <code>
+      &lt;uif-textfield placeholder=&quot;This is the placeholder&quot; /&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-textfield placeholder="This is the placeholder" />  
+  </p>
+</body>
+
+</html>
