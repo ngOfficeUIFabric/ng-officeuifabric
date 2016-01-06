@@ -1,42 +1,7 @@
 ﻿'use strict';
 import * as ng from 'angular';
 
-    //export class SearchBoxController {
-    //    static $inject = ['$element', '$scope'];
-        
-    //    public uifValue: string;
-    //    public uifSearch: string;
-    //    constructor(public $element: ng.IAugmentedJQuery, public $scope: { uifValue:string, uifSearch:string }) {
-    //        this.uifValue = $scope.uifValue;
-    //        this.uifSearch = $scope.uifSearch
-
-    //        // Any Jquery access goes here. Use $element
-
-    //        // Setup any $watch on $scope that you need
-    //    }
-    //    public focus(): void {
-    //        console.log("focus called");
-    //        this.isFocus = true;
-    //        this.isLabelHidden = true;
-    //        this.isActive = true;
-    //    }
-    //    public mousedown(): void {
-    //        this.isCancel = true;
-    //    }
-    //    public blur(): void {
-    //        if (this.isCancel) {
-    //            this.uifValue = "";
-    //            this.isLabelHidden = false;
-    //        }
-    //        this.isActive = false;
-    //        if (this.uifValue == "") {
-    //            this.isLabelHidden = false;
-    //        }
-
-    //        this.isFocus = this.isCancel = false;
-
-    //    }
-    //}
+    
 /**
  * @ngdoc directive
  * @name uifSearchbox
