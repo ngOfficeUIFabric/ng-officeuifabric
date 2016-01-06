@@ -1,7 +1,6 @@
 'use strict';
 
 import {BaseGulpTask} from '../BaseGulpTask';
-import {BuildConfig} from '../config';
 import {Utils} from '../utils';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
@@ -49,7 +48,7 @@ export class GulpTask extends BaseGulpTask {
 
     // create karma configuration
     let karmaConfig: karma.ConfigOptions = <karma.ConfigOptions>{
-      configFile: __dirname + '/../../../' + BuildConfig.BUILD_PATH + '/karma.conf.js',
+      configFile: '../../../config/karma.js',
       singleRun: true
     };
 

@@ -2,7 +2,7 @@
 
 import * as karma from 'karma';
 import * as webpack from 'webpack';
-import * as webpackConfig from './webpack.conf';
+import * as webpackConfig from './webpack';
 
 /**
  * Karma configuration.
@@ -33,7 +33,7 @@ module.exports = (config: karma.Config) => {
   // create karma config
   let karmaConfig: IKarmaConfig = <IKarmaConfig>{
     autoWatch: true,
-    basePath: '../',
+    basePath: __dirname + '/..',
     browsers: ['PhantomJS'],
     colors: true,
     coverageReporter: {
@@ -43,7 +43,6 @@ module.exports = (config: karma.Config) => {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/jquery/dist/jquery.min.js',
       'src/core/*.js',
       'src/components/*/*.js'
     ],
