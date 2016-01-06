@@ -24,7 +24,7 @@ before_script:
 
 script:
   # execute all tests & gen code coverage report
-  - "./node_modules/karma/bin/karma start ./build/karma.conf.js --single-run"
+  - "./node_modules/karma/bin/karma start ./config/karma.js --single-run"
 
 after_script:
   # send code coverage report to coveralls.io
