@@ -1,13 +1,28 @@
 ﻿'use strict';
 
 import * as ng from 'angular';
-describe("searchBoxDirective", () => {
+
+describe("searchBoxDirective: <uif-searchbox />", () => {
+    let element: ng.IAugmentedJQuery;
+    let scope: ng.IScope;
     beforeEach(() => {
-        angular.mock.module('fabric.ui.components.searchbox');
+        angular.mock.module('officeuifabric.core');
+        angular.mock.module('officeuifabric.components.searchbox');
     });
+    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        element = ng.element('<uif-searchbox uif-value="\'value\'" />');
+        scope = $rootScope;
+        $compile(element)(scope);
+        scope.$digest();
+    }));
 
     afterEach(() => {
         // myfunc.reset();
+    });
+    it('should render correct HTML', () => {
+        let elem: ng.IAugmentedJQuery = element.find('input');
+        console.log(elem.html());
+        expect(elem.length).toBe(1);
     });
 
     it("should have unique ids", inject(($compile, $rootScope) => {
@@ -23,43 +38,29 @@ describe("searchBoxDirective", () => {
         expect(textField1[0].id === textField2[0].id).toBe(false);
 
     }));
-    it("should be able to set value", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        $scope.textBoxValue = "Test 1";
-        var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-        $scope.$digest();
-        
-        var textField = $(textBox[0]).find('.ms-SearchBox-field');
-       // expect(textField.length).toBe(1);
-        
-        expect(textField.val()).toBe('Test 1');
+    it("should be able to set value", inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope = $rootScope.$new();
+        $newScope["Value"] = "Test";
+      
+        let tag:ng.IAugmentedJQuery = ng.element("<uif-searchbox uif-value=\"'Value'\" />");
+        $compile(tag)($newScope);
+       
+        $newScope.$digest();
+       
+        expect(tag.find(".ms-SearchBox-field").val()).toBe('Value');
 
-        $scope.textBoxValue = "Test 2";
-        $scope.$digest();
-        
-        console.log("testfield value " + $(textBox[0]).find('.ms-SearchBox-field').val());
-        expect(textField.val()).toBe('Test 2');
-
-        textField.val('Test 3');
-        textField.trigger('input');
-        
-        expect(textField.val()).toBe('Test 3', 'Update textbox');
-        
-        // todo: In the browser this works fine. Not sure why not here :(
-        // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
     }));
-    //it("hide the label", inject(($compile, $rootScope) => {
-    //    var $scope = $rootScope.$new();
-    //    $scope.textBoxValue = "Test 1";
-    //    var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-    //    $scope.$digest();
+    it("hide label", inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope = $rootScope.$new();
+        
 
-    //    var textField = $(textBox[0]).find('.ms-SearchBox-field').trigger('focus');
-    //    $scope.$digest();
-    //    // expect(textField.length).toBe(1);
-    //    expect($(textBox[0]).find('.ms-SearchBox').hasClass('is-active')).toBe(true);
+        let tag: ng.IAugmentedJQuery = ng.element("<uif-searchbox />");
+        $compile(tag)($newScope);
 
-    //    // todo: In the browser this works fine. Not sure why not here :(
-    //    // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
-    //}));
+        $newScope.$digest();
+        tag.find('input').trigger('focus');
+        expect(tag.find(".ms-SearchBox-label").is(':hidden')).toBe(true);
+
+    }));
+   
 });

@@ -1,38 +1,42 @@
 ﻿'use strict';
 import * as ng from 'angular';
 
-    export class SearchBoxController {
+    //export class SearchBoxController {
+    //    static $inject = ['$element', '$scope'];
+        
+    //    public uifValue: string;
+    //    public uifSearch: string;
+    //    constructor(public $element: ng.IAugmentedJQuery, public $scope: { uifValue:string, uifSearch:string }) {
+    //        this.uifValue = $scope.uifValue;
+    //        this.uifSearch = $scope.uifSearch
 
-        public isFocus = false;
-        public isCancel = false;
-        public isLabelHidden = false;
-        public isActive = false;
-        public uifValue: string;
-        public uifSearch: string;
+    //        // Any Jquery access goes here. Use $element
 
-        public focus(): void {
-            console.log("focus called");
-            this.isFocus = true;
-            this.isLabelHidden = true;
-            this.isActive = true;
-        }
-        public mousedown(): void {
-            this.isCancel = true;
-        }
-        public blur(): void {
-            if (this.isCancel) {
-                this.uifValue = "";
-                this.isLabelHidden = false;
-            }
-            this.isActive = false;
-            if (this.uifValue == "") {
-                this.isLabelHidden = false;
-            }
+    //        // Setup any $watch on $scope that you need
+    //    }
+    //    public focus(): void {
+    //        console.log("focus called");
+    //        this.isFocus = true;
+    //        this.isLabelHidden = true;
+    //        this.isActive = true;
+    //    }
+    //    public mousedown(): void {
+    //        this.isCancel = true;
+    //    }
+    //    public blur(): void {
+    //        if (this.isCancel) {
+    //            this.uifValue = "";
+    //            this.isLabelHidden = false;
+    //        }
+    //        this.isActive = false;
+    //        if (this.uifValue == "") {
+    //            this.isLabelHidden = false;
+    //        }
 
-            this.isFocus = this.isCancel = false;
+    //        this.isFocus = this.isCancel = false;
 
-        }
-    }
+    //    }
+    //}
 /**
  * @ngdoc directive
  * @name uifSearchbox
@@ -51,55 +55,75 @@ import * as ng from 'angular';
  */
     export class SearchBoxDirective implements ng.IDirective {
 
-        public template = '<div class="ms-SearchBox" ng-class="{\'is-active\':controller.isActive}">' +
-        '<input class="ms-SearchBox-field" ng-focus="controller.focus()" ng-blur="controller.blur()" ng-model="controller.value" id="{{\'searchBox_\'+uniqueId}}" >' +
-        '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}" ng-hide="controller.isLabelHidden"><i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{controller.search}}</label>' +
-        '<button class="ms-SearchBox-closeButton" ng-mousedown="controller.mousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
+        public template = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive}">' +
+        '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()" ng-model="uifValue" id="{{\'searchBox_\'+uniqueId}}" />' +
+        '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}" ng-hide="isLabelHidden"><i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{uifSearch}}</label>' +
+        '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
         '</div>';
         
         public uniqueId = 1;
-        public scope: {} = {
+        public scope:any = {
             uifValue: "=",
             uifSearch: "=",
            // uifClose: "&"
         }
 
-        constructor() {
-        }
-        public controller: any = SearchBoxController;
-        link(scope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: SearchBoxController) {
+    
+        link(scope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes) {
 
             if (!this.uniqueId) {
                 this.uniqueId = 1;
             }
-
+            scope["isFocus"] = false;
+            scope["isCancel"] = false;
+            scope["isLabelHidden"] = false;
+            scope["isActive"] = false;
+            
             scope.uniqueId = this.uniqueId++;
 
-            scope.controller = controller;
-            scope.controller.uifValue = scope.uifValue;
-            scope.controller.uifSearch = scope.uifSearch;
+            scope["inputFocus"] = function () {
+                scope["isFocus"] = true;
+                scope["isLabelHidden"]  =  true;
+                scope["isActive"] = true;
+            }
 
+            scope["inputBlur"] = function () {
+                if (scope.isCancel) {
+                    scope.uifValue = "";
+                    scope.isLabelHidden = false;
+                }
+                scope.isActive = false;
+                if (scope.uifValue == "") {
+                    scope.isLabelHidden = false;
+                }
+
+                scope.isFocus = scope.isCancel = false;
+            }
+
+            scope["btnMousedown"] = function () {
+                scope["isCancel"] = true;
+            }
 
             scope.$watch("uifValue", function (val) {
-                if (!controller.isFocus) {
+                if (!scope.isFocus) {
                     if (val && val != "") {
-                        controller.isLabelHidden = true;
+                        scope.isLabelHidden = true;
                     } else {
-                        controller.isLabelHidden = false;
+                        scope.isLabelHidden = false;
                     }
-                    controller.uifValue = val;
+                    scope.uifValue = val;
                 }
 
             });
 
             scope.$watch("uifSearch", function (search) {
-                controller.uifSearch= search;
+                scope.uifSearch= search;
             });
 
 
         }
 
-        static factory(): ng.IDirectiveFactory {
+       public static factory(): ng.IDirectiveFactory {
             const directive = () => new SearchBoxDirective();
 
             return directive;
@@ -115,5 +139,5 @@ import * as ng from 'angular';
  */
 
 export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
-    .directive('uifTextfield', SearchBoxDirective.factory());
+    .directive('uifSearchbox', SearchBoxDirective.factory());
 
