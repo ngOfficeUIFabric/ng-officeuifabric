@@ -58,7 +58,7 @@ import * as ng from 'angular';
                     scope.isLabelHidden = false;
                 }
                 scope.isActive = false;
-                if (scope.uifValue == "") {
+                if (typeof (scope.uifValue)==="undefined"||scope.uifValue == "") {
                     scope.isLabelHidden = false;
                 }
 

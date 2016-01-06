@@ -58,9 +58,14 @@ describe("searchBoxDirective: <uif-searchbox />", () => {
         $compile(tag)($newScope);
 
         $newScope.$digest();
-        tag.find('input').trigger('focus');
-        expect(tag.find(".ms-SearchBox-label").is(':hidden')).toBe(true);
+        tag.find('input').triggerHandler('focus');
+        $newScope.$digest();
+        console.log(tag.find('.ms-SearchBox-label').attr("style"));
+        expect(tag.find(".ms-SearchBox-label").hasClass('ng-hide')).toBe(true);
+        tag.find('input').triggerHandler('blur');
+        $newScope.$digest();
 
+        expect(tag.find(".ms-SearchBox-label").hasClass('ng-hide')).toBe(false);
     }));
    
 });
