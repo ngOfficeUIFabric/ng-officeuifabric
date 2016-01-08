@@ -47,9 +47,9 @@ The most common one is `--verbose`. Depending on the task, this will usually out
 
 ## Task List 
 
-### $ gulp [build-ts](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/build-ts.ts)
+### `gulp build-lib`
 
-This task uses [webpack](http://webpack.github.io/) to transpile all TypeScript files and then create a webpack bundle. 
+This task uses [webpack](http://webpack.github.io/) to transpile all TypeScript files and then create a webpack bundle.  
 
 By default, it creates a minified file with no comments or source maps. If the `--debug` argument is supplied, an un-minified bundle with an inline sourcemap is provided. These files are saved to the folder `/dist` as defined in `/build/config.ts`.
 
@@ -65,23 +65,23 @@ $ gulp build-ts --verbose
 $ gulp build-ts --verbose --version=1.2.3
 ```
 
-### $ gulp [clean](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/clean.ts)
+### `gulp clean`
 
 Runs the two tasks `clean-build` & `clean-lib` tasks.
 
 > **NOTE**: After running this task, be aware that no build tasks will work because you have deleted all the JavaScript gulp related files. Therefore you will need to re-transpile your TypeScript: `tsc -p ./`
 
-### $ gulp [clean-build](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/clean-build.ts)
+### `gulp clean-build`
 
 Deletes all generated JavaScript files used in building the project, except those defined in `BuildConfig.BUILD_KEEP_JS` as defined in `/build/config.ts`.
 
 > **NOTE**: After running this task, be aware that no build tasks will work because you have deleted all the JavaScript gulp related files. Therefore you will need to re-transpile your TypeScript: `tsc -p ./`
 
-### $ gulp [clean-lib](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/clean-lib.ts)
+### `gulp clean-lib`
 
 Deletes all generated JavaScript files for the Angular directives, except those defined in `BuildConfig.LIB_KEEP_JS` as defined in `/build/config.ts`.
 
-### $ gulp [test](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/test.ts)
+### `gulp test`
 
 Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/build/karma.conf.js` file.
 
@@ -89,18 +89,18 @@ If you specify the argument `--specs` the tests (and their results) will be writ
 
 Karma also runs *Istanbul* for generation of a code coverage report.
 
-### $ gulp [transpile-ts](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/transpile-ts.ts)
+### `gulp transpile-ts`
 
 Uses the TypeScript compiler to transpile all TypeScript in the project to JavaScript, including sourcemaps at the end of each file.
 
-### $ gulp [vet](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/vet.ts)
+### `gulp vet`
 
 Vets all code by running tasks `vet-build-ts` & `vet-lib-ts`.
 
-### $ gulp [vet-build-ts](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/vet-build-ts.ts)
+### `gulp vet-build-ts`
 
 Runs [tslint](https://www.npmjs.com/package/tslint) against all using the rules defined in `/ngofficeuifabric/ng-officeuifabric/blob/master/tslint.json` against all TypeScript build-related files.
 
-### $ gulp [vet-lib-ts](/ngofficeuifabric/ng-officeuifabric/blob/master/build/gulp/tasks/vet-lib-ts.ts)
+### `gulp vet-lib-ts`
 
 Runs [tslint](https://www.npmjs.com/package/tslint) against all using the rules defined in `/ngofficeuifabric/ng-officeuifabric/blob/master/tslint.json` against all TypeScript library-related files.
