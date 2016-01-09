@@ -1,10 +1,12 @@
 # [Angular](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric).
 
+[![npm version](https://badge.fury.io/js/ng-office-ui-fabric.svg)](https://badge.fury.io/js/ng-office-ui-fabric)
+[![bower version](https://badge.fury.io/bo/ng-office-ui-fabric.svg)](https://github.com/ngofficefabric/package-ngofficeuifabric)
+[![NuGet version](https://badge.fury.io/nu/ng-office-ui-fabric.svg)](https://badge.fury.io/nu/ng-office-ui-fabric)
+
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
 [![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 [![devDependency Status](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric/dev-status.svg)](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric#info=devDependencies)
-[![Issue Stats](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric/badge/pr)](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric)
-[![Issue Stats](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric/badge/issue)](http://www.issuestats.com/github/ngOfficeUIFabric/ng-officeuifabric)
 
 ### Branch Status:
 master | dev
@@ -29,23 +31,39 @@ Basic installation & usage information is found on this page... additional docs 
 
 # Installation
 
-Other than manually downloading the library, **ng-OfficeUIFabric** will be available in the following options:
-
-## CDN
-
-> TODO: usage instructions coming soon: [cdnjs.com](https://cdnjs.com)
+Other than manually downloading the library, **ng-OfficeUIFabric** will be available in the following options. Then you just need to add references to the Angular JS, ngOfficeUiFabric JS & and Office UI Fabric CSS libraries and import the ngOfficeUiFabric modules and you're good to go. Check the [package-ngofficeuifabric](https://github.com/andrewconnell/package-ngofficeuifabric/blob/release-v0.1.0/README.md) for simple usage info.
 
 ## Bower
 
-> TODO: actual install instructions coming soon... once we have something to distribute :)
+Install the library (which should also download the [Angular](http://bower.io/search/?q=angular) & [office-ui-fabric](http://bower.io/search/?q=office-ui-fabric) libraries as they are configured as dependencies:
+
+```shell
+bower install ng-office-ui-fabric --save
+```
 
 ## NPM
 
-> TODO: actual install instructions coming soon... once we have something to distribute :)
+Install the library (which should also download the [Angular](https://www.npmjs.com/package/angular) & [office-ui-fabric](https://www.npmjs.com/package/office-ui-fabric) libraries as they are configured as dependencies:
+
+```shell
+npm install ng-office-ui-fabric --save
+```
 
 ## NuGet
 
-> TODO: actual install instructions coming soon... once we have something to distribute :)
+Install the library (which should also download the [AngularJS.Core](https://www.nuget.org/packages/ng-office-ui-fabric) & [OfficeUiFabric](https://www.nuget.org/packages/OfficeUIFabric/) libraries as they are configured as dependencies.
+
+```shell 
+Install-Package ng-office-ui-fabric
+```
+
+## Direct Download
+
+You can also directly download the built library if you wish. Grab either the unminified `ngOfficeUiFabric.js` or minified `ngOfficeUiFabric.min.js` from the [package-ngofficeuifabric](https://github.com/ngOfficeUIFabric/package-ngofficeuifabric) repo. You will need to also grab copies of [Angular 1.4.*](https://angularjs.org/) and [Office UI Fabric](http://dev.office.com/fabric/getting-started) (*you only need the CSS from Office UI Fabric*). If you install from Bower, NPM or NuGet, the dependencies are pulled in for you.
+
+## CDN
+
+What, no CDN option yet? We need your help! Star this repo because we need at least 100 stars so we can submit to CDNJS!
 
 # Support
 
