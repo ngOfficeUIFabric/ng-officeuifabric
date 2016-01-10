@@ -2,6 +2,36 @@
 
 import * as ng from 'angular';
 
+export interface ITableScope extends ng.IScope {
+    orderBy?: string;
+    orderAsc: boolean;
+}
+
+class TableController {
+    public static $inject: string[] = ['$scope'];
+
+    constructor(public $scope: ITableScope) {
+        this.$scope.orderBy = null;
+        this.$scope.orderAsc = true;
+    }
+
+    get orderBy(): string {
+        return this.$scope.orderBy;
+    }
+    set orderBy(property: string) {
+        this.$scope.orderBy = property;
+        this.$scope.$digest();
+    }
+
+    get orderAsc(): boolean {
+        return this.$scope.orderAsc;
+    }
+    set orderAsc(orderAsc: boolean) {
+        this.$scope.orderAsc = orderAsc;
+        this.$scope.$digest();
+    }
+}
+
 /**
  * @ngdoc directive
  * @name uifTable
@@ -38,6 +68,8 @@ export class TableDirective implements ng.IDirective {
     public transclude: boolean = true;
     public replace: boolean = true;  // required for correct HTML rendering
     public template: string = '<div class="ms-Table" ng-transclude></div>';
+    public controller: any = TableController;
+    public controllerAs: string = 'table';
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new TableDirective();
@@ -178,6 +210,14 @@ export class TableCellDirective implements ng.IDirective {
     }
 }
 
+export interface ITableHeaderScope extends ng.IScope {
+    headerClick: (ev: any) => void;
+}
+
+export interface ITableHeaderAttributes extends ng.IAttributes {
+    uifOrderBy: string;
+}
+
 /**
  * @ngdoc directive
  * @name uifTableHeader
@@ -199,11 +239,52 @@ export class TableHeaderDirective implements ng.IDirective {
     public transclude: boolean = true;
     public replace: boolean = true; // required for correct HTML rendering
     public template: string = '<span class="ms-Table-cell" ng-transclude></span>';
+    public require: string = '^uifTable';
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new TableHeaderDirective();
 
         return directive;
+    }
+
+    public link(scope: ITableHeaderScope,
+                instanceElement: ng.IAugmentedJQuery,
+                attrs: ITableHeaderAttributes,
+                table: TableController): void {
+        scope.headerClick = (ev: any): void => {
+            if (table.orderBy === attrs.uifOrderBy) {
+                table.orderAsc = !table.orderAsc;
+            } else {
+                table.orderBy = attrs.uifOrderBy;
+                table.orderAsc = true;
+            }
+        };
+
+        scope.$watch('table.orderBy', (newOrderBy: string, oldOrderBy: string, tableHeaderScope: ITableHeaderScope): void => {
+            if (oldOrderBy !== newOrderBy &&
+                newOrderBy === attrs.uifOrderBy) {
+                let cells: JQuery = instanceElement.parent().children();
+                for (let i: number = 0; i < cells.length; i++) {
+                    if (cells.eq(i).children().length === 2) {
+                        cells.eq(i).children().eq(1).remove();
+                    }
+                }
+
+                instanceElement.append('<span class="uif-sort-order">&nbsp;<i class="ms-Icon ms-Icon--caretDown" aria-hidden="true"></i></span>');
+            }
+        });
+
+        scope.$watch('table.orderAsc', (newOrderAsc: boolean, oldOrderAsc: boolean, tableHeaderScope: ITableHeaderScope): void => {
+           if (instanceElement.children().length === 2) {
+               let oldCssClass: string = oldOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
+               let newCssClass: string = newOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
+               instanceElement.children().eq(1).children().eq(0).removeClass(oldCssClass).addClass(newCssClass);
+           }
+        });
+
+        if ('uifOrderBy' in attrs) {
+            instanceElement.on('click', scope.headerClick);
+        }
     }
 }
 

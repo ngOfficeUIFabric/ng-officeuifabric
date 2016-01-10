@@ -73,6 +73,66 @@
   <p>
       Rows can be marked as selected using the <code>uif-selected</code> attribute on the <code>&lt;uif-table-row&gt;</code> directive.
   </p>
+  
+  <h2>Sorting table</h2>
+  <p>
+    The <code>uif-table</code> directive supports sorting. To enable sorting you need to complete the following steps:
+    <ol>
+        <li>To each header cell, which you would like to allow users to sort the table with, add the <code>uif-order-by</code>
+            attribute and specify the name of the property used to sort,
+            eg. <code>&lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;</code> will sort the
+            table using the data from the <code>fileName</code> property.</li>
+        <li>In the <code>ng-repeat</code> directive used to rendered table rows add the <code>table.orderBy</code> and
+            <code>!table.orderAsc</code>
+            (<em>please not the exclamation mark (!) prepending the table.orderAsc</em> property) properties, eg.
+            <code>&lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc"&gt;</code></li>
+    </ol>
+  </p>
+  <p>
+    This markup: <br />
+    <pre>
+&lt;uif-table&gt;
+    &lt;uif-table-row&gt;
+        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+        &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
+        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
+        &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
+        &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
+        &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
+    &lt;/uif-table-row&gt;
+    &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}<!---->}"&gt;
+        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
+        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
+        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
+        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
+        &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
+    &lt;/uif-table-row&gt;
+&lt;/uif-table&gt;
+    </pre>
+  </p>
+  <p ng-controller="demoController">
+    Renders this (<em>please note that sorting hasn't been enabled for the <strong>Location</strong> column</em>):
+    <br />
+        <uif-table>
+            <uif-table-row>
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-header uif-order-by="fileName">File name</uif-table-header>
+                <uif-table-header>Location</uif-table-header>
+                <uif-table-header uif-order-by="modified">Modified</uif-table-header>
+                <uif-table-header uif-order-by="type">Type</uif-table-header>
+                <uif-table-header uif-order-by="size">Size</uif-table-header>
+            </uif-table-row>
+            <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}}">
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-cell>{{f.fileName}}</uif-table-cell>
+                <uif-table-cell>{{f.location}}</uif-table-cell>
+                <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+                <uif-table-cell>{{f.type}}</uif-table-cell>
+                <uif-table-cell>{{f.size}}</uif-table-cell>
+            </uif-table-row>
+        </uif-table>
+  </p>
 </body>
 
 </html>

@@ -15,6 +15,7 @@ function demoController($scope) {
             location: '~/file1.txt',
             modified: new Date(),
             type: 'TXT',
+            size: 20,
             isSelected: false
         },
         {
@@ -22,6 +23,7 @@ function demoController($scope) {
             location: '~/file2.docx',
             modified: new Date(),
             type: 'DOCX',
+            size: 5,
             isSelected: true
         },
         {
@@ -29,6 +31,7 @@ function demoController($scope) {
             location: '~/file3.txt',
             modified: new Date(),
             type: 'TXT',
+            size: 10,
             isSelected: false
         }
     ];

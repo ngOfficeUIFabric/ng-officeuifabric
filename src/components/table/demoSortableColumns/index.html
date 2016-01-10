@@ -1,0 +1,18 @@
+<uif-table>
+    <uif-table-row>
+        <uif-table-row-select></uif-table-row-select>
+        <uif-table-header uif-order-by="fileName">File name</uif-table-header>
+        <uif-table-header>Location</uif-table-header>
+        <uif-table-header uif-order-by="modified">Modified</uif-table-header>
+        <uif-table-header uif-order-by="type">Type</uif-table-header>
+        <uif-table-header uif-order-by="size">Size</uif-table-header>
+    </uif-table-row>
+    <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}}">
+        <uif-table-row-select></uif-table-row-select>
+        <uif-table-cell>{{f.fileName}}</uif-table-cell>
+        <uif-table-cell>{{f.location}}</uif-table-cell>
+        <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+        <uif-table-cell>{{f.type}}</uif-table-cell>
+        <uif-table-cell>{{f.size}}</uif-table-cell>
+    </uif-table-row>
+</uif-table>
