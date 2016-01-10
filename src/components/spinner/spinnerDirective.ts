@@ -63,6 +63,8 @@ export class SpinnerDirective implements ng.IDirective {
           instanceElement.append(wrapper);
         }
       });
+
+      scope.init();
   }
 }
 
@@ -76,11 +78,13 @@ export class SpinnerDirective implements ng.IDirective {
  *
  * @property {function} start     - Function strating the spinner animation. Called when spinner is being set to visivle state.
  * @property {function} stop      - Function stopping spinner animation. Called when spinner is being hidden.
+ * @property {function} init      - Function that initializes spinner circles.
  * @property {boolean} ngShow     - Controls visibility of the spinner and triggers animation start/top on change.
  */
 interface ISpinnerScope extends ng.IScope {
   start: () => void;
   stop: () => void;
+  init: () => void;
   ngShow: boolean;
 }
 
@@ -107,8 +111,10 @@ class SpinnerController {
     private $element: ng.IAugmentedJQuery,
     private $interval: ng.IIntervalService) {
 
-    this.createCirclesAndArrange();
-    this.setInitialOpacity();
+    $scope.init = (): void => {
+      this.createCirclesAndArrange();
+      this.setInitialOpacity();
+    }
 
     $scope.start = (): void => {
       this._animationInterval = $interval(
@@ -139,10 +145,10 @@ class SpinnerController {
     while (i--) {
       let circle: ng.IAugmentedJQuery = this.createCircle();
 
-      this.$element.append(circle);
-
       let x: number = Math.round(width * 0.5 + radius * Math.cos(angle) - circle[0].clientWidth * 0.5) - offset * 0.5;
       let y: number = Math.round(height * 0.5 + radius * Math.sin(angle) - circle[0].clientHeight * 0.5) - offset * 0.5;
+
+      this.$element.append(circle);
 
       circle.css('left', (x + 'px'));
       circle.css('top', (y + 'px'));
