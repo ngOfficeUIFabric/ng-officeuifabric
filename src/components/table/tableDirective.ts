@@ -270,7 +270,8 @@ export class TableHeaderDirective implements ng.IDirective {
                     }
                 }
 
-                instanceElement.append('<span class="uif-sort-order">&nbsp;<i class="ms-Icon ms-Icon--caretDown" aria-hidden="true"></i></span>');
+                instanceElement.append('<span class="uif-sort-order">&nbsp;\
+                <i class="ms-Icon ms-Icon--caretDown" aria-hidden="true"></i></span>');
             }
         });
 
