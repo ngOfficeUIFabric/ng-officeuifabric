@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-Toggle demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1/fabric.min.css" />
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Toggle Demo | &lt;uif-toggle&gt;</h1> 
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <p>
+    This markup: <br />
+    <code>
+    &lt;uif-toggle label-off=&quot;Label off&quot; label-on=&quot;Label on&quot; ng-model=&quot;toggled&quot;/&gt;  
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-toggle label-off="Label off" label-on="Label on" ng-model="toggled"/>
+    
+  </p>
+  <p>
+    Toggled: {{toggled}}  
+  </p>
+
+
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-toggle label-off=&quot;Label off&quot; label-on=&quot;Label on&quot; text-location=&quot;right&quot;/&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-toggle label-off="Label off" label-on="Label on" text-location="right"/>
+    
+  </p>
+
+</body>
+
+</html>
