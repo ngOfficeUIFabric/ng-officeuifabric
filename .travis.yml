@@ -12,6 +12,9 @@ branches:
 node_js:
   - stable
 
+env:
+  secure: "Tkmfqa0XkXYHBZ2+SDLvQVkR5GvSk7i4Ckjkv8Up5K7uaDnTfyuAwo1fvsZOMZpG37q2zChh6rdv9AA9xPSi4T+j6i/nOHmHcxD0jSYa6luS9G9DeMdA3jiXn9Ba4dhkkjtPTzK7qXpFODtCHmDACi0HeZ7qrY1Y2+wk10vrHVUpSJI2UI2SHXzx7t3pewssXttYY5FIiIsUigbkZqYc5AvPfqtIRMw9gpeZR8ZNKy+kBAYnRrG+GZk9+gYEt8v/kxa4SDc4vQu6d7OdWdunhOf0Ryvp8ozF9XlGpiuYawmwHRMs2C2s/XbC4Yg+ZzuOLgEhQ2PFpN+BQSoYXTs9MlKvJL0O1ZOna0qcT/km4rojRhtNyiGk5b9P+ahHDQu4/0uJXa5g0Ocsrs6r4KSubONaqoOe0sUaIaJigh1TqNcqNICl61l3gIEZhLRJO20lb89ho2Kauzr15sEr1tcwYBsNe/sHXJ+2sj7OOhhtXqT0jJxWhFI33Gl14ylhr3a5y7XAI6zHWz+41stS4nryXzB90+iJ3Tg6OMigGX+MEMwNJSm2Fr25XBumFzPFAG1NDYPvGiEp7Et59tjO7bzeFtQJZ3StIJ3FZC6W2ZhL3TJUeVJpXP2J9o13vRfID+Gswep8Ux7qlR9+noGzIG16tI+z9+XJ+d/+Ek4DLI1xyYc="
+
 before_script:
   # install dependencies
   - npm install -g gulp
