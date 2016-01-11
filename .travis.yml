@@ -25,6 +25,8 @@ before_script:
 script:
   # execute all tests & gen code coverage report
   - "./node_modules/karma/bin/karma start ./config/karma.js --single-run"
+  # vet all code
+  - "gulp vet-lib-ts --verbose"
 
 after_script:
   # send code coverage report to coveralls.io
