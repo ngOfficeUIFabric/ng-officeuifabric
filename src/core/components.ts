@@ -7,7 +7,6 @@ import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';
 import * as toggleModule from '../components/toggle/toggleDirective';
 
-
 /**
  * @ngdoc module
  * @name officeuifabric.components
@@ -23,4 +22,4 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
     tableModule.module.name,
     textFieldModule.module.name,        
     toggleModule.module.name
-  ]);
+]);
