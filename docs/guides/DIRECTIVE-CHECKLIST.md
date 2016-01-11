@@ -12,6 +12,7 @@ Most of the guidance is based on the [Angular Material](http://material.angularj
   - (003) [Directive Prefix](#directive-prefix)
   - (004) [Module Naming](#module-naming)
   - (005) [Use External Modules](#use-external-modules)
+  - (006) [Directive Attributes](#directive-attributes)
 - [Testing](#testing)
   - (101) [Verify Coverage with Tests](#verify-coverage-with-tests)
   - (102) [Organizing Tests](#organizing-tests)
@@ -124,6 +125,13 @@ class ButtonDirective implements ng.IDirective {
 ```
 
 The library uses [webpack](http://webpack.github.io/) as a module loader as modules are not supported by all browsers.
+
+###Directive Attributes
+###### [Guideline [006](#guideline-006)]
+
+Any element directive that requires custom attributes must prefix those attributes with `uif-` to indicate they are ngOfficeUiFabric specific attributes.
+
+However if you can reuse an existing HTML attribute that would be used for the same or similar purpose, do that. For example, don't create a `uif-value` attribute on a input control to set the value of the control when you can easily use `value` which would do the same thing on a `<input type="text" />` control.
 
 **[Back to top](#table-of-contents)**
 
