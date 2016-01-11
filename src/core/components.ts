@@ -1,6 +1,7 @@
 'use strict';
 
 import * as ng from 'angular';
+import * as calloutModule from '../components/callout/calloutDirective';
 import * as choicefieldModule from '../components/choicefield/choicefieldDirective';
 import * as contextualMenuModule from '../components/contextualmenu/contextualMenu';
 import * as dropdownModule from '../components/dropdown/dropdownDirective';
@@ -24,6 +25,7 @@ import * as toggleModule from '../components/toggle/toggleDirective';
  *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components', [
+  calloutModule.module.name,
   choicefieldModule.module.name,
   contextualMenuModule.module.name,
   dropdownModule.module.name,
