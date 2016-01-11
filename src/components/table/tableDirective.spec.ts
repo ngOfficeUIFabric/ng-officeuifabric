@@ -144,14 +144,14 @@ describe('tableDirective: <uif-table />', () => {
     }));
     
     it('should correctly indicate reversed sorting order', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header><uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
+        element = ng.element('<uif-table><uif-table-row><uif-table-header>ID</uif-table-header><uif-table-header uif-order-by="fileName">File name</uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
         
         let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
         fileNameHeader.click();
         fileNameHeader.click();
-        let sortingIndicatorWrapper: JQuery = fileNameHeader.children().eq(0);
+        let sortingIndicatorWrapper: JQuery = fileNameHeader.children().eq(1);
         let sortingIndicator: JQuery = sortingIndicatorWrapper.children().eq(0);
         expect(sortingIndicator).toHaveClass('ms-Icon--caretUp');
     }));
@@ -181,7 +181,7 @@ describe('tableDirective: <uif-table />', () => {
     }));
     
     it('should clear the sorting indicator after selecting another column for sorting', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        element = ng.element('<uif-table><uif-table-row><uif-table-header uif-order-by="id"></uif-table-header><uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
+        element = ng.element('<uif-table><uif-table-row><uif-table-header uif-order-by="id">ID</uif-table-header><uif-table-header uif-order-by="fileName">File name</uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
         
@@ -189,8 +189,8 @@ describe('tableDirective: <uif-table />', () => {
         let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
         idHeader.click(); // sort id:asc
         fileNameHeader.click(); // sort fileName:asc
-        expect(idHeader.children().length).toEqual(0, 'Sorting indicator not removed from column previously used for sorting');
-        expect(fileNameHeader.children().length).toEqual(1, 'Sorting indicator not added to the column used for sorting');
+        expect(idHeader.children().length).toEqual(1, 'Sorting indicator not removed from column previously used for sorting');
+        expect(fileNameHeader.children().length).toEqual(2, 'Sorting indicator not added to the column used for sorting');
     }));
     
     it('should change the sorting order to ascending after selecting another column for sorting', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
