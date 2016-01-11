@@ -37,10 +37,21 @@ describe('textFieldDirective: <uif-textfield />', () => {
     it('should be able to set underlined', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let textBox: JQuery = $compile('<uif-textfield underlined></uif-textfield>')($scope);
+        // element must be appended to the body, otherwise focus/blur events don't fire
+        textBox.appendTo(document.body);
+
         $scope.$apply();
 
         let div: JQuery = getMainDiv(textBox);
         expect(div.hasClass('ms-TextField--underlined')).toBe(true, 'textfield should have ms-textfield--underlined');
+
+        let input: JQuery = textBox.find('input');
+        let container: JQuery = textBox.find('div');
+        input.focus();
+        expect(container.hasClass('is-active')).toBe(true, 'Container should have class in-active when focused');
+
+        input.blur();
+        expect(container.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
     }));
     it('should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();

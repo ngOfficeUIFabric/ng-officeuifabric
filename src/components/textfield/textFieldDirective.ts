@@ -94,12 +94,6 @@ export class TextFieldDirective implements ng.IDirective {
                 scope.isActive = false;
             }
         };
-        // if (ngModel != null) {
-        //     ngModel.$render = function(): void {
-        //         let input: JQuery = instanceElement.find('input');
-        //         input.val(ngModel.$modelValue);
-        //     };
-        // }
     }
 }
 
