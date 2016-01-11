@@ -1,0 +1,13 @@
+<html ng-app="demoApp" ng-controller="demoController">
+<uif-toggle label-off="Label off" label-on="Label on" ng-model="toggled" />
+</html>
+
+<script type="text/javascript">
+    var demoApp = angular.module('demoApp', [
+        'officeuifabric.core',
+        'officeuifabric.components.toggle'
+        ]);
+
+        demoApp.controller('demoController', [
+        '$scope', demoController]);
+</script>
