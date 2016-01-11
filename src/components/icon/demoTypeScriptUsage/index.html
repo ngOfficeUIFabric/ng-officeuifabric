@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-Icon demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="bundle.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Icon Demo | &lt;uif-icon&gt;</h1> 
+
+  <p>
+    This demo shows how to build an Angular app with TypeScript using the provided icon enum. This option makes sure you are only using Office UI Fabric supported icons.
+  </p>
+  <p>
+    The included icon enum is not intended to be passed directly to the directive's <code>uif-type</code> attribute, rather it should be used to create the string. Refer to the <strong>index.ts</strong> file in this demo to see usage.
+  </p>
+  
+  <p>
+    The TypeScript in this demo uses external modules & this needs a module loader. The ngOfficeUiFabric uses webpack, so we'll use that in this demo as well. We took the <code>index.ts</code> and compile it using webpack to a bundle <code>index.js</code>.
+  </p>
+  <p>
+    After building the library...<br />
+    <code>gulp build-lib --debug</code><br /><br />
+    
+    Use webpack bundle was created using the following command, run from within the same folder as the demo. It uses the <code>webpack.config.js</code> for all settings:<br />
+    <code>webpack</code>
+  </p>
+  
+  <h2>Changing the Icon</h2>
+  <div ng-controller="demoController as controller">
+    <select ng-model="controller.selectedIcon"
+            ng-options="icon as icon for icon in controller.icons">
+    </select>
+    
+    <div>
+      Selected icon = <code>{{controller.selectedIcon}}</code><br />
+      Rendered icon = <uif-icon uif-type="{{controller.selectedIcon}}" />
+    </div>
+  </div>
+
+</body>
+
+</html>
