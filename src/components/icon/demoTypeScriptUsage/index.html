@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-Icon demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.min.css" />
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.components.min.css" />
+  <!-- angular library -->
+
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="bundle.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Icon Demo | &lt;uif-icon&gt;</h1> 
+
+  <p>
+    This demo shows how to build an Angular app with TypeScript using the provided icon enum. This option makes sure you are only using Office UI Fabric supported icons.
+  </p>
+  <p>
+    The included icon enum is not intended to be passed directly to the directive's <code>uif-type</code> attribute, rather it should be used to create the string. Refer to the <strong>index.ts</strong> file in this demo to see usage.
+  </p>
+  
+  <p>
+    To run this demo, you must do the following:
+    <ul>
+      <li>build the library in debug mode:<br /><code>$ gulp build-lib --debug</code></li>
+      <li>transpile everything (including this demo's <code>index.ts</code> file) to typescript:<br /><code>$ tsc -p ./</code></li>
+      <li>use webpack to create a bundle to load modules:<br /><code>webpack src/components/icon/demoTypeScriptUsage/index.js src/components/icon/demoTypeScriptUsage/bundle.js -p</li>
+    </ul>
+  </p>
+  
+  <h2>Changing the Icon</h2>
+  <div ng-controller="demoController">
+    <select ng-model="selectedIcon"
+            ng-options="icon as icon for icon in icons">
+    </select>
+    
+    <div>
+      Selected icon = <code>{{selectedIcon}}</code><br />
+      Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}" />
+    </div>
+  </div>
+
+</body>
+
+</html>
