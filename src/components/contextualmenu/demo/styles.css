@@ -1,0 +1,26 @@
+.ms-ContextualMenu.is-open {
+    position: relative;
+}
+
+.is-open-add{
+    animation: 0.367s cubic-bezier(0.1, 0.9, 0.2, 1) fadeIn, slideRightIn40;
+    -webkit-animation: 0.367s cubic-bezier(0.1, 0.9, 0.2, 1) fadeIn, slideRightIn40;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.is-open-remove{
+    animation: 0.167s cubic-bezier(0.1, 0.25, 0.75, 0.9) fadeOut, scaleDown98;
+    -webkit-animation: 0.167s cubic-bezier(0.1, 0.25, 0.75, 0.9) fadeOut, scaleDown98;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.4);
+    background-color: #fff;
+    border: 1px solid #c8c8c8;
+    display: block;
+    list-style-type: none;
+    position: relative;
+    width: 180px;
+    z-index: 105;
+}
