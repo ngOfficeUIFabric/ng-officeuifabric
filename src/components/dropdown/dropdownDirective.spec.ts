@@ -21,7 +21,7 @@
         
         expect(container.length).toBe(1, 'Container should be present');
         
-        let items = dropdown.find('option');
+        let items = dropdown.find('li');
         expect(items.length).toBe(4, 'There should be 4 options');         
     }));
     
@@ -37,8 +37,7 @@
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue"><uif-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-option></uif-dropdown>')($scope);
         
         $scope.$digest();
-        console.log("HTML: " + dropdown.html());
-        var items = dropdown.find('option');
+        var items = dropdown.find('li');
         expect(items.length).toBe(4);
         expect(items[2].innerText).toBe("Option 3");
     }));
@@ -48,11 +47,12 @@
         $scope.$digest();
         
         dropdown.click();
-        
-        expect(dropdown.hasClass("is-open")).toBe(true);
+        var div = dropdown.find('div.ms-Dropdown');
+        console.log(div.attr('class'));
+        expect(div.hasClass("is-open")).toBe(true, "Should have class is-open after click");
         
         dropdown.click();
-        expect(dropdown.hasClass("is-open")).toBe(false);
+        expect(div.hasClass("is-open")).toBe(false, "Should not have class is-open after click");
         
     }));
     it("should be able to select an option", inject(($compile, $rootScope) => {
@@ -68,7 +68,7 @@
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue"><uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
         $scope.$digest();
         dropdown.appendTo(document.body);
-        var option3 = jQuery(dropdown.find('option')[2]);
+        var option3 = jQuery(dropdown.find('li')[2]);
         
         option3.click();
         var title = dropdown.find('span.ms-Dropdown-title');

@@ -3,7 +3,7 @@
 import * as ng from 'angular';
 
 export class DropdownOptionDirective implements ng.IDirective {
-    public template: string = "<option ng-transclude></option>";
+    public template: string = '<li class="ms-Dropdown-item" ng-transclude></li>';
     constructor() {
     }
             
@@ -42,9 +42,7 @@ export class DropdownOptionDirective implements ng.IDirective {
         instanceElement
             .on('click', (ev: JQueryEventObject) => {                    
                 scope.$apply(() => {         
-                    console.log("CLICK");           
-                    var option = instanceElement.find('option');    
-                    dropdownController.setViewValue(option.val(), attrs['value'], ev);
+                    dropdownController.setViewValue(instanceElement.find('span').html(), attrs['value'], ev);
                 });
             })
             .on('$destroy', () => {
@@ -69,9 +67,9 @@ export class DropdownController {
         
         this.$element.bind('click', function() {               
             if (!element.hasClass('is-disabled')) {                   
-                element.toggleClass('is-open');
-                
-
+                scope["isOpen"] = !scope["isOpen"];
+                scope.$apply();
+               
 //                     /** First, let's close any open dropdowns on this page. */
 //                     this.$dropdownWrapper.find('.is-open').removeClass('is-open');
 // 
@@ -111,7 +109,9 @@ export class DropdownController {
     }
 
     public setViewValue(title: string, value: string, eventType: any): void {
+        console.log("TITLE" + title);
         this.scope["selectedTitle"] = title;
+        
         this.ngModelCtrl.$setViewValue(value, eventType);
         // update the other radio buttons as well
         this.render();
@@ -125,9 +125,9 @@ export class DropdownController {
 
 export class DropdownDirective implements ng.IDirective {
 
-    public template: string = '<div ng-click="dropdownClick" ng-class="{\'ms-Dropdown\' : true, \'is-disabled\' : isDisabled}" tabindex="0" id="dropdown-{{uniqueId}}">' +
+    public template: string = '<div ng-click="dropdownClick" ng-class="{\'ms-Dropdown\' : true, \'is-open\': isOpen, \'is-disabled\' : isDisabled}" tabindex="0" id="dropdown-{{uniqueId}}">' +
      '<i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>' +
-     '<span class="ms-Dropdown-title">{{selectedTitle}}</span><select ng-transclude/></div>'   ;
+     '<span class="ms-Dropdown-title">{{selectedTitle}}</span><ul class="ms-Dropdown-items"><ng-transclude></ng-transclude></ul></div>'   ;
     constructor() {
     }
     public restrict: string = "E";
@@ -144,25 +144,14 @@ export class DropdownDirective implements ng.IDirective {
     }
     
     private preLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, ctrls:{}): void {
-            
-        
-    }
-    
-    private postLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ctrls: {}): void {
         let dropdownController: DropdownController = ctrls[0];
         let modelController: ng.INgModelController = ctrls[1];
         dropdownController.init(modelController, instanceElement, scope);
         
+    }
+    
+    private postLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ctrls: {}): void {
         
-        //ul.replaceWith("<select>" 
-        
-        // var options = ul.contents();
-        // var select = angular.element("select");
-        // select.append(options);
-        // ul.append(select);
-        
-        // ul.parent().append(options);
-        // ul.parent().remove(ul);
     }
         
     static factory(): ng.IDirectiveFactory {
