@@ -1,8 +1,18 @@
 ﻿'use strict';
 import * as ng from 'angular';
 
-
-interface ISearchBoxDirectiveScope extends ng.IScope {
+/**
+ * @ngdoc interface
+ * @name ISearchBoxScope
+ * @module officeuifabric.components.searchbox
+ * 
+ * @description 
+ * This is the scope used by the directive. 
+ * 
+ * @property {string} placeholder - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
+ * @property {string} ngModel     - The scope variable to bind to the text input. 
+ */
+interface ISearchBoxScope extends ng.IScope {
 
     btnMousedown: () => void;
     inputFocus: () => void;
@@ -11,7 +21,7 @@ interface ISearchBoxDirectiveScope extends ng.IScope {
     isCancel: boolean;
     isFocus: boolean;
     isLabelHidden: boolean;
-    uifSearch: string|number;
+    placeholder: string;
     uifValue: string|number;
     uniqueId: number;
 }
@@ -29,7 +39,7 @@ interface ISearchBoxDirectiveScope extends ng.IScope {
  * 
  * @usage
  * 
- * <uif-searchbox uif-value="''" uif-search />
+ * <uif-searchbox uif-value="" placeholder="" />
  */
 export class SearchBoxDirective implements ng.IDirective {
     public static uniqueId: number = 1;
@@ -38,7 +48,7 @@ export class SearchBoxDirective implements ng.IDirective {
     '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
     ' ng-model="uifValue" id="{{\'searchBox_\'+uniqueId}}" />' +
     '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}" ng-hide="isLabelHidden">' +
-    '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{uifSearch}}</label>' +
+    '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{placeholder}}</label>' +
     '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
     '</div>';
 
@@ -54,7 +64,7 @@ export class SearchBoxDirective implements ng.IDirective {
         return directive;
     }
 
-    public link(scope: ISearchBoxDirectiveScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
+    public link(scope: ISearchBoxScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
 
         scope.isFocus = false;
         scope.isCancel = false;
@@ -98,8 +108,8 @@ export class SearchBoxDirective implements ng.IDirective {
 
         });
 
-        scope.$watch('uifSearch', function (search: string|number): void {
-            scope.uifSearch = search;
+        scope.$watch('uifSearch', function (search: string): void {
+            scope.placeholder = search;
         });
 
 
@@ -115,7 +125,6 @@ export class SearchBoxDirective implements ng.IDirective {
  * Searchbox
  * 
  */
-
 export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
     .directive('uifSearchbox', SearchBoxDirective.factory());
 

@@ -2,7 +2,7 @@
 
 import * as karma from 'karma';
 import * as webpack from 'webpack';
-import * as webpackConfig from './webpack.conf';
+import * as webpackConfig from './webpack';
 
 /**
  * Karma configuration.
@@ -14,14 +14,26 @@ import * as webpackConfig from './webpack.conf';
  */
 module.exports = (config: karma.Config) => {
   // load webpack config settings
-  let webpackSettings: webpack.Configuration = new webpackConfig.WebPackConfig();
+  // note: at present the webpack.d.ts typedef is outdated at 1.12.2 when webpack
+  //    is at 1.12.9 & includes support for postLoaders on a module... can't qualify
+  //    the typedef for the config because it breaks TypeScript compilation
+  //    > hopefully this can get updated later... see this logged issue for info:
+  //    https://github.com/DefinitelyTyped/DefinitelyTyped/issues/7497
+  let webpackSettings: any = new webpackConfig.WebPackConfig();
   webpackSettings.entry = {};
   webpackSettings.devtool = 'inline-source-map';
+  // use istanbul-instrumenter-loader which deals with webpack-added wrapper code
+  //  that we can't test for
+  webpackSettings.module.postLoaders = [{
+    exclude: /(node_modules|.spec.js)/,
+    loader: 'istanbul-instrumenter',
+    test: /\.js$/
+  }];
 
   // create karma config
   let karmaConfig: IKarmaConfig = <IKarmaConfig>{
     autoWatch: true,
-    basePath: '../',
+    basePath: __dirname + '/..',
     browsers: ['PhantomJS'],
     colors: true,
     coverageReporter: {
@@ -31,7 +43,6 @@ module.exports = (config: karma.Config) => {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/jquery/dist/jquery.min.js',
       'src/core/*.js',
       'src/components/*/*.js'
     ],
@@ -40,9 +51,7 @@ module.exports = (config: karma.Config) => {
     plugins: ['karma-*'],
     port: 5793,
     preprocessors: {
-      'src/**/*.js': ['webpack', 'sourcemap'],
-      'src/core/**/*.js': 'coverage',
-      'src/components/*/!(*spec).js': 'coverage'
+      'src/**/*.js': ['webpack', 'sourcemap']
     },
     reporters: ['progress', 'coverage'],
     singleRun: false,

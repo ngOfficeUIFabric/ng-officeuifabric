@@ -2,7 +2,7 @@
 
 This document details the guidelines & requirements for submitting pull requests (PR) that either submit new or update existing Angular directives to the library. The library managers will refer to this checklist when evaluating your PRs.
 
-Most of the guidance is based on the [Angular Material(http://material.angularjs.org) project as we want to follow a lot of the rules & styles they have chosen.
+Most of the guidance is based on the [Angular Material](http://material.angularjs.org) project as we want to follow a lot of the rules & styles they have chosen.
 
 ## Table of Contents
 
@@ -12,9 +12,10 @@ Most of the guidance is based on the [Angular Material(http://material.angularjs
   - (003) [Directive Prefix](#directive-prefix)
   - (004) [Module Naming](#module-naming)
   - (005) [Use External Modules](#use-external-modules)
+  - (006) [Directive Attributes](#directive-attributes)
 - [Testing](#testing)
   - (101) [Verify Coverage with Tests](#verify-coverage-with-tests)
-  - (102) [Organize Tests](#organize-tests)
+  - (102) [Organizing Tests](#organizing-tests)
   - (103) [Code Analysis](#code-analysis)
 - [Documentation](#documentation)
   - (201) [Document all Directives](#document-all-directives)
@@ -124,6 +125,13 @@ class ButtonDirective implements ng.IDirective {
 ```
 
 The library uses [webpack](http://webpack.github.io/) as a module loader as modules are not supported by all browsers.
+
+###Directive Attributes
+###### [Guideline [006](#guideline-006)]
+
+Any element directive that requires custom attributes must prefix those attributes with `uif-` to indicate they are ngOfficeUiFabric specific attributes.
+
+However if you can reuse an existing HTML attribute that would be used for the same or similar purpose, do that. For example, don't create a `uif-value` attribute on a input control to set the value of the control when you can easily use `value` which would do the same thing on a `<input type="text" />` control.
 
 **[Back to top](#table-of-contents)**
 
@@ -274,17 +282,17 @@ In the future we will dynamically build an example site, but for now we need an 
 ### Include Complete Demo
 ###### [Guideline [302](#guideline-302)]
 
-Each directive should include a `demo` folder with an `html` and JavaScript or TypeScript file. This should include a verbose demo and optionally usage documentation of the directive.
+Each directive *must* include a `demo` folder with an `html` and JavaScript or TypeScript file. This should include a verbose demo and optionally usage documentation of the directive.
 
 **THIS IS REQUIRED**
 
 ### Include Spot Demos
 ###### [Guideline [303](#guideline-303)]
 
-Each directive should include a `demo[*]` folder with an `html` and JavaScript or TypeScript file. These folders can include broken down demos. Each `index.html` file should include *ONLY* the HTML required to use the directive.
+Each directive *can* include a `demo[*]` folder with an `html` and JavaScript or TypeScript file. These folders can include broken down demos. Each `index.html` file should include *ONLY* the HTML required to use the directive.
 
 These will not run independently... they will be used later in the dynamic generation of an example site.
 
-**THIS IS REQUIRED**
+**THIS IS NOT REQUIRED**
 
 **[Back to top](#table-of-contents)**

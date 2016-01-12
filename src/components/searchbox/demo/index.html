@@ -24,27 +24,27 @@
         Use the attributes <code>uif-value</code> to specify the value of the search field. 
     </p>
     <p>
-        Use the attributes <code>uif-value</code> to specify the value of the search field.
+        Use the attributes <code>placeholder</code> to specify the placeholder of the search field.
     </p>
 
     <p>
         This markup: <br />
         <code>
-            &lt;uif-searchbox uif-value="'Searchtext'" uif-search="'Placeholder'" /&gt;
+            &lt;uif-searchbox  /&gt;
         </code>
     </p>
 
     <p>
         Renders this:
         <br />
-        <uif-searchbox uif-value="'Searchtext'" uif-search="'Placeholder'" />
+        <uif-searchbox  />
     </p>
 
     <div ng-controller="demoController">
         <p>
             Example using a controller
         </p>
-        <uif-searchbox uif-value="value" uif-search="placeholder"></uif-searchbox>
+        <uif-searchbox uif-value="value" placeholder="placeholder"></uif-searchbox>
     </div>
 
 </body>

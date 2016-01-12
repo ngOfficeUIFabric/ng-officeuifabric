@@ -11,13 +11,11 @@ Before you submit your pull request consider the following guidelines:
   ```
 
 - Be familiar with and adhere to things stated in:
-  - [CONTRIBUTING](/ngOfficeUIFabric/ng-officeuifabric/blob/master/CONTRIBUTING.md)
+  - [CONTRIBUTING](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/CONTRIBUTING.md)
   - [CONTRIB-WORKFLOW](CONTRIB-WORKFLOW.md)
   - [CODING](CODING.md)
   - [TESTING](TESTING.md)
 - **Include appropriate test cases.**
-- Run the full ngOfficeUIFabric test suite, as described in the [TESTING](TESTING.md), and ensure that all tests pass.
-- Check the code coverage report generated when running tests to ensure you do not cause the coverage percentage to fall as described in [TESTING](TESTING.md#code-coverage)
 - Ensure your fork is updated and not behind the upstream **ngofficeuifabric** repo. Refer to these resources for more information on syncing your repo:
     - [GitHub Help: Syncing a Fork](https://help.github.com/articles/syncing-a-fork/)    
     - [AC: Keep Your Forked Git Repo Updated with Changes from the Original Upstream Repo](http://www.andrewconnell.com/blog/keep-your-forked-git-repo-updated-with-changes-from-the-original-upstream-repo)
@@ -27,6 +25,18 @@ Before you submit your pull request consider the following guidelines:
   ```bash
   git push origin my-fix-branch
   ```
+
+## Before You Submit Your Pull Request
+
+Please do the following checks on your code before you submit a pull request. They do all these same checks manually and if any fail, your PR will be rejected and you will be prompted to address the issues.
+
+> NOTE: these are all done automatically using [TravisCI](https://travis-ci.org) as defined in the `.travis.yml` file in the root of the repo.
+
+- Run the full ngOfficeUIFabric test suite, as described in the [TESTING](TESTING.md), and ensure that all tests pass.
+- Run the code vetting script `$ gulp vet-lib-ts` to verify you are meeting all required code style requirements.
+- Check the code coverage report generated when running tests to ensure you do not cause the coverage percentage to fall as described in [TESTING](TESTING.md#code-coverage)
+
+Please correct any issues that come up before submitting your PR. Any issues that come up will be listed in the comments for the PR and it will be closed. You can always reopen the PR once you fix the issues, but making sure things are in order before submitting the PR streamlines the process and saves time for everyone involved.
 
 ## Submit Your Pull Request
 - In GitHub, send a pull request to `ngofficeuifabric:dev`.
@@ -42,7 +52,23 @@ Before you submit your pull request consider the following guidelines:
     git push -f
     ```
 
-## After your pull request is merged
+### What Happens if The Build Fails on my Pull Request?
+
+Well, it depends.
+
+If the failure is due to [failing to transpile the TypeScript to JavaScript](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L22-L23), [any failing unit tests](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L26-L27), [code style issues when vetting](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L28-29) or from a significant drop in code coverage, the issues will be mentioned in your PR & it will be closed. You are free to reopen the PR after addressing the issues, resubmitting the code.
+
+However there are other reasons the build may fail that won't cause this...
+
+#### GITHUB API: GitHub Rate Limit Exceeded
+
+Because we are using TypeScript type definitions from https://definitelytyped.org, [the build is configured to download all type definitions](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L20-L21) using the **tsd** utility which uses the Github API to download TypeScript type definitions. The challenge with this is that Github's API limits the number of anonymous API requests to 60/hour. If you exceed this number, TSD will throw an error and break the build with the message *GitHub rate limit exceeded* which [you can easily see in the build logs](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric#L1542-L1547).
+
+The fix is to [set an environment variable that contains a GitHub API token](https://github.com/DefinitelyTyped/tsd#tsdrc) that's tied to your account to bump this limit up to 5,000 API calls. However this [does not apply to pull requests](https://docs.travis-ci.com/user/pull-requests). TravisCI does not include secured environment variables in builds triggered by pull requests.
+
+As such, if your build fails, when it is evaluated, library managers will look to see if this was the root cause. If it is the root cause for the failing build in TravisCI, the three tests above will be manually checked.
+
+## After Your Pull Request is Merged
 
 After your pull request is merged, you can safely delete your branch and pull the changes from the main (upstream) repository:
 
