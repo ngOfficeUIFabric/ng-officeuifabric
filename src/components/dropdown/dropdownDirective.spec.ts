@@ -11,13 +11,12 @@
         var $scope = $rootScope.$new();
                 
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
-        '<option value="value1">Text 1</option>' +
-        '<option value="value2">Text 2</option>' +
-        '<option value="value3">Text 3</option>' +
-        '<option value="value4">Text 4</option>' +
+        '<uif-option value="value1">Text 1</uif-option>' +
+        '<uif-option value="value2">Text 2</uif-option>' +
+        '<uif-option value="value3">Text 3</uif-option>' +
+        '<uif-option value="value4">Text 4</uif-option>' +
         '</uif-dropdown>')($scope);
         $scope.$digest();
-        console.log("HTML: " + dropdown.html());
         let container = dropdown.find('div.ms-Dropdown');
         
         expect(container.length).toBe(1, 'Container should be present');
@@ -35,10 +34,10 @@
             { text: "Option 4", value:"Option4"}
         ];        
         $scope.selectedValue = "Option1";
-        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue"><uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
+        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue"><uif-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-option></uif-dropdown>')($scope);
         
         $scope.$digest();
-
+        console.log("HTML: " + dropdown.html());
         var items = dropdown.find('option');
         expect(items.length).toBe(4);
         expect(items[2].innerText).toBe("Option 3");
@@ -76,7 +75,7 @@
         expect(title.text()).toBe("Option 3", "Displayed text should be Option 3");
         expect($scope["selectedValue"]).toBe("Option3", "Selected value should be Option3");
         
-        console.log(dropdown.html());
+        
     }));
 // 
 //     it("should be able to disable a select", inject(($compile, $rootScope) => {
