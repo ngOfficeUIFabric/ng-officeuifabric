@@ -23,7 +23,6 @@ interface ISearchBoxScope extends ng.IScope {
     isLabelHidden: boolean;
     placeholder: string;
     uifValue: string|number;
-    uniqueId: number;
 }
 /**
  * @ngdoc directive
@@ -42,12 +41,11 @@ interface ISearchBoxScope extends ng.IScope {
  * <uif-searchbox uif-value="" placeholder="" />
  */
 export class SearchBoxDirective implements ng.IDirective {
-    public static uniqueId: number = 1;
 
     public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive}">' +
     '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
-    ' ng-model="uifValue" id="{{\'searchBox_\'+uniqueId}}" />' +
-    '<label class="ms-SearchBox-label" for="{{\'searchBox_\'+uniqueId}}" ng-hide="isLabelHidden">' +
+    ' ng-model="uifValue" id="{{::\'searchBox_\'+$id}}" />' +
+    '<label class="ms-SearchBox-label" for="{{::\'searchBox_\'+$id}}" ng-hide="isLabelHidden">' +
     '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{placeholder}}</label>' +
     '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
     '</div>';
@@ -70,8 +68,6 @@ export class SearchBoxDirective implements ng.IDirective {
         scope.isCancel = false;
         scope.isLabelHidden = false;
         scope.isActive = false;
-
-        scope.uniqueId = SearchBoxDirective.uniqueId++;
 
         scope.inputFocus = function (): void {
             scope.isFocus = true;
