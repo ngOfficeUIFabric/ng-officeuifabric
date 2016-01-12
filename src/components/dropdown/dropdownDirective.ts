@@ -2,12 +2,15 @@
 
 import * as ng from 'angular';
 
-export class DropdownOptionDirective implements ng.IDirective {        
+export class DropdownOptionDirective implements ng.IDirective {
+    public template: string = "<option ng-transclude></option>";
     constructor() {
     }
             
     public restrict: string = "E";
     public require: string = '^uifDropdown';
+    public replace: boolean = true;
+    public transclude: boolean = true;
     
     public static factory(): ng.IDirectiveFactory {
         const directive = () => new DropdownOptionDirective();
@@ -15,28 +18,24 @@ export class DropdownOptionDirective implements ng.IDirective {
         return directive;
     }   
     
-    public compile (instanceElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
-            
-                                
-            return {
-                pre: this.preLink,
-                post: this.postLink
-            };
+    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+        return {
+            pre: this.preLink,
+            post: this.postLink
+        };
     }
-    private preLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes): void {
-    var li = angular.element('<option>');
-        instanceElement.append(li.append(instanceElement.contents()));
+    private preLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, dropdownController:DropdownController, transclude: ng.ITranscludeFunction): void {            
     }
     
-    private postLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, dropdownController: DropdownController): void {            
+    private postLink(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, dropdownController: DropdownController, transclude: ng.ITranscludeFunction): void {
         if (!dropdownController) {
             throw 'Dropdown controller not found!';
         }           
         let render: () => void = () => {
-            let currentValue: string = dropdownController.getViewValue();
-            let checked: boolean = instanceElement.attr('value') === currentValue;
-            
-            console.log("CHECKED: " + checked + "VALUE:" + currentValue + "INSTANCEVALUE: " + instanceElement.attr('value'));
+            // let currentValue: string = dropdownController.getViewValue();
+            // let checked: boolean = instanceElement.attr('value') === currentValue;
+            // 
+            // console.log("CHECKED: " + checked + "VALUE:" + currentValue + "INSTANCEVALUE: " + instanceElement.attr('value'));
         };
         dropdownController.add(render);
         attrs.$observe('value', render);
@@ -128,7 +127,7 @@ export class DropdownDirective implements ng.IDirective {
 
     public template: string = '<div ng-click="dropdownClick" ng-class="{\'ms-Dropdown\' : true, \'is-disabled\' : isDisabled}" tabindex="0" id="dropdown-{{uniqueId}}">' +
      '<i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>' +
-     '<span class="ms-Dropdown-title">{{selectedTitle}}</span><ul><ng-transclude></ng-transclude></ul></div>'   ;
+     '<span class="ms-Dropdown-title">{{selectedTitle}}</span><select ng-transclude/></div>'   ;
     constructor() {
     }
     public restrict: string = "E";
@@ -137,6 +136,7 @@ export class DropdownDirective implements ng.IDirective {
     
     controller = DropdownController;
     public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+        
              return {
                 pre: this.preLink,
                 post: this.postLink
@@ -153,11 +153,13 @@ export class DropdownDirective implements ng.IDirective {
         let modelController: ng.INgModelController = ctrls[1];
         dropdownController.init(modelController, instanceElement, scope);
         
-        var ul = instanceElement.find("ul");
-        var options = ul.contents();
-        var select = angular.element("select");
-        select.append(options);
-        ul.append(select);
+        
+        //ul.replaceWith("<select>" 
+        
+        // var options = ul.contents();
+        // var select = angular.element("select");
+        // select.append(options);
+        // ul.append(select);
         
         // ul.parent().append(options);
         // ul.parent().remove(ul);
