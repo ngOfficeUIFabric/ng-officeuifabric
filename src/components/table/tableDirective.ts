@@ -2,6 +2,18 @@
 
 import * as ng from 'angular';
 
+/**
+ * @ngdoc interface
+ * @name ITableScope
+ * @module officeuifabric.components.table
+ * 
+ * @description 
+ * Scope used by the table controller. 
+ * 
+ * @property {string} orderBy   - Specifies the name of the property used to sort the table. Default null
+ * @property {boolean} orderAsc - Specifies whether the data in the table should be sort ascending or descending.
+ *                                Default `true` (sorting ascending) 
+ */
 export interface ITableScope extends ng.IScope {
     orderBy?: string;
     orderAsc: boolean;
