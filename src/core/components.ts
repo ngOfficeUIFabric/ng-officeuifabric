@@ -5,6 +5,7 @@ import * as iconModule from '../components/icon/iconDirective';
 import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';
+import * as dropdownModule from '../components/dropdown/dropdownDirective';
 
 
 /**
@@ -17,6 +18,7 @@ import * as textFieldModule from '../components/textfield/textFieldDirective';
  *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components', [
+    dropdownModule.module.name,
     iconModule.module.name,
     spinnerModule.module.name,
     textFieldModule.module.name,
