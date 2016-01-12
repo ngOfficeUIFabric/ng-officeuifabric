@@ -16,6 +16,7 @@ import * as ng from 'angular';
  * @property {string} labelOn      - The label to display when toggled
  * @property {string} textLocation - Location of the label (left or right), compared to the toggle  
  */
+
 export interface IToggleScope {
     ngModel: string;
     labelOff: string;
@@ -44,15 +45,14 @@ export interface IToggleScope {
 export class ToggleDirective implements ng.IDirective {
     public template: string = '<div ng-class="toggleClass">' +
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
-                '<input type="checkbox" id="{{uniqueId}}" class="ms-Toggle-input" ng-model="ngModel" />' +
-                '<label for="{{uniqueId}}" class="ms-Toggle-field">' +
+                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" />' +
+                '<label for="{{::$id}}" class="ms-Toggle-field">' +
                     '<span class="ms-Label ms-Label--off">{{labelOff}}</span>' +
                     '<span class="ms-Label ms-Label--on">{{labelOn}}</span>' +
                 '</label>' +
                 '</div>';
     public restrict: string = 'E';
     public transclude: boolean = true;
-    public uniqueId: number = 1;
     public scope: {} = {
         labelOff: '@',
         labelOn: '@',
@@ -66,11 +66,6 @@ export class ToggleDirective implements ng.IDirective {
     }
 
     public link(scope: IToggleScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
-        if (!this.uniqueId) {
-            this.uniqueId = 1;
-        }
-
-        scope.uniqueId = this.uniqueId++;
         scope.toggleClass = 'ms-Toggle';
 
         if (scope.textLocation) {
