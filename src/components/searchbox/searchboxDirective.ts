@@ -10,7 +10,7 @@ import * as ng from 'angular';
  * This is the scope used by the directive. 
  * 
  * @property {string} placeholder - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
- * @property {string} ngModel     - The scope variable to bind to the text input. 
+ * @property {string} value     - The scope variable to bind to the text input. 
  */
 interface ISearchBoxScope extends ng.IScope {
 
@@ -22,7 +22,7 @@ interface ISearchBoxScope extends ng.IScope {
     isFocus: boolean;
     isLabelHidden: boolean;
     placeholder: string;
-    uifValue: string|number;
+    value: string;
 }
 /**
  * @ngdoc directive
@@ -38,22 +38,22 @@ interface ISearchBoxScope extends ng.IScope {
  * 
  * @usage
  * 
- * <uif-searchbox uif-value="" placeholder="" />
+ * <uif-searchbox value="" placeholder="" />
  */
 export class SearchBoxDirective implements ng.IDirective {
 
     public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive}">' +
     '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
-    ' ng-model="uifValue" id="{{::\'searchBox_\'+$id}}" />' +
+    ' ng-model="value" id="{{::\'searchBox_\'+$id}}" />' +
     '<label class="ms-SearchBox-label" for="{{::\'searchBox_\'+$id}}" ng-hide="isLabelHidden">' +
-    '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i>{{placeholder}}</label>' +
+    '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i> {{placeholder}}</label>' +
     '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
     '</div>';
 
 
     public scope: any = {
-        uifSearch: '=',
-        uifValue: '='
+        placeholder: '=',
+        value: '='
     };
 
     public static factory(): ng.IDirectiveFactory {
@@ -77,11 +77,11 @@ export class SearchBoxDirective implements ng.IDirective {
 
         scope.inputBlur = function (): void {
             if (scope.isCancel) {
-                scope.uifValue = '';
+                scope.value = '';
                 scope.isLabelHidden = false;
             }
             scope.isActive = false;
-            if (typeof (scope.uifValue) === 'undefined' || scope.uifValue === '') {
+            if (typeof (scope.value) === 'undefined' || scope.value === '') {
                 scope.isLabelHidden = false;
             }
 
@@ -92,19 +92,19 @@ export class SearchBoxDirective implements ng.IDirective {
             scope.isCancel = true;
         };
 
-        scope.$watch('uifValue', function (val: string|number): void {
+        scope.$watch('value', function (val: string): void {
             if (!scope.isFocus) {
                 if (val && val !== '') {
                     scope.isLabelHidden = true;
                 } else {
                     scope.isLabelHidden = false;
                 }
-                scope.uifValue = val;
+                scope.value = val;
             }
 
         });
 
-        scope.$watch('uifSearch', function (search: string): void {
+        scope.$watch('placeholder', function (search: string): void {
             scope.placeholder = search;
         });
 
