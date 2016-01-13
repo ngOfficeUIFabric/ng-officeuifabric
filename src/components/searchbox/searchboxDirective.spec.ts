@@ -28,10 +28,10 @@ describe('searchBoxDirective: <uif-searchbox />', () => {
         let $scope: ng.IScope = $rootScope.$new();
         let textBox1: ng.IAugmentedJQuery = $compile('<uif-searchbox ></uif-searchbox>')($scope);
         $scope.$digest();
-        let textField1: JQuery = $(textBox1[0]).find('.ms-SearchBox-field');
+        let textField1: JQuery = textBox1.find('.ms-SearchBox-field');
         let textBox2: ng.IAugmentedJQuery = $compile('<uif-searchbox ></uif-searchbox>')($scope);
         $scope.$digest();
-        let textField2: JQuery = $(textBox2[0]).find('.ms-SearchBox-field');
+        let textField2: JQuery = textBox2.find('.ms-SearchBox-field');
         expect(textField1[0].id === textField2[0].id).toBe(false);
     }));
     it('should be able to set value', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
