@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-Icon demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.min.css" />
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">Searchbox Demo | &lt;uif-searchbox&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <p>
+        Use the attributes <code>uif-value</code> to specify the value of the search field. 
+    </p>
+    <p>
+        Use the attributes <code>placeholder</code> to specify the placeholder of the search field.
+    </p>
+
+    <p>
+        This markup: <br />
+        <code>
+            &lt;uif-searchbox  /&gt;
+        </code>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-searchbox  />
+    </p>
+
+    <div ng-controller="demoController">
+        <p>
+            Example using a controller
+        </p>
+        <uif-searchbox value="value" placeholder="placeholder"></uif-searchbox>
+    </div>
+
+</body>
+
+</html>
