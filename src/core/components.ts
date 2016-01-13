@@ -1,6 +1,7 @@
 'use strict';
 
 import * as ng from 'angular';
+import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
 import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
@@ -17,6 +18,7 @@ import * as toggleModule from '../components/toggle/toggleDirective';
  *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components', [
+    dropdownModule.module.name,
     iconModule.module.name,
     spinnerModule.module.name,
     tableModule.module.name,
