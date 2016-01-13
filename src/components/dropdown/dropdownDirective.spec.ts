@@ -1,15 +1,12 @@
-﻿describe("dropdownDirective", () => {
+﻿describe('dropdownDirective', () => {
     beforeEach(() => {
         angular.mock.module('officeuifabric.components.dropdown');
-        jQuery.noConflict();        
+        jQuery.noConflict();
     });
 
-    afterEach(() => {
-        // myfunc.reset();
-    });
-    it("should render correct html", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-                
+    it('should render correct html', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
         '<uif-option value="value1">Text 1</uif-option>' +
         '<uif-option value="value2">Text 2</uif-option>' +
@@ -17,93 +14,92 @@
         '<uif-option value="value4">Text 4</uif-option>' +
         '</uif-dropdown>')($scope);
         $scope.$digest();
-        let container = dropdown.find('div.ms-Dropdown');
-        
+        let container: JQuery = dropdown.find('div.ms-Dropdown');
+
         expect(container.length).toBe(1, 'Container should be present');
-        
-        let items = dropdown.find('li');
-        expect(items.length).toBe(4, 'There should be 4 options');         
+        let items: JQuery = dropdown.find('li');
+        expect(items.length).toBe(4, 'There should be 4 options');
     }));
-    
-    it("should be able to set options", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        $scope["options"] = [
-            { text: "Option 1", value:"Option1"},
-            { text: "Option 2", value:"Option2"},
-            { text: "Option 3", value:"Option3"},
-            { text: "Option 4", value:"Option4"}
-        ];        
-        $scope.selectedValue = "Option1";
-        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue"><uif-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-option></uif-dropdown>')($scope);
-        
+
+    it('should be able to set options', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option1';
+        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
+            '<uif-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-option></uif-dropdown>')($scope);
+
         $scope.$digest();
-        var items = dropdown.find('li');
+        let items: JQuery = dropdown.find('li');
         expect(items.length).toBe(4);
-        expect(items[2].innerText).toBe("Option 3");
+        expect(items[2].innerText).toBe('Option 3');
     }));
-    it("should be able to click", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
+    it('should be able to click the dropdown', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
         let dropdown: JQuery = $compile('<uif-dropdown></uif-dropdown>')($scope);
         $scope.$digest();
-        
+
         dropdown.click();
-        var div = dropdown.find('div.ms-Dropdown');
-        console.log(div.attr('class'));
-        expect(div.hasClass("is-open")).toBe(true, "Should have class is-open after click");
-        
+        let div: JQuery = dropdown.find('div.ms-Dropdown');
+
+        expect(div.hasClass('is-open')).toBe(true, 'Should have class is-open after click');
+
         dropdown.click();
-        expect(div.hasClass("is-open")).toBe(false, "Should not have class is-open after click");
-        
+        expect(div.hasClass('is-open')).toBe(false, 'Should not have class is-open after click');
     }));
-    it("should be able to select an option", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        $scope["options"] = [
-            { text: "Option 1", value: "Option1"},
-            { text: "Option 2", value: "Option2"},
-            { text: "Option 3", value: "Option3"},
-            { text: "Option 4", value: "Option4"}
+    it('should be able to select an option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
         ];
-        $scope["selectedValue"] = "Option1";
-        
-        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue"><uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
+        $scope.selectedValue = 'Option1';
+
+        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
+            '<uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
         $scope.$digest();
         dropdown.appendTo(document.body);
-        var option3 = jQuery(dropdown.find('li')[2]);
-        
+        let option3: JQuery = jQuery(dropdown.find('li')[2]);
+
         option3.click();
-        var title = dropdown.find('span.ms-Dropdown-title');
-        expect(title.text()).toBe("Option 3", "Displayed text should be Option 3");
-        expect($scope["selectedValue"]).toBe("Option3", "Selected value should be Option3");
-        
-        
+        let title: JQuery = dropdown.find('span.ms-Dropdown-title');
+        expect(title.text()).toBe('Option 3', 'Displayed text should be Option 3');
+        expect($scope.selectedValue).toBe('Option3', 'Selected value should be Option3');
+
+        $scope.selectedValue = 'Option2';
+        $scope.$apply();
+        title = dropdown.find('span.ms-Dropdown-title');
+        expect(title.text()).toBe('Option 2', 'Displayed text should be Option 2');
     }));
-// 
-//     it("should be able to disable a select", inject(($compile, $rootScope) => {
-//         var $scope = $rootScope.$new();
-//         $scope["options"] = [
-//             { text: "Option 1"},
-//             { text: "Option 2"},
-//             { text: "Option 3"},
-//             { text: "Option 4"}
-//         ];
-//         $scope["selectedValue"] = "Option 1";
-//         $scope["isDisabled"] = true;
-//         var dropdown = $compile('<uif-dropdown is-disabled="isDisabled" options="options" selected-value="selectedValue"></uif-dropdown>')($scope);
-//         $scope.$digest();
-// 
-//         var title = $(dropdown[0]).find('.ms-Dropdown-title');
-//         expect(title.text()).toBe("Option 1");
-//         var items = $(dropdown[0]).find('.ms-Dropdown-item');
-// 
-// 
-//         console.log("3:" + items[3].outerHTML);
-//         $(items[3]).click();
-// 
-//         title = $(dropdown[0]).find('.ms-Dropdown-title');
-//         expect(title.text()).toBe("Option 1");
-//     }));
 
-    
+    it('should be able to disable a select', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option1';
+        $scope.isDisabled = true;
+        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue" disabled>' +
+            '<uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
+        $scope.$digest();
 
+        let div: JQuery = dropdown.find('div.ms-Dropdown');
+        expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
+        dropdown.click();
+
+        expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
+
+        dropdown.click();
+        expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
+    }));
 });
 
