@@ -170,7 +170,7 @@ export class DropdownDirective implements ng.IDirective {
         };
     }
 
-    private preLink(scope: IDropdownScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, ctrls:{}): void {
+    private preLink(scope: IDropdownScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, ctrls: {}): void {
         let dropdownController: DropdownController = ctrls[0];
         let modelController: ng.INgModelController = ctrls[1];
         scope.ngModel = modelController;
