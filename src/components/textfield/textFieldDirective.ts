@@ -10,21 +10,21 @@ import * as ng from 'angular';
  * @description 
  * This is the scope used by the directive. 
  * 
- * label and placeholder cannot be set at the same time! When both values are set, placeholder will be ignored. 
+ * uifLabel and placeholder cannot be set at the same time! When both values are set, placeholder will be ignored. 
  * 
- * @property {string} label       - The label to display next to the text field
- * @property {string} placeholder - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
- * @property {string} description - A longer text description to display below the text field
- * @property {string} ngModel     - The scope variable to bind to the text input. 
+ * @property {string} uifLabel        - The label to display next to the text field
+ * @property {string} placeholder     - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
+ * @property {string} uifDescription  - A longer text description to display below the text field
+ * @property {string} ngModel         - The scope variable to bind to the text input. 
  */
 export interface ITextFieldScope extends ng.IScope {
-    label: string;
+    uifLabel: string;
     placeholder: string;
-    description: string;
+    uifDescription: string;
     ngModel: string;
 
     labelShown: boolean;
-    underlined: boolean;
+    uifUnderlined: boolean;
     inputFocus: (ev: any) => void;
     inputClick: (ev: any) => void;
     inputBlur: (ev: any) => void;
@@ -45,24 +45,24 @@ export interface ITextFieldScope extends ng.IScope {
  *
  * @usage
  * 
- * <uif-textfield label='This is the label' 
- *                description='This is the description'
- *                underlined
+ * <uif-textfield uif-label='This is the label' 
+ *                uif-description='This is the description'
+ *                uif-Underlined
  *                placeholder='This is the placeholder' />
  */
 export class TextFieldDirective implements ng.IDirective {
     public template: string =
         '<div ng-class="{\'is-active\': isActive, \'ms-TextField\': true, ' +
-        '\'ms-TextField--underlined\': underlined, \'ms-TextField--placeholder\': placeholder}">' +
-        '<label ng-show="labelShown" class="ms-Label">{{label || placeholder}}</label>' +
+        '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder}">' +
+        '<label ng-show="labelShown" class="ms-Label">{{uifLabel || placeholder}}</label>' +
         '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" class="ms-TextField-field" />' +
-        '<span class="ms-TextField-description">{{description}}</span>' +
+        '<span class="ms-TextField-description">{{uifDescription}}</span>' +
         '</div>';
     public scope: {} = {
-        description: '@',
-        label: '@',
         ngModel: '=',
-        placeholder: '@'
+        placeholder: '@',
+        uifDescription: '@',
+        uifLabel: '@'
     };
 
     public restrict: string = 'E';
@@ -74,9 +74,9 @@ export class TextFieldDirective implements ng.IDirective {
 
     public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
         scope.labelShown = true;
-        scope.underlined = 'underlined' in attrs;
+        scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
-            if (scope.underlined) {
+            if (scope.uifUnderlined) {
                 scope.isActive = true;
             }
         };
@@ -90,7 +90,7 @@ export class TextFieldDirective implements ng.IDirective {
             if (scope.placeholder && input.val().length === 0) {
                 scope.labelShown = true;
             }
-            if (scope.underlined) {
+            if (scope.uifUnderlined) {
                 scope.isActive = false;
             }
         };
