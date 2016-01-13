@@ -24,7 +24,8 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
     it('should be able to set label and description', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
-        let textBox: JQuery = $compile('<uif-textfield label="Label contents" description="Description contents"></uif-textfield>')($scope);
+        let textBox: JQuery = $compile('<uif-textfield uif-label="Label contents"' +
+                                                     ' uif-description="Description contents"></uif-textfield>')($scope);
         $scope.$apply();
 
         let label: JQuery = getMainDiv(textBox).find('label.ms-Label');
@@ -36,7 +37,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
     it('should be able to set underlined', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
-        let textBox: JQuery = $compile('<uif-textfield underlined></uif-textfield>')($scope);
+        let textBox: JQuery = $compile('<uif-textfield uif-underlined></uif-textfield>')($scope);
         // element must be appended to the body, otherwise focus/blur events don't fire
         textBox.appendTo(document.body);
 
