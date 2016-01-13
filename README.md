@@ -69,7 +69,7 @@ What, no CDN option yet? We need your help! Star this repo because we need at le
 
 ## Supported Browsers
 
-All directives in ng-OfficeUIFabric will work against the same versions that are commonly supported between the [Office UI Fabric](http://dev.office.com/fabric/resources-and-faq) & [Anuglar 1.x](https://docs.angularjs.org/guide/ie).
+All directives in ng-OfficeUIFabric will work against the same versions that are commonly supported between the [Office UI Fabric](http://dev.office.com/fabric/resources-and-faq) & [Angular 1.x](https://docs.angularjs.org/guide/ie).
 
 - Google Chrome
 - Firefox
