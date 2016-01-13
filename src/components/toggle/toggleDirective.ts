@@ -11,17 +11,17 @@ import * as ng from 'angular';
  * This is the scope used by the directive. 
  *  
  * 
- * @property {string} ngModel      - The scope variable to bind to the toggle.
- * @property {string} labelOff     - The label to display when not toggled
- * @property {string} labelOn      - The label to display when toggled
- * @property {string} textLocation - Location of the label (left or right), compared to the toggle  
+ * @property {string} ngModel         - The scope variable to bind to the toggle.
+ * @property {string} uifLabelOff     - The label to display when not toggled
+ * @property {string} uifLabelOn      - The label to display when toggled
+ * @property {string} uifTextLocation - Location of the label (left or right), compared to the toggle  
  */
 
 export interface IToggleScope {
     ngModel: string;
-    labelOff: string;
-    labelOn: string;
-    textLocation: string;
+    uifLabelOff: string;
+    uifLabelOn: string;
+    uifTextLocation: string;
     uniqueId: number;
     toggleClass: string;
 }
@@ -47,17 +47,17 @@ export class ToggleDirective implements ng.IDirective {
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
                 '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" />' +
                 '<label for="{{::$id}}" class="ms-Toggle-field">' +
-                    '<span class="ms-Label ms-Label--off">{{labelOff}}</span>' +
-                    '<span class="ms-Label ms-Label--on">{{labelOn}}</span>' +
+                    '<span class="ms-Label ms-Label--off">{{uifLabelOff}}</span>' +
+                    '<span class="ms-Label ms-Label--on">{{uifLabelOn}}</span>' +
                 '</label>' +
                 '</div>';
     public restrict: string = 'E';
     public transclude: boolean = true;
     public scope: {} = {
-        labelOff: '@',
-        labelOn: '@',
         ngModel: '=',
-        textLocation: '@'
+        uifLabelOff: '@',
+        uifLabelOn: '@',
+        uifTextLocation: '@'
     };
 
     public static factory(): ng.IDirectiveFactory {
@@ -68,8 +68,8 @@ export class ToggleDirective implements ng.IDirective {
     public link(scope: IToggleScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
         scope.toggleClass = 'ms-Toggle';
 
-        if (scope.textLocation) {
-            let loc: string = scope.textLocation;
+        if (scope.uifTextLocation) {
+            let loc: string = scope.uifTextLocation;
             loc = loc.charAt(0).toUpperCase() + loc.slice(1);
             scope.toggleClass += ' ms-Toggle--text' + loc;
         }
