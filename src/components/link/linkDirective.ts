@@ -12,6 +12,9 @@ import * as ng from 'angular';
  * @description
  * `<uif-link>` is a link directive.
  *
+ * @param {string=} ng-href the url
+ *
+ *
  * @see {link http://dev.office.com/fabric/components/link}
  *
  * @usage
@@ -23,7 +26,7 @@ export class LinkDirective implements ng.IDirective {
   public restrict: string = 'E';
   public template: string = '<a ng-href="{{ ngHref }}" class="ms-Link" ng-transclude></a>';
   public scope: {} = {
-    ngHref: '@',
+    ngHref: '@'
   };
 
   public transclude: boolean = true;
