@@ -1,7 +1,7 @@
 # [Angular](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric).
 
 [![npm version](https://badge.fury.io/js/ng-office-ui-fabric.svg)](https://badge.fury.io/js/ng-office-ui-fabric)
-[![bower version](https://badge.fury.io/bo/ng-office-ui-fabric.svg)](https://github.com/ngofficefabric/package-ngofficeuifabric)
+[![bower version](https://badge.fury.io/bo/ng-office-ui-fabric.svg)](https://github.com/ngOfficeUIFabric/package-ngofficeuifabric)
 [![NuGet version](https://badge.fury.io/nu/ng-office-ui-fabric.svg)](https://badge.fury.io/nu/ng-office-ui-fabric)
 
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
@@ -31,7 +31,7 @@ Basic installation & usage information is found on this page... additional docs 
 
 # Installation
 
-Other than manually downloading the library, **ng-OfficeUIFabric** will be available in the following options. Then you just need to add references to the Angular JS, ngOfficeUiFabric JS & and Office UI Fabric CSS libraries and import the ngOfficeUiFabric modules and you're good to go. Check the [package-ngofficeuifabric](https://github.com/andrewconnell/package-ngofficeuifabric/blob/release-v0.1.0/README.md) for simple usage info.
+Other than manually downloading the library, **ng-OfficeUIFabric** will be available in the following options. Then you just need to add references to the Angular JS, ngOfficeUiFabric JS & and Office UI Fabric CSS libraries and import the ngOfficeUiFabric modules and you're good to go. Check the [package-ngofficeuifabric](https://github.com/ngOfficeUIFabric/package-ngofficeuifabric/blob/master/README.md) for simple usage info.
 
 ## Bower
 
@@ -87,4 +87,4 @@ First check the [issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/i
 
 # Contributing to the Project
 
-We want help! Please take a look at the [Contribution Guide](CONTRIBUTING.md) for guidelines and jump in the Slack team to discuss how you can help: http://ngofficeuifabric-slackin.azurewebsites.net... if you aren't a member of the Slack team yet, [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
+We want help! Please take a look at the [Contribution Guide](CONTRIBUTING.md) for guidelines and jump in the Slack team to discuss how you can help: http://ngofficeuifabric.slack.com... if you aren't a member of the Slack team yet, [request an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
