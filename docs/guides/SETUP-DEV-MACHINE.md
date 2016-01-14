@@ -1,6 +1,6 @@
 # Setup Developer Machine
 
-The **[Minimal Path To Awesome](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/docs/guides/MPA.md)** walks through this process in a much more detailed way; this document is the shortened version for those familiar with Node.js based development.
+The **[Minimal Path To Awesome](MPA.md)** walks through this process in a much more detailed way; this document is the shortened version for those familiar with Node.js based development.
 
 1. Install **[Node.js](https://nodejs.org)**
 1. Install global Node.js dependencies:
@@ -28,6 +28,6 @@ The **[Minimal Path To Awesome](https://github.com/ngOfficeUIFabric/ng-officeuif
 
   > **NOTE**: This is required as all gulp tasks are written in TypeScript.
   
-  > **NOTE**: If you have an issue with this step, refer to the additional information on this step on the **[Minimal Path To Awesome](/ngofficeuifabric/ng-officeuifabric/blob/master/docs/guides/MPA.md)** guide.
+  > **NOTE**: If you have an issue with this step, refer to the additional information on this step on the **[Minimal Path To Awesome](MPA.md)** guide.
 
 At this point you are good to go and can run the gulp tasks.
