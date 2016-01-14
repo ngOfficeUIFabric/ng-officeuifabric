@@ -4,6 +4,7 @@
 #### Features
 
 - **uif-icon**: added validation to specified icon (by @andrewconnell)
+- **uif-link**: directive added (by @tdwhite0; closes #23)
 
 #### Bug Fixes
 

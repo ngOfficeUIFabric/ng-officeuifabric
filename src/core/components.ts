@@ -4,6 +4,7 @@ import * as ng from 'angular';
 import * as contextualMenuModule from '../components/contextualmenu/contextualMenu';
 import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
+import * as linkModule from '../components/link/linkDirective';
 import * as searchboxModule from '../components/searchbox/searchboxDirective';
 import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
@@ -23,6 +24,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   contextualMenuModule.module.name,
   dropdownModule.module.name,
   iconModule.module.name,
+  linkModule.module.name,
   searchboxModule.module.name,
   spinnerModule.module.name,
   tableModule.module.name,
