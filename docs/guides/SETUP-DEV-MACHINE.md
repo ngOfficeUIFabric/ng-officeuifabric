@@ -1,6 +1,6 @@
 # Setup Developer Machine
 
-The **[Minimal Path To Awesome](/ngofficeuifabric/ng-officeuifabric/blob/master/docs/guides/MPA.md)** walks through this process in a much more detailed way; this document is the shortened version for those familiar with Node.js based development.
+The **[Minimal Path To Awesome](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/docs/guides/MPA.md)** walks through this process in a much more detailed way; this document is the shortened version for those familiar with Node.js based development.
 
 1. Install **[Node.js](https://nodejs.org)**
 1. Install global Node.js dependencies:
@@ -15,7 +15,11 @@ The **[Minimal Path To Awesome](/ngofficeuifabric/ng-officeuifabric/blob/master/
   ```bash
   $ npm install
   ```
+1. Download all TypeScript type definitions:
 
+  ```bash
+  $ tsd install -r -o --save-dev
+  ```
 1. Transpile all TypeScript
 
   ```bash
