@@ -1,7 +1,7 @@
 module.exports = {
   entry: './index.ts',
   output: {
-    filename: 'index.js'
+    filename: 'bundle.js'
   },
   externals: {
     'angular': 'angular'
