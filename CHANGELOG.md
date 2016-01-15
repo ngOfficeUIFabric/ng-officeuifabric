@@ -5,6 +5,7 @@
 
 - **uif-icon**: added validation to specified icon (by @andrewconnell)
 - **uif-link**: directive added (by @tdwhite0; closes #23)
+- **uif-overlay**: directive added (by @johnmeilleur; closes #28)
 
 #### Bug Fixes
 

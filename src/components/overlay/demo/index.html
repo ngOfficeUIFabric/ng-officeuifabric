@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-Overlay demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp" ng-controller="demoController">
+
+  <h1 class="ms-font-su">Overlay Demo | &lt;uif-overlay&gt;</h1> 
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <p>
+    Use the attribute <code>uif-mode</code> to specify the light or dark theme.  Any value other then dark will render the light theme.
+  </p>
+
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-icon uif-mode="{{vm.overlayMode}}" /&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    
+    <uif-overlay uif-mode="{{ vm.overlayMode }}">
+        <div class="ms-Grid" style="position:relative; z-index:1000">
+            <div class="ms-Grid-row">
+                <div class="ms-Grid-col ms-u-sm-4" style="background-color:#efefef">
+                    <div class="block" style="padding: 25px">
+                        <select ng-model="vm.overlayMode">
+                            <option>light</option>
+                            <option>dark</option>
+                            <option>invalid</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </uif-overlay>
+  </p>
+
+</body>
+
+</html>
