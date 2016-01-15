@@ -49,7 +49,7 @@ describe('overlayDirective: <uif-overlay />', () => {
     element = ng.element('<uif-overlay uif-mode="dark">hello world</uif-overlay>');
     $compile(element)(scope);
     scope.$digest();
-      
+
     // get the rendered overlay element
     let overlayElement: ng.IAugmentedJQuery = element.find('div');
 
