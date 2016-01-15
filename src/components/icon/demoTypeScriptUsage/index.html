@@ -6,13 +6,13 @@
   <meta charset="utf-8" />
 
   <!-- office ui fabric css -->
-  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.min.css" />
-  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.1.3/fabric.components.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
   <!-- angular library -->
-
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
   <!-- ngofficeuifabric library -->
   <script src="../../../../dist/ngOfficeUIFabric.js"></script>
-  <script src="bundle.js"></script>
+  <script src="index.js"></script>
 </head>
 
 <body ng-app="demoApp">
@@ -27,23 +27,25 @@
   </p>
   
   <p>
-    To run this demo, you must do the following:
-    <ul>
-      <li>build the library in debug mode:<br /><code>$ gulp build-lib --debug</code></li>
-      <li>transpile everything (including this demo's <code>index.ts</code> file) to typescript:<br /><code>$ tsc -p ./</code></li>
-      <li>use webpack to create a bundle to load modules:<br /><code>webpack src/components/icon/demoTypeScriptUsage/index.js src/components/icon/demoTypeScriptUsage/bundle.js -p</li>
-    </ul>
+    The TypeScript in this demo uses external modules & this needs a module loader. The ngOfficeUiFabric uses webpack, so we'll use that in this demo as well. We took the <code>index.ts</code> and compile it using webpack to a bundle <code>index.js</code>.
+  </p>
+  <p>
+    After building the library...<br />
+    <code>gulp build-lib --debug</code><br /><br />
+    
+    Use webpack bundle was created using the following command, run from within the same folder as the demo. It uses the <code>webpack.config.js</code> for all settings:<br />
+    <code>webpack</code>
   </p>
   
   <h2>Changing the Icon</h2>
-  <div ng-controller="demoController">
-    <select ng-model="selectedIcon"
-            ng-options="icon as icon for icon in icons">
+  <div ng-controller="demoController as controller">
+    <select ng-model="controller.selectedIcon"
+            ng-options="icon as icon for icon in controller.icons">
     </select>
     
     <div>
-      Selected icon = <code>{{selectedIcon}}</code><br />
-      Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}" />
+      Selected icon = <code>{{controller.selectedIcon}}</code><br />
+      Rendered icon = <uif-icon uif-type="{{controller.selectedIcon}}" />
     </div>
   </div>
 

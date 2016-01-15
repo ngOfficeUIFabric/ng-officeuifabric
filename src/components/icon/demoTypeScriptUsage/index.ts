@@ -1,17 +1,9 @@
 'use strict';
 
 import * as ng from 'angular';
-import {IconEnum} from '../iconEnum';
+import {IconEnum} from './../iconEnum';
 
-let demoApp: ng.IModule = ng.module('demoApp', [
-  'officeuifabric.core',
-  'officeuifabric.components.icon'
-]);
-
-demoApp.controller('demoController', [
-  '$scope', DemoController]);
-
-class DemoController {
+export class DemoController {
   public icons: string[] = [];
   public selectedIcon: any = {};
 
@@ -31,6 +23,7 @@ class DemoController {
   private _fillIconCollection(): string[] {
     let icons: string[] = [];
 
+    // fill with real options
     icons.push(IconEnum[IconEnum.arrowDownLeft]);
     icons.push(IconEnum[IconEnum.circleEmpty]);
     icons.push(IconEnum[IconEnum.circleFill]);
@@ -38,6 +31,14 @@ class DemoController {
     icons.push(IconEnum[IconEnum.minus]);
     icons.push(IconEnum[IconEnum.question]);
 
+    // add one fake option... this should be a real icon tho!!! :)
+    icons.push('ngOfficeUiFabric');
+
     return icons;
   };
 }
+
+export var module: ng.IModule = ng.module('demoApp', [
+    'officeuifabric.core',
+    'officeuifabric.components.icon'])
+  .controller('demoController', [DemoController]);

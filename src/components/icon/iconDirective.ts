@@ -18,6 +18,19 @@ export interface IIconScope extends ng.IScope {
 }
 
 /**
+ * @controller
+ * @name IconController
+ * @private
+ * @description
+ * Used to more easily inject the Angular $log service into the directive.
+ */
+class IconController {
+  public static $inject: string[] = ['$log'];
+  constructor(public $log: ng.ILogService) {
+  }
+}
+
+/**
  * @ngdoc directive
  * @name uifIcon
  * @module officeuifabric.components.icon
@@ -41,20 +54,25 @@ export class IconDirective implements ng.IDirective {
     uifType: '@'
   };
   public transclude: Boolean = true;
+  public controller: any = IconController;
+  public controllerAs: string = 'icon';
 
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new IconDirective();
     return directive;
   }
 
-  public link(scope: IIconScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
-    // verify a valid icon was passed in
-    if (IconEnum[scope.uifType] === undefined) {
-      console.error('Error [ngOfficeUiFabric] officeuifabric.components.icon - Unsupported icon specified: ' +
-                    'The icon specified (\'' + scope.uifType + '\') is not supported by the Office UI Fabric. ' +
-                    'Supported options are listed here: ' +
-                    'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/icon/iconEnum.ts');
-    }
+  public link(scope: IIconScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: IconController): void {
+    // add watcher
+    scope.$watch('uifType', (newValule: string, oldValue: string) => {
+      // verify a valid icon was passed in
+      if (IconEnum[newValule] === undefined) {
+        controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.icon - Unsupported icon: ' +
+          'The icon (\'' + scope.uifType + '\') is not supported by the Office UI Fabric. ' +
+          'Supported options are listed here: ' +
+          'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/icon/iconEnum.ts');
+      }
+    });
   };
 }
 
