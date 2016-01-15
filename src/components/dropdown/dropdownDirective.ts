@@ -96,8 +96,8 @@ export class DropdownController {
             if (!self.$scope.disabled) {
                 self.$scope.isOpen = !self.$scope.isOpen;
                 self.$scope.$apply();
-                let dropdownWidth: number = self.$element.find('.ms-Dropdown').width();
-                self.$element.find('.ms-Dropdown-items').css('width', dropdownWidth + 'px');
+                let dropdownWidth: number = angular.element(this.querySelector('.ms-Dropdown'))[0].clientWidth;
+                angular.element(this.querySelector('.ms-Dropdown-items'))[0].style.width = dropdownWidth + 'px';
             }
         });
         if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
