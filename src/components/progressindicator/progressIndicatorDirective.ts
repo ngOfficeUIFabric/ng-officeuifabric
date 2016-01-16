@@ -32,7 +32,8 @@ export interface IProgressIndicatorScope extends ng.IScope {
  *
  * @usage
  *
- * <uif-progress-indicator uif-name="MyDocument.docx" uif-description="This is a sample document." uif-percent-complete="65"></uif-progress-indicator>
+ * <uif-progress-indicator uif-name="MyDocument.docx" uif-description="This is a sample document."
+ *  uif-percent-complete="65"></uif-progress-indicator>
  */
 export class ProgressIndicatorDirective implements ng.IDirective {
 
@@ -40,13 +41,13 @@ export class ProgressIndicatorDirective implements ng.IDirective {
 
     public restrict: string = 'E';
     public template: string = '<div class="ms-ProgressIndicator">' +
-        '<div class="ms-ProgressIndicator-itemName">{{uifName}}</div>' +
-            '<div class="ms-ProgressIndicator-itemProgress">' +
-                '<div class="ms-ProgressIndicator-progressTrack"></div>' +
-                '<div class="ms-ProgressIndicator-progressBar" ng-style="{width: uifPercentComplete+\'%\'}"></div>' +
-            '</div>' +
-            '<div class="ms-ProgressIndicator-itemDescription">{{uifDescription}}</div>' +
-        '</div>';
+    '<div class="ms-ProgressIndicator-itemName">{{uifName}}</div>' +
+    '<div class="ms-ProgressIndicator-itemProgress">' +
+    '<div class="ms-ProgressIndicator-progressTrack"></div>' +
+    '<div class="ms-ProgressIndicator-progressBar" ng-style="{width: uifPercentComplete+\'%\'}"></div>' +
+    '</div>' +
+    '<div class="ms-ProgressIndicator-itemDescription">{{uifDescription}}</div>' +
+    '</div>';
     public scope: {} = {
         uifDescription: '@',
         uifName: '@',
@@ -68,16 +69,16 @@ export class ProgressIndicatorDirective implements ng.IDirective {
 
         scope.$watch('uifPercentComplete', (newValue: string, oldValue: string) => {
             // verify a valid percent range was passed in
-            if (newValue == null || newValue == '') {
+            if (newValue == null || newValue === '') {
                 scope.uifPercentComplete = 0;
                 return;
             }
 
-            let newPercentComplete = parseFloat(newValue);
+            let newPercentComplete: number = parseFloat(newValue);
 
             if (isNaN(newPercentComplete) || newPercentComplete < 0 || newPercentComplete > 100) {
-              ProgressIndicatorDirective.log.error('Error [ngOfficeUiFabric] officeuifabric.components.progressindicator - ' +
-                'Percent complete must be a valid number between 0 and 100.');
+                ProgressIndicatorDirective.log.error('Error [ngOfficeUiFabric] officeuifabric.components.progressindicator - ' +
+                    'Percent complete must be a valid number between 0 and 100.');
 
                 // ensure percent complete does not go out of range
                 scope.uifPercentComplete = Math.max(Math.min(newPercentComplete, 100), 0);
