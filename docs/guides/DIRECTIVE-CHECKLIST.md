@@ -13,6 +13,8 @@ Most of the guidance is based on the [Angular Material](http://material.angularj
   - (004) [Module Naming](#module-naming)
   - (005) [Use External Modules](#use-external-modules)
   - (006) [Directive Attributes](#directive-attributes)
+  - (007) [Directive Attribute Validation](#directive-attribute-validation)
+  - (008) [Error Messages](#error-messages)
 - [Testing](#testing)
   - (101) [Verify Coverage with Tests](#verify-coverage-with-tests)
   - (102) [Organizing Tests](#organizing-tests)
@@ -110,7 +112,7 @@ interface IButtonScope extends ng.IScope {
 
 class ButtonDirective implements ng.IDirective {
   public restrict: string = 'E';
-  
+
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new ButtonDirective();
 
@@ -132,6 +134,57 @@ The library uses [webpack](http://webpack.github.io/) as a module loader as modu
 Any element directive that requires custom attributes must prefix those attributes with `uif-` to indicate they are ngOfficeUiFabric specific attributes.
 
 However if you can reuse an existing HTML attribute that would be used for the same or similar purpose, do that. For example, don't create a `uif-value` attribute on a input control to set the value of the control when you can easily use `value` which would do the same thing on a `<input type="text" />` control.
+
+###Directive Attribute Validation
+###### [Guideline [007](#guideline-007)]
+
+Directives that have an attribute that a developer can set, if the attribute has expected & defined values it should:
+
+- include an enumeration that includes all possible options
+- validation logic that logs an error on failures in the console using the Angular `$log.error()`
+
+For example, here's what the enumeration looks like for the `uif-icon` directive:
+
+```javascript
+export enum IconEnum {
+  alert,
+  alert2
+}
+```
+
+Here is an example of validation within a directive's `link()` function:
+
+```javascript
+public link(scope: IIconScope, 
+            instanceElement: ng.IAugmentedJQuery, 
+            attrs: ng.IAttributes, 
+            controller: IconController): void {
+  // add watcher
+  scope.$watch('uifType', (newValule: string, oldValue: string) => {
+    // verify a valid icon was passed in
+    if (IconEnum[newValule] === undefined) {
+      controller.$log.error('Error [ngOfficeUiFabric] {{module}} - {{error}}: {{error details + link to enum of options}}');
+    }
+  });
+};
+```
+
+> Look at the `uif-icon` directive (in release v0.2.0+) for an example of how this is done.
+
+###Error Messages
+###### [Guideline [008](#guideline-008)]
+
+When logging errors from the library to the console, always use the Angular `$log` service.
+
+Error messages should have the format of:
+
+```
+Error [ngOfficeUiFabric] {{module}} - {{error}}: {{error details + link to enum of options}}
+```
+
+- **{{module}}**: should be the name of the module the error is logged from
+- **{{error}}**: short name of the error
+- **{{error details}}**: detailed description of the error; if you can reference something, do so... for instance, if something failed validation you could point to the enumeration file within the `master` branch of the repo.
 
 **[Back to top](#table-of-contents)**
 

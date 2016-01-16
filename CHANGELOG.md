@@ -9,7 +9,10 @@
 #### Bug Fixes
 
 - **docs**: fixed multiple broken links (by @andrewconnell, @estruyf; closes #86, #89)
+- **docs**: added directive guidelines 007 & 008 (by @andrewconnell; closes #93)
+- **uif-dropdown**: fixed issue to support jqlite (by @estruyf; closes #98)
 - fixed angular duped dependency & tsd script (by @andrewconnell; closes #82, #83)
+
 
 <a name="0.1.3"</a>
 ### [0.1.3 (January 13, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.1.3)
