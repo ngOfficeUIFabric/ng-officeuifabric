@@ -12,7 +12,8 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
   });
 
   beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-    element = ng.element('<uif-progress-indicator uif-name="MyFile.docx" uif-description="This is a sample." uif-percent-complete="65"></uif-progress-indicator>');
+    element = ng.element('<uif-progress-indicator uif-name="MyFile.docx" uif-description="This is a sample." uif-percent-complete="65">' +
+        '</uif-progress-indicator>');
     scope = $rootScope;
     $compile(element)(scope);
     scope.$digest();
@@ -67,7 +68,8 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
    */
   it('should be able to set the percent complete', () => {
     // get the rendered overlay element
-    let progressIndicatorProgressBarElement: ng.IAugmentedJQuery = element.find('div.ms-ProgressIndicator-itemProgress div.ms-ProgressIndicator-progressBar');
+    let progressIndicatorProgressBarElement: ng.IAugmentedJQuery = element.find('div.ms-ProgressIndicator-itemProgress ' +
+        'div.ms-ProgressIndicator-progressBar');
 
     // ensure overlay has the correct classes
     expect(progressIndicatorProgressBarElement.eq(0)).toHaveCss({width: '65%'});
@@ -80,7 +82,8 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
     // get the rendered overlay element
     let progressIndicator: JQuery = $compile('<uif-progress-indicator uif-percent-complete="-1"></uif-progress-indicator>')(scope);
     scope.$apply();
-    let progressIndicatorProgressBarElement: JQuery = progressIndicator.find('div.ms-ProgressIndicator-itemProgress div.ms-ProgressIndicator-progressBar');
+    let progressIndicatorProgressBarElement: JQuery = progressIndicator.find('div.ms-ProgressIndicator-itemProgress ' +
+        'div.ms-ProgressIndicator-progressBar');
 
     // ensure overlay has the correct classes
     expect(progressIndicatorProgressBarElement.eq(0)).toHaveCss({width: '0%'});
@@ -93,7 +96,8 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
     // get the rendered overlay element
     let progressIndicator: JQuery = $compile('<uif-progress-indicator uif-percent-complete="1000"></uif-progress-indicator>')(scope);
     scope.$apply();
-    let progressIndicatorProgressBarElement: JQuery = progressIndicator.find('div.ms-ProgressIndicator-itemProgress div.ms-ProgressIndicator-progressBar');
+    let progressIndicatorProgressBarElement: JQuery = progressIndicator.find('div.ms-ProgressIndicator-itemProgress ' +
+        'div.ms-ProgressIndicator-progressBar');
 
     // ensure overlay has the correct classes
     expect(progressIndicatorProgressBarElement.eq(0)).toHaveCss({width: '100%'});
