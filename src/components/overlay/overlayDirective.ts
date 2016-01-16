@@ -3,6 +3,46 @@
 import * as ng from 'angular';
 
 /**
+ * @ngdoc enum
+ * @name OverlayMode
+ * 
+ * @description 
+ * ???
+ * 
+ */
+export enum OverlayMode {
+  light,
+  dark
+}
+
+/**
+ * @ngdoc interface
+ * @name IIconScope
+ * @module officeuifabric.components.contextualmenu
+ * 
+ * @description
+ * This is the scope used by the `<uif-icon />` directive.
+ * 
+ * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
+ */
+export interface IOverlayScope extends ng.IScope {
+  uifMode: OverlayMode;
+}
+
+/**
+ * @controller
+ * @name OverlayController
+ * @private
+ * @description
+ * Used to more easily inject the Angular $log service into the directive.
+ */
+class OverlayController {
+  public static $inject: string[] = ['$log'];
+  constructor(public log: ng.ILogService) {
+  }
+}
+
+/**
  * @ngdoc directive
  * @name uifOverlay
  * @module officeuifabric.components.overlay
@@ -27,11 +67,30 @@ export class OverlayDirective implements ng.IDirective {
     uifMode: '@'
   };
   public transclude: Boolean = true;
-
+  public static log: ng.ILogService;
+  
+  public constructor(public log: ng.ILogService) {
+      OverlayDirective.log = log;
+  }
+  
   public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OverlayDirective();
+    const directive: ng.IDirectiveFactory = (log: ng.ILogService) => new OverlayDirective(log);
+    directive.$inject = ["$log"];
     return directive;
   }
+  
+  public link(scope: IOverlayScope): void {
+    // add watcher
+    
+    scope.$watch('uifMode', (newValue: string, oldValue: string) => {
+      // verify a valid overlay mode was passed in
+      if (OverlayMode[newValue] === undefined) {
+        OverlayDirective.log.error('Error [ngOfficeUiFabric] officeuifabric.components.overlay - Unsupported overlay mode: ' +
+          'The overlay mode (\'' + scope.uifMode + '\') is not supported by the Office UI Fabric. ' +
+          'Supported options are "light" and "dark"');
+      }
+    });
+  };
 }
 
 /**
