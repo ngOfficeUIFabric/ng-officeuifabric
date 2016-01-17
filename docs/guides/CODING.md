@@ -78,10 +78,7 @@ All code should be clear & well commented.
 
 ### Coding
 
-- All code styles are defined in the [tslint.json](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/tslint.json) file. 
-
-  > **NOTE:** At the present time, all directives are authored using TypeScript. Contact the project owner(s) if you are going to write a directive in JavaScript so the appropriate linting can be setup in the project.
-
+- All code styles are defined in the [tslint.json](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/tslint.json) file.
 - Ensure all code has valid style by running the gulp task `vet` to perform checks.
 - When fixing / enhancing existing code:
   - Do not reformat author's code.
@@ -95,7 +92,7 @@ All code should be clear & well commented.
 
 ## Documentation
 
-Directive documentation will be dynamically built at some point and therefore it is important all components are well documented. This process will use the Angular [dgeni](https://github.com/angular/dgeni) JavaScript documentation generator used by Angular, Protractor and other JavaScript projects. It is derived from [jsdoc](http://usejsdoc.org/). 
+Directive documentation will be dynamically built at some point and therefore it is important all components are well documented. This process will use the Angular [dgeni](https://github.com/angular/dgeni) JavaScript documentation generator used by Angular, Protractor and other JavaScript projects. It is derived from [jsdoc](http://usejsdoc.org/).
 
 - All non-trival functions should have a [jsdoc](http://usejsdoc.org/) description.
 - All Angular directives should have a comprehensive [jsdoc](http://usejsdoc.org/) block that explains the directive complete with the following:

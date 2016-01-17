@@ -11,7 +11,7 @@ let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
  * Builds files to be distributed as a library release.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -24,7 +24,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = [];
+  public static dependencies: string[] = ['test'];
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -35,7 +35,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'debug': 'Create unminified version of the library with source maps & comments (otherwise, production bundle created)',
+    'dev': 'Create unminified version of the library with source maps & comments (otherwise, production bundle created)',
     'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
     'version': 'Version number to set build library (if omitted, version from package.json is used)'
   };
@@ -54,8 +54,8 @@ export class GulpTask extends BaseGulpTask {
     let config: webpack.Configuration = new webpackConfig.WebPackConfig();
 
     let webpackPlugins: webpack.Plugin[] = [];
-    // if debug mode, write source maps & keep comments
-    if (!this._args.debug) {
+    // if dev mode, write source maps & keep comments
+    if (!this._args.dev) {
       config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.min.js';
       // use uglify plugin to remove comments & sourcemaps
       webpackPlugins.push(
