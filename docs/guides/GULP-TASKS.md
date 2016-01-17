@@ -51,7 +51,7 @@ The most common one is `--verbose`. Depending on the task, this will usually out
 
 This task uses [webpack](http://webpack.github.io/) to transpile all TypeScript files and then create a webpack bundle.  
 
-By default, it creates a minified file with no comments or source maps. If the `--debug` argument is supplied, an un-minified bundle with an inline sourcemap is provided. These files are saved to the folder `/dist` as defined in `/build/config.ts`.
+By default, it creates a minified file with no comments or source maps. If the `--dev` argument is supplied, an un-minified bundle with an inline sourcemap is provided. These files are saved to the folder `/dist` as defined in `/build/config.ts`.
 
 The contents of the transpiled `/src/core/core.ts` is the first file added to the project.
 
@@ -60,10 +60,21 @@ All comments, including sourcemaps, are stripped from these generated library fi
 The version number for the file (and what's added in the comment banner within each file) is pulled dynamically from the `package.json` file in the repo. However the version can be manually set using the `--version` argument when running the task.
 
 ```bash
-$ gulp build-ts
-$ gulp build-ts --verbose
-$ gulp build-ts --verbose --version=1.2.3
+$ gulp build-lib
+$ gulp build-lib --verbose
+$ gulp build-lib --verbose --version=1.2.3
 ```
+### `gulp watch`
+
+If you want automatically run vet, test and build on file save, use this task.   
+
+By default, it setups watchers on typescript source files (`src/**/*.ts`), test files (`src/**/*.spec.ts`) and build files (`gulpfile.ts, build/**/*.ts`).  
+
+After saving a source file following workflow will be triggered: `source change -> vet -> transpile ts -> test ->  build library with webpack`. If any intermediate task will fail, then whole workflow will stop. That means you need to fix all vet and test errors in order to create `dist` package.   
+After saving a spec file workflow is the same expect the last step (build library with webpack) which is omitted.   
+After saving build file only typescript transpilation and vetting will be run.   
+
+`gulp watch` supports all common params which are used by other tasks (`debug`, `specs`, `verbose`, `version`, `dev`).  
 
 ### `gulp clean`
 

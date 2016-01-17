@@ -9,7 +9,7 @@ let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
  * Vets the code style & quality of all build-related TypeScript as the gulp task 'vet-build-ts'.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -37,12 +37,10 @@ export class GulpTask extends BaseGulpTask {
     super();
     Utils.log('Vetting build TypeScript code');
 
-    gulp.src(BuildConfig.BUILD_TYPESCRIPT)
+    return gulp.src(BuildConfig.BUILD_TYPESCRIPT)
       .pipe($.if(this._args.verbose, $.print()))
       .pipe($.tslint())
       .pipe($.tslint.report('verbose', { summarizeFailureOutput: true }));
-
-    done();
   }
 
 }
