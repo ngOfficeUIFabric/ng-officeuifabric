@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-link demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">Link Demo | &lt;uif-link&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <p>
+        Use the built in Angular directive <code>ng-href</code> to set the url.
+    </p>
+
+    <p>
+        This markup:
+        <br />
+        <code>
+      &lt;uif-link ng-href=&quot;http://ngofficeuifabric.com/&quot;&gt;Some link text here&lt;/uif-link&gt;
+        </code>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-link ng-href="http://ngofficeuifabric.com/">Some link text here</uif-link>
+    </p>
+
+
+
+</body>
+
+</html>
