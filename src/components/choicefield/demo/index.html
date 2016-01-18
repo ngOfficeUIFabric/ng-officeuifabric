@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <title>ngOfficeUiFabric | uif-Choicefield demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body>
+
+    <h1 class="ms-font-su">Choicefield Demo | &lt;uif-choicefield&gt;</h1> 
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <h2>Basic usage</h2>
+    <p>
+        This markup: <br />
+        <pre>
+            &lt;uif-choicefield-group ng-model=&quot;selectedValue&quot;&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;            &lt;/uif-choicefield-group&gt;
+        </pre>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-choicefield-group ng-model="selectedValue">
+            <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
+        </uif-choicefield-group>
+
+    </p>
+    <p>
+        <span>selectedValue: {{selectedValue}}</span>
+    </p>
+  
+    <h2>Checkbox usage</h2>
+    <p>
+        This markup: <br />
+        <pre>
+            &lt;uif-choicefield-option uif-type=&quot;checkbox&quot; value=&quot;value1&quot; &#13;&#10;                ng-model=&quot;selectedCheckbox&quot; ng-true-value=&quot;&apos;Y&apos;&quot; ng-false-value=&quot;&apos;N&apos;&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;
+        </pre>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        
+        <uif-choicefield-option uif-type="checkbox" value="value1" 
+            ng-model="selectedCheckbox" ng-true-value="'Y'" ng-false-value="'N'">Text 1</uif-choicefield-option>
+       
+    </p>
+    <p>
+        <span>selectedCheckbox: {{selectedCheckbox}}</span>
+       
+    </p>
+ 
+  
+    <h2>Disabled usage</h2>
+    <p>
+        This markup: <br />
+        <pre>
+            &lt;uif-choicefield-group ng-model=&quot;selectedValue&quot; disabled&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;            &lt;/uif-choicefield-group&gt;
+        </pre>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-choicefield-group ng-model="selectedValue" disabled>
+            <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
+        </uif-choicefield-group>
+
+    </p>
+    <p>
+        <span>selectedValue: {{selectedValue}}</span>
+    </p>
+ 
+</body>
+
+</html>

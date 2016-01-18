@@ -1,4 +1,4 @@
-﻿describe('dropdownDirective', () => {
+﻿describe('dropdownDirective: <uif-dropdown />', () => {
     beforeEach(() => {
         angular.mock.module('officeuifabric.components.dropdown');
         jQuery.noConflict();
