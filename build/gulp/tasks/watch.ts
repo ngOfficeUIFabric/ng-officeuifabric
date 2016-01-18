@@ -68,7 +68,7 @@ export class GulpTask extends BaseGulpTask {
     }
 
     subscribeWatcher(gulp.watch(['./src/**/*.ts', '!./src/**/*.spec.ts'], ['build-lib']), buildLibEventName);
-    subscribeWatcher(gulp.watch(['./build/**/*.ts', './gulpfile.ts'], ['transpile-ts']), 'Transpile build files');
+    subscribeWatcher(gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], ['transpile-ts']), 'Transpile build files');
     subscribeWatcher(gulp.watch(['./src/**/*.spec.ts'], ['test']), 'Run tests');
   }
 }
