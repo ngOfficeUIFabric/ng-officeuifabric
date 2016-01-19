@@ -32,13 +32,12 @@ Installation of Node.js includes NPM, the package manager for Node.js.
 
 ### Global NPM Packages
 
-Many parts of the project are implemented using TypeScript, but more importantly the build process is written in TypeScript. As such, you need to install two NPM packages globally:
+Many parts of the project are implemented using TypeScript, but more importantly the build process is written in TypeScript. As such, you need to install one NPM package globally:
 
 - [typescript](https://npmjs.com/package/typescript): main TypeScript compiler
-- [tsd](https://npmjs.com/package/tsd): TypeScript type definition manager for DefinatelyTyped [DefinatelyTyped](http://definitelytyped.org/)
 
 ```bash
-$ npm install -g typescript tsd
+$ npm install -g typescript
 ```
 
 ## Clone the Repository
@@ -87,15 +86,7 @@ To fix this, you need to transpile the TypeScript to JavaScript. This is a one-t
 - you update the build process such as changing or adding Gulp tasks
 - you purge all JavaScript transpiled from TypeScript
 
-First, download all the TypeScript type definitions:
-
-```bash
-$ tsd install -r -o --save-dev
-```
-
-> **NOTE**: This is also provided as an NPM script... you could just run `npm run-script dev-install` which will run the above command.
-
-Then transpile all the TypeScript to JavaScript. The following command will run the TypeScript compiler, `tsc`, telling it to treat the folder (`./`) as a project (`-p`) by looking at the `tsconfig.json` file in the root fo the folder:
+Transpile all the TypeScript to JavaScript. The following command will run the TypeScript compiler, `tsc`, telling it to treat the folder (`./`) as a project (`-p`) by looking at the `tsconfig.json` file in the root fo the folder:
 
 ```bash
 $ tsc -p ./

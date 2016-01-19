@@ -2,7 +2,6 @@
 
 # no need to keep stuff pulled remotely
 node_modules
-build/typings
 
 # don't keep coverage
 coverage/

@@ -16,9 +16,6 @@ before_script:
   # install dependencies
   - npm install -g gulp
   - npm install -g typescript
-  - npm install -g tsd
-  # download type definitions
-  - tsd install -r -o --save-dev
   # compile typescript
   - tsc -p ./
 

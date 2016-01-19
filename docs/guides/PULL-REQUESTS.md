@@ -60,14 +60,6 @@ If the failure is due to [failing to transpile the TypeScript to JavaScript](htt
 
 However there are other reasons the build may fail that won't cause this...
 
-#### GITHUB API: GitHub Rate Limit Exceeded
-
-Because we are using TypeScript type definitions from https://definitelytyped.org, [the build is configured to download all type definitions](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L20-L21) using the **tsd** utility which uses the Github API to download TypeScript type definitions. The challenge with this is that Github's API limits the number of anonymous API requests to 60/hour. If you exceed this number, TSD will throw an error and break the build with the message *GitHub rate limit exceeded* which [you can easily see in the build logs](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric#L1542-L1547).
-
-The fix is to [set an environment variable that contains a GitHub API token](https://github.com/DefinitelyTyped/tsd#tsdrc) that's tied to your account to bump this limit up to 5,000 API calls. However this [does not apply to pull requests](https://docs.travis-ci.com/user/pull-requests). TravisCI does not include secured environment variables in builds triggered by pull requests.
-
-As such, if your build fails, when it is evaluated, library managers will look to see if this was the root cause. If it is the root cause for the failing build in TravisCI, the three tests above will be manually checked.
-
 ## After Your Pull Request is Merged
 
 After your pull request is merged, you can safely delete your branch and pull the changes from the main (upstream) repository:
