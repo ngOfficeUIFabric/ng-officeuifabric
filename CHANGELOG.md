@@ -1,3 +1,9 @@
+<a name="next"</a>
+### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
+
+#### Features
+- **docs**: added link to demo site on main readme (by @jthake)
+
 <a name="0.2.0"</a>
 ### [0.2.0 (January 19, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.2.0)
 
