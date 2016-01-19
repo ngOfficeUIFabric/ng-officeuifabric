@@ -1,8 +1,9 @@
 <a name="0.2.0"</a>
-### [0.2.0 (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
+### [0.2.0 (January 19, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
 #### Features
 
+- **docs**: added auto watcher for easier dev (by @s-KaiNet; closes #49)
 - **uif-choicefield**: directive added (by @rolandoldengarm; closes #16)
 - **uif-icon**: added validation to specified icon (by @andrewconnell)
 - **uif-link**: directive added (by @tdwhite0; closes #23)
