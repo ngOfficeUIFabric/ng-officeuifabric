@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-Progress-Indicator demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/components/ProgressIndicator/ProgressIndicator.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp" ng-controller="demoController">
+
+  <h1 class="ms-font-su">Progress Indicator Demo | &lt;uif-progress-indicator&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <p>
+    <code>uif-name</code> is an optional string to display the name field.<br/>
+    <code>uif-description</code> is an optional string to display the description field.<br/>
+    <code>uif-percent-complete</code> is an optional number between 0 and 100 which display the progress completed.  Defaults to zero.<br/>
+  </p>
+
+  <p>
+    This markup: <br />
+    <code>
+        &lt;uif-progress-indicator uif-name="MyDocument.docx" uif-description="This is a sample document." uif-percent-complete="65"&gt;&lt;/uif-progress-indicator&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-progress-indicator uif-name="MyDocument.docx" uif-description="This is a sample document." uif-percent-complete="65"></uif-progress-indicator>
+  </p>
+
+  <h2>Interactive Example</h2>
+
+  <p>
+    <p>Name: <input type="text" ng-model="vm.name" /></p>
+    <p>Description: <input type="text" ng-model="vm.description" /></p>
+    <p>Percent Complete: <input type="number" ng-model="vm.percentComplete" min="0" max="100" /></p>
+
+    <uif-progress-indicator uif-name="{{ vm.name }}" uif-description="{{ vm.description }}" uif-percent-complete="{{ vm.percentComplete }}" />
+  </p>
+
+</body>
+
+</html>
