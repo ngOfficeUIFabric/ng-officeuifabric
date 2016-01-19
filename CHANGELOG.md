@@ -3,6 +3,7 @@
 
 #### Features
 - **docs**: added link to demo site on main readme (by @jthake)
+- **uif-contextual-menu**: added attribute validation & error logging to console (by @s-KaiNet; closes [#99](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/99))
 
 <a name="0.2.0"</a>
 ### [0.2.0 (January 19, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.2.0)
