@@ -40,12 +40,12 @@
     "dev-install": "tsd install -ros"
   },
   "dependencies": {
-    "angular": "^1.4.8",
+    "angular": "1.4.8",
     "office-ui-fabric": "^1.2.1"
   },
   "devDependencies": {
-    "angular-animate": "^1.4.8",
-    "angular-mocks": "^1.4.8",
+    "angular-animate": "1.4.8",
+    "angular-mocks": "1.4.8",
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
     "gulp": "^3.9.0",
