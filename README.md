@@ -66,7 +66,13 @@ You can also directly download the built library if you wish. Grab either the un
 
 ## CDN
 
-What, no CDN option yet? We need your help! Star this repo because we need at least 100 stars so we can submit to CDNJS!
+Hosting facilitated by [CDNJS](https://cdnjs.com), a community driven CDN. Simply add a reference in your page to:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngOfficeUiFabric/0.2.0/ngOfficeUiFabric.min.js"></script>
+```
+
+> **NOTE**: Be sure to use the most current version!
 
 # Support
 
