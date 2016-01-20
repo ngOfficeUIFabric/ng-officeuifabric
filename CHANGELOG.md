@@ -3,6 +3,8 @@
 
 #### Features
 - **uif-contextual-menu**: added attribute validation & error logging to console (by @s-KaiNet; closes [#99](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/99))
+- **uif-table**: added support to select multiple rows (by @waldekmastykarz; closes [#61](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/61))
+- **uif-table**: added attribute validation & error logging to console (by @waldekmastykarz; closes [#101](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/101))
 
 <a name="0.2.0"</a>
 ### [0.2.0 (January 19, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.2.0)
