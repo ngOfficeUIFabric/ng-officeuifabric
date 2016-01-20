@@ -2,7 +2,6 @@
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
 #### Features
-- **docs**: added link to demo site on main readme (by @jthake)
 - **uif-contextual-menu**: added attribute validation & error logging to console (by @s-KaiNet; closes [#99](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/99))
 
 <a name="0.2.0"</a>
