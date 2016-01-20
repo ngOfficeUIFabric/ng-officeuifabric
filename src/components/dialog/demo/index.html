@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-Dialog demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">Dialog Demo | &lt;uif-searchbox&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <p>
+        Use the attributes <code>uif-value</code> to specify the value of the search field. 
+    </p>
+    <p>
+        Use the attributes <code>placeholder</code> to specify the placeholder of the search field.
+    </p>
+
+    <p>
+        This markup: <br />
+        <code>
+            &lt;uif-searchbox  /&gt;
+        </code>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-dialog ></uif-dialog>
+    </p>
+
+    <div ng-controller="demoController">
+        <p>
+            Example using a controller
+        </p>
+        <uif-searchbox value="value" placeholder="placeholder"></uif-searchbox>
+    </div>
+
+</body>
+
+</html>

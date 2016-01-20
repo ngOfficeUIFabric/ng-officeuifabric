@@ -3,6 +3,7 @@
 import * as ng from 'angular';
 import * as choicefieldModule from '../components/choicefield/choicefieldDirective';
 import * as contextualMenuModule from '../components/contextualmenu/contextualMenu';
+import * as dialogModule from '../components/dialog/dialogDirective';
 import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
 import * as linkModule from '../components/link/linkDirective';
@@ -26,6 +27,7 @@ import * as toggleModule from '../components/toggle/toggleDirective';
 export var module: ng.IModule = ng.module('officeuifabric.components', [
   choicefieldModule.module.name,
   contextualMenuModule.module.name,
+  dialogModule.module.name,
   dropdownModule.module.name,
   iconModule.module.name,
   linkModule.module.name,
