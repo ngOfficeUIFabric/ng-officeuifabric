@@ -57,6 +57,15 @@ describe('tableDirective: <uif-table />', () => {
         expect(rows.eq(2)).not.toHaveClass('is-selected');
     }));
 
+    it('should throw an error on an invalid value for the \'uif-selected\' attribute',
+       inject(($compile: Function, $rootScope: ng.IRootScopeService, $log: ng.ILogService) => {
+        element = ng.element('<uif-table><uif-table-row uif-selected="invalid"></uif-table-row></uif-table>');
+        $compile(element)(scope);
+        scope.$digest();
+
+        expect($log.error.logs.length).toEqual(1);
+     }));
+
     it('should render table row select using the span tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
         $compile(element)(scope);

@@ -146,12 +146,14 @@ export class TableDirective implements ng.IDirective {
     }
 
     public link(scope: ITableScope, instanceElement: ng.IAugmentedJQuery, attrs: ITableAttributes, controller: TableController): void {
-        if (TableRowSelectModeEnum[attrs.uifRowSelectMode] === undefined) {
-            controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
-            '\'' + attrs.uifRowSelectMode + '\' is not a valid option for \'uif-row-select-mode\'. ' +
-            'Valid options are none|single|multiple.');
-        } else {
-            scope.rowSelectMode = attrs.uifRowSelectMode;
+        if (attrs.uifRowSelectMode !== undefined && attrs.uifRowSelectMode !== null) {
+            if (TableRowSelectModeEnum[attrs.uifRowSelectMode] === undefined) {
+                controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+                '\'' + attrs.uifRowSelectMode + '\' is not a valid option for \'uif-row-select-mode\'. ' +
+                'Valid options are none|single|multiple.');
+            } else {
+                scope.rowSelectMode = attrs.uifRowSelectMode;
+            }
         }
 
         if (scope.rowSelectMode === undefined) {
@@ -260,8 +262,19 @@ export class TableRowDirective implements ng.IDirective {
                 instanceElement: ng.IAugmentedJQuery,
                 attrs: ITableRowAttributes,
                 table: TableController): void {
-        if (attrs.uifSelected === 'true') {
-            scope.selected = true;
+        if (attrs.uifSelected !== undefined &&
+            attrs.uifSelected !== null) {
+            let selectedString: string = attrs.uifSelected.toLowerCase();
+
+            if (selectedString !== 'true' && selectedString !== 'false') {
+                table.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+                    '\'' + attrs.uifSelected + '\' is not a valid boolean value. ' +
+                    'Valid options are true|false.');
+            } else {
+                if (selectedString === 'true') {
+                    scope.selected = true;
+                }
+            }
         }
 
         // don't treat header row as a table row
