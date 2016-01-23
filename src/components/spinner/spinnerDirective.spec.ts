@@ -29,20 +29,33 @@ describe('spinnerDirective: <uif-spinner />', () => {
 
     it('should render proper CSS for large spinner', inject(($compile: Function) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-spinnersize="large"></uif-spinner>');
+      element = ng.element('<uif-spinner uif-size="large"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
       expect(element[0]).toHaveClass('ms-Spinner--large');
     }));
 
-    it('should not render CSS for large spinner if spinnersize not large', inject(($compile: Function) => {
+    it('should render proper CSS for small spinner', inject(($compile: Function) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-spinnersize="small"></uif-spinner>');
+      element = ng.element('<uif-spinner uif-size="small"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
       expect(element[0]).not.toHaveClass('ms-Spinner--large');
+    }));
+
+    it('should throw error when invalid size provided', inject(($compile: Function, $log: ng.ILogService) => {
+      // override default element for suite
+      element = ng.element('<uif-spinner uif-size="invalid"></uif-spinner>');
+      $compile(element)(scope);
+      scope.$digest();
+
+      // expect(element[0]).not.toHaveClass('ms-Spinner--large');
+
+      expect($log.error.logs.length === 1).toBeTruthy();
+      expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.spinner - Unsupported size: ' +
+          'Spinner size (\'invalid\') is not supported by the Office UI Fabric.');
     }));
 
     it('should not render wrapper when no content', () => {
