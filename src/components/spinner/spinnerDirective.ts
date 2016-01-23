@@ -1,5 +1,6 @@
 'use strict';
 import * as ng from 'angular';
+import {SpinnerSize} from './spinnerSizeEnum';
 
 /**
  * @ngdoc directive
@@ -37,11 +38,19 @@ export class SpinnerDirective implements ng.IDirective {
     scope: ISpinnerScope,
     instanceElement: ng.IAugmentedJQuery,
     attrs: ISpinnerAttributes,
-    ctrl: any,
+    controller: SpinnerController,
     $transclude: ng.ITranscludeFunction): void {
 
-      if (attrs.uifSpinnersize === 'large') {
-        instanceElement.addClass('ms-Spinner--large');
+      if (ng.isDefined(attrs.uifSize) ) {
+        if (ng.isUndefined(SpinnerSize[attrs.uifSize])) {
+
+        controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.spinner - Unsupported size: ' +
+          'Spinner size (\'' + attrs.uifSize + '\') is not supported by the Office UI Fabric.');
+        }
+
+        if (SpinnerSize[attrs.uifSize] === SpinnerSize.large) {
+          instanceElement.addClass('ms-Spinner--large');
+        }
       }
 
       if (attrs.ngShow != null) {
@@ -97,7 +106,7 @@ interface ISpinnerScope extends ng.IScope {
  */
 class SpinnerController {
 
-  public static $inject: string[] = ['$scope', '$element', '$interval'];
+  public static $inject: string[] = ['$scope', '$element', '$interval', '$log'];
 
   private _offsetSize: number = 0.179;
   private _numCircles: number = 8;
@@ -109,7 +118,8 @@ class SpinnerController {
   constructor(
     public $scope: ISpinnerScope,
     private $element: ng.IAugmentedJQuery,
-    private $interval: ng.IIntervalService) {
+    private $interval: ng.IIntervalService,
+    public $log: ng.ILogService) {
 
     $scope.init = (): void => {
       this.createCirclesAndArrange();
@@ -209,7 +219,7 @@ class CircleObject {
 }
 
 interface ISpinnerAttributes extends ng.IAttributes {
-  uifSpinnersize?: string;
+  uifSize?: string;
   ngShow?: any;
 }
 
