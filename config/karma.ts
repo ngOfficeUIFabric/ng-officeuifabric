@@ -6,11 +6,11 @@ import * as webpackConfig from './webpack';
 
 /**
  * Karma configuration.
- * 
+ *
  * @function
  * @public
  * @see {link http://karma-runner.github.io/0.13/config/configuration-file.html}
- * 
+ *
  */
 module.exports = (config: karma.Config) => {
   // load webpack config settings
@@ -43,10 +43,13 @@ module.exports = (config: karma.Config) => {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+      'src/core/jquery.phantomjs.fix.js',
       'src/core/*.js',
       'src/components/*/*.js'
     ],
-    frameworks: ['jasmine-jquery', 'jasmine'],
+    frameworks: ['jasmine'],
     logLevel: config.LOG_WARN,
     plugins: ['karma-*'],
     port: 5793,
@@ -67,7 +70,7 @@ module.exports = (config: karma.Config) => {
 
 /**
  * Interface to define Karma coverage reporter configuration
- * 
+ *
  * @typedef karmaCoverageReporterConfigurationOptions
  * @property {string} type - Specify a reporter type (html | lcov | lcovonly | text | text-summary | cobertura | teamcity | json)
  * @property {string} dir - Output directory for coverage reports. If relative, resolved against karma.Configurationoptions.basePath.
@@ -81,7 +84,7 @@ interface IKarmaCoverageReporterConfigurationOptions {
 /**
  * Interface to extend the default Karma configuration options to add
  * stuff needed for code coverage & webpack.
- * 
+ *
  * @typedef karmaConfig
  * @augments karma.Config
  * @property {IKarmaCoverageReporterConfigurationOptions} coverageReporter - Settings for karma-coverage.

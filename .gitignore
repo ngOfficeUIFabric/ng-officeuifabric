@@ -9,3 +9,5 @@ coverage/
 # no js, just typescript
 *.js
 *.js.map
+
+!src/core/jquery.phantomjs.fix.js
