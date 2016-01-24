@@ -139,7 +139,7 @@ export class CalloutActionsDirective implements ng.IDirective {
  */
 interface ICalloutAttributes extends ng.IAttributes {
   uifSeparator: string;
-  uifActiontext: string;
+  uifActionText: string;
   uifArrow: string;
   uifClose: boolean;
 }
@@ -236,7 +236,7 @@ export class CalloutDirective implements ng.IDirective {
 
       });
 
-      scope.hasSeparator = (!ng.isUndefined(attrs.uifActiontext) || !ng.isUndefined(attrs.uifSeparator));
+      scope.hasSeparator = (!ng.isUndefined(attrs.uifActionText) || !ng.isUndefined(attrs.uifSeparator));
 
       if (!ng.isUndefined(attrs.uifClose)) {
         scope.closeButton = true;

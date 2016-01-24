@@ -100,9 +100,9 @@ describe('calloutDirectives:', () => {
     }));
 
     it(
-      'main element has CSS class when uif-actiontext is present',
+      'main element has CSS class when uif-action-text is present',
       inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout uif-actiontext></uif-callout>');
+        element = ng.element('<uif-callout uif-action-text></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -111,7 +111,7 @@ describe('calloutDirectives:', () => {
         expect(calloutElement[0]).toHaveClass('ms-Callout--actionText');
     }));
 
-    it('main element has no separator when uif-actiontext and uif-separator not present', () => {
+    it('main element has no separator when uif-action-text and uif-separator not present', () => {
       let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
       expect(calloutElement[0]).not.toHaveClass('ms-Callout--actionText');
     });
