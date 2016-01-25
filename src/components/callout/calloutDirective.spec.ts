@@ -17,6 +17,8 @@ describe('calloutDirectives:', () => {
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
+
+      element = jQuery(element[0]);
     }));
 
     it('main element should be DIV', () => {
@@ -63,6 +65,8 @@ describe('calloutDirectives:', () => {
       $compile(element)(scope);
       scope.$digest();
 
+      element = jQuery(element);
+
       let topArrowElement: JQuery = element.find('div.ms-Callout').eq(0);
       let bottomArrowElement: JQuery = element.find('div.ms-Callout').eq(1);
       let leftArrowElement: JQuery = element.find('div.ms-Callout').eq(2);
@@ -95,6 +99,8 @@ describe('calloutDirectives:', () => {
         $compile(element)(scope);
         scope.$digest();
 
+        element = jQuery(element[0]);
+
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--actionText');
     }));
@@ -106,6 +112,8 @@ describe('calloutDirectives:', () => {
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
+
+        element = jQuery(element[0]);
 
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--actionText');
@@ -124,6 +132,8 @@ describe('calloutDirectives:', () => {
         $compile(element)(scope);
         scope.$digest();
 
+        element = jQuery(element[0]);
+
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--OOBE');
     }));
@@ -135,6 +145,8 @@ describe('calloutDirectives:', () => {
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
+
+        element = jQuery(element[0]);
 
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--Peek');
@@ -167,6 +179,8 @@ describe('calloutDirectives:', () => {
         $compile(element)(scope);
         scope.$digest();
 
+        element = jQuery(element[0]);
+
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--close');
 
@@ -197,6 +211,7 @@ describe('calloutDirectives:', () => {
     it('intially callout is closed', inject(($compile: ng.ICompileService) => {
        $compile(element)(scope);
        scope.$digest();
+       element = jQuery(element[0]);
 
        let calloutElement: JQuery = element.eq(0);
        expect(calloutElement[0]).toHaveClass('ng-hide');
@@ -205,6 +220,8 @@ describe('calloutDirectives:', () => {
     it('intially callout is open', inject(($compile: ng.ICompileService) => {
        $compile(element)(scope);
        scope.vm.isOpen = true;
+
+       element = jQuery(element[0]);
 
        scope.$digest();
 
@@ -217,6 +234,8 @@ describe('calloutDirectives:', () => {
 
        $compile(element)(scope);
        scope.$digest();
+
+       element = jQuery(element[0]);
 
        // close it
        scope.vm.isOpen = false;
@@ -241,6 +260,8 @@ describe('calloutDirectives:', () => {
         $compile(element)(scope);
         scope.$digest();
 
+        element = jQuery(element[0]);
+
         expect(element[0]).not.toHaveClass('ng-hide');
 
         let closeButton: JQuery = element.find('button.ms-Callout-close').eq(0);
@@ -253,15 +274,16 @@ describe('calloutDirectives:', () => {
     }));
 
     it('should not close by itself when mouse is over callout', inject(($compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
+        let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
 
         scope.vm.isOpen = true;
 
-        $compile(element)(scope);
+        $compile(jqlElement)(scope);
         scope.$digest();
 
-        let callout: JQuery = element.eq(0);
-        callout.mouseenter();
+        element = jQuery(jqlElement);
+
+        jqlElement.triggerHandler('mouseenter');
         scope.$digest();
 
         scope.vm.isOpen = false;
@@ -278,6 +300,8 @@ describe('calloutDirectives:', () => {
 
         $compile(element)(scope);
         scope.$digest();
+
+        element = jQuery(element[0]);
 
         let callout: JQuery = element.eq(0);
         callout.mouseenter();
@@ -299,6 +323,8 @@ describe('calloutDirectives:', () => {
         $compile(element)(scope);
         scope.$digest();
 
+        element = jQuery(element);
+
         let callout: JQuery = element.eq(0);
         callout.mouseenter();
         scope.$digest();
@@ -319,6 +345,8 @@ describe('calloutDirectives:', () => {
 
         $compile(element)(scope);
         scope.$digest();
+
+        element = jQuery(element[0]);
 
         let callout: JQuery = element.eq(0);
         callout.mouseenter();
@@ -342,6 +370,8 @@ describe('calloutDirectives:', () => {
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
+
+      element = jQuery(element[0]);
     }));
 
     it('should be rendered as DIV', () => {
@@ -375,6 +405,8 @@ describe('calloutDirectives:', () => {
       element = ng.element('<uif-callout-header>Callout header test!</uif-callout-header>');
       $compile(element)(scope);
 
+      element = jQuery(element[0]);
+
       let headerParagrah: JQuery = element.find('p.ms-Callout-title').eq(0);
 
       expect(headerParagrah[0].innerHTML.indexOf('Callout header test!')).toBeGreaterThan(-1);
@@ -391,6 +423,8 @@ describe('calloutDirectives:', () => {
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
+
+      element = jQuery(element[0]);
     }));
 
     it('should be rendered as DIV', () => {
@@ -424,6 +458,8 @@ describe('calloutDirectives:', () => {
       element = ng.element('<uif-callout-content>Callout content test!</uif-callout-content>');
       $compile(element)(scope);
 
+      element = jQuery(element[0]);
+
       let headerParagrah: JQuery = element.find('p.ms-Callout-subText').eq(0);
 
       expect(headerParagrah[0].innerHTML.indexOf('Callout content test!')).toBeGreaterThan(-1);
@@ -440,6 +476,8 @@ describe('calloutDirectives:', () => {
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
+
+      element = jQuery(element[0]);
     }));
 
     it('should be rendered as DIV', () => {
@@ -458,6 +496,8 @@ describe('calloutDirectives:', () => {
     it('should trasnsclude inside main element', inject(($compile: ng.ICompileService) => {
       element = ng.element('<uif-callout-actions>Callout actions test!</uif-callout-actions>');
       $compile(element)(scope);
+
+      element = jQuery(element[0]);
 
       expect(element[0].innerHTML.indexOf('Callout actions test!')).toBeGreaterThan(-1);
     }));
@@ -478,6 +518,8 @@ describe('calloutDirectives:', () => {
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
+
+      element = jQuery(element[0]);
     }));
 
     it('should render ms-Callout-inner & header should be appended there', () => {
@@ -490,7 +532,6 @@ describe('calloutDirectives:', () => {
       let header: JQuery = mainWrapper.children().eq(0);
 
       expect(header[0].tagName === 'UIF-CALLOUT-HEADER').toBeTruthy();
-
     });
 
   });
