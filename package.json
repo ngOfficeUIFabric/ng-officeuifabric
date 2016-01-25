@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -19,7 +19,7 @@
     "Struyf, Elio <info@estruyf.be>",
     "White, Thomas <tdwhite0@gmail.com>"
   ],
-  "homepage": "https://github.com/ngOfficeUIFabric/ng-officeuifabric#readme",
+  "homepage": "https://ngOfficeUiFabric.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngOfficeUIFabric/ng-officeuifabric.git"
