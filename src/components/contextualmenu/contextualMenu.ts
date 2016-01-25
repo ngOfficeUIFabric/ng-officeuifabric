@@ -75,8 +75,8 @@ export class ContextualMenuItemDirective implements ng.IDirective {
 
   public replace: boolean = true;
   public scope: {} = {
-    isDisabled: '=uifIsDisabled',
-    isSelected: '=uifIsSelected',
+    isDisabled: '=?uifIsDisabled',
+    isSelected: '=?uifIsSelected',
     onClick: '&uifClick',
     text: '=uifText',
     type: '@uifType'
@@ -252,7 +252,7 @@ export class ContextualMenuDirective implements ng.IDirective {
   public replace: boolean = true;
   public controller: any = ContextualMenuController;
   public scope: {} = {
-    isOpen: '=uifIsOpen',
+    isOpen: '=?uifIsOpen',
     multiselect: '@uifMultiselect'
   };
 

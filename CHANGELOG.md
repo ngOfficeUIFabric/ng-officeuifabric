@@ -1,3 +1,9 @@
+<a name="next"</a>
+### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
+
+#### Fixes
+- **uif-contextual-menu**: fixed regression introduced in Angular 1.4.9 (by @s-KaiNet; closes [#139](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/139))
+
 <a name="0.3.0"</a>
 ### [0.3.0 (January 25, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.3.0)
 
