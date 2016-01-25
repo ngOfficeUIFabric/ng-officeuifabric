@@ -9,7 +9,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
   });
 
   describe('regular menu tests', () => {
-    let $element: ng.IAugmentedJQuery;
+    let $element: JQuery;
     let $scope: any;
 
     beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
@@ -33,6 +33,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
       $scope = $rootScope;
       $scope.sub = {};
       $compile($element)($scope);
+      $element = jQuery($element[0]);
       $scope.$digest();
     }));
 
@@ -156,7 +157,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
   });
 
   describe('multiselect menu tests', () => {
-    let $element: ng.IAugmentedJQuery;
+    let $element: JQuery;
     let $scope: any;
 
     beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
@@ -171,6 +172,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
       $scope.isOpen = true;
       $scope.$digest();
       $compile($element)($scope);
+      $element = jQuery($element[0]);
       $scope.$digest();
     }));
 
