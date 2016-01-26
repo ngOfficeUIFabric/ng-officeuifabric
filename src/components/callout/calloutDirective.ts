@@ -195,7 +195,7 @@ export class CalloutDirective implements ng.IDirective {
   public require: string[] = ['uifCallout'];
 
   public scope: any = {
-    ngShow: '=',
+    ngShow: '=?',
     uifType: '@'
   };
 

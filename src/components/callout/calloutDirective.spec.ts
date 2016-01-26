@@ -25,6 +25,19 @@ describe('calloutDirectives:', () => {
       expect(calloutElement[0].tagName === 'DIV').toBeTruthy();
     });
 
+    it('should not throw error on mouseenter and leave', () => {
+
+      element.triggerHandler('mouseenter');
+      scope.$digest();
+
+      expect(() => {
+        element.triggerHandler('mouseleave');
+      }).not.toThrow(new Error('[$compile:nonassign] Expression \'undefined\' ' +
+      'used with directive \'uifCallout\' is non-assignable!\n' +
+      'http://errors.angularjs.org/1.4.9/$compile/nonassign?p0=undefined&p1=uifCallout'));
+
+    });
+
     it('main element should have callout CSS class', () => {
       let calloutElement: JQuery = element.find('div').first();
 
