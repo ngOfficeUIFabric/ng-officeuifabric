@@ -14,6 +14,7 @@
         '<uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>' +
         '</uif-choicefield>')($scope);
         $scope.$digest();
+        choicefield = jQuery(choicefield[0]);
         let container: JQuery = choicefield.find('div.ms-ChoiceFieldGroup');
 
         expect(container.length).toBe(1, 'Container should be present');
@@ -38,6 +39,7 @@
         '<uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>' +
         '</uif-choicefield-group>')($scope);
         $scope.$digest();
+        choicefield = jQuery(choicefield[0]);
 
         let input2: JQuery = choicefield.find('div.ms-ChoiceFieldGroup div.ms-ChoiceField:nth-child(2) input');
         input2 = jQuery(choicefield.find('input')[1]);
@@ -60,6 +62,7 @@
             '<uif-choicefield-option uif-type="radio" ng-repeat="option in options" ' +
             'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
         $scope.$digest();
+        choicefield = jQuery(choicefield[0]);
         choicefield.appendTo(document.body);
         let option1: JQuery = jQuery(choicefield.find('input')[0]);
         let option3: JQuery = jQuery(choicefield.find('input')[2]);
@@ -77,6 +80,7 @@
         let choicefield: JQuery = $compile('<uif-choicefield-option uif-type="checkbox" value="Option1"' +
             'ng-model="selectedValue" ng-true-value="\'TRUEVALUE\'" ng-false-value="\'FALSEVALUE\'">Option 1</uif-choicefield>')($scope);
         $scope.$digest();
+        choicefield = jQuery(choicefield[0]);
 
         let input: JQuery = choicefield.find('input');
         input.click();
@@ -114,6 +118,7 @@
             '<uif-choicefield-option ng-repeat="option in options" ' +
             'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
         $scope.$digest();
+        choicefield = jQuery(choicefield[0]);
 
         let option1: JQuery = jQuery(choicefield.find('input')[0]);
         let option3: JQuery = jQuery(choicefield.find('input')[2]);

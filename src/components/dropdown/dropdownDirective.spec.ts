@@ -14,6 +14,7 @@
         '<uif-option value="value4">Text 4</uif-option>' +
         '</uif-dropdown>')($scope);
         $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
         let container: JQuery = dropdown.find('div.ms-Dropdown');
 
         expect(container.length).toBe(1, 'Container should be present');
@@ -34,6 +35,7 @@
             '<uif-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-option></uif-dropdown>')($scope);
 
         $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
         let items: JQuery = dropdown.find('li');
         expect(items.length).toBe(4);
         expect(items[2].innerText).toBe('Option 3');
@@ -42,6 +44,7 @@
         let $scope: any = $rootScope.$new();
         let dropdown: JQuery = $compile('<uif-dropdown></uif-dropdown>')($scope);
         $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
 
         dropdown.click();
         let div: JQuery = dropdown.find('div.ms-Dropdown');
@@ -64,6 +67,7 @@
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
             '<uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
         $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
         dropdown.appendTo(document.body);
         let option3: JQuery = jQuery(dropdown.find('li')[2]);
 
@@ -91,6 +95,7 @@
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue" disabled>' +
             '<uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
         $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
 
         let div: JQuery = dropdown.find('div.ms-Dropdown');
         expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
@@ -102,4 +107,3 @@
         expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
     }));
 });
-
