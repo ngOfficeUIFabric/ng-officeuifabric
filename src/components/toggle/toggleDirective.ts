@@ -54,7 +54,7 @@ export class ToggleDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public scope: {} = {
-        ngModel: '=',
+        ngModel: '=?',
         uifLabelOff: '@',
         uifLabelOn: '@',
         uifTextLocation: '@'
