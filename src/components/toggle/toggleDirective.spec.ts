@@ -6,10 +6,12 @@ describe('toggleDirective: <uif-toggle />', () => {
     it('should have unique ids', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let toggle1: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled">Test</toggle>')($scope);
+        toggle1 = jQuery(toggle1[0]);
         $scope.$apply();
 
         let checkBox1: JQuery = toggle1.find('input.ms-Toggle-input');
         let toggle2: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled">Test</toggle>')($scope);
+        toggle2 = jQuery(toggle2[0]);
         $scope.$apply();
 
         let checkBox2: JQuery = toggle2.find('input.ms-Toggle-input');
@@ -21,6 +23,7 @@ describe('toggleDirective: <uif-toggle />', () => {
 
         let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled" ' +
                                                   'uif-text-location="right">Toggle this, or not</toggle>')($scope);
+        toggle = jQuery(toggle[0]);
         $scope.$digest();
 
         let mainToggle: JQuery = toggle.find('.ms-Toggle');
@@ -32,6 +35,7 @@ describe('toggleDirective: <uif-toggle />', () => {
 
         let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ' +
                                                   'ng-model="toggled">Toggle this, or not</toggle>')($scope);
+        toggle = jQuery(toggle[0]);
         $scope.$apply();
 
         let labelOff: JQuery = toggle.find('.ms-Label--off');
@@ -48,6 +52,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         $scope.toggled = true;
 
         let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"></toggle>')($scope);
+        toggle = jQuery(toggle[0]);
         $scope.$apply();
 
         let checkBox: JQuery = toggle.find('input.ms-Toggle-input');
