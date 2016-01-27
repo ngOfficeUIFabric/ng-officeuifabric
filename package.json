@@ -40,12 +40,12 @@
     "dev-install": "tsd install -ros"
   },
   "dependencies": {
-    "angular": "^1.4.8",
+    "angular": "^1.4.9",
     "office-ui-fabric": "^1.2.1"
   },
   "devDependencies": {
-    "angular-animate": "^1.4.8",
-    "angular-mocks": "^1.4.8",
+    "angular-animate": "^1.4.9",
+    "angular-mocks": "^1.4.9",
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
     "gulp": "^3.9.0",
@@ -79,7 +79,7 @@
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
-    "phantomjs": "^1.9.19",
+    "phantomjs": "^2.1.2",
     "run-sequence": "^1.1.5",
     "ts-loader": "^0.8.0",
     "tslint": "^3.2.0",
