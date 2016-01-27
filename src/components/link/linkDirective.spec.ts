@@ -3,7 +3,7 @@
 import * as ng from 'angular';
 
 describe('linkDirective: <uif-link />', () => {
-    let element: ng.IAugmentedJQuery;
+    let element: JQuery;
     let scope: ng.IScope;
 
     beforeEach(() => {
@@ -16,12 +16,13 @@ describe('linkDirective: <uif-link />', () => {
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
+        element = jQuery(element[0]);
     }));
 
 
     it('should render as an <a>', () => {
 
-        let aElement: ng.IAugmentedJQuery = element;
+        let aElement: JQuery = element;
 
         expect(aElement).toEqual('a');
 
@@ -30,7 +31,7 @@ describe('linkDirective: <uif-link />', () => {
 
     it('should have an href attribute', () => {
 
-        let aElement: ng.IAugmentedJQuery = element;
+        let aElement: JQuery = element;
 
         expect(aElement).toHaveAttr('href');
 
@@ -39,7 +40,7 @@ describe('linkDirective: <uif-link />', () => {
 
     it('should render correct Office UI Fabric CSS classes', () => {
 
-        let aElement: ng.IAugmentedJQuery = element;
+        let aElement: JQuery = element;
 
         // ensure link has the correct classes
         expect(aElement.eq(0)).toHaveClass('ms-Link');
@@ -49,7 +50,7 @@ describe('linkDirective: <uif-link />', () => {
 
     it('should render the correct text', () => {
 
-        let aElement: ng.IAugmentedJQuery = element;
+        let aElement: JQuery = element;
 
         // make sure it has the correct text
         expect(aElement.eq(0)).toHaveText('Link Text');
