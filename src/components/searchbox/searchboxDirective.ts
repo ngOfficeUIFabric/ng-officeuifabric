@@ -52,8 +52,8 @@ export class SearchBoxDirective implements ng.IDirective {
 
 
   public scope: any = {
-    placeholder: '=',
-    value: '='
+    placeholder: '=?',
+    value: '=?'
   };
 
   public static factory(): ng.IDirectiveFactory {
