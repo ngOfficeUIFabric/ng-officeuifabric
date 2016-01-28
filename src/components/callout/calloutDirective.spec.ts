@@ -528,7 +528,7 @@ describe('calloutDirectives:', () => {
       '<uif-callout-actions><a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a></uif-callout-actions>' +
       '</uif-callout>');
 
-      scope = $rootScope;
+      scope = $rootScope.$new();
       $compile(element)(scope);
       scope.$digest();
 
@@ -546,6 +546,75 @@ describe('calloutDirectives:', () => {
 
       expect(header[0].tagName === 'UIF-CALLOUT-HEADER').toBeTruthy();
     });
+
+    it('action buttons get proper CSS when uif-actiontext is used', inject(($compile: ng.ICompileService) => {
+      element = ng.element('<uif-callout uif-action-text>' +
+      '<uif-callout-actions>' +
+      '<button class="ms-Button ms-Button--command">' +
+      '<span class="ms-Button-icon"><i class="ms-Icon ms-Icon--check"></i></span>' +
+      '<span class="ms-Button-label">Save</span>' +
+      '</button>' +
+      '<button class="ms-Button ms-Button--command">' +
+      '<span class="ms-Button-icon"><i class="ms-Icon ms-Icon--x"></i></span>' +
+      '<span class="ms-Button-label">Cancel</span>' +
+      '</button>' +
+      '</uif-callout-actions>' +
+      '</uif-callout>');
+
+      $compile(element)(scope);
+      scope.$digest();
+
+      element = jQuery(element[0]);
+
+      let buttons: JQuery = element.find('button.ms-Button');
+      expect(buttons.length).toBe(2);
+      // expect(buttons).toHaveClass('ms-Callout-action');
+
+      let firstButton: JQuery = buttons.eq(0);
+      let secondButton: JQuery = buttons.eq(1);
+
+      expect(firstButton).toHaveClass('ms-Callout-action');
+      expect(secondButton).toHaveClass('ms-Callout-action');
+
+
+      let firstButtonSpans: JQuery = firstButton.find('span');
+      expect(firstButtonSpans.length).toBe(2);
+      expect(firstButtonSpans).toHaveClass('ms-Callout-actionText');
+
+      let secondButtonSpans: JQuery = secondButton.find('span');
+      expect(secondButtonSpans.length).toBe(2);
+      expect(secondButtonSpans).toHaveClass('ms-Callout-actionText');
+    }));
+
+    it('action links get proper CSS when uif-actiontext is used', inject(($compile: ng.ICompileService) => {
+      element = ng.element('<uif-callout uif-action-text>' +
+      '<uif-callout-actions>' +
+      '<a class="ms-Button ms-Button--command">' +
+      '<span class="ms-Button-icon"><i class="ms-Icon ms-Icon--x"></i></span>' +
+      '<span class="ms-Button-label">Cancel</span>' +
+      '</a>' +
+      '</uif-callout-actions>' +
+      '</uif-callout>');
+
+      $compile(element)(scope);
+      scope.$digest();
+
+      element = jQuery(element[0]);
+
+      let actions: JQuery = element.find('a');
+      expect(actions.length).toBe(1);
+      // expect(buttons).toHaveClass('ms-Callout-action');
+
+      let firstAction: JQuery = actions.eq(0);
+
+      expect(firstAction).toHaveClass('ms-Callout-action');
+
+      let firstActionSpans: JQuery = firstAction.find('span');
+      expect(firstActionSpans.length).toBe(2);
+      expect(firstActionSpans).toHaveClass('ms-Callout-actionText');
+
+    }));
+
 
   });
 
