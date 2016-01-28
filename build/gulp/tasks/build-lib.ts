@@ -24,7 +24,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['test'];
+  public static dependencies: string[] = [];
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -35,7 +35,8 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'dev': 'Create unminified version of the library with source maps & comments (otherwise, production bundle created)',
+    'dev':     'Create unminified version of the library with source maps & comments (otherwise, production' + GulpTask.helpMargin +
+               'bundle created)',
     'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
     'version': 'Version number to set build library (if omitted, version from package.json is used)'
   };

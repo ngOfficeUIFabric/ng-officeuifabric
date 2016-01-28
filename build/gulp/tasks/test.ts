@@ -4,10 +4,11 @@ import {BaseGulpTask} from '../BaseGulpTask';
 import {Utils} from '../utils';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
+import * as gulp from 'gulp';
 
 /**
  * Runs all tests against the directives.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -20,7 +21,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['transpile-ts'];
+  public static dependencies: string[] = [];
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -31,9 +32,10 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'debug': 'Set karma log level to DEBUG',
-    'specs': 'Output all tests being run',
-    'verbose': 'Output all TypeScript files being built & set karma log level to INFO'
+    'debug':   'Set karma log level to DEBUG',
+    'specs':   'Output all tests being run',
+    'verbose': 'Output all TypeScript files being built & set karma log level to INFO',
+    'watch':   'Adds Chrome browser and start listening on file changes for easier debugging'
   };
 
   /**
@@ -42,7 +44,7 @@ export class GulpTask extends BaseGulpTask {
   private _args: ICommandLineArgs = yargs.argv;
 
   /** @constructor */
-  constructor(done: IStringCallback) {
+  constructor(done: gulp.TaskCallback) {
     super();
     Utils.log('Testing code with Karma');
 
@@ -64,17 +66,22 @@ export class GulpTask extends BaseGulpTask {
       karmaConfig.logLevel = 'INFO';
     }
 
+    if (this._args.watch) {
+      karmaConfig.singleRun = false;
+      karmaConfig.browsers = ['Chrome', 'PhantomJS'];
+    }
+
     // create karma server
     let karmaServer: karma.Server = new karma.Server(karmaConfig, (karmaResult: number) => {
       Utils.log('Karma test run completed');
 
       // result = 1 means karma exited with error
       if (karmaResult === 1) {
-        done('Karma returned error code ' + karmaResult + ' because at least one test failed.'
-          + '\nThe following stack trace is expected when tests fail.');
-      } else {
-        done();
+        Utils.log('Karma finished with error(s)');
       }
+
+      done();
+
     });
     karmaServer.start();
   }

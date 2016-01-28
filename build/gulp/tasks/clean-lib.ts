@@ -9,7 +9,7 @@ let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
  * Removes all generated JavaScript from TypeScript used in the app as the gulp task 'clean-lib-ts'.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -32,7 +32,7 @@ export class GulpTask extends BaseGulpTask {
   private _args: ICommandLineArgs = yargs.argv;
 
   /** @constructor */
-  constructor() {
+  constructor(done: gulp.TaskCallback) {
     super();
     Utils.log('Removing generated app JavaScript files from source tree');
 

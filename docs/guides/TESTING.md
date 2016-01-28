@@ -28,6 +28,10 @@ $ gulp test --specs
 ```
 
 This will replace the **progress** reporter with the **spec** reporter and write each test & outcome to the console.
+```shell
+$ gulp test --watch
+```
+This will setup watcher and open Chrome for convenient debugging.
 
 ## Using jQuery in tests
 We are not relying on jQuery in our library, that's why all elements in directives are wrapped in jqLite object and not jQuery. jqLite has limited functionality in comparison to jQuery and we made it possible to use jQuery and jasmine-jquery library in your specs.

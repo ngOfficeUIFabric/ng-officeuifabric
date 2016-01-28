@@ -49,7 +49,7 @@ export class BuildConfig {
   // files not dynamically built & should not be purged
   public static BUILD_KEEP_JS: string[] = [];
   public static LIB_KEEP_JS: string[] = [
-    BuildConfig.SOURCE + '/externals/PickaDate.js'
+    BuildConfig.SOURCE + '/core/jquery.phantomjs.fix.js'
   ];
 
   /*

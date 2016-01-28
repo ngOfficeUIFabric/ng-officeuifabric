@@ -2,10 +2,12 @@
 
 import {BaseGulpTask} from '../BaseGulpTask';
 import {Utils} from '../utils';
+import * as gulp from 'gulp';
+import * as runSequence from 'run-sequence';
 
 /**
  * Removes all transpiled TypeScript files as the gulp task 'clean'.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -30,12 +32,12 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['clean-build', 'clean-lib'];
+  public static dependencies: string[] = [];
 
   /** @constructor */
-  constructor() {
+  constructor(done: gulp.TaskCallback) {
     super();
-    Utils.log('Cleaning generated files');
+    runSequence('clean-build', 'clean-lib', done);
   }
 
 }

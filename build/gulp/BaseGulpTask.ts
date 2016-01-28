@@ -23,4 +23,9 @@ export class BaseGulpTask {
    */
   public static options: any = {};
 
+  /**
+   * @property  {string}  helpMargin   - whitespaces for nicely displaying help in the console
+   */
+  public static helpMargin: string = '\r\n                      ';
+
 }
