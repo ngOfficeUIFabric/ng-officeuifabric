@@ -17,8 +17,8 @@ import {CalloutArrow} from './calloutArrowEnum';
  *
  */
 export class CalloutController {
-  public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) { }
+  public static $inject: string[] = ['$scope', '$log'];
+  constructor(public $scope: ICalloutScope, public $log: ng.ILogService) { }
 }
 
 /**
@@ -115,10 +115,43 @@ export class CalloutActionsDirective implements ng.IDirective {
   public replace: boolean = false;
   public scope: boolean = false;
   public template: string = '<div class="ms-Callout-actions" ng-transclude></div>';
+  public require: string = '^?uifCallout';
 
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new CalloutActionsDirective();
     return directive;
+  }
+
+  public link(scope: ICalloutScope, instanceElement: ng.IAugmentedJQuery, attrs: any, calloutController: CalloutController): void {
+
+    if (ng.isObject(calloutController)) {
+      calloutController.$scope.$watch('hasSeparator', (hasSeparator: boolean) => {
+        let actionChildren: JQuery = instanceElement.children().eq(0).children();
+
+        for (let buttonIndex: number = 0; buttonIndex < actionChildren.length; buttonIndex++) {
+          let action: JQuery = actionChildren.eq(buttonIndex);
+          // handle CSS on button
+          if (hasSeparator) {
+            action.addClass('ms-Callout-action');
+          } else {
+            action.removeClass('ms-Callout-action');
+          }
+
+          // take care of span inside buttons
+          let actionSpans: JQuery = action.find('span');
+
+          for (let spanIndex: number = 0; spanIndex < actionSpans.length; spanIndex++) {
+            let actionSpan: JQuery = actionSpans.eq(spanIndex);
+
+            if (hasSeparator) {
+              actionSpan.addClass('ms-Callout-actionText');
+            } else {
+              actionSpan.removeClass('ms-Callout-actionText');
+            }
+          }
+        }
+      });
+    }
   }
 
 }
