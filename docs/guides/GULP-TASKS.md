@@ -16,7 +16,7 @@ Therefore you must first transpile all TypeScript to JavaScript (as Gulp only un
 $ tsc -p ./
 ```
 
-To get a list of all available tasks, simply run `gulp`. 
+To get a list of all available tasks, simply run `gulp`.
 
 ```bash
 $ gulp
@@ -45,11 +45,11 @@ Available tasks
 
 The most common one is `--verbose`. Depending on the task, this will usually output additional details when the task runs. For instance when you run the task `vet-ts` which checks all TypeScript for code quality and conventions, it writes each TypeScript file as it's checked to the console.
 
-## Task List 
+## Task List
 
 ### `gulp build-lib`
 
-This task uses [webpack](http://webpack.github.io/) to transpile all TypeScript files and then create a webpack bundle.  
+This task uses [webpack](http://webpack.github.io/) to transpile all TypeScript files and then create a webpack bundle.
 
 By default, it creates a minified file with no comments or source maps. If the `--dev` argument is supplied, an un-minified bundle with an inline sourcemap is provided. These files are saved to the folder `/dist` as defined in `/build/config.ts`.
 
@@ -66,15 +66,15 @@ $ gulp build-lib --verbose --version=1.2.3
 ```
 ### `gulp watch`
 
-If you want automatically run vet, test and build on file save, use this task.   
+If you want automatically run vet, test and build on file save, use this task.
 
-By default, it setups watchers on typescript source files (`src/**/*.ts`), test files (`src/**/*.spec.ts`) and build files (`gulpfile.ts, build/**/*.ts`).  
+By default, it setups watchers on typescript source files (`src/**/*.ts`), test files (`src/**/*.spec.ts`) and build files (`gulpfile.ts, build/**/*.ts`).
 
-After saving a source file following workflow will be triggered: `source change -> vet -> transpile ts -> test ->  build library with webpack`. If any intermediate task will fail, then whole workflow will stop. That means you need to fix all vet and test errors in order to create `dist` package.   
-After saving a spec file workflow is the same expect the last step (build library with webpack) which is omitted.   
-After saving build file only typescript transpilation and vetting will be run.   
+When saving a source or spec file, it will run `vet`, `test` and `build-lib` tasks in a sequence. Errors (if any) will be reported under the console.
 
-`gulp watch` supports all common params which are used by other tasks (`debug`, `specs`, `verbose`, `version`, `dev`).  
+When saving build file, only typescript transpilation and vetting will be run.
+
+`gulp watch` supports all common params which are used by other tasks (`debug`, `specs`, `verbose`, `version`, `dev`).
 
 ### `gulp clean`
 
@@ -84,21 +84,28 @@ Runs the two tasks `clean-build` & `clean-lib` tasks.
 
 ### `gulp clean-build`
 
-Deletes all generated JavaScript files used in building the project, except those defined in `BuildConfig.BUILD_KEEP_JS` as defined in `/build/config.ts`.
+Deletes all generated JavaScript files used in building the project, except those defined in `BuildConfig.BUILD_KEEP_JS` as defined in `/config/build.ts`.
 
 > **NOTE**: After running this task, be aware that no build tasks will work because you have deleted all the JavaScript gulp related files. Therefore you will need to re-transpile your TypeScript: `tsc -p ./`
 
 ### `gulp clean-lib`
 
-Deletes all generated JavaScript files for the Angular directives, except those defined in `BuildConfig.LIB_KEEP_JS` as defined in `/build/config.ts`.
+Deletes all generated JavaScript files for the Angular directives, except those defined in `BuildConfig.LIB_KEEP_JS` as defined in `/config/build.ts`.
 
 ### `gulp test`
 
-Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/build/karma.conf.js` file.
+Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/config/karma.ts` file.
 
 If you specify the argument `--specs` the tests (and their results) will be written to the console as they are run. By default the *progress* reporter is used which just summarizes the results and writes out any failing tests.
 
+If you specify the argument `--watch` it will setup watchers and open Chrome for debugging.
+
 Karma also runs *Istanbul* for generation of a code coverage report.
+
+### `gulp browser-sync`
+This task used for automatic browser refresh when you change something under demo folder.
+
+Runs [browser-sync](https://github.com/BrowserSync/browser-sync) in a static mode with default port of 3000. After run it opens browser window with url pointed to `http://localhost:3000/`. After that you need to open your demo by using mentioned url, such as `http://localhost:3000/src/components/icon/demo/index.html`, you will see a message at the top right corner `Connected to BrowserSync`. Now you can write you demo, save your assets (css, js, ts) and browser will be automatically refreshed.
 
 ### `gulp transpile-ts`
 

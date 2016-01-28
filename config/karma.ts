@@ -47,7 +47,8 @@ module.exports = (config: karma.Config) => {
       'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
       'src/core/jquery.phantomjs.fix.js',
       'src/core/*.js',
-      'src/components/*/*.js'
+      'src/components/*/!(*.spec).js',
+      'src/components/*/*.spec.js'
     ],
     frameworks: ['jasmine'],
     logLevel: config.LOG_WARN,

@@ -35,4 +35,5 @@ interface ICommandLineArgs {
   verbose?: boolean;
   version?: number;
   dev?: boolean;
+  watch?: boolean;
 }
