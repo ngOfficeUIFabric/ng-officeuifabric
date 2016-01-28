@@ -3,7 +3,7 @@
 import * as ng from 'angular';
 
 describe('tableDirective: <uif-table />', () => {
-    let element: ng.IAugmentedJQuery;
+    let element: JQuery;
     let scope: any;
 
     beforeEach(() => {
@@ -113,6 +113,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header>\
         <uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let headerCells: JQuery = element.children().eq(0).children();
@@ -139,6 +140,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header>\
         <uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
@@ -159,6 +161,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header>ID</uif-table-header>\
         <uif-table-header uif-order-by="fileName">File name</uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
@@ -173,6 +176,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header>\
         <uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
@@ -185,6 +189,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header>\
         <uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
@@ -201,6 +206,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header uif-order-by="id">ID</uif-table-header>\
         <uif-table-header uif-order-by="fileName">File name</uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let idHeader: JQuery = element.children().eq(0).children().eq(0);
@@ -216,6 +222,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header uif-order-by="id"></uif-table-header>\
         <uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let idHeader: JQuery = element.children().eq(0).children().eq(0);
@@ -231,6 +238,7 @@ describe('tableDirective: <uif-table />', () => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header>\
         <uif-table-header uif-order-by="fileName"></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let firstHeader: JQuery = element.children().eq(0).children().eq(0);
@@ -267,6 +275,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         expect(scope.rowSelectMode).toEqual('single');
@@ -293,6 +302,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         expect(scope.rowSelectMode).toEqual('multiple');
@@ -329,6 +339,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let headerRow: JQuery = element.children().eq(0);
@@ -363,6 +374,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let tableRow: JQuery = element.children().eq(1);
@@ -377,6 +389,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let tableRowSelect: JQuery = element.children().eq(0).children().eq(0);
@@ -411,6 +424,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let firstDataRow: JQuery = element.children().eq(1);
@@ -431,6 +445,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let firstDataRow: JQuery = element.children().eq(1);
@@ -447,6 +462,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let tableRowSelectInHeader: JQuery = element.children().eq(0).children().eq(0);
@@ -481,6 +497,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let tableRow: JQuery = element.children().eq(1);
@@ -496,6 +513,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let tableRow: JQuery = element.children().eq(1);
@@ -512,6 +530,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         let tableRowSelect: JQuery = element.children().eq(0).children().eq(0);
@@ -534,6 +553,7 @@ describe('tableDirective: <uif-table />', () => {
         '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
         $compile(element)(scope);
+        element = jQuery(element[0]);
         scope.$digest();
 
         // select all rows
