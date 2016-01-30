@@ -7,6 +7,8 @@ import * as path from 'path';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
 import * as runSequence from 'run-sequence';
+import * as browserSyncModule from 'browser-sync';
+import * as fs from 'fs';
 
 /**
  * Watches for file change and automatically run vet, test, transpile, build.
@@ -18,29 +20,44 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Watches for changes in source files and automatically runs vet, build, test';
+  public static description: string = 'Watches for changes in source files and automatically' + GulpTask.helpMargin +
+                                      'runs vet, build, test' + GulpTask.helpMargin;
 
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['run-all-sequence'];
+  public static dependencies: string[] = ['validate-build'];
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
    */
-  public static aliases: string[] = ['w', 'W'];
+  public static aliases: string[] = ['ld', 'LD'];
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'specs': 'Affects \'test\' task, outputs all tests being run',
-    'verbose': 'Affects \'test\' and \'build-lib\' tasks, outputs all TypeScript files ' +
-    'being compiled & JavaScript files included in the external library, set karma log level to INFO',
-    'version': 'Affects \'build-lib\' task, version number to set build library (if omitted, version from package.json is used)',
-    'debug': 'Affects \'test\' task, sets karma log level to DEBUG',
-    'dev': 'Affects \'build-lib\' task, creates unminified version of the library ' +
-    'with source maps & comments (otherwise, production bundle created) '
+    'debug':   'Affects \'test\' task, sets karma log level to DEBUG' + GulpTask.helpMargin,
+
+    'dev':     'Affects \'build-lib\' task, creates unminified ' + GulpTask.helpMargin +
+               'version of the library with source maps & comments ' + GulpTask.helpMargin +
+               '(otherwise, production bundle created)' + GulpTask.helpMargin,
+
+    'serve':   'Automatically reloads connected browsers when sources' + GulpTask.helpMargin +
+               'for demo changed.' + GulpTask.helpMargin +
+               'Starts static server at http://localhost:3000/' + GulpTask.helpMargin +
+               'To connect browser you need to explicitly open your demo'  + GulpTask.helpMargin +
+               'with url,such as ' + GulpTask.helpMargin +
+               'http://localhost:3000/src/components/icon/demo/index.html' + GulpTask.helpMargin,
+
+    'specs':   'Affects \'test\' task, outputs all tests being run' + GulpTask.helpMargin,
+
+    'verbose': 'Affects \'test\' and \'build-lib\' tasks, outputs all ' + GulpTask.helpMargin +
+               'TypeScript files being compiled & JavaScript files included' + GulpTask.helpMargin +
+               'in the external library, set karma log level to INFO' + GulpTask.helpMargin,
+
+    'version': 'Affects \'build-lib\' task, version number to set build' + GulpTask.helpMargin +
+               'library (if omitted, version from package.json is used)' + GulpTask.helpMargin
   };
 
   /**
@@ -48,11 +65,19 @@ export class GulpTask extends BaseGulpTask {
    */
   private _args: ICommandLineArgs = yargs.argv;
 
+  /**
+   * @property {Object} browserSync   - If 'serve' option is provied, contains reference to browerSync object
+   */
+  private browserSync: browserSyncModule.BrowserSyncInstance;
+
   /** @constructor */
   constructor() {
     super();
+
     Utils.log('Watching for files changes....');
+
     let eventSeparator: string = '---------------- *** ----------------------';
+
     let logEvent: (event: gulp.WatchEvent, eventName: string) => void = (event: gulp.WatchEvent, eventName: string) => {
       let fileName: string = path.basename(event.path);
       Utils.log(eventSeparator);
@@ -74,24 +99,60 @@ export class GulpTask extends BaseGulpTask {
 
     let buildLibEventName: string = `Build and test library in ${modeName} mode`;
 
+    let reloadBrowsers: () => void = () => {
+      if (this._args.serve) {
+            this.browserSync.reload();
+          }
+    };
+
+    if (this._args.serve) {
+          this.browserSync = browserSyncModule.create();
+          this.browserSync.init({
+              server: {
+                  baseDir: './'
+              }
+          });
+
+          gulp.watch(['./dist/*.js', './src/**/demo*/*.*', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
+            let filePath: path.ParsedPath = path.parse(event.path);
+
+            /* skip reloading for files which are changed by typescript transpilation
+               they are reloading by other task */
+            if (filePath.ext === '.js') {
+              let tsFile: string = event.path.replace('.js', '.ts');
+              fs.stat(tsFile, (err: NodeJS.ErrnoException, stats: fs.Stats) => {
+              /* corresponding .ts not found -->> reload */
+              if (err) {
+                this.browserSync.reload();
+                return;
+              }
+              /* .ts found -->> do nothing, at this point browsers should be reloaded by the `Transpile demo files` */
+            });
+
+            } else {
+              this.browserSync.reload();
+            }
+          });
+      }
+
     subscribeWatcher(
       gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], ['transpile-ts']), 'Transpile build files');
 
     subscribeWatcher(
-      gulp.watch(['./src/**/demo*/*.ts'], ['transpile-ts']), 'Transpile demo files');
+      gulp.watch(['./src/**/demo*/*.ts'], () => {
+        runSequence('transpile-ts', reloadBrowsers);
+      }),
+      'Transpile demo files');
 
-    gulp.watch(['./src/**/*.ts', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
+
+    subscribeWatcher(
+      gulp.watch(['./src/**/*.ts', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
 
       let currentPath: path.ParsedPath = path.parse(event.path);
       let allExceptSpecs: string = path.join(currentPath.dir, '!(*.spec).js');
       let allSpecs: string = path.join(currentPath.dir, '*.spec.js');
       let pathParts: string[] = currentPath.dir.split(path.sep);
       let dirName: string = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
-
-      Utils.log(eventSeparator);
-      Utils.log(`${buildLibEventName}`);
-      Utils.log(eventSeparator);
-      Utils.log(`Triggered by: '${currentPath.base}'`);
 
       runSequence('transpile-ts', 'build-lib', () => {
 
@@ -138,6 +199,8 @@ export class GulpTask extends BaseGulpTask {
         karmaServer.start();
       });
 
-    });
+    }),
+      buildLibEventName);
+
   }
 }

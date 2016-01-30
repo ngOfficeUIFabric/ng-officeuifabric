@@ -19,7 +19,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Builds ngOfficeUiFabric library files';
+  public static description: string = 'Builds ngOfficeUiFabric library files' + GulpTask.helpMargin;
 
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
@@ -35,9 +35,14 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'dev': 'Create unminified version of the library with source maps & comments (otherwise, production bundle created)',
-    'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
-    'version': 'Version number to set build library (if omitted, version from package.json is used)'
+    'dev': 'Create unminified version of the library with source maps' + GulpTask.helpMargin +
+           '& comments (otherwise, production bundle created)' + GulpTask.helpMargin,
+
+    'verbose': 'Output all TypeScript files being compiled & JavaScript' + GulpTask.helpMargin +
+               'files included in the external library' + GulpTask.helpMargin,
+
+    'version': 'Version number to set build library' + GulpTask.helpMargin +
+               '(if omitted, version from package.json is used)' + GulpTask.helpMargin
   };
 
   /**

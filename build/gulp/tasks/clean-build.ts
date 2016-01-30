@@ -9,7 +9,7 @@ let $: any = require('gulp-load-plugins')({ lazy: true });
 
 /**
  * Removes all generated JavaScript from TypeScript used in the build as the gulp task 'clean-build-ts'.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -17,13 +17,14 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Removes all generated JavaScript from TypeScript used in the build';
+  public static description: string = 'Removes all generated JavaScript from TypeScript ' + GulpTask.helpMargin +
+                                      'used in the build' + GulpTask.helpMargin;
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'verbose': 'Output all TypeScript files being removed'
+    'verbose': 'Output all TypeScript files being removed' + GulpTask.helpMargin
   };
 
   /**

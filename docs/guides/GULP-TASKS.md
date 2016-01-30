@@ -64,7 +64,11 @@ $ gulp build-lib
 $ gulp build-lib --verbose
 $ gulp build-lib --verbose --version=1.2.3
 ```
-### `gulp watch`
+
+### `gulp validate-build`
+Validates the build by running `vet`, `transpile-ts`, `build-lib`, `test` in a sequence, all errors are rerported under the console.
+
+### `gulp live-dev`
 
 If you want automatically run vet, test and build on file save, use this task.
 
@@ -74,7 +78,9 @@ When saving a source or spec file, it will run `vet`, `test` and `build-lib` tas
 
 When saving build file, only typescript transpilation and vetting will be run.
 
-`gulp watch` supports all common params which are used by other tasks (`debug`, `specs`, `verbose`, `version`, `dev`).
+`gulp live-dev` supports all common params which are used by other tasks (`debug`, `specs`, `verbose`, `version`, `dev`).
+
+Also supports `--serve` flag - it automatically reloads connected browsers when sources for demo changed. Starts static server at `http://localhost:3000/`. To connect browser you need to explicitly open your demo with url, such as `http://localhost:3000/src/components/icon/demo/index.html`
 
 ### `gulp clean`
 
@@ -101,11 +107,6 @@ If you specify the argument `--specs` the tests (and their results) will be writ
 If you specify the argument `--watch` it will setup watchers and open Chrome for debugging.
 
 Karma also runs *Istanbul* for generation of a code coverage report.
-
-### `gulp browser-sync`
-This task used for automatic browser refresh when you change something under demo folder.
-
-Runs [browser-sync](https://github.com/BrowserSync/browser-sync) in a static mode with default port of 3000. After run it opens browser window with url pointed to `http://localhost:3000/`. After that you need to open your demo by using mentioned url, such as `http://localhost:3000/src/components/icon/demo/index.html`, you will see a message at the top right corner `Connected to BrowserSync`. Now you can write you demo, save your assets (css, js, ts) and browser will be automatically refreshed.
 
 ### `gulp transpile-ts`
 

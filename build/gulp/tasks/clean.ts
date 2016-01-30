@@ -5,7 +5,7 @@ import {Utils} from '../utils';
 
 /**
  * Removes all transpiled TypeScript files as the gulp task 'clean'.
- * 
+ *
  * @class
  */
 export class GulpTask extends BaseGulpTask {
@@ -13,7 +13,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Removes all transpiled TypeScript files';
+  public static description: string = 'Removes all transpiled TypeScript files' + GulpTask.helpMargin;
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -24,7 +24,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'verbose': 'Output all files being removed'
+    'verbose': 'Output all files being removed' + GulpTask.helpMargin
   };
 
   /**

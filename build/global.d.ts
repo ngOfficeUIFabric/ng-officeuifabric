@@ -36,4 +36,5 @@ interface ICommandLineArgs {
   version?: number;
   dev?: boolean;
   watch?: boolean;
+  serve?: boolean;
 }

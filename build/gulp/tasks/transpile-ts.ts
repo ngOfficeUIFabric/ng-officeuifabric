@@ -16,7 +16,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Builds all TypeScript as JavaScript';
+  public static description: string = 'Builds all TypeScript as JavaScript' + GulpTask.helpMargin;
 
   /**
    * @property  {string[]}  aliases   - Different options to run the task.
@@ -32,7 +32,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'verbose': 'Output all TypeScript files being built'
+    'verbose': 'Output all TypeScript files being built' + GulpTask.helpMargin
   };
 
   /**
