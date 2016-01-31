@@ -14,12 +14,7 @@ import * as webpackConfig from './webpack';
  */
 module.exports = (config: karma.Config) => {
   // load webpack config settings
-  // note: at present the webpack.d.ts typedef is outdated at 1.12.2 when webpack
-  //    is at 1.12.9 & includes support for postLoaders on a module... can't qualify
-  //    the typedef for the config because it breaks TypeScript compilation
-  //    > hopefully this can get updated later... see this logged issue for info:
-  //    https://github.com/DefinitelyTyped/DefinitelyTyped/issues/7497
-  let webpackSettings: any = new webpackConfig.WebPackConfig();
+  let webpackSettings: webpack.Configuration = new webpackConfig.WebPackConfig();
   webpackSettings.entry = {};
   webpackSettings.devtool = 'inline-source-map';
   // use istanbul-instrumenter-loader which deals with webpack-added wrapper code
