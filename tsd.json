@@ -90,13 +90,19 @@
       "commit": "5e960679e6f9ae6ce905b1db0ad36fc189cd2eca"
     },
     "webpack/webpack.d.ts": {
-      "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "jasmine-jquery/jasmine-jquery.d.ts": {
       "commit": "0d66537e353802f996a3f67ca1b711f63835f9e7"
     },
     "angularjs/angular-animate.d.ts": {
       "commit": "984a41af67d76b5134e0d4991a30f813dfb8561f"
+    },
+    "uglify-js/uglify-js.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+    },
+    "source-map/source-map.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     }
   }
 }

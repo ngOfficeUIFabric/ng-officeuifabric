@@ -58,14 +58,7 @@ export class GulpTask extends BaseGulpTask {
     if (!this._args.dev) {
       config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.min.js';
       // use uglify plugin to remove comments & sourcemaps
-      webpackPlugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-          output: {
-            comments: false
-          },
-          sourceMap: false
-        })
-      );
+      webpackPlugins.push(new webpack.optimize.UglifyJsPlugin());
     } else { // else gen un-uglified & include inline sourcemaps
       config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.js';
       config.devtool = 'inline-source-map';
