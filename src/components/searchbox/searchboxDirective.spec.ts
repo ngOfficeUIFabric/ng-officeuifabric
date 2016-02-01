@@ -1,63 +1,64 @@
-﻿
-describe("searchBoxDirective", () => {
+'use strict';
+
+import * as ng from 'angular';
+
+describe('searchBoxDirective: <uif-searchbox />', () => {
+    let element: JQuery;
+    let scope: ng.IScope;
     beforeEach(() => {
         angular.mock.module('fabric.ui.components.searchbox');
     });
+    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        element = ng.element('<uif-searchbox value="\'value\'" />');
+        scope = $rootScope;
+        $compile(element)(scope);
+        scope.$digest();
+        element = jQuery(element[0]);
+    }));
 
     afterEach(() => {
         // myfunc.reset();
     });
 
-    it("should have unique ids", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        var textBox1 = $compile('<uif-Searchbox ></uif-Searchbox>')($scope);
-        $scope.$digest();
-        var textField1 = $(textBox1[0]).find('.ms-SearchBox-field');
+    it('should render correct HTML', () => {
+        let elem: JQuery = element.find('input');
+        expect(elem.length).toBe(1);
+    });
 
-        var textBox2 = $compile('<uif-Searchbox ></uif-Searchbox>')($scope);
+    it('should have unique ids', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: ng.IScope = $rootScope.$new();
+        let textBox1: JQuery = $compile('<uif-searchbox ></uif-searchbox>')($scope);
+        textBox1 = jQuery(textBox1[0]);
+        $scope.$digest();
+        let textField1: JQuery = textBox1.find('.ms-SearchBox-field');
+        let textBox2: JQuery = $compile('<uif-searchbox ></uif-searchbox>')($scope);
+        textBox2 = jQuery(textBox2[0]);
         $scope.$digest();
         var textField2 = $(textBox2[0]).find('.ms-SearchBox-field');
-        
         expect(textField1[0].id === textField2[0].id).toBe(false);
 
     }));
-    it("should be able to set value", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        $scope.textBoxValue = "Test 1";
-        var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-        $scope.$digest();
-        
-        var textField = $(textBox[0]).find('.ms-SearchBox-field');
-       // expect(textField.length).toBe(1);
-        
-        expect(textField.val()).toBe('Test 1');
-
-        $scope.textBoxValue = "Test 2";
-        $scope.$digest();
-        
-        console.log("testfield value " + $(textBox[0]).find('.ms-SearchBox-field').val());
-        expect(textField.val()).toBe('Test 2');
-
-        textField.val('Test 3');
-        textField.trigger('input');
-        
-        expect(textField.val()).toBe('Test 3', 'Update textbox');
-        
-        // todo: In the browser this works fine. Not sure why not here :(
-        // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
+    it('should be able to set value', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: ng.IScope = $rootScope.$new();
+        let tag: JQuery = ng.element("<uif-searchbox value=\"'Value'\" />");
+        $compile(tag)($newScope);
+        $newScope.$digest();
+        tag = jQuery(tag[0]);
+        expect(tag.find('.ms-SearchBox-field').val()).toBe('Value');
     }));
-    //it("hide the label", inject(($compile, $rootScope) => {
-    //    var $scope = $rootScope.$new();
-    //    $scope.textBoxValue = "Test 1";
-    //    var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-    //    $scope.$digest();
+    it('hide label', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: ng.IScope = $rootScope.$new();
+        let jqlTag: JQuery = ng.element('<uif-searchbox />'); // jqlite
+        $compile(jqlTag)($newScope);
+        $newScope.$digest();
+        let jqTag: JQuery = jQuery(jqlTag[0]); // jquery
 
-    //    var textField = $(textBox[0]).find('.ms-SearchBox-field').trigger('focus');
-    //    $scope.$digest();
-    //    // expect(textField.length).toBe(1);
-    //    expect($(textBox[0]).find('.ms-SearchBox').hasClass('is-active')).toBe(true);
-
-    //    // todo: In the browser this works fine. Not sure why not here :(
-    //    // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
-    //}));
+        // trigger events on jqLite element
+        jqlTag.find('input').triggerHandler('focus');
+        $newScope.$digest();
+        expect(jqTag.find('.ms-SearchBox-label').hasClass('ng-hide')).toBe(true);
+        jqlTag.find('input').triggerHandler('blur');
+        $newScope.$digest();
+        expect(jqTag.find('.ms-SearchBox-label').hasClass('ng-hide')).toBe(false);
+    }));
 });

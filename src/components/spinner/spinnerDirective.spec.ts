@@ -9,13 +9,14 @@ describe('spinnerDirective: <uif-spinner />', () => {
   });
 
   describe('basic tests', () => {
-    let element: ng.IAugmentedJQuery;
+    let element: JQuery;
     let scope: ng.IScope;
 
     beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
       element = ng.element('<uif-spinner></uif-spinner>');
       scope = $rootScope;
       $compile(element)(scope);
+      element = jQuery(element[0]);
       scope.$digest();
     }));
 
@@ -29,24 +30,37 @@ describe('spinnerDirective: <uif-spinner />', () => {
 
     it('should render proper CSS for large spinner', inject(($compile: Function) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-spinnersize="large"></uif-spinner>');
+      element = ng.element('<uif-spinner uif-size="large"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
       expect(element[0]).toHaveClass('ms-Spinner--large');
     }));
 
-    it('should not render CSS for large spinner if spinnersize not large', inject(($compile: Function) => {
+    it('should render proper CSS for small spinner', inject(($compile: Function) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-spinnersize="small"></uif-spinner>');
+      element = ng.element('<uif-spinner uif-size="small"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
       expect(element[0]).not.toHaveClass('ms-Spinner--large');
     }));
 
+    it('should throw error when invalid size provided', inject(($compile: Function, $log: ng.ILogService) => {
+      // override default element for suite
+      element = ng.element('<uif-spinner uif-size="invalid"></uif-spinner>');
+      $compile(element)(scope);
+      scope.$digest();
+
+      // expect(element[0]).not.toHaveClass('ms-Spinner--large');
+
+      expect($log.error.logs.length === 1).toBeTruthy();
+      expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.spinner - Unsupported size: ' +
+          'Spinner size (\'invalid\') is not supported by the Office UI Fabric.');
+    }));
+
     it('should not render wrapper when no content', () => {
-      let wrapperElement: ng.IAugmentedJQuery = element.find('div.ms-Spinner-label');
+      let wrapperElement: JQuery = element.find('div.ms-Spinner-label');
 
       expect(wrapperElement.length).toBe(0);
     });
@@ -56,7 +70,9 @@ describe('spinnerDirective: <uif-spinner />', () => {
       $compile(element)(scope);
       scope.$digest();
 
-      let wrapperElement: ng.IAugmentedJQuery = element.find('div.ms-Spinner-label');
+      element = jQuery(element[0]);
+
+      let wrapperElement: JQuery = element.find('div.ms-Spinner-label');
       expect(wrapperElement.length).toBeGreaterThan(0);
       expect(wrapperElement[0].tagName).toEqual('DIV');
       expect(wrapperElement[0]).toHaveClass('ms-Spinner-label');
@@ -64,13 +80,13 @@ describe('spinnerDirective: <uif-spinner />', () => {
     }));
 
     it('should have eight circles rendered with proper CSS', () => {
-      let circles: ng.IAugmentedJQuery = element.find('div.ms-Spinner-circle');
+      let circles: JQuery = element.find('div.ms-Spinner-circle');
 
       expect(circles.length).toBe(8);
     });
 
     it('should have initial opacity on circles set', () => {
-      let circles: ng.IAugmentedJQuery = element.find('div.ms-Spinner-circle');
+      let circles: JQuery = element.find('div.ms-Spinner-circle');
 
       expect(circles.css('opacity')).toBeGreaterThan(0);
     });
@@ -78,7 +94,7 @@ describe('spinnerDirective: <uif-spinner />', () => {
   });
 
   describe('visibility', () => {
-    let element: ng.IAugmentedJQuery;
+    let element: JQuery;
     let scope: any;
 
     beforeEach(inject(($rootScope: ng.IRootScopeService) => {
@@ -90,6 +106,8 @@ describe('spinnerDirective: <uif-spinner />', () => {
       element = ng.element('<uif-spinner ng-show="isVisible"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
+
+      element = jQuery(element[0]);
 
       expect(element[0]).toHaveClass('ng-hide');
 
@@ -104,7 +122,9 @@ describe('spinnerDirective: <uif-spinner />', () => {
       $compile(element)(scope);
       scope.$digest();
 
-      let circles: ng.IAugmentedJQuery = element.find('div.ms-Spinner-circle');
+      element = jQuery(element[0]);
+
+      let circles: JQuery = element.find('div.ms-Spinner-circle');
       let initialOpacity: number = +(circles[0].style.opacity);
 
       $interval.flush(90);
@@ -121,7 +141,9 @@ describe('spinnerDirective: <uif-spinner />', () => {
       $compile(element)(scope);
       scope.$digest();
 
-      let circles: ng.IAugmentedJQuery = element.find('div.ms-Spinner-circle');
+      element = jQuery(element[0]);
+
+      let circles: JQuery = element.find('div.ms-Spinner-circle');
 
       // animation not playing
       let initialOpacity: number = +(circles[0].style.opacity);
