@@ -20,8 +20,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Watches for changes in source files and automatically' + GulpTask.helpMargin +
-                                      'runs vet, build, test' + GulpTask.helpMargin;
+  public static description: string = 'Watches for changes in source files and automatically runs vet, build, test' + GulpTask.helpMargin;
 
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
@@ -37,27 +36,17 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'debug':   'Affects \'test\' task, sets karma log level to DEBUG' + GulpTask.helpMargin,
-
-    'dev':     'Affects \'build-lib\' task, creates unminified ' + GulpTask.helpMargin +
-               'version of the library with source maps & comments ' + GulpTask.helpMargin +
-               '(otherwise, production bundle created)' + GulpTask.helpMargin,
-
-    'serve':   'Automatically reloads connected browsers when sources' + GulpTask.helpMargin +
-               'for demo changed.' + GulpTask.helpMargin +
-               'Starts static server at http://localhost:3000/' + GulpTask.helpMargin +
-               'To connect browser you need to explicitly open your demo'  + GulpTask.helpMargin +
-               'with url,such as ' + GulpTask.helpMargin +
-               'http://localhost:3000/src/components/icon/demo/index.html' + GulpTask.helpMargin,
-
-    'specs':   'Affects \'test\' task, outputs all tests being run' + GulpTask.helpMargin,
-
-    'verbose': 'Affects \'test\' and \'build-lib\' tasks, outputs all ' + GulpTask.helpMargin +
-               'TypeScript files being compiled & JavaScript files included' + GulpTask.helpMargin +
-               'in the external library, set karma log level to INFO' + GulpTask.helpMargin,
-
-    'version': 'Affects \'build-lib\' task, version number to set build' + GulpTask.helpMargin +
-               'library (if omitted, version from package.json is used)' + GulpTask.helpMargin
+    'debug':   'Affects \'test\' task, sets karma log level to DEBUG',
+    'dev':     'Affects \'build-lib\' task, creates unminified version of the library with source maps & comments ' + GulpTask.helpMargin +
+               '(otherwise, production bundle created)',
+    'serve':   'Automatically reloads connected browsers when sources for demo changed. Starts static server at' + GulpTask.helpMargin +
+               'http://localhost:3000/. To connect browser you need to explicitly open your demo with url,'  + GulpTask.helpMargin +
+               'such as http://localhost:3000/src/components/icon/demo/index.html',
+    'specs':   'Affects \'test\' task, outputs all tests being run',
+    'verbose': 'Affects \'test\' and \'build-lib\' tasks, outputs all TypeScript files being compiled & JavaScript ' + GulpTask.helpMargin +
+               'files included in the external library, set karma log level to INFO',
+    'version': 'Affects \'build-lib\' task, version number to set build library (if omitted, version from ' + GulpTask.helpMargin +
+               'package.json is used)'
   };
 
   /**

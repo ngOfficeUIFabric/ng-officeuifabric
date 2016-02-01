@@ -16,7 +16,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Executes all tests against the directives' + GulpTask.helpMargin;
+  public static description: string = 'Executes all tests against the directives';
 
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
@@ -32,12 +32,10 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'debug':   'Set karma log level to DEBUG' + GulpTask.helpMargin,
-    'specs':   'Output all tests being run' + GulpTask.helpMargin,
-    'verbose': 'Output all TypeScript files being built & set karma' + GulpTask.helpMargin +
-               'log level to INFO' + GulpTask.helpMargin,
-    'watch':   'Adds Chrome browser and start listening on file changes' + GulpTask.helpMargin +
-               'for easier debugging' + GulpTask.helpMargin
+    'debug':   'Set karma log level to DEBUG',
+    'specs':   'Output all tests being run',
+    'verbose': 'Output all TypeScript files being built & set karma log level to INFO',
+    'watch':   'Adds Chrome browser and start listening on file changes for easier debugging'
   };
 
   /**
