@@ -3,7 +3,7 @@
 import * as ng from 'angular';
 
 describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
-  let element: ng.IAugmentedJQuery;
+  let element: JQuery;
   let scope: ng.IScope;
 
   beforeEach(() => {
@@ -17,6 +17,8 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
     scope = $rootScope;
     $compile(element)(scope);
     scope.$digest();
+    // fix for jQuery in tests
+    element = jQuery(element[0]);
   }));
 
   /**
@@ -24,7 +26,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
    */
   it('should render correct HTML', () => {
     // get the rendered progress indicator element
-    let progressIndicatorElement: ng.IAugmentedJQuery = element.find('div');
+    let progressIndicatorElement: JQuery = element.find('div');
 
     // make sure found the progress indicator
     expect(progressIndicatorElement.length).toBe(6);
@@ -35,7 +37,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
    */
   it('should render correct Office UI Fabric CSS classes', () => {
     // get the rendered overlay element
-    let progressIndicatorElement: ng.IAugmentedJQuery = element.find('div');
+    let progressIndicatorElement: JQuery = element.find('div');
 
     // ensure overlay has the correct classes
     expect(progressIndicatorElement.eq(0)).toHaveClass('ms-ProgressIndicator');
@@ -46,7 +48,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
    */
   it('should be able to set name', () => {
     // get the rendered overlay element
-    let progressIndicatorNameElement: ng.IAugmentedJQuery = element.find('div.ms-ProgressIndicator-itemName');
+    let progressIndicatorNameElement: JQuery = element.find('div.ms-ProgressIndicator-itemName');
 
     // ensure overlay has the correct classes
     expect(progressIndicatorNameElement.eq(0)).toContainText('MyFile.docx');
@@ -57,7 +59,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
    */
   it('should be able to set description', () => {
     // get the rendered overlay element
-    let progressIndicatorDescriptionElement: ng.IAugmentedJQuery = element.find('div.ms-ProgressIndicator-itemDescription');
+    let progressIndicatorDescriptionElement: JQuery = element.find('div.ms-ProgressIndicator-itemDescription');
 
     // ensure overlay has the correct classes
     expect(progressIndicatorDescriptionElement.eq(0)).toContainText('This is a sample.');
@@ -68,7 +70,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
    */
   it('should be able to set the percent complete', () => {
     // get the rendered overlay element
-    let progressIndicatorProgressBarElement: ng.IAugmentedJQuery = element.find('div.ms-ProgressIndicator-itemProgress ' +
+    let progressIndicatorProgressBarElement: JQuery = element.find('div.ms-ProgressIndicator-itemProgress ' +
         'div.ms-ProgressIndicator-progressBar');
 
     // ensure overlay has the correct classes
@@ -81,6 +83,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
   it('should not go below range on percent complete (e.g. < 0)', inject(($compile: Function) => {
     // get the rendered overlay element
     let progressIndicator: JQuery = $compile('<uif-progress-indicator uif-percent-complete="-1"></uif-progress-indicator>')(scope);
+    progressIndicator = jQuery(progressIndicator[0]);
     scope.$apply();
     let progressIndicatorProgressBarElement: JQuery = progressIndicator.find('div.ms-ProgressIndicator-itemProgress ' +
         'div.ms-ProgressIndicator-progressBar');
@@ -95,6 +98,7 @@ describe('progressIndicatorDirective: <uif-progress-indicator />', () => {
   it('should not go above range on percent complete (e.g. > 0)', inject(($compile: Function) => {
     // get the rendered overlay element
     let progressIndicator: JQuery = $compile('<uif-progress-indicator uif-percent-complete="1000"></uif-progress-indicator>')(scope);
+    progressIndicator = jQuery(progressIndicator[0]);
     scope.$apply();
     let progressIndicatorProgressBarElement: JQuery = progressIndicator.find('div.ms-ProgressIndicator-itemProgress ' +
         'div.ms-ProgressIndicator-progressBar');

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>ngOfficeUiFabric | uif-Callout demo</title>
+    <meta charset="utf-8">
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+  </head>
+
+  <body ng-app="demoApp">
+    <h1 class="ms-font-su">Callout Demo | &lt;uif-callout&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <!-- first example -->
+    <p>To render callout, use the following markup:
+      <br/>
+      <pre>
+  &lt;uif-callout uif-arrow=&quot;left&quot;&gt;
+    &lt;uif-callout-header&gt;All of your favorite people&lt;/uif-callout-header&gt;
+    &lt;uif-callout-content&gt;Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.&lt;/uif-callout-content&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;a href=&quot;#&quot; class=&quot;ms-Callout-link ms-Link ms-Link--hero&quot;&gt;Learn more&lt;/a&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-callout uif-arrow="left">
+        <uif-callout-header>All of your favorite people</uif-callout-header>
+        <uif-callout-content>Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.</uif-callout-content>
+        <uif-callout-actions>
+          <a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a>
+        </uif-callout-actions>
+      </uif-callout>
+    </p>
+
+    <!-- second example -->
+    <p>
+      This markup will render OOBE callout:
+      <br/>
+      <pre>
+  &lt;uif-callout uif-arrow=&quot;top&quot; uif-type=&quot;oobe&quot;&gt;
+    &lt;uif-callout-header&gt;All of your favorite people&lt;/uif-callout-header&gt;
+    &lt;uif-callout-content&gt;People automatically puts together all of the people you care most about in one place.&lt;/uif-callout-content&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;button class=&quot;ms-Callout-button ms-Button ms-Button--primary&quot;&gt;
+        &lt;span class=&quot;ms-Button-label&quot;&gt;More&lt;/span&gt;
+        &lt;span class=&quot;ms-Button-description&quot;&gt;Description of the action this button takes&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class=&quot;ms-Callout-button ms-Button&quot;&gt;
+        &lt;span class=&quot;ms-Button-label&quot;&gt;Got it&lt;/span&gt;
+        &lt;span class=&quot;ms-Button-description&quot;&gt;Description of the action this button takes&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-callout uif-arrow="top" uif-type="oobe">
+        <uif-callout-header>All of your favorite people</uif-callout-header>
+        <uif-callout-content>People automatically puts together all of the people you care most about in one place.</uif-callout-content>
+        <uif-callout-actions>
+          <button class="ms-Callout-button ms-Button ms-Button--primary">
+            <span class="ms-Button-label">More</span>
+            <span class="ms-Button-description">Description of the action this button takes</span>
+          </button>
+          <button class="ms-Callout-button ms-Button">
+            <span class="ms-Button-label">Got it</span>
+            <span class="ms-Button-description">Description of the action this button takes</span>
+          </button>
+        </uif-callout-actions>
+      </uif-callout>
+    </p>
+  <!-- third example -->
+    <p>
+      This markup will render Peek callout:
+      <br/>
+      <pre>
+  &lt;uif-callout uif-arrow=&quot;right&quot; uif-type=&quot;peek&quot;&gt;
+    &lt;uif-callout-header&gt;Uploaded 2 items to &lt;span class=&quot;ms-Link&quot;&gt;Alton&apos;s OneDrive&lt;/span&gt;&lt;/uif-callout-header&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;button class=&quot;ms-Callout-button ms-Button&quot;&gt;
+        &lt;span class=&quot;ms-Button-label&quot;&gt;More&lt;/span&gt;
+        &lt;span class=&quot;ms-Button-description&quot;&gt;Description of the action this button takes&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-callout uif-arrow="right" uif-type="peek">
+        <uif-callout-header>Uploaded 2 items to <span class="ms-Link">Alton's OneDrive</span></uif-callout-header>
+        <uif-callout-actions>
+          <button class="ms-Callout-button ms-Button">
+            <span class="ms-Button-label">More</span>
+            <span class="ms-Button-description">Description of the action this button takes</span>
+          </button>
+        </uif-callout-actions>
+      </uif-callout>
+    </p>
+
+  <!-- fourth example -->
+
+    <p>
+      Separator can be rendered between content and actions containers. <em>uif-actiontext</em> and <em>uif-separator</em> server the same purpose.
+      <br/>
+      <pre>
+  &lt;uif-callout uif-action-text&gt;
+    &lt;uif-callout-header&gt;All of your favorite people&lt;/uif-callout-header&gt;
+    &lt;uif-callout-content&gt;People automatically puts together all of the people you care most about in one place.&lt;/uif-callout-header&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;button class=&quot;ms-Button ms-Button--command&quot;&gt;
+        &lt;span class=&quot;ms-Button-icon&quot;&gt;&lt;i class=&quot;ms-Icon ms-Icon--check&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;span class=&quot;ms-Button-label&quot;&gt;Save&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class=&quot;ms-Button ms-Button--command&quot;&gt;
+        &lt;span class=&quot;ms-Button-icon&quot;&gt;&lt;i class=&quot;ms-Icon ms-Icon--x&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;span class=&quot;ms-Button-label&quot;&gt;Cancel&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-callout uif-action-text>
+        <uif-callout-header>All of your favorite people</uif-callout-header>
+        <uif-callout-content>People automatically puts together all of the people you care most about in one place.</uif-callout-header>
+        <uif-callout-actions>
+          <button class="ms-Button ms-Button--command">
+            <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--check"></i></span>
+            <span class="ms-Button-label">Save</span>
+          </button>
+          <button class="ms-Button ms-Button--command">
+            <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--x"></i></span>
+            <span class="ms-Button-label">Cancel</span>
+          </button>
+        </uif-callout-actions>
+      </uif-callout>
+    </p>
+
+  <!-- fifth example -->
+
+    <div ng-controller="calloutDemoController">
+      <p>Callout supports <em>ngShow</em> directive. Hover over the link to test.
+        <br/>
+        <pre>
+  &lt;uif-callout ng-show=&quot;vm.firstVisible&quot; uif-arrow=&quot;left&quot;&gt;
+    &lt;uif-callout-header&gt;All of your favorite people&lt;/uif-callout-header&gt;
+    &lt;uif-callout-content&gt;Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.&lt;/uif-callout-content&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;a href=&quot;#&quot; class=&quot;ms-Callout-link ms-Link ms-Link--hero&quot;&gt;Learn more&lt;/a&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+        </pre>
+      </p>
+      <div>
+        <a href="#" ng-mouseenter="vm.firstVisible = true" ng-mouseleave="vm.firstVisible = false">Hover over me!</a>
+      </div>
+      <div>
+        <uif-callout ng-show="vm.firstVisible" uif-arrow="left">
+          <uif-callout-header>All of your favorite people</uif-callout-header>
+          <uif-callout-content>Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.</uif-callout-content>
+          <uif-callout-actions>
+            <a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a>
+          </uif-callout-actions>
+        </uif-callout>
+      </div>
+
+  <!-- fifth example -->
+
+      <p>Callout can have close button, with help of <em>uif-close</em> attribute.
+        <br/>
+        <pre>
+  &lt;uif-callout ng-show=&quot;vm.secondVisible&quot; uif-arrow=&quot;left&quot; uif-close&gt;
+    &lt;uif-callout-header&gt;All of your favorite people&lt;/uif-callout-header&gt;
+    &lt;uif-callout-content&gt;Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.&lt;/uif-callout-content&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;a href=&quot;#&quot; class=&quot;ms-Callout-link ms-Link ms-Link--hero&quot;&gt;Learn more&lt;/a&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+        </pre>
+      </p>
+      <div>
+        <button ng-click="vm.secondVisible = !vm.secondVisible">Click me!</button>
+      </div>
+      <div>
+        <uif-callout ng-show="vm.secondVisible" uif-arrow="left" uif-close>
+          <uif-callout-header>All of your favorite people</uif-callout-header>
+          <uif-callout-content>Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.</uif-callout-content>
+          <uif-callout-actions>
+            <a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a>
+          </uif-callout-actions>
+        </uif-callout>
+      </div>
+
+  <!-- sixth example -->
+
+      <p>When <em>ngShow</em> is used without <em>uif-close</em>, callout is closed when mouse leaves from callout:
+        <br/>
+        <pre>
+  &lt;uif-callout ng-show=&quot;vm.thirdVisible&quot; uif-arrow=&quot;left&quot;&gt;
+    &lt;uif-callout-header&gt;All of your favorite people&lt;/uif-callout-header&gt;
+    &lt;uif-callout-content&gt;Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.&lt;/uif-callout-content&gt;
+    &lt;uif-callout-actions&gt;
+      &lt;a href=&quot;#&quot; class=&quot;ms-Callout-link ms-Link ms-Link--hero&quot;&gt;Learn more&lt;/a&gt;
+    &lt;/uif-callout-actions&gt;
+  &lt;/uif-callout&gt;
+        </pre>
+      </p>
+      <div>
+        <button ng-click="vm.thirdVisible = !vm.thirdVisible">Click me!</button>
+      </div>
+      <div>
+        <uif-callout ng-show="vm.thirdVisible" uif-arrow="left">
+          <uif-callout-header>All of your favorite people</uif-callout-header>
+          <uif-callout-content>Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.</uif-callout-content>
+          <uif-callout-actions>
+            <a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a>
+          </uif-callout-actions>
+        </uif-callout>
+      </div>
+    </div>
+  </body>
+
+</html>

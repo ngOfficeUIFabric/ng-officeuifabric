@@ -16,7 +16,10 @@ master | dev
 
 This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of Angular 1.x directives to make it easier to use in Angular-based applications. **ngOfficeUIFabric** is modeled after the Google sponsored project [Angular Material](https://material.angularjs.org).
 
-**Dive Right In!**
+## See it running
+We have a web site where you can see these directives running at [http://ngOfficeUiFabric.com](http://ngOfficeUiFabric.com). This is a great way to see what components are available and the ease of use for you as a developer.
+
+## Dive Right In!
 
 Want to see things working right away? Check out our **[Minimal Path to Awesome](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/master/docs/guides/MPA.md)** doc! Using it you'll clone the repo locally, install all the dependencies, run tests, see code coverage reports, build the library & see a working directive demo!
 
@@ -63,7 +66,13 @@ You can also directly download the built library if you wish. Grab either the un
 
 ## CDN
 
-What, no CDN option yet? We need your help! Star this repo because we need at least 100 stars so we can submit to CDNJS!
+Hosting facilitated by [CDNJS](https://cdnjs.com), a community driven CDN. Simply add a reference in your page to:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngOfficeUiFabric/0.2.0/ngOfficeUiFabric.min.js"></script>
+```
+
+> **NOTE**: Be sure to use the most current version!
 
 # Support
 

@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -19,7 +19,7 @@
     "Struyf, Elio <info@estruyf.be>",
     "White, Thomas <tdwhite0@gmail.com>"
   ],
-  "homepage": "https://github.com/ngOfficeUIFabric/ng-officeuifabric#readme",
+  "homepage": "https://ngOfficeUiFabric.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngOfficeUIFabric/ng-officeuifabric.git"
@@ -40,12 +40,12 @@
     "dev-install": "tsd install -ros"
   },
   "dependencies": {
-    "angular": "^1.4.8",
+    "angular": "^1.4.9",
     "office-ui-fabric": "^1.2.1"
   },
   "devDependencies": {
-    "angular-animate": "^1.4.8",
-    "angular-mocks": "^1.4.8",
+    "angular-animate": "^1.4.9",
+    "angular-mocks": "^1.4.9",
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
     "gulp": "^3.9.0",
@@ -60,7 +60,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-strip-comments": "2.1.1",
+    "gulp-strip-comments": "2.2.1",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",
@@ -70,6 +70,8 @@
     "istanbul": "^0.4.1",
     "istanbul-instrumenter-loader": "^0.1.3",
     "jasmine-core": "^2.4.1",
+    "jasmine-jquery": "^2.1.1",
+    "jquery": "^2.2.0",
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
@@ -79,9 +81,9 @@
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
-    "phantomjs": "^1.9.19",
+    "phantomjs": "^2.1.2",
     "run-sequence": "^1.1.5",
-    "ts-loader": "^0.7.2",
+    "ts-loader": "^0.8.0",
     "tslint": "^3.2.0",
     "webpack": "^1.12.9",
     "yargs": "^3.31.0"

@@ -32,36 +32,49 @@
     <uif-spinner></uif-spinner>
   </p>
 
-  <p>To render large spinner, use the following markup:
+  <p>By default, small spinner is rendered. Above is shorthand of:
     <br />
     <code>
-      &lt;uif-spinner uif-spinnersize="large"&gt;&lt;uif-spinner/&gt;
+      &lt;uif-spinner uif-size="small"&gt;&lt;uif-spinner/&gt;
     </code>
   </p>
 
   <p>
     Example:
     <br />
-    <uif-spinner uif-spinnersize="large"></uif-spinner>
+    <uif-spinner uif-size="small"></uif-spinner>
+  </p>
+
+  <p>To render large spinner, use the following markup:
+    <br />
+    <code>
+      &lt;uif-spinner uif-size="large"&gt;&lt;uif-spinner/&gt;
+    </code>
+  </p>
+
+  <p>
+    Example:
+    <br />
+    <uif-spinner uif-size="large"></uif-spinner>
   </p>
 
   <p>You can also add content to the spinner, which will become it's label :
     <br />
     <code>
-      &lt;uif-spinner uif-spinnersize="large"&gt;Loading...&lt;uif-spinner/&gt;
+      &lt;uif-spinner uif-size="large"&gt;Loading...&lt;uif-spinner/&gt;
     </code>
   </p>
 
   <p>
     Example:
     <br />
-    <uif-spinner uif-spinnersize="large">Loading...</uif-spinner>
+    <uif-spinner uif-size="large">Loading...</uif-spinner>
   </p>
 
   <p>You can control visibility of the spinner with <code>ngShow</code> directive
     <br />
     <code>
-      &lt;uif-spinner uif-spinnersize="large" ng-show="spinnerVisible"&gt;&lt;uif-spinner/&gt;
+      &lt;uif-spinner uif-size="large" ng-show="spinnerVisible"&gt;&lt;uif-spinner/&gt;
     </code>
   </p>
 
@@ -70,7 +83,7 @@
     <br />
     <button type="button" ng-click="vm.spinnerVisible = !vm.spinnerVisible">Toggle visibility</button>
     <br />
-    <uif-spinner uif-spinnersize="large" ng-show="vm.spinnerVisible"></uif-spinner>
+    <uif-spinner uif-size="large" ng-show="vm.spinnerVisible"></uif-spinner>
   </p>
 
 </body>

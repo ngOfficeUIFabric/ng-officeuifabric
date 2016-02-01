@@ -3,13 +3,13 @@
 This describes the guidelines developer should follow to run & create tests.
 
 - All code must have valid, **passing** unit tests
-- All code should have 100% test coverage or good reasons why it doesn't meet 100% coverage 
+- All code should have 100% test coverage or good reasons why it doesn't meet 100% coverage
 
 ## Testing Overview
 
 - [Jasmine](http://jasmine.github.io/) is used as the test framework for this project.
 - [Karma](http://karma-runner.github.io) is used as the test runner for all Angular unit tests.
-- [Protractor](https://angular.github.io/protractor/#/) is used for as the test runner for all Angular end-to-end (E2E) tests. 
+- [Protractor](https://angular.github.io/protractor/#/) is used for as the test runner for all Angular end-to-end (E2E) tests.
 
 Run all tests using the provided gulp task **test**:
 
@@ -17,7 +17,7 @@ Run all tests using the provided gulp task **test**:
 $ gulp test
 ```
 
-This includes two Karma reporters: 
+This includes two Karma reporters:
  - **progress**: This writes a summary of the test results & details for any failing tests.
  - **coverage**. This is used to create the code coverage reports with Istanbul.
 
@@ -28,6 +28,20 @@ $ gulp test --specs
 ```
 
 This will replace the **progress** reporter with the **spec** reporter and write each test & outcome to the console.
+
+## Using jQuery in tests
+We are not relying on jQuery in our library, that's why all elements in directives are wrapped in jqLite object and not jQuery. jqLite has limited functionality in comparison to jQuery and we made it possible to use jQuery and jasmine-jquery library in your specs.
+In Karma jQuery loaded after angular.js and is accessible from your code. For easier DOM manipulation and assertions you can wrap element in jQuery object manually:
+```javascript
+let $element = $compile('<your directive>')($scope);// <<---- $element is jqLite instance
+$element = jQuery($element[0]);// <<---- $element is jQuery instance
+```
+manipulate your jQuery object:
+```javascript
+let child = $element.find('div.child');// <<--- works with jQuery, not works with jqLite
+expect(child).toHaveClass('active');// <<---- jasmine-jquery assertion
+```
+**Note** on using mouse events with jQuery in your specs. For handling mouse events from jQuery object we included a special fix for PhantomJS browser, because it has an issue with raising this events. If you are experience a problem with raising event from jQuery object, you still can use native angular's jqLite event trigger, i.e. `$element.triggerHandler('click')`.
 
 ## Test Validation
 
