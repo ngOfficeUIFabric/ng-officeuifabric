@@ -37,15 +37,22 @@
     <p>
         Renders this:
         <br />
-        <uif-dialog ></uif-dialog>
+        <uif-dialog uif-close="false" uif-overlay="dark">
+            <uif-dialog-header>
+                <p class="ms-Dialog-title">
+                            Create account
+                </p>
+             </uif-dialog-header>
+         </uif-dialog>
     </p>
+     
 
-    <div ng-controller="demoController">
+    <!--<div ng-controller="demoController">
         <p>
             Example using a controller
         </p>
         <uif-searchbox value="value" placeholder="placeholder"></uif-searchbox>
-    </div>
+    </div>-->
 
 </body>
 
