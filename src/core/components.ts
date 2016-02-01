@@ -6,6 +6,7 @@ import * as choicefieldModule from '../components/choicefield/choicefieldDirecti
 import * as contextualMenuModule from '../components/contextualmenu/contextualMenu';
 import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
+import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as progressIndicatorModule from '../components/progressindicator/progressIndicatorDirective';
@@ -30,6 +31,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   contextualMenuModule.module.name,
   dropdownModule.module.name,
   iconModule.module.name,
+  labelModule.module.name,
   linkModule.module.name,
   overlayModule.module.name,
   progressIndicatorModule.module.name,
