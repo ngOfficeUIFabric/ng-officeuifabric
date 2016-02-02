@@ -62,7 +62,6 @@ export class DatepickerController {
             // strings and translations
             weekdaysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
         });
-        console.log("INITDATEPICKER 2");
         let picker: Pickadate.DatePicker = this.getPicker($element);
         /** Respond to built-in picker events. */
         picker.on({
