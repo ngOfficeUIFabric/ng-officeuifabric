@@ -1,7 +1,6 @@
 'use strict';
 
 import {BaseGulpTask} from '../BaseGulpTask';
-import {Utils} from '../utils';
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
 
