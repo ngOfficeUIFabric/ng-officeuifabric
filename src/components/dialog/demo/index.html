@@ -17,35 +17,51 @@
 
 <body ng-app="demoApp">
 
-    <h1 class="ms-font-su">Dialog Demo | &lt;uif-searchbox&gt;</h1>
+    <h1 class="ms-font-su">Dialog Demo | &lt;uif-dialog&gt;</h1>
     <em>In order for this demo to work you must first build the library in debug mode.</em>
 
     <p>
-        Use the attributes <code>uif-value</code> to specify the value of the search field. 
+        Use the attributes <code>uif-value</code> to specify the value of the search field.
     </p>
     <p>
         Use the attributes <code>placeholder</code> to specify the placeholder of the search field.
     </p>
 
     <p>
-        This markup: <br />
+        This markup:
+        <br />
         <code>
-            &lt;uif-searchbox  /&gt;
+            &lt;uif-dialog  /&gt;
         </code>
     </p>
 
-    <p>
-        Renders this:
-        <br />
-        <uif-dialog uif-close="false" uif-overlay="dark">
-            <uif-dialog-header>
-                <p class="ms-Dialog-title">
-                            Create account
-                </p>
-             </uif-dialog-header>
-         </uif-dialog>
-    </p>
-     
+
+    Renders this:
+    <br />
+    <uif-dialog uif-close="true" uif-overlay="light">
+        <uif-dialog-header>
+            <p class="ms-Dialog-title">
+                Create account
+            </p>
+        </uif-dialog-header>
+        <uif-dialog-inner>
+            <uif-dialog-content>
+                <uif-dialog-subtext>
+                    <span>Your Inbox has changed. No longer does it include favorites, it is a singular destination for your emails.
+                    asdasda</span>
+                    <uif-icon uif-type="arrowDownLeft" /> 
+                </uif-dialog-subtext>
+                <uif-choicefield-group ng-model="selectedValue">
+                    <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
+                    <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
+                    <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
+                    <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
+                </uif-choicefield-group>
+
+            </uif-dialog-content>
+        </uif-dialog-inner>
+    </uif-dialog>
+
 
     <!--<div ng-controller="demoController">
         <p>
