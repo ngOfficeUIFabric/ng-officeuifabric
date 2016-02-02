@@ -1,7 +1,6 @@
 ﻿describe('choicefieldDirective <uif-choicefield />', () => {
     beforeEach(() => {
         angular.mock.module('officeuifabric.components.choicefield');
-        jQuery.noConflict();
     });
 
     it('should render correct html', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {

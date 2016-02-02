@@ -1,7 +1,6 @@
 ﻿describe('dropdownDirective: <uif-dropdown />', () => {
     beforeEach(() => {
         angular.mock.module('officeuifabric.components.dropdown');
-        jQuery.noConflict();
     });
 
     it('should render correct html', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
