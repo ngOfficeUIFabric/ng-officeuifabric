@@ -4,6 +4,7 @@ import * as ng from 'angular';
 import * as calloutModule from '../components/callout/calloutDirective';
 import * as choicefieldModule from '../components/choicefield/choicefieldDirective';
 import * as contextualMenuModule from '../components/contextualmenu/contextualMenu';
+import * as datepickerModule from '../components/datepicker/datepickerDirective';
 import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
 import * as linkModule from '../components/link/linkDirective';
@@ -28,6 +29,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   calloutModule.module.name,
   choicefieldModule.module.name,
   contextualMenuModule.module.name,
+  datepickerModule.module.name,
   dropdownModule.module.name,
   iconModule.module.name,
   linkModule.module.name,

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
   <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
   <!-- angular library -->
-  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <script src="../../../../node_modules/angular/angular.js"></script>
   
   <!-- jquery (pickadate depends on jquery) -->
   <script src="../../../../node_modules/jquery/dist/jquery.min.js"></script>
@@ -40,8 +40,9 @@
   <p>
     Renders this:
     <br />
-    <uif-datepicker />
-    
+    <uif-datepicker ng-model="value"/>
+    <br/>
+    <p>Value: {{value}}</p>
   </p>
   <p>
       

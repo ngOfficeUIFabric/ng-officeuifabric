@@ -2,15 +2,17 @@
 
 import * as ng from 'angular';
 
-export interface IDatepickerDirectiveScope extends ng.IScope {
-    months: string;
-    startLabel: string;
-    placeHolderText: string;
-    monthsArray: string[];
-    textValue: string;
-    value: string;
-}
-
+/**
+ * @ngdoc class
+ * @name DatepickerController
+ * @module officeuifabric.components.datepicker
+ *
+ * @restrict E
+ *
+ * @description
+ * DatepickerController is the controller for the <uif-datepicker> directive
+ *
+ */
 export class DatepickerController {
     public static $inject: string[] = ['$element', '$scope'];
     constructor($element: JQuery, public $scope: IDatepickerDirectiveScope) {
@@ -143,7 +145,7 @@ export class DatepickerController {
         });
 
         /** Go to the current date, shown in the day picking view. */
-        $goToday.click(function (event: JQueryEventObject): void {
+        $goToday.on('click', function (event: JQueryEventObject): void {
             event.preventDefault();
 
             /** Select the current date, while keeping the picker open. */
@@ -268,11 +270,50 @@ export class DatepickerController {
     }
 }
 
+/**
+ * @ngdoc interface
+ * @name IDatepickerDirectiveScope
+ * @module officeuifabric.components.datepicker
+ * 
+ * @description 
+ * This is the scope used by the directive. 
+ *
+ * 
+ * @property {string} uifMonths - Comma separated list of all months  
+ * @property {string} uifLabel - The label to display above the date picker
+ * @property {string} uifPlaceholderText - The placeholder to display in the text box  
+ */
+export interface IDatepickerDirectiveScope extends ng.IScope {
+    uifMonths: string;
+    uifLabel: string;
+    uifPlaceholderText: string;
+    monthsArray: string[];
+}
+
+/**
+ * @ngdoc directive
+ * @name uifDatepicker
+ * @module officeuifabric.components.datepicker
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-datepicker>` is an directive for rendering a datepicker
+ *
+ * @usage
+ * <uif-datepicker 
+ *      ng-model="value" 
+ *      uif-placeholder-text="Please, find a date"
+ *      uif-months="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+ *      uif-label="Start date"
+ * />
+ */
+
 export class DatepickerDirective implements ng.IDirective {
     public template: string = '<span>{{bar}}</span><div class="ms-TextField">' +
-        '<label class="ms-Label">{{startLabel}}</label>' +
+        '<label class="ms-Label">{{uifLabel}}</label>' +
         '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
-        '<input class="ms-TextField-field" type="text" placeholder="{{placeholderText}}">' +
+        '<input class="ms-TextField-field" type="text" placeholder="{{uifPlaceholderText}}">' +
         '</div>' +
         '<div class="ms-DatePicker-monthComponents">' +
         '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
@@ -300,11 +341,11 @@ export class DatepickerDirective implements ng.IDirective {
     public restrict: string = 'E';
 
     public scope: any = {
-        months: '@',
-        placeholderText : '@',
-        startLabel: '@'
+        uifLabel: '@',
+        uifMonths: '@',
+        uifPlaceholderText : '@'
     };
-    public require: string[] = ['uifDatepicker', 'ngModel'];
+    public require: string[] = ['uifDatepicker', '?ngModel'];
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new DatepickerDirective();
@@ -312,28 +353,28 @@ export class DatepickerDirective implements ng.IDirective {
         return directive;
     }
     // todo scope interface
-    public link($scope: any, $element: JQuery, attrs: any, ctrls: any[]): void {
+    public link($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
         let datepickerController: DatepickerController = ctrls[0];
         let ngModel: ng.INgModelController = ctrls[1];
-        if (!$scope.months) {
-            $scope.months = "'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'";
+        if (!$scope.uifMonths) {
+            $scope.uifMonths = 'Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec';
         }
-        if (!$scope.startLabel) {
-            $scope.startLabel = 'Start Date';
-        }
-
-        if (!$scope.placeholderText) {
-            $scope.placeholderText = 'Select a date';
+        if (!$scope.uifLabel) {
+            $scope.uifLabel = 'Start Date';
         }
 
-        $scope.monthsArray = $scope.months.split(',');
+        if (!$scope.uifPlaceholderText) {
+            $scope.uifPlaceholderText = 'Select a date';
+        }
+
+        $scope.monthsArray = $scope.uifMonths.split(',');
         if ($scope.monthsArray.length !== 12) {
             throw 'Months setting should have 12 months, separated by a comma';
         }
         datepickerController.initDatepicker(jQuery($element), ngModel);
         ngModel.$render = function (): void {
             if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
-                datepickerController.setValue($($element), new Date(ngModel.$modelValue));
+                datepickerController.setValue(jQuery($element), new Date(ngModel.$modelValue));
             }
         };
     }
