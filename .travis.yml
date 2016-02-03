@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - dev
+    - datepicker
 
 node_js:
   - stable
