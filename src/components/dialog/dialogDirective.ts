@@ -19,14 +19,14 @@ export class DialogDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
     public transclude: boolean = true;
-    public template: string = '<div class="ms-Dialog">' +
-                            //   'ng-class="{ \'ms-Dialog--close\': uifClose==\'true\', \'ms-Dialog--lgHeader\': uifType==\'header\',"' +
-                            //   '\'ms-Dialog--multiline\':uifType==\'multiline\' }">' +
-                              '<div class="ms-Overlay ms-Overlay--dark"></div>' +
-                             // '<uif-overlay uif-mode="{{uifOverlay}}"></uif-overlay>'
-                              '<div class="ms-Dialog-main" ng-transclude></div>' +
-                              '</div>';
-    public scope: any  = {
+    public template: string = '<div class="ms-Dialog"' +
+    'ng-class="{ \'ms-Dialog--close\': uifClose==\'true\'' +
+    ', \'ms-Dialog--lgHeader\': uifType==\'header\'' +
+    ', \'ms-Dialog--multiline\': uifType==\'multiline\' }">' +
+     '<uif-overlay uif-mode="{{uifOverlay}}"></uif-overlay>' +
+    '<div class="ms-Dialog-main" ng-transclude></div>' +
+    '</div>';
+    public scope: any = {
         uifClose: '@',
         uifOverlay: '@',
         uifType: '@'
@@ -43,8 +43,11 @@ export class DialogHeaderDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
     public transclude: boolean = true;
-    // public require: string = '^uifDialog';
-    public template: string = '<div class="ms-Dialog-header" ng-transclude></div>';
+    public require: string = '^^uifDialog';
+    public template: string = '<div class="ms-Dialog-header">' +
+    '<button ng-if="$parent.uifClose" class="ms-Dialog-button ms-Dialog-button--close">' +
+    '<i class="ms-Icon ms-Icon--x"></i></button>' +
+    '<ng-transclude></ng-transclude></div>';
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new DialogHeaderDirective();
         return directive;
@@ -91,10 +94,27 @@ export class DialogSubtextDirective implements ng.IDirective {
 
 }
 
+export class DialogActionsDirective implements ng.IDirective {
+    public restrict: string = 'E';
+    public replace: boolean = true;
+    public transclude: boolean = true;
+    // public require: string = '^uifDialog';
+    public template: string = '<div class="ms-Dialog-actions"><div ng-class="{ \'ms-Dialog-actionsRight\': uifPosition==\'right\'}">' +
+    '<ng-transclude></ng-transclude></div></div>';
+    public scope: any = {
+        uifPosition: '=?'
+    }
+    public static factory(): ng.IDirectiveFactory {
+        const directive: ng.IDirectiveFactory = () => new DialogActionsDirective();
+        return directive;
+    }
+}
+
 export var module: ng.IModule = ng.module('officeuifabric.components.dialog', ['officeuifabric.components'])
     .directive('uifDialog', DialogDirective.factory())
     .directive('uifDialogHeader', DialogHeaderDirective.factory())
     .directive('uifDialogContent', DialogContentDirective.factory())
     .directive('uifDialogInner', DialogInnerDirective.factory())
-    .directive('uifDialogSubtext', DialogSubtextDirective.factory());
+    .directive('uifDialogSubtext', DialogSubtextDirective.factory())
+    .directive('uifDialogActions', DialogActionsDirective.factory());
 

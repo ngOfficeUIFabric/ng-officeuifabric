@@ -38,7 +38,8 @@
 
     Renders this:
     <br />
-    <uif-dialog uif-close="true" uif-overlay="light">
+   
+    <uif-dialog uif-close="false" uif-overlay="dark" uif-type="multiline">
         <uif-dialog-header>
             <p class="ms-Dialog-title">
                 Create account
@@ -57,8 +58,13 @@
                     <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
                     <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
                 </uif-choicefield-group>
-
+                
             </uif-dialog-content>
+            <uif-dialog-actions uif-position="right">
+                    <button class="ms-Dialog-action ms-Button ms-Button--primary">
+                      <span class="ms-Button-label">Save</span>
+                   </button>
+                </uif-dialog-actions>
         </uif-dialog-inner>
     </uif-dialog>
 
