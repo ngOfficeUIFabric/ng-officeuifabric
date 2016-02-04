@@ -37,4 +37,5 @@ interface ICommandLineArgs {
   dev?: boolean;
   watch?: boolean;
   serve?: boolean;
+  file?: string;
 }

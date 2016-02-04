@@ -5,6 +5,7 @@ import {Utils} from '../utils';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
 import * as gulp from 'gulp';
+import * as path from 'path';
 
 /**
  * Runs all tests against the directives.
@@ -70,6 +71,28 @@ export class GulpTask extends BaseGulpTask {
       karmaConfig.singleRun = false;
       karmaConfig.browsers = ['Chrome', 'PhantomJS'];
     }
+
+    if (this._args.file) {
+      let currentPath: path.ParsedPath = path.parse(this._args.file);
+      let allExceptSpecs: string = path.join(currentPath.dir, '!(*.spec).js');
+      let allSpecs: string = path.join(currentPath.dir, '*.spec.js');
+      let pathParts: string[] = currentPath.dir.split(path.sep);
+      let dirName: string = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+
+      karmaConfig.files = [
+          'node_modules/angular/angular.js',
+          'node_modules/angular-mocks/angular-mocks.js',
+          'node_modules/jquery/dist/jquery.min.js',
+          'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+          'src/core/jquery.phantomjs.fix.js',
+          'src/core/*.js',
+          allExceptSpecs,
+          allSpecs
+        ];
+
+      Utils.log(`Using specs under src/components/${dirName}/`);
+    }
+
 
     // create karma server
     let karmaServer: karma.Server = new karma.Server(karmaConfig, (karmaResult: number) => {
