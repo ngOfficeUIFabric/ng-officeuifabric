@@ -5,10 +5,10 @@ import {Utils} from '../utils';
 import * as gulp from 'gulp';
 import * as path from 'path';
 import * as yargs from 'yargs';
-import * as karma from 'karma';
 import * as runSequence from 'run-sequence';
 import * as browserSyncModule from 'browser-sync';
 import * as fs from 'fs';
+import * as childProcess from 'child_process';
 
 /**
  * Watches for file change and automatically run vet, test, transpile, build.
@@ -81,6 +81,17 @@ export class GulpTask extends BaseGulpTask {
       });
     };
 
+    let spawnGulpTask: (task: string, ...additionalArgs: string[]) => childProcess.ChildProcess =
+    (task: string, ...additionalArgs: string[]) => {
+      let isWindows: boolean = (process.platform.lastIndexOf('win') === 0);
+
+      let command: string = isWindows ? 'cmd.exe' : 'sh';
+      let args: string[]  = isWindows ? ['/c', 'gulp ' + task].concat(process.argv.slice(3)).concat(additionalArgs)
+                                      : ['-c', 'gulp ' + task].concat(process.argv.slice(3)).concat(additionalArgs);
+
+      return childProcess.spawn(command, args, { env: process.env , stdio: 'inherit' });
+    };
+
     let modeName: string = 'DEV';
     if (!this._args.dev) {
       modeName = 'RELEASE';
@@ -94,7 +105,10 @@ export class GulpTask extends BaseGulpTask {
           }
     };
 
-    if (this._args.serve) {
+    type setupWatcherFunc = () => void;
+
+    let demoFilesWatcher: setupWatcherFunc = () => {
+      if (this._args.serve) {
           this.browserSync = browserSyncModule.create();
           this.browserSync.init({
               server: {
@@ -123,73 +137,43 @@ export class GulpTask extends BaseGulpTask {
             }
           });
       }
+    };
 
-    subscribeWatcher(
+    let buildFilesWatcher: setupWatcherFunc = () => {
+      subscribeWatcher(
       gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], ['transpile-ts']), 'Transpile build files');
+    };
 
-    subscribeWatcher(
+    let demoTypescriptWatcher: setupWatcherFunc = () => {
+      subscribeWatcher(
       gulp.watch(['./src/**/demo*/*.ts'], () => {
         runSequence('transpile-ts', reloadBrowsers);
       }),
       'Transpile demo files');
+    };
 
-
-    subscribeWatcher(
+    let sourceWatcher: setupWatcherFunc = () => {
+      subscribeWatcher(
       gulp.watch(['./src/**/*.ts', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
 
-      let currentPath: path.ParsedPath = path.parse(event.path);
-      let allExceptSpecs: string = path.join(currentPath.dir, '!(*.spec).js');
-      let allSpecs: string = path.join(currentPath.dir, '*.spec.js');
-      let pathParts: string[] = currentPath.dir.split(path.sep);
-      let dirName: string = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
-
-      runSequence('transpile-ts', 'build-lib', () => {
-
-        Utils.log('Starting Karma server');
-        Utils.log(`Using specs under src/components/${dirName}/`);
-
-        let karmaConfig: karma.ConfigOptions = <karma.ConfigOptions>{
-          configFile: '../../../config/karma.js',
-          singleRun: true
-        };
-
-        // if in spec mode, change reporters from progress => spec
-        if (this._args.specs) {
-          karmaConfig.reporters = ['spec', 'coverage'];
-        }
-
-        // set log level accordingly
-        if (this._args.debug) {
-          karmaConfig.logLevel = 'DEBUG';
-        } else if (this._args.verbose) {
-          karmaConfig.logLevel = 'INFO';
-        }
-
-        karmaConfig.files = [
-          'node_modules/angular/angular.js',
-          'node_modules/angular-mocks/angular-mocks.js',
-          'node_modules/jquery/dist/jquery.min.js',
-          'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-          'src/core/jquery.phantomjs.fix.js',
-          'src/core/*.js',
-          allExceptSpecs,
-          allSpecs
-        ];
-
-        let karmaServer: karma.Server = new karma.Server(karmaConfig, (karmaResult: number) => {
-          Utils.log('Karma test run completed');
-
-          // result = 1 means karma exited with error
-          if (karmaResult === 1) {
-            Utils.log('Karma finished with error(s)');
-          }
+      runSequence('transpile-ts', () => {
+        spawnGulpTask('build-lib')
+        .on('exit', () => {
+          spawnGulpTask('test', '--file=' + event.path);
         });
-
-        karmaServer.start();
       });
-
     }),
       buildLibEventName);
+    };
 
+
+    /* Push .bin path into current PATH env. variable */
+    process.env.PATH += path.delimiter + path.join(__dirname, 'node_modules', '.bin');
+
+    /* setup all wathers */
+    buildFilesWatcher();
+    demoFilesWatcher();
+    demoTypescriptWatcher();
+    sourceWatcher();
   }
 }
