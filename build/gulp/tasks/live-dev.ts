@@ -86,10 +86,13 @@ export class GulpTask extends BaseGulpTask {
       let isWindows: boolean = (process.platform.lastIndexOf('win') === 0);
 
       let command: string = isWindows ? 'cmd.exe' : 'sh';
-      let args: string[]  = isWindows ? ['/c', 'gulp ' + task].concat(process.argv.slice(3)).concat(additionalArgs)
-                                      : ['-c', 'gulp ' + task].concat(process.argv.slice(3)).concat(additionalArgs);
+      let args: string  = ['gulp ' + task].concat(process.argv.slice(3)).concat(additionalArgs).join(' ');
 
-      return childProcess.spawn(command, args, { env: process.env , stdio: 'inherit' });
+      if (isWindows) {
+        return childProcess.spawn(command, ['/c', args], { env: process.env , stdio: 'inherit' });
+      }
+
+      return childProcess.spawn(command, ['-c', args], { env: process.env , stdio: 'inherit' });
     };
 
     let modeName: string = 'DEV';
