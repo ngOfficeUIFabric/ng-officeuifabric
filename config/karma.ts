@@ -39,6 +39,8 @@ module.exports = (config: karma.Config) => {
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/pickadate/lib/picker.js',
+      'node_modules/pickadate/lib/picker.date.js',
       'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
       'src/core/jquery.phantomjs.fix.js',
       'src/core/*.js',

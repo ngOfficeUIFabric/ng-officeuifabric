@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-Toggle demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.js"></script>
+  
+  <!-- jquery (pickadate depends on jquery) -->
+  <script src="../../../../node_modules/jquery/dist/jquery.min.js"></script>
+  
+  <!-- pickadate library -->
+  <script src="../../../../node_modules/pickadate/lib/compressed/picker.js"></script>
+  <script src="../../../../node_modules/pickadate/lib/compressed/picker.date.js"></script>
+  
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  
+  
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Toggle Demo | &lt;uif-toggle&gt;</h1> 
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+  <br/>
+  <em>This directive depends on
+    <ul>
+        <li><a href="https://jquery.com/">jQuery</a></li>
+        <li><a href="http://amsul.ca/pickadate.js/">pickadate.js</a></li>
+    </ul>   
+    Add references to jquery.js, pickadate.js, and picker.js, and picker.date.js BEFORE
+    the ngofficeuifabric.js reference</em>
+  <p>
+    This markup: <br />
+    <code>
+        &lt;uif-datepicker ng-model=&quot;value&quot;/&gt;  
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-datepicker ng-model="value"/>
+    <br/>
+    <p>Value: {{value}}</p>
+  </p>
+  <p>
+    This markup: <br />
+    <code>
+        &lt;uif-datepicker ng-model=&quot;value_2&quot;&#13;&#10;       uif-months=&quot;Jan,Feb,Maa,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Dec&quot;&#13;&#10;       uif-label=&quot;Start date&quot;&#13;&#10;       uif-placeholder-text=&quot;Please, find a date&quot;&#13;&#10;       /&gt;  
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-datepicker ng-model="value_2"
+       uif-months="Jan,Feb,Maa,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Dec"
+       uif-label="Start date"
+       uif-placeholder-text="Please, find a date"
+       />
+    <br/>
+    <p>Value: {{value_2}}</p>
+  </p>
+  <p>
+      
+  </p>
+
+
+</body>
+
+</html>
