@@ -299,7 +299,12 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
  *
  * @description
  * `<uif-datepicker>` is an directive for rendering a datepicker
- *
+ * It depends on 
+ * - jQuery: https://jquery.com/
+ * - pickadate.js : http://amsul.ca/pickadate.js/ 
+ * Add references to jquery.js, pickadate.js, and picker.js, and picker.date.js BEFORE
+ * the ngofficeuifabric.js reference
+ *  
  * @usage
  * <uif-datepicker 
  *      ng-model="value" 
@@ -352,7 +357,6 @@ export class DatepickerDirective implements ng.IDirective {
 
         return directive;
     }
-    // todo scope interface
     public link($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
         let datepickerController: DatepickerController = ctrls[0];
         let ngModel: ng.INgModelController = ctrls[1];

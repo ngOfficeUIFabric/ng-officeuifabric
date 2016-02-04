@@ -1,13 +1,1 @@
-<html ng-app="demoApp" ng-controller="demoController">
-<uif-toggle uif-label-off="Label off" uif-label-on="Label on" ng-model="toggled" />
-</html>
-
-<script type="text/javascript">
-    var demoApp = angular.module('demoApp', [
-        'officeuifabric.core',
-        'officeuifabric.components.toggle'
-        ]);
-
-        demoApp.controller('demoController', [
-        '$scope', demoController]);
-</script>
+<uif-datepicker ng-model="value" uif-placeholder-text="Please, find a date"/>
