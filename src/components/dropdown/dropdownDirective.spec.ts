@@ -8,10 +8,10 @@
         let $scope: any = $rootScope.$new();
 
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
-        '<uif-option value="value1">Text 1</uif-option>' +
-        '<uif-option value="value2">Text 2</uif-option>' +
-        '<uif-option value="value3">Text 3</uif-option>' +
-        '<uif-option value="value4">Text 4</uif-option>' +
+        '<uif-dropdown-option value="value1">Text 1</uif-dropdown-option>' +
+        '<uif-dropdown-option value="value2">Text 2</uif-dropdown-option>' +
+        '<uif-dropdown-option value="value3">Text 3</uif-dropdown-option>' +
+        '<uif-dropdown-option value="value4">Text 4</uif-dropdown-option>' +
         '</uif-dropdown>')($scope);
         $scope.$digest();
         dropdown = jQuery(dropdown[0]);
@@ -32,7 +32,7 @@
         ];
         $scope.selectedValue = 'Option1';
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
-            '<uif-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-option></uif-dropdown>')($scope);
+            '<uif-dropdown-option ng-repeat="o in options" value="{{o.value}}">{{o.text}}</uif-dropdown-option></uif-dropdown>')($scope);
 
         $scope.$digest();
         dropdown = jQuery(dropdown[0]);
@@ -65,7 +65,8 @@
         $scope.selectedValue = 'Option1';
 
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
-            '<uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
+            '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-dropdown-option>' +
+            '</uif-dropdown>')($scope);
         $scope.$digest();
         dropdown = jQuery(dropdown[0]);
         dropdown.appendTo(document.body);
@@ -93,7 +94,8 @@
         $scope.selectedValue = 'Option1';
         $scope.isDisabled = true;
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue" disabled>' +
-            '<uif-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-option></uif-dropdown>')($scope);
+            '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-dropdown-option>' +
+            '</uif-dropdown>')($scope);
         $scope.$digest();
         dropdown = jQuery(dropdown[0]);
 

@@ -22,18 +22,18 @@ export interface IDropdownScope extends ng.IScope {
 
 /**
  * @ngdoc directive
- * @name uifOption
+ * @name uifDropdownOption
  * @module officeuifabric.components.dropdown
  * 
  * @restrict E
  * 
  * @description 
- * `<uif-option>` is an option directive
+ * `<uif-dropdown-option>` is an option directive
  *
  * @usage
  * 
  * <uif-dropdown>
- *   <uif-option value="Value">Text</uif-option>
+ *   <uif-dropdown-option value="Value">Text</uif-option>
  * </uif-dropdown>
  */
 export class DropdownOptionDirective implements ng.IDirective {
@@ -190,5 +190,5 @@ export class DropdownDirective implements ng.IDirective {
 export var module: ng.IModule = ng.module('officeuifabric.components.dropdown', [
     'officeuifabric.components'
   ])
-  .directive('uifOption', DropdownOptionDirective.factory())
+  .directive('uifDropdownOption', DropdownOptionDirective.factory())
   .directive('uifDropdown', DropdownDirective.factory());
