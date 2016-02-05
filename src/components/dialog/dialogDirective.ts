@@ -1,19 +1,6 @@
 'use strict';
-import * as ng from 'angular';
 
-/*
-<uif-dialog uif-type="<empty>|header|multiline" uif-close="true|false" uif-overlay="light|dark">
-       <uif-dialog-header>
-                  <uif-dialog-title> </uif-dialog-title>
-           </uif-dialog-header>
-           <uif-dialog-content>
-                  <uif-dialog-subtext> </uif-dialog-subtext>
-           </uif-dialog-content>
-       <uif-dialog-actions uif-position="left|right" >
-                     <uif-button />
-          </uif-dialog-actions>
- </uif-dialog>
- */
+import * as ng from 'angular';
 
 export class DialogDirective implements ng.IDirective {
     public restrict: string = 'E';
@@ -102,7 +89,7 @@ export class DialogActionsDirective implements ng.IDirective {
     public template: string = '<div class="ms-Dialog-actions"><div ng-class="{ \'ms-Dialog-actionsRight\': uifPosition==\'right\'}">' +
     '<ng-transclude></ng-transclude></div></div>';
     public scope: any = {
-        uifPosition: '=?'
+        uifPosition: '@'
     }
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new DialogActionsDirective();
