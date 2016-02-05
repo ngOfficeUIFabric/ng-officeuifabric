@@ -4,6 +4,9 @@
 #### Features
 - **uif-label**: directive added (@jjczopek; closes [#22](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/22))
 
+#### Breaking Changes
+- **uif-dropdown**: refactored the dropdown's `uif-option` to `uif-dropdown-option` (by @rolandoldengarm; closes [#107](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/107))
+
 #### Fixes
 - **uif-spinner**: invalid closing tag in demo (by @jjczopek; closes [#150](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/150))
 - **uif-callout**: fixed regression introduced in Angular 1.4.9 (by @jjczopek; closes [#139](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/139))
