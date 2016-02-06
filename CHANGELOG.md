@@ -8,12 +8,13 @@
 - **uif-dropdown**: refactored the dropdown's `uif-option` to `uif-dropdown-option` (by @rolandoldengarm; closes [#107](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/107))
 
 #### Fixes
-- **uif-spinner**: invalid closing tag in demo (by @jjczopek; closes [#150](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/150))
 - **uif-callout**: fixed regression introduced in Angular 1.4.9 (by @jjczopek; closes [#139](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/139))
 - **uif-callout**: fixed CSS when separator used (by @jjczopek; closes [#122](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/122))
 - **uif-contextual-menu**: fixed regression introduced in Angular 1.4.9 (by @s-KaiNet; closes [#139](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/139))
+- **uif-textfield**: fixed placeholder and overlap issue (by @rolandoldengarm; closes [#152](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/152))
 - **uif-toggle**: fixed regression introduced in Angular 1.4.9 (by @rolandoldengarm; closes [#139](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/139))
 - **uif-searchbox**: fixed regression introduced in Angular 1.4.9 (by @andrewconnell; closes [#139](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/139))
+- **uif-spinner**: invalid closing tag in demo (by @jjczopek; closes [#150](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/150))
 
 <a name="0.3.0"</a>
 ### [0.3.0 (January 25, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.3.0)
