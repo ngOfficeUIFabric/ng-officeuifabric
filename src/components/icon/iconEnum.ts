@@ -236,7 +236,6 @@ export enum IconEnum {
   noteForward,
   noteReply,
   notRecurring,
-  onedrive,
   onlineAdd,
   onlineJoin,
   oofReply,
