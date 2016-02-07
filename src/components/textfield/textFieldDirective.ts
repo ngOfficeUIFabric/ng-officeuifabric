@@ -65,6 +65,8 @@ export class TextFieldDirective implements ng.IDirective {
         uifLabel: '@'
     };
 
+    public require: string = '?ngModel';
+
     public restrict: string = 'E';
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new TextFieldDirective();
@@ -94,6 +96,13 @@ export class TextFieldDirective implements ng.IDirective {
                 scope.isActive = false;
             }
         };
+        if (ngModel != null) {
+            ngModel.$render = () => {
+                // when setting the ngModel value programmatically,
+                // hide the placeholder when viewvalue is not empty
+                scope.labelShown = !ngModel.$viewValue;
+            };
+        }
     }
 }
 

@@ -27,20 +27,20 @@
   <p>
     This markup: <br />
     <code>
-      &lt;uif-icon uif-type="arrowDownLeft" /&gt;
+      &lt;uif-icon uif-type="arrowDownLeft"&gt;&lt;/uif-icon&gt;
     </code>
   </p>
 
   <p>
     Renders this:
     <br />
-    <uif-icon uif-type="arrowDownLeft" />
+    <uif-icon uif-type="arrowDownLeft"></uif-icon>
   </p>
 
   <h2>Modifiers</h2>
   <p>
     Change the size &amp; color using standard CSS sizing techniques: <code>style="font-size:32px; color:red;"</code>:<br />
-    <uif-icon uif-type="arrowDownLeft" style="font-size:32px; color:red;" />
+    <uif-icon uif-type="arrowDownLeft" style="font-size:32px; color:red;"></uif-icon>
   </p>
   
   <h2>Changing the Icon</h2>
@@ -51,7 +51,7 @@
     
     <div>
       Selected icon = <code>{{selectedIcon}}</code><br />
-      Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}" />
+      Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}"></uif-icon>
     </div>
   </div>
   
@@ -60,10 +60,10 @@
     Wouldn't you like to see an error when you specify an icon that's not supported? Open the JavaScript console to see an error for an icon like this: <br />
 
     <code>
-      &lt;uif-icon uif-type="ngOfficeUiFabric" /&gt;
+      &lt;uif-icon uif-type="ngOfficeUiFabric"&gt;&lt;/uif-icon&gt;
     </code>
     
-    <uif-icon uif-type="ngOfficeUiFabric" />
+    <uif-icon uif-type="ngOfficeUiFabric"></uif-icon>
   </p>
 
 </body>

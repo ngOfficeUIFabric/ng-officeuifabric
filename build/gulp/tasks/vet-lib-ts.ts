@@ -17,8 +17,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string}  description   - Help description for the task.
    */
-  public static description: string = 'Run code quality & style analysis on all library TypeScript'
-  + ' (code used in creating the directives)';
+  public static description: string = 'Run code quality & style analysis on all library TypeScript (source code for the directives)';
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
@@ -42,7 +41,10 @@ export class GulpTask extends BaseGulpTask {
     return gulp.src(allTypeScript)
       .pipe($.if(this._args.verbose, $.print()))
       .pipe($.tslint())
-      .pipe($.tslint.report('verbose', { summarizeFailureOutput: true }));
+      .pipe($.tslint.report('verbose', {
+        emitError: false,
+        summarizeFailureOutput: true
+      }));
   }
 
 }

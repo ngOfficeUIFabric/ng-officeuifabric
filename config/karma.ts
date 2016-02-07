@@ -1,5 +1,6 @@
 'use strict';
 
+import {BuildConfig} from './build';
 import * as karma from 'karma';
 import * as webpack from 'webpack';
 import * as webpackConfig from './webpack';
@@ -14,12 +15,7 @@ import * as webpackConfig from './webpack';
  */
 module.exports = (config: karma.Config) => {
   // load webpack config settings
-  // note: at present the webpack.d.ts typedef is outdated at 1.12.2 when webpack
-  //    is at 1.12.9 & includes support for postLoaders on a module... can't qualify
-  //    the typedef for the config because it breaks TypeScript compilation
-  //    > hopefully this can get updated later... see this logged issue for info:
-  //    https://github.com/DefinitelyTyped/DefinitelyTyped/issues/7497
-  let webpackSettings: any = new webpackConfig.WebPackConfig();
+  let webpackSettings: webpack.Configuration = new webpackConfig.WebPackConfig();
   webpackSettings.entry = {};
   webpackSettings.devtool = 'inline-source-map';
   // use istanbul-instrumenter-loader which deals with webpack-added wrapper code
@@ -40,15 +36,9 @@ module.exports = (config: karma.Config) => {
       dir: 'coverage/',
       type: 'lcov'
     },
-    files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-      'src/core/jquery.phantomjs.fix.js',
-      'src/core/*.js',
-      'src/components/*/*.js'
-    ],
+    files: BuildConfig.CORE_TEST_FILES.concat(
+      BuildConfig.ALL_SPEC_FILES
+    ),
     frameworks: ['jasmine'],
     logLevel: config.LOG_WARN,
     plugins: ['karma-*'],
