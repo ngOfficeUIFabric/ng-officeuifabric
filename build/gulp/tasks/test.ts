@@ -2,6 +2,7 @@
 
 import {BaseGulpTask} from '../BaseGulpTask';
 import {Utils} from '../utils';
+import {BuildConfig} from '../../../config/build';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
 import * as gulp from 'gulp';
@@ -33,10 +34,10 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'debug':   'Set karma log level to DEBUG',
-    'specs':   'Output all tests being run',
+    'debug': 'Set karma log level to DEBUG',
+    'specs': 'Output all tests being run',
     'verbose': 'Output all TypeScript files being built & set karma log level to INFO',
-    'watch':   'Adds Chrome browser and start listening on file changes for easier debugging'
+    'watch': 'Adds Chrome browser and start listening on file changes for easier debugging'
   };
 
   /**
@@ -79,16 +80,9 @@ export class GulpTask extends BaseGulpTask {
       let pathParts: string[] = currentPath.dir.split(path.sep);
       let dirName: string = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
 
-      karmaConfig.files = [
-          'node_modules/angular/angular.js',
-          'node_modules/angular-mocks/angular-mocks.js',
-          'node_modules/jquery/dist/jquery.min.js',
-          'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-          'src/core/jquery.phantomjs.fix.js',
-          'src/core/*.js',
-          allExceptSpecs,
-          allSpecs
-        ];
+      karmaConfig.files = BuildConfig.CORE_TEST_FILES.concat(
+        allExceptSpecs, allSpecs
+      );
 
       Utils.log(`Using specs under src/components/${dirName}/`);
     }
