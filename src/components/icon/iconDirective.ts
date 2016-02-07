@@ -9,7 +9,7 @@ import {IconEnum} from './iconEnum';
  * @module officeuifabric.components.contextualmenu
  * 
  * @description
- * This is the scope used by the `<uif-icon />` directive.
+ * This is the scope used by the `<uif-icon>` directive.
  * 
  * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
  */
@@ -44,7 +44,7 @@ class IconController {
  * 
  * @usage
  * 
- * <uif-icon uif-type="arrowDownLeft" />
+ * <uif-icon uif-type="arrowDownLeft"></uif-icon>
  */
 export class IconDirective implements ng.IDirective {
 
