@@ -7,7 +7,7 @@ import * as gulp from 'gulp';
 import * as yargs from 'yargs';
 import * as webpack from 'webpack';
 import * as webpackConfig from '../../../config/webpack';
-let $: any = require('gulp-load-plugins')({ lazy: true });
+let webpackStream: any = require('webpack-stream');
 
 /**
  * Builds files to be distributed as a library release.
@@ -77,7 +77,7 @@ export class GulpTask extends BaseGulpTask {
 
     // build webpack bundle
     return gulp.src([rootSource + '/core/core.ts', rootSource + '/core/components.ts'])
-      .pipe($.webpack(config))
+      .pipe(webpackStream(config))
       .pipe(gulp.dest(BuildConfig.OUTPUT_PATH));
   }
 }
