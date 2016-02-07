@@ -1,5 +1,6 @@
 'use strict';
 
+import {BuildConfig} from './build';
 import * as karma from 'karma';
 import * as webpack from 'webpack';
 import * as webpackConfig from './webpack';
@@ -35,16 +36,9 @@ module.exports = (config: karma.Config) => {
       dir: 'coverage/',
       type: 'lcov'
     },
-    files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-      'src/core/jquery.phantomjs.fix.js',
-      'src/core/*.js',
-      'src/components/*/!(*.spec).js',
-      'src/components/*/*.spec.js'
-    ],
+    files: BuildConfig.CORE_TEST_FILES.concat(
+      BuildConfig.ALL_SPEC_FILES
+    ),
     frameworks: ['jasmine'],
     logLevel: config.LOG_WARN,
     plugins: ['karma-*'],
