@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-org-chart demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+    <script src="bundle.js"></script>
+
+    <style>
+        .ms-Persona.is-selected {
+            background-color: #c7e0f4;
+        }
+
+        pre{
+            padding-top:0;
+            padding-bottom:0;
+            margin-top:0;
+            margin-bottom:0;
+        }
+    </style>
+
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">OrgChart Demo | &lt;uif-org-chart&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <h3>Attributes:</h3>
+
+    <table style="text-align:left;">
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><pre>uif-items</pre></td>
+                <td>
+                    Source array of person-items.
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-group</pre></td>
+                <td>
+                    Property used for group-title. If not provided the chart render with no groups.
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-primary-text</pre></td>
+                <td>
+                    Property used for primary text, e.g. full name.
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-secondary-text</pre></td>
+                <td>
+                    Property used for secondary text, e.g. title.
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-image</pre></td>
+                <td>
+                    Property used for image url.
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-presence</pre></td>
+                <td>
+                    Property used for presense. Valid values are <code>available|away|busy|blocked</code>.
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-style</pre></td>
+                <td>
+                    Style used for displaying person images. Valid values are <code>standard|square</code>
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-select-mode</pre></td>
+                <td>
+                    Enable persons to be selected. Valid values are <code>none|single|multiple</code>
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-selected-items</pre></td>
+                <td>
+                    Array containing til selected items
+                </td>
+            </tr>
+            <tr>
+                <td><pre>uif-uif-method</pre></td>
+                <td>
+                    Function to execute when person is clicked. Person-item is provided to the function.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h3>Workaround:</h3>
+    <p>
+        In order to indicate a selected person create the following style:
+        <pre>
+.ms-Persona.is-selected {
+    background-color: #c7e0f4;
+    }
+
+        </pre>
+    </p>
+
+
+
+    <div ng-controller="demoController as vm">
+
+        <h2>Example 1: Multi select. Grouped.</h2>
+
+        <pre ng-non-bindable>
+&lt;uif-org-chart uif-items="vm.items"
+    uif-group="{{vm.groupby}}"
+    uif-primary-text="{{vm.namefield}}"
+    uif-secondary-text="{{vm.titlefield}}"
+    uif-image="{{vm.imagefield}}"
+    uif-presence="{{vm.presencefield}}"
+    uif-style="standard"
+    uif-select-mode="multiple"
+    uif-selected-items="vm.selected1"&gt;&lt;/uif-org-chart&gt;   
+</pre>
+        <br />
+        <div>
+            Primary text field:
+            <select ng-model="vm.namefield">
+                <option selected>name</option>
+                <option>firstname</option>
+            </select>
+
+            Group by field:
+            <select ng-model="vm.groupby">
+                <option selected>department</option>
+                <option>title</option>
+            </select>
+        </div>
+        <br />
+
+        <uif-org-chart uif-items="vm.items"
+                       uif-group="{{vm.groupby}}"
+                       uif-primary-text="{{vm.namefield}}"
+                       uif-secondary-text="{{vm.titlefield}}"
+                       uif-image="{{vm.imagefield}}"
+                       uif-presence="{{vm.presencefield}}"
+                       uif-style="standard"
+                       uif-select-mode="multiple"
+                       uif-selected-items="vm.selected1"></uif-org-chart>
+
+        Selected 1:
+        <table>
+            <tbody>
+                <tr ng-repeat="p in vm.selected1 ">
+                    <td>{{p.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <h2>Example 2: Single select. Not grouped.</h2>
+        <pre ng-non-bindable>
+&lt;uif-org-chart uif-items="vm.items"
+    uif-primary-text="{{vm.namefield}}"
+    uif-secondary-text="{{vm.titlefield}}"
+    uif-image="{{vm.imagefield}}"
+    uif-presence="{{vm.presencefield}}"
+    uif-style="square"
+    uif-select-mode="single"
+    uif-selected-items="vm.selected2"&gt;&lt;/uif-org-chart&gt;  
+      </pre>
+        <uif-org-chart uif-items="vm.items"
+                       uif-primary-text="{{vm.namefield}}"
+                       uif-secondary-text="{{vm.titlefield}}"
+                       uif-image="{{vm.imagefield}}"
+                       uif-presence="{{vm.presencefield}}"
+                       uif-style="square"
+                       uif-select-mode="single"
+                       uif-selected-items="vm.selected2"></uif-org-chart>
+
+        Selected 2:
+        <table>
+            <tbody>
+                <tr ng-repeat="p in vm.selected2 ">
+                    <td>{{p.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Example 3: Minimal view. Click a person.</h2>
+
+        <pre ng-non-bindable>
+&lt;uif-org-chart uif-items="vm.items"
+    uif-primary-text="name"
+    uif-image="imageUrl"
+    uif-select-mode="single"
+    uif-method="vm.ShowPerson(person)"&gt;&lt;/uif-org-chart&gt;
+</pre>
+
+        <uif-org-chart uif-items="vm.items"
+                       uif-primary-text="name"
+                       uif-image="imageUrl"
+                       uif-select-mode="single"
+                       uif-method="vm.ShowPerson(person)"></uif-org-chart>
+
+        <h2>Example 4: Just a list.</h2>
+<pre ng-non-bindable>
+&lt;uif-org-chart uif-items="vm.items"
+    uif-primary-text="name"
+    uif-image="imageUrl"&gt;&lt;/uif-org-chart&gt;   
+</pre>
+        <uif-org-chart uif-items="vm.items"
+                       uif-primary-text="name"
+                       uif-image="imageUrl"></uif-org-chart>
+
+
+    </div>
+
+</body>
+
+</html>
