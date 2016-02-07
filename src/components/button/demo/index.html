@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-button demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Button Demo | &lt;uif-button&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <h1>action (aka:regular) buttons</h1>
+  <uif-button>Button as button</uif-button>
+  <uif-button disabled>Button as button</uif-button>
+  <uif-button ng-href="http://ngOfficeUiFabric.com">Button as link</uif-button>
+  <uif-button disabled ng-href="http://ngOfficeUiFabric.com">Button as link</uif-button>
+
+  <h1>primary buttons</h1>
+  <uif-button uif-type="primary">PrimaryButton as button</uif-button>
+  <uif-button uif-type="primary" disabled>PrimaryButton as button</uif-button>
+  <uif-button uif-type="primary" ng-href="http://ngOfficeUiFabric.com">PrimaryButton as link</uif-button>
+  <uif-button uif-type="primary" disabled ng-href="http://ngOfficeUiFabric.com">PrimaryButton as link</uif-button>
+
+  <h1>command buttons</h1>
+  <uif-button uif-type="command">CommandButton as button</uif-button>
+  <uif-button uif-type="command" disabled>CommandButton as button</uif-button>
+  <uif-button uif-type="command" ng-href="http://ngOfficeUiFabric.com">CommandButton as link</uif-button>
+  <uif-button uif-type="command" disabled ng-href="http://ngOfficeUiFabric.com">CommandButton as link</uif-button>
+  <p />
+  <uif-button uif-type="command">
+    <uif-icon uif-type="alert"></uif-icon>CommandIcon as button
+  </uif-button>
+  <uif-button uif-type="command" disabled>
+    <uif-icon uif-type="alert"></uif-icon>CommandIcon as button
+  </uif-button>
+  <uif-button uif-type="command" ng-href="http://ngOfficeUiFabric.com">
+    <uif-icon uif-type="alert"></uif-icon>CommandIcon as link
+  </uif-button>
+  <uif-button uif-type="command" disabled ng-href="http://ngOfficeUiFabric.com">
+    <uif-icon uif-type="alert"></uif-icon>CommandIcon as link
+  </uif-button>
+
+  <h1>compound button</h1>
+  <uif-button uif-type="compound">CompoundButton as button</uif-button>
+  <uif-button uif-type="compound" disabled>CompoundButton as button</uif-button>
+  <p />
+  <uif-button uif-type="compound" ng-href="http://ngOfficeUiFabric.com">CompoundButton as link</uif-button>
+  <uif-button uif-type="compound" disabled ng-href="http://ngOfficeUiFabric.com">CompoundButton as link</uif-button>
+  <p />
+  <uif-button uif-type="compound">
+    CompoundDescription as button
+    <uif-button-description>CompoundDescription description</uif-button-description>
+  </uif-button>
+  <uif-button uif-type="compound" disabled>
+    CompoundDescription as button
+    <uif-button-description>CompoundDescription description</uif-button-description>
+  </uif-button>
+  <p />
+  <uif-button uif-type="compound" ng-href="http://ngOfficeUiFabric.com">
+    CompoundDescription as link
+    <uif-button-description>CompoundDescription description</uif-button-description>
+  </uif-button>
+  <uif-button uif-type="compound" disabled ng-href="http://ngOfficeUiFabric.com">
+    CompoundDescription as link
+    <uif-button-description>CompoundDescription description</uif-button-description>
+  </uif-button>
+
+
+  <h1>hero button</h1>
+  <uif-button uif-type="hero">HeroButton as button</uif-button>
+  <uif-button uif-type="hero" disabled>HeroButton as button</uif-button>
+  <p />
+  <uif-button uif-type="hero" ng-href="http://ngOfficeUiFabric.com">HeroButton as link</uif-button>
+  <uif-button uif-type="hero" disabled ng-href="http://ngOfficeUiFabric.com">HeroButton as link</uif-button>
+  <p />
+  <uif-button uif-type="hero">
+    <uif-icon uif-type="plus"></uif-icon>HeroIcon as button
+  </uif-button>
+  <uif-button uif-type="hero" disabled>
+    <uif-icon uif-type="plus"></uif-icon>HeroIcon as button
+  </uif-button>
+  <p />
+  <uif-button uif-type="hero" ng-href="http://ngOfficeUiFabric.com">
+    <uif-icon uif-type="plus"></uif-icon>HeroIcon as link
+  </uif-button>
+  <uif-button uif-type="hero" disabled ng-href="http://ngOfficeUiFabric.com">
+    <uif-icon uif-type="plus"></uif-icon>HeroIcon as link
+  </uif-button>
+
+
+</body>
+
+</html>
