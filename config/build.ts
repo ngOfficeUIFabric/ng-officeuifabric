@@ -80,6 +80,8 @@ export class BuildConfig {
     BuildConfig.NODE_MODULES + '/angular/angular.js',
     BuildConfig.NODE_MODULES + '/angular-mocks/angular-mocks.js',
     BuildConfig.NODE_MODULES + '/jquery/dist/jquery.min.js',
+    BuildConfig.NODE_MODULES + '/pickadate/lib/picker.js',
+    BuildConfig.NODE_MODULES + '/pickadate/lib/picker.date.js',
     BuildConfig.NODE_MODULES + '/jasmine-jquery/lib/jasmine-jquery.js',
     'src/core/jquery.phantomjs.fix.js',
     'src/core/*.js'
