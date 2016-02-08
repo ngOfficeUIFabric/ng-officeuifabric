@@ -21,6 +21,7 @@ In working on this library, the contributors have found and reported numerous bu
 - [#292](https://github.com/OfficeDev/Office-UI-Fabric/issues/292) - Design responsive behavior for tables
 - [#302](https://github.com/OfficeDev/Office-UI-Fabric/issues/302) - Label consisting of multiple words wrapped on each word
 - [#316](https://github.com/OfficeDev/Office-UI-Fabric/issues/316) - TextField: Placeholder interferes with input field hover
+- [#328](https://github.com/OfficeDev/Office-UI-Fabric/issues/328) - Large spinner misplaced
 
 ## What Version of Angular is Supported?
 
