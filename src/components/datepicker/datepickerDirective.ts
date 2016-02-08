@@ -358,10 +358,7 @@ export class DatepickerDirective implements ng.IDirective {
 
         return directive;
     }
-<<<<<<< 48a0ee762e27dcfca7d224bf441fbefedab6129e
-=======
-    // todo scope interface
->>>>>>> dev complete
+
     public link($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
         let datepickerController: DatepickerController = ctrls[0];
         let ngModel: ng.INgModelController = ctrls[1];
