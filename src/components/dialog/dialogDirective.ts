@@ -2,6 +2,8 @@
 
 import * as ng from 'angular';
 
+
+
 export class DialogDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
@@ -47,7 +49,6 @@ export class DialogContentDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
     public transclude: boolean = true;
-    // public require: string = '^uifDialog';
     public template: string = '<div class="ms-Dialog-content" ng-transclude></div>';
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new DialogContentDirective();
@@ -59,7 +60,6 @@ export class DialogInnerDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
     public transclude: boolean = true;
-    // public require: string = '^uifDialog';
     public template: string = '<div class="ms-Dialog-inner" ng-transclude></div>';
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new DialogInnerDirective();
