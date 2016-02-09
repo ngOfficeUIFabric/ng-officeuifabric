@@ -49,7 +49,7 @@ export class BuildConfig {
   // files not dynamically built & should not be purged
   public static BUILD_KEEP_JS: string[] = [];
   public static LIB_KEEP_JS: string[] = [
-    BuildConfig.SOURCE + '/externals/PickaDate.js'
+    BuildConfig.SOURCE + '/core/jquery.phantomjs.fix.js'
   ];
 
   /*
@@ -72,4 +72,23 @@ export class BuildConfig {
   public static ALL_TYPESCRIPT: string[] = BuildConfig.BUILD_TYPESCRIPT
     .concat(BuildConfig.LIB_TYPESCRIPT)
     .concat(BuildConfig.LIB_TEST_TYPESCRIPT);
+
+  /**
+   * All core files used in testing.
+   */
+  public static CORE_TEST_FILES: string[] = [
+    BuildConfig.NODE_MODULES + '/angular/angular.js',
+    BuildConfig.NODE_MODULES + '/angular-mocks/angular-mocks.js',
+    BuildConfig.NODE_MODULES + '/jquery/dist/jquery.min.js',
+    BuildConfig.NODE_MODULES + '/jasmine-jquery/lib/jasmine-jquery.js',
+    'src/core/jquery.phantomjs.fix.js',
+    'src/core/*.js'
+  ];
+  /**
+   * ALl test files.
+   */
+  public static ALL_SPEC_FILES: string[] = [
+    'src/components/*/!(*.spec).js',
+    'src/components/*/*.spec.js'
+  ];
 }

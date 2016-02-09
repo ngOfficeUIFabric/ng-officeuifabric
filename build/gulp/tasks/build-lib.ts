@@ -7,7 +7,7 @@ import * as gulp from 'gulp';
 import * as yargs from 'yargs';
 import * as webpack from 'webpack';
 import * as webpackConfig from '../../../config/webpack';
-let $: any = require('gulp-load-plugins')({ lazy: true });
+let webpackStream: any = require('webpack-stream');
 
 /**
  * Builds files to be distributed as a library release.
@@ -35,7 +35,8 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'dev': 'Create unminified version of the library with source maps & comments (otherwise, production bundle created)',
+    'dev':     'Create unminified version of the library with source maps & comments (otherwise, production' + GulpTask.helpMargin +
+               'bundle created)',
     'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
     'version': 'Version number to set build library (if omitted, version from package.json is used)'
   };
@@ -58,14 +59,7 @@ export class GulpTask extends BaseGulpTask {
     if (!this._args.dev) {
       config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.min.js';
       // use uglify plugin to remove comments & sourcemaps
-      webpackPlugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-          output: {
-            comments: false
-          },
-          sourceMap: false
-        })
-      );
+      webpackPlugins.push(new webpack.optimize.UglifyJsPlugin());
     } else { // else gen un-uglified & include inline sourcemaps
       config.output.filename = BuildConfig.OUTPUT_LIB_NAME + '.js';
       config.devtool = 'inline-source-map';
@@ -83,7 +77,7 @@ export class GulpTask extends BaseGulpTask {
 
     // build webpack bundle
     return gulp.src([rootSource + '/core/core.ts', rootSource + '/core/components.ts'])
-      .pipe($.webpack(config))
+      .pipe(webpackStream(config))
       .pipe(gulp.dest(BuildConfig.OUTPUT_PATH));
   }
 }

@@ -4,11 +4,6 @@ language: node_js
 git:
   depth: 3
 
-branches:
-  only:
-    - master
-    - dev
-
 node_js:
   - stable
 

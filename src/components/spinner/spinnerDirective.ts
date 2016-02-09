@@ -26,7 +26,8 @@ export class SpinnerDirective implements ng.IDirective {
   public template: string = '<div class="ms-Spinner"></div>';
   public controller: any = SpinnerController;
   public scope: any = {
-    'ngShow': '='
+    'ngShow': '=',
+    'uifSize' : '@'
   };
 
   public static factory(): ng.IDirectiveFactory {
@@ -89,12 +90,14 @@ export class SpinnerDirective implements ng.IDirective {
  * @property {function} stop      - Function stopping spinner animation. Called when spinner is being hidden.
  * @property {function} init      - Function that initializes spinner circles.
  * @property {boolean} ngShow     - Controls visibility of the spinner and triggers animation start/top on change.
+ * @property {boolean} uifSize    - Size of the spinner.
  */
 interface ISpinnerScope extends ng.IScope {
   start: () => void;
   stop: () => void;
   init: () => void;
   ngShow: boolean;
+  uifSize: string;
 }
 
 /**
@@ -114,6 +117,7 @@ class SpinnerController {
   private _circles: CircleObject[] = [];
   private _fadeIncrement: number;
   private _animationInterval: ng.IPromise<any>;
+  private _parentSize: number;
 
   constructor(
     public $scope: ISpinnerScope,
@@ -122,6 +126,7 @@ class SpinnerController {
     public $log: ng.ILogService) {
 
     $scope.init = (): void => {
+      this._parentSize = SpinnerSize[this.$scope.uifSize] === SpinnerSize.large ? 28 : 20;
       this.createCirclesAndArrange();
       this.setInitialOpacity();
     };
@@ -144,19 +149,17 @@ class SpinnerController {
 
   private createCirclesAndArrange(): void {
 
-    let width: number = this.$element[0].clientWidth;
-    let height: number = this.$element[0].clientHeight;
     let angle: number = 0;
-    let offset: number = width * this._offsetSize;
+    let offset: number = this._parentSize * this._offsetSize;
     let step: number = (2 * Math.PI) / this._numCircles;
     let i: number = this._numCircles;
-    let radius: number = (width - offset) * 0.5;
+    let radius: number = (this._parentSize - offset) * 0.5;
 
     while (i--) {
       let circle: ng.IAugmentedJQuery = this.createCircle();
 
-      let x: number = Math.round(width * 0.5 + radius * Math.cos(angle) - circle[0].clientWidth * 0.5) - offset * 0.5;
-      let y: number = Math.round(height * 0.5 + radius * Math.sin(angle) - circle[0].clientHeight * 0.5) - offset * 0.5;
+      let x: number = Math.round(this._parentSize * 0.5 + radius * Math.cos(angle) - circle[0].clientWidth * 0.5) - offset * 0.5;
+      let y: number = Math.round(this._parentSize * 0.5 + radius * Math.sin(angle) - circle[0].clientHeight * 0.5) - offset * 0.5;
 
       this.$element.append(circle);
 
@@ -172,9 +175,7 @@ class SpinnerController {
 
   private createCircle(): ng.IAugmentedJQuery {
     let circle: ng.IAugmentedJQuery = ng.element('<div></div>');
-    let parentWidth: number = this.$element[0].clientWidth;
-    let dotSize: string = (parentWidth * this._offsetSize) + 'px';
-
+    let dotSize: string = (this._parentSize * this._offsetSize) + 'px';
     circle.addClass('ms-Spinner-circle').css('width', dotSize).css('height', dotSize);
 
     return circle;

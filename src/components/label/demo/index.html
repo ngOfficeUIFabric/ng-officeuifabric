@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>ngOfficeUiFabric | uif-Label demo</title>
+    <meta charset="utf-8">
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+  </head>
+
+  <body ng-app="demoApp">
+    <h1 class="ms-font-su">Label Demo | &lt;uif-label&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <!-- first example -->
+    <p>To render label, use the following markup:
+      <br/>
+      <pre>
+&lt;uif-label&gt;Name&lt;/uif-label&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-label>Name</uif-label>
+    </p>
+
+    <!-- second example -->
+    <p>
+      Following markup will render required label:
+      <br/>
+      <pre>
+&lt;uif-label required&gt;Name&lt;/uif-label&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-label required>Name</uif-label>
+    </p>
+  <!-- third example -->
+    <p>
+      This markup will render disabled label:
+      <br/>
+      <pre>
+&lt;uif-label disabled&gt;Name&lt;/uif-label&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-label disabled>Name</uif-label>
+    </p>
+  </body>
+</html>

@@ -50,6 +50,7 @@ export class GulpTask extends BaseGulpTask {
 
     // compile all TypeScript files, including sourcemaps inline in the generated JavaScript
     let result: any = tsProject.src()
+      .pipe($.plumber())
       .pipe($.if(this._args.verbose, $.print()))
       .pipe($.sourcemaps.init())
       .pipe($.typescript(tsProject));
@@ -58,5 +59,4 @@ export class GulpTask extends BaseGulpTask {
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest(''));
   }
-
 }
