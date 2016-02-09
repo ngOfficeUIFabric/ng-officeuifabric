@@ -1,7 +1,11 @@
-<a name="next"</a>
+<a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+<a name="0.4.0"></a>
+### [0.4.0 (February 9, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.0)
+
 #### Features
+- **uif-button**: directive added (@andrewconnell; closes [#14](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/14))
 - **uif-label**: directive added (@jjczopek; closes [#22](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/22))
 
 #### Breaking Changes
