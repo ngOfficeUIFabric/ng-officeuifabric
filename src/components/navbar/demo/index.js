@@ -3,7 +3,7 @@
 
   angular.module('demo', [
     'officeuifabric.core',
-    'officeuifabric.components.contextualmenu',
+    'officeuifabric.components.navbar',
     'ngSanitize'
   ])
     .directive('raw', ['$sce', function ($sce) {
@@ -27,11 +27,6 @@
     .controller('demoController',
       ['$scope', function ($scope) {
         $scope.isOpen = true;
-        $scope.dynamic = {};
-        $scope.dynamic.opened = false;
-        $scope.toggleMenu = function () {
-          $scope.dynamic.opened = !$scope.dynamic.opened;
-        }
         $scope.colors = ['Green', 'Yellow', 'Red', 'White', 'Blue'];
 
         $scope.logColor = function (color) {
@@ -40,6 +35,10 @@
 
         $scope.logClick = function (logData) {
           console.log(logData);
+        }
+
+        $scope.onSearch = function(search){
+          alert('You searched for "' + search + '"');
         }
       }]);
 

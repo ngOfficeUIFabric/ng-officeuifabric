@@ -90,7 +90,9 @@ export class BuildConfig {
    * ALl test files.
    */
   public static ALL_SPEC_FILES: string[] = [
-    'src/components/*/!(*.spec).js',
+    'src/components/*/!(*.spec|contextualMenu|navbarDirective).js',
+    'src/components/navbar/navbarDirective.js',
+    'src/components/contextualmenu/contextualMenu.js',
     'src/components/*/*.spec.js'
   ];
 }

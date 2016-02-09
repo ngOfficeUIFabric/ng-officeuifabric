@@ -1,23 +1,21 @@
-.ms-ContextualMenu.is-open {
-    position: relative;
-}
-
-.dynamic-menu .ms-ContextualMenu.is-open {
-  position: absolute;
+.mobile iframe {
+  width: 470px;
+  height: 350px;
+  border: 1px solid #E2DFDF;
 }
 
 .code {
   margin: -20px 0 -20px -40px;
 }
 
-.is-open-add{
+.ms-ContextualMenu.is-open-add{
     animation: 0.367s cubic-bezier(0.1, 0.9, 0.2, 1) fadeIn, slideRightIn40;
     -webkit-animation: 0.367s cubic-bezier(0.1, 0.9, 0.2, 1) fadeIn, slideRightIn40;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
 
-.is-open-remove{
+.ms-ContextualMenu.is-open-remove{
     animation: 0.167s cubic-bezier(0.1, 0.25, 0.75, 0.9) fadeOut, scaleDown98;
     -webkit-animation: 0.167s cubic-bezier(0.1, 0.25, 0.75, 0.9) fadeOut, scaleDown98;
     -webkit-animation-fill-mode: both;
@@ -28,7 +26,12 @@
     border: 1px solid #c8c8c8;
     display: block;
     list-style-type: none;
-    position: relative;
+    position: absolute;
     width: 180px;
     z-index: 105;
+}
+
+.ms-NavBar-item.ms-NavBar-item--search.is-open-add, .ms-NavBar-item.ms-NavBar-item--search.is-open-remove{
+  -webkit-transition: all .2s;
+	transition: all .2s;
 }
