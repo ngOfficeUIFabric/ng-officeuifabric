@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-persona-card demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Persona Card Demo | &lt;uif-persona-card&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <p>&nbsp;</p>
+
+
+
+  <div ng-controller="personaCardController">
+
+    <p>
+      You can control presence of the user, e.g.:
+      <uif-dropdown ng-model="vm.presence">
+        <uif-dropdown-option ng-repeat="(key, val) in vm.presenceOptions" value="{{key}}">{{val}}</uif-dropdown-option>
+      </uif-dropdown>
+    </p>
+
+    <p>
+      You can control size of the persona card, e.g.:
+      <uif-dropdown ng-model="vm.size">
+        <uif-dropdown-option ng-repeat="(key, val) in vm.sizeOptions" value="{{key}}">{{val}}</uif-dropdown-option>
+      </uif-dropdown>
+    </p>
+
+    <p>
+      You can control style of the persona card, e.g.:
+      <uif-dropdown ng-model="vm.style">
+        <uif-dropdown-option ng-repeat="(key, val) in vm.styleOptions" value="{{key}}">{{val}}</uif-dropdown-option>
+      </uif-dropdown>
+    </p>
+
+    <p>&nbsp;</p>
+
+    <div>
+      <uif-persona-card uif-style="{{vm.style}}" uif-size="{{vm.size}}" uif-presence="{{vm.presence}}" uif-image-url="Persona.Person2.png">
+        <uif-persona-card-primary-text>Alton Lafferty</uif-persona-card-primary-text>
+        <uif-persona-card-secondary-text>Interior Designer, Contoso</uif-persona-card-secondary-text>
+        <uif-persona-card-tertiary-text>Office: 7/1234</uif-persona-card-tertiary-text>
+        <uif-persona-card-optional-text>Available - Video capable</uif-persona-card-optional-text>
+        <uif-persona-card-action uif-icon="chat" uif-placeholder="regular">
+          <uif-persona-card-detail-line>
+            <uif-persona-card-detail-label>Lync:</uif-persona-card-detail-label>
+            <uif-link ng-href="#">Start Lync call</uif-link>
+          </uif-persona-card-detail-line>
+        </uif-persona-card-action>
+        <uif-persona-card-action uif-icon="phone" uif-placeholder="regular">
+          <uif-persona-card-detail-line>
+            <uif-persona-card-detail-label>Personal:</uif-persona-card-detail-label> 555.206.2443
+          </uif-persona-card-detail-line>
+          <uif-persona-card-detail-line>
+            <uif-persona-card-detail-label>Work:</uif-persona-card-detail-label> 555.929.8240
+          </uif-persona-card-detail-line>
+        </uif-persona-card-action>
+        <uif-persona-card-action uif-icon="video" uif-placeholder="regular">
+          <uif-persona-card-detail-line>
+            <uif-persona-card-detail-label>Skype:</uif-persona-card-detail-label>
+            <uif-link ng-href="#">Start Skype call</uif-link>
+          </uif-persona-card-detail-line>
+        </uif-persona-card-action>
+        <uif-persona-card-action uif-icon="mail" uif-placeholder="regular">
+          <uif-persona-card-detail-line>
+            <uif-persona-card-detail-label>Personal:</uif-persona-card-detail-label>
+            <uif-link ng-href="mailto:alton.lafferty@outlook.com">alton.lafferty@outlook.com</uif-link>
+          </uif-persona-card-detail-line>
+          <uif-persona-card-detail-line>
+            <uif-persona-card-detail-label>Work:</uif-persona-card-detail-label>
+            <uif-link ng-href="mailto:alton.lafferty@outlook.com">altonlafferty@contoso.com</uif-link>
+          </uif-persona-card-detail-line>
+        </uif-persona-card-action>
+        <uif-persona-card-action uif-icon="org" uif-placeholder="topright">
+          <div class="ms-OrgChart">
+            <div class="ms-OrgChart-group">
+              <ul class="ms-OrgChart-list">
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--darkBlue">RM</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Russel Miller</div>
+                        <div class="ms-Persona-secondaryText">Sales</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--green">DF</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Douglas Fielder</div>
+                        <div class="ms-Persona-secondaryText">Public Relations</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="ms-OrgChart-group">
+              <div class="ms-OrgChart-groupTitle">Manager</div>
+              <ul class="ms-OrgChart-list">
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--red">GS</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Grant Steel</div>
+                        <div class="ms-Persona-secondaryText">Sales</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="ms-OrgChart-group">
+              <div class="ms-OrgChart-groupTitle">Staff</div>
+              <ul class="ms-OrgChart-list">
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--teal">HW</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Harvey Wallin</div>
+                        <div class="ms-Persona-secondaryText">Public Relations</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--purple">ML</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Marcus Lauer</div>
+                        <div class="ms-Persona-secondaryText">Technical Support</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--lightBlue">MG</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Marcel Groce</div>
+                        <div class="ms-Persona-secondaryText">Delivery</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+                <li class="ms-OrgChart-listItem">
+                  <button class="ms-OrgChart-listItemBtn">
+                    <div class="ms-Persona">
+                      <div class="ms-Persona-imageArea">
+                        <div class="ms-Persona-initials ms-Persona-initials--green">JF</div>
+                        <img class="ms-Persona-image" src="Persona.Person2.png">
+                      </div>
+                      <div class="ms-Persona-presence"></div>
+                      <div class="ms-Persona-details">
+                        <div class="ms-Persona-primaryText">Jessica Fischer</div>
+                        <div class="ms-Persona-secondaryText">Marketing</div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </uif-persona-card-action>
+        <uif-persona-card-action uif-placeholder="overflow">
+          View profile on Delve
+        </uif-persona-card-action>
+      </uif-persona-card>
+    </div>
+
+    <p>
+      Above sample is rendered by this sample markup:
+      <br />
+      <pre>
+      &lt;uif-persona-card uif-style=&quot;{{vm.style}}&quot; uif-size=&quot;{{vm.size}}&quot; uif-presence=&quot;{{vm.presence}}&quot; uif-image-url=&quot;Persona.Person2.png&quot;&gt;
+        &lt;uif-persona-card-primary-text&gt;Alton Lafferty&lt;/uif-persona-card-primary-text&gt;
+        &lt;uif-persona-card-secondary-text&gt;Interior Designer, Contoso&lt;/uif-persona-card-secondary-text&gt;
+        &lt;uif-persona-card-tertiary-text&gt;Office: 7/1234&lt;/uif-persona-card-tertiary-text&gt;
+        &lt;uif-persona-card-optional-text&gt;Available - Video capable&lt;/uif-persona-card-optional-text&gt;
+        &lt;uif-persona-card-action uif-icon=&quot;chat&quot; uif-placeholder=&quot;regular&quot;&gt;
+          &lt;uif-persona-card-detail-line&gt;
+            &lt;uif-persona-card-detail-label&gt;Lync:&lt;/uif-persona-card-detail-label&gt;
+            &lt;uif-link ng-href=&quot;#&quot;&gt;Start Lync call&lt;/uif-link&gt;
+          &lt;/uif-persona-card-detail-line&gt;
+        &lt;/uif-persona-card-action&gt;
+        &lt;uif-persona-card-action uif-icon=&quot;phone&quot; uif-placeholder=&quot;regular&quot;&gt;
+          &lt;uif-persona-card-detail-line&gt;
+            &lt;uif-persona-card-detail-label&gt;Personal:&lt;/uif-persona-card-detail-label&gt; 555.206.2443
+          &lt;/uif-persona-card-detail-line&gt;
+          &lt;uif-persona-card-detail-line&gt;
+            &lt;uif-persona-card-detail-label&gt;Work:&lt;/uif-persona-card-detail-label&gt; 555.929.8240
+          &lt;/uif-persona-card-detail-line&gt;
+        &lt;/uif-persona-card-action&gt;
+        &lt;uif-persona-card-action uif-icon=&quot;video&quot; uif-placeholder=&quot;regular&quot;&gt;
+          &lt;uif-persona-card-detail-line&gt;
+            &lt;uif-persona-card-detail-label&gt;Skype:&lt;/uif-persona-card-detail-label&gt;
+            &lt;uif-link ng-href=&quot;#&quot;&gt;Start Skype call&lt;/uif-link&gt;
+          &lt;/uif-persona-card-detail-line&gt;
+        &lt;/uif-persona-card-action&gt;
+        &lt;uif-persona-card-action uif-icon=&quot;mail&quot; uif-placeholder=&quot;regular&quot;&gt;
+          &lt;uif-persona-card-detail-line&gt;
+            &lt;uif-persona-card-detail-label&gt;Personal:&lt;/uif-persona-card-detail-label&gt;
+            &lt;uif-link ng-href=&quot;mailto:alton.lafferty@outlook.com&quot;&gt;alton.lafferty@outlook.com&lt;/uif-link&gt;
+          &lt;/uif-persona-card-detail-line&gt;
+          &lt;uif-persona-card-detail-line&gt;
+            &lt;uif-persona-card-detail-label&gt;Work:&lt;/uif-persona-card-detail-label&gt;
+            &lt;uif-link ng-href=&quot;mailto:alton.lafferty@outlook.com&quot;&gt;altonlafferty@contoso.com&lt;/uif-link&gt;
+          &lt;/uif-persona-card-detail-line&gt;
+        &lt;/uif-persona-card-action&gt;
+        &lt;uif-persona-card-action uif-icon=&quot;org&quot; uif-placeholder=&quot;topright&quot;&gt;
+          &lt;!-- Org chart --&gt;
+        &lt;/uif-persona-card-action&gt;
+        &lt;uif-persona-card-action uif-placeholder=&quot;overflow&quot;&gt;
+          View profile on Delve
+        &lt;/uif-persona-card-action&gt;
+      &lt;/uif-persona-card&gt;
+      </pre>
+    </p>
+  </div>
+</body>
+
+</html>
