@@ -36,6 +36,53 @@ describe('datepicker: <uif-datepicker />', () => {
         }
         expect(exception).toBe(true, 'Invalid list of months should have failed.');
     }));
+    it('Should be able to use the custom month and date selector', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+
+        let $scope: any = $rootScope.$new();
+        $scope.value = new Date(2015, 2, 1);
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        datepicker = jQuery(datepicker[0]);
+
+        // add the element to the DOM, otherwise click event is not registered
+        datepicker.appendTo(document.body);
+
+        let monthPickerSwitcher: JQuery = datepicker.find('.js-showMonthPicker');
+        let yearPickerSwitcher: JQuery = datepicker.find('.js-showMonthPicker');
+
+        yearPickerSwitcher.click();
+        let yearPicker: JQuery = datepicker.find('.ms-DatePicker-yearPicker');
+        let monthPicker: JQuery = datepicker.find('.ms-DatePicker-monthPicker');
+        expect(yearPicker).toBeVisible();
+        expect(monthPicker).not.toBeVisible();
+
+        monthPickerSwitcher.click();
+        expect(monthPicker).toBeVisible();
+        expect(yearPicker).not.toBeVisible();
+
+        let highlightedMonth: JQuery = datepicker.find('.ms-DatePicker-monthOption.is-highlighted');
+
+        expect(highlightedMonth.html()).toContain('Feb', 'Selected month in month picker should be Feb');
+
+        let juneMonth: JQuery = datepicker.find('.js-changeDate.ms-DatePicker-monthOption[data-month=5]');
+
+        juneMonth.triggerHandler('click');
+        juneMonth.click();
+//        $scope.$digest();
+
+        expect(juneMonth).toHaveClass('is-highlighted');
+
+        let yearOptions: JQuery = datepicker.find('.ms-DatePicker-yearOption');
+        expect(yearOptions.length).toBe(11, 'There should be 11 year options');
+        let highlightedYear: JQuery = datepicker.find('.ms-DatePicker-yearOption.is-highlighted');
+        expect(highlightedYear.length).toBe(1, 'There should be one active year');
+        //console.log( datepicker.find('.ms-DatePicker-yearPicker').html());
+        expect(highlightedYear.html().trim()).toContain('2015');
+
+
+    }));
+
 
     it('Should be able to set and retrieve a value', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();

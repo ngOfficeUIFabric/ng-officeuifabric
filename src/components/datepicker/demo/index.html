@@ -2,12 +2,15 @@
 <html>
 
 <head>
-  <title>ngOfficeUiFabric | uif-Toggle demo</title>
+  <title>ngOfficeUiFabric | uif-DatePicker demo</title>
   <meta charset="utf-8" />
 
   <!-- office ui fabric css -->
-  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
-  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!--<link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />-->
+  
+  <link rel="stylesheet" href="http://appsforoffice.microsoft.com/fabric/1.2.1/fabric.min.css">
+    <link rel="stylesheet" href="http://appsforoffice.microsoft.com/fabric/1.2.1/fabric.components.min.css">
   <!-- angular library -->
   <script src="../../../../node_modules/angular/angular.js"></script>
   
@@ -27,7 +30,7 @@
 
 <body ng-app="demoApp">
 
-  <h1 class="ms-font-su">Datepicker Demo | &lt;uif-demo&gt;</h1> 
+  <h1 class="ms-font-su">Datepicker Demo | &lt;uif-datepicker&gt;</h1> 
   <em>In order for this demo to work you must first build the library in debug mode.</em>
   <br/>
   <em>This directive depends on
@@ -68,11 +71,7 @@
        uif-placeholder-text="Please, find a date"
        />
     <br/>
-    <p>Value: {{value_2}}</p>
-
-    <uif-datepicker ng-model="value"/>
-    <br/>
-    <p>Value: {{value}}</p>
+    <p>Value: {{value_2}}</p>  
 
   </p>
   <p>

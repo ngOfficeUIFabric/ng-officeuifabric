@@ -15,20 +15,37 @@ import * as ng from 'angular';
  */
 export class DatepickerController {
     public static $inject: string[] = ['$element', '$scope'];
+    public isPickingYears: boolean = false;
+    public isPickingMonths: boolean = false;
+    
+    private jElement: JQuery;
+    
     constructor($element: JQuery, public $scope: IDatepickerDirectiveScope) {
+        this.jElement = $($element[0]); 
+        $scope.ctrl = this;
+    }
+    public range(min: number, max: number, step: number): number[] {
+        step = step || 1;
+        // console.log('Range ' + min + ' to ' + max + ', step ' + step);
+        let input: number[] = [];
+        for (let i: number = min; i <= max; i += step) {
+            input.push(i);
+        }
+        return input;
     }
 
-    public getPicker($element: JQuery): Pickadate.DatePicker {
-        return $element.find('.ms-TextField-field').pickadate('picker');
+    public getPicker(): Pickadate.DatePicker {
+        return this.jElement.find('.ms-TextField-field').pickadate('picker');
     }
 
-    public setValue($element: JQuery, value: any): void {
-        this.getPicker($element).set('select', value);
+    public setValue(value: Date): void {
+        this.getPicker().set('select', value);
     }
 
-    public initDatepicker($element: JQuery, ngModel: ng.INgModelController): void {
+    public initDatepicker(ngModel: ng.INgModelController): void {
         let self: DatepickerController = this;
-        $element.find('.ms-TextField-field').pickadate({
+        
+        this.jElement.find('.ms-TextField-field').pickadate({
             // don't render the buttons
             clear: '',
             close: '',
@@ -58,20 +75,17 @@ export class DatepickerController {
             },
             // events
             onStart: function (): void {
-                self.initCustomView($element);
+                self.initCustomView();
             },
             today: '',
             // strings and translations
             weekdaysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
         });
-        let picker: Pickadate.DatePicker = this.getPicker($element);
+        let picker: Pickadate.DatePicker = this.getPicker();
         /** Respond to built-in picker events. */
         picker.on({
             open: function (): void {
-                self.scrollUp($element);
-            },
-            render: function (): void {
-                self.updateCustomView($element);
+                self.scrollUp();
             },
             set: function (value: string): void {
                 let formattedValue: string = picker.get('select', 'yyyy-mm-dd');
@@ -80,16 +94,16 @@ export class DatepickerController {
         });
     }
 
-    private initCustomView($element: JQuery): void {
+    private initCustomView(): void {
 
         /** Get some variables ready. */
-        let $monthControls: JQuery = $element.find('.ms-DatePicker-monthComponents');
-        let $goToday: JQuery = $element.find('.ms-DatePicker-goToday');
-        // let $dayPicker: JQuery = $element.find('.ms-DatePicker-dayPicker');
-        let $monthPicker: JQuery = $element.find('.ms-DatePicker-monthPicker');
-        let $yearPicker: JQuery = $element.find('.ms-DatePicker-yearPicker');
-        let $pickerWrapper: JQuery = $element.find('.ms-DatePicker-wrap');
-        let $picker: Pickadate.DatePicker = this.getPicker($element);
+        let $monthControls: JQuery = this.jElement.find('.ms-DatePicker-monthComponents');
+        let $goToday: JQuery = this.jElement.find('.ms-DatePicker-goToday');
+        // let $dayPicker: JQuery = jElement.find('.ms-DatePicker-dayPicker');
+        let $monthPicker: JQuery = this.jElement.find('.ms-DatePicker-monthPicker');
+        let $yearPicker: JQuery = this.jElement.find('.ms-DatePicker-yearPicker');
+        let $pickerWrapper: JQuery = this.jElement.find('.ms-DatePicker-wrap');
+        let $picker: Pickadate.DatePicker = this.getPicker();
         let self: DatepickerController = this;
 
         /** Move the month picker into position. */
@@ -99,49 +113,46 @@ export class DatepickerController {
         $monthPicker.appendTo($pickerWrapper);
         $yearPicker.appendTo($pickerWrapper);
 
-        /** Update the custom view. */
-        this.updateCustomView($element);
-
         /** Move back one month. */
         $monthControls.on('click', '.js-prevMonth', function (event: JQueryEventObject): void {
             event.preventDefault();
             let newMonth: number = $picker.get('highlight').month - 1;
-            self.changeHighlightedDate($element, null, newMonth, null);
+            self.changeHighlightedDate(null, newMonth, null);
         });
 
         /** Move ahead one month. */
         $monthControls.on('click', '.js-nextMonth', function (event: JQueryEventObject): void {
             event.preventDefault();
             let newMonth: number = $picker.get('highlight').month + 1;
-            self.changeHighlightedDate($element, null, newMonth, null);
+            self.changeHighlightedDate(null, newMonth, null);
         });
 
         /** Move back one year. */
         $monthPicker.on('click', '.js-prevYear', function (event: JQueryEventObject): void {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year - 1;
-            self.changeHighlightedDate($element, newYear, null, null);
+            self.changeHighlightedDate(newYear, null, null);
         });
 
         /** Move ahead one year. */
         $monthPicker.on('click', '.js-nextYear', function (event: JQueryEventObject): void {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year + 1;
-            self.changeHighlightedDate($element, newYear, null, null);
+            self.changeHighlightedDate(newYear, null, null);
         });
 
         /** Move back one decade. */
         $yearPicker.on('click', '.js-prevDecade', function (event: JQueryEventObject): void {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year - 10;
-            self.changeHighlightedDate($element, newYear, null, null);
+            self.changeHighlightedDate(newYear, null, null);
         });
 
         /** Move ahead one decade. */
         $yearPicker.on('click', '.js-nextDecade', function (event: JQueryEventObject): void {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year + 10;
-            self.changeHighlightedDate($element, newYear, null, null);
+            self.changeHighlightedDate(newYear, null, null);
         });
 
         /** Go to the current date, shown in the day picking view. */
@@ -153,7 +164,7 @@ export class DatepickerController {
             $picker.set('select', [now.getFullYear(), now.getMonth(), now.getDate()]);
 
             /** Switch to the default (calendar) view. */
-            $element.removeClass('is-pickingMonths').removeClass('is-pickingYears');
+            self.jElement.removeClass('is-pickingMonths').removeClass('is-pickingYears');
 
         });
 
@@ -168,11 +179,11 @@ export class DatepickerController {
             let newDay: number = currentDate.day;
 
             /** Update the date. */
-            self.changeHighlightedDate($element, newYear, newMonth, newDay);
+            self.changeHighlightedDate(newYear, newMonth, newDay);
 
             /** If we've been in the "picking months" state on mobile, remove that state so we show the calendar again. */
-            if ($element.hasClass('is-pickingMonths')) {
-                $element.removeClass('is-pickingMonths');
+            if (self.jElement.hasClass('is-pickingMonths')) {
+                self.jElement.removeClass('is-pickingMonths');
             }
         });
 
@@ -187,74 +198,43 @@ export class DatepickerController {
             let newDay: number = currentDate.day;
 
             /** Update the date. */
-            self.changeHighlightedDate($element, newYear, newMonth, newDay);
+            self.changeHighlightedDate(newYear, newMonth, newDay);
 
             /** If we've been in the "picking years" state on mobile, remove that state so we show the calendar again. */
-            if ($element.hasClass('is-pickingYears')) {
-                $element.removeClass('is-pickingYears');
+            if (self.jElement.hasClass('is-pickingYears')) {
+                self.jElement.removeClass('is-pickingYears');
             }
         });
 
         /** Switch to the default state. */
         $monthPicker.on('click', '.js-showDayPicker', function (event: JQueryEventObject): void {
-            $element.removeClass('is-pickingMonths');
-            $element.removeClass('is-pickingYears');
+            self.isPickingMonths = false;
+            self.isPickingYears = false;
+            self.$scope.$apply();
         });
 
         /** Switch to the is-pickingMonths state. */
         $monthControls.on('click', '.js-showMonthPicker', function (event: JQueryEventObject): void {
-            $element.toggleClass('is-pickingMonths');
+            self.isPickingMonths = !self.isPickingMonths;
+            self.$scope.$apply();
         });
 
         /** Switch to the is-pickingYears state. */
         $monthPicker.on('click', '.js-showYearPicker', function (event: JQueryEventObject): void {
-            $element.toggleClass('is-pickingYears');
+            self.isPickingYears = !self.isPickingYears;
+            self.$scope.$apply();
         });
+
+        // set the highlighted value 
+        self.$scope.highlightedValue = $picker.get('highlight');
     }
 
-    private updateCustomView($element: JQuery): void {
-        /** Get some variables ready. */
-        let $monthPicker: JQuery = $element.find('.ms-DatePicker-monthPicker');
-        let $yearPicker: JQuery = $element.find('.ms-DatePicker-yearPicker');
-        let $picker: Pickadate.DatePicker = this.getPicker($element);
-
-        /** Set the correct year. */
-        $monthPicker.find('.ms-DatePicker-currentYear').text($picker.get('view').year);
-
-        /** Highlight the current month. */
-        $monthPicker.find('.ms-DatePicker-monthOption').removeClass('is-highlighted');
-        $monthPicker.find('.ms-DatePicker-monthOption[data-month="' + $picker.get('highlight').month + '"]').addClass('is-highlighted');
-
-        /** Generate the grid of years for the year picker view. */
-
-        // start by removing any existing generated output. */
-        $yearPicker.find('.ms-DatePicker-currentDecade').remove();
-        $yearPicker.find('.ms-DatePicker-optionGrid').remove();
-
-        // generate the output by going through the years.
-        let startingYear: number = $picker.get('highlight').year - 11;
-        let decadeText: string = startingYear + ' - ' + (startingYear + 11);
-        let output: string = '<div class="ms-DatePicker-currentDecade">' + decadeText + '</div>';
-        output += '<div class="ms-DatePicker-optionGrid">';
-        for (let year: number = startingYear; year < (startingYear + 12); year++) {
-            output += '<span class="ms-DatePicker-yearOption js-changeDate" data-year="' + year + '">' + year + '</span>';
-        }
-        output += '</div>';
-
-        // output the title and grid of years generated above.
-        $yearPicker.append(output);
-
-        /** Highlight the current year. */
-        $yearPicker.find('.ms-DatePicker-yearOption').removeClass('is-highlighted');
-        $yearPicker.find('.ms-DatePicker-yearOption[data-year="' + $picker.get('highlight').year + '"]').addClass('is-highlighted');
+    private scrollUp(): void {
+        $('html, body').animate({ scrollTop: this.jElement.offset().top}, 367);
     }
 
-    private scrollUp($element: JQuery): void {
-        $('html, body').animate({ scrollTop: $element.offset().top}, 367);
-    }
-
-    private changeHighlightedDate($element: JQuery, newYear: number, newMonth: number, newDay: number): void {
-        let picker: Pickadate.DatePicker = this.getPicker($element);
+    private changeHighlightedDate(newYear: number, newMonth: number, newDay: number): void {
+        let picker: Pickadate.DatePicker = this.getPicker();
         /** All variables are optional. If not provided, default to the current value. */
         if (newYear == null) {
             newYear = picker.get('highlight').year;
@@ -268,7 +248,9 @@ export class DatepickerController {
 
         /** Update it. */
         picker.set('highlight', [newYear, newMonth, newDay]);
-
+        console.log("HIGHLIGHT");
+        this.$scope.highlightedValue = picker.get('highlight');
+        this.$scope.$apply();
     }
 }
 
@@ -290,6 +272,8 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
     uifLabel: string;
     uifPlaceholderText: string;
     monthsArray: string[];
+    highlightedValue: Pickadate.DateItem,
+    ctrl: DatepickerController;
 }
 
 /**
@@ -312,33 +296,62 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
  */
 
 export class DatepickerDirective implements ng.IDirective {
-    public template: string = '<span>{{bar}}</span><div class="ms-TextField">' +
-        '<label class="ms-Label">{{uifLabel}}</label>' +
-        '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
-        '<input class="ms-TextField-field" type="text" placeholder="{{uifPlaceholderText}}">' +
-        '</div>' +
-        '<div class="ms-DatePicker-monthComponents">' +
-        '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
-        '<span class="ms-DatePicker-prevMonth js-prevMonth"><i class="ms-Icon ms-Icon--chevronLeft"></i></span>' +
-        '<div class="ms-DatePicker-headerToggleView js-showMonthPicker"></div>' +
-        '</div>' +
-        '<span class="ms-DatePicker-goToday js-goToday">Go to today</span>' +
-        '<div class="ms-DatePicker-monthPicker">' +
-        '<div class="ms-DatePicker-header">' +
-        '<div class="ms-DatePicker-yearComponents">' +
-        '<span class="ms-DatePicker-nextYear js-nextYear"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
-        '<span class="ms-DatePicker-prevYear js-prevYear"><i class="ms-Icon ms-Icon--chevronLeft"></i></span>' +
-        '</div>' +
-        '<div class="ms-DatePicker-currentYear js-showYearPicker"></div>' +
-        '</div>' +
-    '<div class="ms-DatePicker-optionGrid" >' +
-    '<span ng-repeat="month in monthsArray" class="ms-DatePicker-monthOption js-changeDate" data-month="{{$index}}">{{month}}</span>' +
-    '</div></div>' +
-        '<div class="ms-DatePicker-yearPicker">' +
-        '<div class="ms-DatePicker-decadeComponents">' +
-        '<span class="ms-DatePicker-nextDecade js-nextDecade"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
-        '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--chevronLeft"></i></span>' +
-        '</div></div>';
+    public template: string =
+        '<div ng-class="{\'ms-DatePicker\': true, \'is-pickingYears\': ctrl.isPickingYears, \'is-pickingMonths\': ctrl.isPickingMonths}">' +
+            '<div class="ms-TextField">' +
+                '<label class="ms-Label">{{uifLabel}}</label>' +
+                '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
+                '<input class="ms-TextField-field" type="text" placeholder="{{uifPlaceholderText}}">' +
+            '</div>' +
+            '<div class="ms-DatePicker-monthComponents">' +
+                '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
+                '<span class="ms-DatePicker-prevMonth js-prevMonth"><i class="ms-Icon ms-Icon--chevronLeft"></i></span>' +
+                '<div class="ms-DatePicker-headerToggleView js-showMonthPicker"></div>' +
+            '</div>' +
+            '<span class="ms-DatePicker-goToday js-goToday">Go to today</span>' +
+            '<div class="ms-DatePicker-monthPicker">' +
+                '<div class="ms-DatePicker-header">' +
+                    '<div class="ms-DatePicker-yearComponents">' +
+                        '<span class="ms-DatePicker-nextYear js-nextYear"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
+                        '<span class="ms-DatePicker-prevYear js-prevYear"><i class="ms-Icon ms-Icon--chevronLeft"></i></span>' +
+                    '</div>' +
+                    '<div class="ms-DatePicker-currentYear js-showYearPicker">{{highlightedValue.year}}</div>' +
+                '</div>' +
+                '<div class="ms-DatePicker-optionGrid" >' +
+                    '<span ng-repeat="month in monthsArray"' +
+                        'ng-class="{\'ms-DatePicker-monthOption js-changeDate\': true, ' +
+                            '\'is-highlighted\': highlightedValue.month == $index}"' +
+                        'data-month="{{$index}}">' +
+                    '{{month}}</span>' +
+                '</div>' +
+            '</div>' +
+            '<div class="ms-DatePicker-yearPicker">' +
+                '<div class="ms-DatePicker-decadeComponents">' +
+                    '<span class="ms-DatePicker-nextDecade js-nextDecade"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
+                    '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--chevronLeft"></i></span>' +
+                '</div>' +
+                '<div class="ms-DatePicker-currentDecade">{{highlightedValue.year - 10}} - {{highlightedValue.year}}</div>' +
+                '<div class="ms-DatePicker-optionGrid">' +
+                    '<span ng-class="{\'ms-DatePicker-yearOption js-changeDate\': true,' +
+                        '\'is-highlighted\': highlightedValue.year == year}" ' +
+                        'ng-repeat="year in ctrl.range(highlightedValue.year - 10, highlightedValue.year)"' +
+                        'data-year="{{year}}">{{year}}</span>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+
+//         // generate the output by going through the years.
+//         let startingYear: number = $picker.get('highlight').year - 11;
+//         let decadeText: string = startingYear + ' - ' + (startingYear + 11);
+//         let output: string = '<div class="ms-DatePicker-currentDecade">' + decadeText + '</div>';
+//         output += '<div class="ms-DatePicker-optionGrid">';
+//         for (let year: number = startingYear; year < (startingYear + 12); year++) {
+//             output += '<span class="ms-DatePicker-yearOption js-changeDate" data-year="' + year + '">' + year + '</span>';
+//         }
+//         output += '</div>';
+// 
+//         // output the title and grid of years generated above.
+//         $yearPicker.append(output);
     public controller: typeof DatepickerController = DatepickerController;
     public restrict: string = 'E';
 
@@ -354,10 +367,17 @@ export class DatepickerDirective implements ng.IDirective {
 
         return directive;
     }
-    // todo scope interface
-    public link($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
-        let datepickerController: DatepickerController = ctrls[0];
-        let ngModel: ng.INgModelController = ctrls[1];
+    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
+        : ng.IDirectivePrePost {
+        return {
+            post: this.postLink,
+            pre: this.preLink
+        };
+    }
+
+    private preLink(
+        $scope: IDatepickerDirectiveScope, instanceElement: ng.IAugmentedJQuery,
+        instanceAttributes: ng.IAttributes, ctrls: {}): void {
         if (!$scope.uifMonths) {
             $scope.uifMonths = 'Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec';
         }
@@ -368,15 +388,21 @@ export class DatepickerDirective implements ng.IDirective {
         if (!$scope.uifPlaceholderText) {
             $scope.uifPlaceholderText = 'Select a date';
         }
-
         $scope.monthsArray = $scope.uifMonths.split(',');
         if ($scope.monthsArray.length !== 12) {
             throw 'Months setting should have 12 months, separated by a comma';
         }
-        datepickerController.initDatepicker(jQuery($element), ngModel);
+
+    }
+
+    private postLink($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
+        let datepickerController: DatepickerController = ctrls[0];
+        let ngModel: ng.INgModelController = ctrls[1];
+
+        datepickerController.initDatepicker(ngModel);
         ngModel.$render = function (): void {
             if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
-                datepickerController.setValue(jQuery($element), new Date(ngModel.$modelValue));
+                datepickerController.setValue(new Date(ngModel.$modelValue));
             }
         };
     }
