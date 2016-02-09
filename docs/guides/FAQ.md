@@ -14,13 +14,14 @@ As we get commonly asked questions, we will post them here.
 
 In working on this library, the contributors have found and reported numerous bugs / issues within the Office UI Fabric project including these:
 
-  - [#262](https://github.com/OfficeDev/Office-UI-Fabric/issues/262) - Version number in header of distribution CSS incorrect for 1.2.0 (says 1.1.3)
-  - [#281](https://github.com/OfficeDev/Office-UI-Fabric/issues/281) - Progress Indicator's CSS not in main CSS distro
-  - [#283](https://github.com/OfficeDev/Office-UI-Fabric/issues/283) - ContextualMenu header text out of alignment
-  - [#287](https://github.com/OfficeDev/Office-UI-Fabric/issues/287) - Fix ContextualMenu animations
-  - [#292](https://github.com/OfficeDev/Office-UI-Fabric/issues/292) - Design responsive behavior for tables
-  - [#302](https://github.com/OfficeDev/Office-UI-Fabric/issues/302) - Label consisting of multiple words wrapped on each word
-  - [#316](https://github.com/OfficeDev/Office-UI-Fabric/issues/316) - TextField: Placeholder interferes with input field hover
+- [#262](https://github.com/OfficeDev/Office-UI-Fabric/issues/262) - Version number in header of distribution CSS incorrect for 1.2.0 (says 1.1.3)
+- [#281](https://github.com/OfficeDev/Office-UI-Fabric/issues/281) & [#325](https://github.com/OfficeDev/Office-UI-Fabric/issues/325) - Progress Indicator's CSS not in main CSS distro
+- [#283](https://github.com/OfficeDev/Office-UI-Fabric/issues/283) - ContextualMenu header text out of alignment
+- [#287](https://github.com/OfficeDev/Office-UI-Fabric/issues/287) - Fix ContextualMenu animations
+- [#292](https://github.com/OfficeDev/Office-UI-Fabric/issues/292) - Design responsive behavior for tables
+- [#302](https://github.com/OfficeDev/Office-UI-Fabric/issues/302) - Label consisting of multiple words wrapped on each word
+- [#316](https://github.com/OfficeDev/Office-UI-Fabric/issues/316) - TextField: Placeholder interferes with input field hover
+- [#328](https://github.com/OfficeDev/Office-UI-Fabric/issues/328) - Large spinner misplaced
 
 ## What Version of Angular is Supported?
 
@@ -52,5 +53,5 @@ This library has only two dependencies:
 
 There is one exception to the dependencies above. The date picker component in the Office UI Fabric has a tight dependency on the [pickadate.js](http://amsul.ca/pickadate.js/) library. Because this library is a [jQuery](http://jquery.com/) plugin & the Office UI Fabric CSS is written for this plugin, when using our date picker component, you will need:
 
-  - [jQuery](https://www.npmjs.com/package/jquery) v2.2.0
-  - [pickadate](https://www.npmjs.com/package/pickadate) v3.4.6
+- [jQuery](https://www.npmjs.com/package/jquery) v2.2.0
+- [pickadate](https://www.npmjs.com/package/pickadate) v3.4.6
