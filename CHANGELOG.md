@@ -3,6 +3,7 @@
 
 #### Features
 - **uif-datepicker**: directive added (@rolandoldengarm; closes [#19](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/19))
+- **uif-navbar**: directive added (@s-KaiNet; closes [#26](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/26))
 
 <a name="0.4.1"></a>
 ### [0.4.1 (February 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.1))
