@@ -17,11 +17,11 @@ export class DatepickerController {
     public static $inject: string[] = ['$element', '$scope'];
     public isPickingYears: boolean = false;
     public isPickingMonths: boolean = false;
-    
+
     private jElement: JQuery;
-    
+
     constructor($element: JQuery, public $scope: IDatepickerDirectiveScope) {
-        this.jElement = $($element[0]); 
+        this.jElement = $($element[0]);
         $scope.ctrl = this;
     }
     public range(min: number, max: number, step: number): number[] {
@@ -40,11 +40,12 @@ export class DatepickerController {
 
     public setValue(value: Date): void {
         this.getPicker().set('select', value);
+        this.changeHighlightedDate(value.getFullYear(), value.getMonth(), value.getDate());
     }
 
     public initDatepicker(ngModel: ng.INgModelController): void {
         let self: DatepickerController = this;
-        
+
         this.jElement.find('.ms-TextField-field').pickadate({
             // don't render the buttons
             clear: '',
@@ -118,6 +119,7 @@ export class DatepickerController {
             event.preventDefault();
             let newMonth: number = $picker.get('highlight').month - 1;
             self.changeHighlightedDate(null, newMonth, null);
+            self.$scope.$apply();
         });
 
         /** Move ahead one month. */
@@ -125,6 +127,7 @@ export class DatepickerController {
             event.preventDefault();
             let newMonth: number = $picker.get('highlight').month + 1;
             self.changeHighlightedDate(null, newMonth, null);
+            self.$scope.$apply();
         });
 
         /** Move back one year. */
@@ -132,6 +135,7 @@ export class DatepickerController {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year - 1;
             self.changeHighlightedDate(newYear, null, null);
+            self.$scope.$apply();
         });
 
         /** Move ahead one year. */
@@ -139,6 +143,7 @@ export class DatepickerController {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year + 1;
             self.changeHighlightedDate(newYear, null, null);
+            self.$scope.$apply();
         });
 
         /** Move back one decade. */
@@ -146,6 +151,7 @@ export class DatepickerController {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year - 10;
             self.changeHighlightedDate(newYear, null, null);
+            self.$scope.$apply();
         });
 
         /** Move ahead one decade. */
@@ -153,6 +159,7 @@ export class DatepickerController {
             event.preventDefault();
             let newYear: number = $picker.get('highlight').year + 10;
             self.changeHighlightedDate(newYear, null, null);
+            self.$scope.$apply();
         });
 
         /** Go to the current date, shown in the day picking view. */
@@ -165,7 +172,7 @@ export class DatepickerController {
 
             /** Switch to the default (calendar) view. */
             self.jElement.removeClass('is-pickingMonths').removeClass('is-pickingYears');
-
+            self.$scope.$apply();
         });
 
         /** Change the highlighted month. */
@@ -185,6 +192,7 @@ export class DatepickerController {
             if (self.jElement.hasClass('is-pickingMonths')) {
                 self.jElement.removeClass('is-pickingMonths');
             }
+            self.$scope.$apply();
         });
 
         /** Change the highlighted year. */
@@ -204,6 +212,7 @@ export class DatepickerController {
             if (self.jElement.hasClass('is-pickingYears')) {
                 self.jElement.removeClass('is-pickingYears');
             }
+            self.$scope.$apply();
         });
 
         /** Switch to the default state. */
@@ -248,9 +257,7 @@ export class DatepickerController {
 
         /** Update it. */
         picker.set('highlight', [newYear, newMonth, newDay]);
-        console.log("HIGHLIGHT");
         this.$scope.highlightedValue = picker.get('highlight');
-        this.$scope.$apply();
     }
 }
 
@@ -272,7 +279,7 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
     uifLabel: string;
     uifPlaceholderText: string;
     monthsArray: string[];
-    highlightedValue: Pickadate.DateItem,
+    highlightedValue: Pickadate.DateItem;
     ctrl: DatepickerController;
 }
 
@@ -339,21 +346,9 @@ export class DatepickerDirective implements ng.IDirective {
                 '</div>' +
             '</div>' +
         '</div>';
-
-//         // generate the output by going through the years.
-//         let startingYear: number = $picker.get('highlight').year - 11;
-//         let decadeText: string = startingYear + ' - ' + (startingYear + 11);
-//         let output: string = '<div class="ms-DatePicker-currentDecade">' + decadeText + '</div>';
-//         output += '<div class="ms-DatePicker-optionGrid">';
-//         for (let year: number = startingYear; year < (startingYear + 12); year++) {
-//             output += '<span class="ms-DatePicker-yearOption js-changeDate" data-year="' + year + '">' + year + '</span>';
-//         }
-//         output += '</div>';
-// 
-//         // output the title and grid of years generated above.
-//         $yearPicker.append(output);
     public controller: typeof DatepickerController = DatepickerController;
     public restrict: string = 'E';
+    public replace: boolean = true;
 
     public scope: any = {
         uifLabel: '@',

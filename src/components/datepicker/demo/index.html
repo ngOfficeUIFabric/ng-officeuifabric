@@ -6,11 +6,9 @@
   <meta charset="utf-8" />
 
   <!-- office ui fabric css -->
-  <!--<link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
-  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />-->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
   
-  <link rel="stylesheet" href="http://appsforoffice.microsoft.com/fabric/1.2.1/fabric.min.css">
-    <link rel="stylesheet" href="http://appsforoffice.microsoft.com/fabric/1.2.1/fabric.components.min.css">
   <!-- angular library -->
   <script src="../../../../node_modules/angular/angular.js"></script>
   
@@ -28,7 +26,7 @@
   <script src="index.js"></script>
 </head>
 
-<body ng-app="demoApp">
+<body ng-app="demoApp" ng-controller="demoController">
 
   <h1 class="ms-font-su">Datepicker Demo | &lt;uif-datepicker&gt;</h1> 
   <em>In order for this demo to work you must first build the library in debug mode.</em>
@@ -40,10 +38,21 @@
     </ul>   
     Add references to jquery.js, pickadate.js, and picker.js, and picker.date.js BEFORE
     the ngofficeuifabric.js reference</em>
+    <br/><br/>
+    <strong>IMPORTANT! The latest supported version of Pickadate is 3.5.3. Version 3.5.6 introduced an issue with the OfficeUIFabric
+        implementation of the DatePicker. This has been raised with the OfficeUIFabric and will be fixed in a next release, see the
+        <a href="https://github.com/OfficeDev/Office-UI-Fabric/pull/337">pull request</a> for more information.
+    </strong>
+    <hr />
+    <h2>Demos</h2>
   <p>
     This markup: <br />
     <code>
         &lt;uif-datepicker ng-model=&quot;value&quot;/&gt;  
+    </code>
+    <br/>and this script:
+    <code>
+        $scope.value = new Date(2016, 3, 2);    
     </code>
   </p>
 
