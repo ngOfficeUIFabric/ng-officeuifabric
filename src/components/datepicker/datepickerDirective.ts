@@ -265,12 +265,12 @@ export class DatepickerController {
  * 
  * @property {string} uifMonths - Comma separated list of all months  
  * @property {string} uifLabel - The label to display above the date picker
- * @property {string} uifPlaceholderText - The placeholder to display in the text box  
+ * @property {string} placeholder - The placeholder to display in the text box  
  */
 export interface IDatepickerDirectiveScope extends ng.IScope {
     uifMonths: string;
     uifLabel: string;
-    uifPlaceholderText: string;
+    placeholder: string;
     monthsArray: string[];
     highlightedValue: Pickadate.DateItem;
     ctrl: DatepickerController;
@@ -289,7 +289,7 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
  * @usage
  * <uif-datepicker 
  *      ng-model="value" 
- *      uif-placeholder-text="Please, find a date"
+ *      placeholder="Please, find a date"
  *      uif-months="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
  *      uif-label="Start date"
  * />
@@ -301,7 +301,7 @@ export class DatepickerDirective implements ng.IDirective {
             '<div class="ms-TextField">' +
                 '<label class="ms-Label">{{uifLabel}}</label>' +
                 '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
-                '<input class="ms-TextField-field" type="text" placeholder="{{uifPlaceholderText}}">' +
+                '<input class="ms-TextField-field" type="text" placeholder="{{placeholder}}">' +
             '</div>' +
             '<div class="ms-DatePicker-monthComponents">' +
                 '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
@@ -344,9 +344,9 @@ export class DatepickerDirective implements ng.IDirective {
     public replace: boolean = true;
 
     public scope: any = {
+        placeholder : '@',
         uifLabel: '@',
-        uifMonths: '@',
-        uifPlaceholderText : '@'
+        uifMonths: '@'
     };
     public require: string[] = ['uifDatepicker', '?ngModel'];
 
@@ -373,8 +373,8 @@ export class DatepickerDirective implements ng.IDirective {
             $scope.uifLabel = 'Start Date';
         }
 
-        if (!$scope.uifPlaceholderText) {
-            $scope.uifPlaceholderText = 'Select a date';
+        if (!$scope.placeholder) {
+            $scope.placeholder = 'Select a date';
         }
         $scope.monthsArray = $scope.uifMonths.split(',');
         if ($scope.monthsArray.length !== 12) {

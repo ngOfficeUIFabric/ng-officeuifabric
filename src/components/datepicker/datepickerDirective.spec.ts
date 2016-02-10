@@ -121,7 +121,7 @@ describe('datepicker: <uif-datepicker />', () => {
     it('Should be able to click  next and prev decade', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2015, 1, 1);
-        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" uif-placeholder-text="TEST"></uif-datepicker>')($scope);
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
         $scope.$digest();
         datepicker = jQuery(datepicker[0]);
         datepicker.appendTo(document.body);
@@ -145,7 +145,7 @@ describe('datepicker: <uif-datepicker />', () => {
     it('Should be able to set and retrieve a value', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
-        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" uif-placeholder-text="TEST"></uif-datepicker>')($scope);
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
         $scope.$digest();
         datepicker = jQuery(datepicker[0]);
         expect($scope.value).toBe('');
@@ -193,7 +193,7 @@ describe('datepicker: <uif-datepicker />', () => {
         let input: JQuery = jQuery(datepicker[0]).find('.ms-TextField-field');
         expect(input.attr('Placeholder')).toBe('Select a date');
 
-        datepicker = $compile('<uif-datepicker ng-model="value" uif-placeholder-text="Please, find a date"></uif-datepicker>')($scope);
+        datepicker = $compile('<uif-datepicker ng-model="value" placeholder="Please, find a date"></uif-datepicker>')($scope);
         $scope.$digest();
 
         // verify custom value
