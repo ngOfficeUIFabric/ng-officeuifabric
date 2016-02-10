@@ -67,6 +67,11 @@ describe('datepicker: <uif-datepicker />', () => {
         nextYear.click();
         highlightedYear = datepicker.find('.ms-DatePicker-yearOption.is-highlighted');
         expect(highlightedYear.html()).toBe('2014', 'Highlighted year should be 2015');
+
+        let year2010: JQuery = datepicker.find('.js-changeDate.ms-DatePicker-yearOption[data-year=2010]');
+        year2010.click();
+
+        expect(year2010).toHaveClass('is-highlighted');
     }));
     it('Should be able to use the custom month selector', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
 

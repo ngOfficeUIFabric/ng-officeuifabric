@@ -215,13 +215,6 @@ export class DatepickerController {
             self.$scope.$apply();
         });
 
-        /** Switch to the default state. */
-        $monthPicker.on('click', '.js-showDayPicker', function (event: JQueryEventObject): void {
-            self.isPickingMonths = false;
-            self.isPickingYears = false;
-            self.$scope.$apply();
-        });
-
         /** Switch to the is-pickingMonths state. */
         $monthControls.on('click', '.js-showMonthPicker', function (event: JQueryEventObject): void {
             self.isPickingMonths = !self.isPickingMonths;
