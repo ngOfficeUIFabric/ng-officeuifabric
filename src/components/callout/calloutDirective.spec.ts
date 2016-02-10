@@ -22,23 +22,28 @@ describe('calloutDirectives:', () => {
     }));
 
     it('main element should be DIV', () => {
+      element = jQuery(element[0]);
       let calloutElement: JQuery = element.children().first();
 
       expect(calloutElement[0].tagName === 'DIV').toBeTruthy();
     });
 
-    it('should not throw error on mouseenter and leave', () => {
+    it('should not throw error on mouseenter and leave', inject(($compile: ng.ICompileService) => {
+      let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout></uif-callout>');
+      $compile(jqlElement)(scope);
+      scope.$digest();
 
-      element.triggerHandler('mouseenter');
+      jqlElement.triggerHandler('mouseenter');
       scope.$digest();
 
       expect(() => {
-        element.triggerHandler('mouseleave');
+        jqlElement.triggerHandler('mouseleave');
       }).not.toThrow(new Error('[$compile:nonassign] Expression \'undefined\' ' +
       'used with directive \'uifCallout\' is non-assignable!\n' +
       'http://errors.angularjs.org/1.4.9/$compile/nonassign?p0=undefined&p1=uifCallout'));
 
-    });
+
+    }));
 
     it('main element should have callout CSS class', () => {
       let calloutElement: JQuery = element.find('div').first();
@@ -307,49 +312,47 @@ describe('calloutDirectives:', () => {
     }));
 
     it('should close by itself when mouse outside callout', inject(($compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
+      let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
+      scope.vm.isOpen = true;
+      $compile(jqlElement)(scope);
+      scope.$digest();
 
-        scope.vm.isOpen = true;
+      let jqueryElement: JQuery = jQuery(jqlElement[0]);
+      expect(jqueryElement[0]).not.toHaveClass('ng-hide');
 
-        $compile(element)(scope);
-        scope.$digest();
+      jqlElement.triggerHandler('mouseenter');
+      scope.$digest();
+      expect(jqueryElement[0]).not.toHaveClass('ng-hide');
 
-        element = jQuery(element[0]);
+      jqlElement.triggerHandler('mouseleave');
+      scope.$digest();
+      expect(jqueryElement[0]).toHaveClass('ng-hide');
 
-        let callout: JQuery = element.eq(0);
-        callout.mouseenter();
-        scope.$digest();
-
-        expect(element[0]).not.toHaveClass('ng-hide');
-
-        scope.vm.isOpen = false;
-        callout.mouseleave();
-        scope.$digest();
-        expect(element[0]).toHaveClass('ng-hide');
     }));
 
     it('should close itself when mouse over callout and close button clicked', inject(($compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
+        let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
+        element = jQuery(jqlElement[0]);
+
 
         scope.vm.isOpen = true;
-
         $compile(element)(scope);
         scope.$digest();
 
-        element = jQuery(element);
-
-        let callout: JQuery = element.eq(0);
-        callout.mouseenter();
+        jqlElement.triggerHandler('mouseenter');
         scope.$digest();
 
         expect(element[0]).not.toHaveClass('ng-hide');
 
-        let closeButton: JQuery = element.find('button.ms-Callout-close').eq(0);
-        closeButton.click();
+        let closeButton: JQuery = jqlElement.find('button').eq(0);
+        closeButton.triggerHandler('click');
         scope.$digest();
 
         expect(element[0]).toHaveClass('ng-hide');
     }));
+
+
+
 
     it('should not close when mouse moves outside callout but there is close button', inject(($compile: ng.ICompileService) => {
         element = ng.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
@@ -359,15 +362,12 @@ describe('calloutDirectives:', () => {
         $compile(element)(scope);
         scope.$digest();
 
-        element = jQuery(element[0]);
-
-        let callout: JQuery = element.eq(0);
-        callout.mouseenter();
+        element.triggerHandler('mouseenter');
         scope.$digest();
 
         expect(element[0]).not.toHaveClass('ng-hide');
 
-        callout.mouseleave();
+        element.triggerHandler('mouseleave');
         scope.$digest();
 
         expect(element[0]).not.toHaveClass('ng-hide');
@@ -550,14 +550,14 @@ describe('calloutDirectives:', () => {
     it('action buttons get proper CSS when uif-actiontext is used', inject(($compile: ng.ICompileService) => {
       element = ng.element('<uif-callout uif-action-text>' +
       '<uif-callout-actions>' +
-      '<button class="ms-Button ms-Button--command">' +
-      '<span class="ms-Button-icon"><i class="ms-Icon ms-Icon--check"></i></span>' +
-      '<span class="ms-Button-label">Save</span>' +
-      '</button>' +
-      '<button class="ms-Button ms-Button--command">' +
-      '<span class="ms-Button-icon"><i class="ms-Icon ms-Icon--x"></i></span>' +
-      '<span class="ms-Button-label">Cancel</span>' +
-      '</button>' +
+      '<uif-button uif-type="command">' +
+      '<uif-icon uif-type="check"></uif-icon>' +
+      'Save' +
+      '</uif-button>' +
+      '<uif-button uif-type="command">' +
+      '<uif-icon uif-type="x"></uif-icon>' +
+      'Cancel' +
+      '</uif-button>' +
       '</uif-callout-actions>' +
       '</uif-callout>');
 
@@ -577,11 +577,11 @@ describe('calloutDirectives:', () => {
       expect(secondButton).toHaveClass('ms-Callout-action');
 
 
-      let firstButtonSpans: JQuery = firstButton.find('span');
+      let firstButtonSpans: JQuery = firstButton.children('span')
       expect(firstButtonSpans.length).toBe(2);
       expect(firstButtonSpans).toHaveClass('ms-Callout-actionText');
 
-      let secondButtonSpans: JQuery = secondButton.find('span');
+      let secondButtonSpans: JQuery = secondButton.children('span');
       expect(secondButtonSpans.length).toBe(2);
       expect(secondButtonSpans).toHaveClass('ms-Callout-actionText');
     }));
@@ -589,10 +589,10 @@ describe('calloutDirectives:', () => {
     it('action links get proper CSS when uif-actiontext is used', inject(($compile: ng.ICompileService) => {
       element = ng.element('<uif-callout uif-action-text>' +
       '<uif-callout-actions>' +
-      '<a class="ms-Button ms-Button--command">' +
-      '<span class="ms-Button-icon"><i class="ms-Icon ms-Icon--x"></i></span>' +
-      '<span class="ms-Button-label">Cancel</span>' +
-      '</a>' +
+      '<uif-button uif-type="command" ng-href="#">' +
+      '<uif-icon uif-type="x"></uif-icon>' +
+      'Cancel' +
+      '</uif-button>' +
       '</uif-callout-actions>' +
       '</uif-callout>');
 
@@ -609,10 +609,14 @@ describe('calloutDirectives:', () => {
 
       expect(firstAction).toHaveClass('ms-Callout-action');
 
-      let firstActionSpans: JQuery = firstAction.find('span');
+      let firstActionSpans: JQuery = firstAction.children('span');
       expect(firstActionSpans.length).toBe(2);
       expect(firstActionSpans).toHaveClass('ms-Callout-actionText');
 
+      // deepest span should not have the ms-Callout-actionText class
+      let deepestSpan: JQuery = firstActionSpans.children('span');
+      expect(deepestSpan.length).toBe(1);
+      expect(deepestSpan).not.toHaveClass('ms-Callout-actionText');
     }));
 
 
