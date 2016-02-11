@@ -19,85 +19,99 @@
 
   <h1 class="ms-font-su">Button Demo | &lt;uif-button&gt;</h1>
   <em>In order for this demo to work you must first build the library in debug mode.</em>
+  
+  <p>The button comes in multiple flavors, all demonstrated below. The simplest button is the default, known as <strong>regular</strong> or <strong>action</strong> button:</p>
 
-  <h1>action (aka:regular) buttons</h1>
-  <uif-button>Button as button</uif-button>
-  <uif-button disabled>Button as button</uif-button>
-  <uif-button ng-href="http://ngOfficeUiFabric.com">Button as link</uif-button>
-  <uif-button disabled ng-href="http://ngOfficeUiFabric.com">Button as link</uif-button>
+  <p>
+    This markup:<br />
+    <code>
+      &lt;uif-button&gt;Click Me!&lt;/uif-button&gt;
+    </code>
+  </p>
 
-  <h1>primary buttons</h1>
-  <uif-button uif-type="primary">PrimaryButton as button</uif-button>
-  <uif-button uif-type="primary" disabled>PrimaryButton as button</uif-button>
-  <uif-button uif-type="primary" ng-href="http://ngOfficeUiFabric.com">PrimaryButton as link</uif-button>
-  <uif-button uif-type="primary" disabled ng-href="http://ngOfficeUiFabric.com">PrimaryButton as link</uif-button>
+  <p>
+    Renders this:<br />
+    <uif-button>Click Me!</uif-button>
+  </p>
 
-  <h1>command buttons</h1>
-  <uif-button uif-type="command">CommandButton as button</uif-button>
-  <uif-button uif-type="command" disabled>CommandButton as button</uif-button>
-  <uif-button uif-type="command" ng-href="http://ngOfficeUiFabric.com">CommandButton as link</uif-button>
-  <uif-button uif-type="command" disabled ng-href="http://ngOfficeUiFabric.com">CommandButton as link</uif-button>
-  <p />
-  <uif-button uif-type="command">
-    <uif-icon uif-type="alert"></uif-icon>CommandIcon as button
-  </uif-button>
-  <uif-button uif-type="command" disabled>
-    <uif-icon uif-type="alert"></uif-icon>CommandIcon as button
-  </uif-button>
-  <uif-button uif-type="command" ng-href="http://ngOfficeUiFabric.com">
-    <uif-icon uif-type="alert"></uif-icon>CommandIcon as link
-  </uif-button>
-  <uif-button uif-type="command" disabled ng-href="http://ngOfficeUiFabric.com">
-    <uif-icon uif-type="alert"></uif-icon>CommandIcon as link
-  </uif-button>
+  <h3>Button Types</h3>
+  <p>
+    You can also change the type of the button by specifying one of the following types in the button's <code>uif-type</code> attribute:
+    <ul>
+      <li><strong>primary</strong>: changes the button to blue (primary color)</li>
+      <li><strong>command</strong>: rendering doesn't have the button rectange... looks more like a link &amp; can have an optional icon in the label</li>
+      <li><strong>compound</strong>: a bigger button, but it can optionally have a description associated with it</li>
+      <li><strong>hero</strong>: a big button without the button rectangle and can include an optional</li>
+    </ul>
+  </p>
 
-  <h1>compound button</h1>
-  <uif-button uif-type="compound">CompoundButton as button</uif-button>
-  <uif-button uif-type="compound" disabled>CompoundButton as button</uif-button>
-  <p />
-  <uif-button uif-type="compound" ng-href="http://ngOfficeUiFabric.com">CompoundButton as link</uif-button>
-  <uif-button uif-type="compound" disabled ng-href="http://ngOfficeUiFabric.com">CompoundButton as link</uif-button>
-  <p />
-  <uif-button uif-type="compound">
-    CompoundDescription as button
-    <uif-button-description>CompoundDescription description</uif-button-description>
-  </uif-button>
-  <uif-button uif-type="compound" disabled>
-    CompoundDescription as button
-    <uif-button-description>CompoundDescription description</uif-button-description>
-  </uif-button>
-  <p />
-  <uif-button uif-type="compound" ng-href="http://ngOfficeUiFabric.com">
-    CompoundDescription as link
-    <uif-button-description>CompoundDescription description</uif-button-description>
-  </uif-button>
-  <uif-button uif-type="compound" disabled ng-href="http://ngOfficeUiFabric.com">
-    CompoundDescription as link
-    <uif-button-description>CompoundDescription description</uif-button-description>
-  </uif-button>
+  <h3>Disabled Buttons</h3>
+  <p>
+    All buttons can be disabled by simply adding a <code>disabled</code> attribute to the button's opening elemnt.
+  </p>
 
+  <h3>Buttons as Buttons or Links</h3>
+  <p>
+    Buttons are rendered as <code>&lt;button&gt;</code> elements by default. However if you include a <code>ng-href=""</code> attribute to the opening button element, the directive will render the button as a <code>&lt;a&gt;</code> element instead.
+  </p>
 
-  <h1>hero button</h1>
-  <uif-button uif-type="hero">HeroButton as button</uif-button>
-  <uif-button uif-type="hero" disabled>HeroButton as button</uif-button>
-  <p />
-  <uif-button uif-type="hero" ng-href="http://ngOfficeUiFabric.com">HeroButton as link</uif-button>
-  <uif-button uif-type="hero" disabled ng-href="http://ngOfficeUiFabric.com">HeroButton as link</uif-button>
-  <p />
-  <uif-button uif-type="hero">
-    <uif-icon uif-type="plus"></uif-icon>HeroIcon as button
-  </uif-button>
-  <uif-button uif-type="hero" disabled>
-    <uif-icon uif-type="plus"></uif-icon>HeroIcon as button
-  </uif-button>
-  <p />
-  <uif-button uif-type="hero" ng-href="http://ngOfficeUiFabric.com">
-    <uif-icon uif-type="plus"></uif-icon>HeroIcon as link
-  </uif-button>
-  <uif-button uif-type="hero" disabled ng-href="http://ngOfficeUiFabric.com">
-    <uif-icon uif-type="plus"></uif-icon>HeroIcon as link
-  </uif-button>
+  <hr />
 
+  <h2>Primary Button</h2>
+  <p>
+    This markup:
+    <pre>
+&lt;uif-button uif-type="primary"&gt;Click Me!&lt;/uif-button&gt;
+    </pre>
+    Renders this:<br />
+    <uif-button uif-type="primary">Click Me!</uif-button>
+  </p>
+
+  <h2>Command Button</h2>
+  <p>
+    This markup:
+    <pre>
+&lt;uif-button uif-type="command"&gt;
+  &lt;uif-icon uif-type="plus"&gt;&lt;/uif-icon&gt;
+  Click Me!
+&lt;/uif-button&gt;
+    </pre>
+    Renders this:<br />
+    <uif-button uif-type="command">
+      <uif-icon uif-type="plus"></uif-icon>Click Me!
+    </uif-button>
+  </p>
+
+  <h2>Compound Button</h2>
+  <p>
+    This markup:
+    <pre>
+&lt;uif-button uif-type="compound"&gt;
+  Click Me!
+  &lt;uif-button-description&gt;a button with a description&lt;/uif-button-description&gt;
+&lt;/uif-button&gt;
+    </pre>
+    Renders this:<br />
+    <uif-button uif-type="compound">
+      Click Me!
+      <uif-button-description>a button with a description</uif-button-description>
+    </uif-button>
+  </p>
+
+  <h2>Hero Button</h2>
+  <p>
+    This markup:
+    <pre>
+&lt;uif-button uif-type="hero"&gt;
+  &lt;uif-icon uif-type="plus"&gt;&lt;/uif-icon&gt;
+  Click Me!
+&lt;/uif-button&gt;
+    </pre>
+    Renders this:<br />
+    <uif-button uif-type="hero">
+      <uif-icon uif-type="plus"></uif-icon>Click Me!
+    </uif-button>
+  </p>
 
 </body>
 
