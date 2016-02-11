@@ -22,6 +22,7 @@ In working on this library, the contributors have found and reported numerous bu
 - [#302](https://github.com/OfficeDev/Office-UI-Fabric/issues/302) - Label consisting of multiple words wrapped on each word
 - [#316](https://github.com/OfficeDev/Office-UI-Fabric/issues/316) - TextField: Placeholder interferes with input field hover
 - [#328](https://github.com/OfficeDev/Office-UI-Fabric/issues/328) - Large spinner misplaced
+- [#336](https://github.com/OfficeDev/Office-UI-Fabric/issues/336) - Datepicker does not work with pickadate @ 3.5.6
 - [#346](https://github.com/OfficeDev/Office-UI-Fabric/issues/346) - Hero button icon not centered
 
 ## What Version of Angular is Supported?
