@@ -154,15 +154,18 @@ describe('datepicker: <uif-datepicker />', () => {
         expect(goToday.length).toBe(1, 'Go to today should be present');
         goToday.triggerHandler('click');
         $scope.$digest();
-        expect(new Date($scope.value).getDay()).toBe(new Date().getDay());
-        expect(new Date($scope.value).getMonth()).toBe(new Date().getMonth());
-        expect(new Date($scope.value).getFullYear()).toBe(new Date().getFullYear());
 
+        // we are using UTC Dates here, as otherwise this test will fail in certain timezones.
+        expect(new Date($scope.value).getUTCDate()).toBe(new Date().getDate(), 'Day Today');
+        expect(new Date($scope.value).getUTCMonth()).toBe(new Date().getMonth(), 'Month Today');
+        expect(new Date($scope.value).getUTCFullYear()).toBe(new Date().getFullYear(), 'Year Today');
 
-        $scope.value = '2015-01-02';
+        $scope.value = new Date('2015-01-02');
         $scope.$digest();
-
-        expect(jQuery(datepicker[0]).find('.ms-TextField-field').val()).toBe('2 January, 2015');
+        let textboxValue: string = jQuery(datepicker[0]).find('.ms-TextField-field').val();
+        expect(new Date(textboxValue).getUTCDate()).toBe(new Date('2015-01-02').getUTCDate(), 'Day Custom');
+        expect(new Date(textboxValue).getUTCMonth()).toBe(new Date('2015-01-02').getUTCMonth(), 'Month Custom');
+        expect(new Date(textboxValue).getUTCFullYear()).toBe(new Date('2015-01-02').getUTCFullYear(), 'Year Custom');
 
     }));
 

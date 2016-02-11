@@ -26,7 +26,6 @@ export class DatepickerController {
     }
     public range(min: number, max: number, step: number): number[] {
         step = step || 1;
-        // console.log('Range ' + min + ' to ' + max + ', step ' + step);
         let input: number[] = [];
         for (let i: number = min; i <= max; i += step) {
             input.push(i);
@@ -168,7 +167,7 @@ export class DatepickerController {
 
             /** Select the current date, while keeping the picker open. */
             let now: Date = new Date();
-            $picker.set('select', [now.getFullYear(), now.getMonth(), now.getDate()]);
+            $picker.set('select', now);
 
             /** Switch to the default (calendar) view. */
             self.jElement.removeClass('is-pickingMonths').removeClass('is-pickingYears');
@@ -390,7 +389,11 @@ export class DatepickerDirective implements ng.IDirective {
         datepickerController.initDatepicker(ngModel);
         ngModel.$render = function (): void {
             if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
-                datepickerController.setValue(new Date(ngModel.$modelValue));
+                // $modelValue is in format yyyy-mm-dd. In timezones on the left side of UTC, 
+                // this will result in a Date object with the previous day
+                let date: Date = new Date(ngModel.$modelValue);
+                let utc: Date = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+                datepickerController.setValue(utc);
             }
         };
     }
