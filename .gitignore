@@ -1,4 +1,5 @@
 **/.DS_Store
+**/npm-debug.log
 
 # no need to keep stuff pulled remotely
 node_modules
