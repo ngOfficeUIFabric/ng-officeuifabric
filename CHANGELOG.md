@@ -11,6 +11,12 @@
 #### Fixes
 - **uif-link**: added support for "hero" link (by @jjczopek; closes [#187](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/187))
 
+<a name="0.4.1"></a>
+### [0.4.1 (February 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.1))
+
+#### Fixes
+- **uif-link**: added support for "hero" link (by @jjczopek; closes [#187](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/187))
+
 <a name="0.4.0"></a>
 ### [0.4.0 (February 9, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.0))
 
