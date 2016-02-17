@@ -68,7 +68,7 @@ function run {
 
   # clone packaging repo
   echo ".. clone packaging repo"
-  git clone https://github.com/andrewconnell/package-ngofficeuifabric \
+  git clone https://github.com/ngOfficeUIFabric/package-ngofficeuifabric \
     $PKG_PATH --depth=2
 
 
