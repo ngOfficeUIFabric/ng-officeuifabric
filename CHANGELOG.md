@@ -4,8 +4,14 @@
 #### Features
 - **uif-datepicker**: directive added (@rolandoldengarm; closes [#19](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/19))
 
+<a name="0.4.1"></a>
+### [0.4.1 (February 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.1))
+
+#### Fixes
+- **uif-link**: added support for "hero" link (by @jjczopek; closes [#187](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/187))
+
 <a name="0.4.0"></a>
-### [0.4.0 (February 9, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.0)
+### [0.4.0 (February 9, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.4.0))
 
 #### Features
 - **uif-button**: directive added (@andrewconnell; closes [#14](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/14))
@@ -24,7 +30,7 @@
 - **uif-spinner**: invalid closing tag in demo (by @jjczopek; closes [#150](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/150))
 
 <a name="0.3.0"</a>
-### [0.3.0 (January 25, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.3.0)
+### [0.3.0 (January 25, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.3.0))
 
 #### Features
 - **uif-callout**: directive added (@jjczopek; closes [#15](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/15))
@@ -37,7 +43,7 @@
 - **uif-spinner**: updated attribute name `uif-spinnersize` to `uif-size` (by @jjczopek; closes [#102](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/102))
 
 <a name="0.2.0"</a>
-### [0.2.0 (January 19, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.2.0)
+### [0.2.0 (January 19, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.2.0))
 
 #### Features
 
@@ -57,7 +63,7 @@
 
 
 <a name="0.1.3"</a>
-### [0.1.3 (January 13, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.1.3)
+### [0.1.3 (January 13, 2016)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.1.3))
 
 This is the first release of the ngOfficeUiFabric! Everything is new… check the repo’s [README.md](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/README.md) for details on the current state of the library and the various options (NPM / Bower / NuGet) can get the library. Check the demo site for sample usage & working examples: **http://ngOfficeUiFabric.com**.
 
