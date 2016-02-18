@@ -577,7 +577,7 @@ describe('calloutDirectives:', () => {
       expect(secondButton).toHaveClass('ms-Callout-action');
 
 
-      let firstButtonSpans: JQuery = firstButton.children('span')
+      let firstButtonSpans: JQuery = firstButton.children('span');
       expect(firstButtonSpans.length).toBe(2);
       expect(firstButtonSpans).toHaveClass('ms-Callout-actionText');
 
