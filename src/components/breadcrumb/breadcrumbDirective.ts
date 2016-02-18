@@ -5,7 +5,7 @@ import * as ng from 'angular';
 
 export class BreadcrumbLinkDirective implements ng.IDirective {
   public restrict: string = 'E';
-  public transclude: boolean = true;
+//  public transclude: boolean = true;
   // public template: string = 
   //   '<span class="CURRENT" ng-if="uifCurrent"><ng-transclude /></span>' +
   //   '<a ng-href="ngHref" class="ms-Breadcrumb-parent" ng-if="!uifCurrent"><ng-transclude /></a>';
@@ -30,11 +30,12 @@ export class BreadcrumbLinkDirective implements ng.IDirective {
     }
 
   public preLink(scope: any, instanceElement: ng.IAugmentedJQuery, attributes: any, uifBreadcrumbController: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
+    // transclude((clone) => {
+    //     instanceElement.append(clone);    
+    //   });
   }
   public postLink(scope: any, instanceElement: ng.IAugmentedJQuery, attributes: any , uifBreadcrumbController: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
-    transclude((clone) => {
-        instanceElement.append(clone);    
-      });
+    
   }
 }
 
@@ -74,7 +75,7 @@ export class BreadcrumbDirective implements ng.IDirective {
   
   public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
         : ng.IDirectivePrePost {
-            
+      
       return {
                 pre: this.preLink
             };
@@ -90,19 +91,24 @@ export class BreadcrumbDirective implements ng.IDirective {
         if (links[i].getAttribute('uif-current') != null) {
           activeLink = angular.element(links[i]);
         } else {
-          instanceElement.children().append(links[i]);
+          var anchor = angular.element("<a></a>");
+          anchor.attr('ng-href', links[i].getAttribute('ng-href'));
+          anchor.append(angular.element(links[i]).contents());
+          instanceElement.children().append(anchor);
         }
       }
 
       if (activeLink != null) {
         console.log("Active Link");
 
-        // TODO: Below does not work (transcluded elements are gone)
-        instanceElement.prepend(ctrl.$compile(activeLink.clone())(scope));
-        instanceElement.prepend(ctrl.$compile(activeLink.clone())(scope));
+        var spanCurrentLarge = angular.element("<span class='ms-Breadcrumb-currentLarge'></span>");
+        var spanCurrent = angular.element("<span class='ms-Breadcrumb-current'></span>");
+        spanCurrentLarge.append(activeLink.contents().clone());
+        spanCurrent.append(activeLink.contents().clone());
 
-        // THIS does work:
-        // instanceElement.prepend(ctrl.$compile(activeLink)(scope));
+        instanceElement.children().prepend(spanCurrentLarge.clone());
+        instanceElement.children().append(spanCurrent.clone());
+
       }
     });
   }

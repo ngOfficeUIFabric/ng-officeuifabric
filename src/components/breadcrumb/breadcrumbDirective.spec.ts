@@ -8,7 +8,7 @@ describe('choicefieldDirective <uif-breadcrumb />', () => {
 
         let breadcrumb: JQuery = $compile('<uif-breadcrumb>' +
         '<uif-breadcrumb-link ng-href="\'http://github.com\'">GitHub</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link uif-current="XXX" current="TEST">RolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarmRolandOldengarm</uif-breadcrumb-link>' +
+        '<uif-breadcrumb-link uif-current="XXX" current="TEST">ZZZ</uif-breadcrumb-link>' +
         '</uif-breadcrumb>')($scope);
         $scope.$digest();
         breadcrumb = jQuery(breadcrumb[0]);
