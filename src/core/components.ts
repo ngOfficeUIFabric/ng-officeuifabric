@@ -1,6 +1,7 @@
 'use strict';
 
 import * as ng from 'angular';
+import * as breadcrumbModule from '../components/breadcrumb/breadcrumbDirective';
 import * as calloutModule from '../components/callout/calloutDirective';
 import * as buttonModule from '../components/button/buttonDirective';
 import * as choicefieldModule from '../components/choicefield/choicefieldDirective';
@@ -28,6 +29,7 @@ import * as toggleModule from '../components/toggle/toggleDirective';
  *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components', [
+  breadcrumbModule.module.name,
   calloutModule.module.name,
   buttonModule.module.name,
   choicefieldModule.module.name,

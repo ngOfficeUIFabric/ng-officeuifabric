@@ -2,11 +2,5 @@
 
 var demoApp = angular.module('demoApp', [
   'officeuifabric.core',
-  'officeuifabric.components.label'
+  'officeuifabric.components.breadcrumb'
 ]);
-
-// demoApp.controller('labelDemoController',['$scope', labelDemoController]);
-//
-// function labelDemoController($scope){
-//
-// }
