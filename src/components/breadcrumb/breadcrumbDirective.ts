@@ -2,115 +2,105 @@
 
 import * as ng from 'angular';
 
-
-export class BreadcrumbLinkDirective implements ng.IDirective {
-  public restrict: string = 'E';
-//  public transclude: boolean = true;
-  // public template: string = 
-  //   '<span class="CURRENT" ng-if="uifCurrent"><ng-transclude /></span>' +
-  //   '<a ng-href="ngHref" class="ms-Breadcrumb-parent" ng-if="!uifCurrent"><ng-transclude /></a>';
-  //public template: string = "<ng-transclude></ng-transclude>";
-  public require: string = '^?uifBreadcrumb';
-  public scope: {} = {
-    'ngHref': '=',
-    'uifCurrent': '@'
-  };
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new BreadcrumbLinkDirective();
-    return directive;
-  }
-
-  public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
-      return {
-                post: this.postLink,
-                pre: this.preLink
-            };
-    }
-
-  public preLink(scope: any, instanceElement: ng.IAugmentedJQuery, attributes: any, uifBreadcrumbController: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
-    // transclude((clone) => {
-    //     instanceElement.append(clone);    
-    //   });
-  }
-  public postLink(scope: any, instanceElement: ng.IAugmentedJQuery, attributes: any , uifBreadcrumbController: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
-    
-  }
-}
-
-export class BreadcrumbController {
-    public static $inject: string[] = ['$element', '$compile', '$scope'];
-
-    constructor(public $element: ng.IAugmentedJQuery, public $compile: ng.ICompileService, public $scope: any){
-    }
-}
 /**
  * @ngdoc directive
- * @name uifLabel
- * @module officeuifabric.components.label
+ * @name uifBreadcrumblink
+ * @module officeuifabric.components.breadcrumb
  *
  * @restrict E
  *
  * @description
- * `<uif-label>` is and directive for rendering label component.
- * @see https://github.com/OfficeDev/Office-UI-Fabric/tree/master/src/components/Label
+ * `<uif-breadcrumblink>` is a directive for rendering a link in the breadcrumb component.
  *
  * @usage
  *
- * <uif-label>Name</uif-label>
+ * <uif-breadcrumb>
+ *   <uif-breadcrumblink uif-active>Active text</uif-breadcrumblink>
+ *   <uif-breadcrumblink ng-href="https://github.com">GitHub</uif-breadcrumblink>
+ *   <uif-breadcrumblink ng-href="https://office.com">Office</uif-breadcrumblink>
+ * </uif-breadcrumb>
  */
+export class BreadcrumbLinkDirective implements ng.IDirective {
+  public restrict: string = 'E';
+  public require: string = '^uifBreadcrumb';
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = () => new BreadcrumbLinkDirective();
+    return directive;
+  }
+}
+/**
+ * @ngdoc class
+ * @name BreadcrumbController
+ * @module officeuifabric.components.breadcrumb
+ * 
+ * @description This is the controller for the breadcrumb component
+ */
+export class BreadcrumbController {
+    public static $inject: string[] = [];
+}
+
+/**
+ * @ngdoc directive
+ * @name uifBreadcrumb
+ * @module officeuifabric.components.breadcrumb
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-breadcrumb>` is a directive for rendering breadcrumb component.
+ *
+ * @usage
+ *
+ * <uif-breadcrumb>
+ *   <uif-breadcrumblink uif-active>Active text</uif-breadcrumblink>
+ *   <uif-breadcrumblink ng-href="https://github.com">GitHub</uif-breadcrumblink>
+ *   <uif-breadcrumblink ng-href="https://office.com">Office</uif-breadcrumblink>
+ * </uif-breadcrumb>
+ */
+
 export class BreadcrumbDirective implements ng.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
-  public template: string = '<div class="ms-Breadcrumb">' + 
-    '</div>';
+  public template: string = '<div class="ms-Breadcrumb"></div>';
   public controller: typeof BreadcrumbController = BreadcrumbController;
   public require: string = 'uifBreadcrumb';
-  
+
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new BreadcrumbDirective();
     return directive;
   }
-  
-  public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
-      
-      return {
-                pre: this.preLink
-            };
-    }
+  public link(
+    scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attributes: any,
+    ctrl: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
+      // transclusion happens here, and not in the breadcrumblink directive, as 
+      // we found that transclusion does not work when cloning elements.
+      // in our case we needed to clone the active link.
 
-
-//todo scope interface
-  public preLink(scope: any, instanceElement: ng.IAugmentedJQuery, attributes: any, ctrl: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
-    transclude((transcludedElement) => {
-      let activeLink: JQuery = null;
-      let links: JQuery = transcludedElement;
-      for (let i: number = 0; i < transcludedElement.length; i++) {
-        if (links[i].getAttribute('uif-current') != null) {
-          activeLink = angular.element(links[i]);
-        } else {
-          var anchor = angular.element("<a></a>");
-          anchor.attr('ng-href', links[i].getAttribute('ng-href'));
-          anchor.append(angular.element(links[i]).contents());
-          instanceElement.children().append(anchor);
+      transclude((transcludedElement: JQuery) => {
+        let activeLink: JQuery = null;
+        let links: JQuery = transcludedElement;
+        for (let i: number = 0; i < transcludedElement.length; i++) {
+          if (links[i].getAttribute('uif-current') != null) {
+            activeLink = angular.element(links[i]);
+          } else {
+            let anchor: JQuery = angular.element('<a></a>');
+            anchor.attr('ng-href', links[i].getAttribute('ng-href'));
+            anchor.append(angular.element(links[i]).contents());
+            instanceElement.children().append(anchor);
+          }
         }
-      }
 
-      if (activeLink != null) {
-        console.log("Active Link");
+        if (activeLink != null) {
+          let spanCurrentLarge: JQuery = angular.element("<span class='ms-Breadcrumb-currentLarge'></span>");
+          let spanCurrent: JQuery = angular.element("<span class='ms-Breadcrumb-current'></span>");
+          spanCurrentLarge.append(activeLink.contents().clone());
+          spanCurrent.append(activeLink.contents().clone());
 
-        var spanCurrentLarge = angular.element("<span class='ms-Breadcrumb-currentLarge'></span>");
-        var spanCurrent = angular.element("<span class='ms-Breadcrumb-current'></span>");
-        spanCurrentLarge.append(activeLink.contents().clone());
-        spanCurrent.append(activeLink.contents().clone());
+          instanceElement.children().prepend(spanCurrentLarge.clone());
+          instanceElement.children().append(spanCurrent.clone());
 
-        instanceElement.children().prepend(spanCurrentLarge.clone());
-        instanceElement.children().append(spanCurrent.clone());
-
-      }
-    });
+        }
+      });
   }
 }
 
