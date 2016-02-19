@@ -36,7 +36,9 @@ export class BreadcrumbLinkDirective implements ng.IDirective {
  * @description This is the controller for the breadcrumb component
  */
 export class BreadcrumbController {
-    public static $inject: string[] = [];
+    public static $inject: string[] = ['$compile'];
+    constructor(public $compile: ng.ICompileService) {
+    }
 }
 
 /**
@@ -80,13 +82,14 @@ export class BreadcrumbDirective implements ng.IDirective {
         let activeLink: JQuery = null;
         let links: JQuery = transcludedElement;
         for (let i: number = 0; i < transcludedElement.length; i++) {
-          if (links[i].getAttribute('uif-current') != null) {
-            activeLink = angular.element(links[i]);
+          let link: JQuery = angular.element(links[i]);
+          if (link.attr('uif-current') != null) {
+            activeLink = link;
           } else {
-            let anchor: JQuery = angular.element('<a></a>');
-            anchor.attr('ng-href', links[i].getAttribute('ng-href'));
-            anchor.append(angular.element(links[i]).contents());
-            instanceElement.children().append(anchor);
+            let anchor: JQuery = angular.element(`<a class="ms-Breadcrumb-parent" ng-href="${link.attr('ng-href')}"></a>`);
+            anchor.append(link.html());
+            anchor.append(angular.element('<span>&nbsp;</span>'));
+            instanceElement.children().append(ctrl.$compile(anchor)(scope));
           }
         }
 
