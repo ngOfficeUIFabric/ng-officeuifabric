@@ -10,6 +10,7 @@ import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
 import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
+import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as progressIndicatorModule from '../components/progressindicator/progressIndicatorDirective';
 import * as searchboxModule from '../components/searchbox/searchboxDirective';
@@ -37,6 +38,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   iconModule.module.name,
   labelModule.module.name,
   linkModule.module.name,
+  navBarModule.module.name,
   overlayModule.module.name,
   progressIndicatorModule.module.name,
   searchboxModule.module.name,

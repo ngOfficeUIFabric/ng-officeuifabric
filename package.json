@@ -46,6 +46,7 @@
   "devDependencies": {
     "angular-animate": "^1.4.9",
     "angular-mocks": "^1.4.9",
+    "angular-sanitize": "^1.4.9",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
