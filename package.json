@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -40,8 +40,8 @@
     "dev-install": "tsd install -ros"
   },
   "dependencies": {
-    "angular": "^1.4.9",
-    "office-ui-fabric": "^2.0.1"
+    "angular": "1.4.9",
+    "office-ui-fabric": "2.0.1"
   },
   "devDependencies": {
     "angular-animate": "^1.4.9",
