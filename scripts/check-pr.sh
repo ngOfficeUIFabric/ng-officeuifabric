@@ -35,7 +35,7 @@ echo "  directive: $prDirective"
 echo ""
 
 # create branch for PR & pull
-echo ".. creating new branch & pulling down source in PR" 
+echo ".. creating new branch & pulling down source in PR"
 git checkout dev
 git checkout -b pr$prNum
 git pull $prForkedRepo $prForkedBranch
@@ -74,11 +74,11 @@ echo ".. build the library files"
 npm run build:lib
 
 # open demo
-if [[ -n "${prDirective// }" ]]
-echo ".. opening demo"
-open src/components/$prDirective/demo/index.html
+if [[ -n "${prDirective// }" ]] then
+  echo ".. opening demo"
+  open src/components/$prDirective/demo/index.html
 else
-echo ".. skipping demo"
+  echo ".. skipping demo"
 fi
 
 echo "FINISHED PR CHECK SCRIPT!"
