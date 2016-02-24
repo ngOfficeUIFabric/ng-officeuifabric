@@ -74,7 +74,7 @@ echo ".. build the library files"
 npm run build:lib
 
 # open demo
-if [[ -n "${prDirective// }" ]] then
+if [[ -n "${prDirective// }" ]]; then
   echo ".. opening demo"
   open src/components/$prDirective/demo/index.html
 else
