@@ -39,7 +39,9 @@ export class GulpTask extends BaseGulpTask {
 
     return gulp.src(BuildConfig.BUILD_TYPESCRIPT)
       .pipe($.if(this._args.verbose, $.print()))
-      .pipe($.tslint())
+      .pipe($.tslint({
+        configuration: BuildConfig.ROOT + '/tslint.json'
+      }))
       .pipe($.tslint.report('verbose', {
         emitError: false,
         summarizeFailureOutput: true
