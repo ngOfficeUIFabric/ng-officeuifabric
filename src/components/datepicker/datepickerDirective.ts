@@ -226,7 +226,7 @@ export class DatepickerController {
             self.$scope.$apply();
         });
 
-        // set the highlighted value 
+        // set the highlighted value
         self.$scope.highlightedValue = $picker.get('highlight');
     }
 
@@ -257,14 +257,14 @@ export class DatepickerController {
  * @ngdoc interface
  * @name IDatepickerDirectiveScope
  * @module officeuifabric.components.datepicker
- * 
- * @description 
- * This is the scope used by the directive. 
  *
- * 
- * @property {string} uifMonths - Comma separated list of all months  
+ * @description
+ * This is the scope used by the directive.
+ *
+ *
+ * @property {string} uifMonths - Comma separated list of all months
  * @property {string} uifLabel - The label to display above the date picker
- * @property {string} placeholder - The placeholder to display in the text box  
+ * @property {string} placeholder - The placeholder to display in the text box
  */
 export interface IDatepickerDirectiveScope extends ng.IScope {
     uifMonths: string;
@@ -286,8 +286,8 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
  * `<uif-datepicker>` is an directive for rendering a datepicker
  *
  * @usage
- * <uif-datepicker 
- *      ng-model="value" 
+ * <uif-datepicker
+ *      ng-model="value"
  *      placeholder="Please, find a date"
  *      uif-months="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
  *      uif-label="Start date"
@@ -354,8 +354,9 @@ export class DatepickerDirective implements ng.IDirective {
 
         return directive;
     }
-    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
+    public compile (templateElement: ng.IAugmentedJQuery,
+                    templateAttributes: ng.IAttributes,
+                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
         return {
             post: this.postLink,
             pre: this.preLink
@@ -389,7 +390,7 @@ export class DatepickerDirective implements ng.IDirective {
         datepickerController.initDatepicker(ngModel);
         ngModel.$render = function (): void {
             if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
-                // $modelValue is in format yyyy-mm-dd. In timezones on the left side of UTC, 
+                // $modelValue is in format yyyy-mm-dd. In timezones on the left side of UTC,
                 // this will result in a Date object with the previous day
                 let date: Date = new Date(ngModel.$modelValue);
                 let utc: Date = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
@@ -402,10 +403,10 @@ export class DatepickerDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.datepicker
- * 
- * @description 
+ *
+ * @description
  * datepicker. Depends on angular-pickadate https://github.com/restorando/angular-pickadate
- * 
+ *
  */
 export let module: ng.IModule = ng.module('officeuifabric.components.datepicker', [
     'officeuifabric.components'

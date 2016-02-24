@@ -56,24 +56,8 @@ export class ContextualMenuItemDirective implements ng.IDirective {
   public transclude: boolean = true;
   public controller: any = ContextualMenuItemController;
 
-  public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IContextualMenuItemAttributes) => {
-    let type: string = $attrs.uifType;
-
-    if (ng.isUndefined(type)) {
-      return this.templateTypes[MenuItemTypes.link];
-    }
-
-    if (MenuItemTypes[type] === undefined) {
-      this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.contextualmenu - unsupported menu type:\n' +
-        'the type \'' + type + '\' is not supported by ng-Office UI Fabric as valid type for context menu.' +
-        'Supported types can be found under MenuItemTypes enum here:\n' +
-        'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/contextualmenu/contextualMenu.ts');
-    }
-
-    return this.templateTypes[MenuItemTypes[type]];
-  };
-
   public replace: boolean = true;
+
   public scope: {} = {
     isDisabled: '=?uifIsDisabled',
     isSelected: '=?uifIsSelected',
@@ -107,6 +91,23 @@ export class ContextualMenuItemDirective implements ng.IDirective {
     directive.$inject = ['$log'];
     return directive;
   }
+
+  public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IContextualMenuItemAttributes) => {
+    let type: string = $attrs.uifType;
+
+    if (ng.isUndefined(type)) {
+      return this.templateTypes[MenuItemTypes.link];
+    }
+
+    if (MenuItemTypes[type] === undefined) {
+      this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.contextualmenu - unsupported menu type:\n' +
+        'the type \'' + type + '\' is not supported by ng-Office UI Fabric as valid type for context menu.' +
+        'Supported types can be found under MenuItemTypes enum here:\n' +
+        'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/contextualmenu/contextualMenu.ts');
+    }
+
+    return this.templateTypes[MenuItemTypes[type]];
+  };
 
   public link(
     $scope: IContextualMenuItemScope,

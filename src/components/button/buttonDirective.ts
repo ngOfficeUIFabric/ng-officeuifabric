@@ -30,39 +30,39 @@ class ButtonController {
  * @ngdoc directive
  * @name uifButton
  * @module officeuifabric.components.button
- * 
+ *
  * @restrict E
- * 
+ *
  * @description
- * `<uif-button>` is a button directive. This direcive implements multiple types 
+ * `<uif-button>` is a button directive. This direcive implements multiple types
  * of buttons including action, primary, command, compound and hero buttons. Each type
- * may also support inclusion of icons using the `<uif-icon>` directive. Buttons are 
+ * may also support inclusion of icons using the `<uif-icon>` directive. Buttons are
  * rendered as a `<button>` or `<a>` element depending in an `ng-href` attribute is
  * specified. All buttons can be disabled by adding the `disabled` attribute
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/button}
- * 
+ *
  * @usage
- * 
+ *
  * Regular buttons:
  * <uif-button>Lorem Ipsum</uif-button>
- * 
+ *
  * Primary buttons:
  * <uif-button uif-type="primary">Lorem Ipsum</uif-button>
- * 
+ *
  * Command buttons:
  * <uif-button uif-type="command">Lorem Ipsum</uif-button>
  * <uif-button uif-type="command">
  *   <uif-icon uif-type="plus"></uif-icon>Lorem Ipsum
  * </uif-button>
- * 
+ *
  * Compound buttons:
  * <uif-button uif-type="Compound">Lorem Ipsum</uif-button>
  * <uif-button uif-type="Compound">
  *   Lorem Ipsum
  *   <uif-button-description>Lorem Ipsum Description</uif-button-description>
  * </uif-button>
- * 
+ *
  * Hero buttons:
  * <uif-button uif-type="Hero">Lorem Ipsum</uif-button>
  * <uif-button uif-type="Hero">
@@ -78,6 +78,19 @@ export class ButtonDirective implements ng.IDirective {
   public scope: {} = {};
   public controller: any = ButtonController;
   public controllerAs: string = 'button';
+
+  // array of all the possibilities for a button
+  private templateOptions: { [buttonTemplateType: number]: string } = {};
+
+  constructor(private $log: ng.ILogService) {
+    this._populateHtmlTemplates();
+  }
+
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ButtonDirective($log);
+    directive.$inject = ['$log'];
+    return directive;
+  }
 
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IButtonAttributes) => {
     // verify button type is supported
@@ -117,19 +130,6 @@ export class ButtonDirective implements ng.IDirective {
           : this.templateOptions[ButtonTemplateType.actionLink];
     }
   };
-
-  // array of all the possibilities for a button
-  private templateOptions: { [buttonTemplateType: number]: string } = {};
-
-  constructor(private $log: ng.ILogService) {
-    this._populateHtmlTemplates();
-  }
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ButtonDirective($log);
-    directive.$inject = ['$log'];
-    return directive;
-  }
 
   public compile(element: ng.IAugmentedJQuery,
                  attrs: IButtonAttributes,
@@ -289,16 +289,16 @@ export class ButtonDirective implements ng.IDirective {
  * @ngdoc directive
  * @name uifDescriptionButton
  * @module officeuifabric.components.button
- * 
+ *
  * @restrict E
- * 
+ *
  * @description
  * `<uif-button-description>` is a button description directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/button}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-button-description>Lorem Ipsum</uif-button-description>
  */
 export class ButtonDescriptionDirective implements ng.IDirective {
@@ -320,10 +320,10 @@ export class ButtonDescriptionDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.button
- * 
- * @description 
+ *
+ * @description
  * Button
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.button', [
   'officeuifabric.components'
