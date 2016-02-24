@@ -76,6 +76,7 @@ describe('datepicker: <uif-datepicker />', () => {
     it('Should be able to use the custom month selector', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
 
         let $scope: any = $rootScope.$new();
+        // important to take the first of the month, as previously this test failed due to time zone issues
         $scope.value = new Date(2015, 2, 1);
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
         $scope.$digest();
@@ -156,16 +157,24 @@ describe('datepicker: <uif-datepicker />', () => {
         $scope.$digest();
 
         // we are using UTC Dates here, as otherwise this test will fail in certain timezones.
+        // $scope.value is e.g. "2015-02-01", which is February 1st. However, left of UTC new Date("2015-02-01").getDate() == 31 (January).
+        // that's why we take the UTC Date of $scope.value
+        // with new Date() this is not necessary as that is always the local date.
+
         expect(new Date($scope.value).getUTCDate()).toBe(new Date().getDate(), 'Day Today');
         expect(new Date($scope.value).getUTCMonth()).toBe(new Date().getMonth(), 'Month Today');
         expect(new Date($scope.value).getUTCFullYear()).toBe(new Date().getFullYear(), 'Year Today');
 
-        $scope.value = new Date('2015-01-02');
+        let date: Date = new Date('2015-01-02');
+        $scope.value = date;
         $scope.$digest();
         let textboxValue: string = jQuery(datepicker[0]).find('.ms-TextField-field').val();
-        expect(new Date(textboxValue).getUTCDate()).toBe(new Date('2015-01-02').getUTCDate(), 'Day Custom');
-        expect(new Date(textboxValue).getUTCMonth()).toBe(new Date('2015-01-02').getUTCMonth(), 'Month Custom');
-        expect(new Date(textboxValue).getUTCFullYear()).toBe(new Date('2015-01-02').getUTCFullYear(), 'Year Custom');
+
+        let monthNames: string[] =
+            ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let formattedValue: string = `${date.getDate()} ${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
+
+        expect(textboxValue).toBe(formattedValue);
 
     }));
 
