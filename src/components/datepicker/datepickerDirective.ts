@@ -390,11 +390,12 @@ export class DatepickerDirective implements ng.IDirective {
         datepickerController.initDatepicker(ngModel);
         ngModel.$render = function (): void {
             if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
-                // $modelValue is in format yyyy-mm-dd. In timezones on the left side of UTC,
-                // this will result in a Date object with the previous day
-                let date: Date = new Date(ngModel.$modelValue);
-                let utc: Date = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-                datepickerController.setValue(utc);
+                if (typeof ngModel.$modelValue === 'string') {
+                    let date: Date = new Date(ngModel.$modelValue);
+                    datepickerController.setValue(date);
+                } else {
+                  datepickerController.setValue(ngModel.$modelValue);
+                }
             }
         };
     }
