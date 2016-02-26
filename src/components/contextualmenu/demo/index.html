@@ -29,7 +29,7 @@
       <h4><i>Code:</i></h4>
       <raw src="'regular.html'"></raw>
 
-      <h2>Multi level menu:</h2>
+      <h2>Multi level menu with rich item content:</h2>
 
       <ng-include src="'multiLevel.html'"></ng-include>
       <h4><i>Code:</i></h4>
@@ -74,23 +74,34 @@
 
     <script type="text/ng-template" id="regular.html">
       <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
-        <uif-contextual-menu-item uif-text="color" uif-click="logColor(color)" ng-repeat="color in colors"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="color" ng-click="logColor(color)" ng-repeat="color in colors"></uif-contextual-menu-item>
       </uif-contextual-menu>
     </script>
 
     <script type="text/ng-template" id="multiLevel.html">
       <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
-        <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item>
+          <uif-content>
+            <uif-icon uif-type="settings"></uif-icon> Settings
+          </uif-content>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item>
+          <uif-content>
+            <uif-icon uif-type="flag"></uif-icon> Flag
+          </uif-content>
+        </uif-contextual-menu-item>
         <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-text="'Tools'" uif-type="subMenu" uif-click="logClick('Tools clicked!')">
+        <uif-contextual-menu-item uif-type="subMenu" ng-click="logClick('Tools clicked!')">
+          <uif-content>
+            <uif-icon uif-type="arrowRight"></uif-icon> Tools
+          </uif-content>
           <uif-contextual-menu>
             <uif-contextual-menu-item uif-text="'Test'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'View'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'Recycle'"></uif-contextual-menu-item>
-            <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" uif-click="logClick('Manage clicked!')">
+            <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" ng-click="logClick('Manage clicked!')">
               <uif-contextual-menu>
-                <uif-contextual-menu-item uif-text="'Approve'" uif-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-text="'Approve'" ng-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
                 <uif-contextual-menu-item uif-text="'Reject'"></uif-contextual-menu-item>
                 <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
                 <uif-contextual-menu-item uif-text="'Delay'"></uif-contextual-menu-item>
@@ -98,14 +109,17 @@
             </uif-contextual-menu-item>
           </uif-contextual-menu>
         </uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-text="'Move'" uif-type="subMenu" uif-click="logClick('Move clicked!')">
+        <uif-contextual-menu-item uif-type="subMenu" ng-click="logClick('Move clicked!')">
+          <uif-content>
+            <i><uif-icon uif-type="mail"></uif-icon> Mail</i>
+          </uif-content>
           <uif-contextual-menu>
             <uif-contextual-menu-item uif-text="'Bin'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'Read later'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'Important'"></uif-contextual-menu-item>
           </uif-contextual-menu>
         </uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-is-disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
       </uif-contextual-menu>
     </script>
 
@@ -132,14 +146,14 @@
     <script type="text/ng-template" id="animated.html">
       <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
         <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-text="'Tools'" uif-type="subMenu" uif-click="logClick('Tools clicked!')">
+        <uif-contextual-menu-item uif-text="'Tools'" uif-type="subMenu" ng-click="logClick('Tools clicked!')">
           <uif-contextual-menu>
             <uif-contextual-menu-item uif-text="'Test'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'View'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'Recycle'"></uif-contextual-menu-item>
-            <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" uif-click="logClick('Manage clicked!')">
+            <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" ng-click="logClick('Manage clicked!')">
               <uif-contextual-menu>
-                <uif-contextual-menu-item uif-text="'Approve'" uif-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-text="'Approve'" ng-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
                 <uif-contextual-menu-item uif-text="'Reject'"></uif-contextual-menu-item>
                 <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
                 <uif-contextual-menu-item uif-text="'Delay'"></uif-contextual-menu-item>
@@ -149,14 +163,14 @@
         </uif-contextual-menu-item>
         <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
         <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-text="'Move'" uif-type="subMenu" uif-click="logClick('Move clicked!')">
+        <uif-contextual-menu-item uif-text="'Move'" uif-type="subMenu" ng-click="logClick('Move clicked!')">
           <uif-contextual-menu>
             <uif-contextual-menu-item uif-text="'Bin'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'Read later'"></uif-contextual-menu-item>
             <uif-contextual-menu-item uif-text="'Important'"></uif-contextual-menu-item>
           </uif-contextual-menu>
         </uif-contextual-menu-item>
-        <uif-contextual-menu-item uif-is-disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
       </uif-contextual-menu>
     </script>
   </div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-content demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <script src="../../../../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1 class="ms-font-su">Content Demo | &lt;uif-content&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+  <div id="regularSample">
+    <div ng-controller="demoController">
+      <h2>Renders all which is inside &lt;uif-content /&gt;:</h2>
+      <ng-include src="'regular.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'regular.html'"></raw>
+    </div>
+
+    <script type="text/ng-template" id="regular.html">
+      <uif-content>
+        <uif-icon uif-type="arrowRight"></uif-icon> Item being rendered <uif-icon uif-type="arrowLeft"></uif-icon>
+      </uif-content>
+    </script>
+  </div>
+</body>
+
+</html>
