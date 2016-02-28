@@ -17,6 +17,19 @@ echo ""
 echo "GETTING A PULL RELEASE AND RUNNING THROUGH THE INITIAL TESTS FOR ANAYLASIS"
 echo ""
 
+# jump up to the root of the repo
+cd ../..
+SRC_PATH=$PWD
+
+# make sure in root of repo
+if [ "${SRC_PATH##*/}" != "ng-officeuifabric" ]; then
+  echo "ERROR: script must be run from the root of the 'ng-officeuifabric' repo"
+  echo "ERROR: you are running from '${SRC_PATH##*/}'"
+  exit 1
+fi
+
+echo "LOG: current folder: $SRC_PATH"
+
 # prompt for pr# & repo+branch
 echo "Please provide the pull release number & the repo+branch where the PR"
 echo "  source resides. Get the repo+branch from the PR details, sepecifically the"

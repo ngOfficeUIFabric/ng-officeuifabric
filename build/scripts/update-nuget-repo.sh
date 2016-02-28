@@ -18,8 +18,14 @@
 #   2. copy the compiled library & changelog to the cloned nuget-ngofficeuifabric
 #   3. update the nuget-ngofficeuifabric repo with the following changes by calling
 #       update-nuget-versions.js:
-#     3.1. update ng-office-ui-fabric.nuspec with current library dependencies
-#     3.2. update ng-office-ui-fabric.nuspec with current library version
+#     3.1. update ng-office-ui-fabric.nuspec with current library version
+#     3.2. update ng-office-ui-fabric.nuspec with current library dependencies
+#   4. update the cloned package repo's origin master:
+#     4.1. add all changed files
+#     4.2. commit everything with comment "release(): [version]"
+#     4.3. push commit => origin master
+#     4.4. tag with the current version & push tags to origin
+#   5. remove cloned package repo temp folder
 
 ARG_DEFS=(
   "--version=(.*)"
@@ -40,23 +46,23 @@ function run {
 
 
   # clone packaging repo
-  echo ".. clone packaging repo"
-  echo "..>>> $PKG_PATH"
+  echo ".. [1 / 5] clone packaging repo"
   git clone $REPO_URL $PKG_PATH --depth=2
 
 
   # copy built library & changelog
-  echo ".. copying built library & changelog"
+  echo ".. [2 / 5] copying built library & changelog"
   cp -Rf dist/*.js $PKG_PATH/src/content/Scripts
   cp -Rf changelog.md $PKG_PATH/changelog.md
 
 
   # update versions & dependencies in ng-office-ui-fabric.nuspec
-  echo ".. updating versions & dependencies in ng-office-ui-fabric.nuspec"
-  node scripts/update-nuget-versions.js --src=$PWD --pkg=$PKG_PATH
+  echo ".. [3 / 5] updating versions & dependencies in ng-office-ui-fabric.nuspec"
+  node ./build/scripts/update-nuget-versions.js --src=$PWD --pkg=$PKG_PATH
+
 
   # update packaging repo
-  echo ".. updating packaging repo nuget-ngofficeuifabric"
+  echo ".. [4 / 5] updating packaging repo nuget-ngofficeuifabric"
   cd $PKG_PATH
 
   echo ".. .. adding & commiting changes to package repo"
@@ -68,7 +74,15 @@ function run {
 
   echo ".. .. adding tag for version $VERSION & pushing orign master"
   git tag -f $VERSION
+  echo ".. .. pushing origin master tags"
   git push --tags
+
+
+  # remove temp folder
+  echo ".. [5 / 5] removing temp folder at:"
+  echo ".. .. $PKG_PATH"
+  cd $SRC_PATH
+  rm -rf $PKG_PATH
 }
 
 source $(dirname $0)/utils.inc
