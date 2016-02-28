@@ -31,3 +31,4 @@
 /// <reference path="yargs/yargs.d.ts" />
 /// <reference path="uglify-js/uglify-js.d.ts" />
 /// <reference path="source-map/source-map.d.ts" />
+/// <reference path="xpath/xpath.d.ts" />
