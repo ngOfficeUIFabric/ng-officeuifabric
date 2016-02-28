@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -44,8 +44,8 @@
     "test": "npm run build:ts && gulp test --specs"
   },
   "dependencies": {
-    "angular": "1.4.9",
-    "office-ui-fabric": "2.0.1"
+    "angular": "1.5.0",
+    "office-ui-fabric": "2.1.0"
   },
   "devDependencies": {
     "angular-animate": "^1.4.9",
@@ -94,6 +94,8 @@
     "tslint": "^3.5.0",
     "webpack": "^1.12.9",
     "webpack-stream": "^3.1.0",
+    "xmldom": "^0.1.22",
+    "xpath": "0.0.21",
     "yargs": "^3.31.0"
   }
 }
