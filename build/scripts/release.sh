@@ -28,6 +28,10 @@
 #     will have the `--dry-run` argument added and thus, nothing is push to remotes
 # ^^^ to ensure these things run, you must specify --git-push-dryrun=false
 
+function init {
+  # if set, export --git-push-dryrun so available in other scripts
+  export GIT_PUSH_DRYRUN=$GIT_PUSH_DRYRUN
+}
 
 function run {
   # jump up to the root of the repo
