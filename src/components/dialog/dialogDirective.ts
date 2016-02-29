@@ -92,6 +92,19 @@ export class DialogDirective implements ng.IDirective {
 
 }
 
+/**
+ * @directive
+ * @name uifDialogHeader
+ * @module officeuifabric.components.dialog
+ * 
+ * @restrict E
+ * @description 
+ * '<uif-dialog-header>' Renders header of the dialog
+ * 
+ * @usage
+ * <uif-dialog><uif-dialog-header></uif-dialog-header></uif-dialog>
+ * 
+ */
 export class DialogHeaderDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
@@ -108,7 +121,19 @@ export class DialogHeaderDirective implements ng.IDirective {
 
 }
 
-
+/**
+ * @directive
+ * @name uifDialogContent
+ * @module officeuifabric.components.dialog
+ * 
+ * @restrict E
+ * @description 
+ * '<uif-dialog-content>' Renders content of the dialog
+ * 
+ * @usage
+ * <uif-dialog><uif-dialog-content></uif-dialog-content></uif-dialog>
+ * 
+ */
 export class DialogContentDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
@@ -120,6 +145,19 @@ export class DialogContentDirective implements ng.IDirective {
     }
 
 }
+/**
+ * @directive
+ * @name uifDialogInner
+ * @module officeuifabric.components.dialog
+ * 
+ * @restrict E
+ * @description 
+ * '<uif-dialog-inner>' Renders content and actions of the dialog
+ * 
+ * @usage
+ * <uif-dialog><uif-dialog-inner></uif-dialog-inner></uif-dialog>
+ * 
+ */
 export class DialogInnerDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
@@ -131,7 +169,19 @@ export class DialogInnerDirective implements ng.IDirective {
     }
 
 }
-
+/**
+ * @directive
+ * @name uifDialogSubtext
+ * @module officeuifabric.components.dialog
+ * 
+ * @restrict E
+ * @description 
+ * '<uif-dialog-subtext>' Renders text within the content
+ * 
+ * @usage
+ * <uif-dialog><uif-dialog-content><uif-dialog-subtext> text here </uif-dialog-subtext></uif-dialog-content></uif-dialog>
+ * 
+ */
 export class DialogSubtextDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
@@ -145,6 +195,19 @@ export class DialogSubtextDirective implements ng.IDirective {
 
 }
 
+/**
+ * @directive
+ * @name uifDialogActions
+ * @module officeuifabric.components.dialog
+ * 
+ * @restrict E
+ * @description 
+ * '<uif-dialog-subtext>' Renders text within the content
+ * 
+ * @usage
+ * <uif-dialog><uif-dialog-content><uif-dialog-subtext> text here </uif-dialog-subtext></uif-dialog-content></uif-dialog>
+ * 
+ */
 export class DialogActionsDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;

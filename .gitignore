@@ -2,7 +2,7 @@
 
 # no need to keep stuff pulled remotely
 node_modules
-
+.vscode/*
 # don't keep coverage
 coverage/
 
