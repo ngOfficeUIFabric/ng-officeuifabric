@@ -50,6 +50,10 @@
     .controller('demoController',
       ['$scope', function ($scope) {
         $scope.isOpen = true;
+
+        $scope.logClick = function (logData) {
+          console.log(logData);
+        }
       }]);
 })();
 

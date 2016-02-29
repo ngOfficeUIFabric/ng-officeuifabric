@@ -15,11 +15,13 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
     beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
       $element = ng.element(`
                     <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
-                        <uif-contextual-menu-item uif-text="'Item3'"></uif-contextual-menu-item>
+                        <uif-contextual-menu-item>
+                          <uif-content><uif-icon uif-type="arrowRight"></uif-icon> Item 1</uif-content>
+                        </uif-contextual-menu-item>
                         <uif-contextual-menu-item uif-text="'Item2'" uif-type="subMenu">
                                 <uif-contextual-menu uif-is-open="sub.isOpen">
                                     <uif-contextual-menu-item uif-text="'SubItem1'"></uif-contextual-menu-item>
-                                    <uif-contextual-menu-item uif-text="'SubItem2'" uif-click="item2click()"></uif-contextual-menu-item>
+                                    <uif-contextual-menu-item uif-text="'SubItem2'" ng-click="item2click()"></uif-contextual-menu-item>
                                     <uif-contextual-menu-item uif-text="'SubItem3'" uif-type="subMenu">
                                         <uif-contextual-menu>
                                             <uif-contextual-menu-item uif-text="'Item1'"></uif-contextual-menu-item>
@@ -41,6 +43,18 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
       $scope.isOpen = true;
       $scope.$digest();
       expect($element).toHaveClass('is-open');
+    }));
+
+    it('should have enhanced content', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      let content: JQuery = $element.find('li a').first().find('.uif-content');
+
+      expect(content.length).toEqual(1);
+    }));
+
+    it('should have an icon as content', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      let content: JQuery = $element.find('li a').first().find('.uif-content .ms-Icon');
+
+      expect(content.length).toEqual(1);
     }));
 
     it('should selects item', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
@@ -133,7 +147,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
         expect(_$log_.error).toHaveBeenCalled();
       }));
 
-    it('should write an error - invalid \'uif-is-disabled\' attribute usage', inject(
+    it('should write an error - invalid \'disabled\' attribute usage', inject(
       ($compile: Function,
         $rootScope: ng.IRootScopeService,
         /* tslint:disable:variable-name */
@@ -148,7 +162,27 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
 
         $compile(ng.element(`
                     <uif-contextual-menu>
-                      <uif-contextual-menu-item uif-text="'Item1'" uif-is-disabled="isDisabled"></uif-contextual-menu-item>
+                      <uif-contextual-menu-item uif-text="'Item1'" disabled="isDisabled"></uif-contextual-menu-item>
+                    </uif-contextual-menu>`))($scope);
+        $scope.$digest();
+
+        expect(_$log_.error).toHaveBeenCalled();
+      }));
+
+    it('should write an error - no text for menu item provided', inject(
+      ($compile: Function,
+        $rootScope: ng.IRootScopeService,
+        /* tslint:disable:variable-name */
+        _$log_: any) => {
+        /* tslint:enable:variable-name */
+
+        $scope = $rootScope.$new();
+
+        spyOn(_$log_, 'error');
+
+        $compile(ng.element(`
+                    <uif-contextual-menu>
+                      <uif-contextual-menu-item></uif-contextual-menu-item>
                     </uif-contextual-menu>`))($scope);
         $scope.$digest();
 
