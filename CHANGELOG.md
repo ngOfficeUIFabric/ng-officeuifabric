@@ -1,6 +1,13 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+<a name="0.5.1"></a>
+### [0.5.1 (February 29, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.5.1))
+
+#### Breaking Changes
+- **uif-contextual-menu**: refactored (by @s-KaiNet; closes [#201](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/201))
+- **uif-navbar**: refactored (@s-KaiNet; closes [#201](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/201))
+
 <a name="0.5.0"></a>
 ### [0.5.0 (February 24, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.5.0))
 
