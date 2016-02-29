@@ -15,7 +15,7 @@ import * as linkModule from '../components/link/linkDirective';
 import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as progressIndicatorModule from '../components/progressindicator/progressIndicatorDirective';
-import * as searchboxModule from '../components/searchbox/searchboxDirective';
+import * as searchboxModule from '../components/searchbox/searchBoxDirective';
 import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';

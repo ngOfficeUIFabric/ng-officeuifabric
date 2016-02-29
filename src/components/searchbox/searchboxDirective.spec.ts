@@ -1,63 +1,125 @@
-﻿
-describe("searchBoxDirective", () => {
-    beforeEach(() => {
-        angular.mock.module('fabric.ui.components.searchbox');
+﻿'use strict';
+import * as ng from 'angular';
+
+/**
+ * @ngdoc interface
+ * @name ISearchBoxScope
+ * @module officeuifabric.components.searchbox
+ * 
+ * @description 
+ * This is the scope used by the directive. 
+ * 
+ * @property {string} placeholder - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
+ * @property {string} value       - The scope variable to bind to the text input. 
+ */
+interface ISearchBoxScope extends ng.IScope {
+
+  btnMousedown: () => void;
+  inputFocus: () => void;
+  inputBlur: () => void;
+  isActive: boolean;
+  isCancel: boolean;
+  isFocus: boolean;
+  isLabelHidden: boolean;
+  placeholder: string;
+  value: string;
+}
+/**
+ * @ngdoc directive
+ * @name uifSearchbox
+ * @module officeuifabric.components.searchbox
+ * 
+ * @restrict E
+ * 
+ * @description 
+ * `<uif-searchbox>` is an searchbox directive.
+ * 
+ * @see {link http://dev.office.com/fabric/components/searchbox}
+ * 
+ * @usage
+ * 
+ * <uif-searchbox value="" placeholder="" />
+ */
+export class SearchBoxDirective implements ng.IDirective {
+
+  public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive}">' +
+  '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
+  ' ng-model="value" id="{{::\'searchBox_\'+$id}}" />' +
+  '<label class="ms-SearchBox-label" for="{{::\'searchBox_\'+$id}}" ng-hide="isLabelHidden">' +
+  '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i> {{placeholder}}</label>' +
+  '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
+  '</div>';
+
+
+  public scope: any = {
+    placeholder: '=?',
+    value: '=?'
+  };
+
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = () => new SearchBoxDirective();
+
+    return directive;
+  }
+
+  public link(scope: ISearchBoxScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
+
+    scope.isFocus = false;
+    scope.isCancel = false;
+    scope.isLabelHidden = false;
+    scope.isActive = false;
+
+    scope.inputFocus = function(): void {
+      scope.isFocus = true;
+      scope.isLabelHidden = true;
+      scope.isActive = true;
+    };
+
+    scope.inputBlur = function(): void {
+      if (scope.isCancel) {
+        scope.value = '';
+        scope.isLabelHidden = false;
+      }
+      scope.isActive = false;
+      if (typeof (scope.value) === 'undefined' || scope.value === '') {
+        scope.isLabelHidden = false;
+      }
+
+      scope.isFocus = scope.isCancel = false;
+    };
+
+    scope.btnMousedown = function(): void {
+      scope.isCancel = true;
+    };
+
+    scope.$watch('value', function(val: string): void {
+      if (!scope.isFocus) {
+        if (val && val !== '') {
+          scope.isLabelHidden = true;
+        } else {
+          scope.isLabelHidden = false;
+        }
+        scope.value = val;
+      }
+
     });
 
-    afterEach(() => {
-        // myfunc.reset();
+    scope.$watch('placeholder', function(search: string): void {
+      scope.placeholder = search;
     });
 
-    it("should have unique ids", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        var textBox1 = $compile('<uif-Searchbox ></uif-Searchbox>')($scope);
-        $scope.$digest();
-        var textField1 = $(textBox1[0]).find('.ms-SearchBox-field');
 
-        var textBox2 = $compile('<uif-Searchbox ></uif-Searchbox>')($scope);
-        $scope.$digest();
-        var textField2 = $(textBox2[0]).find('.ms-SearchBox-field');
-        
-        expect(textField1[0].id === textField2[0].id).toBe(false);
+  }
 
-    }));
-    it("should be able to set value", inject(($compile, $rootScope) => {
-        var $scope = $rootScope.$new();
-        $scope.textBoxValue = "Test 1";
-        var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-        $scope.$digest();
-        
-        var textField = $(textBox[0]).find('.ms-SearchBox-field');
-       // expect(textField.length).toBe(1);
-        
-        expect(textField.val()).toBe('Test 1');
 
-        $scope.textBoxValue = "Test 2";
-        $scope.$digest();
-        
-        console.log("testfield value " + $(textBox[0]).find('.ms-SearchBox-field').val());
-        expect(textField.val()).toBe('Test 2');
-
-        textField.val('Test 3');
-        textField.trigger('input');
-        
-        expect(textField.val()).toBe('Test 3', 'Update textbox');
-        
-        // todo: In the browser this works fine. Not sure why not here :(
-        // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
-    }));
-    //it("hide the label", inject(($compile, $rootScope) => {
-    //    var $scope = $rootScope.$new();
-    //    $scope.textBoxValue = "Test 1";
-    //    var textBox = $compile('<uif-Searchbox value="textBoxValue"></uif-Searchbox>')($scope);
-    //    $scope.$digest();
-
-    //    var textField = $(textBox[0]).find('.ms-SearchBox-field').trigger('focus');
-    //    $scope.$digest();
-    //    // expect(textField.length).toBe(1);
-    //    expect($(textBox[0]).find('.ms-SearchBox').hasClass('is-active')).toBe(true);
-
-    //    // todo: In the browser this works fine. Not sure why not here :(
-    //    // expect($scope.textBoxValue).toBe('Test 3', 'Scope update parent');
-    //}));
-});
+}
+/**
+ * @ngdoc module
+ * @name officeuifabric.components.searchbox
+ * 
+ * @description 
+ * Searchbox
+ * 
+ */
+export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
+  .directive('uifSearchbox', SearchBoxDirective.factory());

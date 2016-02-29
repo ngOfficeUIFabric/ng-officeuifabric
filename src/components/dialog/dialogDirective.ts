@@ -22,6 +22,17 @@ export interface IDialogScope extends ng.IScope {
 }
 
 /**
+ * @ngdoc interface
+ * @name IDialogActionsPositionScope
+ * 
+ * @description
+ * This scope is used by `<uif-dialog-actions>' element
+ */
+export interface IDialogActionsPositionScope extends ng.IScope {
+    uifPosition: string;
+}
+
+/**
  * @controller
  * @module officeuifabric.components.dialog 
  * @private 
@@ -196,6 +207,20 @@ export class DialogSubtextDirective implements ng.IDirective {
 }
 
 /**
+ * @controller
+ * @module officeuifabric.components.dialog 
+ * @private 
+ * @description
+ * Used to more easily inject the Angular $log service into the directive. 
+ */
+export class DialogActionsController {
+    public static $inject: string[] = ['$log'];
+    constructor(public $log: ng.ILogService) {
+    }
+}
+
+
+/**
  * @directive
  * @name uifDialogActions
  * @module officeuifabric.components.dialog
@@ -212,15 +237,35 @@ export class DialogActionsDirective implements ng.IDirective {
     public restrict: string = 'E';
     public replace: boolean = true;
     public transclude: boolean = true;
+    public controller: any = DialogActionsController;
     // public require: string = '^uifDialog';
     public template: string = '<div class="ms-Dialog-actions"><div ng-class="{ \'ms-Dialog-actionsRight\': uifPosition==\'right\'}">' +
     '<ng-transclude></ng-transclude></div></div>';
     public scope: any = {
         uifPosition: '@'
-    }
+    };
+
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new DialogActionsDirective();
         return directive;
+    }
+    public link(scope: IDialogActionsPositionScope,
+                element: ng.IAugmentedJQuery,
+                attrs: ng.IAttributes,
+                controller: DialogActionsController): void {
+        scope.$watch('uifPosition', (newValue: string, oldValue: string) => {
+            if (typeof (newValue) !== 'undefined') {
+                if (DialogActionsPositionEnum[newValue] === undefined) {
+                    controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.dialog - Unsupported type:' +
+                        'The type (\'' + scope.uifPosition + '\') is not supported by the Office UI Fabric.' +
+                        'Supported options are listed here: ' +
+                        'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/dialog/dialogEnums.ts'
+                    );
+
+                }
+            }
+
+        });
     }
 }
 
