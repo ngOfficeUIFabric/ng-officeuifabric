@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -37,15 +37,20 @@
     "sharepoint"
   ],
   "scripts": {
-    "dev-install": "tsd install -ros"
+    "build": "npm run build:ts && npm run build:lib",
+    "build:ts": "tsc -p ./",
+    "build:lib": "gulp build-lib && gulp build-lib --dev",
+    "dev-install": "tsd install -ros",
+    "test": "npm run build:ts && gulp test --specs"
   },
   "dependencies": {
-    "angular": "^1.4.9",
-    "office-ui-fabric": "^2.0.1"
+    "angular": "1.4.9",
+    "office-ui-fabric": "2.0.1"
   },
   "devDependencies": {
     "angular-animate": "^1.4.9",
     "angular-mocks": "^1.4.9",
+    "angular-sanitize": "^1.4.9",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
@@ -83,9 +88,10 @@
     "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
     "phantomjs-prebuilt": "^2.1.4",
+    "pickadate": "3.5.3",
     "run-sequence": "^1.1.5",
     "ts-loader": "^0.8.0",
-    "tslint": "^3.2.0",
+    "tslint": "^3.5.0",
     "webpack": "^1.12.9",
     "webpack-stream": "^3.1.0",
     "yargs": "^3.31.0"

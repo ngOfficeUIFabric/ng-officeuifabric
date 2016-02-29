@@ -126,34 +126,29 @@ export class CalloutActionsDirective implements ng.IDirective {
 
     if (ng.isObject(calloutController)) {
       calloutController.$scope.$watch('hasSeparator', (hasSeparator: boolean) => {
-        let actionChildren: JQuery = instanceElement.children().eq(0).children();
+        if (hasSeparator) {
+          let actionChildren: JQuery = instanceElement.children().eq(0).children();
 
-        for (let buttonIndex: number = 0; buttonIndex < actionChildren.length; buttonIndex++) {
-          let action: JQuery = actionChildren.eq(buttonIndex);
-          // handle CSS on button
-          if (hasSeparator) {
+          for (let buttonIndex: number = 0; buttonIndex < actionChildren.length; buttonIndex++) {
+            let action: JQuery = actionChildren.eq(buttonIndex);
+            // handle CSS on button
             action.addClass('ms-Callout-action');
-          } else {
-            action.removeClass('ms-Callout-action');
-          }
 
-          // take care of span inside buttons
-          let actionSpans: JQuery = action.find('span');
+            // take care of span inside buttons
+            let actionSpans: JQuery = action.find('span');
 
-          for (let spanIndex: number = 0; spanIndex < actionSpans.length; spanIndex++) {
-            let actionSpan: JQuery = actionSpans.eq(spanIndex);
-
-            if (hasSeparator) {
-              actionSpan.addClass('ms-Callout-actionText');
-            } else {
-              actionSpan.removeClass('ms-Callout-actionText');
+            // add only to spans that are either button label or icon
+            for (let spanIndex: number = 0; spanIndex < actionSpans.length; spanIndex++) {
+              let actionSpan: JQuery = actionSpans.eq(spanIndex);
+              if (actionSpan.hasClass('ms-Button-label') || actionSpan.hasClass('ms-Button-icon')) {
+                actionSpan.addClass('ms-Callout-actionText');
+              }
             }
           }
         }
       });
     }
   }
-
 }
 
 /**

@@ -111,46 +111,47 @@ export class GulpTask extends BaseGulpTask {
     type setupWatcherFunc = () => void;
 
     let demoFilesWatcher: setupWatcherFunc = () => {
-      if (this._args.serve) {
-          this.browserSync = browserSyncModule.create();
-          this.browserSync.init({
-              server: {
-                  baseDir: './'
-              }
-          });
-
-          gulp.watch(['./dist/*.js', './src/**/demo*/*.*', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
-            let filePath: path.ParsedPath = path.parse(event.path);
-
-            /* skip reloading for files which are changed by typescript transpilation
-               they are reloading by other task */
-            if (filePath.ext === '.js') {
-              let tsFile: string = event.path.replace('.js', '.ts');
-              fs.stat(tsFile, (err: NodeJS.ErrnoException, stats: fs.Stats) => {
-              /* corresponding .ts not found -->> reload */
-              if (err) {
-                this.browserSync.reload();
-                return;
-              }
-              /* .ts found -->> do nothing, at this point browsers should be reloaded by the `Transpile demo files` */
-            });
-
-            } else {
-              this.browserSync.reload();
+        this.browserSync = browserSyncModule.create();
+        this.browserSync.init({
+            server: {
+                baseDir: './'
             }
+        });
+
+        gulp.watch(['./dist/*.js', './src/**/demo*/*.*', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
+          let filePath: path.ParsedPath = path.parse(event.path);
+
+          /* skip reloading for files which are changed by typescript transpilation
+              they are reloading by other task */
+          if (filePath.ext === '.js') {
+            let tsFile: string = event.path.replace('.js', '.ts');
+            fs.stat(tsFile, (err: NodeJS.ErrnoException, stats: fs.Stats) => {
+            /* corresponding .ts not found -->> reload */
+            if (err) {
+              this.browserSync.reload();
+              return;
+            }
+            /* .ts found -->> do nothing, at this point browsers should be reloaded by the `Transpile demo files` */
           });
-      }
+
+          } else {
+            this.browserSync.reload();
+          }
+        });
     };
 
     let buildFilesWatcher: setupWatcherFunc = () => {
       subscribeWatcher(
-      gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], ['transpile-ts']), 'Transpile build files');
+      gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], () => {
+        runSequence('vet', 'transpile-ts');
+      }),
+      'Transpile build files');
     };
 
     let demoTypescriptWatcher: setupWatcherFunc = () => {
       subscribeWatcher(
       gulp.watch(['./src/**/demo*/*.ts'], () => {
-        runSequence('transpile-ts', reloadBrowsers);
+        runSequence('vet', 'transpile-ts', reloadBrowsers);
       }),
       'Transpile demo files');
     };
@@ -159,7 +160,7 @@ export class GulpTask extends BaseGulpTask {
       subscribeWatcher(
       gulp.watch(['./src/**/*.ts', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
 
-      runSequence('transpile-ts', () => {
+      runSequence('vet', () => {
         spawnGulpTask('build-lib')
         .on('exit', () => {
           spawnGulpTask('test', '--file=' + event.path);
@@ -175,7 +176,11 @@ export class GulpTask extends BaseGulpTask {
 
     /* setup all wathers */
     buildFilesWatcher();
-    demoFilesWatcher();
+
+    if (this._args.serve) {
+      demoFilesWatcher();
+    }
+
     demoTypescriptWatcher();
     sourceWatcher();
   }

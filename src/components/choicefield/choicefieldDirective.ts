@@ -7,11 +7,11 @@ import {ChoicefieldType} from './choicefieldTypeEnum';
  * @ngdoc interface
  * @name IChoicefieldOptionScope
  * @module officeuifabric.components.choicefield
- * 
- * @description 
- * This is the scope used by the choicefield option directive. 
  *
- * 
+ * @description
+ * This is the scope used by the choicefield option directive.
+ *
+ *
  * @property {string=} ngModel           - Set the ng-model
  * @property {string=} ngTrueValue       - Set the ng-true-value. Can only be used with checkbox
  * @property {string=} ngFalseValue      - Set the ng-false-value. Can only be used with checkbox
@@ -30,11 +30,11 @@ export interface IChoicefieldOptionScope extends ng.IScope {
  * @ngdoc interface
  * @name IChoicefieldGroupScope
  * @module officeuifabric.components.choicefield
- * 
- * @description 
- * This is the scope used by the choicefield group directive. 
  *
- * 
+ * @description
+ * This is the scope used by the choicefield group directive.
+ *
+ *
  * @property {string=} ngModel     - Set the ng-model
  * @property {boolean=} disabled   - Set to disable the element
  */
@@ -46,7 +46,7 @@ export interface IChoicefieldGroupScope extends ng.IScope {
  * @ngdoc class
  * @name ChoicefieldOptionController
  * @module  officeuifabric.components.choicefield
- * 
+ *
  * @description
  * This is the controller for the <uif-choicefield-option> directive
  */
@@ -59,16 +59,16 @@ export class ChoicefieldOptionController {
  * @ngdoc directive
  * @name uifChoicefieldOption
  * @module officeuifabric.components.choicefield
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-choicefield-option>` is an option directive (radio or checkbox)
  * Can be used in uif-choicefield-group, or as a single element
  *
  * @usage
- * 
- * <uif-choicefield-option uif-type="checkbox" value="Option1" 
+ *
+ * <uif-choicefield-option uif-type="checkbox" value="Option1"
  *      ng-model="selectedValue" ng-true-value="\'TRUEVALUE\'" ng-false-value="\'FALSEVALUE\'">Option 1</uif-choicefield>
  */
 export class ChoicefieldOptionDirective implements ng.IDirective {
@@ -97,8 +97,9 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
         return directive;
     }
 
-    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
+    public compile (templateElement: ng.IAugmentedJQuery,
+                    templateAttributes: ng.IAttributes,
+                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
             let input: ng.IAugmentedJQuery = templateElement.find('input');
             if (!('ngModel' in templateAttributes)) {
                 // remove ng-model, as this is an optional attribute.
@@ -164,10 +165,10 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
  * @ngdoc class
  * @name ChoicefieldgroupController
  * @module officeuifabric.components.choicefield
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * ChoicefieldGroupController is the controller for the <uif-choicefield-group> directive
  *
  */
@@ -214,15 +215,15 @@ export class ChoicefieldGroupController {
  * @ngdoc directive
  * @name uifDropdown
  * @module officeuifabric.components.choicefield
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-choicefield>` is a choicefield directive
  * @see https://github.com/OfficeDev/Office-UI-Fabric/tree/master/src/components/Choicefield
- * 
+ *
  * @usage
- * 
+ *
  * <uif-choicefield-group ng-model="selectedValue">
  *    <uif-choicefield-option uif-type="radio" ng-repeat="option in options"
  *        value="{{option.value}}">{{option.text}}</uif-choicefield-option>
@@ -246,8 +247,9 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
         const directive: ng.IDirectiveFactory = () => new ChoicefieldGroupDirective();
         return directive;
     }
-    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
+    public compile (templateElement: ng.IAugmentedJQuery,
+                    templateAttributes: ng.IAttributes,
+                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
         return {
             pre: this.preLink
         };
@@ -269,10 +271,10 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.choicefield
- * 
- * @description 
+ *
+ * @description
  * ChoiceField
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.choicefield', [
     'officeuifabric.components'

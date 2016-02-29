@@ -14,7 +14,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
 
     beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
       $element = ng.element(`
-                    <uif-contextual-menu uif-is-open="isOpen">
+                    <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
                         <uif-contextual-menu-item uif-text="'Item3'"></uif-contextual-menu-item>
                         <uif-contextual-menu-item uif-text="'Item2'" uif-type="subMenu">
                                 <uif-contextual-menu uif-is-open="sub.isOpen">
@@ -162,7 +162,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
 
     beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
       $element = ng.element(`
-                    <uif-contextual-menu uif-is-open="isOpen" uif-multiselect="true">
+                    <uif-contextual-menu uif-is-open="isOpen" uif-multiselect="true" uif-close-on-click="false">
                         <uif-contextual-menu-item uif-text="'Header'" uif-type="header"></uif-contextual-menu-item>
                         <uif-contextual-menu-item uif-text="'Item3'"></uif-contextual-menu-item>
                         <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
@@ -189,5 +189,31 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
       $scope.$digest();
       expect($element.find('li a').eq(1)).toHaveClass('is-selected');
     }));
+  });
+
+  describe('auto closing menu tests', () => {
+    let $element: JQuery;
+    let $scope: any;
+
+    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+      $element = ng.element(`
+                    <uif-contextual-menu uif-is-open="isOpen">
+                        <uif-contextual-menu-item uif-text="'Item1'"></uif-contextual-menu-item>
+                        <uif-contextual-menu-item uif-text="'Item2'"></uif-contextual-menu-item>
+                    </uif-contextual-menu>`);
+      $scope = $rootScope;
+      $scope.isOpen = true;
+      $scope.$digest();
+      $compile($element)($scope);
+      $element = jQuery($element[0]);
+      $scope.$digest();
+    }));
+
+    it('should close menu after click', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      $element.find('li a').eq(1).click();
+      $scope.$digest();
+      expect($element).not.toHaveClass('is-open');
+    }));
+
   });
 });

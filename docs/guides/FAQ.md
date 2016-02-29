@@ -2,11 +2,11 @@
 
 As we get commonly asked questions, we will post them here.
 
-- [How has ngOfficeUiFabric Helped the Community?](#)
-- [What Version of Angular is Supported?](#)
-- [What are the Plans for Angular 2 Support?](#)
-- [What is the Release Schedule?](#)
-- [What Dependencies does ngOficeUiFabric Have?](#)
+- [How has ngOfficeUiFabric Helped the Community?](#how-has-ngofficeuifabric-helped-the-community)
+- [What Version of Angular is Supported?](#what-are-the-plans-for-angular-2-support)
+- [What are the Plans for Angular 2 Support?](#what-are-the-plans-for-angular-2-support)
+- [What is the Release Schedule?](#what-is-the-release-schedule)
+- [What Dependencies does ngOficeUiFabric Have?](#what-dependencies-does-ngoficeuifabric-have)
 
 ---
 
@@ -22,6 +22,8 @@ In working on this library, the contributors have found and reported numerous bu
 - [#302](https://github.com/OfficeDev/Office-UI-Fabric/issues/302) - Label consisting of multiple words wrapped on each word
 - [#316](https://github.com/OfficeDev/Office-UI-Fabric/issues/316) - TextField: Placeholder interferes with input field hover
 - [#328](https://github.com/OfficeDev/Office-UI-Fabric/issues/328) - Large spinner misplaced
+- [#336](https://github.com/OfficeDev/Office-UI-Fabric/issues/336) - Datepicker does not work with pickadate @ 3.5.6
+- [#346](https://github.com/OfficeDev/Office-UI-Fabric/issues/346) - Hero button icon not centered
 
 ## What Version of Angular is Supported?
 

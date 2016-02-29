@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>ngOfficeUiFabric | uif-Breadcrumb demo</title>
+    <meta charset="utf-8">
+
+    <!-- office ui fabric css -->
+    <!--<link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />-->
+    
+    <link rel="stylesheet" href="http://appsforoffice.microsoft.com/fabric/1.1.3/fabric.min.css">
+    <link rel="stylesheet" href="http://appsforoffice.microsoft.com/fabric/1.1.3/fabric.components.min.css">
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+  </head>
+
+  <body ng-app="demoApp">
+    <h1 class="ms-font-su">Breadcrumb Demo | &lt;uif-breadcrumb&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <!-- first example -->
+    <p>To render breadcrumb, use the following markup:
+      <br/>
+      <pre>
+        &lt;uif-breadcrumb&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github1.com\&apos;&quot;&gt;GitHub1&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github2.com\&apos;&quot;&gt;GitHub2&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github3.com\&apos;&quot;&gt;GitHub3&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github4.com\&apos;&quot;&gt;GitHub4&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link uif-current&gt;Current&lt;/uif-breadcrumb-link&gt;&#13;&#10;        &lt;/uif-breadcrumb&gt;
+      </pre>
+    </p>
+
+    <p>
+      <uif-breadcrumb>
+        <uif-breadcrumb-link ng-href="\'http://github1.com\'">GitHub1</uif-breadcrumb-link>
+        <uif-breadcrumb-link ng-href="\'http://github2.com\'">GitHub2</uif-breadcrumb-link>
+        <uif-breadcrumb-link ng-href="\'http://github3.com\'">GitHub3</uif-breadcrumb-link>
+        <uif-breadcrumb-link ng-href="\'http://github4.com\'">GitHub4</uif-breadcrumb-link>
+        <uif-breadcrumb-link uif-current>Current</uif-breadcrumb-link>
+      </uif-breadcrumb>
+    </p>
+  </body>
+</html>

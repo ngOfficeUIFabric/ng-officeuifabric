@@ -6,12 +6,12 @@ import * as ng from 'angular';
  * @ngdoc interface
  * @name IDropdownScope
  * @module officeuifabric.components.dropdown
- * 
- * @description 
- * This is the scope used by the directive. 
  *
- * 
- * @property {boolean} disabled - Set to disabled  
+ * @description
+ * This is the scope used by the directive.
+ *
+ *
+ * @property {boolean} disabled - Set to disabled
  */
 export interface IDropdownScope extends ng.IScope {
     isOpen: boolean;
@@ -24,14 +24,14 @@ export interface IDropdownScope extends ng.IScope {
  * @ngdoc directive
  * @name uifDropdownOption
  * @module officeuifabric.components.dropdown
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-dropdown-option>` is an option directive
  *
  * @usage
- * 
+ *
  * <uif-dropdown>
  *   <uif-dropdown-option value="Value">Text</uif-option>
  * </uif-dropdown>
@@ -48,8 +48,9 @@ export class DropdownOptionDirective implements ng.IDirective {
 
         return directive;
     }
-    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
+    public compile (templateElement: ng.IAugmentedJQuery,
+                    templateAttributes: ng.IAttributes,
+                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
         return {
             post: this.postLink
         };
@@ -78,10 +79,10 @@ export class DropdownOptionDirective implements ng.IDirective {
  * @ngdoc class
  * @name DropdownController
  * @module officeuifabric.components.dropdown
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * DropdownController is the controller for the <uif-dropdown> directive
  *
  */
@@ -131,15 +132,15 @@ export class DropdownController {
  * @ngdoc directive
  * @name uifDropdown
  * @module officeuifabric.components.dropdown
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-dropdown>` is a dropdown directive
  * @see https://github.com/OfficeDev/Office-UI-Fabric/tree/master/src/components/Dropdown
- * 
+ *
  * @usage
- * 
+ *
  * <uif-dropdown ng-model="selectedValue">
  *   <uif-option value="Value1">Text 1</uif-option>
  *   <uif-option value="Value2">Text 2</uif-option>
@@ -163,8 +164,9 @@ export class DropdownDirective implements ng.IDirective {
         const directive: ng.IDirectiveFactory = () => new DropdownDirective();
         return directive;
     }
-    public compile (templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude: ng.ITranscludeFunction)
-        : ng.IDirectivePrePost {
+    public compile (templateElement: ng.IAugmentedJQuery,
+                    templateAttributes: ng.IAttributes,
+                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
         return {
             pre: this.preLink
         };
@@ -182,10 +184,10 @@ export class DropdownDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.dropdown
- * 
- * @description 
+ *
+ * @description
  * Dropdown
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.dropdown', [
     'officeuifabric.components'

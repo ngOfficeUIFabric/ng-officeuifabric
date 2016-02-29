@@ -2,6 +2,14 @@
     position: relative;
 }
 
+.dynamic-menu .ms-ContextualMenu.is-open {
+  position: absolute;
+}
+
+.code {
+  margin: -20px 0 -20px -40px;
+}
+
 .is-open-add{
     animation: 0.367s cubic-bezier(0.1, 0.9, 0.2, 1) fadeIn, slideRightIn40;
     -webkit-animation: 0.367s cubic-bezier(0.1, 0.9, 0.2, 1) fadeIn, slideRightIn40;

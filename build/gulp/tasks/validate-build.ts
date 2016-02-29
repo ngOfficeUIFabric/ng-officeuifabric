@@ -45,6 +45,6 @@ export class GulpTask extends BaseGulpTask {
   constructor(cb: gulp.TaskCallback) {
     super();
 
-    runSequence('transpile-ts', 'build-lib', 'test', cb);
+    runSequence('vet', 'test', 'build-lib', cb);
   }
 }

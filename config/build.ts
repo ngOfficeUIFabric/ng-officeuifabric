@@ -80,6 +80,8 @@ export class BuildConfig {
     BuildConfig.NODE_MODULES + '/angular/angular.js',
     BuildConfig.NODE_MODULES + '/angular-mocks/angular-mocks.js',
     BuildConfig.NODE_MODULES + '/jquery/dist/jquery.min.js',
+    BuildConfig.NODE_MODULES + '/pickadate/lib/picker.js',
+    BuildConfig.NODE_MODULES + '/pickadate/lib/picker.date.js',
     BuildConfig.NODE_MODULES + '/jasmine-jquery/lib/jasmine-jquery.js',
     'src/core/jquery.phantomjs.fix.js',
     'src/core/*.js'
@@ -88,7 +90,9 @@ export class BuildConfig {
    * ALl test files.
    */
   public static ALL_SPEC_FILES: string[] = [
-    'src/components/*/!(*.spec).js',
+    'src/components/*/!(*.spec|contextualMenu|navbarDirective).js',
+    'src/components/navbar/navbarDirective.js',
+    'src/components/contextualmenu/contextualMenu.js',
     'src/components/*/*.spec.js'
   ];
 }

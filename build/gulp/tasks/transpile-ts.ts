@@ -26,7 +26,7 @@ export class GulpTask extends BaseGulpTask {
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.
    */
-  public static dependencies: string[] = ['vet'];
+  public static dependencies: string[] = [];
 
   /**
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
