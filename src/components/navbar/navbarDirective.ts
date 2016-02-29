@@ -284,12 +284,12 @@ export class NavBarItemDirective implements ng.IDirective {
     this.templateTypes[NavBarItemTypes.link] = `
     <li class="ms-NavBar-item"
     ng-class="{\'is-disabled\': isDisabled, 'ms-NavBar-item--right': position === 'right'}">
-      <a class="ms-NavBar-link" href=""><span class='uif-nav-item-conent'></span></a>
+      <a class="ms-NavBar-link" href=""><span class='uif-nav-item-content'></span></a>
     </li>`;
 
     this.templateTypes[NavBarItemTypes.menu] = `
     <li class="ms-NavBar-item ms-NavBar-item--hasMenu" ng-class="{\'is-disabled\': isDisabled}">
-      <a class="ms-NavBar-link" href=""><span class='uif-nav-item-conent'></span></a>
+      <a class="ms-NavBar-link" href=""><span class='uif-nav-item-content'></span></a>
       <i class="ms-NavBar-chevronDown ms-Icon ms-Icon--chevronDown"></i>
       <div class='uif-submenu'></div>
     </li>`;
@@ -374,7 +374,9 @@ export class NavBarItemDirective implements ng.IDirective {
 
   private transcludeChilds($scope: INavBarItemScope, $element: ng.IAugmentedJQuery, $transclude: ng.ITranscludeFunction): void {
     $transclude((clone: ng.IAugmentedJQuery) => {
-      if (!clone.length && !$scope.text) {
+      let hasContent: boolean = this.hasItemContent(clone);
+
+      if (!hasContent && !$scope.text) {
         this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.navbar - ' +
           'you need to provide a text for a nav bar menu item.\n' +
           'For <uif-nav-bar-item> you need to specify either \'uif-text\' as attribute or <uif-nav-item-content> as a child directive');
@@ -386,18 +388,18 @@ export class NavBarItemDirective implements ng.IDirective {
   }
 
   private insertLink(clone: ng.IAugmentedJQuery, $scope: INavBarItemScope, $element: ng.IAugmentedJQuery): void {
-    /* text attribute provided */
-    let elementToReplace: JQuery = angular.element($element[0].querySelector('.uif-nav-item-conent'));
-    if (!clone.length && $scope.text) {
-      elementToReplace.remove();
-      $element.find('a').append(angular.element('<span>' + $scope.text + '</span>'));
-    } else if (clone.length) { /* element provided */
+    let elementToReplace: JQuery = angular.element($element[0].querySelector('.uif-nav-item-content'));
+
+    if (this.hasItemContent(clone)) { /* element provided */
       for (let i: number = 0; i < clone.length; i++) {
         let element: ng.IAugmentedJQuery = angular.element(clone[i]);
-        if (element.hasClass('uif-nav-content')) {
+        if (element.hasClass('uif-content')) {
           elementToReplace.replaceWith(element);
+          break;
         }
       }
+    } else { /* text attribute provided */
+      elementToReplace.replaceWith(angular.element('<span>' + $scope.text + '</span>'));
     }
   }
 
@@ -409,41 +411,16 @@ export class NavBarItemDirective implements ng.IDirective {
       }
     }
   }
-}
 
-/**
- * @ngdoc directive
- * @name uifNavItemContent
- * @module officeuifabric.components.navbar
- *
- * @restrict E
- *
- * @description
- * `<uif-nav-item-content>` is a helper directive used by nav bar item.
- * Exposes content for the nav bar item.
- *
- * @see {link http://dev.office.com/fabric/components/navbar}
- *
- * @usage
- *
- * <uif-nav-item-content>
- *     <uif-icon uif-type="arrowRight"></uif-icon><b>NavBar Item</b>
- *     <uif-icon uif-type="arrowLeft"></uif-icon>
- * </uif-nav-item-content>
- */
-export class NavBarItemContent implements ng.IDirective {
-  public static directiveName: string = 'uifNavItemContent';
+  private hasItemContent(clone: ng.IAugmentedJQuery): boolean {
+    for (let i: number = 0; i < clone.length; i++) {
+      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      if (element.hasClass('uif-content')) {
+        return true;
+      }
+    }
 
-  public replace: boolean = true;
-  public require: string = '^uifNavBarItem';
-  public restrict: string = 'E';
-  public transclude: boolean = true;
-  public scope: boolean = true;
-  public template: string = `<span class="uif-nav-content" ng-transclude></span>`;
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new NavBarItemContent();
-    return directive;
+    return false;
   }
 }
 
@@ -609,5 +586,4 @@ export var module: ng.IModule = ng.module('officeuifabric.components.navbar', [
   'officeuifabric.components'])
   .directive(NavBarDirective.directiveName, NavBarDirective.factory())
   .directive(NavBarItemDirective.directiveName, NavBarItemDirective.factory())
-  .directive(NavBarItemContent.directiveName, NavBarItemContent.factory())
   .directive(NavBarSearch.directiveName, NavBarSearch.factory());

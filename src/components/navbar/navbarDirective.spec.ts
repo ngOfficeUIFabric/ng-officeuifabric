@@ -19,7 +19,7 @@ describe('navbar: <uif-nav-bar />', () => {
                     </uif-nav-bar-search>
                     <uif-nav-bar-item uif-text="'Home'" ng-click="logClick('Home item clicked')"></uif-nav-bar-item>
                     <uif-nav-bar-item uif-type="menu">
-                      <uif-nav-item-content>Sub Menu</uif-nav-item-content>
+                      <uif-content><uif-icon uif-type="arrowRight"></uif-icon>Sub Menu</uif-content>
                       <uif-contextual-menu>
                         <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
                         <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
@@ -40,6 +40,20 @@ describe('navbar: <uif-nav-bar />', () => {
       $scope.$apply();
 
       expect(link).toHaveClass('is-selected');
+    }));
+
+    it('should render enhanced menu item', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      let link: JQuery = $element.find('.ms-NavBar-items .ms-NavBar-item:not(.ms-NavBar-item--search)').eq(1);
+      let content: JQuery = link.find('span.uif-content');
+
+      expect(content.length).toEqual(1);
+    }));
+
+    it('should render enhanced menu item with icon', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      let link: JQuery = $element.find('.ms-NavBar-items .ms-NavBar-item:not(.ms-NavBar-item--search)').eq(1);
+      let icon: JQuery = link.find('span.uif-content .ms-Icon');
+
+      expect(icon.length).toEqual(1);
     }));
 
     it('should execute click handler', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
@@ -186,7 +200,7 @@ describe('navbar: <uif-nav-bar />', () => {
       expect(_$log_.error).toHaveBeenCalled();
     }));
 
-    it('should write an error - not text for menu item provided', inject(($compile: Function,
+    it('should write an error - no text for menu item provided', inject(($compile: Function,
       $rootScope: ng.IRootScopeService,
       /* tslint:disable:variable-name */
       _$log_: any) => {
