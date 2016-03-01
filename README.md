@@ -98,4 +98,4 @@ First check the [issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/i
 
 ## Contributing to the Project
 
-We want help! Please take a look at the [Contribution Guide](CONTRIBUTING.md) for guidance and jump in the Slack team to discuss how you can help: [http://ngofficeuifabric.slack.com](http://ngofficeuifabric.slack.com)... if you aren't a member of the Slack team yet, [ask for an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
+We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.github/CONTRIBUTING.md) for guidance and jump in the Slack team to discuss how you can help: [http://ngofficeuifabric.slack.com](http://ngofficeuifabric.slack.com)... if you aren't a member of the Slack team yet, [ask for an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
