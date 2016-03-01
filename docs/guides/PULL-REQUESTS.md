@@ -11,7 +11,7 @@ Before you submit your pull request consider the following guidelines:
   ```
 
 - Be familiar with and adhere to things stated in:
-  - [CONTRIBUTING](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/CONTRIBUTING.md)
+  - [CONTRIBUTING](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.github/CONTRIBUTING.md)
   - [CONTRIB-WORKFLOW](CONTRIB-WORKFLOW.md)
   - [CODING](CODING.md)
   - [TESTING](TESTING.md)
@@ -59,6 +59,8 @@ Please correct any issues that come up before submitting your PR. Any issues tha
 ## Squashing Your Changes to a Single Commit
 
 The branch manager will do this for you if you submit multiple commits in your PR, but if you can do this it will help them out. The idea is to have each change be in it's own commit to keep the commit log clean. This involves taking all the commits and merging them into a single commit with a single comment.
+
+> You can learn more on squashing multiple commits into a single commit and see a video of it in action here: [Squashing Multiple Git Commits Into One](http://www.andrewconnell.com/blog/squash-multiple-git-commits-into-one).
 
 To do this, assuming you are in the branch where you were working on a fix or feature, assuming it's named **issue-xyz**...
 
