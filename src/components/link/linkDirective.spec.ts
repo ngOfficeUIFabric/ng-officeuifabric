@@ -47,15 +47,6 @@ describe('linkDirective: <uif-link />', () => {
 
     });
 
-    it('should not render hero CSS if uif-type not present', () => {
-
-    let aElement: JQuery = element;
-
-    // ensure link has the correct classes
-    expect(aElement.eq(0)).not.toHaveClass('ms-Link--hero');
-
-    });
-
 
     it('should render the correct text', () => {
 
@@ -65,37 +56,5 @@ describe('linkDirective: <uif-link />', () => {
         expect(aElement.eq(0)).toHaveText('Link Text');
 
     });
-
-    it('should have hero class if uif-type="hero"', inject(($compile: ng.ICompileService) => {
-        element = ng.element('<uif-link ng-href="http://ngofficeuifabric.com" uif-type="hero">Link Text</uif-link>');
-        $compile(element)(scope);
-        scope.$digest();
-
-        let jqElement: JQuery = jQuery(element);
-        expect(jqElement).toHaveClass('ms-Link--hero');
-
-    }));
-
-    it('should not have hero class if uif-type="regular"', inject(($compile: ng.ICompileService) => {
-    element = ng.element('<uif-link ng-href="http://ngofficeuifabric.com" uif-type="regular">Link Text</uif-link>');
-    $compile(element)(scope);
-    scope.$digest();
-
-    let jqElement: JQuery = jQuery(element);
-    expect(jqElement).not.toHaveClass('ms-Link--hero');
-
-    }));
-
-    it('should log error message on invalid uif-type', inject(($compile: ng.ICompileService, $log: ng.ILogService) => {
-      element = ng.element('<uif-link ng-href="http://ngofficeuifabric.com" uif-type="invalid">Link Text</uif-link>');
-      $compile(element)(scope);
-      scope.$digest();
-
-      expect($log.error.logs.length === 1).toBeTruthy();
-      expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.link - "' +
-      'invalid" is not a valid value for uifType. It should be hero or regular.');
-    }));
-
-
 
 });
