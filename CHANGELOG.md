@@ -1,6 +1,12 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+#### Features
+- **uif-commandbar**: directive added (@tobiaswest83; closes [#17](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/17))
+
+#### Breaking Changes
+- **uif-link**: removed hero option (by @andrewconnell; closes [#187](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/187))
+
 <a name="0.5.1"></a>
 ### [0.5.1 (February 29, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.5.1))
 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <title>ngOfficeUiFabric | uif-Dropdown demo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+  <script src="index.js"></script>
+
+  <style type="text/css">
+
+    .ms-CommandBarItem.is-hidden
+    {
+      display:none;
+    }
+
+  </style>
+</head>
+
+<body ng-controller="demoAppController">
+
+    <h1 class="ms-font-su">uifCommandBar Demo | &lt;uif-command-bar&gt;</h1>
+    <em class="ms-font-m">In order for this demo to work you must first build the library in dev mode. (gulp build-lib dev)</em>
+
+    <h2 class="ms-font-xl">Basic Usage</h2>
+    <ng-include src="'basic.html'"></ng-include>
+    <h4><i class="ms-font-m">Code:</i></h4>
+    <raw src="'basic.html'"></raw>
+
+    <script type="text/ng-template" id="basic.html">
+    <div>
+      <h3 class="ms-font-l">Search Value</h3>
+      <p>
+        <span class="ms-font-m">SearchValue:{{searchValue}}</span>
+      </p>
+      <p>
+        <span class="ms-font-m">Navigated URL:{{navigationUrl}}</span>
+      </p>
+      <uif-command-bar uif-search-term="searchValue" placeholder="Search here...">
+        <uif-command-bar-search></uif-command-bar-search>
+        <uif-command-bar-side>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save" />
+            <span>Right</span>
+          </uif-command-bar-item>
+        </uif-command-bar-side>
+        <uif-command-bar-main uif-show-overflow='true'>
+          <uif-command-bar-item ng-click="goToLink('First Item')">
+            <uif-icon uif-type="save"></uif-icon>
+            <span>First Item</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>2nd</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>3rd</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>4th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>5th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>6th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>7th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>8th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>9th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>10th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span>11th</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span class='ms-font-l'>12th (large text)</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item ng-click="goToLink('13th')">
+            <uif-icon uif-type="save"></uif-icon>
+            <span class='ms-font-s'>13th (small text)</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item ng-click="openMenu()">
+            <span>14th</span>
+            <uif-icon uif-type="chevronDown"></uif-icon>
+            <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
+              <uif-contextual-menu-item uif-text="'New'" uif-click="goToLink('14th > new')"></uif-contextual-menu-item>
+              <uif-contextual-menu-item uif-text="'Save'" uif-click="goToLink('14th > save')"></uif-contextual-menu-item>
+            </uif-contextual-menu>
+          </uif-command-bar-item>
+          <uif-command-bar-item ng-click="goToLink('15th')">
+            <span>15th</span>
+          </uif-command-bar-item>
+        </uif-command-bar-main>
+      </uif-command-bar>
+  </div>
+  </script>
+</body>
+
+</html>
