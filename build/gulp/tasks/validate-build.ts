@@ -1,6 +1,7 @@
 'use strict';
 
 import {BaseGulpTask} from '../BaseGulpTask';
+import {Utils} from '../utils';
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
 
@@ -45,6 +46,9 @@ export class GulpTask extends BaseGulpTask {
   constructor(cb: gulp.TaskCallback) {
     super();
 
-    runSequence('vet', 'test', 'build-lib', cb);
+    Utils.spawnGulpTask('vet', '--noExit')
+      .on('exit', () => {
+        runSequence('test', 'build-lib', cb);
+      });
   }
 }

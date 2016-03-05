@@ -24,6 +24,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
+    'noExit': 'Flag if failed vetting should not emit error this terminating the process',
     'verbose': 'Output all TypeScript files being vetted'
   };
 
@@ -36,14 +37,13 @@ export class GulpTask extends BaseGulpTask {
   constructor(done: IVoidCallback) {
     super();
     Utils.log('Vetting build TypeScript code');
-
     return gulp.src(BuildConfig.BUILD_TYPESCRIPT)
       .pipe($.if(this._args.verbose, $.print()))
       .pipe($.tslint({
         configuration: BuildConfig.ROOT + '/tslint.json'
       }))
       .pipe($.tslint.report('verbose', {
-        emitError: false,
+        emitError: this._args.noExit ? false : true,
         summarizeFailureOutput: true
       }));
   }
