@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "angular": "1.4.9",
-    "office-ui-fabric": "2.0.1"
+    "office-ui-fabric": "2.1.0"
   },
   "devDependencies": {
     "angular-animate": "^1.4.9",
@@ -67,7 +67,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-strip-comments": "2.2.1",
+    "gulp-strip-comments": "2.3.2",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",
@@ -88,14 +88,14 @@
     "karma-spec-reporter": "0.0.24",
     "karma-webpack": "^1.7.0",
     "phantomjs-prebuilt": "^2.1.4",
-    "pickadate": "3.5.3",
+    "pickadate": "3.5.6",
     "run-sequence": "^1.1.5",
     "ts-loader": "^0.8.0",
     "tslint": "^3.5.0",
     "webpack": "^1.12.9",
     "webpack-stream": "^3.1.0",
     "xmldom": "^0.1.22",
-    "xpath": "0.0.21",
+    "xpath": "0.0.22",
     "yargs": "^4.2.0"
   }
 }
