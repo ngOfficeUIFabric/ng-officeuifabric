@@ -2,7 +2,7 @@
 
 import {BaseGulpTask} from '../BaseGulpTask';
 import * as gulp from 'gulp';
-import {BuildConfig} from '../../../config/build';
+import {BuildConfig} from '../../config/build';
 import {Utils} from '../utils';
 import * as yargs from 'yargs';
 let $: any = require('gulp-load-plugins')({ lazy: true });
