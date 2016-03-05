@@ -7,6 +7,7 @@
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
 [![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 [![devDependency Status](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric/dev-status.svg)](https://david-dm.org/ngOfficeUIFabric/ng-officeuifabric#info=devDependencies)
+[![Project Workbench](https://badge.waffle.io/ngOfficeUIFabric/ng-officeuifabric.svg?title=waffle.io%20workbench)](http://waffle.io/ngOfficeUIFabric/ng-officeuifabric)
 
 ## Branch Status
 
