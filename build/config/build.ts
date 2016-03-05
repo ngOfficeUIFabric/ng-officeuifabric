@@ -10,7 +10,7 @@ export class BuildConfig {
   public static SOURCE: string = BuildConfig.ROOT + '/src';
 
   // get version number
-  public static VERSION: number = yargs.argv.version || require('./../package.json').version;
+  public static VERSION: number = yargs.argv.version || require('./../../package.json').version;
 
   // banner added to all output
   public static BANNER_JS: string =

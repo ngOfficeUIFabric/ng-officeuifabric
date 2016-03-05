@@ -2,7 +2,7 @@
 
 import {BaseGulpTask} from '../BaseGulpTask';
 import {Utils} from '../utils';
-import {BuildConfig} from '../../../config/build';
+import {BuildConfig} from '../../config/build';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
 import * as gulp from 'gulp';
@@ -53,7 +53,7 @@ export class GulpTask extends BaseGulpTask {
 
     // create karma configuration
     let karmaConfig: karma.ConfigOptions = <karma.ConfigOptions>{
-      configFile: '../../../config/karma.js',
+      configFile: '../../../build/config/karma.js',
       singleRun: true
     };
 

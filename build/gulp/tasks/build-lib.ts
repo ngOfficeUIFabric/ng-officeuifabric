@@ -1,12 +1,12 @@
 'use strict';
 
 import {BaseGulpTask} from '../BaseGulpTask';
-import {BuildConfig} from '../../../config/build';
+import {BuildConfig} from '../../config/build';
 import {Utils} from '../utils';
 import * as gulp from 'gulp';
 import * as yargs from 'yargs';
 import * as webpack from 'webpack';
-import * as webpackConfig from '../../../config/webpack';
+import * as webpackConfig from '../../config/webpack';
 let webpackStream: any = require('webpack-stream');
 
 /**
