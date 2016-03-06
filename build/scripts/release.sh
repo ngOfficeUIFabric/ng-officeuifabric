@@ -47,13 +47,26 @@ function run {
 
   echo "LOG: current folder: $SRC_PATH"
 
-  # pre cleaning
-  echo ".. pre cleaning"
-  rm -Rf dist
-
 
   # get version
   VERSION="$(readJsonProp "package.json" "version")"
+
+
+  # get last tag
+  LAST_TAG=$(git describe --tags --abbrev=0)
+
+
+  # make sure version != last tag,
+  # `if so, no release needed so abort
+  if [ "$LAST_TAG" == "$VERSION" ]; then
+    echo "INFO: not a new version; aborting release script"
+    exit 1
+  fi
+
+
+  # pre cleaning
+  echo ".. pre cleaning"
+  rm -Rf dist
 
 
   # compile production & debug library
