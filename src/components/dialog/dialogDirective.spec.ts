@@ -65,7 +65,7 @@ describe('uifDialog: <uif-dialog />', () => {
 
     it('should validate log messages on uifPosition',
        inject(($compile: Function, $rootScope: ng.IRootScopeService, $log: ng.ILogService) => {
-            element = ng.element('<uif-dialog-actions uif-position="unknown"></uif-dialog-actions>')
+            element = ng.element('<uif-dialog-actions uif-position="unknown"></uif-dialog-actions>');
             $compile(element)(scope);
             scope.$digest();
             expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.dialog - Unsupported type:' +
