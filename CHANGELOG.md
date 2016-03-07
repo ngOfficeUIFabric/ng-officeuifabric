@@ -3,6 +3,7 @@
 
 #### Features
 - **uif-commandbar**: directive added (@tobiaswest83; closes [#17](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/17))
+- **uif-dialog**: directive added (@jigargandhi; closes [#20](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/20))
 
 #### Breaking Changes
 - **uif-link**: removed hero option (by @andrewconnell; closes [#187](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/187))
