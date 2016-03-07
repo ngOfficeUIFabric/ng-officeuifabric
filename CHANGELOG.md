@@ -1,6 +1,9 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+<a name="0.6.0"></a>
+### [0.6.0 - February 29, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.6.0)
+
 #### Features
 - **uif-commandbar**: directive added (@tobiaswest83; closes [#17](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/17))
 - **uif-dialog**: directive added (@jigargandhi; closes [#20](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/20))
