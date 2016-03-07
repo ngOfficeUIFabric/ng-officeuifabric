@@ -100,7 +100,9 @@ export class TextFieldDirective implements ng.IDirective {
             ngModel.$render = () => {
                 // when setting the ngModel value programmatically,
                 // hide the placeholder when viewvalue is not empty
-                scope.labelShown = !ngModel.$viewValue;
+                if (scope.placeholder) {
+                    scope.labelShown = !ngModel.$viewValue;
+                }
             };
         }
     }
