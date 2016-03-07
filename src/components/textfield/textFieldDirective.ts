@@ -59,7 +59,7 @@ export class TextFieldDirective implements ng.IDirective {
         '<span class="ms-TextField-description">{{uifDescription}}</span>' +
         '</div>';
     public scope: {} = {
-        ngModel: '=',
+        ngModel: '=?',
         placeholder: '@',
         uifDescription: '@',
         uifLabel: '@'
