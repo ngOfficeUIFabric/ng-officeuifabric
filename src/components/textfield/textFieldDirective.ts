@@ -22,6 +22,7 @@ export interface ITextFieldScope extends ng.IScope {
     placeholder: string;
     uifDescription: string;
     ngModel: string;
+    uifType: string;
 
     labelShown: boolean;
     uifUnderlined: boolean;
@@ -55,14 +56,16 @@ export class TextFieldDirective implements ng.IDirective {
         '<div ng-class="{\'is-active\': isActive, \'ms-TextField\': true, ' +
         '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder}">' +
         '<label ng-show="labelShown" class="ms-Label">{{uifLabel || placeholder}}</label>' +
-        '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" class="ms-TextField-field" />' +
+        '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" class="ms-TextField-field" ng-if="!uifMultiline" type="{{uifType}}" /> ' +
+        '<textarea ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" class="ms-TextField-field" ng-if="uifMultiline"></textarea>' +
         '<span class="ms-TextField-description">{{uifDescription}}</span>' +
         '</div>';
     public scope: {} = {
         ngModel: '=?',
         placeholder: '@',
         uifDescription: '@',
-        uifLabel: '@'
+        uifLabel: '@',
+        uifMultiline: '@'
     };
 
     public require: string = '?ngModel';
@@ -77,6 +80,7 @@ export class TextFieldDirective implements ng.IDirective {
     public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
         scope.labelShown = true;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
+        scope.uifType = attrs["type"] || "text";
         scope.inputFocus = function(ev: any): void {
             if (scope.uifUnderlined) {
                 scope.isActive = true;
