@@ -270,7 +270,7 @@ export class CalloutDirective implements ng.IDirective {
       scope.closeButton = true;
 
       let closeButtonElement: ng.IAugmentedJQuery = ng.element(
-        '<button class="ms-Callout-close">' +
+        '<button class="ms-Callout-close" type="button">' +
         '<i class="ms-Icon ms-Icon--x"></i>' +
         '</button>');
 

@@ -5,6 +5,9 @@
 - **uif-persona**: directive added (@jjczopek; closes [#31](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/31))
 - **uif-persona-card**: directive added (@jjczopek; closes [#32](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/32))
 
+#### Fixes
+- **uif-callout**: uifClose Button type attribute is not defined in calloutDirective (@jjczopek; closes [#221](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/221))
+
 <a name="0.6.0"></a>
 ### [0.6.0 - February 29, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.6.0)
 
