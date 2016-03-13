@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "angular": "1.4.9",
-    "ng-metadata": "1.1.4",
+    "ng-metadata": "1.1.5",
     "office-ui-fabric": "2.1.0"
   },
   "devDependencies": {
