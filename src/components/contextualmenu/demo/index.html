@@ -2,171 +2,178 @@
 <html>
 
 <head>
-    <title>ngOfficeUiFabric | uif-contextual-menu demo</title>
-    <meta charset="utf-8" />
+  <title>ngOfficeUiFabric | uif-contextual-menu demo</title>
+  <meta charset="utf-8" />
 
-    <!-- office ui fabric css -->
-    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
-    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
-    <!-- angular library -->
-    <script src="../../../../node_modules/angular/angular.min.js"></script>
-    <script src="../../../../node_modules/angular-animate/angular-animate.min.js"></script>
-    <!-- ngofficeuifabric library -->
-    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <script src="../../../../node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="../../../../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
 
-    <link rel="stylesheet" href="styles.css" />
-    <script src="index.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="index.js"></script>
 </head>
 
 <body>
-    <h1 class="ms-font-su">Contextual Menu Demo | &lt;uif-contextual-menu&gt;</h1>
-    <em>In order for this demo to work you must first build the library in debug mode.</em>
-    <div id="demoApp">
-        <div ng-controller="demoController">
-            <h2>Simple menu:</h2>
-            <pre ng-non-bindable>
-&lt;uif-contextual-menu uif-is-open=&quot;isOpen&quot;&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;color&quot; uif-click=&quot;logColor(color)&quot; ng-repeat=&quot;color in colors&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-&lt;/uif-contextual-menu&gt;
-        </pre>
-            <uif-contextual-menu uif-is-open="isOpen">
-                <uif-contextual-menu-item uif-text="color" uif-click="logColor(color)" ng-repeat="color in colors"></uif-contextual-menu-item>
-            </uif-contextual-menu>
-            <br>
+  <h1 class="ms-font-su">Contextual Menu Demo | &lt;uif-contextual-menu&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+  <div id="regularSample">
+    <div ng-controller="demoController">
+      <h2>Simple menu:</h2>
+      <ng-include src="'regular.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'regular.html'"></raw>
 
-            <h2>Multi level menu:</h2>
-            <pre>
-&lt;uif-contextual-menu uif-is-open=&quot;isOpen&quot;&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Delete'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Flag'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-type=&quot;divider&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Tools'&quot; uif-type=&quot;subMenu&quot; uif-click=&quot;logClick('Tools clicked!')&quot;&gt;
-        &lt;uif-contextual-menu&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'Test'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'View'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'Recycle'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'Manage'&quot; uif-type=&quot;subMenu&quot; uif-click=&quot;logClick('Manage clicked!')&quot;&gt;
-                &lt;uif-contextual-menu&gt;
-                    &lt;uif-contextual-menu-item uif-text=&quot;'Approve'&quot; uif-click=&quot;logClick('Approve clicked!')&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-                    &lt;uif-contextual-menu-item uif-text=&quot;'Reject'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-                    &lt;uif-contextual-menu-item uif-type=&quot;divider&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-                    &lt;uif-contextual-menu-item uif-text=&quot;'Delay'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-                &lt;/uif-contextual-menu&gt;
-            &lt;/uif-contextual-menu-item&gt;
-        &lt;/uif-contextual-menu&gt;
-    &lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Move'&quot; uif-type=&quot;subMenu&quot; uif-click=&quot;logClick('Move clicked!')&quot;&gt;
-        &lt;uif-contextual-menu&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'Bin'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'Read later'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-            &lt;uif-contextual-menu-item uif-text=&quot;'Important'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-        &lt;/uif-contextual-menu&gt;
-    &lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-is-disabled=&quot;true&quot; uif-text=&quot;'Disabled'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-&lt;/uif-contextual-menu&gt;
-        </pre>
-            <uif-contextual-menu uif-is-open="isOpen">
-                <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Tools'" uif-type="subMenu" uif-click="logClick('Tools clicked!')">
-                    <uif-contextual-menu>
-                        <uif-contextual-menu-item uif-text="'Test'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'View'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Recycle'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" uif-click="logClick('Manage clicked!')">
-                            <uif-contextual-menu>
-                                <uif-contextual-menu-item uif-text="'Approve'" uif-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
-                                <uif-contextual-menu-item uif-text="'Reject'"></uif-contextual-menu-item>
-                                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-                                <uif-contextual-menu-item uif-text="'Delay'"></uif-contextual-menu-item>
-                            </uif-contextual-menu>
-                        </uif-contextual-menu-item>
-                    </uif-contextual-menu>
-                </uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Move'" uif-type="subMenu" uif-click="logClick('Move clicked!')">
-                    <uif-contextual-menu>
-                        <uif-contextual-menu-item uif-text="'Bin'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Read later'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Important'"></uif-contextual-menu-item>
-                    </uif-contextual-menu>
-                </uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-is-disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
-            </uif-contextual-menu>
-            <br>
-            <h2>Multiselection menu:</h2>
-            <pre>
-&lt;uif-contextual-menu uif-is-open=&quot;isOpen&quot; uif-multiselect=&quot;true&quot;&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Sort By'&quot; uif-type=&quot;header&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Date'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Sender'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-type=&quot;divider&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Order'&quot; uif-type=&quot;header&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Name'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-    &lt;uif-contextual-menu-item uif-text=&quot;'Modified'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
-&lt;/uif-contextual-menu&gt;
-        </pre>
-            <uif-contextual-menu uif-is-open="isOpen" uif-multiselect="true">
-                <uif-contextual-menu-item uif-text="'Sort By'" uif-type="header"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Date'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Sender'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Order'" uif-type="header"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Name'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Modified'"></uif-contextual-menu-item>
-            </uif-contextual-menu>
-            <br>
-        </div>
-    </div>
-    <div id="animateSample">
-        <h2>Need some animation? Here you go:</h2>
-        <ol>
-            <li>Include angular-animate.js using script tag (<code>&lt;script src=&quot;https://code.angularjs.org/1.4.8/angular-animate.min.js&quot;&gt;&lt;/script&gt;</code>)
-                or include it into your package</li>
-            <li>Add dependency on <code>`ngAnimate`</code> in your module, <code>angular.module('demoApp', ['ngAnimate','officeuifabric.core','officeuifabric.components']);</code></li>
-            <li>Now <code>is-open-add, is-open-add-active, is-open-remove, is-open-remove-active</code> css classes are availiable
-                for you to use. They are automatically added by <code>ngAnimate</code> when menu opening and closing. You
-                can use Office UI Fabric animation or external libraries like animate.css or even create your own animations.
-            </li>
-            <li>Here is an example of using Office UI Fabric animations:</li>
-        </ol>
+      <h2>Multi level menu with rich item content:</h2>
 
-        <div ng-controller="demoController">
-            <uif-contextual-menu uif-is-open="isOpen">
-                <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Tools'" uif-type="subMenu" uif-click="logClick('Tools clicked!')">
-                    <uif-contextual-menu>
-                        <uif-contextual-menu-item uif-text="'Test'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'View'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Recycle'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" uif-click="logClick('Manage clicked!')">
-                            <uif-contextual-menu>
-                                <uif-contextual-menu-item uif-text="'Approve'" uif-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
-                                <uif-contextual-menu-item uif-text="'Reject'"></uif-contextual-menu-item>
-                                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-                                <uif-contextual-menu-item uif-text="'Delay'"></uif-contextual-menu-item>
-                            </uif-contextual-menu>
-                        </uif-contextual-menu-item>
-                    </uif-contextual-menu>
-                </uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-text="'Move'" uif-type="subMenu" uif-click="logClick('Move clicked!')">
-                    <uif-contextual-menu>
-                        <uif-contextual-menu-item uif-text="'Bin'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Read later'"></uif-contextual-menu-item>
-                        <uif-contextual-menu-item uif-text="'Important'"></uif-contextual-menu-item>
-                    </uif-contextual-menu>
-                </uif-contextual-menu-item>
-                <uif-contextual-menu-item uif-is-disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
-            </uif-contextual-menu>
-        </div>
+      <ng-include src="'multiLevel.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'multiLevel.html'"></raw>
+
+      <h2>Multiselection menu:</h2>
+
+      <ng-include src="'multiSelection.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'multiSelection.html'"></raw>
+
+      <h2>Open contextual menu by clicking on other element:</h2>
+
+      <div class="dynamic-menu">
+        <ng-include src="'openOnClick.html'"></ng-include>
+      </div>
+      <h4><i>Code:</i></h4>
+      <raw src="'openOnClick.html'"></raw>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <script type="text/ng-template" id="openOnClick.html">
+      <a href ng-click="toggleMenu()">Click to close\open the menu</a>
+      <uif-contextual-menu uif-is-open="dynamic.opened">
+        <uif-contextual-menu-item uif-text="'New'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Edit'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Settings'"></uif-contextual-menu-item>
+      </uif-contextual-menu>
+    </script>
+
+    <script type="text/ng-template" id="multiSelection.html">
+      <uif-contextual-menu uif-is-open="isOpen" uif-multiselect="true" uif-close-on-click="false">
+        <uif-contextual-menu-item uif-text="'Sort By'" uif-type="header"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Date'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Sender'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Order'" uif-type="header"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Name'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Modified'"></uif-contextual-menu-item>
+      </uif-contextual-menu>
+    </script>
+
+    <script type="text/ng-template" id="regular.html">
+      <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
+        <uif-contextual-menu-item uif-text="color" ng-click="logColor(color)" ng-repeat="color in colors"></uif-contextual-menu-item>
+      </uif-contextual-menu>
+    </script>
+
+    <script type="text/ng-template" id="multiLevel.html">
+      <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
+        <uif-contextual-menu-item>
+          <uif-content>
+            <uif-icon uif-type="settings"></uif-icon> Settings
+          </uif-content>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item>
+          <uif-content>
+            <uif-icon uif-type="flag"></uif-icon> Flag
+          </uif-content>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-type="subMenu" ng-click="logClick('Tools clicked!')">
+          <uif-content>
+            <uif-icon uif-type="arrowRight"></uif-icon> Tools
+          </uif-content>
+          <uif-contextual-menu>
+            <uif-contextual-menu-item uif-text="'Test'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'View'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Recycle'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" ng-click="logClick('Manage clicked!')">
+              <uif-contextual-menu>
+                <uif-contextual-menu-item uif-text="'Approve'" ng-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-text="'Reject'"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-text="'Delay'"></uif-contextual-menu-item>
+              </uif-contextual-menu>
+            </uif-contextual-menu-item>
+          </uif-contextual-menu>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-type="subMenu" ng-click="logClick('Move clicked!')">
+          <uif-content>
+            <i><uif-icon uif-type="mail"></uif-icon> Mail</i>
+          </uif-content>
+          <uif-contextual-menu>
+            <uif-contextual-menu-item uif-text="'Bin'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Read later'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Important'"></uif-contextual-menu-item>
+          </uif-contextual-menu>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
+      </uif-contextual-menu>
+    </script>
+
+  </div>
+  <div id="animateSample">
+    <h2>Need some animation? Here you go:</h2>
+    <ol>
+      <li>Include angular-animate.js using script tag (<code>&lt;script src=&quot;https://code.angularjs.org/1.4.8/angular-animate.min.js&quot;&gt;&lt;/script&gt;</code>)
+        or include it into your package</li>
+      <li>Add dependency on <code>`ngAnimate`</code> in your module, <code>angular.module('demoApp', ['ngAnimate','officeuifabric.core','officeuifabric.components']);</code></li>
+      <li>Now <code>is-open-add, is-open-add-active, is-open-remove, is-open-remove-active</code> css classes are availiable
+        for you to use. They are automatically added by <code>ngAnimate</code> when menu opening and closing. You can use
+        Office UI Fabric animation or external libraries like animate.css or even create your own animations.
+      </li>
+      <li>Here is an example of using Office UI Fabric animations:</li>
+    </ol>
+
+    <div ng-controller="demoController">
+      <ng-include src="'animated.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'animated.html'"></raw>
+    </div>
+
+    <script type="text/ng-template" id="animated.html">
+      <uif-contextual-menu uif-is-open="isOpen" uif-close-on-click="false">
+        <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Tools'" uif-type="subMenu" ng-click="logClick('Tools clicked!')">
+          <uif-contextual-menu>
+            <uif-contextual-menu-item uif-text="'Test'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'View'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Recycle'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Manage'" uif-type="subMenu" ng-click="logClick('Manage clicked!')">
+              <uif-contextual-menu>
+                <uif-contextual-menu-item uif-text="'Approve'" ng-click="logClick('Approve clicked!')"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-text="'Reject'"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+                <uif-contextual-menu-item uif-text="'Delay'"></uif-contextual-menu-item>
+              </uif-contextual-menu>
+            </uif-contextual-menu-item>
+          </uif-contextual-menu>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+        <uif-contextual-menu-item uif-text="'Move'" uif-type="subMenu" ng-click="logClick('Move clicked!')">
+          <uif-contextual-menu>
+            <uif-contextual-menu-item uif-text="'Bin'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Read later'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Important'"></uif-contextual-menu-item>
+          </uif-contextual-menu>
+        </uif-contextual-menu-item>
+        <uif-contextual-menu-item disabled="true" uif-text="'Disabled'"></uif-contextual-menu-item>
+      </uif-contextual-menu>
+    </script>
+  </div>
 </body>
 
 </html>

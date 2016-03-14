@@ -2,7 +2,7 @@
 
 import {BaseGulpTask} from '../BaseGulpTask';
 import {Utils} from '../utils';
-import {BuildConfig} from '../../../config/build';
+import {BuildConfig} from '../../config/build';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
 import * as gulp from 'gulp';
@@ -35,6 +35,7 @@ export class GulpTask extends BaseGulpTask {
    */
   public static options: any = {
     'debug': 'Set karma log level to DEBUG',
+    'file': 'Changed file to filter tests down to just that file',
     'specs': 'Output all tests being run',
     'verbose': 'Output all TypeScript files being built & set karma log level to INFO',
     'watch': 'Adds Chrome browser and start listening on file changes for easier debugging'
@@ -52,7 +53,7 @@ export class GulpTask extends BaseGulpTask {
 
     // create karma configuration
     let karmaConfig: karma.ConfigOptions = <karma.ConfigOptions>{
-      configFile: '../../../config/karma.js',
+      configFile: '../../../build/config/karma.js',
       singleRun: true
     };
 

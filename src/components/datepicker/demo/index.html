@@ -8,51 +8,46 @@
   <!-- office ui fabric css -->
   <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
   <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
-  
+
   <!-- angular library -->
   <script src="../../../../node_modules/angular/angular.js"></script>
-  
+
   <!-- jquery (pickadate depends on jquery) -->
   <script src="../../../../node_modules/jquery/dist/jquery.min.js"></script>
-  
+
   <!-- pickadate library -->
   <script src="../../../../node_modules/pickadate/lib/compressed/picker.js"></script>
   <script src="../../../../node_modules/pickadate/lib/compressed/picker.date.js"></script>
-  
+
   <!-- ngofficeuifabric library -->
   <script src="../../../../dist/ngOfficeUIFabric.js"></script>
-  
-  
+
+
   <script src="index.js"></script>
 </head>
 
 <body ng-app="demoApp" ng-controller="demoController">
 
-  <h1 class="ms-font-su">Datepicker Demo | &lt;uif-datepicker&gt;</h1> 
+  <h1 class="ms-font-su">Datepicker Demo | &lt;uif-datepicker&gt;</h1>
   <em>In order for this demo to work you must first build the library in debug mode.</em>
   <br/>
   <em>This directive depends on
     <ul>
         <li><a href="https://jquery.com/">jQuery</a></li>
         <li><a href="http://amsul.ca/pickadate.js/">pickadate.js</a></li>
-    </ul>   
+    </ul>
     Add references to jquery.js, pickadate.js, and picker.js, and picker.date.js BEFORE
     the ngofficeuifabric.js reference</em>
-    <br/><br/>
-    <strong>IMPORTANT! The latest supported version of Pickadate is 3.5.3. Version 3.5.6 introduced an issue with the OfficeUIFabric
-        implementation of the DatePicker. This has been raised with the OfficeUIFabric and will be fixed in a next release, see the
-        <a href="https://github.com/OfficeDev/Office-UI-Fabric/pull/337">pull request</a> for more information.
-    </strong>
     <hr />
     <h2>Demos</h2>
   <p>
     This markup: <br />
     <code>
-        &lt;uif-datepicker ng-model=&quot;value&quot;/&gt;  
+        &lt;uif-datepicker ng-model=&quot;value&quot;/&gt;
     </code>
     <br/>and this script:
     <code>
-        $scope.value = new Date(2016, 3, 2);    
+        $scope.value = new Date(2016, 3, 2);
     </code>
   </p>
 
@@ -66,7 +61,7 @@
   <p>
     This markup: <br />
     <code>
-        &lt;uif-datepicker ng-model=&quot;value_2&quot;&#13;&#10;       uif-months=&quot;Jan,Feb,Maa,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Dec&quot;&#13;&#10;       uif-label=&quot;Start date&quot;&#13;&#10;       placeholder=&quot;Please, find a date&quot;&#13;&#10;       /&gt;  
+        &lt;uif-datepicker ng-model=&quot;value_2&quot;&#13;&#10;       uif-months=&quot;Jan,Feb,Maa,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Dec&quot;&#13;&#10;       uif-label=&quot;Start date&quot;&#13;&#10;       placeholder=&quot;Please, find a date&quot;&#13;&#10;       /&gt;
     </code>
   </p>
 
@@ -80,11 +75,11 @@
        placeholder="Please, find a date"
        />
     <br/>
-    <p>Value: {{value_2}}</p>  
+    <p>Value: {{value_2}}</p>
 
   </p>
   <p>
-      
+
   </p>
 
 

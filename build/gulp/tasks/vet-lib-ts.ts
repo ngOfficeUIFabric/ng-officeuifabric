@@ -2,7 +2,7 @@
 
 import {BaseGulpTask} from '../BaseGulpTask';
 import * as gulp from 'gulp';
-import {BuildConfig} from '../../../config/build';
+import {BuildConfig} from '../../config/build';
 import {Utils} from '../utils';
 import * as yargs from 'yargs';
 let $: any = require('gulp-load-plugins')({ lazy: true });
@@ -23,6 +23,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
+    'noExit': 'Flag if failed vetting should not emit error this terminating the process',
     'verbose': 'Output all TypeScript files being vetted'
   };
 
@@ -40,9 +41,11 @@ export class GulpTask extends BaseGulpTask {
 
     return gulp.src(allTypeScript)
       .pipe($.if(this._args.verbose, $.print()))
-      .pipe($.tslint())
+      .pipe($.tslint({
+        configuration: BuildConfig.ROOT + '/tslint.json'
+      }))
       .pipe($.tslint.report('verbose', {
-        emitError: false,
+        emitError: this._args.noExit ? false : true,
         summarizeFailureOutput: true
       }));
   }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-contextual-menu demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <script src="../../../../node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="../../../../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <div id="regularSample">
+    <div ng-controller="demoController">
+      <ng-include src="'advanced.html'"></ng-include>
+    </div>
+    <script type="text/ng-template" id="advanced.html">
+      <uif-nav-bar uif-overlay="dark">
+        <uif-nav-bar-search placeholder="search for smth" uif-on-search="onSearch(search)">
+        </uif-nav-bar-search>
+        <uif-nav-bar-item uif-text="'Regular menu item'" ng-click="logClick('Menu item clicked')"></uif-nav-bar-item>
+        <uif-nav-bar-item>
+          <uif-content>
+            <uif-icon uif-type="arrowRight"></uif-icon><b>Item in bold with icons</b>
+            <uif-icon uif-type="arrowLeft"></uif-icon>
+          </uif-content>
+        </uif-nav-bar-item>
+        <uif-nav-bar-item uif-type="menu">
+          <uif-content>Sub Menu</uif-content>
+          <uif-contextual-menu>
+            <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Move'" ng-click="logClick('Move clicked!')">
+            </uif-contextual-menu-item>
+          </uif-contextual-menu>
+        </uif-nav-bar-item>
+        <uif-nav-bar-item uif-text="'Disabled Item'" disabled="disabled"></uif-nav-bar-item>
+        <uif-nav-bar-item uif-type="menu">
+          <uif-content>
+            <b><i>Channels</i></b>
+          </uif-content>
+          <uif-contextual-menu>
+            <uif-contextual-menu-item uif-text="'Animals'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Education'">
+            </uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Music'"></uif-contextual-menu-item>
+            <uif-contextual-menu-item uif-text="'Sports'" ng-click="logClick('Sports clicked!')">
+            </uif-contextual-menu-item>
+          </uif-contextual-menu>
+        </uif-nav-bar-item>
+        <uif-nav-bar-item uif-position="right">
+          <uif-content><uif-icon uif-type="upload"></uif-icon>Upload</uif-content>
+        </uif-nav-bar-item>
+      </uif-nav-bar>
+    </script>
+  </div>
+</body>
+
+</html>

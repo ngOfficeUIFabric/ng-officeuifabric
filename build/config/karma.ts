@@ -29,7 +29,7 @@ module.exports = (config: karma.Config) => {
   // create karma config
   let karmaConfig: IKarmaConfig = <IKarmaConfig>{
     autoWatch: true,
-    basePath: __dirname + '/..',
+    basePath: __dirname + '/../..',
     browsers: ['PhantomJS'],
     colors: true,
     coverageReporter: {

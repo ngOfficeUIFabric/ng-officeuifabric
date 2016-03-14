@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-Dialog demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">Dialog Demo | &lt;uif-dialog&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <p>
+        This markup:
+        <br />
+        <code>
+            &lt;uif-dialog  /&gt;
+        </code>
+    </p>
+
+
+    Renders this:
+    <br />
+   
+    <uif-dialog uif-close="false" uif-overlay="dark" uif-type="multiline">
+        <uif-dialog-header>
+            <p class="ms-Dialog-title">
+                Create account
+            </p>
+        </uif-dialog-header>
+        <uif-dialog-inner>
+            <uif-dialog-content>
+                <uif-dialog-subtext>
+                    <span>Your Inbox has changed. No longer does it include favorites, it is a singular destination for your emails.
+                    asdasda</span>
+                    <uif-icon uif-type="arrowDownLeft" /> 
+                </uif-dialog-subtext>
+                <uif-choicefield-group ng-model="selectedValue">
+                    <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
+                    <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
+                    <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
+                    <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
+                </uif-choicefield-group>
+                
+            </uif-dialog-content>
+            <uif-dialog-actions uif-position="right">
+                    <button class="ms-Dialog-action ms-Button ms-Button--primary">
+                      <span class="ms-Button-label">Save</span>
+                   </button>
+                </uif-dialog-actions>
+        </uif-dialog-inner>
+    </uif-dialog>
+
+</body>
+
+</html>

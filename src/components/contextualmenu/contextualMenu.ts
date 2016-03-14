@@ -17,9 +17,6 @@ enum MenuItemTypes {
   subMenu = 3
 }
 
-export var contextualMenuItemDirectiveName: string = 'uifContextualMenuItem';
-export var contextualMenuDirectiveName: string = 'uifContextualMenu';
-
 /**
  * @ngdoc interface
  * @name IContextualMenuItemAttributes
@@ -51,10 +48,52 @@ interface IContextualMenuItemAttributes extends ng.IAttributes {
  * <uif-contextual-menu-item uif-text="'Item1'" uif-on-click="menuOnClick()"></uif-contextual-menu-item>
  */
 export class ContextualMenuItemDirective implements ng.IDirective {
+  public static directiveName: string = 'uifContextualMenuItem';
+
   public restrict: string = 'E';
   public require: string = '^uifContextualMenu';
   public transclude: boolean = true;
   public controller: any = ContextualMenuItemController;
+
+  public replace: boolean = true;
+
+  public scope: {} = {
+    isDisabled: '=?disabled',
+    isSelected: '=?uifIsSelected',
+    onClick: '&ngClick',
+    text: '=?uifText',
+    type: '@uifType'
+  };
+
+  private templateTypes: { [menuType: number]: string } = {};
+
+  constructor(private $log: ng.ILogService) {
+    this.templateTypes[MenuItemTypes.subMenu] =
+      `<li class="ms-ContextualMenu-item">
+          <a class="ms-ContextualMenu-link ms-ContextualMenu-link--hasMenu"
+          ng-class="{\'is-selected\': isSelected, \'is-disabled\': isDisabled}" ng-click="selectItem($event)" href>
+            <span class='uif-item-content'></span></a>
+          <i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--chevronRight"></i>
+          <div class="uif-context-submenu"></div>
+       </li>`;
+
+    this.templateTypes[MenuItemTypes.link] =
+      `<li class="ms-ContextualMenu-item">
+            <a class="ms-ContextualMenu-link" ng-class="{\'is-selected\': isSelected, \'is-disabled\': isDisabled}"
+            ng-click="selectItem($event)" href><span class='uif-item-content'></span></a>
+        </li>`;
+    this.templateTypes[MenuItemTypes.header] = `
+    <li class="ms-ContextualMenu-item ms-ContextualMenu-item--header">
+      <span class='uif-item-content'></span>
+    </li>`;
+    this.templateTypes[MenuItemTypes.divider] = `<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>`;
+  }
+
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ContextualMenuItemDirective($log);
+    directive.$inject = ['$log'];
+    return directive;
+  }
 
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IContextualMenuItemAttributes) => {
     let type: string = $attrs.uifType;
@@ -73,47 +112,12 @@ export class ContextualMenuItemDirective implements ng.IDirective {
     return this.templateTypes[MenuItemTypes[type]];
   };
 
-  public replace: boolean = true;
-  public scope: {} = {
-    isDisabled: '=?uifIsDisabled',
-    isSelected: '=?uifIsSelected',
-    onClick: '&uifClick',
-    text: '=uifText',
-    type: '@uifType'
-  };
-
-  private templateTypes: { [menuType: number]: string } = {};
-
-  constructor(private $log: ng.ILogService) {
-    this.templateTypes[MenuItemTypes.subMenu] =
-      `<li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link ms-ContextualMenu-link--hasMenu"
-                ng-class="{\'is-selected\': isSelected, \'is-disabled\': isDisabled}" ng-click="selectItem()" href>{{text}}</a>
-                <i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--chevronRight"></i>
-                <div class="content"></div>
-            </li>`;
-
-    this.templateTypes[MenuItemTypes.link] =
-      `<li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link" ng-class="{\'is-selected\': isSelected, \'is-disabled\': isDisabled}"
-                ng-click="selectItem()" href>{{text}}</a>
-            </li>`;
-    this.templateTypes[MenuItemTypes.header] = `<li class="ms-ContextualMenu-item ms-ContextualMenu-item--header">{{text}}</li>`;
-    this.templateTypes[MenuItemTypes.divider] = `<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>`;
-  }
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ContextualMenuItemDirective($log);
-    directive.$inject = ['$log'];
-    return directive;
-  }
-
-  public link(
+  public link: ng.IDirectiveLinkFn = (
     $scope: IContextualMenuItemScope,
     $element: ng.IAugmentedJQuery,
     $attrs: ng.IAttributes,
     contextualMenuController: ContextualMenuController,
-    $transclude: ng.ITranscludeFunction): void {
+    $transclude: ng.ITranscludeFunction): void => {
 
     if (typeof $scope.isDisabled !== 'boolean' && $scope.isDisabled !== undefined) {
       contextualMenuController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.contextualmenu - ' +
@@ -129,14 +133,11 @@ export class ContextualMenuItemDirective implements ng.IDirective {
         '<uif-contextual-menu-item />. The valid type is boolean.');
     }
 
-    /*transclude function to follow exact html as in Office UI Fabric, because they are using css selectors like parent ~ child */
-    $transclude((clone: JQuery) => {
-      $element.find('div').replaceWith(clone);
-    });
+    this.transcludeChilds($scope, $element, $transclude);
 
-    $scope.selectItem = () => {
+    $scope.selectItem = ($event: MouseEvent) => {
       if (!contextualMenuController.isMultiSelectionMenu()) {
-        contextualMenuController.onDeselectItems();
+        contextualMenuController.deselectItems();
       }
 
       if (ng.isUndefined($scope.isSelected) && !$scope.isDisabled) {
@@ -146,15 +147,13 @@ export class ContextualMenuItemDirective implements ng.IDirective {
       }
 
       /*close all menus if link is clicked, do not close if submenu clicked */
-      if (contextualMenuController.isRootMenu()) {
-        contextualMenuController.onCloseMenus($scope.$id);
-      } else {
-        if (!$scope.hasChildMenu) {
-          contextualMenuController.onCloseMenus(null, true);
-          contextualMenuController.onDeselectItems(true);
-        } else {
-          contextualMenuController.onCloseMenus($scope.$id);
+      if (!$scope.hasChildMenu) {
+        contextualMenuController.closeSubMenus(null, true);
+        if (!contextualMenuController.isRootMenu()) {
+          contextualMenuController.deselectItems(true);
         }
+      } else {
+        contextualMenuController.closeSubMenus($scope.$id);
       }
 
       if ($scope.hasChildMenu) {
@@ -164,6 +163,8 @@ export class ContextualMenuItemDirective implements ng.IDirective {
       if (!ng.isUndefined($scope.onClick)) {
         $scope.onClick();
       }
+
+      $event.stopPropagation();
     };
 
     $scope.$on('uif-menu-deselect', () => {
@@ -175,6 +176,57 @@ export class ContextualMenuItemDirective implements ng.IDirective {
         $scope.childMenuCtrl.closeMenu();
       }
     });
+  };
+
+  private transcludeChilds($scope: IContextualMenuItemScope, $element: ng.IAugmentedJQuery, $transclude: ng.ITranscludeFunction): void {
+    $transclude((clone: ng.IAugmentedJQuery) => {
+      let hasContent: boolean = this.hasItemContent(clone);
+
+      if (!hasContent && !$scope.text && !$scope.hasChildMenu && $scope.type !== 'divider') {
+        this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.contextualmenu - ' +
+          'you need to provide a text for a contextual menu item.\n' +
+          'For <uif-contextual-menu-item> you need to specify either \'uif-text\' as attribute or <uif-content> as a child directive');
+      }
+
+      this.insertItemContent(clone, $scope, $element);
+      this.insertSubMenu(clone, $scope, $element);
+    });
+  }
+
+  private insertItemContent(clone: ng.IAugmentedJQuery, $scope: IContextualMenuItemScope, $element: ng.IAugmentedJQuery): void {
+    let elementToReplace: JQuery = angular.element($element[0].querySelector('.uif-item-content'));
+
+    if (this.hasItemContent(clone)) { /* element provided */
+      for (let i: number = 0; i < clone.length; i++) {
+        let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+        if (element.hasClass('uif-content')) {
+          elementToReplace.replaceWith(element);
+          break;
+        }
+      }
+    } else { /* text attribute provided */
+      elementToReplace.replaceWith(angular.element('<span>' + $scope.text + '</span>'));
+    }
+  }
+
+  private insertSubMenu(clone: ng.IAugmentedJQuery, $scope: IContextualMenuItemScope, $element: ng.IAugmentedJQuery): void {
+    for (let i: number = 0; i < clone.length; i++) {
+      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      if (element.hasClass('ms-ContextualMenu')) {
+        angular.element($element[0].querySelector('.uif-context-submenu')).replaceWith(element);
+      }
+    }
+  }
+
+  private hasItemContent(clone: ng.IAugmentedJQuery): boolean {
+    for (let i: number = 0; i < clone.length; i++) {
+      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      if (element.hasClass('uif-content')) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
 
@@ -192,13 +244,17 @@ export class ContextualMenuItemDirective implements ng.IDirective {
  * @property {function} selectItem   - Function which is called by clicking on menu item
  * @property {function} onClick      - On click callback for parent scope
  * @property {object} childMenuCtrl  - Reference to child controller (will be initialized only if `hasChildMenu` is true)
+ * @property {string} text           - Represents text used by menu item
+ * @property {string} type           - Menu type
  */
 export interface IContextualMenuItemScope extends ng.IScope {
   isSelected?: boolean;
   isDisabled?: boolean;
   hasChildMenu: boolean;
+  text: string;
+  type: string;
 
-  selectItem: () => void;
+  selectItem: ($event: MouseEvent) => void;
   onClick: () => void;
 
   childMenuCtrl: ContextualMenuController;
@@ -208,6 +264,7 @@ export interface IContextualMenuItemScope extends ng.IScope {
  * @ngdoc controller
  * @name ContextualMenuItemController
  * @module officeuifabric.components.contextualmenu
+ *
  * @description
  * Controller used for the `<uif-contextual-menu-item>` directive.
  */
@@ -244,14 +301,16 @@ export class ContextualMenuItemController {
  * </uif-contextual-menu>
  */
 export class ContextualMenuDirective implements ng.IDirective {
+  public static directiveName: string = 'uifContextualMenu';
 
   public restrict: string = 'E';
-  public require: string = contextualMenuDirectiveName;
+  public require: string = ContextualMenuDirective.directiveName;
   public transclude: boolean = true;
   public template: string = `<ul class="ms-ContextualMenu" ng-transclude></ul>`;
   public replace: boolean = true;
   public controller: any = ContextualMenuController;
   public scope: {} = {
+    closeOnClick: '@uifCloseOnClick',
     isOpen: '=?uifIsOpen',
     multiselect: '@uifMultiselect'
   };
@@ -267,7 +326,19 @@ export class ContextualMenuDirective implements ng.IDirective {
     $attrs: ng.IAttributes,
     contextualMenuController: ContextualMenuController): void {
 
-    let parentMenuItemCtrl: ContextualMenuItemController = $element.controller(contextualMenuItemDirectiveName);
+    let setCloseOnClick: (value?: string | boolean) => void = (value: string | boolean) => {
+      if (ng.isUndefined(value)) {
+        $scope.closeOnClick = true;
+      } else {
+        $scope.closeOnClick = value.toString().toLowerCase() === 'true';
+      }
+    };
+
+    setCloseOnClick($scope.closeOnClick);
+
+    $attrs.$observe('uifCloseOnClick', setCloseOnClick);
+
+    let parentMenuItemCtrl: ContextualMenuItemController = $element.controller(ContextualMenuItemDirective.directiveName);
 
     if (!ng.isUndefined(parentMenuItemCtrl)) {
       parentMenuItemCtrl.setChildMenu(contextualMenuController);
@@ -290,23 +361,28 @@ export class ContextualMenuDirective implements ng.IDirective {
  * @property {boolean} isOpen        - Indicates if menu is open
  * @property {boolean} isRootMenu    - Indicates if this is root menu and not child
  * @property {string} multiselect    - Indicates if current menu is multiselection menu
+ * @property {boolean} closeOnClick  - Indicates if root menu should be closed after clicking on menu item
  */
 export interface IContextualMenuScope extends ng.IScope {
   isOpen: boolean;
   isRootMenu: boolean;
   multiselect: string;
+  closeOnClick: boolean;
 }
 
 /**
  * @ngdoc controller
  * @name ContextualMenuController
  * @module officeuifabric.components.contextualmenu
+ *
  * @description
  * Controller used for the `<uif-contextual-menu>` directive.
  */
 export class ContextualMenuController {
 
   public static $inject: string[] = ['$scope', '$animate', '$element', '$log'];
+  public onRootMenuClosed: (() => void)[] = [];
+
   private isOpenClassName: string = 'is-open';
 
   constructor(
@@ -315,7 +391,7 @@ export class ContextualMenuController {
     private $element: ng.IAugmentedJQuery,
     public $log: ng.ILogService) {
 
-    if (ng.isUndefined($element.controller(contextualMenuItemDirectiveName))) {
+    if (ng.isUndefined($element.controller(ContextualMenuItemDirective.directiveName))) {
       $scope.isRootMenu = true;
     }
 
@@ -328,20 +404,34 @@ export class ContextualMenuController {
 
       $animate[newValue ? 'addClass' : 'removeClass']($element, this.isOpenClassName);
     });
+
+    this.onRootMenuClosed.push(() => {
+      this.closeMenu();
+      this.deselectItems(true);
+    });
+
+    $scope.$on('uif-menu-close', () => {
+      if ($scope.isRootMenu && $scope.closeOnClick) {
+        this.onRootMenuClosed.forEach((callback: () => void) => {
+          callback();
+        });
+      }
+    });
   }
 
-  public onDeselectItems(deselectParentMenus?: boolean): void {
+  public deselectItems(deselectParentMenus?: boolean): void {
     this.$scope.$broadcast('uif-menu-deselect');
+
     if (deselectParentMenus) {
       this.$scope.$emit('uif-menu-deselect');
     }
   }
 
-  public onCloseMenus(menuItemToSkip?: number, closeRootMenu?: boolean): void {
+  public closeSubMenus(menuItemToSkip?: number, closeRootMenu?: boolean): void {
+    this.$scope.$broadcast('uif-menu-close', menuItemToSkip);
+
     if (closeRootMenu) {
       this.$scope.$emit('uif-menu-close');
-    } else {
-      this.$scope.$broadcast('uif-menu-close', menuItemToSkip);
     }
   }
 
@@ -364,6 +454,10 @@ export class ContextualMenuController {
 
     return this.$scope.multiselect.toLowerCase() === 'true';
   }
+
+  public isMenuOpened(): boolean {
+    return this.$element.hasClass('is-open');
+  }
 }
 
 /**
@@ -376,5 +470,5 @@ export class ContextualMenuController {
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.contextualmenu', [
   'officeuifabric.components'])
-  .directive(contextualMenuDirectiveName, ContextualMenuDirective.factory())
-  .directive(contextualMenuItemDirectiveName, ContextualMenuItemDirective.factory());
+  .directive(ContextualMenuDirective.directiveName, ContextualMenuDirective.factory())
+  .directive(ContextualMenuItemDirective.directiveName, ContextualMenuItemDirective.factory());

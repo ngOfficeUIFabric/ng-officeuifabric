@@ -24,6 +24,7 @@ In working on this library, the contributors have found and reported numerous bu
 - [#328](https://github.com/OfficeDev/Office-UI-Fabric/issues/328) - Large spinner misplaced
 - [#336](https://github.com/OfficeDev/Office-UI-Fabric/issues/336) - Datepicker does not work with pickadate @ 3.5.6
 - [#346](https://github.com/OfficeDev/Office-UI-Fabric/issues/346) - Hero button icon not centered
+- [#389](https://github.com/OfficeDev/Office-UI-Fabric/issues/389) - Remove content-specific classes from PersonaCard
 
 ## What Version of Angular is Supported?
 

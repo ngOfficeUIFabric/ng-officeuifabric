@@ -6,6 +6,7 @@
 - [Documentation](#documentation)
 - [TypeScript, JavaScript (ES5) or EcmaScript 2015 (ES6)?](#typescript-javascript-es5-or-ecmascript-2015-es6)
 - [Commit Messages](#commit-messages)
+- [Versioning](#versioning)
 
 ## Project Structure
 
@@ -105,13 +106,99 @@ Directive documentation will be dynamically built at some point and therefore it
 
 Refer to the Angular Material project for good examples of directive documentation, such as the [md-autocomplete](https://github.com/angular/material/blob/master/src/components/autocomplete/js/autocompleteDirective.js) directive.
 
-## TypeScript, JavaScript (ES5) or EcmaScript 2015 (ES6)?
+## TypeScript, JavaScript (ES5) or EcmaScript 2015 (ES6)
 
-All directives should be authored in TypeScript
+All directives should be authored in TypeScript.
 
 ## Commit Messages
 
-Do your best to factor commits appropriately, i.e not too large with unrelated things in the same commit, and not too small with the same small change applied N times in N different commits. If there was some accidental reformatting or whitespace changes during the course of your commits, please rebase them away before submitting the PR.
+> The following guidelines should be followed but we recognize that not everyone has strong git-fu. Therefore while we appreciate you respecting the following guidelines, if a pull request is submitted that does not follow them, the branch managers may modify your commits, including the commit message and breaking up or squashing commits when merging your pull request.
+
+> Look at the existing commits to see examples of how these rules are applied. The easiest way to view commits is to run `git log` to see the full commit or `git log --oneline` to see just the first line of the commit. Scroll the list by pressing `ENTER` and leave the log list by pressing `q`.
+
+Do your best to factor commits appropriately. Commits should not be too large with unrelated things in the same commit, and not too small with the same small change applied *N* times in *N* different commits. If there was some accidental reformatting or whitespace changes during the course of your commits, please [squash them into a single commit](http://www.andrewconnell.com/blog/squash-multiple-git-commits-into-one).
+
+Each commit message consists of a **header**, **body** and a **footer**. The header includes three parts: a **type**, **scope** and **subject**:
+
+```
+type(scope): subject
+-BLANK LINE-
+body
+-BLANK LINE-
+footer
+```
+
+The header line should not exceed 75 characters... the idea is to be able to quickly read the topic of the commit in any git tool including GitHub, the console/terminal or other tool of choice.
+
+### Type
+
+The type must be one of the following options. This is used to explain what was included in the commit:
+
+- **feat**: a new feature
+- **fix**: bug fix
+- **docs**: documentation only changes, including releases
+- **style**: change that doesn not affect meaning of the code (*white-space, missing semi-colons, formatting, etc)
+- **refactor**: code change that neither fixes a bug or adds a feature
+- **perf**: code change that improves performance
+- **test**: adds, updates or changes tests
+- **chore**: changes to the build process or auxiliary tools & libraries
+
+### Scope
+
+Anything specifying the place of the commit change. This is not always required and can be left blank, but in those causes leave an empty parents `()`.
+
+### Subject
+
+A short description of what the commit addresses. The goal is to be able to run `git log --oneline` and get a quick view of what each commit does without extra details.
+
+- use the present tense, imperative (use *add* and *fix*, not *adding* or *adds* or *fixed*, *fixing*, *fixed*)
+- don't capitalize the first letter
+- don't end with a dot (.)
+
+### Body
+
+Just like the **subject**, use imperative, present tense. The body should include the motivation for the change and contrast with previous behavior. Don't include things obvious from looking at the code that changed like "added missing semi colon to breaking test". For simple changes the body may be omitted as the header & easily looking at the code may be enough to convey what the commit does.
+
+In the case of breaking changes, you should include a 2-space indented section that explains the breaking change and how you should change your code. Start the breaking change explanation with **BREAKING CHANGE:** and an explanation followed by two sections that explain how to change your code.
+
+A good example of a breaking change is as follows:
+
+````
+refactor(navbar): update to use `uif-content`
+Update the `uif-navbar` directive to use the new `uif-content` directive for displaying rich content within the control.
+
+  BREAKING CHANGE: Where using rich content in a `uif-navbar` (like when displaying text), replace the `uif-nav-item-content` with `uif-content`
+
+  Change your code from this:
+
+  ```html
+  <uif-nav-bar-item>
+    <uif-nav-item-content>
+      <uif-icon uif-type="arrowRight"></uif-icon><b>Item in bold with icons</b>
+      <uif-icon uif-type="arrowLeft"></uif-icon>
+    </uif-nav-item-content>
+  </uif-nav-bar-item>
+  ```
+
+  To this:
+
+  ```html
+  <uif-nav-bar-item>
+    <uif-content>
+      <uif-icon uif-type="arrowRight"></uif-icon><b>Item in bold with icons</b>
+      <uif-icon uif-type="arrowLeft"></uif-icon>
+    </uif-content>
+  </uif-nav-bar-item>
+  ```
+
+Closes #201.
+````
+
+### Footer
+
+Be sure to state what this commit does if it addresses a specific issue. For instance, if a commit closes issue 374, add `Closes #374.`. Notice the period on the end. If it addresses multiple issues, repeat the word *closes* or *references* if it simply references the issue and doesn't close it like so: `Closes #374. References #375. Closes #374.`.
+
+> By including this at the end, GitHub and other external tools can link the commit to the issue automatically as you can see in this example for this commit: https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/98b142a2e99c32b98a2a0e8ba4f3169c35d9f708.
 
 ## Versioning
 

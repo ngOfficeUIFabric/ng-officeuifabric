@@ -1,0 +1,39 @@
+<uif-nav-bar uif-overlay="dark">
+  <uif-nav-bar-search placeholder="search for smth" uif-on-search="onSearch(search)">
+  </uif-nav-bar-search>
+  <uif-nav-bar-item uif-text="'Regular menu item'" ng-click="logClick('Menu item clicked')"></uif-nav-bar-item>
+  <uif-nav-bar-item>
+    <uif-nav-item-content>
+      <uif-icon uif-type="arrowRight"></uif-icon><b>Item in bold with icons</b>
+      <uif-icon uif-type="arrowLeft"></uif-icon>
+    </uif-nav-item-content>
+  </uif-nav-bar-item>
+  <uif-nav-bar-item uif-type="menu">
+    <uif-nav-item-content>Sub Menu</uif-nav-item-content>
+    <uif-contextual-menu>
+      <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
+      <uif-contextual-menu-item uif-text="'Flag'"></uif-contextual-menu-item>
+      <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+      <uif-contextual-menu-item uif-text="'Move'" uif-click="logClick('Move clicked!')">
+      </uif-contextual-menu-item>
+    </uif-contextual-menu>
+  </uif-nav-bar-item>
+  <uif-nav-bar-item uif-text="'Disabled Item'" disabled="disabled"></uif-nav-bar-item>
+  <uif-nav-bar-item uif-type="menu">
+    <uif-nav-item-content>
+      <b><i>Channels</i></b>
+    </uif-nav-item-content>
+    <uif-contextual-menu>
+      <uif-contextual-menu-item uif-text="'Animals'"></uif-contextual-menu-item>
+      <uif-contextual-menu-item uif-text="'Education'">
+      </uif-contextual-menu-item>
+      <uif-contextual-menu-item uif-text="'Music'"></uif-contextual-menu-item>
+      <uif-contextual-menu-item uif-text="'Sports'" uif-click="logClick('Sports clicked!')">
+      </uif-contextual-menu-item>
+    </uif-contextual-menu>
+  </uif-nav-bar-item>
+  <uif-nav-bar-item uif-position="right">
+    <uif-nav-item-content>
+      <uif-icon uif-type="upload"></uif-icon>Upload</uif-nav-item-content>
+  </uif-nav-bar-item>
+</uif-nav-bar>

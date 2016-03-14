@@ -1,7 +1,7 @@
 'use strict';
 
 import * as fs from 'fs';
-import {BuildConfig} from './config/build';
+import {BuildConfig} from './build/config/build';
 let gulp: any = require('gulp-help')(require('gulp'));
 
 /**

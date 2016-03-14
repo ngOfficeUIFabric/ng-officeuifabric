@@ -8,7 +8,6 @@ import * as yargs from 'yargs';
 import * as runSequence from 'run-sequence';
 import * as browserSyncModule from 'browser-sync';
 import * as fs from 'fs';
-import * as childProcess from 'child_process';
 
 /**
  * Watches for file change and automatically run vet, test, transpile, build.
@@ -40,7 +39,7 @@ export class GulpTask extends BaseGulpTask {
     'dev':     'Affects \'build-lib\' task, creates unminified version of the library with source maps & comments ' + GulpTask.helpMargin +
                '(otherwise, production bundle created)',
     'serve':   'Automatically reloads connected browsers when sources for demo changed. Starts static server at' + GulpTask.helpMargin +
-               'http://localhost:3000/. To connect browser you need to explicitly open your demo with url,'  + GulpTask.helpMargin +
+               'http://localhost:3000/. To connect browser you need to explicitly open your demo with url,' + GulpTask.helpMargin +
                'such as http://localhost:3000/src/components/icon/demo/index.html',
     'specs':   'Affects \'test\' task, outputs all tests being run',
     'verbose': 'Affects \'test\' and \'build-lib\' tasks, outputs all TypeScript files being compiled & JavaScript ' + GulpTask.helpMargin +
@@ -81,20 +80,6 @@ export class GulpTask extends BaseGulpTask {
       });
     };
 
-    let spawnGulpTask: (task: string, ...additionalArgs: string[]) => childProcess.ChildProcess =
-    (task: string, ...additionalArgs: string[]) => {
-      let isWindows: boolean = (process.platform.lastIndexOf('win') === 0);
-
-      let command: string = isWindows ? 'cmd.exe' : 'sh';
-      let args: string  = ['gulp ' + task].concat(process.argv.slice(3)).concat(additionalArgs).join(' ');
-
-      if (isWindows) {
-        return childProcess.spawn(command, ['/c', args], { env: process.env , stdio: 'inherit' });
-      }
-
-      return childProcess.spawn(command, ['-c', args], { env: process.env , stdio: 'inherit' });
-    };
-
     let modeName: string = 'DEV';
     if (!this._args.dev) {
       modeName = 'RELEASE';
@@ -104,28 +89,28 @@ export class GulpTask extends BaseGulpTask {
 
     let reloadBrowsers: () => void = () => {
       if (this._args.serve) {
-            this.browserSync.reload();
-          }
+        this.browserSync.reload();
+      }
     };
 
     type setupWatcherFunc = () => void;
 
     let demoFilesWatcher: setupWatcherFunc = () => {
-        this.browserSync = browserSyncModule.create();
-        this.browserSync.init({
-            server: {
-                baseDir: './'
-            }
-        });
+      this.browserSync = browserSyncModule.create();
+      this.browserSync.init({
+        server: {
+          baseDir: './'
+        }
+      });
 
-        gulp.watch(['./dist/*.js', './src/**/demo*/*.*', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
-          let filePath: path.ParsedPath = path.parse(event.path);
+      gulp.watch(['./dist/*.js', './src/**/demo*/*.*', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
+        let filePath: path.ParsedPath = path.parse(event.path);
 
-          /* skip reloading for files which are changed by typescript transpilation
-              they are reloading by other task */
-          if (filePath.ext === '.js') {
-            let tsFile: string = event.path.replace('.js', '.ts');
-            fs.stat(tsFile, (err: NodeJS.ErrnoException, stats: fs.Stats) => {
+        /* skip reloading for files which are changed by typescript transpilation
+            they are reloading by other task */
+        if (filePath.ext === '.js') {
+          let tsFile: string = event.path.replace('.js', '.ts');
+          fs.stat(tsFile, (err: NodeJS.ErrnoException, stats: fs.Stats) => {
             /* corresponding .ts not found -->> reload */
             if (err) {
               this.browserSync.reload();
@@ -134,47 +119,53 @@ export class GulpTask extends BaseGulpTask {
             /* .ts found -->> do nothing, at this point browsers should be reloaded by the `Transpile demo files` */
           });
 
-          } else {
-            this.browserSync.reload();
-          }
-        });
+        } else {
+          this.browserSync.reload();
+        }
+      });
     };
 
     let buildFilesWatcher: setupWatcherFunc = () => {
       subscribeWatcher(
-      gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], () => {
-        runSequence('vet', 'transpile-ts');
-      }),
-      'Transpile build files');
+        gulp.watch(['./build/**/*.ts', './gulpfile.ts', './config/**/*.ts'], () => {
+          Utils.spawnGulpTask('vet', '--noExit')
+            .on('exit', () => {
+              Utils.spawnGulpTask('transpile-ts');
+            });
+        }),
+        'Transpile build files');
     };
 
     let demoTypescriptWatcher: setupWatcherFunc = () => {
       subscribeWatcher(
-      gulp.watch(['./src/**/demo*/*.ts'], () => {
-        runSequence('vet', 'transpile-ts', reloadBrowsers);
-      }),
-      'Transpile demo files');
+        gulp.watch(['./src/**/demo*/*.ts'], () => {
+          Utils.spawnGulpTask('vet', '--noExit')
+            .on('exit', () => {
+              runSequence('transpile-ts', reloadBrowsers);
+            });
+        }),
+        'Transpile demo files');
     };
 
     let sourceWatcher: setupWatcherFunc = () => {
       subscribeWatcher(
-      gulp.watch(['./src/**/*.ts', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
-
-      runSequence('vet', () => {
-        spawnGulpTask('build-lib')
-        .on('exit', () => {
-          spawnGulpTask('test', '--file=' + event.path);
-        });
-      });
-    }),
-      buildLibEventName);
+        gulp.watch(['./src/**/*.ts', '!./src/**/demo*/*.ts'], (event: gulp.WatchEvent) => {
+          Utils.spawnGulpTask('vet', '--noExit')
+            .on('exit', () => {
+              Utils.spawnGulpTask('build-lib')
+                .on('exit', () => {
+                  Utils.spawnGulpTask('test', '--file=' + event.path);
+                });
+            });
+        }),
+        buildLibEventName);
     };
 
 
     /* Push .bin path into current PATH env. variable */
     process.env.PATH += path.delimiter + path.join(__dirname, 'node_modules', '.bin');
 
-    /* setup all wathers */
+    /* setup all watchers */
     buildFilesWatcher();
 
     if (this._args.serve) {
