@@ -167,10 +167,10 @@ ng-officeuifabric/coverage/PhantomJS 1.9.8 (Mac OS X 0.0.0)/lcov-report/index.ht
 
 ## Build the Library
 
-Build the library in debug mode so you can try one of the examples:
+Build the library in dev mode so you can try one of the examples:
 
 ```bash
-$ gulp build-lib --debug
+$ gulp build-lib --dev
 ```
 
 ## See a Working Directive
