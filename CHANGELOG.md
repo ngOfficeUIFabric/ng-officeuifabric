@@ -1,6 +1,8 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+#### Features
+- **uif-persona**: directive added (@jjczopek; closes [#31](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/31))
 - **uif-persona-card**: directive added (@jjczopek; closes [#32](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/32))
 
 <a name="0.6.0"></a>
