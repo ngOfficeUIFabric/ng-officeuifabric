@@ -1,0 +1,18 @@
+  <uif-org-chart uif-select-mode="single|multiple" uif-selected-items="vm.selectedItems">
+    <uif-org-chart-group ng-repeat="group in vm.items | uifOrgChartGroupBy: 'team'">
+        <uif-org-chart-group-title>{{group}}</uif-org-chart-group-title>
+        <uif-org-chart-list>
+            <uif-org-chart-persona uif-style="standard(default)|square" ng-repeat="person in vm.items | filter: {'team': group}"
+                                    uif-item="person"
+                                    uif-presence="person.presence"
+                                    uif-selected="person.selected">
+                <uif-org-chart-image  ng-src="person.imageUrl"></uif-org-chart-image>
+                <uif-org-chart-presence></uif-org-chart-presence>
+                <uif-org-chart-details>
+                    <uif-org-chart-primary-text>{{person.name}}</uif-org-chart-primary-text>
+                    <uif-org-chart-secondary-text>{{person.country}}</uif-org-chart-secondary-text>
+                </uif-org-chart-details>
+            </uif-org-chart-persona>
+        </uif-org-chart-list>
+    </uif-org-chart-group>
+  </uif-org-chart>

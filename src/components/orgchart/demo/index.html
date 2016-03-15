@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ngOfficeUiFabric | uif-button demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+  <script src="index.js"></script>
+
+  <style>
+        .ms-Persona.is-selected {
+            background-color: #c7e0f4;
+        }
+
+        pre{
+            padding-top:0;
+            padding-bottom:0;
+            margin-top:0;
+            margin-bottom:0;
+        }
+    </style>
+
+</head>
+<body ng-app="demoApp">
+
+  <div ng-controller="demoController as vm">
+
+  <h1 class="ms-font-su">OrgChart Demo | &lt;uif-org-chart&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <p>The orgchart comes with different features all demonstrated in the following eksemples.</p>
+
+  <p><b>Attention:</b></p>
+  <p>I order to show the items in the orgchart as selected you need to add following style to your css:</p>
+
+  <pre>
+    .ms-Persona.is-selected {
+        background-color: #c7e0f4;
+    }
+  </pre>
+
+  <p>The style is <a href="https://github.com/OfficeDev/Office-UI-Fabric/pull/327">suggested</a> as change for the Office UI Fabric but is not yet part of the release.</p>
+
+  <h2>Example 1: Simple list</h2>
+  <p>
+   This example shows the orgchart in it's most simple form without using any advanced features.
+   Just a list with images and names.
+   </p>
+  <p><b>This markup:</b></pr>
+  <pre ng-non-bindable>
+
+&lt;uif-org-chart&gt;
+    &lt;uif-org-chart-group&gt;
+        &lt;uif-org-chart-persona-list&gt;
+            &lt;uif-org-chart-persona ng-repeat="person in vm.items" &gt;
+                &lt;uif-org-chart-image ng-src="person.imageUrl"&gt;&lt;/uif-org-chart-image&gt;
+                &lt;uif-org-chart-details&gt;
+                    &lt;uif-org-chart-primary-text&gt;{{person.name}}&lt;/uif-org-chart-primary-text&gt;
+                &lt;/uif-org-chart-details&gt;
+            &lt;/uif-org-chart-persona&gt;
+        &lt;/uif-org-chart-persona-list&gt;
+    &lt;/uif-org-chart-group&gt;
+&lt;/uif-org-chart&gt;
+
+  </pre>
+
+  <p><b>Renders this:</b></p>
+
+  <uif-org-chart >
+    <uif-org-chart-group >
+        <uif-org-chart-persona-list>
+            <uif-org-chart-persona ng-repeat="person in vm.items" >
+                <uif-org-chart-image ng-src="person.imageUrl"></uif-org-chart-image>
+                <uif-org-chart-details>
+                    <uif-org-chart-primary-text>{{person.name}}</uif-org-chart-primary-text>
+                </uif-org-chart-details>
+            </uif-org-chart-persona>
+        </uif-org-chart-persona-list>
+    </uif-org-chart-group>
+  </uif-org-chart>
+
+
+  <h2>Example 2: Grouped multiple-select square-style</h2>
+  <p>
+    The example demonstrates how the orgchart can be grouped by the property of your choice by using
+    the <b>uifOrgChartGroupBy</b> filter. The images is rendered with the '<b>square</b>'-style.
+    The <b>uif-select-mode</b> is set to <b>multiple</b>. The selected items can be retrieved
+    from the vm.selectedItems1-array.
+  </p>
+  <p><b>This markup:</b></p>
+  <pre ng-non-bindable>
+    &lt;uif-org-chart uif-select-mode="multiple" uif-selected-items="vm.selectedItems1"&gt;
+        &lt;uif-org-chart-group ng-repeat="group in vm.items | uifOrgChartGroupBy: 'team'"&gt;
+            &lt;uif-org-chart-group-title&gt;{{group}}&lt;/uif-org-chart-group-title&gt;
+            &lt;uif-org-chart-list&gt;
+                &lt;uif-org-chart-persona uif-style="square" ng-repeat="person in vm.items | filter: {'team': group}"
+                                        uif-item="person"
+                                        uif-presence="person.presence"&gt;
+                    &lt;uif-org-chart-image  ng-src="person.imageUrl"&gt;&lt;/uif-org-chart-image&gt;
+                    &lt;uif-org-chart-presence&gt;&lt;/uif-org-chart-presence&gt;
+                    &lt;uif-org-chart-details&gt;
+                        &lt;uif-org-chart-primary-text&gt;{{person.name}}&lt;/uif-org-chart-primary-text&gt;
+                        &lt;uif-org-chart-secondary-text&gt;{{person.country}}&lt;/uif-org-chart-secondary-text&gt;
+                    &lt;/uif-org-chart-details&gt;
+                &lt;/uif-org-chart-persona&gt;
+            &lt;/uif-org-chart-list&gt;
+        &lt;/uif-org-chart-group&gt;
+    &lt;/uif-org-chart&gt;
+  </pre>
+
+
+  <p><b>Renders this:</b></p>
+
+  <uif-org-chart uif-select-mode="multiple" uif-selected-items="vm.selectedItems1">
+      <uif-org-chart-group ng-repeat="group in vm.items | uifOrgChartGroupBy: 'team'">
+          <uif-org-chart-group-title>{{group}}</uif-org-chart-group-title>
+          <uif-org-chart-list>
+              <uif-org-chart-persona uif-style="square" ng-repeat="person in vm.items | filter: {'team': group}"
+                                      uif-item="person"
+                                      uif-presence="person.presence">
+                  <uif-org-chart-image  ng-src="person.imageUrl"></uif-org-chart-image>
+                  <uif-org-chart-presence></uif-org-chart-presence>
+                  <uif-org-chart-details>
+                      <uif-org-chart-primary-text>{{person.name}}</uif-org-chart-primary-text>
+                      <uif-org-chart-secondary-text>{{person.country}}</uif-org-chart-secondary-text>
+                  </uif-org-chart-details>
+              </uif-org-chart-persona>
+          </uif-org-chart-list>
+      </uif-org-chart-group>
+  </uif-org-chart>
+
+  <b>Selected items from vm.selectedItem1:</b>
+  <div class="ms-bgColor-themeLighterAlt" >
+
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Team</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="selitem in vm.selectedItems1">
+          <td>{{selitem.name}}</td>
+          <td>{{selitem.team}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <h2>Example 3: Grouped - single-select - pre-selected items - no presence</h2>
+  <p>
+  In this example the <b>uif-select-mode</b> is set to '<b>single</b>' and presence is not used. The
+  <b>uif-selected</b> on the <b>uif-org-chart-persona</b>-directive was used to pre-select the items
+  when the data is applied to the chart. Please note that if multiple items has the 'selected' value set to true
+  and the <b>uif-select-mode</b> is set to <b>single</b>, only the last item would be selected.
+  </p>
+  <p><b>This markup:</b></p>
+  <pre ng-non-bindable>
+
+    &lt;uif-org-chart uif-select-mode="single" uif-selected-items="vm.selectedItems2"&gt;
+      &lt;uif-org-chart-group ng-repeat="group in vm.items | uifOrgChartGroupBy: 'team'"&gt;
+          &lt;uif-org-chart-group-title&gt;{{group}}&lt;/uif-org-chart-group-title&gt;
+          &lt;uif-org-chart-list&gt;
+              &lt;uif-org-chart-persona ng-repeat="person in vm.items | filter: {'team': group}"
+                                      uif-item="person"
+                                      uif-presence="person.presence"
+                                      uif-selected="person.selected2"&gt;
+                  &lt;uif-org-chart-image  ng-src="person.imageUrl"&gt;&lt;/uif-org-chart-image&gt;
+                  &lt;uif-org-chart-details&gt;
+                      &lt;uif-org-chart-primary-text&gt;{{person.name}}&lt;/uif-org-chart-primary-text&gt;
+                      &lt;uif-org-chart-secondary-text&gt;{{person.country}}&lt;/uif-org-chart-secondary-text&gt;
+                  &lt;/uif-org-chart-details&gt;
+              &lt;/uif-org-chart-persona&gt;
+          &lt;/uif-org-chart-list&gt;
+      &lt;/uif-org-chart-group&gt;
+    &lt;/uif-org-chart&gt;
+
+  </pre>
+
+  <p><b>Renders this:</b></p>
+
+  <uif-org-chart uif-select-mode="single" uif-selected-items="vm.selectedItems2">
+    <uif-org-chart-group ng-repeat="group in vm.items | uifOrgChartGroupBy: 'team'">
+        <uif-org-chart-group-title>{{group}}</uif-org-chart-group-title>
+        <uif-org-chart-list>
+            <uif-org-chart-persona ng-repeat="person in vm.items | filter: {'team': group}"
+                                    uif-item="person"
+                                    uif-presence="person.presence"
+                                    uif-selected="person.selected2">
+                <uif-org-chart-image  ng-src="person.imageUrl"></uif-org-chart-image>
+                <uif-org-chart-details>
+                    <uif-org-chart-primary-text>{{person.name}}</uif-org-chart-primary-text>
+                    <uif-org-chart-secondary-text>{{person.country}}</uif-org-chart-secondary-text>
+                </uif-org-chart-details>
+            </uif-org-chart-persona>
+        </uif-org-chart-list>
+    </uif-org-chart-group>
+  </uif-org-chart>
+
+  <b>Selected items from vm.selectedItems2:</b>
+  <div class="ms-bgColor-themeLighterAlt" >
+
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Team</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="selitem in vm.selectedItems2">
+          <td>{{selitem.name}}</td>
+          <td>{{selitem.team}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  </div>
+
+</body>
+</html>

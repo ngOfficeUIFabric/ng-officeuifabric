@@ -24,6 +24,7 @@ import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';
 import * as toggleModule from '../components/toggle/toggleDirective';
+import * as orgChartModule from '../components/orgchart/orgChartDirective';
 
 /**
  * @ngdoc module
@@ -57,5 +58,6 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   spinnerModule.module.name,
   tableModule.module.name,
   textFieldModule.module.name,
-  toggleModule.module.name
+  toggleModule.module.name,
+  orgChartModule.module.name
 ]);
