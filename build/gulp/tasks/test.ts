@@ -59,7 +59,7 @@ export class GulpTask extends BaseGulpTask {
 
     // if in spec mode, change reporters from progress => spec
     if (this._args.specs) {
-      karmaConfig.reporters = ['spec', 'coverage'];
+      karmaConfig.reporters = ['junit', 'spec', 'coverage'];
     }
 
     // set log level accordingly

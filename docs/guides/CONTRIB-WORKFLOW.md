@@ -12,7 +12,7 @@ You do not need to file an issue for trivial changes such as typo fixes. Just a 
 
 The continuous integration (CI) system will automatically perform the required builds and run tests (including the ones you are expected to run) for PRs. Builds and test runs must be clean.
 
-If the CI build fails for any reason, the PR issue will be updated with a link that can be used to determine the cause of the failure. This is done using [Travis CI](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric).
+If the CI build fails for any reason, the PR issue will be updated with a link that can be used to determine the cause of the failure. This is done using [CircleCI](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric).
 
 ## Suggested Workflow
 
