@@ -50,9 +50,9 @@
     "office-ui-fabric": "2.1.0"
   },
   "devDependencies": {
-    "angular-animate": "^1.4.9",
-    "angular-mocks": "^1.4.9",
-    "angular-sanitize": "^1.4.9",
+    "angular-animate": "1.4.9",
+    "angular-mocks": "1.4.9",
+    "angular-sanitize": "1.4.9",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
     "coveralls": "^2.11.6",
@@ -85,6 +85,7 @@
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6",
     "karma-jasmine-jquery": "^0.1.1",
+    "karma-junit-reporter": "^0.3.8",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.24",

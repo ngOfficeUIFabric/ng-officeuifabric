@@ -13,7 +13,7 @@
 
 master | dev
 :------: | :---:
-[![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=master)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Build Status](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric.svg?branch=dev)](https://travis-ci.org/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
+[![Circle CI](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/master.svg?style=svg)](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/master) | [![Circle CI](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/dev.svg?style=svg)](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=master&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=dev&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
 
 This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of Angular 1.x directives to make it easier to use in Angular-based applications.

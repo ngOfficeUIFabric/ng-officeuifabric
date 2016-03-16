@@ -33,20 +33,23 @@ module.exports = (config: karma.Config) => {
     browsers: ['PhantomJS'],
     colors: true,
     coverageReporter: {
-      dir: 'coverage/',
+      dir: 'reports/code-coverage/',
       type: 'lcov'
     },
     files: BuildConfig.CORE_TEST_FILES.concat(
       BuildConfig.ALL_SPEC_FILES
     ),
     frameworks: ['jasmine'],
+    junitReporter: {
+      outputDir: 'reports/test/'
+    },
     logLevel: config.LOG_WARN,
     plugins: ['karma-*'],
     port: 5793,
     preprocessors: {
       'src/**/*.js': ['webpack', 'sourcemap']
     },
-    reporters: ['progress', 'coverage'],
+    reporters: ['junit', 'progress', 'coverage'],
     singleRun: false,
     webpack: webpackSettings,
     webpackMiddleware: {

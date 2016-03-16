@@ -1,0 +1,69 @@
+machine:
+  node:
+    version: 5.7.0
+#  environment:
+#  > NOTE: these are set in the project settings within circleci
+#    GIT_PUSH_DRYRUN
+#    COVERALLS_REPO_TOKEN
+#    COVERALLS_SERVICE_NAME
+
+general:
+  artifacts:
+    # compiled library
+    - "transpiled-libraries"
+    # code coverage report
+    - "code-coverage"
+    # deployment cache
+    - "depoyment-cache"
+
+dependencies:
+  pre:
+    # install dependencies
+    - npm install -g gulp
+    - npm install -g typescript
+    # compile typescript
+    - tsc -p ./
+
+test:
+  pre:
+    # vet all code
+    - gulp vet-lib-ts --verbose
+  post:
+    # move junit test report => build artifacts
+    - mkdir $CIRCLE_TEST_REPORTS/junit
+    - mv ./reports/test/*.xml $CIRCLE_TEST_REPORTS/junit/testrun.xml
+    # send code coverage report => coveralls.io
+    - "cat ./reports/code-coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    # move code coverage => build artifacts
+    - mkdir $CIRCLE_ARTIFACTS/code-coverage
+    - mv ./reports/code-coverage/**/lcov-report/** $CIRCLE_ARTIFACTS/code-coverage
+
+deployment:
+  release:
+    branch: master
+    commands:
+      # pre
+      #   > set git
+      - git config --global user.name "ngfabricbot"
+      - git config --global user.email "ngofficeuifabric@andrewconnell.com"
+
+      #   > tag repo with new version & push back to GitHub
+      - sudo chmod 755 ./build/scripts/tag-release.sh
+      - ./build/scripts/tag-release.sh --srcwd=$PWD
+
+      # deployment
+      - mkdir $CIRCLE_ARTIFACTS/transpiled-libraries
+      #   > build libraries
+      - sudo chmod 755 ./build/scripts/build-library.sh
+      - ./build/scripts/build-library.sh --srcwd=$PWD --artifactwd=$CIRCLE_ARTIFACTS/transpiled-libraries
+
+      # update deployments
+      #   > create deployment cache artifact (where local repos will be updated)
+      - mkdir $CIRCLE_ARTIFACTS/depoyment-cache
+
+      #   > deploy to npm, bower, cdnjs
+      - sudo chmod 755 ./build/scripts/update-package-repo.sh
+      - ./build/scripts/update-package-repo.sh --srcwd=$PWD --pkgwd=$CIRCLE_ARTIFACTS/depoyment-cache
+      #   > deploy to nuget
+      - sudo chmod 755 ./build/scripts/update-nuget-repo.sh
+      - ./build/scripts/update-nuget-repo.sh --srcwd=$PWD --pkgwd=$CIRCLE_ARTIFACTS/depoyment-cache

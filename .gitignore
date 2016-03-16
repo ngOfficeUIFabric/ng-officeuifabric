@@ -4,8 +4,8 @@
 # no need to keep stuff pulled remotely
 node_modules
 
-# don't keep coverage
-coverage/
+# don't keep coverage test reports
+reports/
 
 # no js, just typescript
 *.js

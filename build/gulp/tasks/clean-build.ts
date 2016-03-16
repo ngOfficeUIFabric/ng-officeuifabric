@@ -42,8 +42,8 @@ export class GulpTask extends BaseGulpTask {
 
     // get all build JS files
     let tempFiles: string[] = BuildConfig.BUILD_JS;
-    // .. add coverage files
-    tempFiles.push(BuildConfig.COVERAGE_PATH);
+    // .. add build reports
+    tempFiles.push(BuildConfig.BUILDRPT_PATH);
     // .. less the JS that should be kept
     BuildConfig.BUILD_KEEP_JS.forEach((keepFile: string) => {
       tempFiles.push('!' + keepFile);
