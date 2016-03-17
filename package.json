@@ -43,7 +43,8 @@
     "build:ts": "tsc -p ./",
     "build:lib": "gulp build-lib && gulp build-lib --dev",
     "dev-install": "tsd install -ros",
-    "test": "npm run build:ts && gulp test --specs"
+    "test": "npm run build:ts && gulp test --specs",
+    "commit": "git-cz"
   },
   "dependencies": {
     "angular": "1.4.9",
@@ -55,7 +56,9 @@
     "angular-sanitize": "1.4.9",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
+    "commitizen": "2.7.2",
     "coveralls": "^2.11.6",
+    "cz-conventional-changelog": "1.1.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-debug": "^2.1.2",
@@ -100,5 +103,10 @@
     "xmldom": "^0.1.22",
     "xpath": "0.0.22",
     "yargs": "^4.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
