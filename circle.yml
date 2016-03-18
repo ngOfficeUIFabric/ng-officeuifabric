@@ -1,11 +1,11 @@
 machine:
   node:
     version: 5.7.0
-#  environment:
+  environment:
+    COVERALLS_REPO_TOKEN: 6LtFtuOYJuMlHy6vhsRj7lYhYuoo5ZLMs
+    COVERALLS_SERVICE_NAME: circle-ci
 #  > NOTE: these are set in the project settings within circleci
 #    GIT_PUSH_DRYRUN
-#    COVERALLS_REPO_TOKEN
-#    COVERALLS_SERVICE_NAME
 
 general:
   artifacts:
