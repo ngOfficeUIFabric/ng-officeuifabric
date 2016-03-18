@@ -58,7 +58,7 @@ export class BuildConfig {
   /*
    * TypeScript files
    */
-  public static TYPESCRIPT_DEFINITIONS: string = BuildConfig.BUILD_PATH + '/typings/**/*.d.ts';
+  public static TYPESCRIPT_DEFINITIONS: string = BuildConfig.ROOT + '/typings/**/*.d.ts';
   public static BUILD_TYPESCRIPT: string[] = [
     BuildConfig.BUILD_PATH + '/*.ts',
     BuildConfig.BUILD_PATH + '/gulp/**/*.ts',
