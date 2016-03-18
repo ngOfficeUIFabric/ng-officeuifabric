@@ -40,7 +40,7 @@
   ],
   "scripts": {
     "build": "npm run build:ts && npm run build:lib",
-    "build:ts": "typings install && tsc -p ./",
+    "build:ts": "tsc -p ./",
     "build:lib": "gulp build-lib && gulp build-lib --dev",
     "dev-install": "typings install",
     "test": "npm run build:ts && gulp test --specs"
