@@ -42,7 +42,7 @@
     "build": "npm run build:ts && npm run build:lib",
     "build:ts": "tsc -p ./",
     "build:lib": "gulp build-lib && gulp build-lib --dev",
-    "dev-install": "tsd install -ros",
+    "dev-install": "typings install",
     "test": "npm run build:ts && gulp test --specs"
   },
   "dependencies": {
