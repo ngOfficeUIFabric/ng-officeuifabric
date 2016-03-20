@@ -81,4 +81,50 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(label.hasClass('ng-hide')).toBe(true, 'Label should be hidden after setting ng-model');
     }));
 
+    it('should be able to set as multiline', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = 'multiline text';
+        let textBox: JQuery = $compile('<uif-textfield ng-model="value" uif-multiline="true"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let textArea: JQuery = textBox.find('textarea.ms-TextField-field');
+        textArea = jQuery(textArea);
+
+        expect(textArea.hasClass('ng-hide')).toBe(false);
+        expect(textArea.val()).toBe('multiline text');
+
+        let textInput: JQuery = textBox.find('input.ms-TextField-field');
+        textInput = jQuery(textInput);
+        expect(textInput.hasClass('ng-hide')).toBe(true);
+    }));
+
+    it('should be able to set as simple input, not multiline', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = '';
+        let textBox: JQuery = $compile('<uif-textfield ng-model="value" uif-multiline="false"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let textArea: JQuery = textBox.find('textarea.ms-TextField-field');
+        textArea = jQuery(textArea);
+
+        expect(textArea.hasClass('ng-hide')).toBe(true);
+
+        let textInput: JQuery = textBox.find('input.ms-TextField-field');
+        textInput = jQuery(textInput);
+        expect(textInput.hasClass('ng-hide')).toBe(false);
+    }));
+
+    it('should be able to set type as password', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = '';
+        let textBox: JQuery = $compile('<uif-textfield ng-model="value" uif-type="password"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let textInput: JQuery = textBox.find('input.ms-TextField-field');
+        expect(textInput.attr('type')).toBe('password');
+    }));
+
 });
