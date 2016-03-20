@@ -130,6 +130,13 @@ footer
 
 The header line should not exceed 75 characters... the idea is to be able to quickly read the topic of the commit in any git tool including GitHub, the console/terminal or other tool of choice.
 
+### Commitizen
+When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time. This way, you don't have to wait until git commit hook verfies your commit (though that can still be helpful). Don't have to remember the commit message format and digg through Coding.md to find what the preferred format is. Commitizen gives feedback on your commit message formatting and be prompted for required fields.
+
+You would run ```npm run commit``` instead of good old git commit and commitizen will take care of formating the commit message for you.
+When you fetch latest, make sure you run ```npm install``` to get the module in you local.
+
+
 ### Type
 
 The type must be one of the following options. This is used to explain what was included in the commit:
