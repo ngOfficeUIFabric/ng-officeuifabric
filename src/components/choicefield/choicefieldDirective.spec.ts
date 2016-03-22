@@ -72,6 +72,32 @@
         expect(option3.prop('checked')).toBe(true, 'Option 1 - Checked should be false after click');
         expect($scope.selectedValue).toBe('Option3', 'Scope value should be option3 now as it is a radio button group');
     }));
+
+    it('should be able to use ng-change', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option1';
+        $scope.ngChange = () => {
+            $scope.ngChangeCalled = true;
+        };
+        $scope.ngChangeCalled = false;
+        let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" ng-change="ngChange()">' +
+            '<uif-choicefield-option uif-type="radio" ng-repeat="option in options" ' +
+            'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
+        $scope.$digest();
+        choicefield = jQuery(choicefield[0]);
+        choicefield.appendTo(document.body);
+        expect($scope.ngChangeCalled).toBe(false, 'ngChangeCalled should be false initially');
+        let option3: JQuery = jQuery(choicefield.find('input')[2]);
+        option3.click();
+        expect($scope.ngChangeCalled).toBe(true, 'ngChangeCalled should be true after option click');
+    }));
+
     it('should be able to select a single option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.selectedValue = '';

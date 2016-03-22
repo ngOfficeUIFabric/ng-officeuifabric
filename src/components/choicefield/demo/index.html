@@ -15,7 +15,7 @@
   <script src="index.js"></script>
 </head>
 
-<body>
+<body ng-controller="demoController">
 
     <h1 class="ms-font-su">Choicefield Demo | &lt;uif-choicefield&gt;</h1> 
     <em>In order for this demo to work you must first build the library in debug mode.</em>
@@ -41,6 +41,30 @@
     </p>
     <p>
         <span>selectedValue: {{selectedValue}}</span>
+    </p>
+    
+    <h2>Use ng-change</h2>
+    <p>
+        This markup: <br />
+        <pre>
+            &lt;uif-choicefield-group ng-model=&quot;selectedValue2&quot; ng-change=&quot;change()&quot;&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;            &lt;/uif-choicefield-group&gt;
+        </pre>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-choicefield-group ng-model="selectedValue2" ng-change="change()">
+            <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
+        </uif-choicefield-group>
+
+    </p>
+    <p>
+        <span>selectedValue2: {{selectedValue2}}</span><br/>
+        <span>changed: {{changed}}</span>
     </p>
   
     <h2>Checkbox usage</h2>
