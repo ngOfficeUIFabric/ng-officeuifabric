@@ -103,6 +103,7 @@ export class DropdownController {
         });
         if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
             this.$scope.ngModel.$render = function(): void {
+                let found: boolean = false;
                 // find option with new value
                 let options: JQuery = self.$element.find('li');
                 for (let i: number = 0; i < options.length; i++) {
@@ -110,8 +111,13 @@ export class DropdownController {
                     let value: string = option.getAttribute('value');
                     if (value === self.$scope.ngModel.$viewValue) {
                          self.$scope.selectedTitle = angular.element(option).find('span').html();
+                         found = true;
                          break;
                     }
+                }
+                if (!found) {
+                    // no option found
+                    self.$scope.selectedTitle = '';
                 }
             };
         }
