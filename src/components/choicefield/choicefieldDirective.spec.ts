@@ -84,7 +84,7 @@
         $scope.selectedValue = 'Option1';
         $scope.ngChange = () => {
             $scope.ngChangeCalled = true;
-        }
+        };
         $scope.ngChangeCalled = false;
         let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" ng-change="ngChange()">' +
             '<uif-choicefield-option uif-type="radio" ng-repeat="option in options" ' +
