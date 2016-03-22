@@ -29,6 +29,8 @@ export interface ITextFieldScope extends ng.IScope {
     inputClick: (ev: any) => void;
     inputBlur: (ev: any) => void;
     isActive: boolean;
+    required: boolean;
+    disabled: boolean;
 }
 
 /**
@@ -53,7 +55,8 @@ export interface ITextFieldScope extends ng.IScope {
 export class TextFieldDirective implements ng.IDirective {
     public template: string =
         '<div ng-class="{\'is-active\': isActive, \'ms-TextField\': true, ' +
-        '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder}">' +
+        '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder, ' +
+        '\'is-required\': required, \'is-disabled\': disabled}">' +
         '<label ng-show="labelShown" class="ms-Label">{{uifLabel || placeholder}}</label>' +
         '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" class="ms-TextField-field" />' +
         '<span class="ms-TextField-description">{{uifDescription}}</span>' +
@@ -76,6 +79,8 @@ export class TextFieldDirective implements ng.IDirective {
 
     public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
         scope.labelShown = true;
+        scope.required = 'required' in attrs;
+        scope.disabled = 'disabled' in attrs;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
             if (scope.uifUnderlined) {

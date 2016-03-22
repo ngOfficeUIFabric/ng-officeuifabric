@@ -57,6 +57,39 @@ describe('textFieldDirective: <uif-textfield />', () => {
         input.blur();
         expect(container.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
     }));
+
+    it('should be able to set required', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        let textBox: JQuery = $compile('<uif-textfield required></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        // element must be appended to the body, otherwise focus/blur events don't fire
+        textBox.appendTo(document.body);
+
+        $scope.$apply();
+
+        let div: JQuery = getMainDiv(textBox);
+        expect(div.hasClass('is-required')).toBe(true, 'textfield should have is-required');
+    }));
+
+    it('should be able to set disabled', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        let textBox: JQuery = $compile('<uif-textfield disabled></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        // element must be appended to the body, otherwise focus/blur events don't fire
+        textBox.appendTo(document.body);
+
+        $scope.$apply();
+
+        let div: JQuery = getMainDiv(textBox);
+        expect(div.hasClass('is-disabled')).toBe(true, 'textfield should have is-disabled');
+
+        let input: JQuery = textBox.find('input');
+        let container: JQuery = textBox.find('div');
+        spyOn(input[0], 'focus');
+        input.click();
+        expect(container.hasClass('is-active')).toBe(false, 'Container should not be able to get in-active class as it is disabled');
+        expect(input[0].focus).not.toHaveBeenCalled();
+    }));
     it('should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
