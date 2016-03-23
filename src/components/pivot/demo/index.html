@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-pivot demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+  <h1 class="ms-font-su">Pivot Demo | &lt;uif-pivot&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <p>&nbsp;</p>
+
+  <div>
+    Pivot renders set of links/buttons which can be selected. After being clicked, element is in <i>selected</i> state.
+    If specified, it can be bound to scope via <code>uif-selected</code> attribute, allowing to programatically control which link/tab should be selected.
+  </div>
+
+  <p>&nbsp;</p>
+
+  <div ng-controller="pivotController">
+    <div>
+      <code>uif-size</code> can be used to control size of the pivot:
+      <br/><br/>
+      <uif-dropdown ng-model="vm.selectedSize">
+        <uif-dropdown-option value="regular">Regular</uif-dropdown-option>
+        <uif-dropdown-option value="large">Large</uif-dropdown-option>
+      </uif-dropdown>
+    </div>
+    <div>
+      <code>uif-type</code> can be used to control type of the pivot - tabs or regular:
+      <br/><br/>
+      <uif-dropdown ng-model="vm.selectedType">
+        <uif-dropdown-option value="regular">Regular</uif-dropdown-option>
+        <uif-dropdown-option value="tabs">Tabs</uif-dropdown-option>
+      </uif-dropdown>
+    </div>
+
+    <div>
+      <code>uif-selected</code> can be used to capture and control which element is/should be selected:
+      <br/><br/>
+      <uif-dropdown ng-model="vm.selectedPivotTitle">
+        <uif-dropdown-option value="My files">My files</uif-dropdown-option>
+        <uif-dropdown-option value="Recent">Recent</uif-dropdown-option>
+        <uif-dropdown-option value="Shared with me">Shared with me</uif-dropdown-option>
+      </uif-dropdown>
+    </div>
+
+    <div>
+      Ellipsis element can't be selected, but it can contain additional markup, like contextual menu. Visibility of the markup inside ellipsis can be controlled via standard <code>ng-click</code> directive.
+    </div>
+
+    <p>This markup:</p>
+    <pre>
+    &lt;uif-pivot uif-type=&quot;{{vm.selectedType}}&quot; uif-size=&quot;{{vm.selectedSize}}&quot; uif-pivots=&quot;vm.pivots&quot; uif-selected=&quot;vm.selectedPivot&quot; id=&quot;msPivot&quot;&gt;
+      &lt;uif-pivot-ellipsis ng-click=&quot;openMenu()&quot;&gt;
+        &lt;uif-contextual-menu uif-is-open=&quot;vm.menuOpened&quot; uif-close-on-click=&quot;true&quot;&gt;
+          &lt;uif-contextual-menu-item uif-text=&quot;'New'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
+          &lt;uif-contextual-menu-item uif-text=&quot;'Edit'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
+          &lt;uif-contextual-menu-item uif-text=&quot;'Delete'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
+          &lt;uif-contextual-menu-item uif-type=&quot;divider&quot;&gt;&lt;/uif-contextual-menu-item&gt;
+          &lt;uif-contextual-menu-item uif-text=&quot;'Settings'&quot;&gt;&lt;/uif-contextual-menu-item&gt;
+        &lt;/uif-contextual-menu&gt;
+      &lt;/uif-pivot-ellipsis&gt;
+    &lt;/uif-pivot&gt;
+    </pre>
+
+    <p>Gives following output:</p>
+    <uif-pivot uif-type="{{vm.selectedType}}" uif-size="{{vm.selectedSize}}" uif-pivots="vm.pivots" uif-selected="vm.selectedPivot" id="msPivot">
+      <uif-pivot-ellipsis ng-click="openMenu()">
+        <uif-contextual-menu uif-is-open="vm.menuOpened" uif-close-on-click="true">
+          <uif-contextual-menu-item uif-text="'New'"></uif-contextual-menu-item>
+          <uif-contextual-menu-item uif-text="'Edit'"></uif-contextual-menu-item>
+          <uif-contextual-menu-item uif-text="'Delete'"></uif-contextual-menu-item>
+          <uif-contextual-menu-item uif-type="divider"></uif-contextual-menu-item>
+          <uif-contextual-menu-item uif-text="'Settings'"></uif-contextual-menu-item>
+        </uif-contextual-menu>
+      </uif-pivot-ellipsis>
+    </uif-pivot>
+
+    <p>&nbsp;</p>
+
+    <p>
+      <pre>Selected pivot: {{vm.selectedPivot | json}}</pre>
+    </p>
+  </div>
+</body>
+</html>
