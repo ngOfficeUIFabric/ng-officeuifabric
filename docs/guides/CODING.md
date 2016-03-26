@@ -200,6 +200,12 @@ Be sure to state what this commit does if it addresses a specific issue. For ins
 
 > By including this at the end, GitHub and other external tools can link the commit to the issue automatically as you can see in this example for this commit: https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/98b142a2e99c32b98a2a0e8ba4f3169c35d9f708.
 
+### Commitizen
+When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time. This way, you don't have to wait until git commit hook verfies your commit (though that can still be helpful). Don't have to remember the commit message format and digg through Coding.md to find what the preferred format is. Commitizen gives feedback on your commit message formatting and be prompted for required fields.
+
+You would run ```npm run commit``` instead of good old git commit and commitizen will take care of formating the commit message for you.
+When you fetch latest, make sure you run ```npm install``` to get the module in you local.
+
 ## Versioning
 
 We use [semver](http://semver.org/) for versioning with one exception: the goal is to march to 1.0.0 which means this project has complete component & theming coverage with the Office UI Fabric 1.0.0 release.
