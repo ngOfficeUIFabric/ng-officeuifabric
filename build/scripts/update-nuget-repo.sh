@@ -41,16 +41,17 @@ function init {
 }
 
 function run {
-  # make sure version != last tag,
-  #   if so, abort as nothing to do
-  if isNewVersion $VERSION ; then
-    echo "WARN: not a new version; aborting"
-    exit 0
-  fi
-
   # clone packaging repo
   echo "DEBUG: [1 / 4] clone packaging repo"
   git clone $REPO_URL $PKG_PATH --depth=2
+
+
+  # make sure version != last tag,
+  #   if so, abort as nothing to do
+  if isNewVersion $VERSION $PKG_PATH ; then
+    echo "WARN: not a new version; aborting"
+    exit 0
+  fi
 
 
   # copy built library & changelog
@@ -66,6 +67,7 @@ function run {
 
   # update packaging repo
   echo "DEBUG: [4 / 4] updating packaging repo nuget-ngofficeuifabric"
+  cd PKG_PATH
   echo "DEBUG: .. adding & commiting changes to package repo"
   git add -A
   git commit -m "release(): $VERSION"

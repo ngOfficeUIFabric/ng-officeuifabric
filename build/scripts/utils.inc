@@ -220,11 +220,20 @@ function resolveDir {
   echo $(cd $SCRIPT_DIR; cd $1; pwd)
 }
 
-# isNewVersion(version)
+# isNewVersion(version, pkgPath)
 # - returns 1 / 0 if the current build is a new
 #   version or not comparing value in package.json & latest git tag
+# - @param version = version to check
+# - @param pkgPath = path of git repo to check version against
 function isNewVersion {
+  # get current folder & change to path of git repo to check version
+  local CURRENT_DIR=$PWD
+  cd $2
+
   local LAST_TAG=$(git describe --tags --abbrev=0 --always)
+
+  # jump back to current folder
+  cd $CURRENT_DIR
 
   # debug info
   echo "DEBUG: version to test:  $1"

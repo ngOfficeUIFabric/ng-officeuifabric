@@ -31,6 +31,8 @@
 function init {
   # if set, export --git-push-dryrun so available in other scripts
   export GIT_PUSH_DRYRUN=$GIT_PUSH_DRYRUN
+  # create temp folder
+  PKG_PATH="$(mktemp -d)"
 }
 
 function run {
@@ -90,8 +92,8 @@ function run {
 
 
   # update the package & nuget repo
-  sh ./build/scripts/update-package-repo.sh --version=$VERSION --src=$SRC_PATH
-  sh ./build/scripts/update-nuget-repo.sh --version=$VERSION --src=$SRC_PATH
+  sh ./build/scripts/update-package-repo.sh --srcwd=$SRC_PATH --pkgwd=$PKG_PATH
+  sh ./build/scripts/update-nuget-repo.sh --srcwd=$SRC_PATH --pkgwd=$PKG_PATH
 }
 
 source $(dirname $0)/utils.inc
