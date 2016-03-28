@@ -1,21 +1,29 @@
 'use strict';
 
 import * as ng from 'angular';
+import { IRender, renderFactory } from 'ng-metadata/testing';
+import { IconComponent } from './iconDirective'
 
 describe('iconDirective: <uif-icon />', () => {
   let element: ng.IAugmentedJQuery;
   let scope: ng.IScope;
+  let $ctrl: typeof IconComponent;
+
+  let render: IRender;
 
   beforeEach(() => {
     angular.mock.module('officeuifabric.core');
     angular.mock.module('officeuifabric.components.icon');
   });
 
-  beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-    element = ng.element('<uif-icon uif-type="arrowDownLeft" />');
-    scope = $rootScope;
-    $compile(element)(scope);
-    scope.$digest();
+  beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+    scope = $rootScope.$new();
+    render = renderFactory($compile,scope);
+
+    const fixture = render( IconComponent, { attrs: { 'uif-type': 'arrowDownLeft' } } );
+    element = fixture.compiledElement;
+    $ctrl = fixture.ctrl;
+
   }));
 
   /**
@@ -42,7 +50,7 @@ describe('iconDirective: <uif-icon />', () => {
   });
 
   /**
-   * Verifies directive generates the aria-hidden attribute. 
+   * Verifies directive generates the aria-hidden attribute.
    */
   it('should render correct aria-hidden attribute', () => {
     // get the rendered icon element
