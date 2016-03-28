@@ -1,6 +1,14 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+<a name="0.7.1"></a>
+### [0.7.1 - March 28, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.1)
+
+#### Fixes
+- **uif-textfield**: cannot set required or disabled (@rolandoldengarm; closes [#240](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/240))
+- **uif-dropdown**: setting ngModel to unknown (@rolandoldengarm; closes [#245](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/245))
+- **uif-choicefield**: ng-change test case & demo (@rolandoldengarm; closes [#252](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/252))
+
 <a name="0.7.0"></a>
 ### [0.7.0 - March 15, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.0)
 
