@@ -1,6 +1,9 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+#### Fixes
+- **uif-breadcrumb**: updated to match refactored fabric control ([6cb2314](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/6cb2314), closes [#260](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/260))
+
 <a name="0.7.1"></a>
 ### [0.7.1 - March 28, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.1)
 
@@ -45,6 +48,7 @@
 ### [0.5.0 - February 24, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.5.0)
 
 #### Features
+- **uif-breadcrumb**: directive added (@rolandoldengarm; closes [#13](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/13))
 - **uif-datepicker**: directive added (@rolandoldengarm; closes [#19](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/19))
 - **uif-navbar**: directive added (@s-KaiNet; closes [#26](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/26))
 
