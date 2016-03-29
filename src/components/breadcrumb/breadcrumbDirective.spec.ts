@@ -1,62 +1,77 @@
-describe('choicefieldDirective <uif-breadcrumb />', () => {
-    beforeEach(() => {
-        angular.mock.module('officeuifabric.components.breadcrumb');
-    });
+'use strict';
 
-    it('should render correct html', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        let $scope: any = $rootScope.$new();
+import * as ng from 'angular';
 
-        let breadcrumb: JQuery = $compile('<uif-breadcrumb>' +
-        '<uif-breadcrumb-link ng-href="http://github1.com">GitHub1</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link ng-href="http://github2.com">GitHub2</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link ng-href="http://github3.com">GitHub3</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link ng-href="http://github4.com">GitHub4</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link uif-current>Current</uif-breadcrumb-link>' +
-        '</uif-breadcrumb>')($scope);
-        $scope.$digest();
-        breadcrumb = jQuery(breadcrumb[0]);
+describe('breadcrumbDirective <uif-breadcrumb />', () => {
+  let element: JQuery;
+  let scope: ng.IScope;
 
-        let links: JQuery = breadcrumb.find('.ms-Breadcrumb').children();
-        let currentLarge: JQuery = links.first();
+  /**
+   * before each test load all required modules
+   */
+  beforeEach(() => {
+    angular.mock.module('officeuifabric.core');
+    angular.mock.module('officeuifabric.components.breadcrumb');
+  });
 
-        expect(currentLarge).toHaveClass('ms-Breadcrumb-currentLarge');
-        expect(currentLarge.html()).toBe('Current');
+  beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    let html: string = '<uif-breadcrumb>' +
+                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/1">ngOfficeUiFabric-1</uif-breadcrumb-link>' +
+                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/2">ngOfficeUiFabric-2</uif-breadcrumb-link>' +
+                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/3">ngOfficeUiFabric-3</uif-breadcrumb-link>' +
+                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/4">ngOfficeUiFabric-4</uif-breadcrumb-link>' +
+                       '</uif-breadcrumb>';
+    scope = $rootScope;
 
-        let current: JQuery = links.last();
-        expect(current).toHaveClass('ms-Breadcrumb-current');
-        expect(current.html()).toBe('Current');
+    element = $compile(html)(scope);    // jqLite object
+    element = jQuery(element[0]);       // jQuery object
 
-        for (let i: number = 1; i < links.length - 1; i++) {
-          let link: JQuery = $(links.get(i));
-          // check if it starts with, as there is a span with a whitespace at the end
-          expect(link.html().indexOf('GitHub' + i)).toBe(0);
-          expect(link.attr('href')).toBe(`http://github${i}.com`);
-          expect(link).toHaveClass('ms-Breadcrumb-parent');
-        }
-    }));
+    scope.$digest();
+  }));
 
-    it('should render correct html without an active link', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        let $scope: any = $rootScope.$new();
+  it('should create correct HTML', () => {
+    // verify top breadcrumb container & correct style
+    expect(element.prop('tagName')).toEqual('DIV');
+    expect(element[0]).toHaveClass('ms-Breadcrumb');
 
-        let breadcrumb: JQuery = $compile('<uif-breadcrumb>' +
-        '<uif-breadcrumb-link ng-href="http://github1.com">GitHub1</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link ng-href="http://github2.com">GitHub2</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link ng-href="http://github3.com">GitHub3</uif-breadcrumb-link>' +
-        '<uif-breadcrumb-link ng-href="http://github4.com">GitHub4</uif-breadcrumb-link>' +
-        '</uif-breadcrumb>')($scope);
-        $scope.$digest();
-        breadcrumb = jQuery(breadcrumb[0]);
+    // verify nested should contain UL
+    expect(element.find('ul').length).toBe(1);
+    let ulElement: JQuery = element.find('ul');
+    expect(ulElement[0]).toHaveClass('ms-Breadcrumb-list');
 
-        let links: JQuery = breadcrumb.find('.ms-Breadcrumb').children();
+    // look at all list items...
+    // ... get all list items...
+    let liElements: JQuery = ulElement.find('li');
+    // ... make sure there are 4 of them
+    expect(liElements.length).toBe(4, 'should only 4 list items present');
 
-        for (let i: number = 0; i < links.length; i++) {
-          let link: JQuery = $(links.get(i));
-          expect(link.html().indexOf('GitHub' + (i + 1))).toBe(0);
-          // check if it starts with, as there is a span with a whitespace at the end
-          expect(link.attr('href')).toBe(`http://github${i + 1}.com`);
-          expect(link).toHaveClass('ms-Breadcrumb-parent');
-        }
-    }));
+    // loop through all list items...
+    for (let itemIndex: number = 0; itemIndex < liElements.length; itemIndex++) {
+      // for the list item...
+      let liElement: JQuery = $(liElements.get(itemIndex));
+
+      // make sure it has correct css
+      expect(liElement[0]).toHaveClass('ms-Breadcrumb-listItem');
+
+      // make sure it has exactly 1 nested link...
+      expect(liElement.find('a').length).toBe(1, 'expected to find exactly 1 <a> element');
+      let aElement: JQuery = liElement.find('a');
+      // ... with correct style...
+      expect(aElement[0]).toHaveClass('ms-Breadcrumb-itemLink');
+      // ... with correct tabindex...
+      expect(aElement[0]).toHaveAttr('tabindex', `${itemIndex + 2}`);
+      // ... with correct target...
+      expect(aElement[0]).toHaveAttr('href', `http://ngofficeuifabric.com/${itemIndex + 1}`);
+      // ... with correct value...
+      expect(aElement[0].innerText).toBe(`ngOfficeUiFabric-${itemIndex + 1}`);
+
+      // make sure it has exactly 1 cheveron icon...
+      let iElement: JQuery = liElement.find('i');
+      expect(iElement.length).toBe(1);
+      // ... with correct styles...
+      expect(iElement[0]).toHaveClass('ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight');
+    }
+
+  });
 
 });
-
