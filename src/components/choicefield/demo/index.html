@@ -24,7 +24,7 @@
     <p>
         This markup: <br />
         <pre>
-            &lt;uif-choicefield-group ng-model=&quot;selectedValue&quot;&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;            &lt;/uif-choicefield-group&gt;
+            &lt;uif-choicefield-group ng-model=&quot;selectedValue&quot;&gt;&#13;&#10;                &lt;uif-choicefield-group-title&gt;&lt;label class=&quot;ms-Label is-required&quot;&gt;Pick a value&lt;/label&gt;&lt;/uif-choicefield-group-title&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;                &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;            &lt;/uif-choicefield-group&gt;
         </pre>
     </p>
 
@@ -32,6 +32,7 @@
         Renders this:
         <br />
         <uif-choicefield-group ng-model="selectedValue">
+            <uif-choicefield-group-title><label class="ms-Label is-required">Pick a value</label></uif-choicefield-group-title>
             <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
             <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
             <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>

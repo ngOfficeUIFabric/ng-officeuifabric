@@ -1,6 +1,9 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+- **uif-choicefield**
+  - implement customizeable choicefield group title ([1b13244](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1b13244), Closes [#244](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/244))
+
 #### Fixes
 - **uif-breadcrumb**: updated to match refactored fabric control ([6cb2314](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/6cb2314), closes [#260](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/260))
 
