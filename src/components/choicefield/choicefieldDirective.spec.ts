@@ -7,6 +7,7 @@
         let $scope: any = $rootScope.$new();
 
         let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue">' +
+        '<uif-choicefield-group-title><label class="ms-Label is-required">Pick a value</label></uif-choicefield-group-title>' +
         '<uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>' +
         '<uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>' +
         '<uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>' +
@@ -20,6 +21,9 @@
 
         let items: JQuery = choicefield.find('input');
         expect(items.length).toBe(4, 'There should be 4 inputs');
+
+        let titleLabel: JQuery = choicefield.find('.ms-ChoiceFieldGroup-title label.ms-Label');
+        expect(titleLabel.html()).toBe('Pick a value');
 
         let input1: JQuery = jQuery(items[0]);
         expect(input1.attr('type')).toBe('radio', 'Type should be radio');
