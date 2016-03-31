@@ -44,6 +44,7 @@
         let dropdown: JQuery = $compile('<uif-dropdown></uif-dropdown>')($scope);
         $scope.$digest();
         dropdown = jQuery(dropdown[0]);
+        dropdown.appendTo(document.body);
 
         dropdown.click();
         let div: JQuery = dropdown.find('div.ms-Dropdown');
@@ -52,6 +53,11 @@
 
         dropdown.click();
         expect(div.hasClass('is-open')).toBe(false, 'Should not have class is-open after click');
+
+        dropdown.click();
+        expect(div.hasClass('is-open')).toBe(true, 'Should have class is-open after click');
+        $('html').click();
+        expect(div.hasClass('is-open')).toBe(false, 'Should not have class is-open after click on HTML');
     }));
     it('should be able to select an option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
