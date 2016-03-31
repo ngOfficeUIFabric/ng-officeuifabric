@@ -1,6 +1,13 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+
+------------------
+
+
+<a name="0.7.2"></a>
+### [0.7.2 - March 31, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.2)
+
 #### Features
 
 - **uif-choicefield**
@@ -9,8 +16,8 @@
 #### Fixes
 
 - **dependencies**
-  - update library dependencies & verify working with **Angular 1.5.3** & **Office UI Fabric 2.2.0** (closes [#255](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/255))
-  - update build dependencies (closes [#266](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/266))
+  - update library dependencies & verify working with **Angular 1.5.3** & **Office UI Fabric 2.2.0** ([4d2b5c6](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/4d2b5c6), closes [#255](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/255))
+  - update build dependencies ([4d2b5c6](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/4d2b5c6), closes [#266](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/266))
 - **uif-breadcrumb**
   - updated to match refactored fabric control ([7abeb65](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/7abeb65), closes [#260](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/260))
 - **uif-choicefield**
