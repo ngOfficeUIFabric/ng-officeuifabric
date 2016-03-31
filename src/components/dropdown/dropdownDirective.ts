@@ -134,7 +134,6 @@ export class DropdownController {
                 }
             };
         }
-       
     }
 
     public setViewValue(title: string, value: string, eventType: any): void {
