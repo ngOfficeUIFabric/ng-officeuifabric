@@ -69,7 +69,7 @@ function run {
 
   # update packaging repo
   echo "DEBUG: [4 / 4] updating packaging repo package-ngofficeuifabric"
-  cd PKG_PATH
+  cd $PKG_PATH
   echo "DEBUG: .. adding & commiting changes to package repo"
   git add -A
   git commit -m "release(): $VERSION"
