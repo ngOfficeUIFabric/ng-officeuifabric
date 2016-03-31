@@ -8,7 +8,10 @@
 
 #### Fixes
 
-- **uif-breadcrumb**:
+- **dependencies**
+  - update library dependencies & verify working with **Angular 1.5.3** & **Office UI Fabric 2.2.0** (closes [#255](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/255))
+  - update build dependencies (closes [#266](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/266))
+- **uif-breadcrumb**
   - updated to match refactored fabric control ([7abeb65](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/7abeb65), closes [#260](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/260))
 - **uif-choicefield**
   - click outside dropdown closes dropdown ([a8c83ea](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/a8c83ea), closes [#254](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/254))
