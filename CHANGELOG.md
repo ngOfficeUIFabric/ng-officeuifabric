@@ -6,6 +6,8 @@
 
 #### Fixes
 - **uif-breadcrumb**: updated to match refactored fabric control ([6cb2314](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/6cb2314), closes [#260](https://github.com/ngOfficeUIFabric/ng-officeuifabric/pull/260))
+- **uif-choicefield**
+  - click outside dropdown closes dropdown ([dc22c3cf](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/dc22c3cf), closes [#254](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/254))
 
 <a name="0.7.1"></a>
 ### [0.7.1 - March 28, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.1)

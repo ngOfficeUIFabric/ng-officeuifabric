@@ -87,18 +87,31 @@ export class DropdownOptionDirective implements ng.IDirective {
  *
  */
 export class DropdownController {
-    public static $inject: string[] = ['$element', '$scope'];
-    public constructor(public $element: JQuery, public $scope: IDropdownScope) {
+    public static $inject: string[] = ['$element', '$scope', '$document'];
+    public constructor(public $element: JQuery, public $scope: IDropdownScope, public $document: ng.IDocumentService) {
     }
 
     public init(): void {
         let self: DropdownController = this;
-        this.$element.bind('click', function(): void {
+        this.$element.on('click', function(e: Event): void {
             if (!self.$scope.disabled) {
                 self.$scope.isOpen = !self.$scope.isOpen;
                 self.$scope.$apply();
                 let dropdownWidth: number = angular.element(this.querySelector('.ms-Dropdown'))[0].clientWidth;
                 angular.element(this.querySelector('.ms-Dropdown-items'))[0].style.width = dropdownWidth + 'px';
+                e.stopPropagation();
+                if (self.$scope.isOpen) {
+                    let documentClickHandler: () => void = () => {
+                        // when clicking somewhere in the document, close it.
+                        self.$scope.isOpen = false;
+                        self.$scope.$apply();
+                        self.$document.off('click', documentClickHandler);
+                    };
+                    self.$document.on('click', documentClickHandler);
+                    self.$scope.$on('$destroy', function(): void {
+                        self.$document.off('click', documentClickHandler);
+                    });
+                }
             }
         });
         if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
