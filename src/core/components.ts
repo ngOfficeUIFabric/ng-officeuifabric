@@ -14,6 +14,7 @@ import * as dropdownModule from '../components/dropdown/dropdownDirective';
 import * as iconModule from '../components/icon/iconDirective';
 import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
+import * as listModule from '../components/list/listDirective';
 import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as personacardModule from '../components/personacard/personacardDirective';
@@ -49,6 +50,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   iconModule.module.name,
   labelModule.module.name,
   linkModule.module.name,
+  listModule.module.name,
   navBarModule.module.name,
   overlayModule.module.name,
   personacardModule.module.name,
