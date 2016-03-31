@@ -1,10 +1,13 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
-- **uif-panel**
-  - add directive ([774f44e4](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/774f44e4), Closes [#29](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/29))
+#### Features
+
+- **uif-list**
+  - add directive ([#24](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/24))
 
 #### Fixes
+
 - **uif-icon**
   - fixed typo with newValue parameter ([588f7ba](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/588f7ba))
 - **uif-textfield**
