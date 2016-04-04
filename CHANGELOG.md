@@ -1,6 +1,9 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+#### Fixes
+- **uif-dropdown**
+  - disabled not watched ([commitsha](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/commitsha), Closes [#259](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/259))
 
 ------------------
 
