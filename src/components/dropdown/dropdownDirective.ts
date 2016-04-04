@@ -196,6 +196,10 @@ export class DropdownDirective implements ng.IDirective {
         let modelController: ng.INgModelController = ctrls[1];
         scope.ngModel = modelController;
         dropdownController.init();
+
+        scope.$watch(
+          () => { return instanceElement.attr('disabled'); },
+          ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; }));
         scope.disabled = 'disabled' in instanceAttributes;
     }
 }

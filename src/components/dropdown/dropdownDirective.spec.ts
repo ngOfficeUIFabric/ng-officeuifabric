@@ -122,5 +122,30 @@
 
         dropdown.click();
         expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
+
+        // ng-disabled
+        dropdown = $compile('<uif-dropdown ng-model="selectedValue" ng-disabled="isDisabled">' +
+            '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}">{{option.text}}</uif-dropdown-option>' +
+            '</uif-dropdown>')($scope);
+        $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
+
+        div = dropdown.find('div.ms-Dropdown');
+        expect(div.hasClass('is-open')).toBe(false, 'Should be closed, always, as the dropdown is disabled');
+
+        $scope.isDisabled = false;
+        $scope.$apply();
+
+        dropdown.click();
+        expect(div.hasClass('is-open')).toBe(true, 'No longer disabled, should be able to open');
+
+        dropdown.click();
+        expect(div.hasClass('is-open')).toBe(false, 'Should be closed after clicking again');
+
+        $scope.isDisabled = true;
+        $scope.$apply();
+
+        dropdown.click();
+        expect(div.hasClass('is-open')).toBe(false, 'Should be closed as the dropdown is disabled again');
     }));
 });
