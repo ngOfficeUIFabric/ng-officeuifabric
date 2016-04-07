@@ -34,6 +34,13 @@ describe('navbar: <uif-nav-bar />', () => {
       $scope.$apply();
     }));
 
+    it('should not to have \'href\' attribute', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      let link: JQuery = $element.find('.ms-NavBar-items .ms-NavBar-item:not(.ms-NavBar-item--search)').last();
+      let navBarLink: JQuery = link.find('.ms-NavBar-link');
+
+      expect(navBarLink).not.toHaveAttr('href');
+    }));
+
     it('should select menu which is clicked', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
       let link: JQuery = $element.find('.ms-NavBar-items .ms-NavBar-item:not(.ms-NavBar-item--search)').first();
       link.click();
