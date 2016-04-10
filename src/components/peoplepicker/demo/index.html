@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ngOfficeUiFabric | uif-contextual-menu demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <script src="../../../../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUIFabric.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <script src="people.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1 class="ms-font-su">People Picker Demo | &lt;uif-people-picker&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+  <br>
+  <div id="regularSample">
+    <div ng-controller="demoController">
+
+      <h2>People Picker - Regular</h2>
+      <div class="usage">Click on the search input below and type in something. Then click on "Search organization people" button.</div>
+      <div class="usage">This demo simply returns all persons by searching, you can implement filtering\searching function by your own.</div>
+      <div class="usage">Add person to people picker by clicking on search result.</div>
+      <br>
+      <ng-include src="'default.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'default.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="default.html">
+        <uif-people-picker uif-people="getPeopleForDefaultDemo" ng-model="selectedPeopleDefault" placeholder="Search for people"
+          uif-selected-person-click="personClicked">
+          <uif-people-search-more>
+            <uif-secondary-text>Showing {{defaultSearchResults.length}} results</uif-secondary-text>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+        <div>
+          Selected persons:
+          <ul>
+            <li ng-repeat="person in selectedPeopleDefault track by $index">{{person.primaryText}}
+              <uif-button uif-type="command" ng-click="removePerson(person)">
+                <uif-icon uif-type="minus"></uif-icon>
+                Click to remove
+              </uif-button>
+            </li>
+          </ul>
+        </div>
+      </script>
+
+      <h2>People Picker - Compact</h2>
+      <div class="usage">Create compact people picker by supplying <b><i>uif-type="compact"</i></b> type.</div>
+      <div class="usage">You can also prefill your model with selected persons like in this demo.</div>
+      <br>
+      <ng-include src="'compact.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'compact.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="compact.html">
+        <uif-people-picker uif-people="getPeopleForCompactDemo" ng-model="selectedPeopleCompact" uif-type="compact" placeholder="Search for people">
+          <uif-people-search-more>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+
+      <h2>People Picker - searching as you type</h2>
+      <div class="usage">It's possible to run search automatically when you are typing.</div>
+      <div class="usage">By providing <b><i>uif-search-delay="500"</i></b> people picker will run search automatically after specified delay.</div>
+      <div class="usage">Type in something into the input below, after 500ms search will be trigged.</div>
+      <br>
+      <ng-include src="'autosearch.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'autosearch.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="autosearch.html">
+        <uif-people-picker uif-people="getPeopleForAutoSearch" ng-model="selectedPeopleAutoSearch" uif-search-delay="500" placeholder="Search for people">
+          <uif-people-search-more>
+            <uif-secondary-text>Showing {{autoSearchResults.length}} results</uif-secondary-text>
+            <uif-primary-text>Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+
+      <h2>People Picker - compact, async data, searching as you type</h2>
+      <div class="usage">This demo combines compact people picker and search as you type feature.</div>
+      <div class="usage">It also adds async data source. You can provide <i>uif-people</i> function to return array of persons OR promise resolving
+        array of persons.</div>
+      <div class="usage">People picker below simulates ajax request by using <i>$timeout</i> service.</div>
+      <br>
+      <ng-include src="'async.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'async.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="async.html">
+        <uif-people-picker uif-people="getPeopleAsync" ng-model="selectedAsyncPeople" uif-type="compact" uif-search-delay="300" placeholder="Search for people">
+          <uif-people-search-more>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+
+      <h2>People Picker - disconnected</h2>
+      <div class="usage">You can provide <b><i>uif-disconnected</i></b> attribute for <i>&lt;uif-people-search-more&gt;</i> to render disconnected
+        UI.
+      </div>
+      <div class="usage">Click on element below to toggle disconnected state.</div>
+      <br>
+      <uif-toggle uif-label-off="Disconnected" uif-label-on="Connected" ng-model="connected"></uif-toggle>
+      <ng-include src="'disconnected.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'disconnected.html'"></raw>
+      <br>
+
+      <script type="text/ng-template" id="disconnected.html">
+        <uif-people-picker uif-people="getDisconnectedPeopleDemo" ng-model="selectedDisconnectedPeople" placeholder="Search for people">
+          <uif-people-search-more uif-disconnected="!connected">
+            <uif-secondary-text>Showing {{diconnectedSearchResults.length}} results</uif-secondary-text>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+            <uif-disconnected-text>
+              We are having trouble connecting to the server.
+              <br> Please try again in a few minutes.
+            </uif-disconnected-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+
+      <h2>People Picker - disabled</h2>
+      <div class="usage">Control disabled state by using <b><i>ng-disabled</i></b> attribute.</div>
+      <br>
+      <uif-toggle uif-label-off="Disabled" uif-label-on="Enabled" ng-model="disabled"></uif-toggle>
+      <ng-include src="'disabled.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'disabled.html'"></raw>
+      <br>
+
+      <script type="text/ng-template" id="disabled.html">
+        <uif-people-picker ng-disabled="!disabled" uif-people="getDisabledPeopleDemo" ng-model="selectedDisabledPeople" placeholder="Search for people">
+          <uif-people-search-more>
+            <uif-secondary-text>Showing {{disabledSearchPeople.length}} results</uif-secondary-text>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+
+      <h2>People Picker - members List:</h2>
+      <div class="usage">Renders members list by supplying <b><i>uif-type="memberList"</i></b>.</div>
+      <br>
+      <ng-include src="'membersList.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'membersList.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="membersList.html">
+        <uif-people-picker uif-people="onMembersSearch" ng-model="selectedMembers" uif-search-delay="500" uif-type="memberList">
+          <uif-selected-people-header>{{selectedMembers.length}} selected person(s)</uif-selected-people-header>
+        </uif-people-picker>
+      </script>
+      <br>
+
+      <h2>People Picker - faceile</h2>
+      <div class="usage"><b><i>uif-type="facePile"</i></b> for facepile mode.</div>
+      <br>
+      <ng-include src="'FacePile.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'FacePile.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="FacePile.html">
+        <uif-people-picker uif-people="onFacePileSearch" ng-model="selectedFacePilePeople" uif-search-delay="500" uif-type="facePile">
+          <uif-selected-people-header>{{selectedFacePilePeople.length}} selected person(s)</uif-selected-people-header>
+          <uif-people-search-more>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+    </div>
+  </div>
+</body>
+
+</html>

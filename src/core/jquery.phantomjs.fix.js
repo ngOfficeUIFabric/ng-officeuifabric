@@ -17,3 +17,15 @@ jQuery.each(("blur focus focusin focusout click dblclick " +
 	};
 } );
 
+jQuery.each(("keydown keyup keypress").split(" "),
+	function(i, name) {
+
+	jQuery.fn[name] = function(keyCode) {
+		var el = this[0];
+		var event = document.createEvent("Events");
+		event.initEvent(name, true, true);
+		event.keyCode = keyCode;
+		el.dispatchEvent(event);
+	};
+} );
+

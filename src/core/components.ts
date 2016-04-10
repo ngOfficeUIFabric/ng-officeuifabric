@@ -28,6 +28,7 @@ import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';
 import * as toggleModule from '../components/toggle/toggleDirective';
 import * as orgChartModule from '../components/orgchart/orgChartDirective';
+import * as peoplePickerModule from '../components/peoplepicker/peoplePickerDirective';
 
 /**
  * @ngdoc module
@@ -57,6 +58,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   navBarModule.module.name,
   overlayModule.module.name,
   panelModule.module.name,
+  peoplePickerModule.module.name,
   personacardModule.module.name,
   personaModule.module.name,
   progressIndicatorModule.module.name,
