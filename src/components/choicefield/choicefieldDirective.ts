@@ -73,7 +73,7 @@ export class ChoicefieldOptionController {
  */
 export class ChoicefieldOptionDirective implements ng.IDirective {
     public template: string = '<div class="ms-ChoiceField">' +
-        '<input id="{{::$id}}" class="ms-ChoiceField-input" type="{{uifType}}" value="{{value}}" ' +
+        '<input id="{{::$id}}" class="ms-ChoiceField-input" type="{{uifType}}" value="{{value}}" ng-disabled="disabled"  ' +
             'ng-model="ngModel" ng-true-value="{{ngTrueValue}}" ng-false-value="{{ngFalseValue}}" />' +
             '<label for="{{::$id}}" class="ms-ChoiceField-field"><span class="ms-Label" ng-transclude></span></label>' +
         '</div>';
@@ -139,19 +139,28 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
                         choicefieldGroupController.removeRender(render);
                     });
             }
-            let disabled: boolean = 'disabled' in attrs;
 
-            // check parent too
             let parentScope: IChoicefieldGroupScope = <IChoicefieldGroupScope> scope.$parent.$parent;
-            disabled = disabled || (parentScope != null && parentScope.disabled);
-            if (disabled) {
-                instanceElement.find('input').attr('disabled', 'disabled');
-            }
+            let checkDisabled: () => void = () => {
+                scope.disabled = 'disabled' in attrs && attrs.disabled;
+                scope.disabled = scope.disabled || (parentScope != null && parentScope.disabled);
+            };
+            scope.$watch(
+              () => { return instanceElement.attr('disabled'); },
+              ((newValue) => {
+                  checkDisabled();
+              }));
+            scope.$watch(
+              () => { return parentScope == null ? '' : parentScope.disabled; },
+              ((newValue) => { checkDisabled(); }));
+
+            checkDisabled();
             instanceElement
                 .on('click', (ev: JQueryEventObject) => {
-                    if (disabled) {
+                    if (scope.disabled) {
                         return;
                     }
+
                     scope.$apply(() => {
                         if (choicefieldGroupController != null) {
                             choicefieldGroupController.setViewValue(attrs.value, ev);
@@ -263,6 +272,9 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
     public require: string[] = ['uifChoicefieldGroup', '?ngModel'];
     public controller: typeof ChoicefieldGroupController = ChoicefieldGroupController;
 
+    // make sure we have an isolate scope
+    public scope: {} = {};
+
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new ChoicefieldGroupDirective();
         return directive;
@@ -284,6 +296,10 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
             let modelController: ng.INgModelController = ctrls[1];
             scope.ngModel = modelController;
             choicefieldGroupController.init();
+
+            scope.$watch(
+                () => { return instanceElement.attr('disabled'); },
+                ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; }));
             scope.disabled = 'disabled' in instanceAttributes;
     }
 }
