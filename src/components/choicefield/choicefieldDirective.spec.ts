@@ -142,18 +142,38 @@
             { text: 'Option 4', value: 'Option4'}
         ];
         $scope.selectedValue = 'Option1';
+        $scope.disabled = true;
+        $scope.disabledChild = false;
 
-        let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" disabled uif-type="radio">' +
-            '<uif-choicefield-option ng-repeat="option in options" ' +
+        let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" ng-disabled="disabled" uif-type="radio">' +
+            '<uif-choicefield-option ng-repeat="option in options" ng-disabled="disabledChild" ' +
             'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
         $scope.$digest();
         choicefield = jQuery(choicefield[0]);
+        choicefield.appendTo(document.body);
 
         let option1: JQuery = jQuery(choicefield.find('input')[0]);
         let option3: JQuery = jQuery(choicefield.find('input')[2]);
+
         option3.click();
-        expect(option3.prop('checked')).toBe(false, 'Option 3 - Checked should be false after click as element is disabled');
-        expect(option1.prop('checked')).toBe(true, 'Option 1 - Checked should still be true after click as element is disabled');
+        expect(option3.prop('checked')).toBe(false, 'Option 3 - Checked should be false after click as parent element is disabled');
+        expect(option1.prop('checked')).toBe(true, 'Option 1 - Checked should still be true after click as parent element is disabled');
+
+        $scope.disabled = false;
+        $scope.disabledChild = true;
+        $scope.$digest();
+
+        option3.click();
+        expect(option3.prop('checked')).toBe(false, 'Option 3 - Checked should be false after click as child element is disabled');
+        expect(option1.prop('checked')).toBe(true, 'Option 1 - Checked should still be true after click as child element is disabled');
+
+        $scope.disabled = false;
+        $scope.disabledChild = false;
+        $scope.$digest();
+
+        option3.click();
+        expect(option3.prop('checked')).toBe(true, 'Option 3 - Checked should be true after click as element is not disabled');
+        expect(option1.prop('checked')).toBe(false, 'Option 1 - Checked should be false after click as element is not disabled');
     }));
 });
 

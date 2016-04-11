@@ -112,6 +112,41 @@
     <p>
         <span>selectedValue: {{selectedValue}}</span>
     </p>
+    
+    
+    <h2>ng-disabled usage</h2>
+    <p>
+        This markup: <br />
+        <pre>
+          &lt;uif-choicefield-group ng-model=&quot;selectedValue&quot; ng-disabled=&quot;disabled&quot; &gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;          &lt;/uif-choicefield-group&gt;&#13;&#10;          &lt;hr/&gt;&#13;&#10;          &lt;uif-choicefield-group ng-model=&quot;selectedValue&quot;&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; ng-disabled=&quot;!disabled&quot; value=&quot;value1&quot;&gt;Text 1&lt;/uif-choicefield-option&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; ng-disabled=&quot;disabled&quot; value=&quot;value2&quot;&gt;Text 2&lt;/uif-choicefield-option&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; ng-disabled=&quot;!disabled&quot; value=&quot;value3&quot;&gt;Text 3&lt;/uif-choicefield-option&gt;&#13;&#10;              &lt;uif-choicefield-option uif-type=&quot;radio&quot; ng-disabled=&quot;disabled&quot; value=&quot;value4&quot;&gt;Text 4&lt;/uif-choicefield-option&gt;&#13;&#10;          &lt;/uif-choicefield-group&gt;
+        </pre>
+    </p>
+
+    <p>
+        Renders this:
+        <br />
+        <uif-choicefield-group ng-model="selectedValue" ng-disabled="disabled" >
+            <uif-choicefield-option uif-type="radio" value="value1">Text 1</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value2">Text 2</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value3">Text 3</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" value="value4">Text 4</uif-choicefield-option>
+        </uif-choicefield-group>
+        <hr/>
+        <uif-choicefield-group ng-model="selectedValue">
+            <uif-choicefield-option uif-type="radio" ng-disabled="!disabled" value="value1">Text 1</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" ng-disabled="disabled" value="value2">Text 2</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" ng-disabled="!disabled" value="value3">Text 3</uif-choicefield-option>
+            <uif-choicefield-option uif-type="radio" ng-disabled="disabled" value="value4">Text 4</uif-choicefield-option>
+        </uif-choicefield-group>
+        
+        <uif-choicefield-option uif-type="checkbox" 
+        ng-model="disabled" ng-true-value="true" ng-false-value="false">Disabled</uif-choicefield-option>
+        
+    </p>
+    <p>
+        <span>Disabled: {{disabled}}</span>
+        <span>selectedValue: {{selectedValue}}</span>
+    </p>
  
 </body>
 
