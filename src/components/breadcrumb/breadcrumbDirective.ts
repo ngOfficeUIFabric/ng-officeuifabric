@@ -10,14 +10,13 @@ import * as ng from 'angular';
  * @restrict E
  *
  * @description
- * `<uif-breadcrumblink>` is a directive for rendering a link in the breadcrumb component.
+ * `<uif-breadcrumb-link>` is a directive for rendering a link in the breadcrumb component.
  *
  * @usage
  *
  * <uif-breadcrumb>
- *   <uif-breadcrumblink uif-active>Active text</uif-breadcrumblink>
- *   <uif-breadcrumblink ng-href="https://github.com">GitHub</uif-breadcrumblink>
- *   <uif-breadcrumblink ng-href="https://office.com">Office</uif-breadcrumblink>
+ *   <uif-breadcrumb-link ng-href="https://github.com">GitHub</uif-breadcrumb-link>
+ *   <uif-breadcrumb-link ng-href="https://office.com">Office</uif-breadcrumb-link>
  * </uif-breadcrumb>
  */
 export class BreadcrumbLinkDirective implements ng.IDirective {
@@ -28,17 +27,18 @@ export class BreadcrumbLinkDirective implements ng.IDirective {
     return directive;
   }
 }
+
 /**
  * @ngdoc class
  * @name BreadcrumbController
  * @module officeuifabric.components.breadcrumb
- * 
+ *
  * @description This is the controller for the breadcrumb component
  */
 export class BreadcrumbController {
-    public static $inject: string[] = ['$compile'];
-    constructor(public $compile: ng.ICompileService) {
-    }
+  public static $inject: string[] = ['$compile'];
+  constructor(public $compile: ng.ICompileService) {
+  }
 }
 
 /**
@@ -54,15 +54,15 @@ export class BreadcrumbController {
  * @usage
  *
  * <uif-breadcrumb>
- *   <uif-breadcrumblink uif-active>Active text</uif-breadcrumblink>
- *   <uif-breadcrumblink ng-href="https://github.com">GitHub</uif-breadcrumblink>
- *   <uif-breadcrumblink ng-href="https://office.com">Office</uif-breadcrumblink>
+ *   <uif-breadcrumb-link ng-href="https://github.com">GitHub</uif-breadcrumb-link>
+ *   <uif-breadcrumb-link ng-href="https://office.com">Office</uif-breadcrumb-link>
  * </uif-breadcrumb>
  */
 
 export class BreadcrumbDirective implements ng.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
+  public replace: boolean = true;
   public template: string = '<div class="ms-Breadcrumb"></div>';
   public controller: typeof BreadcrumbController = BreadcrumbController;
   public require: string = 'uifBreadcrumb';
@@ -71,39 +71,68 @@ export class BreadcrumbDirective implements ng.IDirective {
     const directive: ng.IDirectiveFactory = () => new BreadcrumbDirective();
     return directive;
   }
-  public link(
-    scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attributes: any,
-    ctrl: BreadcrumbController, transclude: ng.ITranscludeFunction): void {
-      // transclusion happens here, and not in the breadcrumblink directive, as 
-      // we found that transclusion does not work when cloning elements.
-      // in our case we needed to clone the active link.
 
-      transclude((transcludedElement: JQuery) => {
-        let activeLink: JQuery = null;
-        let links: JQuery = transcludedElement;
-        for (let i: number = 0; i < transcludedElement.length; i++) {
-          let link: JQuery = angular.element(links[i]);
-          if (link.attr('uif-current') != null) {
-            activeLink = link;
-          } else {
-            let anchor: JQuery = angular.element(`<a class="ms-Breadcrumb-parent" ng-href="${link.attr('ng-href')}"></a>`);
-            anchor.append(link.html());
-            anchor.append(angular.element('<span>&nbsp;</span>'));
-            instanceElement.children().append(ctrl.$compile(anchor)(scope));
-          }
+  public link(scope: ng.IScope,
+              instanceElement: ng.IAugmentedJQuery,
+              attributes: any,
+              ctrl: BreadcrumbController,
+              transclude: ng.ITranscludeFunction): void {
+    // transclusion happens here, and not in the breadcrumblink directive, as
+    // we found that transclusion does not work when cloning elements.
+    // in our case we needed to clone the active link.
+
+    transclude((transcludedElement: JQuery) => {
+      let breadcrumbList: JQuery = angular.element('<ul></ul>');
+      breadcrumbList.addClass('ms-Breadcrumb-list');
+
+      let tabIndex: number = 1;
+      let breadcrumbLinks: JQuery = transcludedElement;
+      for (let bcLinkIndex: number = 0; bcLinkIndex < transcludedElement.length; bcLinkIndex++) {
+        let link: JQuery = angular.element(breadcrumbLinks[bcLinkIndex]);
+
+        // if not a <uif-breadcrumb-link>, skip it as text is getting picked up
+        if (link[0].nodeName === '#text') {
+          continue;
         }
 
-        if (activeLink != null) {
-          let spanCurrentLarge: JQuery = angular.element("<span class='ms-Breadcrumb-currentLarge'></span>");
-          let spanCurrent: JQuery = angular.element("<span class='ms-Breadcrumb-current'></span>");
-          spanCurrentLarge.append(activeLink.contents().clone());
-          spanCurrent.append(activeLink.contents().clone());
+        // create list item
+        let liElement: JQuery = angular.element('<li></li>');
+        liElement.addClass('ms-Breadcrumb-listItem');
 
-          instanceElement.children().prepend(spanCurrentLarge.clone());
-          instanceElement.children().append(spanCurrent.clone());
+        // create link
+        let aElement: JQuery = angular.element('<a></a>');
+        aElement.addClass('ms-Breadcrumb-itemLink');
+        aElement.attr('tabindex', ++tabIndex);
+        aElement.attr('href', link.attr('ng-href'));
+        aElement.append(link[0].innerHTML);
+        liElement.append(aElement);
 
-        }
-      });
+        // create icon
+        let iconElement: JQuery = angular.element(`<i></i>`);
+        iconElement.addClass('ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight');
+        liElement.append(iconElement);
+
+        // add item to list
+        breadcrumbList.append(liElement);
+      }
+
+      // add overflow
+      let overflowDiv: JQuery = angular.element('<div></div>');
+      overflowDiv.addClass('ms-Breadcrumb-overflow');
+
+      let overflowButtonDiv: JQuery = angular.element('<div></div>');
+      overflowButtonDiv.addClass('ms-Breadcrumb-overflowButton ms-Icon ms-Icon--ellipsis');
+      overflowButtonDiv.attr('tabindex', '1');
+      overflowDiv.append(overflowButtonDiv);
+
+      let iIcon: JQuery = angular.element('<i></i>');
+      iIcon.addClass('ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight');
+      overflowDiv.append(iIcon);
+
+      // add list to element
+      instanceElement.append(overflowDiv);
+      instanceElement.append(breadcrumbList);
+    });
   }
 }
 

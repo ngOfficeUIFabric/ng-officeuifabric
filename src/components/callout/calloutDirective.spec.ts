@@ -205,6 +205,7 @@ describe('calloutDirectives:', () => {
         let closeButton: JQuery = calloutElement.find('button.ms-Callout-close').eq(0);
         expect(closeButton).toBeDefined();
         expect(closeButton).not.toBeNull();
+        expect(closeButton).toHaveAttr('type', 'button');
 
         let buttonIcon: JQuery = closeButton.find('i').eq(0);
         expect(buttonIcon[0]).toHaveClass('ms-Icon');

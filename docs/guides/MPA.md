@@ -35,9 +35,10 @@ Installation of Node.js includes NPM, the package manager for Node.js.
 Many parts of the project are implemented using TypeScript, but more importantly the build process is written in TypeScript. As such, you need to install one NPM package globally:
 
 - [typescript](https://npmjs.com/package/typescript): main TypeScript compiler
+- [typings](https://npmjs.com/package/typings): Typings type definition utility
 
 ```bash
-$ npm install -g typescript
+$ npm install -g typescript typings
 ```
 
 ## Clone the Repository
@@ -86,9 +87,14 @@ To fix this, you need to transpile the TypeScript to JavaScript. This is a one-t
 - you update the build process such as changing or adding Gulp tasks
 - you purge all JavaScript transpiled from TypeScript
 
-Transpile all the TypeScript to JavaScript. The following command will run the TypeScript compiler, `tsc`, telling it to treat the folder (`./`) as a project (`-p`) by looking at the `tsconfig.json` file in the root fo the folder:
+Transpile all the TypeScript to JavaScript. The following command will download all type definitions & run the TypeScript compiler, `tsc`, telling it to treat the folder (`./`) as a project (`-p`) by looking at the `tsconfig.json` file in the root fo the folder:
 
 ```bash
+# run this ...
+$ npm run build:ts
+
+# or run this ...
+$ typings install
 $ tsc -p ./
 ```
 
@@ -167,10 +173,10 @@ ng-officeuifabric/coverage/PhantomJS 1.9.8 (Mac OS X 0.0.0)/lcov-report/index.ht
 
 ## Build the Library
 
-Build the library in debug mode so you can try one of the examples:
+Build the library in dev mode so you can try one of the examples:
 
 ```bash
-$ gulp build-lib --debug
+$ gulp build-lib --dev
 ```
 
 ## See a Working Directive

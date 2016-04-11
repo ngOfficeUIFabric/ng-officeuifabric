@@ -48,7 +48,7 @@ Before you submit your pull request consider the following guidelines:
 
 Please do the following checks on your code before you submit a pull request. They do all these same checks manually and if any fail, your PR will be rejected and you will be prompted to address the issues.
 
-> NOTE: these are all done automatically using [TravisCI](https://travis-ci.org) as defined in the `.travis.yml` file in the root of the repo.
+> NOTE: these are all done automatically using [CircleCI](https://circleci.com) as defined in the `circle.yml` file in the root of the repo.
 
 - Run the full ngOfficeUIFabric test suite, as described in the [TESTING](TESTING.md), and ensure that all tests pass.
 - Run the code vetting script `$ gulp vet-lib-ts` to verify you are meeting all required code style requirements.
@@ -85,7 +85,7 @@ To do this, assuming you are in the branch where you were working on a fix or fe
     - `References #000.`
     - If it addresses multiple issues, please enter each of the above on the same line, but written as sentences like: `Closes #000. Closes #000.`
   - Do **NOT** push to `ngofficeuifabric:master`.
-  - Monitor the automated checks that are performed on your PR when submitted by both Travis CI & Coveralls. If either fails you need to address the issues prior to your submission to be considered for merge. If you need help with this process, jump in the [ngofficeuifabric Slack team](https://ngofficeuifabric.slack.com) and ask for help.
+  - Monitor the automated checks that are performed on your PR when submitted by both CircleCI & Coveralls. If either fails you need to address the issues prior to your submission to be considered for merge. If you need help with this process, jump in the [ngofficeuifabric Slack team](https://ngofficeuifabric.slack.com) and ask for help.
 - If we suggest changes then:
   - Make the required updates.
   - Re-run the test suite to ensure tests are still passing.
@@ -100,7 +100,7 @@ To do this, assuming you are in the branch where you were working on a fix or fe
 
 Well, it depends.
 
-If the failure is due to [failing to transpile the TypeScript to JavaScript](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L22-L23), [any failing unit tests](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L26-L27), [code style issues when vetting](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.travis.yml#L28-29) or from a significant drop in code coverage, the issues will be mentioned in your PR & it will be closed. You are free to reopen the PR after addressing the issues, resubmitting the code.
+If the failure is due to, (a) failing to transpile the TypeScript to JavaScript, (b) any failing unit tests, (c) code style issues when vetting or from a significant drop in code coverage, the issues will be mentioned in your PR & it will be closed. You are free to reopen the PR after addressing the issues, resubmitting the code.
 
 However there are other reasons the build may fail that won't cause this...
 

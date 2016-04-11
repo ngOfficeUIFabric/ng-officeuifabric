@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.6.0",
+  "version": "0.7.3",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -14,6 +14,7 @@
     "Gandhi, Jigar <jigarr.gandhi@gmail.com>",
     "Mastykarz, Waldek <waldek@mastykarz.nl>",
     "Meilleur, John <john@meilleur.ca>",
+    "Molberg, Steen <stm@globeteam.com>",
     "Oldengarm, Roland <me@rolandoldengarm.com>",
     "Sergeev, Sergei <sergeev.srg@gmail.com>",
     "Struyf, Elio <info@estruyf.be>",
@@ -41,20 +42,23 @@
     "build": "npm run build:ts && npm run build:lib",
     "build:ts": "tsc -p ./",
     "build:lib": "gulp build-lib && gulp build-lib --dev",
-    "dev-install": "tsd install -ros",
-    "test": "npm run build:ts && gulp test --specs"
+    "dev-install": "typings install",
+    "test": "npm run build:ts && gulp test --specs",
+    "commit": "git-cz"
   },
   "dependencies": {
-    "angular": "1.4.9",
-    "office-ui-fabric": "2.1.0"
+    "angular": "1.5.3",
+    "office-ui-fabric": "2.2.0"
   },
   "devDependencies": {
-    "angular-animate": "^1.4.9",
-    "angular-mocks": "^1.4.9",
-    "angular-sanitize": "^1.4.9",
+    "angular-animate": "1.5.3",
+    "angular-mocks": "1.5.3",
+    "angular-sanitize": "1.5.3",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
+    "commitizen": "2.7.6",
     "coveralls": "^2.11.6",
+    "cz-conventional-changelog": "1.1.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-debug": "^2.1.2",
@@ -68,7 +72,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-strip-comments": "2.3.2",
+    "gulp-strip-comments": "2.4.2",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",
@@ -84,6 +88,7 @@
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6",
     "karma-jasmine-jquery": "^0.1.1",
+    "karma-junit-reporter": "^0.4.1",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.24",
@@ -98,5 +103,10 @@
     "xmldom": "^0.1.22",
     "xpath": "0.0.22",
     "yargs": "^4.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

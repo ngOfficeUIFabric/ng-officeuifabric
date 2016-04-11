@@ -16,12 +16,15 @@ import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
 import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
+import * as personacardModule from '../components/personacard/personacardDirective';
+import * as personaModule from '../components/persona/personaDirective';
 import * as progressIndicatorModule from '../components/progressindicator/progressIndicatorDirective';
 import * as searchboxModule from '../components/searchbox/searchboxDirective';
 import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';
 import * as toggleModule from '../components/toggle/toggleDirective';
+import * as orgChartModule from '../components/orgchart/orgChartDirective';
 
 /**
  * @ngdoc module
@@ -48,10 +51,13 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   linkModule.module.name,
   navBarModule.module.name,
   overlayModule.module.name,
+  personacardModule.module.name,
+  personaModule.module.name,
   progressIndicatorModule.module.name,
   searchboxModule.module.name,
   spinnerModule.module.name,
   tableModule.module.name,
   textFieldModule.module.name,
-  toggleModule.module.name
+  toggleModule.module.name,
+  orgChartModule.module.name
 ]);

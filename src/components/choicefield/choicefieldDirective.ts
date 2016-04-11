@@ -162,6 +162,28 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
 }
 
 /**
+ * @ngdoc directive
+ * @name uifChoicefieldGroupTitle
+ * @module officeuifabric.components.choicefield
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-choicefield-group-title>` is a choicefield group title directive
+ * to render the title component of a choicefield group 
+ */
+
+export class ChoicefieldGroupTitleDirective implements ng.IDirective {
+    public template: string = '<div class="ms-ChoiceFieldGroup-title"><ng-transclude /></div>';
+    public transclude: boolean = true;
+    public static factory(): ng.IDirectiveFactory {
+        const directive: ng.IDirectiveFactory = () => new ChoicefieldGroupTitleDirective();
+        return directive;
+    }
+}
+
+
+/**
  * @ngdoc class
  * @name ChoicefieldgroupController
  * @module officeuifabric.components.choicefield
@@ -213,7 +235,7 @@ export class ChoicefieldGroupController {
 
 /**
  * @ngdoc directive
- * @name uifDropdown
+ * @name uifChoicefieldGroup
  * @module officeuifabric.components.choicefield
  *
  * @restrict E
@@ -225,6 +247,7 @@ export class ChoicefieldGroupController {
  * @usage
  *
  * <uif-choicefield-group ng-model="selectedValue">
+ *    <uif-choicefield-group-title><label class="ms-Label is-required">Pick one</label></uif-choicefield-group-title>
  *    <uif-choicefield-option uif-type="radio" ng-repeat="option in options"
  *        value="{{option.value}}">{{option.text}}</uif-choicefield-option>
  * </uif-choicefield-group>
@@ -232,9 +255,6 @@ export class ChoicefieldGroupController {
 export class ChoicefieldGroupDirective implements ng.IDirective {
     public template: string =
         '<div class="ms-ChoiceFieldGroup">' +
-            '<div class="ms-ChoiceFieldGroup-title">' +
-                '<label class="ms-Label is-required">Pick one</label>' +
-            '</div>' +
             '<ng-transclude />' +
         '</div>';
 
@@ -280,4 +300,5 @@ export var module: ng.IModule = ng.module('officeuifabric.components.choicefield
     'officeuifabric.components'
   ])
   .directive('uifChoicefieldOption', ChoicefieldOptionDirective.factory())
-  .directive('uifChoicefieldGroup', ChoicefieldGroupDirective.factory());
+  .directive('uifChoicefieldGroup', ChoicefieldGroupDirective.factory())
+  .directive('uifChoicefieldGroupTitle', ChoicefieldGroupTitleDirective.factory());

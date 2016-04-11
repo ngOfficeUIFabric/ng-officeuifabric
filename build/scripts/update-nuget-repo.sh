@@ -14,7 +14,7 @@
 #       dependencies & the changelog.md has been updated
 #
 # The script will do the following things:
-#   1. clone a copy of nuget-ngofficeuifabric to a temp location
+#   1. clone a copy of nuget-ngofficeuifabric to the specified $PKGWD path
 #   2. copy the compiled library & changelog to the cloned nuget-ngofficeuifabric
 #   3. update the nuget-ngofficeuifabric repo with the following changes by calling
 #       update-nuget-versions.js:
@@ -25,64 +25,59 @@
 #     4.2. commit everything with comment "release(): [version]"
 #     4.3. push commit => origin master
 #     4.4. tag with the current version & push tags to origin
-#   5. remove cloned package repo temp folder
 
 ARG_DEFS=(
-  "--version=(.*)"
-  "--src=(.*)"
+  "--srcwd=(.*)"
+  "--pkgwd=(.*)"
 )
 
 function init {
   # setup paths
-  SRC_PATH=$SRC
-  PKG_PATH="$(mktemp -d)"
+  SRC_PATH=$SRCWD
+  PKG_PATH=$PKGWD/nuget-ngofficeuifabric
   # setup globals
+  VERSION="$(readJsonProp "$SRCWD/package.json" "version")"
   REPO_URL="https://github.com/ngOfficeUIFabric/nuget-ngofficeuifabric"
 }
 
 function run {
-  # start from root ng-officeuifabric library
-  cd $SRC_PATH
-
-
   # clone packaging repo
-  echo ".. [1 / 5] clone packaging repo"
+  echo "DEBUG: [1 / 4] clone packaging repo"
   git clone $REPO_URL $PKG_PATH --depth=2
 
 
+  # make sure version != last tag,
+  #   if so, abort as nothing to do
+  if isNewVersion $VERSION $PKG_PATH ; then
+    echo "WARN: not a new version; aborting"
+    exit 0
+  fi
+
+
   # copy built library & changelog
-  echo ".. [2 / 5] copying built library & changelog"
-  cp -Rf dist/*.js $PKG_PATH/src/content/Scripts
-  cp -Rf changelog.md $PKG_PATH/changelog.md
+  echo "DEBUG: [2 / 4] copying built library & changelog"
+  cp -Rf $SRC_PATH/dist/*.js $PKG_PATH/src/content/Scripts
+  cp -Rf $SRC_PATH/CHANGELOG.md $PKG_PATH/CHANGELOG.md
 
 
   # update versions & dependencies in ng-office-ui-fabric.nuspec
-  echo ".. [3 / 5] updating versions & dependencies in ng-office-ui-fabric.nuspec"
-  node ./build/scripts/update-nuget-versions.js --src=$PWD --pkg=$PKG_PATH
+  echo "DEBUG: [3 / 4] updating versions & dependencies in ng-office-ui-fabric.nuspec"
+  node $SRC_PATH/build/scripts/update-nuget-versions.js --src=$SRC_PATH --pkg=$PKG_PATH
 
 
   # update packaging repo
-  echo ".. [4 / 5] updating packaging repo nuget-ngofficeuifabric"
+  echo "DEBUG: [4 / 4] updating packaging repo nuget-ngofficeuifabric"
   cd $PKG_PATH
-
-  echo ".. .. adding & commiting changes to package repo"
+  echo "DEBUG: .. adding & commiting changes to package repo"
   git add -A
-
   git commit -m "release(): $VERSION"
-  echo ".. .. pushing origin master"
+  echo "DEBUG: .. pushing origin master"
   git push -q origin master
 
-  echo ".. .. adding tag for version $VERSION & pushing orign master"
+  echo "DEBUG: .. adding tag for version $VERSION & pushing orign master"
   git tag -f $VERSION
-  echo ".. .. pushing origin master tags"
+  echo "DEBUG: .. pushing origin master tags"
   git push --tags
-
-
-  # remove temp folder
-  echo ".. [5 / 5] removing temp folder at:"
-  echo ".. .. $PKG_PATH"
-  cd $SRC_PATH
-  rm -rf $PKG_PATH
 }
 
 source $(dirname $0)/utils.inc

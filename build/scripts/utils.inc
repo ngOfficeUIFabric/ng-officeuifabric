@@ -220,27 +220,53 @@ function resolveDir {
   echo $(cd $SCRIPT_DIR; cd $1; pwd)
 }
 
+# isNewVersion(version, pkgPath)
+# - returns 1 / 0 if the current build is a new
+#   version or not comparing value in package.json & latest git tag
+# - @param version = version to check
+# - @param pkgPath = path of git repo to check version against
+function isNewVersion {
+  # get current folder & change to path of git repo to check version
+  local CURRENT_DIR=$PWD
+  cd $2
+
+  local LAST_TAG=$(git describe --tags --abbrev=0 --always)
+
+  # jump back to current folder
+  cd $CURRENT_DIR
+
+  # debug info
+  echo "DEBUG: version to test:  $1"
+  echo "DEBUG: last tag version: $LAST_TAG"
+
+  if [[ "$LAST_TAG" == "$1" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 function git_push_dryrun_proxy {
   echo "## git push dryrun proxy enabled!"
   export ORIGIN_GIT=$(which git)
 
   function git {
-	  local ARGS=("$@")
-	  local RC
-	  if [[ $1 == "push" ]]; then
-	    ARGS+=("--dry-run" "--porcelain")
-	    echo "####### START GIT PUSH DRYRUN #######"
+    local ARGS=("$@")
+    local RC
+    if [[ $1 == "push" ]]; then
+      ARGS+=("--dry-run" "--porcelain")
+      echo "####### START GIT PUSH DRYRUN #######"
       echo "${ARGS[@]}"
-	  fi
-	  if [[ $1 == "commit" ]]; then
+    fi
+    if [[ $1 == "commit" ]]; then
       echo "${ARGS[@]}"
-	  fi
-	  $ORIGIN_GIT "${ARGS[@]}"
-	  RC=$?
-	  if [[ $1 == "push" ]]; then
-	    echo "####### END GIT PUSH DRYRUN #######"
-	  fi
-	  return $RC
+    fi
+    $ORIGIN_GIT "${ARGS[@]}"
+    RC=$?
+    if [[ $1 == "push" ]]; then
+      echo "####### END GIT PUSH DRYRUN #######"
+    fi
+    return $RC
   }
 
   export -f git
