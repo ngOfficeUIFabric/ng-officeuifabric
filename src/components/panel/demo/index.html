@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <title>ngOfficeUiFabric | uif-panel demo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+  <script src="index.js"></script>
+
+  <style type="text/css">
+
+    .ms-CommandBarItem.is-hidden
+    {
+      display:none;
+    }
+
+  </style>
+</head>
+
+<body ng-controller="demoAppController">
+
+    <h1 class="ms-font-su">uifPanel Demo | &lt;uif-panel&gt;</h1>
+    <em class="ms-font-m">In order for this demo to work you must first build the library in dev mode. (gulp build-lib --dev)</em>
+
+    <h2 class="ms-font-xl">Basic Usage</h2>
+    <ng-include src="'basic.html'"></ng-include>
+    <h4><i class="ms-font-m">Code:</i></h4>
+    <raw src="'basic.html'"></raw>
+
+    <script type="text/ng-template" id="basic.html">
+      <uif-button  ng-click="vm.isOpen1 = !vm.isOpen1">Toggle Menu</uif-button>
+      <uif-panel uif-type="small" uif-is-open="vm.isOpen1" uif-show-overlay="true" uif-show-close="true">
+        <uif-panel-header>Header</uif-panel-header>
+        <uif-content>
+        <span class="ms-font-m">Place your content in here!</span>
+        </uif-content>
+      </uif-panel>
+    </script>
+
+    <h2 class="ms-font-xl">With uifCommandBar</h2>
+    <ng-include src="'withcommandbar.html'"></ng-include>
+    <h4><i class="ms-font-m">Code:</i></h4>
+    <raw src="'withcommandbar.html'"></raw>
+
+    <script type="text/ng-template" id="withcommandbar.html">
+      <uif-button  ng-click="vm.isOpen2 = !vm.isOpen2">Toggle Menu</uif-button>
+      <uif-panel uif-type="large" uif-is-open="vm.isOpen2" uif-show-overlay="true">
+        <uif-command-bar uif-search-term="searchValue" placeholder="Search here...">
+          <uif-command-bar-main uif-show-overflow='true'>
+          <uif-command-bar-item>
+            <uif-icon uif-type="save"></uif-icon>
+            <span class='ms-font-s'>Save</span>
+          </uif-command-bar-item>
+          <uif-command-bar-item>
+            <uif-icon uif-type="x"></uif-icon>
+            <span class='ms-font-s'>Cancel</span>
+          </uif-command-bar-item>
+          </uif-command-bar-main>
+        </uif-command-bar>
+        <uif-panel-header>Header</uif-panel-header>
+        <uif-content>
+        <span class="ms-font-m">Place your content in here!</span>
+        </uif-content>
+      </uif-panel>
+    </script>
+
+</body>
+
+</html>

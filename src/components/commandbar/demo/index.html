@@ -2,7 +2,7 @@
 <html ng-app="demoApp">
 
 <head>
-  <title>ngOfficeUiFabric | uif-Dropdown demo</title>
+  <title>ngOfficeUiFabric | uifCommandBar demo</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- office ui fabric css -->
@@ -28,6 +28,31 @@
 
     <h1 class="ms-font-su">uifCommandBar Demo | &lt;uif-command-bar&gt;</h1>
     <em class="ms-font-m">In order for this demo to work you must first build the library in dev mode. (gulp build-lib dev)</em>
+
+
+
+    <h2 class="ms-font-xl">Basic Usage</h2>
+    <ng-include src="'databound.html'"></ng-include>
+    <h4><i class="ms-font-m">Code:</i></h4>
+    <raw src="'databound.html'"></raw>
+
+    <script type="text/ng-template" id="databound.html">
+        <uif-command-bar>
+            <uif-command-bar-side>
+                <uif-command-bar-item ng-repeat="item in config.side">
+                    <uif-icon uif-type="{{item.linkIcon}}" ng-click="callAction(item)"></uif-icon>
+                    <span>{{item.title}}</span>
+                </uif-command-bar-item>
+            </uif-command-bar-side>
+            <uif-command-bar-main uif-show-overflow='true'>
+                <uif-command-bar-item ng-repeat="item in config.main">
+                    <uif-icon uif-type="{{item.linkIcon}}" ng-click="callAction(item)"></uif-icon>
+                    <span>{{item.title}}</span>
+                </uif-command-bar-item>
+            </uif-command-bar-main>
+        </uif-command-bar>
+    </script>
+
 
     <h2 class="ms-font-xl">Basic Usage</h2>
     <ng-include src="'basic.html'"></ng-include>

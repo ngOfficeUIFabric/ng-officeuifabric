@@ -16,6 +16,7 @@ import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
 import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
+import * as panelModule from '../components/panel/panelDirective';
 import * as personacardModule from '../components/personacard/personacardDirective';
 import * as personaModule from '../components/persona/personaDirective';
 import * as progressIndicatorModule from '../components/progressindicator/progressIndicatorDirective';
@@ -51,6 +52,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   linkModule.module.name,
   navBarModule.module.name,
   overlayModule.module.name,
+  panelModule.module.name,
   personacardModule.module.name,
   personaModule.module.name,
   progressIndicatorModule.module.name,
