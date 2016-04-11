@@ -219,18 +219,6 @@ export class CommandBarMainDirective implements ng.IDirective {
                     attrs: ng.IAttributes,
                     ctrl: CommandBarMainController): void {
 
-        // bind window resize to trigger overflow event
-        angular.element(window).bind('resize', function(): void {
-            scope.overflowMenuOpen = false;
-            scope.toggleItemVisibility(elem.prop('offsetWidth'), elem);
-          });
-
-        // fire on load to render overflow correctly
-        angular.element(document).ready(function (): void {
-          scope.loadMenuItems(angular.element(elem[0].querySelectorAll('.ms-CommandBarItem')));
-          scope.toggleItemVisibility(elem.prop('offsetWidth'), elem);
-        });
-
         // opens the overflow menu
         scope.openOverflowMenu = function(): void
         {
@@ -323,21 +311,23 @@ export class CommandBarMainDirective implements ng.IDirective {
         };
 
         // calculated which items should be hidden and places them into overflow
-        scope.toggleItemVisibility = function(parentWidth: any, commandBarItem: any): void
+        scope.toggleItemVisibility = function(): void
         {
 
+          let commandBarItems: any;
+          commandBarItems = angular.element(elem[0].querySelectorAll('.ms-CommandBar-mainArea .ms-CommandBarItem'));
           // check for toggle to/from mobile
           if (window.innerWidth < 640 && scope.mobileSwitch === false) {
-            scope.loadMenuItems(angular.element(commandBarItem[0].querySelectorAll('.ms-CommandBarItem')));
+            scope.loadMenuItems(commandBarItems);
             scope.mobileSwitch = true;
           } else if (window.innerWidth >= 640 && scope.mobileSwitch === true) {
-            scope.loadMenuItems(angular.element(commandBarItem[0].querySelectorAll('.ms-CommandBarItem')));
+            scope.loadMenuItems(commandBarItems);
             scope.mobileSwitch = false;
           }
 
           // check for any existing items which need to be hidden
           angular.forEach(scope.commandItems, function(element: any): void {
-              if (element.offset >= parentWidth - 200) {
+              if (element.offset >= elem.prop('offsetWidth') - 200) {
                 angular.element(elem[0].querySelectorAll('.ms-CommandBarItem')[element.index]).addClass('is-hidden');
                 scope.hiddenItems[element.index].visible = true;
                 scope.overflowVisible = true;
@@ -348,8 +338,29 @@ export class CommandBarMainDirective implements ng.IDirective {
               }
           });
 
-          scope.$apply();
+          ctrl.$timeout(
+            () => {
+              scope.$apply();
+            },
+            1);
         };
+
+        scope.$on('uif-command-bar-resize', () => {
+          scope.overflowMenuOpen = false;
+          scope.toggleItemVisibility();
+        });
+
+        // bind window resize to trigger overflow event
+        angular.element(window).bind('resize', function(): void {
+            scope.$broadcast('uif-command-bar-resize');
+          });
+
+        // fire on load to render overflow correctly
+        angular.element(document).ready(function (): void {
+          scope.loadMenuItems(angular.element(elem[0].querySelectorAll('.ms-CommandBarItem')));
+          scope.toggleItemVisibility();
+        });
+
 
 
     };
@@ -385,7 +396,7 @@ interface ICommandBarMainScope extends ng.IScope {
   hiddenItems: any[];
   openOverflowItem: (item: any) => void;
   loadMenuItems: (commandItems: any) => void;
-  toggleItemVisibility: (parentWidth: any, commandBarItem: any) => void;
+  toggleItemVisibility: () => void;
   openOverflowMenu: () => void;
   addOverflowItem: (item: any) => void;
 }
