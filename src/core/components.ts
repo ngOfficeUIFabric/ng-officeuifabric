@@ -18,6 +18,7 @@ import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as personacardModule from '../components/personacard/personacardDirective';
 import * as personaModule from '../components/persona/personaDirective';
+import * as pivotModule from '../components/pivot/pivotDirective';
 import * as progressIndicatorModule from '../components/progressindicator/progressIndicatorDirective';
 import * as searchboxModule from '../components/searchbox/searchboxDirective';
 import * as spinnerModule from '../components/spinner/spinnerDirective';
@@ -53,6 +54,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   overlayModule.module.name,
   personacardModule.module.name,
   personaModule.module.name,
+  pivotModule.module.name,
   progressIndicatorModule.module.name,
   searchboxModule.module.name,
   spinnerModule.module.name,
