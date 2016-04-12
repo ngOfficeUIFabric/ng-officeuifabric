@@ -2,10 +2,13 @@
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
 
+<a name="0.7.4"></a>
+### [0.7.4 - April 12, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.4)
+
 #### Fixes
 - **uif-choicefield**
-  - setting disabled dynamically ([2e53f51](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/2e53f51), Closes [#257](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/257))
-  
+  - setting disabled dynamically ([1881150](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1881150), Closes [#257](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/257))
+
 ------------------
 
 
