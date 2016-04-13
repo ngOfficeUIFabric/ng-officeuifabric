@@ -116,20 +116,58 @@ Usage
   gulp [TASK] [OPTIONS...]
 
 Available tasks
-  build-ts            Builds all TypeScript as JavaScript Aliases: b
-   --verbose          Output all TypeScript files being built
-  clean               Removes all built files Aliases: c [clean-app-ts, clean-build-ts]
+  build-lib           Builds ngOfficeUiFabric library files Aliases: b, B
+   --dev              Create unminified version of the library with source maps & comments (otherwise, production
+                      bundle created)
+   --verbose          Output all TypeScript files being compiled & JavaScript files included in the external library
+   --version          Version number to set build library (if omitted, version from package.json is used)
+  clean               Removes all transpiled TypeScript files Aliases: c
    --verbose          Output all files being removed
-  clean-app-ts        Removes all generated JavaScript from TypeScript used in the app
+  clean-build         Removes all generated JavaScript from TypeScript used in the build
    --verbose          Output all TypeScript files being removed
-  clean-build-ts      Removes all generated JavaScript from TypeScript used in the build
+  clean-lib           Removes all generated JavaScript from TypeScript used in the app
    --verbose          Output all TypeScript files being removed
   help                Display this help text.
-  test                Executes all tests against the directives Aliases: t, T
-   --verbose          Output all directives being tested
-  vet                 Vets all built files Aliases: v, V [vet-ts]
+  live-dev            Watches for changes in source files and automatically runs vet, build, test
+                       Aliases: ld, LD [validate-build]
+   --debug            Affects 'test' task, sets karma log level to DEBUG
+   --dev              Affects 'build-lib' task, creates unminified version of the library with source maps & comments
+                      (otherwise, production bundle created)
+   --serve            Automatically reloads connected browsers when sources for demo changed. Starts static server at
+                      http://localhost:3000/. To connect browser you need to explicitly open your demo with url,
+                      such as http://localhost:3000/src/components/icon/demo/index.html
+   --specs            Affects 'test' task, outputs all tests being run
+   --verbose          Affects 'test' and 'build-lib' tasks, outputs all TypeScript files being compiled & JavaScript
+                      files included in the external library, set karma log level to INFO
+   --version          Affects 'build-lib' task, version number to set build library (if omitted, version from
+                      package.json is used)
+  test                Executes all tests against the directives Aliases: t, T [transpile-ts]
+   --debug            Set karma log level to DEBUG
+   --file             Changed file to filter tests down to just that file
+   --specs            Output all tests being run
+   --verbose          Output all TypeScript files being built & set karma log level to INFO
+   --watch            Adds Chrome browser and start listening on file changes for easier debugging
+  transpile-ts        Builds all TypeScript as JavaScript Aliases: tts
+   --verbose          Output all TypeScript files being built
+  validate-build      Validates the build runs 'vet', 'transpile-ts', 'build-lib' and 'test' in a sequence
+                       Aliases: vb, VB
+   --debug            Affects 'test' task, sets karma log level to DEBUG
+   --dev              Create unminified version of the library with source maps & comments (otherwise, production
+                      bundle created)
+   --specs            Affects 'test' task, outputs all tests being run
+   --verbose          Affects 'test' and 'build-lib' tasks, outputs all TypeScript files being compiled & JavaScript
+                      files included in the external library, set karma log level to INFO
+   --version          Affects 'build-lib' task, version number to set build library (if omitted, version from
+                      package.json is used)
+  vet                 Vets all built files Aliases: v, V [vet-build-ts, vet-lib-ts]
+   --noExit           Flag if failed vetting should not emit error this terminating the process
    --verbose          Output all TypeScript files being vetted
-  vet-ts              Run code quality & style analysis on all TypeScript
+  vet-build-ts        Run code quality & style analysis on all build-realted TypeScript (code used to build &
+                      maintain project)
+   --noExit           Flag if failed vetting should not emit error this terminating the process
+   --verbose          Output all TypeScript files being vetted
+  vet-lib-ts          Run code quality & style analysis on all library TypeScript (source code for the directives)
+   --noExit           Flag if failed vetting should not emit error this terminating the process
    --verbose          Output all TypeScript files being vetted
 
 [07:10:23] Finished 'help' after 1.56 ms
