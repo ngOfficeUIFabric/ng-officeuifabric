@@ -102,8 +102,8 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(label.hasClass('ng-hide')).toBe(false, 'Label should be visible before click');
 
         let input: JQuery = textBox.find('input');
-        input.click();
-        expect(label.hasClass('ng-hide')).toBe(true, 'Label should be hidden after click');
+        input.focus();
+        expect(label.hasClass('ng-hide')).toBe(true, 'Label should be hidden after focus');
 
         input.blur();
         expect(label.hasClass('ng-hide')).toBe(false, 'Label should be visible after blur');

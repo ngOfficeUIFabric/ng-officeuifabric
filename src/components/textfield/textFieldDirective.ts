@@ -26,7 +26,6 @@ export interface ITextFieldScope extends ng.IScope {
     labelShown: boolean;
     uifUnderlined: boolean;
     inputFocus: (ev: any) => void;
-    inputClick: (ev: any) => void;
     inputBlur: (ev: any) => void;
     isActive: boolean;
     required: boolean;
@@ -83,13 +82,11 @@ export class TextFieldDirective implements ng.IDirective {
         scope.disabled = 'disabled' in attrs;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
-            if (scope.uifUnderlined) {
-                scope.isActive = true;
-            }
-        };
-        scope.inputClick = function(ev: any): void {
             if (scope.placeholder) {
                 scope.labelShown = false;
+            }
+            if (scope.uifUnderlined) {
+                scope.isActive = true;
             }
         };
         scope.inputBlur = function (ev: any): void {
