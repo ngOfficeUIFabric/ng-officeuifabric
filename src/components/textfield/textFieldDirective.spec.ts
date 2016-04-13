@@ -108,6 +108,9 @@ describe('textFieldDirective: <uif-textfield />', () => {
         input.blur();
         expect(label.hasClass('ng-hide')).toBe(false, 'Label should be visible after blur');
 
+        input.focus();
+        expect(label.hasClass('ng-hide')).toBe(true, 'Label should be hidden after focus');
+
         $scope.value = 'Test';
         $scope.$apply();
 

@@ -83,6 +83,10 @@ export class TextFieldDirective implements ng.IDirective {
         scope.disabled = 'disabled' in attrs;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
+            if (scope.placeholder) {
+                scope.labelShown = false;
+            }
+                        
             if (scope.uifUnderlined) {
                 scope.isActive = true;
             }
