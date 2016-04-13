@@ -86,7 +86,6 @@ export class TextFieldDirective implements ng.IDirective {
             if (scope.placeholder) {
                 scope.labelShown = false;
             }
-                        
             if (scope.uifUnderlined) {
                 scope.isActive = true;
             }
