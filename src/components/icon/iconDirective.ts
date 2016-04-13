@@ -64,9 +64,9 @@ export class IconDirective implements ng.IDirective {
 
   public link(scope: IIconScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: IconController): void {
     // add watcher
-    scope.$watch('uifType', (newValule: string, oldValue: string) => {
+    scope.$watch('uifType', (newValue: string, oldValue: string) => {
       // verify a valid icon was passed in
-      if (IconEnum[newValule] === undefined) {
+      if (IconEnum[newValue] === undefined) {
         controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.icon - Unsupported icon: ' +
           'The icon (\'' + scope.uifType + '\') is not supported by the Office UI Fabric. ' +
           'Supported options are listed here: ' +
