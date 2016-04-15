@@ -93,18 +93,19 @@ describe('textFieldDirective: <uif-textfield />', () => {
         // ng-disabled
         $scope.isDisabled = true;
         textBox = $compile('<uif-textfield ng-disabled="isDisabled"></uif-textfield>')($scope);
-        $scope.$digest();
+        $scope.$apply();
 
-        textBox = jQuery(textBox[0]);        
+        textBox = jQuery(textBox[0]);
+        textBox.appendTo(document.body);
+        
         div = getMainDiv(textBox);
-
+        input = textBox.find('input');
+        spyOn(input[0], 'focus');
+        
         expect(div.hasClass('is-disabled')).toBe(true, 'textfield should have is-disabled');
 
-        input = textBox.find('input');
-        container = textBox.find('div');
-        spyOn(input[0], 'focus');
         input.click();
-        expect(container.hasClass('is-active')).toBe(false, 'Container should not be able to get in-active class as it is disabled');
+        expect(div.hasClass('is-active')).toBe(false, 'Container should not be able to get in-active class as it is disabled');
         expect(input[0].focus).not.toHaveBeenCalled();
 
         $scope.isDisabled = false;
@@ -112,12 +113,11 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
         expect(div.hasClass('is-disabled')).toBe(false, 'textfield should not be disabled');
 
-        input.click();
-        expect(container.hasClass('is-active')).toBe(true, 'Container should be able to get is-active class as it is not disabled');
-        expect(input[0].focus).toHaveBeenCalled();
+        input.focus();
+        expect(div.hasClass('is-active')).toBe(true, 'Container should be able to get is-active class as it is not disabled');
 
         input.blur();
-        expect(container.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
+        expect(div.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
 
     }));
     
