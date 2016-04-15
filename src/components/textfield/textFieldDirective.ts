@@ -87,9 +87,7 @@ export class TextFieldDirective implements ng.IDirective {
         scope.disabled = 'disabled' in attrs;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
-            if (scope.uifUnderlined) {
                 scope.isActive = true;
-            }
         };
         scope.inputClick = function(ev: any): void {
             if (scope.placeholder) {
@@ -101,9 +99,7 @@ export class TextFieldDirective implements ng.IDirective {
             if (scope.placeholder && input.val().length === 0) {
                 scope.labelShown = true;
             }
-            if (scope.uifUnderlined) {
                 scope.isActive = false;
-            }
         };
         if (ngModel != null) {
             ngModel.$render = () => {
