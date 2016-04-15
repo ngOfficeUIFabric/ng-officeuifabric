@@ -117,7 +117,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(input[0].focus).toHaveBeenCalled();
 
         input.blur();
-        expect(container.hasClass('is-active')).toBe(true, 'Container should have class in-active when not focused');
+        expect(container.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
 
     }));
     
