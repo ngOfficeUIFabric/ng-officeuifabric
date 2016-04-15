@@ -89,7 +89,36 @@ describe('textFieldDirective: <uif-textfield />', () => {
         input.click();
         expect(container.hasClass('is-active')).toBe(false, 'Container should not be able to get in-active class as it is disabled');
         expect(input[0].focus).not.toHaveBeenCalled();
+
+        // ng-disabled
+        $scope.isDisabled = true;
+        textBox = $compile('<uif-textfield ng-disabled="isDisabled"></uif-textfield>')($scope);
+        $scope.$apply();
+
+        textBox = jQuery(textBox[0]);
+        textBox.appendTo(document.body);
+
+        div = getMainDiv(textBox);
+        input = textBox.find('input');
+        spyOn(input[0], 'focus');
+        expect(div.hasClass('is-disabled')).toBe(true, 'textfield should have is-disabled');
+
+        input.click();
+        expect(div.hasClass('is-active')).toBe(false, 'Container should not be able to get in-active class as it is disabled');
+        expect(input[0].focus).not.toHaveBeenCalled();
+
+        $scope.isDisabled = false;
+        $scope.$apply();
+
+        expect(div.hasClass('is-disabled')).toBe(false, 'textfield should not be disabled');
+
+        input.focus();
+        expect(div.hasClass('is-active')).toBe(true, 'Container should be able to get is-active class as it is not disabled');
+
+        input.blur();
+        expect(div.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
     }));
+
     it('should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
