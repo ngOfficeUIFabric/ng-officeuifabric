@@ -79,6 +79,10 @@ export class TextFieldDirective implements ng.IDirective {
     public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
         scope.labelShown = true;
         scope.required = 'required' in attrs;
+        scope.$watch(
+            () => { return instanceElement.attr('disabled'); },
+            ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
+        );
         scope.disabled = 'disabled' in attrs;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
