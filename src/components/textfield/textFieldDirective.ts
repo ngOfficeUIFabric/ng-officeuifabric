@@ -99,7 +99,7 @@ export class TextFieldDirective implements ng.IDirective {
             if (scope.placeholder && input.val().length === 0) {
                 scope.labelShown = true;
             }
-                scope.isActive = false;
+            scope.isActive = false;
         };
         if (ngModel != null) {
             ngModel.$render = () => {
