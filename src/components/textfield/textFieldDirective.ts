@@ -89,18 +89,14 @@ export class TextFieldDirective implements ng.IDirective {
             if (scope.placeholder) {
                 scope.labelShown = false;
             }
-            if (scope.uifUnderlined) {
-                scope.isActive = true;
-            }
+            scope.isActive = true;
         };
         scope.inputBlur = function (ev: any): void {
             let input: JQuery = instanceElement.find('input');
             if (scope.placeholder && input.val().length === 0) {
                 scope.labelShown = true;
             }
-            if (scope.uifUnderlined) {
-                scope.isActive = false;
-            }
+            scope.isActive = false;
         };
         if (ngModel != null) {
             ngModel.$render = () => {
