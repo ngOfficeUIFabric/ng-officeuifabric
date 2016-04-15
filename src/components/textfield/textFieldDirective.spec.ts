@@ -97,11 +97,11 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
         textBox = jQuery(textBox[0]);
         textBox.appendTo(document.body);
-        
+
         div = getMainDiv(textBox);
         input = textBox.find('input');
         spyOn(input[0], 'focus');
-        
+
         expect(div.hasClass('is-disabled')).toBe(true, 'textfield should have is-disabled');
 
         input.click();
@@ -120,7 +120,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(div.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
 
     }));
-    
+
     it('should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
