@@ -24,28 +24,19 @@
     <p>
         This markup: <br />
         <pre>
-        &lt;uif-dropdown ng-model=&quot;dropdownValue&quot; &gt;
-            &lt;uif-dropdown-option value=&quot;value1&quot;&gt;Value 1&lt;/uif-dropdown-option&gt;
-            &lt;uif-dropdown-option value=&quot;value2&quot;&gt;Value 2&lt;/uif-dropdown-option&gt;
-            &lt;uif-dropdown-option value=&quot;value3&quot;&gt;Value 3&lt;/uif-dropdown-option&gt;
-            &lt;uif-dropdown-option value=&quot;value4&quot;&gt;Value 4&lt;/uif-dropdown-option&gt;
+        &lt;uif-dropdown ng-model=&quot;value&quot;&gt;
+            &lt;uif-dropdown-option value="{{key}<!---->}" ng-repeat="(key, value) in values" title="{{value}<!---->}"&gt;{{value}<!---->}&lt;/uif-dropdown-option&gt;
         &lt;/uif-dropdown&gt;
         </pre>
     </p>
 
-    <p>
+    <p ng-controller="demoController">
         Renders this:
         <br />
-        <uif-dropdown ng-model="dropdownValue">
-            <uif-dropdown-option value="value1">Value 1</uif-dropdown-option>
-            <uif-dropdown-option value="value2">Value 2</uif-dropdown-option>
-            <uif-dropdown-option value="value3">Value 3</uif-dropdown-option>
-            <uif-dropdown-option value="value4">Value 4</uif-dropdown-option>
+        <uif-dropdown ng-model="value">
+            <uif-dropdown-option value="{{key}}" ng-repeat="(key, value) in values" title="{{value}}">{{value}}</uif-dropdown-option>
         </uif-dropdown>
-
-    </p>
-    <p>
-        <span>dropdownValue: {{dropdownValue}}</span>
+        Value: {{value}}
     </p>
   
   
