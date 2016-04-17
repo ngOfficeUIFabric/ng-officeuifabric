@@ -21,60 +21,29 @@ export interface IListScope extends ng.IScope {
     itemSelectMode?: string;
     layout?: string;
     items: IListItemScope[];
+    selectedItems: IListItemScope[];
 }
 
-class ListController  {
+class ListController {
     public static $inject: string[] = ['$scope', '$log'];
 
     constructor(public $scope: IListScope, public $log: ng.ILogService) {
         this.$scope.items = [];
+        if (!this.$scope.selectedItems) {
+            this.$scope.selectedItems = [];
+        }
     }
 
     get itemSelectMode(): string {
         return this.$scope.itemSelectMode;
     }
-    set itemSelectMode(itemSelectMode: string) {
-        if (ListItemSelectModeEnum[itemSelectMode] === undefined) {
-            this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-            '\'' + itemSelectMode + '\' is not a valid option for \'uif-item-select-mode\'. ' +
-            'Valid options are none|single|multiple.');
-        } else {
-            this.$scope.itemSelectMode = itemSelectMode;
-            this.$scope.$digest();
-        }
-    }
 
-    get layout(): string {
-        return this.$scope.layout;
-    }
-    set layout(layout: string) {
-        if (ListLayoutEnum[layout] === undefined) {
-            this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-            '\'' + layout + '\' is not a valid option for \'uif-layout\'. ' +
-            'Valid options are list|grid.');
-        } else {
-            this.$scope.layout = layout;
-            this.$scope.$digest();
-        }
+    get selectedItems(): IListItemScope[] {
+        return this.$scope.selectedItems;
     }
 
     get items(): IListItemScope[] {
         return this.$scope.items;
-    }
-    set items(items: IListItemScope[]) {
-        this.$scope.items = items;
-    }
-
-    get selectedItems(): any[] {
-        let selectedItems: any[] = [];
-
-        for (let i: number = 0; i < this.items.length; i++) {
-            if (this.items[i].selected === true) {
-                selectedItems.push(this.items[i].item);
-            }
-        }
-
-        return selectedItems;
     }
 }
 
@@ -97,6 +66,7 @@ class ListController  {
 export interface IListAttributes extends ng.IAttributes {
     uifLayout?: string;
     uifItemSelectMode?: string;
+    uifSelectedItems?: string;
 }
 
 export class ListDirective implements ng.IDirective {
@@ -106,6 +76,9 @@ export class ListDirective implements ng.IDirective {
     public template: string = '<ul class="ms-List" ng-transclude></ul>';
     public controller: any = ListController;
     public controllerAs: string = 'list';
+    public scope: {} = {
+        selectedItems: '=?uifSelectedItems'
+    };
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new ListDirective();
@@ -117,8 +90,8 @@ export class ListDirective implements ng.IDirective {
         if (attrs.uifLayout !== undefined && attrs.uifLayout !== null) {
             if (ListLayoutEnum[attrs.uifLayout] === undefined) {
                 controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-                '\'' + attrs.uifLayout + '\' is not a valid option for \'uif-layout\'. ' +
-                'Valid options are list|grid.');
+                    '\'' + attrs.uifLayout + '\' is not a valid option for \'uif-layout\'. ' +
+                    'Valid options are list|grid.');
             } else {
                 scope.layout = attrs.uifLayout;
             }
@@ -135,8 +108,8 @@ export class ListDirective implements ng.IDirective {
         if (attrs.uifItemSelectMode !== undefined && attrs.uifItemSelectMode !== null) {
             if (ListItemSelectModeEnum[attrs.uifItemSelectMode] === undefined) {
                 controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-                '\'' + attrs.uifItemSelectMode + '\' is not a valid option for \'uif-item-select-mode\'. ' +
-                'Valid options are none|single|multiple.');
+                    '\'' + attrs.uifItemSelectMode + '\' is not a valid option for \'uif-item-select-mode\'. ' +
+                    'Valid options are none|single|multiple.');
             } else {
                 scope.itemSelectMode = attrs.uifItemSelectMode;
             }
@@ -176,46 +149,6 @@ class ListItemController {
     public static $inject: string[] = ['$scope', '$log'];
 
     constructor(public $scope: IListItemScope, public $log: ng.ILogService) {
-    }
-
-    get item(): any {
-        return this.$scope.item;
-    }
-    set item(item: any) {
-        this.$scope.item = item;
-        this.$scope.$digest();
-    }
-
-    get selected(): boolean {
-        return this.$scope.selected;
-    }
-    set selected(selected: boolean) {
-        this.$scope.selected = selected;
-        this.$scope.$digest();
-    }
-
-    get type(): ListItemTypeEnum {
-        return this.$scope.type;
-    }
-    set type(type: ListItemTypeEnum) {
-        this.$scope.type = type;
-        this.$scope.$digest();
-    }
-
-    get unread(): boolean {
-        return this.$scope.unread;
-    }
-    set unread(unread: boolean) {
-        this.$scope.unread = unread;
-        this.$scope.$digest();
-    }
-
-    get unseen(): boolean {
-        return this.$scope.unseen;
-    }
-    set unseen(unseen: boolean) {
-        this.$scope.unseen = unseen;
-        this.$scope.$digest();
     }
 }
 
@@ -274,11 +207,19 @@ export class ListItemDirective implements ng.IDirective {
             }
         }
 
+        if (scope.item && list.selectedItems.length > 0) {
+            for (let i: number = 0; i < list.selectedItems.length; i++) {
+                if (list.selectedItems[i] === scope.item) {
+                    scope.selected = true;
+                }
+            }
+        }
+
         if (attrs.uifType !== undefined && attrs.uifType !== null) {
             if (ListItemTypeEnum[attrs.uifType] === undefined) {
                 list.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-                '\'' + attrs.uifType + '\' is not a valid option for \'uif-type\'. ' +
-                'Valid options are item|itemWithImage|itemWithIcon.');
+                    '\'' + attrs.uifType + '\' is not a valid option for \'uif-type\'. ' +
+                    'Valid options are item|itemWithImage|itemWithIcon.');
             } else {
                 scope.type = ListItemTypeEnum[attrs.uifType];
             }
@@ -289,14 +230,14 @@ export class ListItemDirective implements ng.IDirective {
                 instanceElement.children().eq(0).addClass('ms-ListItem--document');
                 if (instanceElement.children().find('uif-list-item-icon').length === 0) {
                     list.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-                    'List item type itemWithIcon requires the uif-list-item-icon directive');
+                        'List item type itemWithIcon requires the uif-list-item-icon directive');
                 }
                 break;
             case ListItemTypeEnum.itemWithImage:
                 instanceElement.children().eq(0).addClass('ms-ListItem--image');
                 if (instanceElement.children().find('uif-list-item-image').length === 0) {
                     list.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
-                    'List item type itemWithImage requires the uif-list-item-image directive');
+                        'List item type itemWithImage requires the uif-list-item-image directive');
                 }
                 break;
             default:
@@ -338,13 +279,15 @@ export class ListItemDirective implements ng.IDirective {
         }
 
         scope.itemClick = (ev: any): void => {
-          scope.selected = !scope.selected;
-          scope.$apply();
-        }
+            scope.selected = !scope.selected;
+            scope.$apply();
+        };
 
         scope.$watch('selected', (newValue: boolean, oldValue: boolean, listItemScope: IListItemScope): void => {
             if (newValue === true) {
                 if (list.itemSelectMode === ListItemSelectModeEnum[ListItemSelectModeEnum.single]) {
+                    list.selectedItems.length = 0;
+
                     if (list.items) {
                         for (let i: number = 0; i < list.items.length; i++) {
                             if (list.items[i] !== listItemScope) {
@@ -354,8 +297,17 @@ export class ListItemDirective implements ng.IDirective {
                     }
                 }
 
+                list.selectedItems.push(listItemScope.item);
+
                 instanceElement.children().eq(0).addClass('is-selected');
             } else {
+                for (let i: number = 0; i < list.selectedItems.length; i++) {
+                    if (list.selectedItems[i] === listItemScope.item) {
+                        list.selectedItems.splice(i, 1);
+                        break;
+                    }
+                }
+
                 instanceElement.children().eq(0).removeClass('is-selected');
             }
         });
@@ -472,10 +424,6 @@ export class ListItemSelectionTargetDirective implements ng.IDirective {
 
         return directive;
     }
-
-    public link(scope: ng.IScope,
-                instanceElement: ng.IAugmentedJQuery,
-                attrs: ng.IAttributes): void { }
 }
 
 export class ListItemActionsDirective implements ng.IDirective {
@@ -516,7 +464,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components.list', ['of
     .directive('uifListItem', ListItemDirective.factory())
     .directive('uifListItemPrimaryText', ListItemPrimaryTextDirective.factory())
     .directive('uifListItemSecondaryText', ListItemSecondaryTextDirective.factory())
-    .directive('uifListItemTartiaryText', ListItemTertiaryTextDirective.factory())
+    .directive('uifListItemTertiaryText', ListItemTertiaryTextDirective.factory())
     .directive('uifListItemMetaText', ListItemMetaTextDirective.factory())
     .directive('uifListItemImage', ListItemImageDirective.factory())
     .directive('uifListItemIcon', ListItemIconDirective.factory())

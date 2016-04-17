@@ -17,7 +17,7 @@
 
 <body ng-app="demoApp">
 
-  <h1 class="ms-font-su">List Demo | &lt;uif-list&gt;</h1> 
+  <h1 class="ms-font-su">List Demo | &lt;uif-list&gt;</h1>
   <em>In order for this demo to work you must first build the library in debug mode.</em>
 
   <p>
@@ -44,28 +44,33 @@
 
   <p ng-controller="demoController">
     Renders this:
-    <br />
-<uif-list uif-item-select-mode="none" uif-selected-items="selectedItems">
-  <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithIcon">
-    <uif-list-item-icon><uif-icon uif-type="save" /></uif-list-item-icon>
-    <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
-    <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
-    <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
-    <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
-    <uif-list-item-selection-target></uif-list-item-selection-target>
-    <uif-list-item-actions>
-      <uif-list-item-action ng-click="mail(message)">
-        <uif-icon uif-type="mail" />
-      </uif-list-item-action>
-      <uif-list-item-action ng-click="delete(message)">
-        <uif-icon uif-type="trash" />
-      </uif-list-item-action>
-      <uif-list-item-action ng-click="pin(message)">
-        <uif-icon uif-type="pinLeft" />
-      </uif-list-item-action>
-    </uif-list-item-actions>
-  </uif-list-item>
-</uif-list>
+    
+    {{selectedItems}}
+
+    <uif-list uif-item-select-mode="single" uif-selected-items="selectedItems">
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message"
+        uif-type="itemWithIcon">
+        <uif-list-item-icon>
+          <uif-icon uif-type="save"></uif-icon>
+        </uif-list-item-icon>
+        <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+        <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+        <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+        <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+        <uif-list-item-selection-target></uif-list-item-selection-target>
+        <uif-list-item-actions>
+          <uif-list-item-action ng-click="mail(message)">
+            <uif-icon uif-type="mail"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="delete(message)">
+            <uif-icon uif-type="trash"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="pin(message)">
+            <uif-icon uif-type="pinLeft"></uif-icon>
+          </uif-list-item-action>
+        </uif-list-item-actions>
+      </uif-list-item>
+    </uif-list>
   </p>
 </body>
 
