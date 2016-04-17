@@ -148,4 +148,25 @@
         dropdown.click();
         expect(div.hasClass('is-open')).toBe(false, 'Should be closed as the dropdown is disabled again');
     }));
+    it('should be able to pre-select an option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option2';
+
+        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
+            '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}"\
+              title="{{option.text}}">{{option.text}}</uif-dropdown-option>' +
+            '</uif-dropdown>')($scope);
+        $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
+        dropdown.appendTo(document.body);
+
+        let title: JQuery = dropdown.find('span.ms-Dropdown-title');
+        expect(title.text()).toBe('Option 2', 'Displayed text should be Option 2');
+    }));
 });
