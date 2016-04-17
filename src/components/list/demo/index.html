@@ -23,36 +23,333 @@
   <p>
     This markup: <br />
     <pre>
-&lt;uif-table&gt;
-    &lt;uif-table-row&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-header&gt;File name&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Modified&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Type&lt;/uif-table-header&gt;
-    &lt;/uif-table-row&gt;
-    &lt;uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}<!---->}"&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
-    &lt;/uif-table-row&gt;
-&lt;/uif-table&gt;
+&lt;uif-list&gt;
+  &lt;uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}<!---->}" uif-unseen="{{message.isUnseen}<!---->}" uif-item="message"&gt;
+    &lt;uif-list-item-primary-text&gt;{{message.sender.name}<!---->}&lt;/uif-list-item-primary-text&gt;
+    &lt;uif-list-item-secondary-text&gt;{{message.title}<!---->}&lt;/uif-list-item-secondary-text&gt;
+    &lt;uif-list-item-tertiary-text&gt;{{message.description}<!---->}&lt;/uif-list-item-tertiary-text&gt;
+    &lt;uif-list-item-meta-text&gt;{{message.time | date : 'shortTime'}<!---->}&lt;/uif-list-item-meta-text&gt;
+    &lt;uif-list-item-selection-target&gt;&lt;/uif-list-item-selection-target&gt;
+    &lt;uif-list-item-actions&gt;
+      &lt;uif-list-item-action ng-click="mail(message)"&gt;
+        &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="delete(message)"&gt;
+        &lt;uif-icon uif-type="trash"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="pin(message)"&gt;
+        &lt;uif-icon uif-type="pinLeft"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+    &lt;/uif-list-item-actions&gt;
+  &lt;/uif-list-item&gt;
+&lt;/uif-list&gt;
     </pre>
   </p>
 
   <p ng-controller="demoController">
     Renders this:
-    
-    {{selectedItems}}
 
-    <uif-list uif-item-select-mode="single" uif-selected-items="selectedItems">
-      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message"
-        uif-type="itemWithIcon">
+    <uif-list>
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+        <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+        <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+        <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+        <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+        <uif-list-item-selection-target></uif-list-item-selection-target>
+        <uif-list-item-actions>
+          <uif-list-item-action ng-click="mail(message)">
+            <uif-icon uif-type="mail"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="delete(message)">
+            <uif-icon uif-type="trash"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="pin(message)">
+            <uif-icon uif-type="pinLeft"></uif-icon>
+          </uif-list-item-action>
+        </uif-list-item-actions>
+      </uif-list-item>
+    </uif-list>
+  </p>
+  
+  <h2>List Item Types</h2>
+  <p>
+    The <code>&lt;uif-list&gt;</code> directive supports three types of items: regular items, items with images and items with icons. You can specify the desired type of rendering using the <code>uif-type</code> attribute.
+  </p>
+  
+  <h3>Rendering items with images</h3>
+  <p>
+    You can render list items with images by setting the <code>uif-type</code> attribute to <strong>itemWithImage</strong>. When you do, you also need to include the <code>&lt;uif-list-item-image&gt;</code> directive.
+  </p>
+  <p>
+    The following markup:<br />
+    <pre>
+&lt;uif-list&gt;
+  &lt;uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}<!---->}" uif-unseen="{{message.isUnseen}<!---->}" uif-item="message" uif-type="itemWithImage"&gt;
+    &lt;uif-list-item-image&gt;
+      &lt;img ng-src="{{message.image}<!---->}" style="width: 100%" /&gt;
+    &lt;/uif-list-item-image&gt;
+    &lt;uif-list-item-primary-text&gt;{{message.sender.name}<!---->}&lt;/uif-list-item-primary-text&gt;
+    &lt;uif-list-item-secondary-text&gt;{{message.title}<!---->}&lt;/uif-list-item-secondary-text&gt;
+    &lt;uif-list-item-tertiary-text&gt;{{message.description}<!---->}&lt;/uif-list-item-tertiary-text&gt;
+    &lt;uif-list-item-meta-text&gt;{{message.time | date : 'shortTime'}<!---->}&lt;/uif-list-item-meta-text&gt;
+    &lt;uif-list-item-selection-target&gt;&lt;/uif-list-item-selection-target&gt;
+    &lt;uif-list-item-actions&gt;
+      &lt;uif-list-item-action ng-click="mail(message)"&gt;
+        &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="delete(message)"&gt;
+        &lt;uif-icon uif-type="trash"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="pin(message)"&gt;
+        &lt;uif-icon uif-type="pinLeft"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+    &lt;/uif-list-item-actions&gt;
+  &lt;/uif-list-item&gt;
+&lt;/uif-list&gt;
+    </pre>
+  </p>
+  <p ng-controller="demoController">
+    Renders this:
+    <uif-list>
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithImage">
+        <uif-list-item-image>
+          <img ng-src="{{message.image}}" style="width: 100%" />
+        </uif-list-item-image>
+        <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+        <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+        <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+        <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+        <uif-list-item-selection-target></uif-list-item-selection-target>
+        <uif-list-item-actions>
+          <uif-list-item-action ng-click="mail(message)">
+            <uif-icon uif-type="mail"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="delete(message)">
+            <uif-icon uif-type="trash"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="pin(message)">
+            <uif-icon uif-type="pinLeft"></uif-icon>
+          </uif-list-item-action>
+        </uif-list-item-actions>
+      </uif-list-item>
+    </uif-list>
+  </p>
+  
+  <h3>Rendering items with icons</h3>
+  <p>
+    Another type of items that's supported by the list directive is items with icons. You can render list items with icons by setting the <code>uif-type</code> attribute to <strong>itemWithIcon</strong>. When you do, you also need to include the <code>&lt;uif-list-item-icon&gt;</code> directive.
+  </p>
+  <p>
+    The following markup:<br />
+    <pre>
+&lt;uif-list&gt;
+  &lt;uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}<!---->}" uif-unseen="{{message.isUnseen}<!---->}" uif-item="message" uif-type="itemWithIcon"&gt;
+    &lt;uif-list-item-icon&gt;
+      &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+    &lt;/uif-list-item-icon&gt;
+    &lt;uif-list-item-primary-text&gt;{{message.sender.name}<!---->}&lt;/uif-list-item-primary-text&gt;
+    &lt;uif-list-item-secondary-text&gt;{{message.title}<!---->}&lt;/uif-list-item-secondary-text&gt;
+    &lt;uif-list-item-tertiary-text&gt;{{message.description}<!---->}&lt;/uif-list-item-tertiary-text&gt;
+    &lt;uif-list-item-meta-text&gt;{{message.time | date : 'shortTime'}<!---->}&lt;/uif-list-item-meta-text&gt;
+    &lt;uif-list-item-selection-target&gt;&lt;/uif-list-item-selection-target&gt;
+    &lt;uif-list-item-actions&gt;
+      &lt;uif-list-item-action ng-click="mail(message)"&gt;
+        &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="delete(message)"&gt;
+        &lt;uif-icon uif-type="trash"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="pin(message)"&gt;
+        &lt;uif-icon uif-type="pinLeft"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+    &lt;/uif-list-item-actions&gt;
+  &lt;/uif-list-item&gt;
+&lt;/uif-list&gt;
+    </pre>
+  </p>
+  <p ng-controller="demoController">
+    Renders this:
+    <uif-list>
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithIcon">
         <uif-list-item-icon>
-          <uif-icon uif-type="save"></uif-icon>
+          <uif-icon uif-type="mail"></uif-icon>
         </uif-list-item-icon>
+        <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+        <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+        <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+        <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+        <uif-list-item-selection-target></uif-list-item-selection-target>
+        <uif-list-item-actions>
+          <uif-list-item-action ng-click="mail(message)">
+            <uif-icon uif-type="mail"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="delete(message)">
+            <uif-icon uif-type="trash"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="pin(message)">
+            <uif-icon uif-type="pinLeft"></uif-icon>
+          </uif-list-item-action>
+        </uif-list-item-actions>
+      </uif-list-item>
+    </uif-list>
+  </p>
+  
+  <h2>Selecting List Items</h2>
+  <p>
+    The <code>&lt;uif-list&gt;</code> directive supports selecting items in the list. Using the <code>uif-item-select-mode</code> attribute you can allow selecting single item (<code>uif-item-select-mode="single"</code>), multiple items (<code>uif-item-select-mode="multiple"</code>) or you explicitly disable selecting items which is also the default mode (<code>uif-item-select-mode="none"</code>).
+    You can get the list of selected items by passing a reference to an array to the list directive using the <code>uif-selected-items</code> attribute.
+  </p>
+  
+  <h3>Selecting a single item</h3>
+  <p>
+    To allow selecting a single item in the list set on the <code>&lt;uif-list&gt;</code> directive the <code>uif-item-select-mode</code> attribute to <strong>single</strong>.
+  </p>
+  
+  <p>
+    The following markup:<br />
+    <pre>
+Selected item: {{selectedItemsSingle[0]}<!---->}
+&lt;uif-list uif-item-select-mode="single" uif-selected-items="selectedItemsSingle"&gt;
+  &lt;uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}<!---->}" uif-unseen="{{message.isUnseen}<!---->}" uif-item="message"&gt;
+    &lt;uif-list-item-primary-text&gt;{{message.sender.name}<!---->}&lt;/uif-list-item-primary-text&gt;
+    &lt;uif-list-item-secondary-text&gt;{{message.title}<!---->}&lt;/uif-list-item-secondary-text&gt;
+    &lt;uif-list-item-tertiary-text&gt;{{message.description}<!---->}&lt;/uif-list-item-tertiary-text&gt;
+    &lt;uif-list-item-meta-text&gt;{{message.time | date : 'shortTime'}<!---->}&lt;/uif-list-item-meta-text&gt;
+    &lt;uif-list-item-selection-target&gt;&lt;/uif-list-item-selection-target&gt;
+    &lt;uif-list-item-actions&gt;
+      &lt;uif-list-item-action ng-click="mail(message)"&gt;
+        &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="delete(message)"&gt;
+        &lt;uif-icon uif-type="trash"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="pin(message)"&gt;
+        &lt;uif-icon uif-type="pinLeft"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+    &lt;/uif-list-item-actions&gt;
+  &lt;/uif-list-item&gt;
+&lt;/uif-list&gt;
+    </pre>
+  </p>
+  <p ng-controller="demoController">
+    Renders this:<br />
+    Selected item: {{selectedItemsSingle[0]}}
+    <uif-list uif-item-select-mode="single" uif-selected-items="selectedItemsSingle">
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+        <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+        <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+        <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+        <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+        <uif-list-item-selection-target></uif-list-item-selection-target>
+        <uif-list-item-actions>
+          <uif-list-item-action ng-click="mail(message)">
+            <uif-icon uif-type="mail"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="delete(message)">
+            <uif-icon uif-type="trash"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="pin(message)">
+            <uif-icon uif-type="pinLeft"></uif-icon>
+          </uif-list-item-action>
+        </uif-list-item-actions>
+      </uif-list-item>
+    </uif-list>
+  </p>
+  
+  <h3>Selecting multiple items</h3>
+  <p>
+    To allow selecting multiple items in the list set on the <code>&lt;uif-list&gt;</code> directive the <code>uif-item-select-mode</code> attribute to <strong>multiple</strong>.
+  </p>
+  
+  <p>
+    The following markup:<br />
+    <pre>
+Selected items: {{selectedItemsMultiple}<!---->}
+&lt;uif-list uif-item-select-mode="multiple" uif-selected-items="selectedItemsMultiple"&gt;
+  &lt;uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}<!---->}" uif-unseen="{{message.isUnseen}<!---->}" uif-item="message"&gt;
+    &lt;uif-list-item-primary-text&gt;{{message.sender.name}<!---->}&lt;/uif-list-item-primary-text&gt;
+    &lt;uif-list-item-secondary-text&gt;{{message.title}<!---->}&lt;/uif-list-item-secondary-text&gt;
+    &lt;uif-list-item-tertiary-text&gt;{{message.description}<!---->}&lt;/uif-list-item-tertiary-text&gt;
+    &lt;uif-list-item-meta-text&gt;{{message.time | date : 'shortTime'}<!---->}&lt;/uif-list-item-meta-text&gt;
+    &lt;uif-list-item-selection-target&gt;&lt;/uif-list-item-selection-target&gt;
+    &lt;uif-list-item-actions&gt;
+      &lt;uif-list-item-action ng-click="mail(message)"&gt;
+        &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="delete(message)"&gt;
+        &lt;uif-icon uif-type="trash"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="pin(message)"&gt;
+        &lt;uif-icon uif-type="pinLeft"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+    &lt;/uif-list-item-actions&gt;
+  &lt;/uif-list-item&gt;
+&lt;/uif-list&gt;
+    </pre>
+  </p>
+  <p ng-controller="demoController">
+    Renders this:<br />
+    Selected items: {{selectedItemsMultiple}}
+    <uif-list uif-item-select-mode="multiple" uif-selected-items="selectedItemsMultiple">
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+        <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+        <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+        <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+        <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+        <uif-list-item-selection-target></uif-list-item-selection-target>
+        <uif-list-item-actions>
+          <uif-list-item-action ng-click="mail(message)">
+            <uif-icon uif-type="mail"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="delete(message)">
+            <uif-icon uif-type="trash"></uif-icon>
+          </uif-list-item-action>
+          <uif-list-item-action ng-click="pin(message)">
+            <uif-icon uif-type="pinLeft"></uif-icon>
+          </uif-list-item-action>
+        </uif-list-item-actions>
+      </uif-list-item>
+    </uif-list>
+  </p>
+  
+  <h3>Preselecting items</h3>
+  <p>
+    It is also possible to pass a list of preselected items to the <code>&lt;uif-list&gt;</code> directive using the <code>uif-selected-items</code> attribute. Every item in the passed array will be marked as selected in the list.<br />
+    <br />
+    <strong>Important:</strong> if there are multiple items in the array passed to the <code>uif-selected-items</code> attribute but the list item select mode has been set to <code>single</code> only the last item in the array will be marked as selected.
+  </p>
+  
+  <p>
+    The following markup:<br />
+    <pre>
+Selected items: {{selectedItems}<!---->}
+&lt;uif-list uif-item-select-mode="multiple" uif-selected-items="selectedItems"&gt;
+  &lt;uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}<!---->}" uif-unseen="{{message.isUnseen}<!---->}" uif-item="message"&gt;
+    &lt;uif-list-item-primary-text&gt;{{message.sender.name}<!---->}&lt;/uif-list-item-primary-text&gt;
+    &lt;uif-list-item-secondary-text&gt;{{message.title}<!---->}&lt;/uif-list-item-secondary-text&gt;
+    &lt;uif-list-item-tertiary-text&gt;{{message.description}<!---->}&lt;/uif-list-item-tertiary-text&gt;
+    &lt;uif-list-item-meta-text&gt;{{message.time | date : 'shortTime'}<!---->}&lt;/uif-list-item-meta-text&gt;
+    &lt;uif-list-item-selection-target&gt;&lt;/uif-list-item-selection-target&gt;
+    &lt;uif-list-item-actions&gt;
+      &lt;uif-list-item-action ng-click="mail(message)"&gt;
+        &lt;uif-icon uif-type="mail"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="delete(message)"&gt;
+        &lt;uif-icon uif-type="trash"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+      &lt;uif-list-item-action ng-click="pin(message)"&gt;
+        &lt;uif-icon uif-type="pinLeft"&gt;&lt;/uif-icon&gt;
+      &lt;/uif-list-item-action&gt;
+    &lt;/uif-list-item-actions&gt;
+  &lt;/uif-list-item&gt;
+&lt;/uif-list&gt;
+    </pre>
+  </p>
+  <p ng-controller="demoController">
+    Renders this:<br />
+    Selected items: {{selectedItems}}
+    <uif-list uif-item-select-mode="multiple" uif-selected-items="selectedItems">
+      <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
         <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
         <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
         <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>

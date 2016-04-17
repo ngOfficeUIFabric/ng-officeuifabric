@@ -326,6 +326,21 @@ describe('listDirective: <uif-list />', () => {
         expect(scope.selectedItems[1]).toEqual(2);
     }));
 
+    it('for item select mode \'multiple\' should preselect the correct items',
+       inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        scope.items = [1, 2, 3];
+        scope.selectedItems = [scope.items[1]];
+        element = ng.element('<uif-list uif-item-select-mode="multiple" uif-selected-items="selectedItems">\
+        <uif-list-item ng-repeat="n in items" uif-item="n"></uif-list-item>\
+        </uif-list>');
+        $compile(element)(scope);
+        element = jQuery(element[0]);
+        scope.$digest();
+
+        expect(scope.selectedItems.length).toEqual(1);
+        expect(scope.selectedItems[0]).toEqual(2);
+    }));
+
     it('should set correct Office UI Fabric classes on the selected and unselected list items',
        inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-list><uif-list-item></uif-list-item>\

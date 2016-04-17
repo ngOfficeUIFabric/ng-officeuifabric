@@ -13,17 +13,25 @@ import {ListLayoutEnum} from './listLayoutEnum';
  * @description 
  * Scope used by the list controller. 
  * 
- * @property {string} itemSelectMode - Specifies the list item selection mode used by the list
- * @property {string} layout         - Specifies how the list should be rendered
- * @property {IListItemScope[]}      - Contains the data items that belong to the list  
+ * @property {string} itemSelectMode  - Specifies the list item selection mode used by the list
+ * @property {string} layout          - Specifies how the list should be rendered
+ * @property {IListItemScope[]} items - Contains the data items that belong to the list
+ * @property {any[]} selectedItems    - Contains the list of selected items
  */
 export interface IListScope extends ng.IScope {
     itemSelectMode?: string;
     layout?: string;
     items: IListItemScope[];
-    selectedItems: IListItemScope[];
+    selectedItems: any[];
 }
 
+/**
+ * @ngdoc object
+ * @name ListController
+ * @requires  $scope, $log
+ * @description
+ * List directive controller. Used to keep track of items selected in the list
+ */
 class ListController {
     public static $inject: string[] = ['$scope', '$log'];
 
@@ -59,9 +67,11 @@ class ListController {
  *                                          Possible values: list - items are rendered as a list
  *                                                           grid - items are rendered as a grid
  * @property {string} uifItemSelectMode   - Specifies whether the list supports selecting items.
- *                                         Possible values: none - selecting items is not possible;
- *                                                          single - only one item can be selected;
- *                                                          multiple - multiple items can be selected;
+ *                                          Possible values: none - selecting items is not possible;
+ *                                                           single - only one item can be selected;
+ *                                                           multiple - multiple items can be selected;
+ * @property {string} uifSelectedItems    - Specifies the name of the array used to keep track of the
+ *                                          selected items
  */
 export interface IListAttributes extends ng.IAttributes {
     uifLayout?: string;
@@ -69,6 +79,45 @@ export interface IListAttributes extends ng.IAttributes {
     uifSelectedItems?: string;
 }
 
+/**
+ * @ngdoc directive
+ * @name uifList
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list>` is a directive used to display a list of items
+ *
+ * @see {link http://dev.office.com/fabric/components/list}
+ *
+ * @usage
+ *
+ * <uif-list uif-item-select-mode="single" uif-selected-items="selectedItems">
+ *   <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message"
+ *    uif-type="itemWithIcon">
+ *     <uif-list-item-icon>
+ *       <uif-icon uif-type="save"></uif-icon>
+ *     </uif-list-item-icon>
+ *     <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+ *     <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+ *     <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+ *     <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+ *     <uif-list-item-selection-target></uif-list-item-selection-target>
+ *     <uif-list-item-actions>
+ *       <uif-list-item-action ng-click="mail(message)">
+ *         <uif-icon uif-type="mail"></uif-icon>
+ *       </uif-list-item-action>
+ *       <uif-list-item-action ng-click="delete(message)">
+ *         <uif-icon uif-type="trash"></uif-icon>
+ *       </uif-list-item-action>
+ *       <uif-list-item-action ng-click="pin(message)">
+ *         <uif-icon uif-type="pinLeft"></uif-icon>
+ *       </uif-list-item-action>
+ *     </uif-list-item-actions>
+ *   </uif-list-item>
+ * </uif-list>
+ */
 export class ListDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -145,6 +194,13 @@ export interface IListItemScope extends ng.IScope {
     itemClick: (ev: any) => void;
 }
 
+/**
+ * @ngdoc object
+ * @name ListItemController
+ * @requires  $scope, $log
+ * @description
+ * List Item directive controller
+ */
 class ListItemController {
     public static $inject: string[] = ['$scope', '$log'];
 
@@ -174,6 +230,45 @@ export interface IListItemAttributes extends ng.IAttributes {
     uifUnseen?: string;
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItem
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item>` is a directive that represents an item in a list
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list uif-item-select-mode="single" uif-selected-items="selectedItems">
+ *   <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message"
+ *    uif-type="itemWithIcon">
+ *     <uif-list-item-icon>
+ *       <uif-icon uif-type="save"></uif-icon>
+ *     </uif-list-item-icon>
+ *     <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+ *     <uif-list-item-secondary-text>{{message.title}}</uif-list-item-secondary-text>
+ *     <uif-list-item-tertiary-text>{{message.description}}</uif-list-item-tertiary-text>
+ *     <uif-list-item-meta-text>{{message.time | date : 'shortTime'}}</uif-list-item-meta-text>
+ *     <uif-list-item-selection-target></uif-list-item-selection-target>
+ *     <uif-list-item-actions>
+ *       <uif-list-item-action ng-click="mail(message)">
+ *         <uif-icon uif-type="mail"></uif-icon>
+ *       </uif-list-item-action>
+ *       <uif-list-item-action ng-click="delete(message)">
+ *         <uif-icon uif-type="trash"></uif-icon>
+ *       </uif-list-item-action>
+ *       <uif-list-item-action ng-click="pin(message)">
+ *         <uif-icon uif-type="pinLeft"></uif-icon>
+ *       </uif-list-item-action>
+ *     </uif-list-item-actions>
+ *   </uif-list-item>
+ * </uif-list>
+ */
 export class ListItemDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -297,7 +392,18 @@ export class ListItemDirective implements ng.IDirective {
                     }
                 }
 
-                list.selectedItems.push(listItemScope.item);
+                // only add to the list if not yet exists. prevents conflicts
+                // with preselected items
+                let itemAlreadySelected: boolean = false;
+                for (let i: number = 0; i < list.selectedItems.length; i++) {
+                    if (list.selectedItems[i] === listItemScope.item) {
+                        itemAlreadySelected = true;
+                        break;
+                    }
+                }
+                if (!itemAlreadySelected) {
+                    list.selectedItems.push(listItemScope.item);
+                }
 
                 instanceElement.children().eq(0).addClass('is-selected');
             } else {
@@ -335,6 +441,24 @@ export class ListItemDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemPrimaryText
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-primary-text>` is a directive that represents the primary text of a list item (eg. e-mail sender)
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+ *   <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
+ * </uif-list-item>
+ */
 export class ListItemPrimaryTextDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -348,6 +472,24 @@ export class ListItemPrimaryTextDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemSecondaryText
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-secondary-text>` is a directive that represents the secondary text of a list item (eg. e-mail subject)
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+ *   <uif-list-item-secondary-text>{{message.sender.name}}</uif-list-item-secondary-text>
+ * </uif-list-item>
+ */
 export class ListItemSecondaryTextDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -361,6 +503,24 @@ export class ListItemSecondaryTextDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemTertiartText
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-tertiary-text>` is a directive that represents the tertiary text of a list item (eg. e-mail short preview)
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+ *   <uif-list-item-tertiary-text>{{message.sender.name}}</uif-list-item-tertiary-text>
+ * </uif-list-item>
+ */
 export class ListItemTertiaryTextDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -374,6 +534,24 @@ export class ListItemTertiaryTextDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemMetaText
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-meta-text>` is a directive that represents the meta text of a list item (eg. e-mail send time)
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}" uif-unseen="{{message.isUnseen}}" uif-item="message">
+ *   <uif-list-item-meta-text>{{message.sender.name}}</uif-list-item-meta-text>
+ * </uif-list-item>
+ */
 export class ListItemMetaTextDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -387,6 +565,28 @@ export class ListItemMetaTextDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemImage
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-image>` is a directive that represents the image of a list item.
+ * This directive is required when list item type is set to `itemWithImage`.
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}"
+ *    uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithImage">
+ *   <uif-list-item-image>
+ *     <img ng-src="{{message.image}}" />
+ *   </uif-list-item-image>
+ * </uif-list-item>
+ */
 export class ListItemImageDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -400,6 +600,28 @@ export class ListItemImageDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemIcon
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-icon>` is a directive that represents the icon of a list item.
+ * This directive is required when list item type is set to `itemWithIcon`.
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}"
+ *  uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithIcon">
+ *   <uif-list-item-icon>
+ *     <uif-icon uif-type="save"></uif-icon>
+ *   </uif-list-item-icon>
+ * </uif-list-item>
+ */
 export class ListItemIconDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -413,6 +635,25 @@ export class ListItemIconDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemSelectionTarget
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-selection-target>` is a directive that represents the space used to display item selection box.
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}"
+ *  uif-unseen="{{message.isUnseen}}" uif-item="message">
+ *   <uif-list-item-selection-target></uif-list-item-selection-target>
+ * </uif-list-item>
+ */
 export class ListItemSelectionTargetDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -426,6 +667,35 @@ export class ListItemSelectionTargetDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemActions
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-actions>` is a directive that wraps any actions specified on a list item.
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}"
+ *  uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithIcon">
+ *   <uif-list-item-actions>
+ *     <uif-list-item-action ng-click="mail(message)">
+ *       <uif-icon uif-type="mail"></uif-icon>
+ *     </uif-list-item-action>
+ *     <uif-list-item-action ng-click="delete(message)">
+ *       <uif-icon uif-type="trash"></uif-icon>
+ *     </uif-list-item-action>
+ *     <uif-list-item-action ng-click="pin(message)">
+ *       <uif-icon uif-type="pinLeft"></uif-icon>
+ *     </uif-list-item-action>
+ *   </uif-list-item-actions>
+ * </uif-list-item>
+ */
 export class ListItemActionsDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -439,6 +709,29 @@ export class ListItemActionsDirective implements ng.IDirective {
     }
 }
 
+/**
+ * @ngdoc directive
+ * @name uifListItemAction
+ * @module officeuifabric.components.list
+ *
+ * @restrict E
+ *
+ * @description
+ * `<uif-list-item-action>` is a directive that represent a single action on a list item
+ *
+ * @see {link http://dev.office.com/fabric/components/listitem}
+ *
+ * @usage
+ *
+ * <uif-list-item ng-repeat="message in messages" uif-unread="{{message.isUnread}}"
+ *  uif-unseen="{{message.isUnseen}}" uif-item="message" uif-type="itemWithIcon">
+ *   <uif-list-item-actions>
+ *     <uif-list-item-action ng-click="mail(message)">
+ *       <uif-icon uif-type="mail"></uif-icon>
+ *     </uif-list-item-action>
+ *   </uif-list-item-actions>
+ * </uif-list-item>
+ */
 export class ListItemActionDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
