@@ -326,6 +326,11 @@ export class NavBarItemDirective implements ng.IDirective {
     navBarController: NavBarController,
     $transclude: ng.ITranscludeFunction): void => {
 
+    if ($scope.isDisabled) {
+      let navBarLinkEelement: JQuery = angular.element($element[0].querySelector('.ms-NavBar-link'));
+      navBarLinkEelement.removeAttr('href');
+    }
+
     if (ng.isUndefined($scope.type)) {
       $scope.type = NavBarItemTypes[NavBarItemTypes.link];
     }

@@ -298,7 +298,7 @@ export class DatepickerDirective implements ng.IDirective {
     public template: string =
         '<div ng-class="{\'ms-DatePicker\': true, \'is-pickingYears\': ctrl.isPickingYears, \'is-pickingMonths\': ctrl.isPickingMonths}">' +
             '<div class="ms-TextField">' +
-                '<label class="ms-Label">{{uifLabel}}</label>' +
+                '<label class="ms-Label" ng-if="uifLabel">{{uifLabel}}</label>' +
                 '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
                 '<input class="ms-TextField-field" type="text" placeholder="{{placeholder}}">' +
             '</div>' +

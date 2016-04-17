@@ -53,19 +53,14 @@
     <p>
         This markup: <br />
         <pre>
-         &lt;uif-dropdown ng-model=&quot;dropdownValue&quot; disabled&gt;
-            &lt;uif-dropdown-option value=&quot;value1&quot;&gt;Value 1&lt;/uif-dropdown-option&gt;
-            &lt;uif-dropdown-option value=&quot;value2&quot;&gt;Value 2&lt;/uif-dropdown-option&gt;
-            &lt;uif-dropdown-option value=&quot;value3&quot;&gt;Value 3&lt;/uif-dropdown-option&gt;
-            &lt;uif-dropdown-option value=&quot;value4&quot;&gt;Value 4&lt;/uif-dropdown-option&gt;
-        &lt;/uif-dropdown&gt;
+            &lt;uif-dropdown ng-model=&quot;dropdownValue&quot; ng-disabled=&quot;disabled&quot;&gt;&#13;&#10;                &lt;uif-dropdown-option value=&quot;value1&quot;&gt;Value 1&lt;/uif-dropdown-option&gt;&#13;&#10;                &lt;uif-dropdown-option value=&quot;value2&quot;&gt;Value 2&lt;/uif-dropdown-option&gt;&#13;&#10;                &lt;uif-dropdown-option value=&quot;value3&quot;&gt;Value 3&lt;/uif-dropdown-option&gt;&#13;&#10;                &lt;uif-dropdown-option value=&quot;value4&quot;&gt;Value 4&lt;/uif-dropdown-option&gt;&#13;&#10;            &lt;/uif-dropdown&gt;
         </pre>
     </p>
 
     <p>
         Renders this:
         <br />
-        <uif-dropdown ng-model="dropdownValue" disabled>
+        <uif-dropdown ng-model="dropdownValue" ng-disabled="disabled">
             <uif-dropdown-option value="value1">Value 1</uif-dropdown-option>
             <uif-dropdown-option value="value2">Value 2</uif-dropdown-option>
             <uif-dropdown-option value="value3">Value 3</uif-dropdown-option>
@@ -74,7 +69,10 @@
 
     </p>
     <p>
+        <input type="checkbox" ng-model="disabled"/>Disabled<br/>
         <span>dropdownValue: {{dropdownValue}}</span>
+        
+        
     </p>
 </body>
 
