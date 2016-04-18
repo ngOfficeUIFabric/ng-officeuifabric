@@ -68,4 +68,23 @@ describe('toggleDirective: <uif-toggle />', () => {
         expect(checkBox.is(':checked')).toBe(true);
         expect($scope.toggled).toBe(true);
     }));
+
+    it('should be able to be disabled', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.disabled = true;
+
+        let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"'
+                                            + 'ng-disabled="disabled"></toggle>')($scope);
+        toggle = jQuery(toggle[0]);
+        $scope.$apply();
+
+        let mainToggle: JQuery = toggle.find('.ms-Toggle');
+        expect(mainToggle.hasClass('is-disabled')).toBe(true, 'Element is disabled');
+
+        $scope.disabled = false;
+        $scope.$digest();
+
+        mainToggle = toggle.find('.ms-Toggle');
+        expect(mainToggle.hasClass('is-disabled')).toBe(false, 'Element is not disabled');
+    }));
 });

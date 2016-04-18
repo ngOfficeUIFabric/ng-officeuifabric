@@ -19,7 +19,8 @@
 
   <h1 class="ms-font-su">Toggle Demo | &lt;uif-toggle&gt;</h1> 
   <em>In order for this demo to work you must first build the library in debug mode.</em>
-
+  
+  <h2>Default Toggle</h2>
   <p>
     This markup: <br />
     <code>
@@ -37,21 +38,40 @@
     Toggled: {{toggled}}  
   </p>
 
-
+  <h2>Default Toogle with text location left</h2>
   <p>
     This markup: <br />
     <code>
-      &lt;uif-toggle uif-label-off=&quot;Label off&quot; uif-label-on=&quot;Label on&quot; uif-text-location=&quot;right&quot;/&gt;
+      &lt;uif-label&gt;Toggle Control&lt;/uif-label&gt;<br/>
+      &lt;uif-toggle uif-label-off=&quot;Label off&quot; uif-label-on=&quot;Label on&quot; uif-text-location=&quot;left&quot;/&gt;
     </code>
   </p>
 
   <p>
     Renders this:
     <br />
-    <uif-toggle uif-label-off="Label off" uif-label-on="Label on" uif-text-location="right"/>
+    <uif-label>Toggle Control</uif-label>
+    <uif-toggle uif-label-off="Label off" uif-label-on="Label on" uif-text-location="left"/>
     
   </p>
 
+  <h2>Disabled Toggle</h2>
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-toggle uif-label-off=&quot;Label off&quot; uif-label-on=&quot;Label on&quot; ng-disabled=&quot;disabled&quot;/&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-toggle uif-label-off="Label off" uif-label-on="Label on" ng-disabled="disabled"/>
+    
+  </p>
+  <p>
+    <input type="checkbox" ng-model="disabled" />Disabled
+  </p>
 </body>
 
 </html>
