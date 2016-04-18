@@ -1,6 +1,15 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+- **uif-panel**
+  - add directive ([774f44e4](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/774f44e4), Closes [#29](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/29))
+
+#### Fixes
+- **uif-icon**
+  - fixed typo with newValue parameter ([588f7ba](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/588f7ba))
+- **uif-textfield**
+  - disabled not watched ([b811381](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b811381))
+  - fixed placeholder to hide when textfield gets focus ([c9a08d5](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/c9a08d5))
 
 <a name="0.7.4"></a>
 ### [0.7.4 - April 12, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.7.4)
