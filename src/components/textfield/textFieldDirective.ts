@@ -15,7 +15,7 @@ import * as ng from 'angular';
  * @property {string} uifLabel        - The label to display next to the text field
  * @property {string} placeholder     - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
  * @property {string} uifDescription  - A longer text description to display below the text field
- * @property {string} ngModel         - The scope variable to bind to the text input. 
+ * @property {string} ngModel         - The scope variable to bind to the text input.
  */
 export interface ITextFieldScope extends ng.IScope {
     uifLabel: string;
@@ -79,24 +79,24 @@ export class TextFieldDirective implements ng.IDirective {
     public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
         scope.labelShown = true;
         scope.required = 'required' in attrs;
+        scope.$watch(
+            () => { return instanceElement.attr('disabled'); },
+            ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
+        );
         scope.disabled = 'disabled' in attrs;
         scope.uifUnderlined = 'uifUnderlined' in attrs;
         scope.inputFocus = function(ev: any): void {
             if (scope.placeholder) {
                 scope.labelShown = false;
             }
-            if (scope.uifUnderlined) {
-                scope.isActive = true;
-            }
+            scope.isActive = true;
         };
         scope.inputBlur = function (ev: any): void {
             let input: JQuery = instanceElement.find('input');
             if (scope.placeholder && input.val().length === 0) {
                 scope.labelShown = true;
             }
-            if (scope.uifUnderlined) {
-                scope.isActive = false;
-            }
+            scope.isActive = false;
         };
         if (ngModel != null) {
             ngModel.$render = () => {
