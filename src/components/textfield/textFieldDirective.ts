@@ -15,7 +15,7 @@ import * as ng from 'angular';
  * @property {string} uifLabel        - The label to display next to the text field
  * @property {string} placeholder     - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
  * @property {string} uifDescription  - A longer text description to display below the text field
- * @property {string} ngModel         - The scope variable to bind to the text input. 
+ * @property {string} ngModel         - The scope variable to bind to the text input.
  */
 export interface ITextFieldScope extends ng.IScope {
     uifLabel: string;
