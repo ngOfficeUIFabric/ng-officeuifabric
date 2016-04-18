@@ -1,10 +1,15 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+<a name="0.8.0"></a>
+### [0.8.0 - April 18, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.8.0)
+
 #### Features
 
 - **uif-list**
-  - add directive ([#24](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/24))
+  - add directive ([7cd02dc](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/7cd02dc), Closes [#24](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/24))
+- **uif-panel**
+  - add directive ([774f44e](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/774f44e) [#29](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/29))
 
 #### Fixes
 
