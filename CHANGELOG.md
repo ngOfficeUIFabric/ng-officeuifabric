@@ -3,7 +3,7 @@
 
 #### Fixes
 
-- **uif-textfield**
+**uif-textfield**
   - disabled attribute missing ([1e30042](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1e30042))
 - **uif-toggle**
   - disabled attribute missing ([86675be](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/86675be))

@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -48,13 +48,13 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "angular": "1.5.3",
-    "office-ui-fabric": "2.2.0"
+    "angular": "1.5.5",
+    "office-ui-fabric": "2.3.0"
   },
   "devDependencies": {
-    "angular-animate": "1.5.3",
-    "angular-mocks": "1.5.3",
-    "angular-sanitize": "1.5.3",
+    "angular-animate": "1.5.5",
+    "angular-mocks": "1.5.5",
+    "angular-sanitize": "1.5.5",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
     "commitizen": "2.7.6",
@@ -73,7 +73,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-strip-comments": "2.4.2",
+    "gulp-strip-comments": "2.4.3",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",
@@ -92,7 +92,7 @@
     "karma-junit-reporter": "^0.4.1",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.6",
-    "karma-spec-reporter": "0.0.24",
+    "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "phantomjs-prebuilt": "^2.1.4",
     "pickadate": "3.5.6",
@@ -102,7 +102,7 @@
     "webpack": "^1.12.9",
     "webpack-stream": "^3.1.0",
     "xmldom": "^0.1.22",
-    "xpath": "0.0.22",
+    "xpath": "0.0.23",
     "yargs": "^4.2.0"
   },
   "config": {
