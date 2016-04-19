@@ -1,1 +1,53 @@
-<uif-button disabled>Lorem Ipsum</uif-button>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-button demo</title>
+    <meta charset="utf-8" />
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+
+    <h1 class="ms-font-su">Button Demo | &lt;uif-button&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <p>The button can be disabled</p>
+    <p>
+        <input type="checkbox" ng-model="disabled" />Disabled
+    </p>
+    <h2>Button rendering</h2>
+    <p>
+        This markup:<br />
+        <code>
+            &lt;uif-button ng-disabled=&quot;disabled&quot;&gt;Lorem Ipsum&lt;/uif-button&gt;
+        </code>
+    </p>
+
+    <p>
+        Renders this:<br />
+        <uif-button ng-disabled="disabled">Lorem Ipsum</uif-button>
+    </p>
+    <h2>a Link Rendering</h2>
+    <p>
+        This markup:<br />
+        <code>
+            &lt;uif-button ng-disabled=&quot;disabled&quot;&gt;Lorem Ipsum&lt;/uif-button&gt;
+        </code>
+    </p>
+
+    <p>
+        Renders this:<br />
+        <uif-button ng-href="#" ng-disabled="disabled">Lorem Ipsum</uif-button>
+    </p>
+</body>
+
+</html>
