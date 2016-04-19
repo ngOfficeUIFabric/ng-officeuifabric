@@ -1,6 +1,7 @@
 ﻿'use strict';
 
 import * as ng from 'angular';
+import {InputTypeEnum} from './uifTypeEnum';
 
 /**
  * @ngdoc interface
@@ -16,12 +17,17 @@ import * as ng from 'angular';
  * @property {string} placeholder     - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
  * @property {string} uifDescription  - A longer text description to display below the text field
  * @property {string} ngModel         - The scope variable to bind to the text input.
+ * @property {InputTypeEnum} uifType  - The type of the text field
+ * @property {boolean} uifMultiline   - If true, textbox will be rendered as a multiline text area
+ * 
  */
 export interface ITextFieldScope extends ng.IScope {
   uifLabel: string;
   placeholder: string;
   uifDescription: string;
   ngModel: string;
+  uifType: InputTypeEnum;
+  uifMultiline: boolean;
 
   labelShown: boolean;
   uifUnderlined: boolean;
@@ -30,6 +36,37 @@ export interface ITextFieldScope extends ng.IScope {
   isActive: boolean;
   required: boolean;
   disabled: boolean;
+}
+
+/**
+ * @ngdoc interface
+ * @name ITextFieldAttributes
+ * @module officeuifabric.components.textfield
+ * 
+ * @description 
+ * This is the attribute interface used by the directive. 
+ * 
+ * @property {InputTypeEnum} uifType - The type of the text field
+ * @property {string} uifMultiline   - If true, textbox will be rendered as a multiline text area
+ * 
+ * uifMultiline needs to be a string, because the binding evaluates any non-empty string as true
+ */
+export interface ITextFieldAttributes extends ng.IAttributes {
+    uifType: InputTypeEnum;
+    uifMultiline: string;
+}
+
+/**
+ * @controller
+ * @name TextFieldController
+ * @private
+ * @description
+ * Used to more easily inject the Angular $log service into the directive.
+ */
+class TextFieldController {
+  public static $inject: string[] = ['$log'];
+  constructor(public $log: ng.ILogService) {
+  }
 }
 
 /**
@@ -52,13 +89,17 @@ export interface ITextFieldScope extends ng.IScope {
  *                placeholder='This is the placeholder' />
  */
 export class TextFieldDirective implements ng.IDirective {
+  public controller: typeof TextFieldController = TextFieldController;
+
   public template: string =
   '<div ng-class="{\'is-active\': isActive, \'ms-TextField\': true, ' +
   '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder, ' +
-  '\'is-required\': required, \'is-disabled\': disabled}">' +
+  '\'is-required\': required, \'is-disabled\': disabled, \'ms-TextField--multiline\' : uifMultiline }">' +
   '<label ng-show="labelShown" class="ms-Label">{{uifLabel || placeholder}}</label>' +
   '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
-  'class="ms-TextField-field" ng-disabled="disabled" />' +
+      'class="ms-TextField-field" ng-show="!uifMultiline" ng-disabled="disabled" type="{{uifType}}" />' +
+  '<textarea ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
+      'class="ms-TextField-field" ng-show="uifMultiline" ng-disabled="disabled"></textarea>' +
   '<span class="ms-TextField-description">{{uifDescription}}</span>' +
   '</div>';
   public scope: {} = {
@@ -68,7 +109,7 @@ export class TextFieldDirective implements ng.IDirective {
     uifLabel: '@'
   };
 
-  public require: string = '?ngModel';
+  public require: string[] = ['uifTextfield', '?ngModel'];
 
   public restrict: string = 'E';
   public static factory(): ng.IDirectiveFactory {
@@ -77,14 +118,38 @@ export class TextFieldDirective implements ng.IDirective {
     return directive;
   }
 
-  public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController): void {
-    scope.labelShown = true;
-    scope.required = 'required' in attrs;
+  public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery,
+              attrs: ITextFieldAttributes, controllers: any[]): void {
+
+    let controller: TextFieldController = controllers[0];
+    let ngModel: ng.INgModelController = controllers[1];
+
+    scope.disabled = 'disabled' in attrs;
     scope.$watch(
       () => { return instanceElement.attr('disabled'); },
       ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
     );
-    scope.disabled = 'disabled' in attrs;
+    scope.labelShown = true;
+    scope.required = 'required' in attrs;
+    scope.uifMultiline = attrs.uifMultiline === 'true';
+    scope.uifType = attrs.uifType;
+    scope.$watch(
+      'uifType',
+      (newValue: string, oldValue: string) => {
+        if (typeof newValue !== 'undefined') {
+          // verify a valid type was passed in
+          if (InputTypeEnum[newValue] === undefined) {
+            controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.textfield - Unsupported type: ' +
+            'The type (\'' + scope.uifType + '\') is not supported by the Office UI Fabric. ' +
+            'Supported options are listed here: ' +
+            'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/textfield/uifTypeEnum.ts');
+          }
+        } else {
+          // default value
+          scope.uifType = InputTypeEnum.text;
+        }
+      }
+    );
     scope.uifUnderlined = 'uifUnderlined' in attrs;
     scope.inputFocus = function (ev: any): void {
       if (scope.placeholder) {
@@ -99,6 +164,7 @@ export class TextFieldDirective implements ng.IDirective {
       }
       scope.isActive = false;
     };
+
     if (ngModel != null) {
       ngModel.$render = () => {
         // when setting the ngModel value programmatically,
