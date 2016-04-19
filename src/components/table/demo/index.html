@@ -24,20 +24,24 @@
     This markup: <br />
     <pre>
 &lt;uif-table&gt;
-    &lt;uif-table-row&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-header&gt;File name&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Modified&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Type&lt;/uif-table-header&gt;
-    &lt;/uif-table-row&gt;
-    &lt;uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}<!---->}"&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
-    &lt;/uif-table-row&gt;
+    &lt;uif-table-head&gt;
+        &lt;uif-table-row&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-header&gt;File name&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Modified&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Type&lt;/uif-table-header&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-head&gt;
+    &lt;uif-table-body&gt;
+        &lt;uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}<!---->}"&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-body&gt;
 &lt;/uif-table&gt;
     </pre>
   </p>
@@ -46,27 +50,25 @@
     Renders this:
     <br />
         <uif-table>
-            <uif-table-row>
-                <uif-table-row-select></uif-table-row-select>
-                <uif-table-header>File name</uif-table-header>
-                <uif-table-header>Location</uif-table-header>
-                <uif-table-header>Modified</uif-table-header>
-                <uif-table-header>Type</uif-table-header>
-            </uif-table-row>
-            <uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}}">
-                <uif-table-row-select></uif-table-row-select>
-                <uif-table-cell>{{f.fileName}}</uif-table-cell>
-                <uif-table-cell>{{f.location}}</uif-table-cell>
-                <uif-table-cell>{{f.modified | date}}</uif-table-cell>
-                <uif-table-cell>{{f.type}}</uif-table-cell>
-            </uif-table-row>
+            <uif-table-head>
+                <uif-table-row>
+                    <uif-table-row-select></uif-table-row-select>
+                    <uif-table-header>File name</uif-table-header>
+                    <uif-table-header>Location</uif-table-header>
+                    <uif-table-header>Modified</uif-table-header>
+                    <uif-table-header>Type</uif-table-header>
+                </uif-table-row>
+            </uif-table-head>
+            <uif-table-body>
+                <uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}}">
+                    <uif-table-row-select></uif-table-row-select>
+                    <uif-table-cell>{{f.fileName}}</uif-table-cell>
+                    <uif-table-cell>{{f.location}}</uif-table-cell>
+                    <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+                    <uif-table-cell>{{f.type}}</uif-table-cell>
+                </uif-table-row>
+            </uif-table-body>
         </uif-table>
-  </p>
-  
-  <h2>Selecting rows</h2>
-  <p>
-      The <code>&lt;uif-table-row-select&gt;</code> directive renders a control that can be used to select and unselect rows.
-      Although the directive is already present, support for selecting rows will be added in the future.
   </p>
   
   <h2>Marking rows as selected</h2>
@@ -92,22 +94,26 @@
     This markup: <br />
     <pre>
 &lt;uif-table&gt;
-    &lt;uif-table-row&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
-    &lt;/uif-table-row&gt;
-    &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}<!---->}"&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
-    &lt;/uif-table-row&gt;
+    &lt;uif-table-head&gt;
+        &lt;uif-table-row&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-head&gt;
+    &lt;uif-table-body&gt;
+        &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}<!---->}"&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-body&gt;
 &lt;/uif-table&gt;
     </pre>
   </p>
@@ -115,22 +121,26 @@
     Renders this (<em>please note that sorting hasn't been enabled for the <strong>Location</strong> column</em>):
     <br />
         <uif-table>
-            <uif-table-row>
-                <uif-table-row-select></uif-table-row-select>
-                <uif-table-header uif-order-by="fileName">File name</uif-table-header>
-                <uif-table-header>Location</uif-table-header>
-                <uif-table-header uif-order-by="modified">Modified</uif-table-header>
-                <uif-table-header uif-order-by="type">Type</uif-table-header>
-                <uif-table-header uif-order-by="size">Size</uif-table-header>
-            </uif-table-row>
-            <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}}">
-                <uif-table-row-select></uif-table-row-select>
-                <uif-table-cell>{{f.fileName}}</uif-table-cell>
-                <uif-table-cell>{{f.location}}</uif-table-cell>
-                <uif-table-cell>{{f.modified | date}}</uif-table-cell>
-                <uif-table-cell>{{f.type}}</uif-table-cell>
-                <uif-table-cell>{{f.size}}</uif-table-cell>
-            </uif-table-row>
+            <uif-table-head>
+                <uif-table-row>
+                    <uif-table-row-select></uif-table-row-select>
+                    <uif-table-header uif-order-by="fileName">File name</uif-table-header>
+                    <uif-table-header>Location</uif-table-header>
+                    <uif-table-header uif-order-by="modified">Modified</uif-table-header>
+                    <uif-table-header uif-order-by="type">Type</uif-table-header>
+                    <uif-table-header uif-order-by="size">Size</uif-table-header>
+                </uif-table-row>
+            </uif-table-head>
+            <uif-table-body>
+                <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-selected="{{f.isSelected}}">
+                    <uif-table-row-select></uif-table-row-select>
+                    <uif-table-cell>{{f.fileName}}</uif-table-cell>
+                    <uif-table-cell>{{f.location}}</uif-table-cell>
+                    <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+                    <uif-table-cell>{{f.type}}</uif-table-cell>
+                    <uif-table-cell>{{f.size}}</uif-table-cell>
+                </uif-table-row>
+            </uif-table-body>
         </uif-table>
   </p>
   
@@ -157,22 +167,26 @@
     This markup: <br />
     <pre>
 &lt;uif-table uif-row-select-mode="none"&gt;
-    &lt;uif-table-row&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
-    &lt;/uif-table-row&gt;
-    &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}<!---->}"&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
-    &lt;/uif-table-row&gt;
+    &lt;uif-table-head&gt;
+        &lt;uif-table-row&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-head&gt;
+    &lt;uif-table-body&gt;
+        &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}<!---->}"&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-body&gt;
 &lt;/uif-table&gt;
     </pre>
   </p>
@@ -180,22 +194,26 @@
     Renders this (selecting rows disabled, one row marked as selected):
     <br />
     <uif-table uif-row-select-mode="none">
-        <uif-table-row>
-            <uif-table-row-select></uif-table-row-select>
-            <uif-table-header uif-order-by="fileName">File name</uif-table-header>
-            <uif-table-header>Location</uif-table-header>
-            <uif-table-header uif-order-by="modified">Modified</uif-table-header>
-            <uif-table-header uif-order-by="type">Type</uif-table-header>
-            <uif-table-header uif-order-by="size">Size</uif-table-header>
-        </uif-table-row>
-        <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}}">
-            <uif-table-row-select></uif-table-row-select>
-            <uif-table-cell>{{f.fileName}}</uif-table-cell>
-            <uif-table-cell>{{f.location}}</uif-table-cell>
-            <uif-table-cell>{{f.modified | date}}</uif-table-cell>
-            <uif-table-cell>{{f.type}}</uif-table-cell>
-            <uif-table-cell>{{f.size}}</uif-table-cell>
-        </uif-table-row>
+        <uif-table-head>
+            <uif-table-row>
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-header uif-order-by="fileName">File name</uif-table-header>
+                <uif-table-header>Location</uif-table-header>
+                <uif-table-header uif-order-by="modified">Modified</uif-table-header>
+                <uif-table-header uif-order-by="type">Type</uif-table-header>
+                <uif-table-header uif-order-by="size">Size</uif-table-header>
+            </uif-table-row>
+        </uif-table-head>
+        <uif-table-body>
+            <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}}">
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-cell>{{f.fileName}}</uif-table-cell>
+                <uif-table-cell>{{f.location}}</uif-table-cell>
+                <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+                <uif-table-cell>{{f.type}}</uif-table-cell>
+                <uif-table-cell>{{f.size}}</uif-table-cell>
+            </uif-table-row>
+        </uif-table-body>
     </uif-table>
   </p>
   <h3>Selecting single row (<code>&lt;uif-table uif-row-select-mode="single"&gt;</code>)</h3>
@@ -203,22 +221,26 @@
     This markup: <br />
     <pre>
 &lt;uif-table uif-row-select-mode="single"&gt;
-    &lt;uif-table-row&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
-    &lt;/uif-table-row&gt;
-    &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}<!---->}"&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
-    &lt;/uif-table-row&gt;
+    &lt;uif-table-head&gt;
+        &lt;uif-table-row&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-head&gt;
+    &lt;uif-table-body&gt;
+        &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}<!---->}"&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-body&gt;
 &lt;/uif-table&gt;
     </pre>
   </p>
@@ -226,22 +248,26 @@
     Renders this (selecting single row enabled, one row marked as selected):
     <br />
     <uif-table uif-row-select-mode="single">
-        <uif-table-row>
-            <uif-table-row-select></uif-table-row-select>
-            <uif-table-header uif-order-by="fileName">File name</uif-table-header>
-            <uif-table-header>Location</uif-table-header>
-            <uif-table-header uif-order-by="modified">Modified</uif-table-header>
-            <uif-table-header uif-order-by="type">Type</uif-table-header>
-            <uif-table-header uif-order-by="size">Size</uif-table-header>
-        </uif-table-row>
-        <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}}">
-            <uif-table-row-select></uif-table-row-select>
-            <uif-table-cell>{{f.fileName}}</uif-table-cell>
-            <uif-table-cell>{{f.location}}</uif-table-cell>
-            <uif-table-cell>{{f.modified | date}}</uif-table-cell>
-            <uif-table-cell>{{f.type}}</uif-table-cell>
-            <uif-table-cell>{{f.size}}</uif-table-cell>
-        </uif-table-row>
+        <uif-table-head>
+            <uif-table-row>
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-header uif-order-by="fileName">File name</uif-table-header>
+                <uif-table-header>Location</uif-table-header>
+                <uif-table-header uif-order-by="modified">Modified</uif-table-header>
+                <uif-table-header uif-order-by="type">Type</uif-table-header>
+                <uif-table-header uif-order-by="size">Size</uif-table-header>
+            </uif-table-row>
+        </uif-table-head>
+        <uif-table-body>
+            <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}}">
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-cell>{{f.fileName}}</uif-table-cell>
+                <uif-table-cell>{{f.location}}</uif-table-cell>
+                <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+                <uif-table-cell>{{f.type}}</uif-table-cell>
+                <uif-table-cell>{{f.size}}</uif-table-cell>
+            </uif-table-row>
+        </uif-table-body>
     </uif-table>
   </p>
   <h3>Selecting multiple rows (<code>&lt;uif-table uif-row-select-mode="multiple"&gt;</code>)</h3>
@@ -252,22 +278,26 @@
     This markup: <br />
     <pre>
 &lt;uif-table uif-row-select-mode="multiple"&gt;
-    &lt;uif-table-row&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
-        &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
-        &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
-    &lt;/uif-table-row&gt;
-    &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}<!---->}"&gt;
-        &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
-        &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
-        &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
-    &lt;/uif-table-row&gt;
+    &lt;uif-table-head&gt;
+        &lt;uif-table-row&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-header uif-order-by="fileName"&gt;File name&lt;/uif-table-header&gt;
+            &lt;uif-table-header&gt;Location&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="modified"&gt;Modified&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="type"&gt;Type&lt;/uif-table-header&gt;
+            &lt;uif-table-header uif-order-by="size"&gt;Size&lt;/uif-table-header&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-head&gt;
+    &lt;uif-table-body&gt;
+        &lt;uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}<!---->}"&gt;
+            &lt;uif-table-row-select&gt;&lt;/uif-table-row-select&gt;
+            &lt;uif-table-cell&gt;{{f.fileName}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.location}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.modified | date}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.type}}&lt;/uif-table-cell&gt;
+            &lt;uif-table-cell&gt;{{f.size}}&lt;/uif-table-cell&gt;
+        &lt;/uif-table-row&gt;
+    &lt;/uif-table-body&gt;
 &lt;/uif-table&gt;
     </pre>
   </p>
@@ -275,22 +305,26 @@
     Renders this (selecting multiple rows enabled, one row marked as selected):
     <br />
     <uif-table uif-row-select-mode="multiple">
-        <uif-table-row>
-            <uif-table-row-select></uif-table-row-select>
-            <uif-table-header uif-order-by="fileName">File name</uif-table-header>
-            <uif-table-header>Location</uif-table-header>
-            <uif-table-header uif-order-by="modified">Modified</uif-table-header>
-            <uif-table-header uif-order-by="type">Type</uif-table-header>
-            <uif-table-header uif-order-by="size">Size</uif-table-header>
-        </uif-table-row>
-        <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}}">
-            <uif-table-row-select></uif-table-row-select>
-            <uif-table-cell>{{f.fileName}}</uif-table-cell>
-            <uif-table-cell>{{f.location}}</uif-table-cell>
-            <uif-table-cell>{{f.modified | date}}</uif-table-cell>
-            <uif-table-cell>{{f.type}}</uif-table-cell>
-            <uif-table-cell>{{f.size}}</uif-table-cell>
-        </uif-table-row>
+        <uif-table-head>
+            <uif-table-row>
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-header uif-order-by="fileName">File name</uif-table-header>
+                <uif-table-header>Location</uif-table-header>
+                <uif-table-header uif-order-by="modified">Modified</uif-table-header>
+                <uif-table-header uif-order-by="type">Type</uif-table-header>
+                <uif-table-header uif-order-by="size">Size</uif-table-header>
+            </uif-table-row>
+        </uif-table-head>
+        <uif-table-body>
+            <uif-table-row ng-repeat="f in files | orderBy:table.orderBy:!table.orderAsc" uif-item="f" uif-selected="{{f.isSelected}}">
+                <uif-table-row-select></uif-table-row-select>
+                <uif-table-cell>{{f.fileName}}</uif-table-cell>
+                <uif-table-cell>{{f.location}}</uif-table-cell>
+                <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+                <uif-table-cell>{{f.type}}</uif-table-cell>
+                <uif-table-cell>{{f.size}}</uif-table-cell>
+            </uif-table-row>
+        </uif-table-head>
     </uif-table>
   </p>
 </body>
