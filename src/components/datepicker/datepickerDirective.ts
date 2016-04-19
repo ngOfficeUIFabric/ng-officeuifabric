@@ -263,12 +263,10 @@ export class DatepickerController {
  *
  *
  * @property {string} uifMonths - Comma separated list of all months
- * @property {string} uifLabel - The label to display above the date picker
  * @property {string} placeholder - The placeholder to display in the text box
  */
 export interface IDatepickerDirectiveScope extends ng.IScope {
     uifMonths: string;
-    uifLabel: string;
     placeholder: string;
     monthsArray: string[];
     highlightedValue: Pickadate.DateItem;
@@ -289,16 +287,13 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
  * <uif-datepicker
  *      ng-model="value"
  *      placeholder="Please, find a date"
- *      uif-months="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
- *      uif-label="Start date"
- * />
+ *      uif-months="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" />
  */
 
 export class DatepickerDirective implements ng.IDirective {
     public template: string =
         '<div ng-class="{\'ms-DatePicker\': true, \'is-pickingYears\': ctrl.isPickingYears, \'is-pickingMonths\': ctrl.isPickingMonths}">' +
             '<div class="ms-TextField">' +
-                '<label class="ms-Label">{{uifLabel}}</label>' +
                 '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
                 '<input class="ms-TextField-field" type="text" placeholder="{{placeholder}}">' +
             '</div>' +
@@ -344,7 +339,6 @@ export class DatepickerDirective implements ng.IDirective {
 
     public scope: any = {
         placeholder : '@',
-        uifLabel: '@',
         uifMonths: '@'
     };
     public require: string[] = ['uifDatepicker', '?ngModel'];
@@ -369,10 +363,6 @@ export class DatepickerDirective implements ng.IDirective {
         if (!$scope.uifMonths) {
             $scope.uifMonths = 'Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec';
         }
-        if (!$scope.uifLabel) {
-            $scope.uifLabel = 'Start Date';
-        }
-
         if (!$scope.placeholder) {
             $scope.placeholder = 'Select a date';
         }
