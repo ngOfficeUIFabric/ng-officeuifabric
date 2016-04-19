@@ -1,9 +1,14 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+<a name="0.8.1"></a>
+### [0.8.1 - April 19, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.8.1)
+
 #### Fixes
 
-**uif-textfield**
+- **dependencies**
+  - update library dependencies & verify working with **Angular 1.5.5** & **Office UI Fabric 2.3.0** ([09bf108](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/09bf108), Closes [#287](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/287))
+- **uif-textfield**
   - disabled attribute missing ([1e30042](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1e30042))
 - **uif-toggle**
   - disabled attribute missing ([86675be](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/86675be))
