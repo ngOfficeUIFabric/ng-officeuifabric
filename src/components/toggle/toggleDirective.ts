@@ -17,13 +17,14 @@ import * as ng from 'angular';
  * @property {string} uifTextLocation - Location of the label (left or right), compared to the toggle  
  */
 
-export interface IToggleScope {
+export interface IToggleScope extends ng.IScope {
     ngModel: string;
     uifLabelOff: string;
     uifLabelOn: string;
     uifTextLocation: string;
     uniqueId: number;
-    toggleClass: string;
+    textLocation: string;
+    disabled: boolean;
 }
 
 /**
@@ -43,9 +44,9 @@ export interface IToggleScope {
  * <uif-toggle ng-model='toggled' />
  */
 export class ToggleDirective implements ng.IDirective {
-    public template: string = '<div ng-class="toggleClass">' +
+    public template: string = '<div ng-class="[\'ms-Toggle\', textLocation, {\'is-disabled\': disabled}]">' +
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
-                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" />' +
+                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" ng-disabled="disabled"/>' +
                 '<label for="{{::$id}}" class="ms-Toggle-field">' +
                     '<span class="ms-Label ms-Label--off">{{uifLabelOff}}</span>' +
                     '<span class="ms-Label ms-Label--on">{{uifLabelOn}}</span>' +
@@ -66,13 +67,16 @@ export class ToggleDirective implements ng.IDirective {
     }
 
     public link(scope: IToggleScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
-        scope.toggleClass = 'ms-Toggle';
-
         if (scope.uifTextLocation) {
             let loc: string = scope.uifTextLocation;
             loc = loc.charAt(0).toUpperCase() + loc.slice(1);
-            scope.toggleClass += ' ms-Toggle--text' + loc;
+            scope.textLocation = ' ms-Toggle--text' + loc;
         }
+        scope.$watch(
+            () => { return elem.attr('disabled'); },
+            ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
+        );
+        scope.disabled = 'disabled' in attrs;
     }
 }
 
