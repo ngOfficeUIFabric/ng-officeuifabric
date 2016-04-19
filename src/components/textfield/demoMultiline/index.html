@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <title>ngOfficeUiFabric | uif-Textfield demo</title>
+  <meta charset="utf-8" />
+
+  <!-- office ui fabric css -->
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+  <!-- angular library -->
+  <script src="../../../../node_modules/angular/angular.min.js"></script>
+  <!-- ngofficeuifabric library -->
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+</head>
+
+<body>
+
+  <h1 class="ms-font-su">Textfield Demo | &lt;uif-textfield&gt;</h1>
+  <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+  <h2>Basic multiline usage</h2>
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-textfield uif-label=&quot;This is the label&quot; uif-description=&quot;This is the description&quot; uif-multiline=&quot;true&quot; /&gt;
+    </code>
+  </p>
+  <p>
+    Renders this:
+    <br />
+    <uif-textfield uif-label="This is the label" uif-description="This is the description" uif-Multiline="true" />
+  </p>
+
+  <h2>Disabled</h2>
+  <p>
+    This markup: <br />
+    <code>
+
+    </code>
+  </p>
+  <p>
+    Renders this:
+    <br />
+    <uif-textfield uif-label="This is the label" uif-Multiline="true" ng-disabled="disabled" />
+
+  </p>
+  <p>
+    <input type="checkbox" ng-model="disabled" />Disabled
+  </p>
+
+</body>
+
+</html>

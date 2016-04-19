@@ -146,4 +146,24 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(label.hasClass('ng-hide')).toBe(true, 'Label should be hidden after setting ng-model');
     }));
 
+    it('should be able to set as multiline', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = 'multiline text';
+        let textBox: JQuery = $compile('<uif-textfield ng-model="value" uif-multiline="true"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let textArea: JQuery = textBox.find('textarea.ms-TextField-field');
+        textArea = jQuery(textArea);
+
+        expect(textArea.hasClass('ng-hide')).toBe(false, 'textarea should be visible.');
+        expect(textArea.val()).toBe('multiline text');
+
+        let div: JQuery = textBox.find('div');
+        expect(div.hasClass('ms-TextField--multiline')).toBe(true, 'Container should have class ms-TextField--multiline.');
+
+        let textInput: JQuery = textBox.find('input.ms-TextField-field');
+        textInput = jQuery(textInput);
+        expect(textInput.hasClass('ng-hide')).toBe(true, 'input should be hidden');
+    }));
 });

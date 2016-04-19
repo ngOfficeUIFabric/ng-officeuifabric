@@ -1,6 +1,11 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+#### Features
+
+- **uif-textfield**
+  - multiline and password ([#227](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/227))
+
 <a name="0.8.1"></a>
 ### [0.8.1 - April 19, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.8.1)
 
