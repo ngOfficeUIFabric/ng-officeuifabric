@@ -46,7 +46,7 @@ export interface IToggleScope extends ng.IScope {
 export class ToggleDirective implements ng.IDirective {
     public template: string = '<div ng-class="[\'ms-Toggle\', textLocation, {\'is-disabled\': disabled}]">' +
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
-                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" />' +
+                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" ng-disabled="disabled"/>' +
                 '<label for="{{::$id}}" class="ms-Toggle-field">' +
                     '<span class="ms-Label ms-Label--off">{{uifLabelOff}}</span>' +
                     '<span class="ms-Label ms-Label--on">{{uifLabelOn}}</span>' +

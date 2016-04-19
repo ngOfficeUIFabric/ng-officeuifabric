@@ -81,10 +81,16 @@ describe('toggleDirective: <uif-toggle />', () => {
         let mainToggle: JQuery = toggle.find('.ms-Toggle');
         expect(mainToggle.hasClass('is-disabled')).toBe(true, 'Element is disabled');
 
+        let input: JQuery = toggle.find('input');
+        expect(input.attr('disabled')).toBe('disabled', 'Input element is disabled');
+
         $scope.disabled = false;
         $scope.$digest();
 
         mainToggle = toggle.find('.ms-Toggle');
         expect(mainToggle.hasClass('is-disabled')).toBe(false, 'Element is not disabled');
+
+        input = toggle.find('input');
+        expect(input.attr('disabled')).toBe(undefined, 'Input element is not disabled');
     }));
 });
