@@ -57,7 +57,8 @@ export class TextFieldDirective implements ng.IDirective {
   '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder, ' +
   '\'is-required\': required, \'is-disabled\': disabled}">' +
   '<label ng-show="labelShown" class="ms-Label">{{uifLabel || placeholder}}</label>' +
-  '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" class="ms-TextField-field" />' +
+  '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
+  'class="ms-TextField-field" ng-disabled="disabled" />' +
   '<span class="ms-TextField-description">{{uifDescription}}</span>' +
   '</div>';
   public scope: {} = {
