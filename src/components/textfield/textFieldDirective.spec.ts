@@ -100,6 +100,8 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
         div = getMainDiv(textBox);
         input = textBox.find('input');
+        expect(input.attr('disabled')).toBe('disabled', 'Input should be disabled');
+
         spyOn(input[0], 'focus');
         expect(div.hasClass('is-disabled')).toBe(true, 'textfield should have is-disabled');
 
@@ -110,6 +112,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
         $scope.isDisabled = false;
         $scope.$apply();
 
+        expect(input.attr('disabled')).toBe(undefined, 'Input should not be disabled');
         expect(div.hasClass('is-disabled')).toBe(false, 'textfield should not be disabled');
 
         input.focus();
