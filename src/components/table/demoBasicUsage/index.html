@@ -1,16 +1,20 @@
 <uif-table>
-    <uif-table-row>
-        <uif-table-row-select></uif-table-row-select>
-        <uif-table-header>File name</uif-table-header>
-        <uif-table-header>Location</uif-table-header>
-        <uif-table-header>Modified</uif-table-header>
-        <uif-table-header>Type</uif-table-header>
-    </uif-table-row>
-    <uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}}">
-        <uif-table-row-select></uif-table-row-select>
-        <uif-table-cell>{{f.fileName}}</uif-table-cell>
-        <uif-table-cell>{{f.location}}</uif-table-cell>
-        <uif-table-cell>{{f.modified | date}}</uif-table-cell>
-        <uif-table-cell>{{f.type}}</uif-table-cell>
-    </uif-table-row>
+    <uif-table-head>
+        <uif-table-row>
+            <uif-table-row-select></uif-table-row-select>
+            <uif-table-header>File name</uif-table-header>
+            <uif-table-header>Location</uif-table-header>
+            <uif-table-header>Modified</uif-table-header>
+            <uif-table-header>Type</uif-table-header>
+        </uif-table-row>
+    </uif-table-head>
+    <uif-table-body>
+        <uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}}">
+            <uif-table-row-select></uif-table-row-select>
+            <uif-table-cell>{{f.fileName}}</uif-table-cell>
+            <uif-table-cell>{{f.location}}</uif-table-cell>
+            <uif-table-cell>{{f.modified | date}}</uif-table-cell>
+            <uif-table-cell>{{f.type}}</uif-table-cell>
+        </uif-table-row>
+    </uif-table-body>
 </uif-table>

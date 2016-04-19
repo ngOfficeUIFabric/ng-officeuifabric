@@ -15,11 +15,11 @@ describe('tableDirective: <uif-table />', () => {
         scope = $rootScope;
     }));
 
-    it('should render table using a div tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render table using a table tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table></uif-table>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.prop('tagName')).toEqual('DIV');
+        expect(element.prop('tagName')).toEqual('TABLE');
     }));
 
     it('should set correct Office UI Fabric classes on the table', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
@@ -29,18 +29,18 @@ describe('tableDirective: <uif-table />', () => {
         expect(element).toHaveClass('ms-Table');
     }));
 
-    it('should render the row using a div tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render the row using a tr tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.children().eq(0).prop('tagName')).toEqual('DIV');
+        expect(element.children().eq(0).prop('tagName')).toEqual('TR');
     }));
 
-    it('should set correct Office UI Fabric classes on the row', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set no Office UI Fabric classes on the row', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.children().eq(0)).toHaveClass('ms-Table-row');
+        expect(element.children().eq(0)).not.toHaveClass('ms-Table-row');
     }));
 
     it('should set correct Office UI Fabric classes on the selected and unselected rows',
@@ -66,11 +66,37 @@ describe('tableDirective: <uif-table />', () => {
         expect($log.error.logs.length).toEqual(1);
      }));
 
-    it('should render table row select using the span tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render table row select using the td tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.children().eq(0).children().eq(0).prop('tagName')).toEqual('SPAN');
+        expect(element.children().eq(0).children().eq(0).prop('tagName')).toEqual('TD');
+    }));
+
+    it('should render table row select using the th tag in thead', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        element = ng.element('<uif-table>\
+        <uif-table-head><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-head>\
+        <uif-table-body><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-body>\
+        </uif-table>');
+        $compile(element)(scope);
+        scope.$digest();
+        expect(element.children().eq(0) // thead
+               .children().eq(0) // tr
+               .children().eq(0) // table-row-select
+               .prop('tagName')).toEqual('TH');
+    }));
+
+    it('should render table row select using the td tag in tbody', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        element = ng.element('<uif-table>\
+        <uif-table-head><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-head>\
+        <uif-table-body><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-body>\
+        </uif-table>');
+        $compile(element)(scope);
+        scope.$digest();
+        expect(element.children().eq(1) // tbody
+               .children().eq(0) // tr
+               .children().eq(0) // table-row-select
+               .prop('tagName')).toEqual('TD');
     }));
 
     it('should set correct Office UI Fabric classes on the table row select',
@@ -81,32 +107,32 @@ describe('tableDirective: <uif-table />', () => {
         expect(element.children().eq(0).children().eq(0)).toHaveClass('ms-Table-rowCheck');
     }));
 
-    it('should render the cell using a span tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render the cell using a td tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table-cell></uif-table-cell>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.prop('tagName')).toEqual('SPAN');
+        expect(element.prop('tagName')).toEqual('TD');
     }));
 
-    it('should set correct Office UI Fabric classes on the table cell', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set no Office UI Fabric classes on the table cell', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table-cell></uif-table-cell>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element).toHaveClass('ms-Table-cell');
+        expect(element).not.toHaveClass('ms-Table-cell');
     }));
 
-    it('should render the table header using a span tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render the table header using a th tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.children().eq(0).children().eq(0).prop('tagName')).toEqual('SPAN');
+        expect(element.children().eq(0).children().eq(0).prop('tagName')).toEqual('TH');
     }));
 
-    it('should set correct Office UI Fabric classes on the table header', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set no Office UI Fabric classes on the table header', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row><uif-table-header></uif-table-header></uif-table-row></uif-table>');
         $compile(element)(scope);
         scope.$digest();
-        expect(element.children().eq(0).children().eq(0)).toHaveClass('ms-Table-cell');
+        expect(element.children().eq(0).children().eq(0)).not.toHaveClass('ms-Table-cell');
     }));
 
     it('should trigger sorting only on enabled header cells', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
