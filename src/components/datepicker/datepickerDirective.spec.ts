@@ -178,32 +178,6 @@ describe('datepicker: <uif-datepicker />', () => {
 
     }));
 
-    it('Should be able to set start label', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        let $scope: any = $rootScope.$new();
-        let datepicker: any = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
-        $scope.$digest();
-
-        // verify default value
-        let startLabel: JQuery = jQuery(datepicker[0]).find('.ms-Label');
-        expect(startLabel.text()).toBe('Start Date', 'Default start label should be Start Date');
-
-        datepicker = $compile('<uif-datepicker uif-label="First Date" ng-model="value"></uif-datepicker>')($scope);
-        $scope.$digest();
-
-        // verify custom value
-        startLabel = jQuery(datepicker[0]).find('.ms-Label');
-        expect(startLabel.text()).toBe('First Date', 'Setting custom start date label');
-
-
-        // verify empty value
-        datepicker = $compile('<uif-datepicker uif-label="" ng-model="value"></uif-datepicker>')($scope);
-        $scope.$digest();
-
-        startLabel = jQuery(datepicker[0]).find('.ms-Label');
-        expect(startLabel.length).toBe(0, 'Label should be hidden if empty');
-
-    }));
-
     it('Should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
