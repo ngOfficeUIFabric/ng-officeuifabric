@@ -165,23 +165,44 @@ describe('buttonDirective: <uif-button />', () => {
 
       // verify no disabled class present
       expect(element).not.toHaveClass('is-disabled');
+      expect(element.attr('disabled')).toBe(undefined, 'button should not be disabled');
     });
 
     // if set to disabled, this should render on the button rendered element
     it('should be able to set disabled', inject(($compile: Function) => {
       // expected rendered HTML:
-      // <button class="ms-Button is-disabled">
+      // <button class="ms-Button is-disabled" disabled="disabled">
       //   <span class="ms-Button-label">Button as &lt;button&gt;</span>
       // </button>
 
-      let html: string = '<uif-button disabled>Lorem Ipsum</uif-button>';
+      let html: string = '<uif-button disabled="disabled">Lorem Ipsum</uif-button>';
       let buttonElement: JQuery = $compile(html)(scope);  // jqLite object
       buttonElement = jQuery(buttonElement[0]);           // jQuery object
       scope.$digest();
 
       // verify no disabled class present
       expect(buttonElement[0]).toHaveClass('is-disabled');
+      expect(buttonElement.attr('disabled')).toBe('disabled', 'button should be disabled');
     }));
+
+    // it('should be able to be toggled between enabled and disabled', inject(($compile: Function) => {
+    //   let currentScope: any = scope.$new();
+    //   currentScope.isDisabled = true;
+
+    //   let html: string = '<uif-button ng-disabled="isDisabled">Lorem Ipsum</uif-button>';
+    //   let buttonElement: JQuery = $compile(html)(currentScope);  // jqLite object
+    //   buttonElement = jQuery(buttonElement[0]);           // jQuery object
+    //   currentScope.$digest();
+
+    //   expect(buttonElement[0]).toHaveClass('is-disabled');
+    //   expect(buttonElement.attr('disabled')).toBe('disabled', 'button should be disabled');
+
+    //   currentScope.isDisabled = false;
+    //   currentScope.$digest();
+
+    //   expect(element).not.toHaveClass('is-disabled');
+    //   expect(element.attr('disabled')).toBe(undefined, 'button should not be disabled');
+    // }));
 
     /**
      * action (default) button tests
