@@ -50,6 +50,11 @@ class ButtonController {
  * Primary buttons:
  * <uif-button uif-type="primary">Lorem Ipsum</uif-button>
  *
+ * Disabled buttons:
+ * <uif-button disabled="disabled">Lorem Ipsum</uif-button>
+ * or
+ * <uif-button ng-disabled="true">Lorem Ipsum</uif-button>
+ * 
  * Command buttons:
  * <uif-button uif-type="command">Lorem Ipsum</uif-button>
  * <uif-button uif-type="command">
@@ -151,6 +156,17 @@ export class ButtonDirective implements ng.IDirective {
     // if disabled, add the disabled attribute to the button/a tag
     let disabled: boolean = 'disabled' in attrs;
     scope.disabled = disabled;
+    scope.$watch(
+      () => { return element.attr('disabled'); },
+      ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
+    );
+
+    // if disabled prevent click action
+    element.on('click', (e: Event) => {
+      if (scope.disabled) {
+        e.preventDefault();
+      }
+    });
   }
 
   /**
@@ -246,7 +262,7 @@ export class ButtonDirective implements ng.IDirective {
   private _populateHtmlTemplates(): void {
     // regular / action button
     this.templateOptions[ButtonTemplateType.actionButton] =
-      `<button class="ms-Button" ng-class="{\'is-disabled\': disabled}">
+      `<button class="ms-Button" ng-class="{\'is-disabled\': disabled}" ng-disabled="disabled">
          <span class="ms-Button-label" ng-transclude></span>
        </button>`;
     this.templateOptions[ButtonTemplateType.actionLink] =
@@ -256,7 +272,7 @@ export class ButtonDirective implements ng.IDirective {
 
     // primary button
     this.templateOptions[ButtonTemplateType.primaryButton] =
-      `<button class="ms-Button ms-Button--primary" ng-class="{\'is-disabled\': disabled}">
+      `<button class="ms-Button ms-Button--primary" ng-class="{\'is-disabled\': disabled}" ng-disabled="disabled">
          <span class="ms-Button-label" ng-transclude></span>
        </button>`;
     this.templateOptions[ButtonTemplateType.primaryLink] =
@@ -266,19 +282,19 @@ export class ButtonDirective implements ng.IDirective {
 
     // command button
     this.templateOptions[ButtonTemplateType.commandButton] =
-      `<button class="ms-Button ms-Button--command" ng-class="{\'is-disabled\': disabled}"></button>`;
+      `<button class="ms-Button ms-Button--command" ng-class="{\'is-disabled\': disabled}" ng-disabled="disabled"></button>`;
     this.templateOptions[ButtonTemplateType.commandLink] =
       `<a class="ms-Button ms-Button--command" ng-class="{\'is-disabled\': disabled}"></a>`;
 
     // compound button
     this.templateOptions[ButtonTemplateType.compoundButton] =
-      `<button class="ms-Button ms-Button--compound" ng-class="{\'is-disabled\': disabled}"></button>`;
+      `<button class="ms-Button ms-Button--compound" ng-class="{\'is-disabled\': disabled}" ng-disabled="disabled"></button>`;
     this.templateOptions[ButtonTemplateType.compoundLink] =
       `<a class="ms-Button ms-Button--compound" ng-class="{\'is-disabled\': disabled}"></a>`;
 
     // hero button
     this.templateOptions[ButtonTemplateType.heroButton] =
-      `<button class="ms-Button ms-Button--hero" ng-class="{\'is-disabled\': disabled}"></button>`;
+      `<button class="ms-Button ms-Button--hero" ng-class="{\'is-disabled\': disabled}" ng-disabled="disabled"></button>`;
     this.templateOptions[ButtonTemplateType.heroLink] =
       `<a class="ms-Button ms-Button--hero" ng-class="{\'is-disabled\': disabled}"></a>`;
   }
