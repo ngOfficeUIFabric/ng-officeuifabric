@@ -621,7 +621,7 @@ describe('buttonDirective: <uif-button />', () => {
       linkElement = jQuery(linkElement[0]);             // jQuery object
       scope.$digest();
 
-      // button calls event.preventDefault on click
+      // link calls event.preventDefault on click
       let e: Event = $.Event('click');
       linkElement.trigger('e');
       expect(e.preventDefault).toBeTruthy();

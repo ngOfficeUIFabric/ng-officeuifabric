@@ -50,6 +50,11 @@ class ButtonController {
  * Primary buttons:
  * <uif-button uif-type="primary">Lorem Ipsum</uif-button>
  *
+ * Disabled buttons:
+ * <uif-button disabled="disabled">Lorem Ipsum</uif-button>
+ * or
+ * <uif-button ng-disabled="true">Lorem Ipsum</uif-button>
+ * 
  * Command buttons:
  * <uif-button uif-type="command">Lorem Ipsum</uif-button>
  * <uif-button uif-type="command">
@@ -155,6 +160,8 @@ export class ButtonDirective implements ng.IDirective {
       () => { return element.attr('disabled'); },
       ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
     );
+
+    // if disabled prevent click action
     element.on('click', (e: Event) => {
       if (scope.disabled) {
         e.preventDefault();
