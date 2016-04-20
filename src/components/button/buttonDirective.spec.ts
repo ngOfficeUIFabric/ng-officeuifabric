@@ -185,24 +185,36 @@ describe('buttonDirective: <uif-button />', () => {
       expect(buttonElement.attr('disabled')).toBe('disabled', 'button should be disabled');
     }));
 
-    // it('should be able to be toggled between enabled and disabled', inject(($compile: Function) => {
-    //   let currentScope: any = scope.$new();
-    //   currentScope.isDisabled = true;
+    it('should call preventDefault in disabled state', inject(($compile: Function) => {
+      let html: string = '<uif-button disabled="disabled">Lorem Upsum</uif-button>';
+      let buttonElement: JQuery = $compile(html)(scope);
+      buttonElement = jQuery(buttonElement[0]);
+      scope.$digest();
 
-    //   let html: string = '<uif-button ng-disabled="isDisabled">Lorem Ipsum</uif-button>';
-    //   let buttonElement: JQuery = $compile(html)(currentScope);  // jqLite object
-    //   buttonElement = jQuery(buttonElement[0]);           // jQuery object
-    //   currentScope.$digest();
+      // button calls event.preventDefault on click
+      let e: Event = $.Event('click');
+      buttonElement.trigger('e');
+      expect(e.preventDefault).toBeTruthy();
+    }));
 
-    //   expect(buttonElement[0]).toHaveClass('is-disabled');
-    //   expect(buttonElement.attr('disabled')).toBe('disabled', 'button should be disabled');
+    it('should be able to be toggled between enabled and disabled', inject(($compile: Function) => {
+      let currentScope: any = scope.$new();
+      currentScope.disabled = true;
 
-    //   currentScope.isDisabled = false;
-    //   currentScope.$digest();
+      let html: string = '<uif-button ng-disabled="disabled">Lorem Upsum</uif-button>';
+      let buttonElement: JQuery = $compile(html)(currentScope);
+      buttonElement = jQuery(buttonElement[0]);
+      scope.$digest();
 
-    //   expect(element).not.toHaveClass('is-disabled');
-    //   expect(element.attr('disabled')).toBe(undefined, 'button should not be disabled');
-    // }));
+      expect(buttonElement).toHaveClass('is-disabled');
+      expect(buttonElement.attr('disabled')).toBe('disabled', 'button should be disabled');
+
+      currentScope.disabled = false;
+      currentScope.$digest();
+
+      expect(element).not.toHaveClass('is-disabled');
+      expect(element.attr('disabled')).toBe(undefined, 'button should not be disabled');
+    }));
 
     /**
      * action (default) button tests
@@ -594,15 +606,43 @@ describe('buttonDirective: <uif-button />', () => {
       //   <span class="ms-Button-label">Button as &lt;a&gt;</span>
       // </a>
 
-      let html: string = '<uif-button disabled ng-href="http://ngOfficeUiFabric.com">Lorem Ipsum</uif-button>';
+      let html: string = '<uif-button disabled="disabled" ng-href="http://ngOfficeUiFabric.com">Lorem Ipsum</uif-button>';
       let linkElement: JQuery = $compile(html)(scope);  // jqLite object
       linkElement = jQuery(linkElement[0]);             // jQuery object
       scope.$digest();
 
-      // verify no disabled class present
+      // verify disabled class present
       expect(linkElement[0]).toHaveClass('is-disabled');
     }));
 
+    it('should call preventDefault in disabled state', inject(($compile: Function) => {
+      let html: string = '<uif-button disabled="disabled" ng-href="http://ngOfficeUiFabric.com">Lorem Ipsum</uif-button>';
+      let linkElement: JQuery = $compile(html)(scope);  // jqLite object
+      linkElement = jQuery(linkElement[0]);             // jQuery object
+      scope.$digest();
+
+      // button calls event.preventDefault on click
+      let e: Event = $.Event('click');
+      linkElement.trigger('e');
+      expect(e.preventDefault).toBeTruthy();
+    }));
+
+    it('should be able to be toggled between enabled and disabled', inject(($compile: Function) => {
+      let currentScope: any = scope.$new();
+      currentScope.disabled = true;
+
+      let html: string = '<uif-button ng-disabled="disabled" ng-href="http://ngOfficeUiFabric.com">Lorem Upsum</uif-button>';
+      let buttonElement: JQuery = $compile(html)(currentScope);
+      buttonElement = jQuery(buttonElement[0]);
+      scope.$digest();
+
+      expect(buttonElement).toHaveClass('is-disabled');
+
+      currentScope.disabled = false;
+      currentScope.$digest();
+
+      expect(element).not.toHaveClass('is-disabled');
+    }));
     /**
      * action (default) button tests
      */
