@@ -183,4 +183,24 @@ describe('textFieldDirective: <uif-textfield />', () => {
         textArea = jQuery(textArea);
         expect(textArea.attr('type')).toBe(undefined, 'textarea can not be set of type password');
     }));
+
+    // input with placeholder should focus on click on label
+    // click on the placeholder should hide it an set the focus into the input field
+    it('input with placeholder should focus on click on label', inject (($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        let textBox: JQuery = $compile('<uif-textfield placeholder="Placeholder contents"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let label: JQuery = textBox.find('div.ms-TextField--placeholder label.ms-Label');
+        expect(label.html()).toBe('Placeholder contents');
+        expect(label.hasClass('ng-hide')).toBe(false, 'Label should be visible before click');
+
+        let input: JQuery = textBox.find('input.ms-TextField-field');
+        input = jQuery(input);
+
+        spyOn(input[0], 'focus');
+        label.click();
+        expect(input[0].focus).toHaveBeenCalled();
+    }));
 });

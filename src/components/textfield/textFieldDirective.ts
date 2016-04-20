@@ -33,6 +33,7 @@ export interface ITextFieldScope extends ng.IScope {
   uifUnderlined: boolean;
   inputFocus: (ev: any) => void;
   inputBlur: (ev: any) => void;
+  labelClick: (ev: any) => void;
   isActive: boolean;
   required: boolean;
   disabled: boolean;
@@ -94,7 +95,7 @@ export class TextFieldDirective implements ng.IDirective {
   '<div ng-class="{\'is-active\': isActive, \'ms-TextField\': true, ' +
   '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder, ' +
   '\'is-required\': required, \'is-disabled\': disabled, \'ms-TextField--multiline\' : uifMultiline }">' +
-  '<label ng-show="labelShown" class="ms-Label">{{uifLabel || placeholder}}</label>' +
+  '<label ng-show="labelShown" class="ms-Label" ng-click="labelClick()">{{uifLabel || placeholder}}</label>' +
   '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
       'class="ms-TextField-field" ng-show="!uifMultiline" ng-disabled="disabled" type="{{uifType}}" />' +
   '<textarea ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
@@ -162,6 +163,12 @@ export class TextFieldDirective implements ng.IDirective {
         scope.labelShown = true;
       }
       scope.isActive = false;
+    };
+    scope.labelClick = function(ev: any): void {
+      if (scope.placeholder) {
+        let input: JQuery = instanceElement.find('input');
+        input[0].focus();
+      }
     };
 
     if (ngModel != null) {
