@@ -168,7 +168,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
     }));
 
     // input should be able to be of type password
-    // multiline (textbox) is no abel to be set of type password
+    // multiline (textbox) is not abel to be set of type password
     it('input should be able to be of type password', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let textBox: JQuery = $compile('<uif-textfield ng-model="value" uif-type="password"></uif-textfield>')($scope);
