@@ -166,9 +166,10 @@ export class TextFieldDirective implements ng.IDirective {
     };
     scope.labelClick = function(ev: any): void {
       if (scope.placeholder) {
-        let input: JQuery = instanceElement.find('input');
-        input[0].focus();
-      }
+          let input: JQuery = scope.uifMultiline  ? instanceElement.find('textarea')
+                                                  : instanceElement.find('input');
+          input[0].focus();
+        }
     };
 
     if (ngModel != null) {

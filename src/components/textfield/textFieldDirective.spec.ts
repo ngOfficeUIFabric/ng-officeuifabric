@@ -202,5 +202,21 @@ describe('textFieldDirective: <uif-textfield />', () => {
         spyOn(input[0], 'focus');
         label.click();
         expect(input[0].focus).toHaveBeenCalled();
+
+        // multiline tests
+        textBox = $compile('<uif-textfield placeholder="Placeholder contents" uif-multiline="true"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        label = textBox.find('div.ms-TextField--placeholder label.ms-Label');
+        expect(label.html()).toBe('Placeholder contents');
+        expect(label.hasClass('ng-hide')).toBe(false, 'Label should be visible before click');
+
+        input = textBox.find('textarea.ms-TextField-field');
+        input = jQuery(input);
+
+        spyOn(input[0], 'focus');
+        label.click();
+        expect(input[0].focus).toHaveBeenCalled();
     }));
 });
