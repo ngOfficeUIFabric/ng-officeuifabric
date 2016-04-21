@@ -5,6 +5,20 @@
 ------------------
 
 
+<a name="0.8.4"></a>
+### [0.8.4 - April 21, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.8.4)
+
+#### Fixes
+
+- **uif-button**
+  - disabled not watched and handled ([59a2b87](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/59a2b87))
+- **uif-textfield**
+  - clear placeholder on click ([1ed03de](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1ed03de), Closes [#305](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/305))
+
+
+------------------
+
+
 <a name="0.8.3"></a>
 ### [0.8.3 - April 19, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.8.3)
 
