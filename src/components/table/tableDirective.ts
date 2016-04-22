@@ -2,6 +2,7 @@
 
 import * as ng from 'angular';
 import {TableRowSelectModeEnum} from './tableRowSelectModeEnum';
+import {TableTypeEnum} from './tableTypeEnum';
 
 /**
  * @ngdoc interface
@@ -15,13 +16,15 @@ import {TableRowSelectModeEnum} from './tableRowSelectModeEnum';
  * @property {boolean} orderAsc - Specifies whether the data in the table should be sort ascending or descending.
  *                                Default `true` (sorting ascending)
  * @property {string} rowSelectMode - Specifies the row selection mode used by the table
- * @property {ITableRowScope[]} - Contains the data rows (all except the header row) that belong to the table 
+ * @property {ITableRowScope[]} - Contains the data rows (all except the header row) that belong to the table
  */
 export interface ITableScope extends ng.IScope {
     orderBy?: string;
     orderAsc: boolean;
     rowSelectMode?: string;
     rows: ITableRowScope[];
+    tableType: string;
+    tableTypeClass: string;
 }
 
 class TableController {
@@ -95,9 +98,14 @@ class TableController {
  *                                         Possible values: none - selecting rows is not possible;
  *                                                          single - only one row can be selected;
  *                                                          multiple - multiple rows can be selected;
+ * @property {string} uifTableType      - Specifies whether the table is renders in fuild or fixed mode.
+ *                                        Possible values: fixed    - the table is rendered in fixed style.
+ *                                                                    Added with Fabric 2.4.
+ *                                                         fluid    - the table style is fuild (Default)
  */
 export interface ITableAttributes extends ng.IAttributes {
     uifRowSelectMode?: string;
+    uifTableType?: string;
 }
 
 /**
@@ -139,7 +147,7 @@ export class TableDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public replace: boolean = true;  // required for correct HTML rendering
-    public template: string = '<table class="ms-Table" ng-transclude></table>';
+    public template: string = '<table ng-class="[\'ms-Table\', tableTypeClass]" ng-transclude></table>';
     public controller: any = TableController;
     public controllerAs: string = 'table';
 
@@ -162,6 +170,22 @@ export class TableDirective implements ng.IDirective {
 
         if (scope.rowSelectMode === undefined) {
             scope.rowSelectMode = TableRowSelectModeEnum[TableRowSelectModeEnum.none];
+        }
+
+        if (attrs.uifTableType !== undefined && attrs.uifTableType !== null) {
+            if (TableTypeEnum[attrs.uifTableType] === undefined) {
+                controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+                '\'' + attrs.uifTableType + '\' is not a valid option for \'uif-table-type\'. ' +
+                'Valid options are fixed|fluid.');
+            } else {
+                scope.tableType = attrs.uifTableType;
+            }
+        }
+        if (scope.tableType === undefined) {
+            scope.tableType = TableTypeEnum[TableTypeEnum.fluid];
+        }
+        if (scope.tableType === TableTypeEnum[TableTypeEnum.fixed]) {
+            scope.tableTypeClass = 'ms-Table--fixed';
         }
     }
 }
