@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-message-banner demo</title>
+    <meta charset="utf-8">
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+    <h1 class="ms-font-su">Message Banner Demo | &lt;uif-message-banner&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <!-- first example -->
+    <p>To render message banner, use the following markup:
+        <br />
+        <code>
+            &lt;uif-message-banner uif-is-open=&quot;true&quot; uif-message=&quot;Testmessage&quot; uif-action-label=&quot;Testbutton&quot; uif-action=&quot;alert('test')&quot; /&gt;
+        </code>
+    </p>
+
+    <p>
+        <uif-message-banner uif-is-open="true" uif-message="Testmessage" uif-action-label="Testbutton" uif-action="alert('test')" />
+    </p>
+</body>
+
+</html>
