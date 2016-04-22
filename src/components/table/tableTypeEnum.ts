@@ -10,7 +10,7 @@
  *
  * This is used to generate the string that you pass into the `uif-table-type` attribute of the following components:
  *
- * let style: string = InputTypeEnum[InputTypeEnum.text];
+ * let style: string = TableTypeEnum[TableTypeEnum.text];
  */
 export enum TableTypeEnum {
   fluid,

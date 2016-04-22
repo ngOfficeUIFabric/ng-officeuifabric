@@ -37,7 +37,7 @@ describe('tableDirective: <uif-table />', () => {
         expect(element).toHaveClass('ms-Table--fixed');
     }));
 
-    it('should set correct Office UI Fabric fulid class on the table for the \'uif-table-type\' attribute',
+    it('should set correct Office UI Fabric fluid class on the table for the \'uif-table-type\' attribute',
        inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table uif-table-type="fluid"></uif-table>');
         $compile(element)(scope);

@@ -98,10 +98,10 @@ class TableController {
  *                                         Possible values: none - selecting rows is not possible;
  *                                                          single - only one row can be selected;
  *                                                          multiple - multiple rows can be selected;
- * @property {string} uifTableType      - Specifies whether the table is renders in fuild or fixed mode.
+ * @property {string} uifTableType      - Specifies whether the table is rendered in fluid or fixed mode.
  *                                        Possible values: fixed    - the table is rendered in fixed style.
  *                                                                    Added with Fabric 2.4.
- *                                                         fluid    - the table style is fuild (Default)
+ *                                                         fluid    - the table style is fluid (Default)
  */
 export interface ITableAttributes extends ng.IAttributes {
     uifRowSelectMode?: string;
