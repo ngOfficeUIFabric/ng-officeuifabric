@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "angular": "1.5.5",
-    "office-ui-fabric": "2.3.0"
+    "office-ui-fabric": "2.4.1"
   },
   "devDependencies": {
     "angular-animate": "1.5.5",

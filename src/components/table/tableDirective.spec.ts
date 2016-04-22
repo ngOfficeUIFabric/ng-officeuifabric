@@ -29,6 +29,31 @@ describe('tableDirective: <uif-table />', () => {
         expect(element).toHaveClass('ms-Table');
     }));
 
+    it('should set correct Office UI Fabric fixed class on the table for the \'uif-table-type\' attribute',
+       inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        element = ng.element('<uif-table uif-table-type="fixed"></uif-table>');
+        $compile(element)(scope);
+        scope.$digest();
+        expect(element).toHaveClass('ms-Table--fixed');
+    }));
+
+    it('should set correct Office UI Fabric fluid class on the table for the \'uif-table-type\' attribute',
+       inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        element = ng.element('<uif-table uif-table-type="fluid"></uif-table>');
+        $compile(element)(scope);
+        scope.$digest();
+        expect(element).not.toHaveClass('ms-Table--fixed');
+    }));
+
+    it('should throw an error on an invalid value for the \'uif-table-type\' attribute',
+       inject(($compile: Function, $rootScope: ng.IRootScopeService, $log: ng.ILogService) => {
+        element = ng.element('<uif-table uif-table-type="invalid"></uif-table>');
+        $compile(element)(scope);
+        scope.$digest();
+
+        expect($log.error.logs.length).toEqual(1);
+     }));
+
     it('should render the row using a tr tag', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         element = ng.element('<uif-table><uif-table-row></uif-table-row></uif-table>');
         $compile(element)(scope);
