@@ -15,6 +15,12 @@ import * as ng from 'angular';
  * @property {string} uifLabelOff     - The label to display when not toggled
  * @property {string} uifLabelOn      - The label to display when toggled
  * @property {string} uifTextLocation - Location of the label (left or right), compared to the toggle  
+ * @property {string} uniqueId
+ * @property {string} textLocation
+ * @property {string} disabled
+ * @property {string} ngChange        - Expression to be called on the ngChange event of the input element
+ * @property {string} ngTrueValue     - Pass a constant for the ng-true-value of the input element
+ * @property {string} ngFalseValue    - Pass a constant for the ng-false-value of the input element
  */
 
 export interface IToggleScope extends ng.IScope {
@@ -25,6 +31,9 @@ export interface IToggleScope extends ng.IScope {
     uniqueId: number;
     textLocation: string;
     disabled: boolean;
+    ngChange: string;
+    ngTrueValue: string;
+    ngFalseValue: string;
 }
 
 /**
@@ -46,7 +55,9 @@ export interface IToggleScope extends ng.IScope {
 export class ToggleDirective implements ng.IDirective {
     public template: string = '<div ng-class="[\'ms-Toggle\', textLocation, {\'is-disabled\': disabled}]">' +
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
-                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ng-model="ngModel" ng-disabled="disabled"/>' +
+                '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ' +
+                'ng-model="ngModel" ng-change="ngChange()" ng-disabled="disabled" ' +
+                'ng-attr-ng-true-value="{{ngTrueValue || undefined}}" ng-attr-ng-false-value="{{ngFalseValue || undefined}}" />' +
                 '<label for="{{::$id}}" class="ms-Toggle-field">' +
                     '<span class="ms-Label ms-Label--off">{{uifLabelOff}}</span>' +
                     '<span class="ms-Label ms-Label--on">{{uifLabelOn}}</span>' +
@@ -55,7 +66,10 @@ export class ToggleDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public scope: {} = {
+        ngChange: '&?',
+        ngFalseValue: '@?',
         ngModel: '=?',
+        ngTrueValue: '@?',
         uifLabelOff: '@',
         uifLabelOn: '@',
         uifTextLocation: '@'

@@ -93,4 +93,63 @@ describe('toggleDirective: <uif-toggle />', () => {
         input = toggle.find('input');
         expect(input.attr('disabled')).toBe(undefined, 'Input element is not disabled');
     }));
+
+    it('should call the function passed to ng-change on toggle', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.testValue = false;
+        $scope.toggled = false;
+        $scope.toggleMe = (someValue) => {
+            // dummy function.
+        };
+
+        spyOn($scope, 'toggleMe');
+
+        let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"'
+            + 'ng-change="toggleMe(testValue)"></uif-toggle>')($scope);
+        toggle = jQuery(toggle[0]);
+        $scope.$apply();
+
+        let checkBox: JQuery = toggle.find('input.ms-Toggle-input');
+        checkBox.click();
+        $scope.$apply();
+
+        expect($scope.toggleMe).toHaveBeenCalledWith($scope.testValue);
+
+    }));
+
+    it('display the attribute ng-true-value only if passed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.toggled = false;
+
+        let trueToggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"'
+            + 'ng-true-value="\'YES\'"></uif-toggle>')($scope);
+        $scope.$apply();
+        let trueInput: JQuery = trueToggle.find('input');
+
+        expect(trueInput.attr('ng-true-value') === "'YES'").toBe(true);
+
+        let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"></uif-toggle>')($scope);
+        $scope.$apply();
+        let input: JQuery = toggle.find('input');
+
+        expect(input.attr('ng-true-value') === undefined).toBe(true);
+    }));
+
+    it('display the attribute ng-false-value only if passed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.toggled = false;
+
+        let falseToggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"'
+            + 'ng-false-value="\'NO\'"></uif-toggle>')($scope);
+        $scope.$apply();
+        let falseInput: JQuery = falseToggle.find('input');
+
+        expect(falseInput.attr('ng-false-value') === "'NO'").toBe(true);
+
+        let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"></uif-toggle>')($scope);
+        $scope.$apply();
+        let input: JQuery = toggle.find('input');
+
+        expect(input.attr('ng-false-value') === undefined).toBe(true);
+    }));
 });
