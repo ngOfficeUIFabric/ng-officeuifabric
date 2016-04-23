@@ -45,6 +45,14 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
       expect($element).toHaveClass('is-open');
     }));
 
+    it('should return menu visibility status', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      $scope.isOpen = true;
+      $scope.$digest();
+      let contextMenuCtrl: any = angular.element($element[0]).controller('uifContextualMenu');
+
+      expect(contextMenuCtrl.isMenuOpened()).toBe(true);
+    }));
+
     it('should have enhanced content', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
       let content: JQuery = $element.find('li a').first().find('.uif-content');
 
@@ -104,81 +112,44 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
     }));
 
     it('should write an error - invalid \'uif-is-open\' attribute usage', inject(
-      ($compile: Function,
-        $rootScope: ng.IRootScopeService,
-        /* tslint:disable:variable-name */
-        _$log_: any) => {
-        /* tslint:enable:variable-name */
+      ($compile: Function, $rootScope: ng.IRootScopeService, $log: any) => {
 
         $scope = $rootScope.$new();
 
-        spyOn(_$log_, 'error');
+        spyOn($log, 'error');
 
         $scope.isOpen = 'invalid';
-
         $compile(ng.element(`
                     <uif-contextual-menu uif-is-open="isOpen">
                       <uif-contextual-menu-item uif-text="'Item1'"></uif-contextual-menu-item>
                     </uif-contextual-menu>`))($scope);
         $scope.$digest();
 
-        expect(_$log_.error).toHaveBeenCalled();
+        expect($log.error).toHaveBeenCalled();
       }));
 
     it('should write an error - invalid \'uif-is-selected\' attribute usage', inject(
-      ($compile: Function,
-        $rootScope: ng.IRootScopeService,
-        /* tslint:disable:variable-name */
-        _$log_: any) => {
-        /* tslint:enable:variable-name */
+      ($compile: Function, $rootScope: ng.IRootScopeService, $log: any) => {
 
         $scope = $rootScope.$new();
 
-        spyOn(_$log_, 'error');
+        spyOn($log, 'error');
 
         $scope.isSelected = 'invalid';
-
         $compile(ng.element(`
                     <uif-contextual-menu>
                       <uif-contextual-menu-item uif-text="'Item1'" uif-is-selected="isSelected"></uif-contextual-menu-item>
                     </uif-contextual-menu>`))($scope);
         $scope.$digest();
 
-        expect(_$log_.error).toHaveBeenCalled();
-      }));
-
-    it('should write an error - invalid \'disabled\' attribute usage', inject(
-      ($compile: Function,
-        $rootScope: ng.IRootScopeService,
-        /* tslint:disable:variable-name */
-        _$log_: any) => {
-        /* tslint:enable:variable-name */
-
-        $scope = $rootScope.$new();
-
-        spyOn(_$log_, 'error');
-
-        $scope.isDisabled = 'invalid';
-
-        $compile(ng.element(`
-                    <uif-contextual-menu>
-                      <uif-contextual-menu-item uif-text="'Item1'" disabled="isDisabled"></uif-contextual-menu-item>
-                    </uif-contextual-menu>`))($scope);
-        $scope.$digest();
-
-        expect(_$log_.error).toHaveBeenCalled();
+        expect($log.error).toHaveBeenCalled();
       }));
 
     it('should write an error - no text for menu item provided', inject(
-      ($compile: Function,
-        $rootScope: ng.IRootScopeService,
-        /* tslint:disable:variable-name */
-        _$log_: any) => {
-        /* tslint:enable:variable-name */
-
+      ($compile: Function, $rootScope: ng.IRootScopeService, $log: any) => {
         $scope = $rootScope.$new();
 
-        spyOn(_$log_, 'error');
+        spyOn($log, 'error');
 
         $compile(ng.element(`
                     <uif-contextual-menu>
@@ -186,7 +157,7 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
                     </uif-contextual-menu>`))($scope);
         $scope.$digest();
 
-        expect(_$log_.error).toHaveBeenCalled();
+        expect($log.error).toHaveBeenCalled();
       }));
   });
 
@@ -247,6 +218,45 @@ describe('contextualmenu: <uif-contextual-menu />', () => {
       $element.find('li a').eq(1).click();
       $scope.$digest();
       expect($element).not.toHaveClass('is-open');
+    }));
+  });
+
+  describe('disabled items test', () => {
+    let $element: JQuery;
+    let $scope: any;
+
+    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+      $element = ng.element(`
+                    <uif-contextual-menu uif-is-open="isOpen">
+                        <uif-contextual-menu-item disabled="disabled" uif-text="'Item1'"></uif-contextual-menu-item>
+                        <uif-contextual-menu-item ng-disabled="itemDisabled" uif-text="'Item2'"></uif-contextual-menu-item>
+                    </uif-contextual-menu>`);
+      $scope = $rootScope;
+      $scope.isOpen = true;
+      $scope.$digest();
+      $compile($element)($scope);
+      $element = jQuery($element[0]);
+      $scope.$digest();
+    }));
+
+    it('should change disabled state', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      $scope.itemDisabled = true;
+      $scope.$apply();
+
+      let $secondItem: JQuery = $element.find('.ms-ContextualMenu-link').eq(1);
+
+      expect($secondItem).toHaveClass('is-disabled');
+
+      $scope.itemDisabled = false;
+      $scope.$apply();
+
+      expect($secondItem).not.toHaveClass('is-disabled');
+    }));
+
+    it('should set initial disabled state', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      let $firstItem: JQuery = $element.find('.ms-ContextualMenu-link').eq(0);
+
+      expect($firstItem).toHaveClass('is-disabled');
     }));
 
   });
