@@ -13,7 +13,7 @@ var demoApp = angular.module('demoApp', [
     template: '<pre class="code" ng-bind-html="data"></pre>',
     restrict: 'E',
     link: function (scope, element, attrs, controller, $transclude) {
-      let template = angular.element(document.getElementById(scope.src));
+      var template = angular.element(document.getElementById(scope.src));
       scope.data = $sce.trustAsHtml(element.text(template.html()).html());
     }
   };
