@@ -58,7 +58,6 @@ export class ContextualMenuItemDirective implements ng.IDirective {
   public replace: boolean = true;
 
   public scope: {} = {
-    isDisabled: '=?disabled',
     isSelected: '=?uifIsSelected',
     onClick: '&ngClick',
     text: '=?uifText',
@@ -119,19 +118,16 @@ export class ContextualMenuItemDirective implements ng.IDirective {
     contextualMenuController: ContextualMenuController,
     $transclude: ng.ITranscludeFunction): void => {
 
-    if (typeof $scope.isDisabled !== 'boolean' && $scope.isDisabled !== undefined) {
-      contextualMenuController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.contextualmenu - ' +
-        'invalid attribute type: \'uif-is-disabled\'.\n' +
-        'The type \'' + typeof $scope.isDisabled + '\' is not supported as valid type for \'uif-is-disabled\' attribute for ' +
-        '<uif-contextual-menu-item />. The valid type is boolean.');
-    }
-
     if (typeof $scope.isSelected !== 'boolean' && $scope.isSelected !== undefined) {
       contextualMenuController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.contextualmenu - ' +
         'invalid attribute type: \'uif-is-selected\'.\n' +
         'The type \'' + typeof $scope.isSelected + '\' is not supported as valid type for \'uif-is-selected\' attribute for ' +
         '<uif-contextual-menu-item />. The valid type is boolean.');
     }
+
+    $attrs.$observe('disabled', (disabled) => {
+      $scope.isDisabled = !!disabled;
+    });
 
     this.transcludeChilds($scope, $element, $transclude);
 
