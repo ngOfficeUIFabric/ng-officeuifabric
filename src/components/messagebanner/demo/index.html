@@ -15,10 +15,11 @@
     <script src="index.js"></script>
 </head>
 
-<body ng-app="demoApp">
+<body ng-app="demoApp" ng-controller="messageBannerDemoController">
     <h1 class="ms-font-su">Message Banner Demo | &lt;uif-message-banner&gt;</h1>
     <em>In order for this demo to work you must first build the library in debug mode.</em>
 
+    <input type="checkbox" ng-model="bannerToggle" />Show/hide
     <!-- first example -->
     <p>To render message banner, use the following markup:
         <br />
@@ -28,7 +29,14 @@
     </p>
 
     <p>
-        <uif-message-banner uif-is-open="true" uif-message="Testmessage" uif-action-label="Testbutton" uif-action="alert('test')" />
+        <uif-message-banner uif-is-open="bannerToggle" uif-message="Testmessage" uif-action-label="Testbutton" uif-action="customFunction()"
+            uif-on-close="customCloseFunction()" />
+    </p>
+    <h2>uif-content demo</h2>
+    <p>
+        <uif-message-banner uif-is-open="bannerToggle" uif-action-label="Testbutton" uif-action="myFunction()" uif-on-close="customCloseFunction()">
+            <uif-content><b>Some formatted content</b></uif-content>
+        </uif-message-banner>
     </p>
 </body>
 
