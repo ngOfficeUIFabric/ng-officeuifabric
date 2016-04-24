@@ -11,11 +11,14 @@ function messageBannerDemoController($scope, $log, $window) {
   $scope.customFunction = function () {
     alert('this is a test message');
   }
-  
+
   $scope.customCloseFunction = function () {
     alert('message banner closed');
   }
-  
-  $scope.bannerToggle = false;
+
+  $scope.vm = {
+    bannerToggle: true,
+    message: 'Lorem Ipsum'
+  };
 }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-message-banner demo</title>
+    <meta charset="utf-8">
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp" ng-controller="messageBannerDemoController">
+    <h1 class="ms-font-su">Message Banner Demo | &lt;uif-message-banner&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+
+    <h2>uif-content demo</h2>
+    <input type="checkbox" ng-model="vm.bannerToggle" />Show/hide
+    <!-- first example -->
+    <p>To render message banner, use the following markup:
+        <br />
+        <code>
+        &lt;uif-message-banner uif-is-visible=&quot;vm.bannerToggle&quot; uif-action-label=&quot;Testbutton&quot; uif-action=&quot;customFunction()&quot; uif-on-close=&quot;customCloseFunction()&quot;&gt;
+            &lt;uif-content&gt;
+                &lt;b&gt;Some formatted content&lt;/b&gt; Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                duo dolores et ea rebum.
+            &lt;/uif-content&gt;
+        &lt;/uif-message-banner&gt;
+        </code>
+    </p>
+    <p>
+        <uif-message-banner uif-is-visible="vm.bannerToggle" uif-action-label="Testbutton" uif-action="customFunction()" uif-on-close="customCloseFunction()">
+            <uif-content>
+                <b>Some formatted content</b> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                duo dolores et ea rebum.
+            </uif-content>
+        </uif-message-banner>
+    </p>
+</body>
+
+</html>

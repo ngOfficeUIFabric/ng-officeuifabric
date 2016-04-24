@@ -25,15 +25,16 @@ export class MessageBannerController {
  * This is the scope used by the `<uif-message-banner />` directive.
  *
  *  
- * @property {string} actionLabel    - Label for the action button.
- * @property {string} message        - Message text
- * @property {boolean} isOpen        - Hide or show message banner
+ * @property {string} actionLabel   - Label for the action button.
+ * @property {string} message       - Message text
+ * @property {boolean} isVisible    - Hide or show message banner   
  * 
  */
 export interface IMessageBannerScope extends ng.IScope {
     actionLabel: string;
+    isExpanded: boolean;
+    isVisible: boolean;
     message: string;
-    isOpen: boolean;
 }
 
 /**
@@ -47,7 +48,7 @@ export interface IMessageBannerScope extends ng.IScope {
  * @property {Function} uifAction       - Expression to be called on the button click event
  * @property {string} uifActionLabel    - Label for the action button.
  * @property {string} uifMessage        - Message text
- * @property {boolean} uifIsOpen        - Hide or show message banner
+ * @property {boolean} uifIsVisible     - Hide or show the message banner
  * @property {Function} uifOnClose      - Expression to be called on message banner close event
  *
  */
@@ -55,7 +56,7 @@ export interface IMessageBannerAttributes extends ng.IAttributes {
     uifAction: () => void;
     uifActionLabel: string;
     uifMessage: string;
-    uifIsOpen: boolean;
+    uifIsVisible: boolean;
     uifOnClose: () => void;
 }
 
@@ -87,20 +88,25 @@ export class MessageBannerDirective implements ng.IDirective {
     public replace: boolean = false;
     public require: string = 'uifMessageBanner';
 
+    public isExpanded: boolean = false;
+
     public template: string = '' +
-    '<div class="ms-MessageBanner">' +
+    '<div class="ms-MessageBanner" ng-show="uifIsVisible">' +
     '<div class="ms-MessageBanner-content">' +
     '<div class="ms-MessageBanner-text">' +
     '<div class="ms-MessageBanner-clipper"></div>' +
     '</div>' +
-    '<uif-button uif-type="command" class="ms-MessageBanner-expand is-visible">' +
+    '<uif-button uif-type="command" class="ms-MessageBanner-expand" ng-show="!isExpanded" style="height:52px">' +
     '<uif-icon uif-type="chevronsDown"></uif-icon>' +
+    '</uif-button>' +
+    '<uif-button uif-type="command" class="ms-MessageBanner-expand" ng-show="isExpanded" style="height:52px">' +
+    '<uif-icon uif-type="chevronsUp"></uif-icon>' +
     '</uif-button>' +
     '<div class="ms-MessageBanner-action">' +
     '<uif-button uif-type="primary" class="ms-fontColor-neutralLight" ng-click="uifAction()">{{actionLabel}}</uif-button>' +
     '</div>' +
     '</div>' +
-    '<uif-button uif-type="command" class="ms-MessageBanner-close" ng-click="uifOnClose()">' +
+    '<uif-button uif-type="command" class="ms-MessageBanner-close" ng-click="uifOnClose()" style="height:52px">' +
     '<uif-icon uif-type="x"></uif-icon>' +
     '</uif-button>' +
     '</div>';
@@ -108,9 +114,9 @@ export class MessageBannerDirective implements ng.IDirective {
     public scope: any = {
         uifAction: '&',
         uifActionLabel: '@',
-        uifIsOpen: '=',
-        uifMessage: '=?',
-        uifOnClose: '&'
+        uifIsVisible: '=?',
+        uifMessage: '@',
+        uifOnClose: '&?'
     };
 
     // ui fabric js variables
@@ -131,7 +137,8 @@ export class MessageBannerDirective implements ng.IDirective {
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory =
-            ($log: ng.ILogService, $timeout: ng.ITimeoutService) => new MessageBannerDirective($log, $timeout);
+            ($log: ng.ILogService, $timeout: ng.ITimeoutService) =>
+                new MessageBannerDirective($log, $timeout);
         directive.$inject = ['$log', '$timeout'];
         return directive;
     }
@@ -143,36 +150,25 @@ export class MessageBannerDirective implements ng.IDirective {
 
         $scope.message = $attrs.uifMessage;
         $scope.actionLabel = $attrs.uifActionLabel;
+        $scope.isVisible = $attrs.uifIsVisible;
+        $scope.isExpanded = false;
 
         this._initLocals($elem);
         this.transcludeChilds($scope, $elem, $transclude);
 
-        // office ui fabric functions
+        // office ui fabric functions bindings
         ng.element($controller.$window).bind('resize', () => {
             this._onResize();
             $scope.$digest();
         });
-
-        // watch for message banner toggle
-        $scope.isOpen = $attrs.uifIsOpen;
-        $scope.$watch(
-            'isOpen',
-            (newValue: string, oldValue: string) => {
-                if (typeof newValue !== 'undefined') {
-                    if ($scope.isOpen) {
-                        this._showBanner();
-                    } else {
-                        this._hideBanner();
-                    }
-                }
-            }
-        );
         ng.element(this._chevronButton).bind('click', () => {
-            this._toggleExpansion();
+            this._toggleExpansion($scope);
         });
         ng.element(this._closeButton).bind('click', () => {
-            this._hideBanner();
+            this._hideBanner($scope);
         });
+
+        this._onResize();
     };
 
     private transcludeChilds(
@@ -204,7 +200,7 @@ export class MessageBannerDirective implements ng.IDirective {
                 }
             }
         } else { /* text attribute provided */
-            contentElement.html($scope.message);
+            contentElement.append(ng.element('<span>' + $scope.message + '</span>'));
         }
     }
 
@@ -222,9 +218,9 @@ export class MessageBannerDirective implements ng.IDirective {
      * helper for init of local variables
      */
     private _initLocals($elem: ng.IAugmentedJQuery): void {
-        this._messageBanner = $elem;
+        this._messageBanner = ng.element($elem[0].querySelector('.ms-MessageBanner'));
         this._clipper = ng.element($elem[0].querySelector('.ms-MessageBanner-clipper'));
-        this._chevronButton = ng.element($elem[0].querySelector('.ms-MessageBanner-expand'));
+        this._chevronButton = ng.element($elem[0].querySelectorAll('.ms-MessageBanner-expand'));
         this._actionButton = ng.element($elem[0].querySelector('.ms-MessageBanner-action'));
         this._bufferSize = this._actionButton[0].offsetWidth + this._bufferElementsWidth;
         this._closeButton = ng.element($elem[0].querySelector('.ms-MessageBanner-close'));
@@ -248,12 +244,17 @@ export class MessageBannerDirective implements ng.IDirective {
     private _resizeRegular(): void {
         if ((this._clientWidth - this._bufferSize) > this._initTextWidth && this._initTextWidth < this._textContainerMaxWidth) {
             this._textWidth = 'auto';
-            this._chevronButton[0].className = 'ms-MessageBanner-expand';
-            this._collapse();
+            this._chevronButton.addClass('ms-MessageBanner-expand');
+            // this._collapse();
         } else {
             this._textWidth = Math.min((this._clientWidth - this._bufferSize), this._textContainerMaxWidth) + 'px';
-            if (this._chevronButton[0].className.indexOf('is-visible') === -1) {
-                this._chevronButton[0].className += ' is-visible';
+            for (let i: number = 0; i < this._chevronButton.length; i++) {
+                let chevron: ng.IAugmentedJQuery = ng.element(this._chevronButton[i]);
+                if (!chevron.hasClass('is-visible') && !chevron.hasClass('ng-hide')) {
+                    chevron.addClass('is-visible');
+                } else {
+                    chevron.removeClass('is-visible');
+                }
             }
         }
         this._clipper[0].style.width = this._textWidth;
@@ -265,59 +266,34 @@ export class MessageBannerDirective implements ng.IDirective {
     private _resizeSmall(): void {
         if (this._clientWidth - (this._bufferElementsWidthSmall + this._closeButton[0].offsetWidth) > this._initTextWidth) {
             this._textWidth = 'auto';
-            this._collapse();
+            // this._collapse();
         } else {
             this._textWidth = (this._clientWidth - (this._bufferElementsWidthSmall + this._closeButton[0].offsetWidth)) + 'px';
         }
         this._clipper[0].style.width = this._textWidth;
     };
-    /**
-     * expands component to show full error message
-     */
-    private _expand(): void {
-        let icon: Element = this._chevronButton[0].querySelector('.ms-Icon');
-        this._messageBanner[0].className += ' is-expanded';
-        icon.className = 'ms-Icon ms-Icon--chevronsUp';
-    };
 
-    /**
-     * collapses component to only show truncated message
-     */
-    private _collapse(): void {
-        let icon: Element = this._chevronButton[0].querySelector('.ms-Icon');
-        this._messageBanner[0].className = 'ms-MessageBanner';
-        icon.className = 'ms-Icon ms-Icon--chevronsDown';
-    };
-
-    private _toggleExpansion(): void {
-        if (this._messageBanner[0].className.indexOf('is-expanded') > -1) {
-            this._collapse();
-        } else {
-            this._expand();
-        }
+    private _toggleExpansion($scope: IMessageBannerScope): void {
+        $scope.isExpanded = !$scope.isExpanded;
+        $scope.$digest();
+        this._messageBanner.toggleClass('is-expanded');
     };
 
     /**
      * hides banner when close button is clicked
      */
-    private _hideBanner(): void {
-        if (this._messageBanner[0].className.indexOf('hide') === -1) {
-            this._messageBanner[0].className += ' hide';
+    private _hideBanner($scope: IMessageBannerScope): void {
+        if ($scope.isVisible) {
+            this._messageBanner.addClass('hide');
             this.$timeout(
                 (): void => {
-                    this._messageBanner[0].className = 'ms-MessageBanner is-hidden';
+                    $scope.isVisible = false;
+                    $scope.$digest();
+                    this._messageBanner.removeClass('hide');
                 },
                 500);
         }
     };
-
-    /**
-     * shows banner if the banner is hidden
-     */
-    private _showBanner(): void {
-        this._messageBanner[0].className = 'ms-MessageBanner';
-    };
-    // ui fabric private functions end
 }
 
 /**
