@@ -26,15 +26,14 @@ export class MessageBannerController {
  *
  *  
  * @property {string} actionLabel   - Label for the action button.
- * @property {string} message       - Message text
  * @property {boolean} isVisible    - Hide or show message banner   
  * 
  */
 export interface IMessageBannerScope extends ng.IScope {
-    actionLabel: string;
+    uifActionLabel: string;
+    uifIsVisible: boolean;
+
     isExpanded: boolean;
-    isVisible: boolean;
-    message: string;
 }
 
 /**
@@ -47,7 +46,6 @@ export interface IMessageBannerScope extends ng.IScope {
  *
  * @property {Function} uifAction       - Expression to be called on the button click event
  * @property {string} uifActionLabel    - Label for the action button.
- * @property {string} uifMessage        - Message text
  * @property {boolean} uifIsVisible     - Hide or show the message banner
  * @property {Function} uifOnClose      - Expression to be called on message banner close event
  *
@@ -55,7 +53,6 @@ export interface IMessageBannerScope extends ng.IScope {
 export interface IMessageBannerAttributes extends ng.IAttributes {
     uifAction: () => void;
     uifActionLabel: string;
-    uifMessage: string;
     uifIsVisible: boolean;
     uifOnClose: () => void;
 }
@@ -103,7 +100,7 @@ export class MessageBannerDirective implements ng.IDirective {
     '<uif-icon uif-type="chevronsUp"></uif-icon>' +
     '</uif-button>' +
     '<div class="ms-MessageBanner-action">' +
-    '<uif-button uif-type="primary" class="ms-fontColor-neutralLight" ng-click="uifAction()">{{actionLabel}}</uif-button>' +
+    '<uif-button uif-type="primary" class="ms-fontColor-neutralLight" ng-click="uifAction()">{{ uifActionLabel }}</uif-button>' +
     '</div>' +
     '</div>' +
     '<uif-button uif-type="command" class="ms-MessageBanner-close" ng-click="uifOnClose()" style="height:52px">' +
@@ -115,7 +112,6 @@ export class MessageBannerDirective implements ng.IDirective {
         uifAction: '&',
         uifActionLabel: '@',
         uifIsVisible: '=?',
-        uifMessage: '@',
         uifOnClose: '&?'
     };
 
@@ -148,9 +144,9 @@ export class MessageBannerDirective implements ng.IDirective {
         $attrs: IMessageBannerAttributes, $controller: MessageBannerController,
         $transclude: ng.ITranscludeFunction): void => {
 
-        $scope.message = $attrs.uifMessage;
-        $scope.actionLabel = $attrs.uifActionLabel;
-        $scope.isVisible = $attrs.uifIsVisible;
+        // $scope.message = $attrs.uifMessage;
+        $scope.uifActionLabel = $attrs.uifActionLabel;
+        $scope.uifIsVisible = $attrs.uifIsVisible;
         $scope.isExpanded = false;
 
         this._initLocals($elem);
@@ -178,11 +174,12 @@ export class MessageBannerDirective implements ng.IDirective {
         $transclude((clone: ng.IAugmentedJQuery) => {
             let hasContent: boolean = this.hasItemContent(clone);
 
-            if (!hasContent && !$scope.message) {
+            // if (!hasContent && !$scope.message) {
+            if (!hasContent) {
                 this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.messagebanner - ' +
                     'you need to provide a text for the message banner.\n' +
-                    'For <uif-message-banner> you need to specify either \'uif-message\' ' +
-                    'as attribute or <uif-content> as a child directive');
+                    'For <uif-message-banner> you need to specify' +
+                    '<uif-content> as a child directive');
             }
             this.insertItemContent(clone, $scope, $element);
         });
@@ -199,9 +196,10 @@ export class MessageBannerDirective implements ng.IDirective {
                     break;
                 }
             }
-        } else { /* text attribute provided */
-            contentElement.append(ng.element('<span>' + $scope.message + '</span>'));
         }
+        // } else { /* text attribute provided */
+        //     contentElement.append(ng.element('<span>' + $scope.message + '</span>'));
+        // }
     }
 
     private hasItemContent(clone: ng.IAugmentedJQuery): boolean {
@@ -283,12 +281,12 @@ export class MessageBannerDirective implements ng.IDirective {
      * hides banner when close button is clicked
      */
     private _hideBanner($scope: IMessageBannerScope): void {
-        if ($scope.isVisible) {
+        if ($scope.uifIsVisible) {
             this._messageBanner.addClass('hide');
             this.$timeout(
                 (): void => {
-                    $scope.isVisible = false;
-                    $scope.$digest();
+                    $scope.uifIsVisible = false;
+                    $scope.$apply();
                     this._messageBanner.removeClass('hide');
                 },
                 500);
