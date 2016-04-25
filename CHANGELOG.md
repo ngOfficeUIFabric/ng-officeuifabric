@@ -5,6 +5,30 @@
 ------------------
 
 
+<a name="0.9.0"></a>
+### [0.9.0 - April 25, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.9.0)
+
+#### Features
+
+- **uif-peoplepicker**
+  - add directive ([6e0ba80](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/6e0ba80), Closes [#30](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/30))
+- **uif-table**
+  - add new table type ([c643a25](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/c643a25), [#308](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/308))
+- **uif-toggle**
+  - add ng checkbox attributes support ([bccfb64](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/bccfb64), Closes [#289](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/289))
+
+#### Fixes
+
+- **dependencies**
+  - update library dependencies & verify working with **Office UI Fabric 2.4.1** ([c643a25](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/c643a25))
+- **uif-contextualmenu**
+  - diabled not watched ([c914b96](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/c914b96))
+- **uif-commandbar**, **uif-contextualmenu**, **uif-navbar** & **uif-panel** 
+  - change 'let' keyword in all demos ([8af391f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8af391f), Closes [#313](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/313))
+
+------------------
+
+
 <a name="0.8.4"></a>
 ### [0.8.4 - April 21, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.8.4)
 
