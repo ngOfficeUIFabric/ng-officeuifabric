@@ -40,6 +40,7 @@
       $scope.connected = false;
 
       var defaultPeople = JSON.parse(JSON.stringify(window.demo.people));
+      $scope.selectedPeopleDefault = [];
       var compactPeople = JSON.parse(JSON.stringify(window.demo.people));
       $scope.selectedPeopleCompact = [compactPeople[0], compactPeople[1]];
       var autoSearchPeople = JSON.parse(JSON.stringify(window.demo.people));
@@ -103,6 +104,11 @@
         }, 1000 * 2);
 
         return deferred.promise;
+      }
+
+      $scope.removePerson = function (person) {
+        var indx = $scope.selectedPeopleDefault.indexOf(person);
+        $scope.selectedPeopleDefault.splice(indx, 1);
       }
 
     }]);
