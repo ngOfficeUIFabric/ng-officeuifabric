@@ -18,7 +18,7 @@ function messageBannerDemoController($scope, $log, $window) {
 
   $scope.vm = {
     bannerToggle: true,
-    message: 'Lorem Ipsum'
-  };
+    label: 'test button'
+  }
 }
 
