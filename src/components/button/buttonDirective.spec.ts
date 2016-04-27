@@ -199,9 +199,9 @@ describe('buttonDirective: <uif-button />', () => {
 
     it('should be able to be toggled between enabled and disabled', inject(($compile: Function) => {
       let currentScope: any = scope.$new();
-      currentScope.disabled = true;
+      currentScope.btnDisabled = true;
 
-      let html: string = '<uif-button ng-disabled="disabled">Lorem Upsum</uif-button>';
+      let html: string = '<uif-button ng-disabled="btnDisabled">Lorem Upsum</uif-button>';
       let buttonElement: JQuery = $compile(html)(currentScope);
       buttonElement = jQuery(buttonElement[0]);
       scope.$digest();
@@ -209,7 +209,7 @@ describe('buttonDirective: <uif-button />', () => {
       expect(buttonElement).toHaveClass('is-disabled');
       expect(buttonElement.attr('disabled')).toBe('disabled', 'button should be disabled');
 
-      currentScope.disabled = false;
+      currentScope.btnDisabled = false;
       currentScope.$digest();
 
       expect(element).not.toHaveClass('is-disabled');
@@ -629,16 +629,16 @@ describe('buttonDirective: <uif-button />', () => {
 
     it('should be able to be toggled between enabled and disabled', inject(($compile: Function) => {
       let currentScope: any = scope.$new();
-      currentScope.disabled = true;
+      currentScope.btnDisabled = true;
 
-      let html: string = '<uif-button ng-disabled="disabled" ng-href="http://ngOfficeUiFabric.com">Lorem Upsum</uif-button>';
+      let html: string = '<uif-button ng-disabled="btnDisabled" ng-href="http://ngOfficeUiFabric.com">Lorem Upsum</uif-button>';
       let buttonElement: JQuery = $compile(html)(currentScope);
       buttonElement = jQuery(buttonElement[0]);
       scope.$digest();
 
       expect(buttonElement).toHaveClass('is-disabled');
 
-      currentScope.disabled = false;
+      currentScope.btnDisabled = false;
       currentScope.$digest();
 
       expect(element).not.toHaveClass('is-disabled');
