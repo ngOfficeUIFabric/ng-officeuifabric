@@ -5,6 +5,29 @@
 ------------------
 
 
+<a name="0.10.0"></a>
+### [0.10.0 - April 27, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.0)
+
+#### Features
+
+- **uif-messagebanner**
+  - add directive ([79748c0](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/79748c0), Closes [#299](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/299))
+- **uif-pivot**
+  - add directive ([76d4748](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/76d4748), Closes [#33](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/33))
+
+#### Fixes
+
+- **dependencies**
+  - updated various build / dev dependencies
+- **uif-peoplepicker**
+  - issue when person not removed in demo ([18636c6](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/18636c6), Closes [#317](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/317))
+- **uif-button**
+  - ng-disabled not watched correctly ([aff3fd3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/aff3fd3), Closes [#319](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/319))
+
+
+------------------
+
+
 <a name="0.9.0"></a>
 ### [0.9.0 - April 25, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.9.0)
 
