@@ -31,7 +31,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
     it('should be able to set label and description', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let textBox: JQuery = $compile('<uif-textfield uif-label="Label contents"' +
-                                                     ' uif-description="Description contents"></uif-textfield>')($scope);
+            ' uif-description="Description contents"></uif-textfield>')($scope);
         textBox = jQuery(textBox[0]);
         $scope.$apply();
 
@@ -127,6 +127,18 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(div.hasClass('is-active')).toBe(false, 'Container should not have class in-active when not focused');
     }));
 
+    it('should be able to set min, max and step for input', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        let textBox: JQuery = $compile('<uif-textfield min="0" max="2" step="1" ></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let input: JQuery = textBox.find('input');
+        expect(input.attr('max')).toBe('2', 'max value is set');
+        expect(input.attr('min')).toBe('0', 'min value is set');
+        expect(input.attr('step')).toBe('1', 'step value is set');
+    }));
+
     it('should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
@@ -189,9 +201,23 @@ describe('textFieldDirective: <uif-textfield />', () => {
         expect(textArea.attr('type')).toBe(undefined, 'textarea can not be set of type password');
     }));
 
+    // input should verify uif-type
+    it('should be validating uif-type attributes', inject(($compile: Function, $rootScope: ng.IRootScopeService, $log: ng.ILogService) => {
+        let $scope: any = $rootScope.$new();
+
+        expect($log.error.logs.length).toBe(0);
+        $compile('<uif-textfield ng-model="value" uif-type="invalid"></uif-textfield>')($scope);
+        $scope.$digest();
+
+        expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.textfield - Unsupported type: ' +
+            'The type (\'invalid\') is not supported by the Office UI Fabric. ' +
+            'Supported options are listed here: ' +
+            'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/textfield/uifTypeEnum.ts');
+    }));
+
     // input with placeholder should focus on click on label
     // click on the placeholder should hide it an set the focus into the input field
-    it('input with placeholder should focus on click on label', inject (($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('input with placeholder should focus on click on label', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let textBox: JQuery = $compile('<uif-textfield placeholder="Placeholder contents"></uif-textfield>')($scope);
         textBox = jQuery(textBox[0]);

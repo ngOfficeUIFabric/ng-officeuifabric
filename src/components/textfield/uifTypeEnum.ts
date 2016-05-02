@@ -14,5 +14,10 @@
  */
 export enum InputTypeEnum {
   text,
-  password
+  password,
+  email,
+  url,
+  tel,
+  range,
+  number
 }
