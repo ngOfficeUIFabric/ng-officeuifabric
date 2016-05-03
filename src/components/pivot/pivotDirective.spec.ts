@@ -1,7 +1,6 @@
 'use strict';
 
 import * as ng from 'angular';
-import * as pivot from './pivotDirective';
 
 describe('uif-pivot tests', () => {
   let liteElement: ng.IAugmentedJQuery;
@@ -20,11 +19,12 @@ describe('uif-pivot tests', () => {
 
       beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
         liteElement = ng.element('<uif-pivot></uif-pivot>');
-        scope = $rootScope.$new();
+        scope = $rootScope;
 
         $compile(liteElement)(scope);
-        element = jQuery(liteElement[0]);
         scope.$digest();
+        element = jQuery(liteElement[0]);
+
       }));
 
       it('should render as UL wrapped in UIF-PIVOT', () => {
@@ -44,7 +44,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let list: JQuery = element.children().first();
         expect(list).toHaveClass('ms-Pivot--large');
@@ -55,7 +54,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let ul: JQuery = element.children().first();
         expect(ul).not.toHaveClass('ms-Pivot--large');
@@ -71,7 +69,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         expect($log.error.logs.length === 1).toBeTruthy();
 
@@ -91,7 +88,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let ul: JQuery = element.children().first();
         expect(ul).toHaveClass('ms-Pivot--tabs');
@@ -102,7 +98,7 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
+
         expect($log.error.logs.length === 1).toBeTruthy();
 
         let expectedMessage: string = 'Error [ngOfficeUiFabric] officeuifabric.components.pivot - Unsupported size: ' +
@@ -116,7 +112,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let ul: JQuery = element.children().first();
         expect(ul).not.toHaveClass('ms-Pivot--tabs');
@@ -125,14 +120,13 @@ describe('uif-pivot tests', () => {
       it('should render pivot links', inject(($compile: ng.ICompileService) => {
         liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection"></uif-pivot>');
         scope.pivotCollection = [
-          new pivot.PivotItem('My Files'),
-          new pivot.PivotItem('Recent'),
-          new pivot.PivotItem('Shared with me')
+          {title: 'My Files'},
+          {title: 'Recent'},
+          {title: 'Shared with me'}
         ];
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let pivots: JQuery = element.find('li');
         expect(pivots.length === 3).toBeTruthy();
@@ -147,14 +141,13 @@ describe('uif-pivot tests', () => {
       it('should have proper class when selected', inject(($compile: ng.ICompileService) => {
         liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection"></uif-pivot>');
         scope.pivotCollection = [
-          new pivot.PivotItem('My Files'),
-          new pivot.PivotItem('Recent'),
-          new pivot.PivotItem('Shared with me')
+          {title: 'My Files'},
+          {title: 'Recent'},
+          {title: 'Shared with me'}
         ];
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let pivots: JQuery = element.find('li');
 
@@ -169,14 +162,13 @@ describe('uif-pivot tests', () => {
         liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
-          new pivot.PivotItem('My Files'),
-          new pivot.PivotItem('Recent'),
-          new pivot.PivotItem('Shared with me')
+          {title: 'My Files'},
+          {title: 'Recent'},
+          {title: 'Shared with me'}
         ];
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let pivots: JQuery = element.find('li');
 
@@ -193,25 +185,22 @@ describe('uif-pivot tests', () => {
         liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
-          new pivot.PivotItem('My Files'),
-          new pivot.PivotItem('Recent'),
-          new pivot.PivotItem('Shared with me')
+          {title: 'My Files'},
+          {title: 'Recent'},
+          {title: 'Shared with me'}
         ];
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         scope.$digest();
-        scope.selectedPivot = new pivot.PivotItem('Shared with me');
+        scope.selectedPivot = {title: 'Shared with me'};
         scope.$digest();
 
         let pivots: JQuery = element.find('li');
 
         expect(pivots[2]).toHaveClass('is-selected');
 
-        // expect(scope.selectedPivot).toBeDefined();
-        // expect(scope.selectedPivot.title === 'Recent').toBeTruthy();
 
       }));
 
@@ -219,17 +208,16 @@ describe('uif-pivot tests', () => {
         liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
-          new pivot.PivotItem('My Files'),
-          new pivot.PivotItem('Recent'),
-          new pivot.PivotItem('Recent')
+          {title: 'My Files'},
+          {title: 'Recent'},
+          {title: 'Recent'}
         ];
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         scope.$digest();
-        scope.selectedPivot = new pivot.PivotItem('Recent');
+        scope.selectedPivot = {title: 'Recent'};
         scope.$digest();
 
         let pivots: JQuery = element.find('li');
@@ -237,8 +225,6 @@ describe('uif-pivot tests', () => {
         expect(pivots[1]).toHaveClass('is-selected');
         expect(pivots[2]).not.toHaveClass('is-selected');
 
-        // expect(scope.selectedPivot).toBeDefined();
-        // expect(scope.selectedPivot.title === 'Recent').toBeTruthy();
 
       }));
 
@@ -246,17 +232,16 @@ describe('uif-pivot tests', () => {
         liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
-          new pivot.PivotItem('My Files'),
-          new pivot.PivotItem('Recent'),
-          new pivot.PivotItem('Shared with me')
+          {title: 'My Files'},
+          {title: 'Recent'},
+          {title: 'Shared with me'}
         ];
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         scope.$digest();
-        scope.selectedPivot = new pivot.PivotItem('Shared with me');
+        scope.selectedPivot = {title: 'Shared with me'};
         scope.$digest();
 
         let pivots: JQuery = element.find('li');
@@ -264,7 +249,7 @@ describe('uif-pivot tests', () => {
         expect(pivots[0]).not.toHaveClass('is-selected');
         expect(pivots[2]).toHaveClass('is-selected');
 
-        scope.selectedPivot = new pivot.PivotItem('My Files');
+        scope.selectedPivot = {title: 'My Files'};
         scope.$digest();
         expect(pivots[0]).toHaveClass('is-selected');
         expect(pivots[2]).not.toHaveClass('is-selected');
@@ -277,13 +262,10 @@ describe('uif-pivot tests', () => {
       beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
         liteElement = ng.element('<uif-pivot-ellipsis></uif-pivot-ellipsis>');
 
-        // compile = $compile;
-        // rootScope = $rootScope;
         scope = $rootScope.$new();
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
       }));
 
       it('should render as LI item', () => {
@@ -313,8 +295,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
-        // recompileElement();
 
         let sampleDiv: JQuery = liteElement.find('div');
         expect(sampleDiv.length === 1).toBeTruthy();
@@ -329,7 +309,6 @@ describe('uif-pivot tests', () => {
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
-        // recompileElement();
 
         let ellipsis: JQuery = element.find('uif-pivot-ellipsis');
 
