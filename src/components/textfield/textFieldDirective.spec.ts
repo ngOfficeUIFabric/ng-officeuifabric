@@ -8,12 +8,11 @@ describe('textFieldDirective: <uif-textfield />', () => {
     });
 
     it('should be able to set value', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        
         let $scope: any = $rootScope.$new();
         $scope.valueChanged = () => {
+            // empty body
         };
-        spyOn($scope, 'valueChanged');        
-      
+        spyOn($scope, 'valueChanged');
         $scope.textBoxValue = 'Test 1';
         let textBox: JQuery = $compile('<uif-textfield ng-model="textBoxValue" ng-change="valueChanged()"></uif-textfield>')($scope);
         textBox = jQuery(textBox[0]);
