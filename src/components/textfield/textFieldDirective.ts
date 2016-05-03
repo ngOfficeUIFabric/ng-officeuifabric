@@ -17,6 +17,7 @@ import {InputTypeEnum} from './uifTypeEnum';
  * @property {string} placeholder     - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
  * @property {string} uifDescription  - A longer text description to display below the text field
  * @property {string} ngModel         - The scope variable to bind to the text input.
+ * @property {string} ngChange        - The expression to evaluate when the ngModel changes
  * @property {InputTypeEnum} uifType  - The type of the text field
  * @property {boolean} uifMultiline   - If true, textbox will be rendered as a multiline text area
  *
@@ -26,6 +27,7 @@ export interface ITextFieldScope extends ng.IScope {
   placeholder: string;
   uifDescription: string;
   ngModel: string;
+  ngChange: string;
   uifType: InputTypeEnum;
   uifMultiline: boolean;
 
@@ -96,7 +98,7 @@ export class TextFieldDirective implements ng.IDirective {
   '\'ms-TextField--underlined\': uifUnderlined, \'ms-TextField--placeholder\': placeholder, ' +
   '\'is-required\': required, \'is-disabled\': disabled, \'ms-TextField--multiline\' : uifMultiline }">' +
   '<label ng-show="labelShown" class="ms-Label" ng-click="labelClick()">{{uifLabel || placeholder}}</label>' +
-  '<input ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
+  '<input ng-model="ngModel" ng-change="ngChange" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
       'class="ms-TextField-field" ng-show="!uifMultiline" ng-disabled="disabled" type="{{uifType}}" />' +
   '<textarea ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
       'class="ms-TextField-field" ng-show="uifMultiline" ng-disabled="disabled"></textarea>' +
@@ -104,6 +106,7 @@ export class TextFieldDirective implements ng.IDirective {
   '</div>';
   public scope: {} = {
     ngModel: '=?',
+    ngChange: '=?',
     placeholder: '@',
     uifDescription: '@',
     uifLabel: '@'

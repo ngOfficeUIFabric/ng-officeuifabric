@@ -8,9 +8,14 @@ describe('textFieldDirective: <uif-textfield />', () => {
     });
 
     it('should be able to set value', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        
         let $scope: any = $rootScope.$new();
+        $scope.valueChanged = () => {
+        };
+        spyOn($scope, 'valueChanged');        
+      
         $scope.textBoxValue = 'Test 1';
-        let textBox: JQuery = $compile('<uif-textfield ng-model="textBoxValue"></uif-textfield>')($scope);
+        let textBox: JQuery = $compile('<uif-textfield ng-model="textBoxValue" ng-change="valueChanged()"></uif-textfield>')($scope);
         textBox = jQuery(textBox[0]);
         $scope.$apply();
         let mainDiv: JQuery = getMainDiv(textBox);
@@ -21,6 +26,7 @@ describe('textFieldDirective: <uif-textfield />', () => {
         $scope.textBoxValue = 'Test 2';
         $scope.$apply();
         expect(input.val()).toBe('Test 2');
+        expect($scope.valueChanged).toHaveBeenCalled();
     }));
 
     it('should be able to set label and description', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
