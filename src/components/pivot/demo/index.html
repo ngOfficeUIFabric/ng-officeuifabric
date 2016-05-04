@@ -13,6 +13,11 @@
   <!-- ngofficeuifabric library -->
   <script src="../../../../dist/ngOfficeUIFabric.js"></script>
   <script src="index.js"></script>
+  <style type="text/css">
+    .ms-Pivot {
+      overflow-x: initial;
+    }
+  </style>
 </head>
 
 <body ng-app="demoApp">
@@ -25,6 +30,15 @@
   <div>
     Pivot renders set of links/buttons which can be selected. After being clicked, element is in <i>selected</i> state.
     If specified, it can be bound to scope via <code>uif-selected</code> attribute, allowing to programatically control which link/tab should be selected.
+  </div>
+
+  <div>
+    Due to small bug in <em>Office UI Fabric</em>, elements inside ellipsis might not display correctly. Until its fixed within Fabric UI, you can temporary fix it by overriding a CSS style like this:
+    <code>
+    .ms-Pivot {
+      overflow-x: initial;
+    }
+    </code>
   </div>
 
   <p>&nbsp;</p>
@@ -77,7 +91,7 @@
     </pre>
 
     <p>Gives following output:</p>
-    <uif-pivot uif-type="{{vm.selectedType}}" uif-size="{{vm.selectedSize}}" uif-pivots="vm.pivots" uif-selected="vm.selectedPivot" id="msPivot">
+    <uif-pivot uif-type="{{vm.selectedType}}" uif-size="{{vm.selectedSize}}" uif-pivots="vm.pivots" uif-selected="vm.selectedPivot" id="msPivot" class="pivot-overflow-fix">
       <uif-pivot-ellipsis ng-click="openMenu()">
         <uif-contextual-menu uif-is-open="vm.menuOpened" uif-close-on-click="true">
           <uif-contextual-menu-item uif-text="'New'"></uif-contextual-menu-item>
