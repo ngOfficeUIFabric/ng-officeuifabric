@@ -5,6 +5,19 @@
 ------------------
 
 
+<a name="0.10.1"></a>
+### [0.10.1 - May 4, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.1)
+
+
+#### Fixes
+
+- **uif-textfield**
+  - ng-change not working ([0b33058](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/0b33058), Closes [#324](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/324))
+
+
+------------------
+
+
 <a name="0.10.0"></a>
 ### [0.10.0 - April 27, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.0)
 
