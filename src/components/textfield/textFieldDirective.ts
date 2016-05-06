@@ -30,6 +30,9 @@ export interface ITextFieldScope extends ng.IScope {
   ngChange: string;
   uifType: InputTypeEnum;
   uifMultiline: boolean;
+  max: string;
+  min: string;
+  step: string;
 
   labelShown: boolean;
   uifUnderlined: boolean;
@@ -54,8 +57,8 @@ export interface ITextFieldScope extends ng.IScope {
  *
  */
 export interface ITextFieldAttributes extends ng.IAttributes {
-    uifType: InputTypeEnum;
-    uifMultiline: string;
+  uifType: InputTypeEnum;
+  uifMultiline: string;
 }
 
 /**
@@ -99,15 +102,19 @@ export class TextFieldDirective implements ng.IDirective {
   '\'is-required\': required, \'is-disabled\': disabled, \'ms-TextField--multiline\' : uifMultiline }">' +
   '<label ng-show="labelShown" class="ms-Label" ng-click="labelClick()">{{uifLabel || placeholder}}</label>' +
   '<input ng-model="ngModel" ng-change="ngChange" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
-      'class="ms-TextField-field" ng-show="!uifMultiline" ng-disabled="disabled" type="{{uifType}}" />' +
+  'class="ms-TextField-field" ng-show="!uifMultiline" ng-disabled="disabled" type="{{uifType}}"' +
+  'min="{{min}}" max="{{max}}" step="{{step}}" />' +
   '<textarea ng-model="ngModel" ng-blur="inputBlur()" ng-focus="inputFocus()" ng-click="inputClick()" ' +
-      'class="ms-TextField-field" ng-show="uifMultiline" ng-disabled="disabled"></textarea>' +
+  'class="ms-TextField-field" ng-show="uifMultiline" ng-disabled="disabled"></textarea>' +
   '<span class="ms-TextField-description">{{uifDescription}}</span>' +
   '</div>';
   public scope: {} = {
+    max: '@',
+    min: '@',
     ngChange: '=?',
     ngModel: '=?',
     placeholder: '@',
+    step: '@',
     uifDescription: '@',
     uifLabel: '@'
   };
@@ -121,8 +128,9 @@ export class TextFieldDirective implements ng.IDirective {
     return directive;
   }
 
-  public link(scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery,
-              attrs: ITextFieldAttributes, controllers: any[]): void {
+  public link(
+    scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery,
+    attrs: ITextFieldAttributes, controllers: any[]): void {
 
     let controller: TextFieldController = controllers[0];
     let ngModel: ng.INgModelController = controllers[1];
@@ -143,9 +151,9 @@ export class TextFieldDirective implements ng.IDirective {
           // verify a valid type was passed in
           if (InputTypeEnum[newValue] === undefined) {
             controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.textfield - Unsupported type: ' +
-            'The type (\'' + scope.uifType + '\') is not supported by the Office UI Fabric. ' +
-            'Supported options are listed here: ' +
-            'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/textfield/uifTypeEnum.ts');
+              'The type (\'' + scope.uifType + '\') is not supported by the Office UI Fabric. ' +
+              'Supported options are listed here: ' +
+              'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/textfield/uifTypeEnum.ts');
           }
         } else {
           // default value
@@ -167,12 +175,12 @@ export class TextFieldDirective implements ng.IDirective {
       }
       scope.isActive = false;
     };
-    scope.labelClick = function(ev: any): void {
+    scope.labelClick = function (ev: any): void {
       if (scope.placeholder) {
-          let input: JQuery = scope.uifMultiline  ? instanceElement.find('textarea')
-                                                  : instanceElement.find('input');
-          input[0].focus();
-        }
+        let input: JQuery = scope.uifMultiline ? instanceElement.find('textarea')
+          : instanceElement.find('input');
+        input[0].focus();
+      }
     };
 
     if (ngModel != null) {
