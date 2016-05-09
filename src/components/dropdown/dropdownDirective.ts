@@ -18,6 +18,7 @@ export interface IDropdownScope extends ng.IScope {
     disabled: boolean;
     selectedTitle: string;
     ngModel: ng.INgModelController;
+    placeholder: string;
 }
 
 /**
@@ -134,7 +135,7 @@ export class DropdownController {
                 }
                 if (!found) {
                     // no option found
-                    self.$scope.selectedTitle = '';
+                    self.$scope.selectedTitle = self.$scope.placeholder;
                 }
             };
         }
@@ -199,6 +200,7 @@ export class DropdownDirective implements ng.IDirective {
         let dropdownController: DropdownController = ctrls[0];
         let modelController: ng.INgModelController = ctrls[1];
         scope.ngModel = modelController;
+        scope.placeholder = instanceElement.attr('placeholder');
         dropdownController.init();
 
         scope.$watch(
