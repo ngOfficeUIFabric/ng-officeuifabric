@@ -145,9 +145,7 @@ export class MessageBannerDirective implements ng.IDirective {
         $attrs: IMessageBannerAttributes, $controller: MessageBannerController,
         $transclude: ng.ITranscludeFunction): void => {
 
-        // $scope.message = $attrs.uifMessage;
         $scope.uifActionLabel = $attrs.uifActionLabel;
-        $scope.uifIsVisible = $attrs.uifIsVisible;
         $scope.isExpanded = false;
 
         this._initLocals($elem);
