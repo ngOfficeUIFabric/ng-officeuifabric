@@ -58,14 +58,14 @@ export class OverlayDirective implements ng.IDirective {
     };
     public transclude: Boolean = true;
 
-    public constructor(public log: ng.ILogService) {
-        OverlayDirective.log = log;
-    }
-
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = (log: ng.ILogService) => new OverlayDirective(log);
         directive.$inject = ['$log'];
         return directive;
+    }
+
+    public constructor(public log: ng.ILogService) {
+        OverlayDirective.log = log;
     }
 
     public link(scope: IOverlayScope): void {

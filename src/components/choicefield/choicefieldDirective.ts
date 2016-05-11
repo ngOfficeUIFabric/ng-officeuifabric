@@ -179,7 +179,7 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
  *
  * @description
  * `<uif-choicefield-group-title>` is a choicefield group title directive
- * to render the title component of a choicefield group 
+ * to render the title component of a choicefield group
  */
 
 export class ChoicefieldGroupTitleDirective implements ng.IDirective {
@@ -205,9 +205,11 @@ export class ChoicefieldGroupTitleDirective implements ng.IDirective {
  */
 export class ChoicefieldGroupController {
     public static $inject: string[] = ['$element', '$scope'];
+
+    private renderFns: Function[] = [];
+
     public constructor(public $element: JQuery, public $scope: IChoicefieldGroupScope) {
     }
-    private renderFns: Function[] = [];
 
     public init(): void {
         if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
@@ -217,6 +219,7 @@ export class ChoicefieldGroupController {
             this.render();
         }
     }
+
     public addRender(fn: Function): void {
         this.renderFns.push(fn);
     }

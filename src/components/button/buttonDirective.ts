@@ -87,14 +87,14 @@ export class ButtonDirective implements ng.IDirective {
   // array of all the possibilities for a button
   private templateOptions: { [buttonTemplateType: number]: string } = {};
 
-  constructor(private $log: ng.ILogService) {
-    this._populateHtmlTemplates();
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ButtonDirective($log);
     directive.$inject = ['$log'];
     return directive;
+  }
+
+  constructor(private $log: ng.ILogService) {
+    this._populateHtmlTemplates();
   }
 
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IButtonAttributes) => {

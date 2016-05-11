@@ -44,31 +44,31 @@ export class PersonaCardDirective implements ng.IDirective {
   public require: string[] = ['uifPersonaCard'];
   public controller: any = PersonaCardController;
 
-  public scope: { } = {
+  public scope: {} = {
     'uifPresence': '@',
-    'uifSize' : '@',
-    'uifImageUrl' : '@'
+    'uifSize': '@',
+    'uifImageUrl': '@'
   };
 
   public template: string = '<div class="ms-PersonaCard" ng-class="getPersonaCardClasses()">' +
-    '<div class="ms-PersonaCard-persona">' +
-      '<div class="ms-Persona" ng-class="getPersonaClasses()">' +
-        '<div class="ms-Persona-imageArea">' +
-          '<uif-icon uif-type="person"></uif-icon>' +
-          '<img class="ms-Persona-image" ng-src="{{uifImageUrl}}" ng-if="uifImageUrl">' +
-        '</div>' +
-        '<div class="ms-Persona-presence"></div>' +
-        '<div class="ms-Persona-details"></div>' +
-      '</div>' +
-    '</div>' +
-    '<ul class="ms-PersonaCard-actions">' +
-      '<li ng-repeat="action in personaCardActions" ng-class="getActionClasses(action)" ng-click="selectAction($event, action)">' +
-        '<uif-icon uif-type={{action.icon}} ng-if="action.placeholder != \'overflow\'"></uif-icon>' +
-      '</li>' +
-    '</ul>' +
-    '<div class="ms-PersonaCard-actionDetailBox">' +
-      '<ul ng-class="detailClass"></ul>' +
-    '</div>' +
+  '<div class="ms-PersonaCard-persona">' +
+  '<div class="ms-Persona" ng-class="getPersonaClasses()">' +
+  '<div class="ms-Persona-imageArea">' +
+  '<uif-icon uif-type="person"></uif-icon>' +
+  '<img class="ms-Persona-image" ng-src="{{uifImageUrl}}" ng-if="uifImageUrl">' +
+  '</div>' +
+  '<div class="ms-Persona-presence"></div>' +
+  '<div class="ms-Persona-details"></div>' +
+  '</div>' +
+  '</div>' +
+  '<ul class="ms-PersonaCard-actions">' +
+  '<li ng-repeat="action in personaCardActions" ng-class="getActionClasses(action)" ng-click="selectAction($event, action)">' +
+  '<uif-icon uif-type={{action.icon}} ng-if="action.placeholder != \'overflow\'"></uif-icon>' +
+  '</li>' +
+  '</ul>' +
+  '<div class="ms-PersonaCard-actionDetailBox">' +
+  '<ul ng-class="detailClass"></ul>' +
+  '</div>' +
   '</div>';
 
   public static factory(): ng.IDirectiveFactory {
@@ -77,10 +77,10 @@ export class PersonaCardDirective implements ng.IDirective {
   }
 
   public link: ng.IDirectiveLinkFn = (scope: IPersonaCardScope,
-              element: ng.IAugmentedJQuery,
-              attrs: IPersonaCardAttributes,
-              controllers: any,
-              transclude: ng.ITranscludeFunction): void => {
+    element: ng.IAugmentedJQuery,
+    attrs: IPersonaCardAttributes,
+    controllers: any,
+    transclude: ng.ITranscludeFunction): void => {
 
     let personaCardController: PersonaCardController = controllers[0];
 
@@ -90,20 +90,20 @@ export class PersonaCardDirective implements ng.IDirective {
 
     // validate attributes
     if (ng.isDefined(attrs.uifSize) && ng.isUndefined(PersonaSize[attrs.uifSize])) {
-        personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
-          attrs.uifSize + '" is not a valid value for uifSize. It should be xsmall, small, medium, large, xlarge.');
-        return;
+      personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
+        attrs.uifSize + '" is not a valid value for uifSize. It should be xsmall, small, medium, large, xlarge.');
+      return;
     }
 
     if (ng.isDefined(attrs.uifStyle) && ng.isUndefined(PersonaStyleEnum[attrs.uifStyle])) {
       personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
-          attrs.uifStyle + '" is not a valid value for uifStyle. It should be round or square.');
+        attrs.uifStyle + '" is not a valid value for uifStyle. It should be round or square.');
       return;
     }
 
     if (ng.isDefined(attrs.uifPresence) && ng.isUndefined(PresenceEnum[attrs.uifPresence])) {
       personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
-          attrs.uifPresence + '" is not a valid value for uifPresence. It should be available, away, blocked, busy, dnd or offline.');
+        attrs.uifPresence + '" is not a valid value for uifPresence. It should be available, away, blocked, busy, dnd or offline.');
       return;
     }
 
@@ -237,9 +237,9 @@ export class PersonaCardDirective implements ng.IDirective {
    * Ensures that proper CSS is attached to the action node and registers action in the controller for rendering.
    */
   private processAction(
-                        clone: ng.IAugmentedJQuery,
-                        scope: IPersonaCardScope,
-                        personaCardController: PersonaCardController): ng.IAugmentedJQuery {
+    clone: ng.IAugmentedJQuery,
+    scope: IPersonaCardScope,
+    personaCardController: PersonaCardController): ng.IAugmentedJQuery {
     let classToAdd: string = '';
     let placeholder: string = clone.attr('uif-placeholder');
     let icon: string = clone.attr('uif-icon');
@@ -282,11 +282,11 @@ export class PersonaCardController {
   public static $inject: string[] = ['$log', '$scope'];
 
   private detailCss: { [index: number]: string } = {
-    1 : 'Chat',
-    2 : 'Phone',
-    3 : 'Video',
-    4 : 'Mail',
-    5 : 'Org'
+    1: 'Chat',
+    2: 'Phone',
+    3: 'Video',
+    4: 'Mail',
+    5: 'Org'
   };
 
   constructor(public $log: ng.ILogService, public $scope: IPersonaCardScope) {
@@ -387,12 +387,13 @@ export interface IPersonaCardScope extends ng.IScope {
  * @property {string} detailClass Name of the CSS class that should be applied to list element
  */
 class PersonaCardAction {
+  public isActive: boolean;
+  public detailClass: string;
+
   constructor(
     public icon: string,
     public placeholder: string) { }
 
-    public isActive: boolean;
-    public detailClass: string;
 }
 
 /**
@@ -423,9 +424,9 @@ export class PersonaCardTextDirective implements ng.IDirective {
 
   private availableClasses: { [directiveType: string]: string } = {
     'primary': 'ms-Persona-primaryText',
-    'secondary' : 'ms-Persona-secondaryText',
-    'tertiary' : 'ms-Persona-tertiaryText',
-    'optional' : 'ms-Persona-optionalText'
+    'secondary': 'ms-Persona-secondaryText',
+    'tertiary': 'ms-Persona-tertiaryText',
+    'optional': 'ms-Persona-optionalText'
   };
 
   public static factory(type: string): ng.IDirectiveFactory {
@@ -443,7 +444,7 @@ export class PersonaCardTextDirective implements ng.IDirective {
     if (ng.isUndefined(this.availableClasses[this.directiveType])) {
       this.directiveType = 'optional';
     }
-   }
+  }
 }
 
 /**
@@ -474,18 +475,18 @@ export class PersonaCardActionDirective implements ng.IDirective {
   public require: string = '^?uifPersonaCard';
   public scope: boolean = false;
 
-  constructor(private $log: ng.ILogService) { };
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new PersonaCardActionDirective($log);
     directive.$inject = ['$log'];
     return directive;
   }
 
+  constructor(private $log: ng.ILogService) { };
+
   public template: ng.IComponentTemplateFn = (instanceElement: ng.IAugmentedJQuery, actionAttrs: IPersonaCardActionAttributes) => {
     if (ng.isDefined(actionAttrs.uifPlaceholder) && ng.isUndefined(PlaceholderEnum[actionAttrs.uifPlaceholder])) {
       this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - ' +
-      '"' + actionAttrs.uifPlaceholder + '" is not a valid value for uifPlaceholder. It should be regular, topright or overflow.');
+        '"' + actionAttrs.uifPlaceholder + '" is not a valid value for uifPlaceholder. It should be regular, topright or overflow.');
       return '';
     }
 

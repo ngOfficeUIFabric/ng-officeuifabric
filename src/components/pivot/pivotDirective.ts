@@ -40,8 +40,8 @@ export class PivotController {
  * @property {boolean} selected - used internally to track if current item is selected
  */
 export class PivotItem {
-  constructor(public title: string) {}
   public selected: boolean;
+  constructor(public title: string) {}
 }
 
 /**

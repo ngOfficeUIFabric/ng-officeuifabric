@@ -15,12 +15,12 @@ class OrgChartController {
 
   public static $inject: string[] = ['$scope', '$log'];
 
+  public selectMode: OrgChartSelectModeEnum;
+
   constructor(public $scope: IOrgChartScope, public $log: ng.ILogService) {
     this.$scope.selectMode = null;
     this.$scope.items = [];
   }
-
-  public selectMode: OrgChartSelectModeEnum;
 
   get items(): IOrgChartPersonaScope[] {
     return this.$scope.items;
@@ -275,13 +275,13 @@ export class OrgChartPersonaDirective implements ng.IDirective {
     selected: '=?uifSelected'
   };
 
-  constructor(private $log: ng.ILogService) {
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new OrgChartPersonaDirective($log);
     directive.$inject = ['$log'];
     return directive;
+  }
+
+  constructor(private $log: ng.ILogService) {
   }
 
   public compile(

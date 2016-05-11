@@ -24,10 +24,10 @@ export class MessageBannerController {
  * @description
  * This is the scope used by the `<uif-message-banner />` directive.
  *
- *  
+ *
  * @property {string} actionLabel   - Label for the action button.
- * @property {boolean} isVisible    - Hide or show message banner   
- * 
+ * @property {boolean} isVisible    - Hide or show message banner
+ *
  */
 export interface IMessageBannerScope extends ng.IScope {
     uifActionLabel: string;
@@ -61,14 +61,14 @@ export interface IMessageBannerAttributes extends ng.IAttributes {
  * @ngdoc directive
  * @name uifMessageBanner
  * @module officeuifabric.components.messagebanner
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-message-banner>` is an message banner directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/messagebanner}
- * 
+ *
  * @usage
  * <uif-message-banner uif-action="" uif-action-label="" uif-is-open="" uif-on-close="OnCloseCallback">
  *  <uif-content>
@@ -77,8 +77,6 @@ export interface IMessageBannerAttributes extends ng.IAttributes {
  * </uif-message-banner>
  */
 export class MessageBannerDirective implements ng.IDirective {
-    constructor(private $log: ng.ILogService, private $timeout: ng.ITimeoutService) {
-    };
     public controller: typeof MessageBannerController = MessageBannerController;
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -138,6 +136,9 @@ export class MessageBannerDirective implements ng.IDirective {
         directive.$inject = ['$log', '$timeout'];
         return directive;
     }
+
+    constructor(private $log: ng.ILogService, private $timeout: ng.ITimeoutService) {
+    };
 
     public link: ng.IDirectiveLinkFn = (
         $scope: IMessageBannerScope, $elem: ng.IAugmentedJQuery,
@@ -297,10 +298,10 @@ export class MessageBannerDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.messagebanner
- * 
- * @description 
+ *
+ * @description
  * MessageBanner
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.messagebanner', ['officeuifabric.components'])
     .directive('uifMessageBanner', MessageBannerDirective.factory());

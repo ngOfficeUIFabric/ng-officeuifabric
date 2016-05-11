@@ -54,14 +54,14 @@ export class ProgressIndicatorDirective implements ng.IDirective {
         uifPercentComplete: '@'
     };
 
-    public constructor(public log: ng.ILogService) {
-        ProgressIndicatorDirective.log = log;
-    }
-
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = (log: ng.ILogService) => new ProgressIndicatorDirective(log);
         directive.$inject = ['$log'];
         return directive;
+    }
+
+    public constructor(public log: ng.ILogService) {
+        ProgressIndicatorDirective.log = log;
     }
 
     public link(scope: IProgressIndicatorScope): void {

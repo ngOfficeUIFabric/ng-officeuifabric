@@ -46,8 +46,6 @@ export class PanelDirective implements ng.IDirective {
       uifType: '@'
     };
 
-  constructor(private $log: ng.ILogService, private $animate: ng.animate.IAnimateService, private $timeout: ng.ITimeoutService) { }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = ( $log: ng.ILogService,
                                               $animate: ng.animate.IAnimateService,
@@ -56,6 +54,8 @@ export class PanelDirective implements ng.IDirective {
     return directive;
 
   }
+
+  constructor(private $log: ng.ILogService, private $animate: ng.animate.IAnimateService, private $timeout: ng.ITimeoutService) { }
 
   public compile(element: ng.IAugmentedJQuery,
                  attrs: ng.IAttributes,

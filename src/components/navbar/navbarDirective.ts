@@ -280,6 +280,12 @@ export class NavBarItemDirective implements ng.IDirective {
 
   private templateTypes: { [menuType: number]: string } = {};
 
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new NavBarItemDirective($log);
+    directive.$inject = ['$log'];
+    return directive;
+  }
+
   constructor(private $log: ng.ILogService) {
     this.templateTypes[NavBarItemTypes.link] = `
     <li class="ms-NavBar-item"
@@ -293,12 +299,6 @@ export class NavBarItemDirective implements ng.IDirective {
       <i class="ms-NavBar-chevronDown ms-Icon ms-Icon--chevronDown"></i>
       <div class='uif-submenu'></div>
     </li>`;
-  }
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new NavBarItemDirective($log);
-    directive.$inject = ['$log'];
-    return directive;
   }
 
   public template: ng.IComponentTemplateFn = ($element?: ng.IAugmentedJQuery, $attrs?: INavBarItemAttributes): string => {
@@ -518,11 +518,6 @@ export class NavBarSearch implements ng.IDirective {
       </div>
     </li>`;
 
-  constructor(
-    private $document: ng.IDocumentService,
-    private $animate: ng.animate.IAnimateService,
-    private $timeout: ng.ITimeoutService) { }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = (
       $document: ng.IDocumentService,
@@ -532,6 +527,11 @@ export class NavBarSearch implements ng.IDirective {
     directive.$inject = ['$document', '$animate', '$timeout'];
     return directive;
   }
+
+  constructor(
+    private $document: ng.IDocumentService,
+    private $animate: ng.animate.IAnimateService,
+    private $timeout: ng.ITimeoutService) { }
 
   public link: ng.IDirectiveLinkFn = (
     $scope: INavBarSearchScope,

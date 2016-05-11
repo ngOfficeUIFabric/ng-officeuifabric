@@ -66,6 +66,12 @@ export class ContextualMenuItemDirective implements ng.IDirective {
 
   private templateTypes: { [menuType: number]: string } = {};
 
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ContextualMenuItemDirective($log);
+    directive.$inject = ['$log'];
+    return directive;
+  }
+
   constructor(private $log: ng.ILogService) {
     this.templateTypes[MenuItemTypes.subMenu] =
       `<li class="ms-ContextualMenu-item">
@@ -86,12 +92,6 @@ export class ContextualMenuItemDirective implements ng.IDirective {
       <span class='uif-item-content'></span>
     </li>`;
     this.templateTypes[MenuItemTypes.divider] = `<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>`;
-  }
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ContextualMenuItemDirective($log);
-    directive.$inject = ['$log'];
-    return directive;
   }
 
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IContextualMenuItemAttributes) => {

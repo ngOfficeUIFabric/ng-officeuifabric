@@ -267,6 +267,14 @@ export class PeoplePickerDirective implements ng.IDirective {
 
   private templateTypes: { [peoplePickerType: number]: string } = {};
 
+  public static factory(): ng.IDirectiveFactory {
+    const directive: ng.IDirectiveFactory = (
+      $document: ng.IDocumentService, $timeout: ng.ITimeoutService, $log: ng.ILogService, $window: ng.IWindowService) =>
+      new PeoplePickerDirective($document, $timeout, $log, $window);
+    directive.$inject = ['$document', '$timeout', '$log', '$window'];
+    return directive;
+  }
+
   constructor(
     private $document: ng.IDocumentService,
     private $timeout: ng.ITimeoutService,
@@ -411,14 +419,6 @@ export class PeoplePickerDirective implements ng.IDirective {
         </uif-people-picker-selected>
 
       </div>`;
-  }
-
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = (
-      $document: ng.IDocumentService, $timeout: ng.ITimeoutService, $log: ng.ILogService, $window: ng.IWindowService) =>
-      new PeoplePickerDirective($document, $timeout, $log, $window);
-    directive.$inject = ['$document', '$timeout', '$log', '$window'];
-    return directive;
   }
 
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IPeoplePickerAttributes) => {
@@ -781,14 +781,14 @@ export class PeoplePickerResultListDirective implements ng.IDirective {
     pickerType: '@uifPickerType'
   };
 
-  constructor() {
-    //
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new PeoplePickerResultListDirective();
 
     return directive;
+  }
+
+  constructor() {
+    //
   }
 
   public link: ng.IDirectiveLinkFn = (
@@ -908,14 +908,14 @@ export class PeopleSearchMoreDirective implements ng.IDirective {
     disconnected: '=uifDisconnected'
   };
 
-  constructor() {
-    //
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new PeopleSearchMoreDirective();
 
     return directive;
+  }
+
+  constructor() {
+    //
   }
 
   public link: ng.IDirectiveLinkFn = (
@@ -1005,14 +1005,14 @@ export class PrimaryTextDirective implements ng.IDirective {
     searchingForText: '@?uifSearchForText'
   };
 
-  constructor() {
-    //
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new PrimaryTextDirective();
 
     return directive;
+  }
+
+  constructor() {
+    //
   }
 
   public link: ng.IDirectiveLinkFn = (
@@ -1056,14 +1056,14 @@ export class SecondaryTextDirective implements ng.IDirective {
 
   public scope: boolean = true;
 
-  constructor() {
-    //
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new SecondaryTextDirective();
 
     return directive;
+  }
+
+  constructor() {
+    //
   }
 }
 
@@ -1099,14 +1099,14 @@ export class DisconnectedTextDirective implements ng.IDirective {
 
   public scope: boolean = true;
 
-  constructor() {
-    //
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new DisconnectedTextDirective();
 
     return directive;
+  }
+
+  constructor() {
+    //
   }
 }
 
@@ -1166,14 +1166,14 @@ export class PeoplePickerSelectedDirective implements ng.IDirective {
     selectedPeople: '=ngModel'
   };
 
-  constructor() {
-    //
-  }
-
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new PeoplePickerSelectedDirective();
 
     return directive;
+  }
+
+  constructor() {
+    //
   }
 }
 
