@@ -5,6 +5,27 @@
 ------------------
 
 
+<a name="0.10.2"></a>
+### [0.10.2 - May 11, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.2)
+
+#### Features
+
+- **uif-textfield**
+  - add support for input additional types ([3cf3ec8](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/3cf3ec8), Closes [#323](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/323))
+
+#### Fixes
+- **dependencies**
+  - update karma version dependencies ([8e04ed6](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8e04ed6))
+  - update library dependency on **Office UI Fabric 2.5.0** ([2fe77c1](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/2fe77c1), Closes [#331](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/331))
+- **uif-messagebanner**
+  - fixed `uif-is-visible` binding ([5de4175](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5de4175), Closes [#333](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/333))
+- **uif-pivot**
+  - fixed Pivot demo to display contextual menu in ellipsis ([414ba41](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/414ba41))
+
+
+------------------
+
+
 <a name="0.10.1"></a>
 ### [0.10.1 - May 4, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.1)
 
