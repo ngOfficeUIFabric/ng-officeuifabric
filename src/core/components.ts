@@ -16,6 +16,7 @@ import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
 import * as listModule from '../components/list/listDirective';
 import * as messageBannerModule from '../components/messagebanner/messageBannerDirective';
+import * as messageBarModule from '../components/messagebar/messageBarDirective';
 import * as navBarModule from '../components/navbar/navbarDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as panelModule from '../components/panel/panelDirective';
@@ -56,6 +57,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   linkModule.module.name,
   listModule.module.name,
   messageBannerModule.module.name,
+  messageBarModule.module.name,
   navBarModule.module.name,
   overlayModule.module.name,
   panelModule.module.name,
