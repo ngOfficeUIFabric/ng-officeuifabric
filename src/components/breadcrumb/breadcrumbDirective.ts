@@ -2,6 +2,23 @@
 
 import * as ng from 'angular';
 
+
+/**
+ * @ngdoc interface
+ * @name IBreadcrumbLinkScope
+ * @module officeuifabric.components.breadcrumb
+ *
+ * @description
+ * This is the scope used by the BreadcrumbLink directive.
+ *
+ * @property {string} ngHref          - The link target
+ *
+ */
+export interface IBreadcrumbLinkScope extends ng.IScope {
+  ngHref: string;
+  uifTabindex: number;
+}
+
 /**
  * @ngdoc directive
  * @name uifBreadcrumblink
@@ -22,9 +39,29 @@ import * as ng from 'angular';
 export class BreadcrumbLinkDirective implements ng.IDirective {
   public restrict: string = 'E';
   public require: string = '^uifBreadcrumb';
+  public transclude: boolean = true;
+  public replace: boolean = true;
+  public template: string = '' +
+  '<li class="ms-Breadcrumb-listItem">' +
+  '<a class="ms-Breadcrumb-itemLink" ng-href="{{ngHref}}" tabindex="{{uifTabindex}}" ng-transclude></a>' +
+  '<i class="ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight"></i>' +
+  '</li>';
+  public scope: {} = {
+    ngHref: '@'
+  };
+
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new BreadcrumbLinkDirective();
     return directive;
+  }
+  public link(
+    scope: IBreadcrumbLinkScope,
+    instanceElement: ng.IAugmentedJQuery,
+    attributes: any,
+    ctrl: BreadcrumbController,
+    transclude: ng.ITranscludeFunction): void {
+
+    scope.uifTabindex = parseInt(attributes.uifTabindex, null) + 1;
   }
 }
 
@@ -63,7 +100,19 @@ export class BreadcrumbDirective implements ng.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
-  public template: string = '<div class="ms-Breadcrumb"></div>';
+  public template: string = '' +
+  '<div class="ms-Breadcrumb">' +
+  '<div class="ms-Breadcrumb-overflow">' +
+  '<div class="ms-Breadcrumb-overflowButton ms-Icon ms-Icon--ellipsis" tabindex="1">' +
+  '</div>' +
+  '<i class="ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight"></i>' +
+  '<div class="ms-Breadcrumb-overflowMenu">' +
+  '<ul class="ms-ContextualMenu is-open"></ul>' +
+  '</div>' +
+  '</div>' +
+  '<ul class="ms-Breadcrumb-list">' +
+  '</ul>' +
+  '</div>';
   public controller: typeof BreadcrumbController = BreadcrumbController;
   public require: string = 'uifBreadcrumb';
 
@@ -72,69 +121,31 @@ export class BreadcrumbDirective implements ng.IDirective {
     return directive;
   }
 
-  public link(scope: ng.IScope,
-              instanceElement: ng.IAugmentedJQuery,
-              attributes: any,
-              ctrl: BreadcrumbController,
-              transclude: ng.ITranscludeFunction): void {
-    // transclusion happens here, and not in the breadcrumblink directive, as
-    // we found that transclusion does not work when cloning elements.
-    // in our case we needed to clone the active link.
+  public link(
+    scope: ng.IScope,
+    instanceElement: ng.IAugmentedJQuery,
+    attributes: any,
+    ctrl: BreadcrumbController,
+    transclude: ng.ITranscludeFunction): void {
+
+    let ul: JQuery = ng.element(instanceElement[0].querySelector('.ms-Breadcrumb-list'));
 
     transclude((transcludedElement: JQuery) => {
-      let breadcrumbList: JQuery = angular.element('<ul></ul>');
-      breadcrumbList.addClass('ms-Breadcrumb-list');
-
-      let tabIndex: number = 1;
-      let breadcrumbLinks: JQuery = transcludedElement;
-      for (let bcLinkIndex: number = 0; bcLinkIndex < transcludedElement.length; bcLinkIndex++) {
-        let link: JQuery = angular.element(breadcrumbLinks[bcLinkIndex]);
-
-        // if not a <uif-breadcrumb-link>, skip it as text is getting picked up
-        if (link[0].nodeName === '#text') {
-          continue;
-        }
-
-        // create list item
-        let liElement: JQuery = angular.element('<li></li>');
-        liElement.addClass('ms-Breadcrumb-listItem');
-
-        // create link
-        let aElement: JQuery = angular.element('<a></a>');
-        aElement.addClass('ms-Breadcrumb-itemLink');
-        aElement.attr('tabindex', ++tabIndex);
-        aElement.attr('href', link.attr('ng-href'));
-        aElement.append(link[0].innerHTML);
-        liElement.append(aElement);
-
-        // create icon
-        let iconElement: JQuery = angular.element(`<i></i>`);
-        iconElement.addClass('ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight');
-        liElement.append(iconElement);
-
-        // add item to list
-        breadcrumbList.append(liElement);
-      }
-
-      // add overflow
-      let overflowDiv: JQuery = angular.element('<div></div>');
-      overflowDiv.addClass('ms-Breadcrumb-overflow');
-
-      let overflowButtonDiv: JQuery = angular.element('<div></div>');
-      overflowButtonDiv.addClass('ms-Breadcrumb-overflowButton ms-Icon ms-Icon--ellipsis');
-      overflowButtonDiv.attr('tabindex', '1');
-      overflowDiv.append(overflowButtonDiv);
-
-      let iIcon: JQuery = angular.element('<i></i>');
-      iIcon.addClass('ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight');
-      overflowDiv.append(iIcon);
-
-      // add list to element
-      instanceElement.append(overflowDiv);
-      instanceElement.append(breadcrumbList);
+      let breadcrumbLinks: JQuery = angular.element(transcludedElement);
+      ul.append(breadcrumbLinks);
     });
+
+    // for regular rendering without ng-repeat
+    let tabIndex: number = 1;
+    let breadcrumbLinks: JQuery = ul.find('li');
+    for (let linkIndex: number = 1; linkIndex < breadcrumbLinks.length; linkIndex += 2) {
+      let currentLi: JQuery = ng.element(breadcrumbLinks[linkIndex]);
+      if (currentLi != null) {
+        ng.element(currentLi[0].querySelector('.ms-Breadcrumb-itemLink')).attr('tabindex', ++tabIndex);
+      }
+    }
   }
-}
+};
 
 /**
  * @ngdoc module
