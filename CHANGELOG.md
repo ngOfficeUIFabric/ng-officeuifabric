@@ -1,6 +1,10 @@
 <a name="next"></a>
 ### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 
+#### Features
+
+- **uif-messagebar**
+  - new directive (Closes [#339](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/339))
 
 ------------------
 
@@ -30,6 +34,7 @@
   - add support for input additional types ([3cf3ec8](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/3cf3ec8), Closes [#323](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/323))
 
 #### Fixes
+
 - **dependencies**
   - update karma version dependencies ([8e04ed6](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8e04ed6))
   - update library dependency on **Office UI Fabric 2.5.0** ([2fe77c1](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/2fe77c1), Closes [#331](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/331))
