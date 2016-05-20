@@ -2,7 +2,7 @@
 'use strict';
 
 import * as ng from 'angular';
-import {MessageBarTypeEnum} from './MessageBarTypeEnum';
+import {MessageBarTypeEnum} from './messageBarTypeEnum';
 
 
 /**
