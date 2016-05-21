@@ -61,7 +61,8 @@ export class BreadcrumbLinkDirective implements ng.IDirective {
     ctrl: BreadcrumbController,
     transclude: ng.ITranscludeFunction): void {
 
-    scope.uifTabindex = parseInt(attributes.uifTabindex, null) + 1;
+    let tabindex: number = Array.prototype.indexOf.call(instanceElement.parent().children(), instanceElement[0]) + 2;
+    scope.uifTabindex = tabindex;
   }
 }
 
@@ -135,15 +136,6 @@ export class BreadcrumbDirective implements ng.IDirective {
       ul.append(breadcrumbLinks);
     });
 
-    // for regular rendering without ng-repeat
-    let tabIndex: number = 1;
-    let breadcrumbLinks: JQuery = ul.find('li');
-    for (let linkIndex: number = 1; linkIndex < breadcrumbLinks.length; linkIndex += 2) {
-      let currentLi: JQuery = ng.element(breadcrumbLinks[linkIndex]);
-      if (currentLi != null) {
-        ng.element(currentLi[0].querySelector('.ms-Breadcrumb-itemLink')).attr('tabindex', ++tabIndex);
-      }
-    }
   }
 };
 
