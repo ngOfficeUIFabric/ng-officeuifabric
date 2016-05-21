@@ -16,11 +16,11 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
 
   beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
     let html: string = '<uif-breadcrumb>' +
-                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/1">ngOfficeUiFabric-1</uif-breadcrumb-link>' +
-                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/2">ngOfficeUiFabric-2</uif-breadcrumb-link>' +
-                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/3">ngOfficeUiFabric-3</uif-breadcrumb-link>' +
-                       '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/4">ngOfficeUiFabric-4</uif-breadcrumb-link>' +
-                       '</uif-breadcrumb>';
+      '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/1">ngOfficeUiFabric-1</uif-breadcrumb-link>' +
+      '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/2">ngOfficeUiFabric-2</uif-breadcrumb-link>' +
+      '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/3">ngOfficeUiFabric-3</uif-breadcrumb-link>' +
+      '<uif-breadcrumb-link ng-href="http://ngofficeuifabric.com/4">ngOfficeUiFabric-4</uif-breadcrumb-link>' +
+      '</uif-breadcrumb>';
     scope = $rootScope;
 
     element = $compile(html)(scope);    // jqLite object
@@ -35,9 +35,9 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
     expect(element[0]).toHaveClass('ms-Breadcrumb');
 
     // verify nested should contain UL
-    expect(element.find('ul').length).toBe(1);
+    expect(element.find('ul').length).toBe(2);
     let ulElement: JQuery = element.find('ul');
-    expect(ulElement[0]).toHaveClass('ms-Breadcrumb-list');
+    expect(ulElement[1]).toHaveClass('ms-Breadcrumb-list');
 
     // look at all list items...
     // ... get all list items...
