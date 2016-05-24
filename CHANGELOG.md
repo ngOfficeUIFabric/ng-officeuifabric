@@ -5,6 +5,22 @@
 ------------------
 
 
+<a name="0.10.3"></a>
+### [0.10.3 - May 24, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.3)
+
+#### Fixes
+
+- **dependencies**
+  - update library dependency on **Office UI Fabric 2.6.0** ([79cc25c](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/79cc25c), Closes [#341](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/341))
+- **uif-breadcrumb**
+  - breadcrumb with ng-repeat ([da1f32a](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/da1f32a), Closes [#330](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/330))
+- **uif-icon**
+  - update supported icon list ([920a174](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/920a174), Closes [#336](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/336))
+
+
+------------------
+
+
 <a name="0.10.2"></a>
 ### [0.10.2 - May 11, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.10.2)
 
