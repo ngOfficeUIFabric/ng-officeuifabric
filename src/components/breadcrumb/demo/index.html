@@ -16,7 +16,7 @@
   <script src="index.js"></script>
 </head>
 
-<body ng-app="demoApp">
+<body ng-app="demoApp" ng-controller="demoCtrl">
   <h1 class="ms-font-su">Breadcrumb Demo | &lt;uif-breadcrumb&gt;</h1>
   <em>In order for this demo to work you must first build the library in debug mode.</em>
 
@@ -24,30 +24,27 @@
   <p>To render breadcrumb, use the following markup:
     <br/>
     <pre>
-        &lt;uif-breadcrumb&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github1.com\&apos;&quot;&gt;GitHub1&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github2.com\&apos;&quot;&gt;GitHub2&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github3.com\&apos;&quot;&gt;GitHub3&lt;/uif-breadcrumb-link&gt;&#13;&#10;          &lt;uif-breadcrumb-link ng-href=&quot;\&apos;http://github4.com\&apos;&quot;&gt;GitHub4&lt;/uif-breadcrumb-link&gt;&#13;&#10;        &lt;/uif-breadcrumb&gt;
-      </pre>
-  </p>
-
-  <p>
-    <uif-breadcrumb>
-      <uif-breadcrumb-link ng-href="\'http://github1.com\'">GitHub1</uif-breadcrumb-link>
-      <uif-breadcrumb-link ng-href="\'http://github2.com\'">GitHub2</uif-breadcrumb-link>
-      <uif-breadcrumb-link ng-href="\'http://github3.com\'">GitHub3</uif-breadcrumb-link>
-      <uif-breadcrumb-link ng-href="\'http://github4.com\'">GitHub4</uif-breadcrumb-link>
-    </uif-breadcrumb>
-  </p>
-  <h2>ng-repeat</h2>
-  <p>
+      &lt;uif-breadcrumb uif-breadcrumb-links=&quot;links&quot;&gt;&lt;/uif-breadcrumb&gt;
+    </pre> Breadcrumb elements are passed as an expression to <em>uif-breadcrumb-links</em> attribute. Expression should
+    evaluate as an array of objects with following properties:
+    <ul>
+      <li><em>href</em></li>
+      <li><em>linkText</em></li>
+    </ul>
+    Sample array of such elements can be found below:
     <pre>
-      &lt;uif-breadcrumb&gt;
-      &lt;uif-breadcrumb-link ng-href=&quot;{{item}}&quot; ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/uif-breadcrumb-link&gt;
-      &lt;/uif-breadcrumb&gt;
+      $scope.links = [
+        {href: 'http://github1.com', linkText: 'GitHub1'},
+        {href: 'http://github2.com', linkText: 'GitHub2'},
+        {href: 'http://github3.com', linkText: 'GitHub3'},
+        {href: 'http://github4.com', linkText: 'GitHub4'},
+        {href: 'http://github5.com', linkText: 'GitHub5'},
+        {href: 'http://github6.com', linkText: 'GitHub6'}
+      ];
     </pre>
   </p>
-  <p ng-controller="demoCtrl">
-    <uif-breadcrumb>
-      <uif-breadcrumb-link ng-href="{{item}}" ng-repeat="item in items">{{item}}</uif-breadcrumb-link>
-    </uif-breadcrumb>
+  <p>
+    <uif-breadcrumb uif-breadcrumb-links="links"></uif-breadcrumb>
   </p>
 </body>
 
