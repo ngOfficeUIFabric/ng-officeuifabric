@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "angular": "1.5.5",
-    "office-ui-fabric": "2.6.0"
+    "office-ui-fabric": "2.6.1"
   },
   "devDependencies": {
     "angular-animate": "1.5.5",
@@ -59,7 +59,7 @@
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
     "commitizen": "2.8.1",
-    "coveralls": "^2.11.6",
+    "coveralls": "^2.11.9",
     "cz-conventional-changelog": "1.1.6",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
