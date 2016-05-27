@@ -36,7 +36,7 @@ export class CommandBarDirective implements ng.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<div class="ms-CommandBar" ng-transclude></div>';
-  public transclude: Boolean = true;
+  public transclude: boolean = true;
   public replace: boolean = true;
 
   public scope: {} = {
@@ -152,7 +152,7 @@ export class CommandBarSideDirective implements ng.IDirective {
   public restrict: string = 'E';
   public template: string = '<div class="ms-CommandBar-sideCommands" ng-transclude></div>';
   public replace: boolean = true;
-  public transclude: Boolean = true;
+  public transclude: boolean = true;
 
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new CommandBarSideDirective();
@@ -191,7 +191,7 @@ export class CommandBarMainDirective implements ng.IDirective {
                                   </div>
                                 </div>`;
   public replace: boolean = true;
-  public transclude: Boolean = true;
+  public transclude: boolean = true;
   public controller: any = CommandBarMainController;
   public scope: {} =
   {

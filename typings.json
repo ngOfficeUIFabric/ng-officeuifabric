@@ -8,6 +8,7 @@
     "chokidar": "registry:dt/chokidar#1.4.3+20160316155526",
     "colors": "registry:dt/colors#0.6.0-1+20160501135139",
     "express": "registry:dt/express#4.0.0+20160317120654",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
     "gulp-concat": "registry:dt/gulp-concat#0.0.0+20160316155526",
     "gulp-help": "registry:dt/gulp-help#0.0.0+20160316155526",
     "gulp-istanbul": "registry:dt/gulp-istanbul#0.9.0+20160317120654",

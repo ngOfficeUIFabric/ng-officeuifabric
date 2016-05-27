@@ -4,6 +4,7 @@
 /// <reference path="globals/browser-sync/index.d.ts" />
 /// <reference path="globals/chokidar/index.d.ts" />
 /// <reference path="globals/colors/index.d.ts" />
+/// <reference path="globals/express-serve-static-core/index.d.ts" />
 /// <reference path="globals/express/index.d.ts" />
 /// <reference path="globals/gulp-concat/index.d.ts" />
 /// <reference path="globals/gulp-help/index.d.ts" />

@@ -56,7 +56,7 @@ export class OverlayDirective implements ng.IDirective {
     public scope: {} = {
         uifMode: '@'
     };
-    public transclude: Boolean = true;
+    public transclude: boolean = true;
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = (log: ng.ILogService) => new OverlayDirective(log);
