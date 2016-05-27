@@ -15,18 +15,23 @@ import * as yargs from 'yargs';
 let xmldom: any = require('xmldom');
 import * as xpath from 'xpath';
 
+let argKeys: any = {
+  pkg: 'pkg',
+  src: 'src'
+};
+
 // verify required params passed in
-if (!yargs.argv.src || !yargs.argv.pkg) {
+if (!yargs.argv[argKeys.src] || !yargs.argv[argKeys.pkg]) {
   console.error('must specify the path to \'--src\' & \'--pkg\'');
   process.exit();
 }
 
 // nuspec file
-let nuspecFile: string = yargs.argv.pkg + '/src/ng-office-ui-fabric.nuspec';
+let nuspecFile: string = yargs.argv[argKeys.pkg] + '/src/ng-office-ui-fabric.nuspec';
 
 // get library version & dependencies
-let libraryVersion: string = ScriptUtils.getLibraryVersion(yargs.argv.src);
-let deps: ILibraryDependencies = ScriptUtils.getDependencies(yargs.argv.src);
+let libraryVersion: string = ScriptUtils.getLibraryVersion(yargs.argv[argKeys.src]);
+let deps: ILibraryDependencies = ScriptUtils.getDependencies(yargs.argv[argKeys.src]);
 
 // load XML
 let domParser: DOMParser = new xmldom.DOMParser();
@@ -39,16 +44,18 @@ let query: xpath.SelectFn = xpath.useNamespaces({ nuget: 'http://schemas.microso
 let versionNode: Node = query('/nuget:package/nuget:metadata/nuget:version', packageManifest, true);
 versionNode.textContent = libraryVersion;
 //  update anuglar version
-let angularVersionNode: any = query('/nuget:package/nuget:metadata/nuget:dependencies/nuget:dependency[@id=\'AngularJS.Core\']',
-                                    packageManifest,
-                                    true);
+let angularVersionNode: any = query(
+  '/nuget:package/nuget:metadata/nuget:dependencies/nuget:dependency[@id=\'AngularJS.Core\']',
+  packageManifest,
+  true);
 angularVersionNode.setAttribute('version', deps.angularLib);
 //  update fabric version
-let fabricVersionNode: any = query('/nuget:package/nuget:metadata/nuget:dependencies/nuget:dependency[@id=\'OfficeUIFabric\']',
-                                   packageManifest,
-                                   true);
+let fabricVersionNode: any = query(
+  '/nuget:package/nuget:metadata/nuget:dependencies/nuget:dependency[@id=\'OfficeUIFabric\']',
+  packageManifest,
+  true);
 fabricVersionNode.setAttribute('version', deps.officeUiFabricLib);
 
 // save file changes
 let domSerialzer: XMLSerializer = new xmldom.XMLSerializer();
-fs.writeFileSync(yargs.argv.pkg + '/src/ng-office-ui-fabric.nuspec', domSerialzer.serializeToString(packageManifest));
+fs.writeFileSync(yargs.argv[argKeys.pkg] + '/src/ng-office-ui-fabric.nuspec', domSerialzer.serializeToString(packageManifest));
