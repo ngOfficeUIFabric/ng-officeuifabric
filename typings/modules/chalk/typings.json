@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/typed-typings/npm-chalk/a7e422c5455e70292e5675a727d43a7b05fc3e58/typings.json",
+    "raw": "registry:npm/chalk#1.0.0+20160211003958",
+    "main": "index.d.ts",
+    "global": false,
+    "name": "chalk",
+    "type": "typings"
+  }
+}
