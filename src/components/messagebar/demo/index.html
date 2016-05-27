@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ngOfficeUiFabric | uif-message-bar demo</title>
+    <meta charset="utf-8">
+
+    <!-- office ui fabric css -->
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="../../../../node_modules/office-ui-fabric/dist/css/fabric.components.min.css" />
+    <!-- angular library -->
+    <script src="../../../../node_modules/angular/angular.min.js"></script>
+    <!-- ngofficeuifabric library -->
+    <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="demoApp">
+    <h1 class="ms-font-su">Message Bar Demo | &lt;uif-message-bar&gt;</h1>
+    <em>In order for this demo to work you must first build the library in debug mode.</em>
+    <h2>Default</h2>
+    <p>
+        <code>
+    </code>
+    </p>
+    <p>
+        <uif-message-bar>
+            <uif-content>
+                lorem ipsum dolor sit amet, a elit sem interdum consectetur adipiscing elit
+            </uif-content>
+            <uif-link ng-href="http://ngofficeuifabric.com">Link text</uif-link>
+        </uif-message-bar>
+    </p>
+    <h2>Example with uif-type: error</h2>
+    <p>
+        <code>
+    </code>
+    </p>
+    <p>
+        <uif-message-bar uif-type="error">
+            <uif-content>
+                lorem ipsum dolor sit amet, a elit sem interdum consectetur adipiscing elit
+            </uif-content>
+            <uif-link ng-href="http://ngofficeuifabric.com">Link text</uif-link>
+        </uif-message-bar>
+    </p>
+
+</body>
+
+</html>
