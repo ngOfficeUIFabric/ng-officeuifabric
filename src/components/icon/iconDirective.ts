@@ -7,10 +7,10 @@ import {IconEnum} from './iconEnum';
  * @ngdoc interface
  * @name IIconScope
  * @module officeuifabric.components.contextualmenu
- * 
+ *
  * @description
  * This is the scope used by the `<uif-icon>` directive.
- * 
+ *
  * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
  */
 export interface IIconScope extends ng.IScope {
@@ -34,16 +34,16 @@ class IconController {
  * @ngdoc directive
  * @name uifIcon
  * @module officeuifabric.components.icon
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-icon>` is an icon directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/styles}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-icon uif-type="arrowDownLeft"></uif-icon>
  */
 export class IconDirective implements ng.IDirective {
@@ -53,7 +53,7 @@ export class IconDirective implements ng.IDirective {
   public scope: {} = {
     uifType: '@'
   };
-  public transclude: Boolean = true;
+  public transclude: boolean = true;
   public controller: any = IconController;
   public controllerAs: string = 'icon';
 
@@ -79,10 +79,10 @@ export class IconDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.icon
- * 
- * @description 
+ *
+ * @description
  * Icon
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.icon', [
   'officeuifabric.components'

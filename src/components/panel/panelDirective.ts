@@ -35,7 +35,7 @@ export class PanelDirective implements ng.IDirective {
                                 </div>
                               </div>
                              </div>`;
-  public transclude: Boolean = true;
+  public transclude: boolean = true;
   public replace: boolean = true;
   public controller: any = PanelController;
 
