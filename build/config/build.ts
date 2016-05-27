@@ -10,7 +10,12 @@ export class BuildConfig {
   public static SOURCE: string = BuildConfig.ROOT + '/src';
 
   // get version number
-  public static VERSION: number = yargs.argv.version || require('./../../package.json').version;
+  /* tslint:disable:no-string-literal */
+  // disable explained: tslint rule 'member-ordering' requires privates after publics
+  //   so to avoid the `no-string-literal`, could put in private member, but would be hard to read
+  //   thus, disable rule for this line
+  public static VERSION: number = yargs.argv['version'] || require('./../../package.json').version;
+  /* tslint:enable:no-string-literal */
 
   // banner added to all output
   public static BANNER_JS: string =
@@ -90,7 +95,7 @@ export class BuildConfig {
     'src/core/*.js'
   ];
   /**
-   * ALl test files.
+   * All test files.
    */
   public static ALL_SPEC_FILES: string[] = [
     'src/components/*/!(*.spec|contextualMenu|navbarDirective).js',

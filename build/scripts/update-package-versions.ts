@@ -13,33 +13,38 @@ import {ScriptUtils, ILibraryDependencies} from './ScriptUtils';
 import * as fs from 'fs';
 import * as yargs from 'yargs';
 
+let argKeys: any = {
+  pkg: 'pkg',
+  src: 'src'
+};
+
 // verify required params passed in
-if (!yargs.argv.src || !yargs.argv.pkg) {
+if (!yargs.argv[argKeys.src] || !yargs.argv[argKeys.pkg]) {
   console.error('must specify the path to \'--src\' & \'--pkg\'');
   process.exit();
 }
 
 // get library version & dependencies
-let libraryVersion: string = ScriptUtils.getLibraryVersion(yargs.argv.src);
-let deps: ILibraryDependencies = ScriptUtils.getDependencies(yargs.argv.src);
+let libraryVersion: string = ScriptUtils.getLibraryVersion(yargs.argv[argKeys.src]);
+let deps: ILibraryDependencies = ScriptUtils.getDependencies(yargs.argv[argKeys.src]);
 
 // update bower
-let bowerManifest: any = require(yargs.argv.pkg + '/bower.json');
+let bowerManifest: any = require(yargs.argv[argKeys.pkg] + '/bower.json');
 bowerManifest.version = libraryVersion;
 bowerManifest.dependencies = {
   'angular': deps.angularLib,
   'office-ui-fabric': deps.officeUiFabricLib
 };
 // write bower file back
-fs.writeFileSync(yargs.argv.pkg + '/bower.json', JSON.stringify(bowerManifest, null, 2));
+fs.writeFileSync(yargs.argv[argKeys.pkg] + '/bower.json', JSON.stringify(bowerManifest, null, 2));
 
 
 // update package
-let packageManifest: any = require(yargs.argv.pkg + '/package.json');
+let packageManifest: any = require(yargs.argv[argKeys.pkg] + '/package.json');
 packageManifest.version = libraryVersion;
 packageManifest.dependencies = {
   'angular': deps.angularLib,
   'office-ui-fabric': deps.officeUiFabricLib
 };
 // write bower file back
-fs.writeFileSync(yargs.argv.pkg + '/package.json', JSON.stringify(packageManifest, null, 2));
+fs.writeFileSync(yargs.argv[argKeys.pkg] + '/package.json', JSON.stringify(packageManifest, null, 2));
