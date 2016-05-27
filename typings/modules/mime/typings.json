@@ -1,0 +1,12 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/typed-typings/npm-mime/c7c5810698b7eaa421702a53644a8963d372f758/typings.json",
+    "raw": "registry:npm/mime#1.3.0+20160423043021",
+    "main": "mime.d.ts",
+    "version": "^1.3.0",
+    "global": false,
+    "name": "mime",
+    "type": "typings"
+  }
+}

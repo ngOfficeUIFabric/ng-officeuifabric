@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/4248c2618591b7e85a9bece7cff5bd6bd518af10/browser-sync/browser-sync.d.ts",
+    "raw": "registry:dt/browser-sync#0.0.0+20160524142403",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/4248c2618591b7e85a9bece7cff5bd6bd518af10/browser-sync/browser-sync.d.ts"
+  }
+}

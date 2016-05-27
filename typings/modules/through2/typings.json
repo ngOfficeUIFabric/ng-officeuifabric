@@ -1,0 +1,21 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/typed-typings/npm-through2/2b1d39490ad8530546d97babee8cfaaabed9e0cd/typings.json",
+    "raw": "registry:npm/through2#2.0.0+20160308004148",
+    "main": "index.d.ts",
+    "global": false,
+    "dependencies": {
+      "xtend": {
+        "src": "https://raw.githubusercontent.com/typed-typings/npm-xtend/63cccadf3295b3c15561ee45617ac006edcca9e0/typings.json",
+        "raw": "github:typed-typings/npm-xtend#63cccadf3295b3c15561ee45617ac006edcca9e0",
+        "main": "immutable.d.ts",
+        "global": false,
+        "name": "xtend",
+        "type": "typings"
+      }
+    },
+    "name": "through2",
+    "type": "typings"
+  }
+}
