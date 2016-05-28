@@ -5,12 +5,12 @@ import * as ng from 'angular';
  * @ngdoc interface
  * @name ISearchBoxScope
  * @module officeuifabric.components.searchbox
- * 
- * @description 
- * This is the scope used by the directive. 
- * 
+ *
+ * @description
+ * This is the scope used by the directive.
+ *
  * @property {string} placeholder - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
- * @property {string} value       - The scope variable to bind to the text input. 
+ * @property {string} value       - The scope variable to bind to the text input.
  */
 interface ISearchBoxScope extends ng.IScope {
 
@@ -21,6 +21,7 @@ interface ISearchBoxScope extends ng.IScope {
   isCancel: boolean;
   isFocus: boolean;
   isLabelHidden: boolean;
+  isDisabled: boolean;
   placeholder: string;
   value: string;
 }
@@ -28,23 +29,23 @@ interface ISearchBoxScope extends ng.IScope {
  * @ngdoc directive
  * @name uifSearchbox
  * @module officeuifabric.components.searchbox
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-searchbox>` is an searchbox directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/searchbox}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-searchbox value="" placeholder="" />
  */
 export class SearchBoxDirective implements ng.IDirective {
 
-  public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive}">' +
+  public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive, \'is-disabled\':isDisabled}">' +
   '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
-  ' ng-model="value" id="{{::\'searchBox_\'+$id}}" />' +
+  ' ng-model="value" id="{{::\'searchBox_\'+$id}}" ng-disabled="isDisabled" />' +
   '<label class="ms-SearchBox-label" for="{{::\'searchBox_\'+$id}}" ng-hide="isLabelHidden">' +
   '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i> {{placeholder}}</label>' +
   '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
@@ -108,7 +109,9 @@ export class SearchBoxDirective implements ng.IDirective {
       scope.placeholder = search;
     });
 
-
+    attrs.$observe('disabled', (disabled) => {
+      scope.isDisabled = !!disabled;
+    });
   }
 
 
@@ -116,10 +119,10 @@ export class SearchBoxDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.searchbox
- * 
- * @description 
+ *
+ * @description
  * Searchbox
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
   .directive('uifSearchbox', SearchBoxDirective.factory());
