@@ -21,7 +21,7 @@
     <em>In order for this demo to work you must first build the library in debug mode.</em>
 
     <p>
-        Use the attributes <code>uif-value</code> to specify the value of the search field. 
+        Use the attributes <code>uif-value</code> to specify the value of the search field.
     </p>
     <p>
         Use the attributes <code>placeholder</code> to specify the placeholder of the search field.
@@ -45,6 +45,31 @@
             Example using a controller
         </p>
         <uif-searchbox value="value" placeholder="placeholder"></uif-searchbox>
+        <br/>
+        Searchbox can be disabled with <em>disabled</em> attribute or <em>ng-disabled</em> directive:
+
+        <p>
+            This markup: <br /><br />
+        <code>
+            &lt;label&gt;Click me to toggle: &lt;input type=&quot;checkbox&quot; ng-model=&quot;disabled&quot;&gt;&lt;/label&gt;&lt;br/&gt;<br/>
+            &lt;uif-searchbox  ng-disabled=&quot;disabled&quot;/&gt;
+        </code>
+            <br /><br />
+            Renders this:
+            <br/>
+            <label>Click me to toggle: <input type="checkbox" ng-model="disabled"></label><br/>
+            <uif-searchbox  ng-disabled="disabled"/>
+        </p>
+        <p>
+            This markup: <br /><br />
+        <code>
+            &lt;uif-searchbox disabled=&quot;disabled&quot;/&gt;
+        </code>
+            <br /><br />
+            Renders this:
+            <br/>
+            <uif-searchbox  disabled="disabled"/>
+        </p>
     </div>
 
 </body>

@@ -60,4 +60,45 @@ describe('searchBoxDirective: <uif-searchbox />', () => {
         $newScope.$digest();
         expect(jqTag.find('.ms-SearchBox-label').hasClass('ng-hide')).toBe(false);
     }));
+
+    it('should toggle disable', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: any = $rootScope.$new();
+        $newScope.disabled = false;
+
+        let jqlTag: JQuery = ng.element('<uif-searchbox ng-disabled="disabled"/>'); // jqlite
+        $compile(jqlTag)($newScope);
+        $newScope.$digest();
+
+        let jqTag: JQuery = jQuery(jqlTag[0]); // jquery
+
+        let div: JQuery = jqTag.find('.ms-SearchBox');
+        let input: JQuery = jqTag.find('.ms-SearchBox-field');
+
+        expect(input.attr('disabled')).toBe(undefined, 'Input should not be disabled.');
+        expect(div).not.toHaveClass('is-disabled');
+
+        // toggle disabled
+        $newScope.disabled = true;
+        $newScope.$digest();
+
+        expect(input.attr('disabled')).toBe('disabled', 'Input should be disabled.');
+        expect(div).toHaveClass('is-disabled');
+    }));
+
+    it('should be initially disabled', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: any = $rootScope.$new();
+        $newScope.disabled = false;
+
+        let jqlTag: JQuery = ng.element('<uif-searchbox disabled="disabled"/>'); // jqlite
+        $compile(jqlTag)($newScope);
+        $newScope.$digest();
+
+        let jqTag: JQuery = jQuery(jqlTag[0]); // jquery
+
+        let input: JQuery = jqTag.find('.ms-SearchBox-field');
+        let div: JQuery = jqTag.find('.ms-SearchBox');
+
+        expect(input.attr('disabled')).toBe('disabled', 'Input should be disabled.');
+        expect(div).toHaveClass('is-disabled');
+    }));
 });
