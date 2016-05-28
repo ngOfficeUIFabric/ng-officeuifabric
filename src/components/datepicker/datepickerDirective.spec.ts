@@ -195,4 +195,35 @@ describe('datepicker: <uif-datepicker />', () => {
         expect(input.attr('Placeholder')).toBe('Please, find a date');
 
     }));
+
+    it('Should be able to disable & enable as needed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.disabled = false;
+
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" ng-disabled="disabled"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        // initially should not be disabled
+        let input: JQuery = jQuery(datepicker[0]).find('.ms-TextField-field');
+        expect(input.attr('disabled')).toBe(undefined, 'Input should not be disabled');
+
+        $scope.disabled = true;
+        $scope.$digest();
+        expect(input.attr('disabled')).toBe('disabled', 'Input should be disabled');
+
+    }));
+
+    it('Should be initially be disabled', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" disabled="disabled"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        // initially should be disabled
+        let input: JQuery = jQuery(datepicker[0]).find('.ms-TextField-field');
+
+        expect(input.attr('disabled')).toBe('disabled', 'Input should be disabled');
+
+    }));
+
 });

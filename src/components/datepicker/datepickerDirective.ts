@@ -271,6 +271,7 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
     monthsArray: string[];
     highlightedValue: Pickadate.DateItem;
     ctrl: DatepickerController;
+    isDisabled: boolean;
 }
 
 /**
@@ -295,7 +296,7 @@ export class DatepickerDirective implements ng.IDirective {
         '<div ng-class="{\'ms-DatePicker\': true, \'is-pickingYears\': ctrl.isPickingYears, \'is-pickingMonths\': ctrl.isPickingMonths}">' +
             '<div class="ms-TextField">' +
                 '<i class="ms-DatePicker-event ms-Icon ms-Icon--event"></i>' +
-                '<input class="ms-TextField-field" type="text" placeholder="{{placeholder}}">' +
+                '<input class="ms-TextField-field" type="text" placeholder="{{placeholder}}" ng-disabled="isDisabled">' +
             '</div>' +
             '<div class="ms-DatePicker-monthComponents">' +
                 '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--chevronRight"></i></span>' +
@@ -371,6 +372,9 @@ export class DatepickerDirective implements ng.IDirective {
             throw 'Months setting should have 12 months, separated by a comma';
         }
 
+        instanceAttributes.$observe('disabled', (disabled) => {
+            $scope.isDisabled = !!disabled;
+        });
     }
 
     private postLink($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
