@@ -40,7 +40,7 @@
     the ngofficeuifabric.js reference</em>
     <hr />
     <h2>Demos</h2>
-    
+
     <h3>Default values with ng-model</h3>
   <p>
     This markup: <br />
@@ -60,7 +60,43 @@
     <br/>
     <p>Value: {{value}}</p>
   </p>
-  
+
+  <h3>Support for disabled and ng-disabled</h3>
+
+  <p>
+    This markup: <br />
+    <code>
+      &lt;label&gt;Click me to toggle: &lt;input type=&quot;checkbox&quot; ng-model=&quot;disabled&quot;&gt;&lt;/label&gt;&lt;br/&gt;<br/>
+      &lt;uif-datepicker ng-model=&quot;value_1&quot; ng-disabled=&quot;disabled&quot; /&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <label>Click me to toggle: <input type="checkbox" ng-model="disabled"></label><br/>
+    <uif-datepicker ng-model="value_1" ng-disabled="disabled" />
+    <br/>
+    <p>Value: {{value_1}}</p>
+
+  </p>
+
+  <p>
+    This markup: <br />
+    <code>
+        &lt;uif-datepicker ng-model=&quot;value_3&quot; disabled=&quot;disabled&quot; /&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-datepicker ng-model="value_3" disabled="disabled" />
+    <br/>
+    <p>Value: {{value_3}}</p>
+
+  </p>
+
   <h3>Custom months, label, and placeholder</h3>
   <p>
     This markup: <br />
@@ -83,7 +119,7 @@
   </p>
   <h3>Empty label</h3>
   <p>
-    
+
     This markup: <br />
     <code>
         &lt;uif-datepicker uif-label=&quot;&quot; /&gt;
@@ -95,7 +131,7 @@
     <br />
 
     <uif-datepicker uif-label="" />
-    
+
   </p>
 
 
