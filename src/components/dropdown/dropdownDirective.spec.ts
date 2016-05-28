@@ -169,4 +169,26 @@
         let title: JQuery = dropdown.find('span.ms-Dropdown-title');
         expect(title.text()).toBe('Option 2', 'Displayed text should be Option 2');
     }));
+
+    it('should be able to pre-select an integer option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 1},
+            { text: 'Option 2', value: 2},
+            { text: 'Option 3', value: 3},
+            { text: 'Option 4', value: 4}
+        ];
+        $scope.selectedValue = 2;
+
+        let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
+            '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}"\
+              title="{{option.text}}">{{option.text}}</uif-dropdown-option>' +
+            '</uif-dropdown>')($scope);
+        $scope.$digest();
+        dropdown = jQuery(dropdown[0]);
+        dropdown.appendTo(document.body);
+
+        let title: JQuery = dropdown.find('span.ms-Dropdown-title');
+        expect(title.text()).toBe('Option 2', 'Displayed text should be Option 2');
+    }));
 });

@@ -72,7 +72,7 @@ export class DropdownOptionDirective implements ng.IDirective {
                     dropdownController.setViewValue(instanceElement.find('span').html(), attrs.value, ev);
                 });
             });
-        let value: string = dropdownController.getViewValue();
+        let value: string = '' + dropdownController.getViewValue();
         if (value && value === attrs.value) {
             dropdownController.setViewValue(attrs.title, attrs.value, null);
         }
