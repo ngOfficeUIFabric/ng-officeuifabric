@@ -1,10 +1,112 @@
 <a name="next"></a>
-### [next (TBD)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
+<a name="0.11.0"></a>
+### [0.11.0 - May 30, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.11.0)
 
 #### Features
 
 - **uif-messagebar**
-  - new directive (Closes [#339](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/339))
+  - new directive ([fb6e579](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/fb6e579), Closes [#339](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/339))
+
+#### Fixes
+
+- **build dependencies**
+  - set explicit version dependencies for NPM packages ([14e8e64](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/14e8e64), Closes [#347](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/347))
+  - update typings to v1.x ([1e355d7](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1e355d7), [31cd8d9](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/31cd8d9), [87e1602](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/87e1602), Closes [#346](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/346))
+- **uif-dropdown**
+  - initial value not set correctly for integer keys ([c987430](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/c987430), Closes [#327](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/327))
+- **uif-datepicker**
+  - disabled not watched ([5073fa4](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5073fa4), References [#268](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/268))
+- **uif-searchbox**
+  - dsiabled not watched ([5f71af3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5f71af3), References [#268](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/268)).
+
+
+#### Breaking Change
+
+- **uif-breadcrumb**
+  - missing responsiveness fixed ([8c020dc](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8c020dc), [#342](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/342))
+
+  BREAKING CHANGE: Component does not allow transclusion of the `uif-breadcrumb-link` elements & Breadcrumb items have to be passed as expression evaluating to an array of elements containing link `text` and `href`.
+
+  Change your code from:
+
+    ```html
+    <uif-breadcrumb>
+      <uif-breadcrumb-link ng-href="\'http://github1.com\'">GitHub1</uif-breadcrumb-link>
+      <uif-breadcrumb-link ng-href="\'http://github2.com\'">GitHub2</uif-breadcrumb-link>
+      <uif-breadcrumb-link ng-href="\'http://github3.com\'">GitHub3</uif-breadcrumb-link>
+      <uif-breadcrumb-link ng-href="\'http://github4.com\'">GitHub4</uif-breadcrumb-link>
+    </uif-breadcrumb>
+    ```
+
+  To the following. The markup should be:
+
+    ```html
+    <uif-breadcrumb uif-breadcrumb-links="links"></uif-breadcrumb>
+    ```
+
+  And the controller should use a defined array of breadcrumb items:
+
+    ```javascript
+    $scope.links = [
+      {href: 'http://github1.com', linkText: 'GitHub1'},
+      {href: 'http://github2.com', linkText: 'GitHub2'},
+      {href: 'http://github3.com', linkText: 'GitHub3'},
+      {href: 'http://github4.com', linkText: 'GitHub4'},
+      {href: 'http://github5.com', linkText: 'GitHub5'},
+      {href: 'http://github6.com', linkText: 'GitHub6'}
+    ];
+    ```
+
+#### Special Notes for This Release
+
+Two updates involved in this release have significant updates to the repo. First, we updated Typings to v1.x ([1e355d7](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1e355d7)) which had some breaking changes to how Typings referenced type definitions and the folder structure. Second, we changed the `package.json` to use explicit package version numbers ([14e8e64](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/14e8e64)) to avoid any issues.
+
+One option to update your repo is to delete your fork & refork... but if you have existing work & branches that's not a good option. In that case do the following.
+
+Before doing anything, update your dev & master branches:
+
+  ```shell
+  git checkout dev
+  git pull --rebase upstream dev
+  git checkout master
+  get pull --rebase upstream master
+  ```
+
+To update your folder for the Typings update...
+
+1. Update Typings to v1:
+
+  ```shell
+  npm install -g typings
+  ```
+
+1. Delete the old `/typings` folder (as it will have extra folders you don't need
+1. Recreate the typings folder:
+
+  ```shell
+  typings install
+  ```
+
+  > At this point, if you refreshed from upstream `master` and `dev`, running `git status` should show no changes.
+
+To update NPM with the current modules...
+
+1. Delete the NPM `/node_modules` folder
+1. Reinstall the specific NPM package versions:
+
+  ```shell
+  npm install
+  ```
+
+Lastly you then want to rebase your branch(es) where you are working off the updated `dev` branch. For instance, say you had a branch called `fix/issue000`:
+
+  ```
+  # jump to that branch
+  git checkout fix/issue000
+
+  # rebase off the dev branch
+  git rebase dev
+  ```
 
 ------------------
 
