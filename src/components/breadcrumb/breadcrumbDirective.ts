@@ -96,6 +96,7 @@ export class BreadcrumbLink {
  * @property {function} openOverflow      - Handler for opening overflow menu.
  * @property {function} isOverflow        - Function determining if thre are overflow elements.
  *                                          Returns true if there are such elements, false otherwise.
+ * @property {function} adjustVisibleElements - Determine visible elements count based on size
  */
 export interface IBreadcrumbScope extends ng.IScope {
   uifBreadcrumbLinks: BreadcrumbLink[];
@@ -104,7 +105,7 @@ export interface IBreadcrumbScope extends ng.IScope {
 
   overflowMenuOpen: boolean;
   openOverflow: (event: ng.IAngularEvent) => void;
-
+  adjustVisibleElements: () => void;
   isOverflow: () => boolean;
 }
 
@@ -141,12 +142,7 @@ export class BreadcrumbController {
 
     };
 
-    $document.find('html').on('click', (event: any) => {
-      $scope.overflowMenuOpen = false;
-      $scope.$apply();
-    });
-
-    windowElement.on('resize', () => {
+    $scope.adjustVisibleElements = () => {
       let width: number = $window.innerWidth;
 
       let elementsToShow: number = (width > BreadcrumbController._breakingWidth) ? 4 : 2;
@@ -154,7 +150,15 @@ export class BreadcrumbController {
         $scope.visibleElements = elementsToShow;
         $scope.$apply();
       }
+    };
 
+    $document.find('html').on('click', (event: any) => {
+      $scope.overflowMenuOpen = false;
+      $scope.$apply();
+    });
+
+    windowElement.on('resize', () => {
+      $scope.adjustVisibleElements();
     });
   }
 }
@@ -210,6 +214,10 @@ export class BreadcrumbDirective implements ng.IDirective {
     const directive: ng.IDirectiveFactory = () => new BreadcrumbDirective();
     return directive;
   }
+
+  public link(scope: IBreadcrumbScope, instanceElement: ng.IAugmentedJQuery, attrs: any, breadcrumbController: BreadcrumbController): void {
+    scope.adjustVisibleElements();
+  };
 
 };
 

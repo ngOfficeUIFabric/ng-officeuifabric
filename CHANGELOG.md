@@ -1,4 +1,11 @@
 <a name="next"></a>
+### [next - TBD](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/next)
+
+#### Fixes
+
+- **uif-breadcrumb**
+  - fix(breadcrumb): too many elements on small screen initially (Closes [#354](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/354))
+
 <a name="0.11.0"></a>
 ### [0.11.0 - May 30, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.11.0)
 
