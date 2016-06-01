@@ -91,7 +91,7 @@ export class MessageBarDirective implements ng.IDirective {
     '</div>';
 
     public scope: any = {
-        uifType: '&'
+        uifType: '@'
     };
 
 
@@ -224,7 +224,7 @@ export class MessageBarDirective implements ng.IDirective {
  *
  * @description
  * MessageBar
- * 
+ *
  * @requires OfficeUiFabric > 2.6.0
  *
  */

@@ -4,7 +4,9 @@
 #### Fixes
 
 - **uif-breadcrumb**
-  - fix(breadcrumb): too many elements on small screen initially (Closes [#354](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/354))
+  - too many elements on small screen initially (Closes [#354](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/354))
+- **uif-messagebar**
+  - `uif-type` binding not working properly (Closes [#356](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/356))
 
 <a name="0.11.0"></a>
 ### [0.11.0 - May 30, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.11.0)
@@ -24,7 +26,7 @@
 - **uif-datepicker**
   - disabled not watched ([5073fa4](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5073fa4), References [#268](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/268))
 - **uif-searchbox**
-  - dsiabled not watched ([5f71af3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5f71af3), References [#268](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/268)).
+  - disabled not watched ([5f71af3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5f71af3), References [#268](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/268)).
 
 
 #### Breaking Change
