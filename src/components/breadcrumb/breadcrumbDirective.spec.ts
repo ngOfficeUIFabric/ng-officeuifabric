@@ -14,8 +14,9 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
     angular.mock.module('officeuifabric.components.breadcrumb');
   });
 
-  beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+  beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $window: ng.IWindowService) => {
 
+    $window.innerWidth = 800;
 
     let html: string = '<uif-breadcrumb uif-breadcrumb-links="breadcrumbLinks"></uif-breadcrumb>';
     scope = $rootScope;
@@ -148,6 +149,38 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
 
       expect(overflowMenu).not.toHaveClass('is-open');
     });
+
+    it(
+      'should display 2 on small screen initially',
+      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService, $window: ng.IWindowService
+      ) => {
+
+      $window.innerWidth = 620; // must be less than breaking point
+
+      let html: string = '<uif-breadcrumb uif-breadcrumb-links="breadcrumbLinks"></uif-breadcrumb>';
+      scope = $rootScope.$new();
+      scope.breadcrumbLinks = [
+        {href: 'http://ngofficeuifabric.com/1', linkText: 'ngOfficeUiFabric-1'},
+        {href: 'http://ngofficeuifabric.com/2', linkText: 'ngOfficeUiFabric-2'},
+        {href: 'http://ngofficeuifabric.com/3', linkText: 'ngOfficeUiFabric-3'},
+        {href: 'http://ngofficeuifabric.com/4', linkText: 'ngOfficeUiFabric-4'},
+        {href: 'http://ngofficeuifabric.com/5', linkText: 'ngOfficeUiFabric-5'},
+        {href: 'http://ngofficeuifabric.com/6', linkText: 'ngOfficeUiFabric-6'}
+      ];
+
+      element = $compile(html)(scope);    // jqLite object
+      element = jQuery(element[0]);       // jQuery object
+
+      scope.$digest();
+
+      let visibleLinks: JQuery = element.find('.ms-Breadcrumb-list li');
+      expect(visibleLinks.length === 2).toBeTruthy();
+
+      let overflowLinks: JQuery = element.find('.ms-ContextualMenu li');
+      expect(overflowLinks.length === 4).toBeTruthy();
+
+
+    }));
 
     it('should change breadcrumb count on resize', inject(($window: ng.IWindowService) => {
 
