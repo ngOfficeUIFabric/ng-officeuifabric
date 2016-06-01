@@ -18,7 +18,7 @@ describe('messageBarDirective: <uif-message-bar />', () => {
                 {{message}}
             </uif-content>
             <uif-link ng-href="{{link.url}}">{{link.text}}</uif-link>
-        </uif-message-bar>  
+        </uif-message-bar>
         `);
         $scope = $rootScope;
         $compile($element)($scope);
@@ -62,7 +62,7 @@ describe('messageBarDirective: <uif-message-bar />', () => {
                     {{message}}
                 </uif-content>
                 <uif-link ng-href="{{link.url}}">{{link.text}}</uif-link>
-            </uif-message-bar>  
+            </uif-message-bar>
             `);
             $compile(element)(scope);
             scope.$digest();
@@ -92,7 +92,7 @@ describe('messageBarDirective: <uif-message-bar />', () => {
                     {{message}}
                 </uif-content>
                 <uif-link ng-href="{{link.url}}">{{link.text}}</uif-link>
-            </uif-message-bar>  
+            </uif-message-bar>
             `);
             $compile(element)(scope);
             scope.$digest();
@@ -119,7 +119,34 @@ describe('messageBarDirective: <uif-message-bar />', () => {
                     {{message}}
                 </uif-content>
                 <uif-link ng-href="{{link.url}}">{{link.text}}</uif-link>
-            </uif-message-bar>  
+            </uif-message-bar>
+            `);
+            $compile(element)(scope);
+            scope.$digest();
+            element = jQuery(element[0]);
+
+            let icon: JQuery = element.find('.ms-Icon');
+            expect(icon.hasClass('ms-Icon--xCircle')).toBe(true, 'icon for type error is set');
+        })
+    );
+
+    it('should allow to interpolate uif-type value', inject(
+        (
+            $compile: Function,
+            $rootScope: ng.IRootScopeService,
+            $log: ng.ILogService) => {
+
+            let scope: any = $rootScope.$new();
+
+            scope.type = 'error';
+
+            let element: JQuery = ng.element(`
+            <uif-message-bar uif-type="{{type}}">
+                <uif-content>
+                    {{message}}
+                </uif-content>
+                <uif-link ng-href="{{link.url}}">{{link.text}}</uif-link>
+            </uif-message-bar>
             `);
             $compile(element)(scope);
             scope.$digest();
