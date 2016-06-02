@@ -69,7 +69,7 @@ Before doing anything, update your dev & master branches:
   git checkout dev
   git pull --rebase upstream dev
   git checkout master
-  get pull --rebase upstream master
+  git pull --rebase upstream master
   ```
 
 To update your folder for the Typings update...
