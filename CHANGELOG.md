@@ -1,6 +1,11 @@
 <a name="next"></a>
 ### [next - TBD](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/next)
 
+#### Features
+
+- **uif-facepile**
+  - new directive (Closes [#275](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/275))
+
 #### Fixes
 
 - **uif-breadcrumb**
@@ -9,6 +14,10 @@
   - `uif-type` binding not working properly (Closes [#356](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/356))
 - **uif-panel**
   - add support for new panel type introduced in Office UI Fabric 2.4 + animation issues (Closes [#307](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/307))
+
+
+------------------
+
 
 <a name="0.11.0"></a>
 ### [0.11.0 - May 30, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.11.0)
@@ -118,6 +127,7 @@ Lastly you then want to rebase your branch(es) where you are working off the upd
   # rebase off the dev branch
   git rebase dev
   ```
+
 
 ------------------
 
