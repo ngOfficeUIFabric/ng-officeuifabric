@@ -11,6 +11,7 @@ import * as contextualMenuModule from '../components/contextualmenu/contextualMe
 import * as datepickerModule from '../components/datepicker/datepickerDirective';
 import * as dialogModule from '../components/dialog/dialogDirective';
 import * as dropdownModule from '../components/dropdown/dropdownDirective';
+import * as facepileModule from '../components/facepile/facepileDirective';
 import * as iconModule from '../components/icon/iconDirective';
 import * as labelModule from '../components/label/labelDirective';
 import * as linkModule from '../components/link/linkDirective';
@@ -52,6 +53,7 @@ export var module: ng.IModule = ng.module('officeuifabric.components', [
   datepickerModule.module.name,
   dialogModule.module.name,
   dropdownModule.module.name,
+  facepileModule.module.name,
   iconModule.module.name,
   labelModule.module.name,
   linkModule.module.name,
