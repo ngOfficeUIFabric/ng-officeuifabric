@@ -165,7 +165,7 @@ describe('panel: <uif-panel />', () => {
 
     it('should render correct html', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       expect(panel).toHaveClass('ms-Panel');
-      expect(panel).toHaveClass('ms-Panel--medium');
+      expect(panel).toHaveClass('ms-Panel--md');
     }));
 
   });
@@ -227,7 +227,7 @@ describe('panel: <uif-panel />', () => {
     it('should render correct html', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       expect(panel).toHaveClass('ms-Panel');
       // default to medium
-      expect(panel).toHaveClass('ms-Panel--medium');
+      expect(panel).toHaveClass('ms-Panel--md');
     }));
 
   });

@@ -7,6 +7,8 @@
   - too many elements on small screen initially (Closes [#354](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/354))
 - **uif-messagebar**
   - `uif-type` binding not working properly (Closes [#356](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/356))
+- **uif-panel**
+  - add support for new panel type introduced in Office UI Fabric 2.4 + animation issues (Closes [#307](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/307))
 
 <a name="0.11.0"></a>
 ### [0.11.0 - May 30, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.11.0)
