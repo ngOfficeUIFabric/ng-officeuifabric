@@ -128,7 +128,7 @@ export class PanelController {
 
   // mapping enum to CSS classes for size
   private uifPanelSizeClasses: { [index: number]: string } = {
-    [PanelTypes.small]: 'ms-Panel----sm',
+    [PanelTypes.small]: 'ms-Panel--sm',
     [PanelTypes.medium]: 'ms-Panel--md',
     [PanelTypes.large]: 'ms-Panel--lg',
     [PanelTypes.extralarge]: 'ms-Panel--xl',
