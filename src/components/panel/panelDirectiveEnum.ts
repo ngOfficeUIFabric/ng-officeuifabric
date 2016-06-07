@@ -28,5 +28,6 @@
    medium,
    large,
    extralarge,
+   extraextralarge,
    left
  }
