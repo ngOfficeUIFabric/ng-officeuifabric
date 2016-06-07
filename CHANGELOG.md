@@ -1,19 +1,19 @@
-<a name="next"></a>
-### [next - TBD](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/next)
+<a name="0.12.0"></a>
+### [0.12.0 - June 7, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.0)
 
 #### Features
 
 - **uif-facepile**
-  - new directive (Closes [#275](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/275))
+  - new directive ([6d9b88b](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/6d9b88b), Closes [#275](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/275))
 
 #### Fixes
 
 - **uif-breadcrumb**
-  - too many elements on small screen initially (Closes [#354](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/354))
+  - too many elements on small screen initially ([4ebaf07](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/4ebaf07), Closes [#354](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/354))
 - **uif-messagebar**
-  - `uif-type` binding not working properly (Closes [#356](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/356))
+  - `uif-type` binding not working properly ([4e6e9bc](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/4e6e9bc), Closes [#356](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/356))
 - **uif-panel**
-  - add support for new panel type introduced in Office UI Fabric 2.4 + animation issues (Closes [#307](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/307))
+  - add support for new panel type introduced in Office UI Fabric 2.4 + animation issues ([306b60d](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/306b60d), Closes [#307](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/307))
 
 
 ------------------
