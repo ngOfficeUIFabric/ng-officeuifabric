@@ -27,7 +27,7 @@ export class PanelDirective implements ng.IDirective {
                                     ng-class="uifShowOverlay === true ? \'ms-Overlay--dark\' : \'\';"></div>
                               <div class="ms-Panel-main">
                                 <div class="ms-Panel-commands">
-                                  <button ng-if="uifShowClose" class='ms-Panel-closeButton' ng-click="closePanel()">
+                                  <button type="button" ng-if="uifShowClose" class='ms-Panel-closeButton' ng-click="closePanel()">
                                     <uif-icon uif-type='x'></uif-icon>
                                   </button>
                                 </div>
