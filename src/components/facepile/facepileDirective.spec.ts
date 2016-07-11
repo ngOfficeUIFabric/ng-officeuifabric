@@ -44,6 +44,10 @@ describe('facepile: <uif-facepile />', () => {
       expect($element.find('.ms-Persona').length).toBe(2);
     }));
 
+    it('should hide overflow icon', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+      expect($element.find('.ms-Facepile-itemBtn--overflow.ng-hide').length).toBe(1);      
+    }));
+
   });
 
   describe('basic mode with overflow', () => {
