@@ -60,7 +60,7 @@ export class FacepileDirective implements ng.IDirective {
                                     </uif-persona>
                                   </div>
                                   <button
-                                    ng-show="uifOverflowLimit > 0"
+                                    ng-show="uifOverflowLimit > 0 && members.length > uifOverflowLimit"
                                     ng-click="overflowPanelIsOpen = true;"
                                     class="ms-Facepile-itemBtn ms-Facepile-itemBtn--overflow js-overflowPanel is-active">
                                     <span class="ms-Facepile-overflowText">+{{members.length - uifOverflowLimit}}</span
