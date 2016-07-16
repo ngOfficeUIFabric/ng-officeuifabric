@@ -250,4 +250,49 @@ describe('textFieldDirective: <uif-textfield />', () => {
         label.click();
         expect(input[0].focus).toHaveBeenCalled();
     }));
+
+    it('changing text field should set $dirty on model', inject(($compile: ng.ICompileService, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.modelValue = 'test';
+
+        let liteTextBox: ng.IAugmentedJQuery =
+            $compile('<uif-textfield ng-model="modelValue" placeholder="Placeholder contents"></uif-textfield>')($scope);
+        let textBox: JQuery = jQuery(liteTextBox[0]);
+        $scope.$digest();
+
+        let input: JQuery = textBox.find('input.ms-TextField-field');
+        input = jQuery(input);
+
+        let ngModelCtrl: ng.INgModelController = angular.element(textBox).controller('ngModel');
+        expect(ngModelCtrl.$dirty).toBe(false);
+
+        input.val('xyz');
+        angular.element(input).triggerHandler('input');
+
+        $scope.$digest();
+
+        expect(ngModelCtrl.$dirty).toBe(true);
+    }));
+
+    it('defocusing text field sets $touched on model', inject(($compile: ng.ICompileService, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.modelValue = 'test';
+        let liteTextBox: ng.IAugmentedJQuery =
+                $compile('<uif-textfield ng-model="modelValue" placeholder="Placeholder contents"></uif-textfield>')($scope);
+
+        let textBox: JQuery = jQuery(liteTextBox[0]);
+        $scope.$digest();
+
+        let input: JQuery = textBox.find('input.ms-TextField-field');
+        input = jQuery(input);
+
+        let ngModelCtrl: ng.INgModelController = angular.element(textBox).controller('ngModel');
+        expect(ngModelCtrl.$touched).toBe(false);
+
+        angular.element(input).triggerHandler('blur');
+
+        $scope.$digest();
+
+        expect(ngModelCtrl.$touched).toBe(true);
+    }));
 });
