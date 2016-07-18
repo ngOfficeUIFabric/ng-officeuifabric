@@ -17,11 +17,13 @@ export class DatepickerController {
     public static $inject: string[] = ['$element', '$scope'];
     public isPickingYears: boolean = false;
     public isPickingMonths: boolean = false;
+    public displayDateFormat: string = 'd mmmm, yyyy';
 
     private jElement: JQuery;
 
     constructor($element: JQuery, public $scope: IDatepickerDirectiveScope) {
         this.jElement = $($element[0]);
+        this.displayDateFormat = $scope.uifDateFormat;
         $scope.ctrl = this;
     }
     public range(min: number, max: number, step: number): number[] {
@@ -50,6 +52,8 @@ export class DatepickerController {
             clear: '',
             close: '',
 
+            // formats
+            format: self.displayDateFormat,
             // classes
             klass: {
                 active: 'ms-DatePicker-input--active',
@@ -267,6 +271,7 @@ export class DatepickerController {
  */
 export interface IDatepickerDirectiveScope extends ng.IScope {
     uifMonths: string;
+    uifDateFormat: string;
     placeholder: string;
     monthsArray: string[];
     highlightedValue: Pickadate.DateItem;
@@ -340,6 +345,7 @@ export class DatepickerDirective implements ng.IDirective {
 
     public scope: any = {
         placeholder : '@',
+        uifDateFormat: '@',
         uifMonths: '@'
     };
     public require: string[] = ['uifDatepicker', '?ngModel'];
@@ -366,6 +372,9 @@ export class DatepickerDirective implements ng.IDirective {
         }
         if (!$scope.placeholder) {
             $scope.placeholder = 'Select a date';
+        }
+        if (!$scope.uifDateFormat) {
+            $scope.uifDateFormat = 'd mmmm, yyyy';
         }
         $scope.monthsArray = $scope.uifMonths.split(',');
         if ($scope.monthsArray.length !== 12) {
