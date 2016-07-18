@@ -118,7 +118,39 @@ describe('datepicker: <uif-datepicker />', () => {
         expect(mayMonth).toHaveClass('is-highlighted');
         expect(julyMonth).not.toHaveClass('is-highlighted');
     }));
+    it('Should be able to specify custom date format', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = '';
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
+        $scope.$digest();
+        datepicker = jQuery(datepicker[0]);
 
+        let date: Date = new Date('2015-01-02');
+        $scope.value = date;
+        $scope.$digest();
+        let textboxValue: string = jQuery(datepicker[0]).find('.ms-TextField-field').val();
+
+        let monthNames: string[] =
+            ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let formattedValue: string = `${date.getDate()} ${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
+
+        expect(textboxValue).toBe(formattedValue, 'Default date format');
+
+        $scope = $rootScope.$new();
+        datepicker = $compile('<uif-datepicker ng-model="value" placeholder="TEST" uif-date-format="mmmm d, yyyy"></uif-datepicker>')
+            ($scope);
+        $scope.$digest();
+        datepicker = jQuery(datepicker[0]);
+
+        $scope.value = date;
+        $scope.$digest();
+
+        textboxValue = jQuery(datepicker[0]).find('.ms-TextField-field').val();
+
+        let newFormattedValue: string = `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+
+        expect(textboxValue).toBe(newFormattedValue, 'Custom date format');
+    }));
     it('Should be able to click  next and prev decade', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2015, 1, 1);
