@@ -59,7 +59,7 @@ export class FacepileDirective implements ng.IDirective {
                                       <uif-persona-initials uif-color="{{member.color}}">{{member.initials}}</uif-persona-initials>
                                     </uif-persona>
                                   </div>
-                                  <button
+                                  <button type="button"
                                     ng-show="uifOverflowLimit > 0"
                                     ng-click="overflowPanelIsOpen = true;"
                                     class="ms-Facepile-itemBtn ms-Facepile-itemBtn--overflow js-overflowPanel is-active">
@@ -137,7 +137,7 @@ export class FacepileAddIconDirective implements ng.IDirective {
   public transclude: boolean = true;
   public restrict: string = 'E';
 
-  public template: string = `<button
+  public template: string = `<button type="button"
                                 class="ms-Facepile-itemBtn ms-Facepile-itemBtn--addPerson js-addPerson"
                                 ng-click="peoplepickerPanelIsOpen = true;">
                                   <i class="ms-Facepile-addPersonIcon ms-Icon ms-Icon--personAdd"></i>
