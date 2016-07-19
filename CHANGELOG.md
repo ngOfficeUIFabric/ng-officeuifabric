@@ -1,4 +1,10 @@
 <a name="0.12.0"></a>
+### [0.12.1 - June 29, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.1)
+
+#### Fixes
+  - **uif-panel**
+    - close button no longer triggers reload ([4de8d81](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/4de8d81), Closes [#366](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/366))
+
 ### [0.12.0 - June 7, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.0)
 
 #### Features
