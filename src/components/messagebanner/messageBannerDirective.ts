@@ -85,26 +85,26 @@ export class MessageBannerDirective implements ng.IDirective {
 
     public isExpanded: boolean = false;
 
-    public template: string = '' +
-    '<div class="ms-MessageBanner" ng-show="uifIsVisible">' +
-    '<div class="ms-MessageBanner-content">' +
-    '<div class="ms-MessageBanner-text">' +
-    '<div class="ms-MessageBanner-clipper"></div>' +
-    '</div>' +
-    '<uif-button uif-type="command" class="ms-MessageBanner-expand" ng-show="!isExpanded" style="height:52px">' +
-    '<uif-icon uif-type="chevronsDown"></uif-icon>' +
-    '</uif-button>' +
-    '<uif-button uif-type="command" class="ms-MessageBanner-expand" ng-show="isExpanded" style="height:52px">' +
-    '<uif-icon uif-type="chevronsUp"></uif-icon>' +
-    '</uif-button>' +
-    '<div class="ms-MessageBanner-action">' +
-    '<uif-button uif-type="primary" class="ms-fontColor-neutralLight" ng-click="uifAction()">{{ uifActionLabel }}</uif-button>' +
-    '</div>' +
-    '</div>' +
-    '<uif-button uif-type="command" class="ms-MessageBanner-close" ng-click="uifOnClose()" style="height:52px">' +
-    '<uif-icon uif-type="x"></uif-icon>' +
-    '</uif-button>' +
-    '</div>';
+    public template: string = `
+    <div class="ms-MessageBanner" ng-show="uifIsVisible">
+    <div class="ms-MessageBanner-content">
+    <div class="ms-MessageBanner-text">
+    <div class="ms-MessageBanner-clipper"></div>
+    </div>
+    <uif-button type="button" uif-type="command" class="ms-MessageBanner-expand" ng-show="!isExpanded" style="height:52px">
+    <uif-icon uif-type="chevronsDown"></uif-icon>
+    </uif-button>
+    <uif-button type="button" uif-type="command" class="ms-MessageBanner-expand" ng-show="isExpanded" style="height:52px">
+    <uif-icon uif-type="chevronsUp"></uif-icon>
+    </uif-button>
+    <div class="ms-MessageBanner-action">
+    <uif-button type="button" uif-type="primary" class="ms-fontColor-neutralLight" ng-click="uifAction()">{{ uifActionLabel }}</uif-button>
+    </div>
+    </div>
+    <uif-button type="button" uif-type="command" class="ms-MessageBanner-close" ng-click="uifOnClose()" style="height:52px">
+    <uif-icon uif-type="x"></uif-icon>
+    </uif-button>
+    </div>`;
 
     public scope: any = {
         uifAction: '&',
@@ -303,4 +303,3 @@ export class MessageBannerDirective implements ng.IDirective {
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.messagebanner', ['officeuifabric.components'])
     .directive('uifMessageBanner', MessageBannerDirective.factory());
-
