@@ -292,7 +292,7 @@ export class PeoplePickerDirective implements ng.IDirective {
                 <uif-persona-initials uif-color="{{person.color}}">{{person.initials}}</uif-persona-initials>
                 <uif-persona-primary-text>{{person.primaryText}}</uif-persona-primary-text>
               </uif-persona>
-              <button ng-click="removePersonFromSelectedPeople(person, $event)" class="ms-PeoplePicker-personaRemove">
+              <button type="button" ng-click="removePersonFromSelectedPeople(person, $event)" class="ms-PeoplePicker-personaRemove">
                 <uif-icon uif-type="${IconEnum[IconEnum.x]}"></uif-icon>
               </button>
             </div>
@@ -332,7 +332,7 @@ export class PeoplePickerDirective implements ng.IDirective {
                 <uif-persona-initials uif-color="{{person.color}}">{{person.initials}}</uif-persona-initials>
                 <uif-persona-primary-text>{{person.primaryText}}</uif-persona-primary-text>
               </uif-persona>
-              <button ng-click="removePersonFromSelectedPeople(person, $event)" class="ms-PeoplePicker-personaRemove">
+              <button type="button" ng-click="removePersonFromSelectedPeople(person, $event)" class="ms-PeoplePicker-personaRemove">
                 <uif-icon uif-type="${IconEnum[IconEnum.x]}"></uif-icon>
               </button>
             </div>
@@ -747,13 +747,13 @@ export class PeoplePickerResultListDirective implements ng.IDirective {
           <uif-persona-primary-text>{{person.primaryText}}</uif-persona-primary-text>
           <uif-persona-secondary-text>{{person.secondaryText}}</uif-persona-secondary-text>
         </uif-persona>
-        <button
+        <button type="button"
           ng-if="!person.additionalData && onPersonCloseClick()"
           ng-click="onPersonCloseClick()(people, person, $event)"
           class="ms-PeoplePicker-resultAction js-resultRemove">
           <uif-icon uif-type="${IconEnum[IconEnum.x]}"></uif-icon>
         </button>
-        <button
+        <button type="button"
           ng-if="person.additionalData"
           ng-click="expandAdditionalData($event)"
           class="ms-PeoplePicker-resultAction js-resultRemove">
@@ -871,7 +871,7 @@ export class PeopleSearchMoreDirective implements ng.IDirective {
   public template: string = `
   <div class="ms-PeoplePicker-searchMore js-searchMore"
     ng-class="{'ms-PeoplePicker-searchMore--disconnected': disconnected}">
-    <button ng-if="pickerType === '${PeoplePickerTypes[PeoplePickerTypes.grouped]}' && !disconnected"
+    <button type="button" ng-if="pickerType === '${PeoplePickerTypes[PeoplePickerTypes.grouped]}' && !disconnected"
       ng-click="onSearch($event)" class="ms-PeoplePicker-searchMoreBtn">
       <div class="ms-PeoplePicker-searchMoreIcon">
         <uif-icon ng-if="!disconnected" uif-type="${IconEnum[IconEnum.search]}"></uif-icon>
@@ -1153,7 +1153,9 @@ export class PeoplePickerSelectedDirective implements ng.IDirective {
               <uif-persona-primary-text>{{person.primaryText}}</uif-persona-primary-text>
               <uif-persona-secondary-text>{{person.secondaryText}}</uif-persona-secondary-text>
             </uif-persona>
-            <button ng-click="removePersonFromSelectedPeople()(person, $event)" class="ms-PeoplePicker-resultAction js-resultRemove">
+            <button type="button"
+                    ng-click="removePersonFromSelectedPeople()(person, $event)"
+                    class="ms-PeoplePicker-resultAction js-resultRemove">
               <uif-icon uif-type="${IconEnum[IconEnum.x]}"></uif-icon>
             </button>
           </li>
