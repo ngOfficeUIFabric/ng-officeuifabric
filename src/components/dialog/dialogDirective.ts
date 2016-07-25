@@ -121,7 +121,7 @@ export class DialogHeaderDirective implements ng.IDirective {
   public transclude: boolean = true;
   public require: string = '^^uifDialog';
   public template: string = '<div class="ms-Dialog-header">' +
-  '<button ng-if="$parent.uifClose" class="ms-Dialog-button ms-Dialog-button--close">' +
+  '<button type="button" ng-if="$parent.uifClose" class="ms-Dialog-button ms-Dialog-button--close">' +
   '<i class="ms-Icon ms-Icon--x"></i></button>' +
   '<ng-transclude></ng-transclude></div>';
   public static factory(): ng.IDirectiveFactory {
