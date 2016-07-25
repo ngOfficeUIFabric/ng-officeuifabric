@@ -1,4 +1,27 @@
-<a name="0.12.0"></a>
+<a name="0.12.2"></a>
+### [0.12.2 - July 25, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.2)
+
+#### Features
+
+- **uif-datepicker**
+  - add custom date format support ([e9f9a6e](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/e9f9a6e), Closes [#385](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/385))
+
+
+#### Fixes
+
+- **uif-facepile**
+  - display overflow only if necessary ([acf1dd6](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/acf1dd6))
+  - update button to include button attribute ([772d65b](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/772d65b), Closes [#390](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/390))
+- **uif-messagebanner**
+  - add type attribute to button element ([58b6538](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/58b6538), Closes [#388](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/388))
+- **uif-peoplepicker**
+  - update button to include button attribute ([6da9687](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/6da9687), Closes [#391](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/391))
+
+
+------------------
+
+
+<a name="0.12.1"></a>
 ### [0.12.1 - June 29, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.1)
 
 #### Fixes
