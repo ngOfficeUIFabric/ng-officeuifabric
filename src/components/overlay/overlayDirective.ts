@@ -1,7 +1,7 @@
 'use strict';
 
 import * as ng from 'angular';
-import {OverlayMode} from './overlayModeEnum.ts';
+import {OverlayMode} from './overlayModeEnum';
 
 /**
  * @ngdoc interface

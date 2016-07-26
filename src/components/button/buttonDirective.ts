@@ -1,8 +1,8 @@
 'use strict';
 
 import * as ng from 'angular';
-import {ButtonTypeEnum} from './buttonTypeEnum.ts';
-import {ButtonTemplateType} from './buttonTemplateType.ts';
+import {ButtonTypeEnum} from './buttonTypeEnum';
+import {ButtonTemplateType} from './buttonTemplateType';
 
 export interface IButtonScope extends ng.IScope {
   disabled: boolean;
