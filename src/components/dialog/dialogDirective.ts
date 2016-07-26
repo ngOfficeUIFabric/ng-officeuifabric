@@ -1,7 +1,7 @@
 'use strict';
 
 import * as ng from 'angular';
-import {DialogTypeEnum, DialogActionsPositionEnum} from './dialogEnums.ts';
+import {DialogTypeEnum, DialogActionsPositionEnum} from './dialogEnums';
 
 /**
  * @ngdoc interface
