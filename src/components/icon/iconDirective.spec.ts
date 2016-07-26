@@ -42,7 +42,7 @@ describe('iconDirective: <uif-icon />', () => {
   });
 
   /**
-   * Verifies directive generates the aria-hidden attribute. 
+   * Verifies directive generates the aria-hidden attribute.
    */
   it('should render correct aria-hidden attribute', () => {
     // get the rendered icon element
@@ -52,5 +52,24 @@ describe('iconDirective: <uif-icon />', () => {
     expect(iconElement.eq(0)).toHaveAttr('aria-hidden');
     expect(iconElement.eq(0).attr('aria-hidden')).toBe('true');
   });
+
+  /**
+   * Verfies type is watched for changes when set.
+   */
+  it('should allow to interpolate uif-type value',
+     inject(($rootScope: ng.IRootScopeService, $compile: Function, $log: ng.ILogService) => {
+
+      let thisScope: any = $rootScope.$new();
+
+      thisScope.type = 'error';
+
+      let thisElement: JQuery = ng.element('<uif-icon uif-type="{{type}}">');
+      $compile(thisElement)(thisScope);
+      thisScope.$digest();
+      thisElement = jQuery(element[0]);
+
+      let icon: JQuery = thisElement.find('.ms-Icon');
+      expect(icon.hasClass('ms-Icon--error')).toBe(true, 'icon for type error is set');
+    }));
 
 });
