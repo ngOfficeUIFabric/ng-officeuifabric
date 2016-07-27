@@ -35,3 +35,45 @@
   -webkit-transition: all .2s;
 	transition: all .2s;
 }
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideRightIn40 {
+  from {
+    transform: translate3d(-40px, 0px, 0px);
+  }
+
+  to {
+    transform: translate3d(0px, 0px, 0px);
+  }
+}
+
+@-webkit-keyframes scaleDown98 {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  to {
+    transform: scale3d(0.98, 0.98, 1);
+  }
+}
