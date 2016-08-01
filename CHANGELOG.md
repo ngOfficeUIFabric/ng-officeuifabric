@@ -1,3 +1,23 @@
+<a name="0.12.3"></a>
+### [0.12.3 - August 1, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.3)
+
+#### Features
+
+- **WallabyJS**
+  - added support for Wallaby.js ([deb0029](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/deb0029))
+
+
+#### Fixes
+
+- **uif-navbar, uif-contextmenu**
+  - animation demo is not working ([b353876](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b353876), Closes [#402](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/402))
+- **dependencies**
+  - update dependencies ([454d9a1](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/454d9a1))
+
+
+------------------
+
+
 <a name="0.12.2"></a>
 ### [0.12.2 - July 25, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.2)
 
