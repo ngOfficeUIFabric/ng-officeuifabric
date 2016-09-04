@@ -32,6 +32,7 @@
     "tmp": "registry:dt/tmp#0.0.0+20160514170650",
     "uglify-js": "registry:dt/uglify-js#2.6.1+20160316155526",
     "vinyl": "registry:dt/vinyl#1.1.0+20160316155526",
+    "wallabyjs": "registry:dt/wallabyjs#0.0.0+20160817101616",
     "xpath": "registry:dt/xpath#0.0.7+20160316155526"
   },
   "dependencies": {

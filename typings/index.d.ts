@@ -29,6 +29,7 @@
 /// <reference path="globals/tmp/index.d.ts" />
 /// <reference path="globals/uglify-js/index.d.ts" />
 /// <reference path="globals/vinyl/index.d.ts" />
+/// <reference path="globals/wallabyjs/index.d.ts" />
 /// <reference path="globals/xpath/index.d.ts" />
 /// <reference path="modules/bluebird/index.d.ts" />
 /// <reference path="modules/chalk/index.d.ts" />

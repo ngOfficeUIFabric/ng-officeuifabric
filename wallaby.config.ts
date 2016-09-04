@@ -1,4 +1,4 @@
-import { IWallabyConfig, IWallabyFilePattern, IWallabyEnvironment } from 'wallaby';
+import { IWallaby, IWallabyConfig, IWallabyCompilers, IWallabyProcessor, IWallabyFilePattern, IWallabyEnvironment } from 'wallabyjs';
 import { BuildConfig } from './build/config/build';
 import { WebPackConfig } from './build/config/webpack';
 
@@ -20,7 +20,7 @@ class WallabyConfig implements IWallabyConfig {
     { load: false, pattern: 'src/**/*.spec.ts' }
   ];
 
-  public compilers: any = {
+  public compilers: IWallabyCompilers = {
     'src/**/*.ts': this.wallaby.compilers.typeScript()
   };
 
@@ -29,7 +29,7 @@ class WallabyConfig implements IWallabyConfig {
     runner: require('phantomjs2-ext').path
   };
 
-  public postprocessor: any;
+  public postprocessor: IWallabyProcessor;
 
   /**
    * Configure testing framework / sandbox environbment just before a test run starts.
@@ -40,7 +40,7 @@ class WallabyConfig implements IWallabyConfig {
     window[moduleBundle].loadTests();
   };
 
-  constructor(private wallaby: any) {
+  constructor(private wallaby: IWallaby) {
     this.configPostProcessor();
   }
 
@@ -68,6 +68,6 @@ class WallabyConfig implements IWallabyConfig {
 
 }
 
-module.exports = (wallaby: any) => {
+module.exports = (wallaby: IWallaby) => {
   return new WallabyConfig(wallaby);
 };
