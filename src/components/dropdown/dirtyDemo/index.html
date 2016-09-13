@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css">
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="AppController as vm">
+<form name="dirtyForm" novalidate>
+
+    <!--<input type="text" name="working" ng-model="vm.working" />-->
+
+    <uif-dropdown ng-model="vm.dropdown" name="dropdown">
+      <uif-dropdown-option value="value1">Value 1</uif-dropdown-option>
+      <uif-dropdown-option value="value2">Value 2</uif-dropdown-option>
+      <uif-dropdown-option value="value3">Value 3</uif-dropdown-option>
+      <uif-dropdown-option value="value4">Value 4</uif-dropdown-option>
+    </uif-dropdown>
+
+    <pre> {{ dirtyForm | json }}</pre>
+
+  </form>
+
+  <script>
+    angular.module('app', ['officeuifabric.core', 'officeuifabric.components', ]);
+
+    angular.module('app').controller('AppController', ['$scope', function() {
+      var vm = this;
+
+      vm.dropdown = "value2";
+
+    }]);
+  </script>
+</body>
+
+</html>

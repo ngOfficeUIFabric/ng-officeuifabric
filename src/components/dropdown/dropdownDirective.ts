@@ -116,6 +116,9 @@ export class DropdownController {
                         self.$document.off('click', documentClickHandler);
                     });
                 }
+                if(self.$scope.ngModel !== undefined && self.$scope.ngModel != null) {
+                    self.$scope.ngModel.$setTouched();
+                }
             }
         });
         if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
