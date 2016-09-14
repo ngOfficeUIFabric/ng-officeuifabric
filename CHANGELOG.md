@@ -1,3 +1,19 @@
+<a name="0.12.4"></a>
+### [0.12.4 - September 14, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.4)
+
+#### Features
+
+- **uif-dropdown**
+  - added support for `ngModel.$touched` for `uif-dropdown` ([bc258b3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/bc258b3), [#368](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/368))
+
+
+#### Fixes
+
+- **WallabyJS**
+  - update wallaby to use definately typed definition ([46e9ef0](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/46e9ef0))
+- **dependencies**
+  - update dependencies ([09187e3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/09187e3))
+
 <a name="0.12.3"></a>
 ### [0.12.3 - August 1, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.3)
 
