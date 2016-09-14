@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css">
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="AppController as vm">
+<h1>Dirty Checking with ngOfficeUiFabric directives</h1>
+
+  <form name="dirtyForm" novalidate>
+
+    <input type="text" name="working" ng-model="vm.working" />
+
+    <uif-toggle name="notworking" uif-label-off="Label off" uif-label-on="Label on" ng-model="vm.notWorking"></uif-toggle>
+
+    <pre> {{ dirtyForm | json }}</pre>
+
+  </form>
+
+  <script>
+    angular.module('app', ['officeuifabric.core', 'officeuifabric.components', ]);
+
+    angular.module('app').controller('AppController', ['$scope', function() {
+      var vm = this;
+
+      vm.notWorking = true;
+      vm.working = "standard input element";
+    }]);
+  </script>
+</body>
+
+</html>

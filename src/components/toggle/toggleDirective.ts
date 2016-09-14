@@ -6,15 +6,15 @@ import * as ng from 'angular';
  * @ngdoc interface
  * @name IToggleScope
  * @module officeuifabric.components.toggle
- * 
- * @description 
- * This is the scope used by the directive. 
- *  
- * 
+ *
+ * @description
+ * This is the scope used by the directive.
+ *
+ *
  * @property {string} ngModel         - The scope variable to bind to the toggle.
  * @property {string} uifLabelOff     - The label to display when not toggled
  * @property {string} uifLabelOn      - The label to display when toggled
- * @property {string} uifTextLocation - Location of the label (left or right), compared to the toggle  
+ * @property {string} uifTextLocation - Location of the label (left or right), compared to the toggle
  * @property {string} uniqueId
  * @property {string} textLocation
  * @property {string} disabled
@@ -34,29 +34,30 @@ export interface IToggleScope extends ng.IScope {
     ngChange: string;
     ngTrueValue: string;
     ngFalseValue: string;
+    checkboxChange: () => void;
 }
 
 /**
  * @ngdoc directive
  * @name uifToggle
  * @module officeuifabric.components.toggle
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-toggle>` is a toggle directive.
- * 
+ *
  * @see {link http://officeuifabric.com/components/toggle/}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-toggle ng-model='toggled' />
  */
 export class ToggleDirective implements ng.IDirective {
     public template: string = '<div ng-class="[\'ms-Toggle\', textLocation, {\'is-disabled\': disabled}]">' +
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
                 '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ' +
-                'ng-model="ngModel" ng-change="ngChange()" ng-disabled="disabled" ' +
+                'ng-model="ngModel" ng-change="checkboxChange();ngChange()" ng-disabled="disabled" ' +
                 'ng-attr-ng-true-value="{{ngTrueValue || undefined}}" ng-attr-ng-false-value="{{ngFalseValue || undefined}}" />' +
                 '<label for="{{::$id}}" class="ms-Toggle-field">' +
                     '<span class="ms-Label ms-Label--off">{{uifLabelOff}}</span>' +
@@ -65,6 +66,7 @@ export class ToggleDirective implements ng.IDirective {
                 '</div>';
     public restrict: string = 'E';
     public transclude: boolean = true;
+    public require: string[] = ['?ngModel'];
     public scope: {} = {
         ngChange: '&?',
         ngFalseValue: '@?',
@@ -80,7 +82,12 @@ export class ToggleDirective implements ng.IDirective {
         return directive;
     }
 
-    public link(scope: IToggleScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
+    public link(scope: IToggleScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, ctrls: any[]): void {
+        let ngModelCtrl: ng.INgModelController;
+        if (ng.isDefined(ctrls) && ctrls.length > 0) {
+            ngModelCtrl = ctrls[0];
+        }
+
         if (scope.uifTextLocation) {
             let loc: string = scope.uifTextLocation;
             loc = loc.charAt(0).toUpperCase() + loc.slice(1);
@@ -91,16 +98,23 @@ export class ToggleDirective implements ng.IDirective {
             ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; })
         );
         scope.disabled = 'disabled' in attrs;
+
+        scope.checkboxChange = () => {
+            if (ng.isDefined(ngModelCtrl) && ngModelCtrl  !== null) {
+                ngModelCtrl.$setDirty();
+                ngModelCtrl.$setTouched();
+            }
+        };
     }
 }
 
 /**
  * @ngdoc module
  * @name officeuifabric.components.toggle
- * 
- * @description 
+ *
+ * @description
  * Toggle
- * 
+ *
  */
 export var module: ng.IModule = ng.module('officeuifabric.components.toggle', [
     'officeuifabric.components'

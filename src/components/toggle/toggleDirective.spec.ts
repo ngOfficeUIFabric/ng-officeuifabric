@@ -152,4 +152,28 @@ describe('toggleDirective: <uif-toggle />', () => {
 
         expect(input.attr('ng-false-value') === undefined).toBe(true);
     }));
+
+    it('should set $dirty when value changed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.toggled = true;
+
+        let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled"></toggle>')($scope);
+        toggle = jQuery(toggle[0]);
+        $scope.$apply();
+
+        let checkBox: JQuery = toggle.find('input.ms-Toggle-input');
+
+        let ngModel: ng.INgModelController = angular.element(toggle).controller('ngModel');
+
+        expect(ngModel.$dirty).toBe(false);
+        expect(ngModel.$touched).toBe(false);
+
+        checkBox.click();
+        $scope.$apply();
+
+        expect($scope.toggled).toBe(false);
+
+        expect(ngModel.$dirty).toBe(true);
+        expect(ngModel.$touched).toBe(true);
+    }));
 });
