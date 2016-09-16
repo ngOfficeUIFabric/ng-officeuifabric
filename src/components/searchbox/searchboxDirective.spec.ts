@@ -38,8 +38,9 @@ describe('searchBoxDirective: <uif-searchbox />', () => {
         expect(textField1[0].id === textField2[0].id).toBe(false);
     }));
     it('should be able to set value', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-        let $newScope: ng.IScope = $rootScope.$new();
-        let tag: JQuery = ng.element("<uif-searchbox value=\"'Value'\" />");
+        let $newScope: any = $rootScope.$new();
+        $newScope.value = 'Value';
+        let tag: JQuery = ng.element('<uif-searchbox ng-model="value" />');
         $compile(tag)($newScope);
         $newScope.$digest();
         tag = jQuery(tag[0]);
@@ -100,5 +101,71 @@ describe('searchBoxDirective: <uif-searchbox />', () => {
 
         expect(input.attr('disabled')).toBe('disabled', 'Input should be disabled.');
         expect(div).toHaveClass('is-disabled');
+    }));
+
+    it('should set $dirty value changed', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: any = $rootScope.$new();
+        $newScope.value = 'Value';
+
+        let tag: JQuery = ng.element('<uif-searchbox ng-model="value" />');
+        $compile(tag)($newScope);
+        $newScope.$digest();
+        tag = jQuery(tag[0]);
+
+        let ngModel: ng.INgModelController = angular.element(tag).controller('ngModel');
+        expect(ngModel.$dirty).toBe(false);
+
+        let input: JQuery = tag.find('.ms-SearchBox-field');
+
+        input.val('Value changed');
+        angular.element(input).triggerHandler('input');
+
+        $newScope.$digest();
+
+        expect(ngModel.$dirty).toBe(true);
+    }));
+
+    it('should set $touched on blur', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: any = $rootScope.$new();
+        $newScope.value = 'Value';
+
+        let tag: JQuery = ng.element('<uif-searchbox ng-model="value" />');
+        $compile(tag)($newScope);
+        $newScope.$digest();
+        tag = jQuery(tag[0]);
+
+        let ngModel: ng.INgModelController = angular.element(tag).controller('ngModel');
+        expect(ngModel.$touched).toBe(false);
+
+        let input: JQuery = tag.find('.ms-SearchBox-field');
+        angular.element(input).triggerHandler('blur');
+
+        $newScope.$digest();
+
+        expect(ngModel.$touched).toBe(true);
+    }));
+
+    it('when cleared, $dirty should be set', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+        let $newScope: any = $rootScope.$new();
+        $newScope.value = 'Value';
+
+        let tag: JQuery = ng.element('<uif-searchbox ng-model="value" />');
+        $compile(tag)($newScope);
+        $newScope.$digest();
+        tag = jQuery(tag[0]);
+
+        let ngModel: ng.INgModelController = angular.element(tag).controller('ngModel');
+        expect(ngModel.$dirty).toBe(false);
+
+        let input: JQuery = tag.find('.ms-SearchBox-field');
+        let button: JQuery = tag.find('.ms-SearchBox-closeButton');
+
+        angular.element(button).triggerHandler('mousedown');
+        angular.element(input).triggerHandler('blur');
+
+        $newScope.$digest();
+
+        expect($newScope.value).toBe('');
+        expect(ngModel.$dirty).toBe(true);
     }));
 });
