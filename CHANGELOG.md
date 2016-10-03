@@ -1,3 +1,13 @@
+<a name="0.12.5"></a>
+### [0.12.5 - October 3, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.5)
+
+#### Fixes
+
+- **uif-textfield**
+  - $dirty not being set on uif-textfield ([25bf59f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/25bf59f), [#367](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/367))
+- **uif-toggle**
+  - $dirty not being set on uif-toggle ([81c60f7](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/81c60f7), [#379](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/379))
+
 <a name="0.12.4"></a>
 ### [0.12.4 - September 14, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.4)
 
