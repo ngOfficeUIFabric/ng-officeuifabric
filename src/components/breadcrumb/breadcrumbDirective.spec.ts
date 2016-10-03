@@ -16,7 +16,7 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
 
   beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $window: ng.IWindowService) => {
 
-    $window.innerWidth = 800;
+    $window.resizeTo(800, $window.innerWidth);
 
     let html: string = '<uif-breadcrumb uif-breadcrumb-links="breadcrumbLinks"></uif-breadcrumb>';
     scope = $rootScope;
@@ -155,7 +155,7 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
       inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService, $window: ng.IWindowService
       ) => {
 
-      $window.innerWidth = 620; // must be less than breaking point
+      $window.resizeTo(620, $window.innerWidth); // must be less than breaking point
 
       let html: string = '<uif-breadcrumb uif-breadcrumb-links="breadcrumbLinks"></uif-breadcrumb>';
       scope = $rootScope.$new();
@@ -191,7 +191,7 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
       expect(overflowLinks.length === 2).toBeTruthy();
 
       // narrow down window
-      $window.innerWidth = 620; // must be less than breaking point
+      $window.resizeTo(620, $window.innerWidth); // must be less than breaking point
       ng.element($window).triggerHandler('resize');
       scope.$digest();
 
@@ -202,7 +202,7 @@ describe('breadcrumbDirective <uif-breadcrumb />', () => {
       expect(overflowLinks.length === 4).toBeTruthy();
 
       // back to normal
-      $window.innerWidth = 800; // must be less than breaking point
+      $window.resizeTo(800, $window.innerWidth); // must be less than breaking point
       ng.element($window).triggerHandler('resize');
       scope.$digest();
 
