@@ -1,3 +1,12 @@
+<a name="0.12.6"></a>
+### [0.12.6 - October 3, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.6)
+
+#### Fixes
+
+- **uif-breadcrumb**
+  - fix text compile error ([0f1749a](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/0f1749a))
+
+
 <a name="0.12.5"></a>
 ### [0.12.5 - October 3, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.5)
 
