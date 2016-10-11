@@ -53,7 +53,7 @@ export class GulpTask extends BaseGulpTask {
       .pipe($.plumber())
       .pipe($.if(this._args.verbose, $.print()))
       .pipe($.sourcemaps.init())
-      .pipe($.typescript(tsProject));
+      .pipe(tsProject());
 
     return result.js
       .pipe($.sourcemaps.write())
