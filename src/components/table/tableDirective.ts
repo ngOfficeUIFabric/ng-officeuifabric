@@ -400,7 +400,9 @@ export class TableRowSelectDirective implements ng.IDirective {
                 controllers: any[]): void {
         let thead: TableHeadController = controllers[1];
         if (thead) {
-            instanceElement.replaceWith('<th class="ms-Table-rowCheck"></th>');
+            let newElem: ng.IAugmentedJQuery = angular.element('<th class="ms-Table-rowCheck"></th>');
+            instanceElement.replaceWith(newElem);
+            instanceElement = newElem;
         }
 
         scope.rowSelectClick = (ev: any): void => {
