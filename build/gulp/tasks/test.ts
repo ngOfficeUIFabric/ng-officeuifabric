@@ -1,8 +1,8 @@
 'use strict';
 
-import {BaseGulpTask} from '../BaseGulpTask';
-import {Utils} from '../utils';
-import {BuildConfig} from '../../config/build';
+import { BaseGulpTask } from '../BaseGulpTask';
+import { Utils } from '../utils';
+import { BuildConfig } from '../../config/build';
 import * as yargs from 'yargs';
 import * as karma from 'karma';
 import * as gulp from 'gulp';
@@ -94,11 +94,12 @@ export class GulpTask extends BaseGulpTask {
       Utils.log('Karma test run completed');
 
       // result = 1 means karma exited with error
-      if (karmaResult === 1) {
+      if (karmaResult !== 0) {
         Utils.log('Karma finished with error(s)');
+        done(() => { return new Error('Karma finished with errors'); });
+      } else {
+        done();
       }
-
-      done();
 
     });
     karmaServer.start();
