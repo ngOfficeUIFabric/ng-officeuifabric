@@ -577,14 +577,16 @@ describe('tableDirective: <uif-table />', () => {
 
     it('for row select mode \'multiple\' clicking the row selected in the header should select all rows if not all rows are selected',
        inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        element = ng.element('<uif-table uif-row-select-mode="multiple">' +
-        '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
-        '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
+        element = ng.element('<uif-table uif-row-select-mode="multiple">\
+        <uif-table-head><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-head>\
+        <uif-table-body>\
+        <uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row>\
+        </uif-table-body></uif-table>');
         $compile(element)(scope);
         element = jQuery(element[0]);
         scope.$digest();
 
-        let tableRowSelect: JQuery = element.children().eq(0).children().eq(0);
+        let tableRowSelect: JQuery = element.children().eq(0).children().eq(0).children().eq(0);
         tableRowSelect.click();
 
         let numSelectedItems: number = 0;
@@ -600,19 +602,21 @@ describe('tableDirective: <uif-table />', () => {
 
     it('for row select mode \'multiple\' clicking the row selected in the header should unselect all rows if all rows are selected',
        inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
-        element = ng.element('<uif-table uif-row-select-mode="multiple">' +
-        '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
-        '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
+        element = ng.element('<uif-table uif-row-select-mode="multiple">\
+        <uif-table-head><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-head>\
+        <uif-table-body>\
+        <uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row>\
+        <uif-table-body></uif-table>');
         $compile(element)(scope);
         element = jQuery(element[0]);
         scope.$digest();
 
         // select all rows
-        element.children().eq(1).click();
-        element.children().eq(2).click();
-        element.children().eq(3).click();
+        element.children().eq(1).children().eq(0).click();
+        element.children().eq(1).children().eq(1).click();
+        element.children().eq(1).children().eq(2).click();
 
-        let tableRowSelect: JQuery = element.children().eq(0).children().eq(0);
+        let tableRowSelect: JQuery = element.children().eq(0).children().eq(0).children().eq(0);
         tableRowSelect.click();
 
         let numSelectedItems: number = 0;
