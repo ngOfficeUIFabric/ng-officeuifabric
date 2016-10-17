@@ -158,7 +158,7 @@ export class MessageBannerDirective implements ng.IDirective {
             } else {
                 this._resizeSmall();
             }
-        }
+        };
 
         this._initLocals($elem);
         this.transcludeChilds($scope, $elem, $transclude);
