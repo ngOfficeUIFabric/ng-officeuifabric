@@ -52,21 +52,23 @@ describe('messageBannerDirective: <uif-message-banner />', () => {
     });
 
     it('should be able to be expanded', (): void => {
-        let chevronDown: JQuery = jQuery($element.find('.ms-MessageBanner-expand')[0]);
-        let chevronUp: JQuery = jQuery($element.find('.ms-MessageBanner-expand')[1]);
+        let chevronButton: JQuery = jQuery($element.find('.ms-MessageBanner-expand'));
+        let chevronDown: JQuery = jQuery(chevronButton.find('uif-icon').eq(0));
+        let chevronUp: JQuery = jQuery(chevronButton.find('uif-icon').eq(1));
+
         let container: JQuery = jQuery($element.find('.ms-MessageBanner'));
 
         expect(chevronDown.hasClass('ng-hide')).toBe(false, 'Chevron down is visible');
         expect(chevronUp.hasClass('ng-hide')).toBe(true, 'Chevron up is hidden');
 
-        chevronDown.click();
-        expect(chevronDown.hasClass('ng-hide')).not.toBe('true');
-        expect(container.hasClass('is-expanded')).toBe(true, 'Container should be expanded');
+        chevronButton.click();
 
+        expect(container.hasClass('is-expanded')).toBe(true, 'Container should be expanded');
         expect(chevronDown.hasClass('ng-hide')).toBe(true, 'Chevron down is hidden');
         expect(chevronUp.hasClass('ng-hide')).toBe(false, 'Chevron up is visible');
 
-        chevronUp.click();
+        chevronButton.click();
+
         expect(container.hasClass('is-expanded')).toBe(false, 'Container should not be expanded');
     });
 
@@ -93,4 +95,43 @@ describe('messageBannerDirective: <uif-message-banner />', () => {
         button.trigger('click');
         expect($scope.customCloseFunction).toHaveBeenCalled();
     });
+
+    it('should be able to resize the messageBanner', inject(
+        (
+            $rootScope: ng.IRootScopeService,
+            $compile: Function,
+            $window: ng.IWindowService,
+            $controller: ng.IControllerService) => {
+
+            let element: JQuery;
+
+            let scope: any = $rootScope.$new();
+
+            element = ng.element(`
+        <uif-message-banner uif-is-visible="toggle" uif-action-label="{{label}}" 
+        uif-action="customFunction()" uif-on-close="customCloseFunction()">
+            <uif-content>
+                {{message}}
+            </uif-content>
+        </uif-message-banner>  
+        `);
+            $compile(element)(scope);
+            scope.message = 'Lorem ipsum message';
+            scope.$digest();
+            element = jQuery(element[0]);
+
+            let directiveScope: any = ng.element(element).isolateScope();
+
+            // narrow down window
+            directiveScope.onResize(470);
+
+            let chevron: JQuery = element.find('.ms-MessageBanner-expand');
+            expect(chevron.css('height')).toBe('85px', 'Element height is 85px');
+
+            // back to normal
+            directiveScope.onResize(800);
+
+            chevron = element.find('.ms-MessageBanner-expand');
+            expect(chevron.css('height')).toBe('52px', 'Element height is 52px');
+        }));
 });
