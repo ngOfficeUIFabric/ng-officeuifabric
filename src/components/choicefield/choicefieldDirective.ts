@@ -24,6 +24,7 @@ export interface IChoicefieldOptionScope extends ng.IScope {
     ngFalseValue: string;
     disabled: boolean;
     uifType: ChoicefieldType;
+
 }
 
 /**
@@ -160,7 +161,9 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
                     if (scope.disabled) {
                         return;
                     }
-
+                    if (choicefieldGroupController != null) {
+                        choicefieldGroupController.setTouched();
+                    }
                     scope.$apply(() => {
                         if (choicefieldGroupController != null) {
                             choicefieldGroupController.setViewValue(attrs.value, ev);
@@ -229,9 +232,19 @@ export class ChoicefieldGroupController {
     }
 
     public setViewValue(value: string, eventType: any): void {
+        if (this.getViewValue() !== value) {
+            this.$scope.ngModel.$setDirty();
+        }
         this.$scope.ngModel.$setViewValue(value, eventType);
         this.render(); // update all inputs checked/not checked
     }
+
+    public setTouched(): void {
+        if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+            this.$scope.ngModel.$setTouched();
+        }
+    }
+
     public getViewValue(): string {
         if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
             return  this.$scope.ngModel.$viewValue;

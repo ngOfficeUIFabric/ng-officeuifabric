@@ -175,5 +175,90 @@
         expect(option3.prop('checked')).toBe(true, 'Option 3 - Checked should be true after click as element is not disabled');
         expect(option1.prop('checked')).toBe(false, 'Option 1 - Checked should be false after click as element is not disabled');
     }));
+
+    it('should set $dirty & $touched on ng-model when value changed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option1';
+
+        let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" ng-disabled="disabled" uif-type="radio">' +
+            '<uif-choicefield-option ng-repeat="option in options" ng-disabled="disabledChild" ' +
+            'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
+
+        choicefield = jQuery(choicefield[0]);
+        choicefield.appendTo(document.body);
+
+        $scope.$digest();
+
+        let option3: JQuery = jQuery(choicefield.find('input')[2]);
+
+        option3.click();
+
+        let ngModel: ng.INgModelController = angular.element(choicefield).controller('ngModel');
+
+        expect($scope.selectedValue).toBe('Option3');
+        expect(ngModel.$dirty).toBeTruthy();
+        expect(ngModel.$touched).toBeTruthy();
+    }));
+
+    it('should set $touched when value not changed & option clicked', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option3';
+
+        let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" ng-disabled="disabled" uif-type="radio">' +
+            '<uif-choicefield-option ng-repeat="option in options" ng-disabled="disabledChild" ' +
+            'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
+
+        choicefield = jQuery(choicefield[0]);
+        choicefield.appendTo(document.body);
+
+        $scope.$digest();
+
+        let option3: JQuery = jQuery(choicefield.find('input')[2]);
+
+        option3.click();
+
+        let ngModel: ng.INgModelController = angular.element(choicefield).controller('ngModel');
+
+        expect($scope.selectedValue).toBe('Option3');
+        expect(ngModel.$dirty).toBeFalsy();
+        expect(ngModel.$touched).toBeTruthy();
+    }));
+
+    it('should not set $dirty & $touched on ng-model intially', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.options = [
+            { text: 'Option 1', value: 'Option1'},
+            { text: 'Option 2', value: 'Option2'},
+            { text: 'Option 3', value: 'Option3'},
+            { text: 'Option 4', value: 'Option4'}
+        ];
+        $scope.selectedValue = 'Option1';
+
+        let choicefield: JQuery = $compile('<uif-choicefield-group ng-model="selectedValue" ng-disabled="disabled" uif-type="radio">' +
+            '<uif-choicefield-option ng-repeat="option in options" ng-disabled="disabledChild" ' +
+            'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
+
+        choicefield = jQuery(choicefield[0]);
+        choicefield.appendTo(document.body);
+
+        $scope.$digest();
+
+        let ngModel: ng.INgModelController = angular.element(choicefield).controller('ngModel');
+
+        expect(ngModel.$dirty).toBeFalsy();
+        expect(ngModel.$touched).toBeFalsy();
+    }));
 });
 
