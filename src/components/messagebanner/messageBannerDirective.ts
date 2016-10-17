@@ -34,6 +34,8 @@ export interface IMessageBannerScope extends ng.IScope {
     uifIsVisible: boolean;
 
     isExpanded: boolean;
+
+    onResize: () => void;
 }
 
 /**
@@ -91,11 +93,9 @@ export class MessageBannerDirective implements ng.IDirective {
     <div class="ms-MessageBanner-text">
     <div class="ms-MessageBanner-clipper"></div>
     </div>
-    <uif-button type="button" uif-type="command" class="ms-MessageBanner-expand" ng-show="!isExpanded" style="height:52px">
-    <uif-icon uif-type="chevronsDown"></uif-icon>
-    </uif-button>
-    <uif-button type="button" uif-type="command" class="ms-MessageBanner-expand" ng-show="isExpanded" style="height:52px">
-    <uif-icon uif-type="chevronsUp"></uif-icon>
+    <uif-button type="button" uif-type="command" class="ms-MessageBanner-expand">
+    <uif-icon uif-type="chevronsDown" ng-show="!isExpanded"></uif-icon>
+    <uif-icon uif-type="chevronsUp" ng-show="isExpanded"></uif-icon>
     </uif-button>
     <div class="ms-MessageBanner-action">
     <uif-button type="button" uif-type="primary" class="ms-fontColor-neutralLight" ng-click="uifAction()">{{ uifActionLabel }}</uif-button>
@@ -148,12 +148,26 @@ export class MessageBannerDirective implements ng.IDirective {
         $scope.uifActionLabel = $attrs.uifActionLabel;
         $scope.isExpanded = false;
 
+        $scope.onResize = (innerWidth?: number) => {
+            if (innerWidth === undefined) {
+                innerWidth = window.innerWidth;
+            }
+            this._clientWidth = this._messageBanner[0].offsetWidth;
+            if (innerWidth >= this.SMALL_BREAK_POINT) {
+                this._resizeRegular();
+            } else {
+                this._resizeSmall();
+            }
+        }
+
         this._initLocals($elem);
         this.transcludeChilds($scope, $elem, $transclude);
 
+        this._initTextWidth = (this._clipper.children().eq(0))[0].offsetWidth;
+
         // office ui fabric functions bindings
         ng.element($controller.$window).bind('resize', () => {
-            this._onResize();
+            $scope.onResize();
             $scope.$digest();
         });
         ng.element(this._chevronButton).bind('click', () => {
@@ -163,7 +177,7 @@ export class MessageBannerDirective implements ng.IDirective {
             this._hideBanner($scope);
         });
 
-        this._onResize();
+        $scope.onResize();
     };
 
     private transcludeChilds(
@@ -196,9 +210,6 @@ export class MessageBannerDirective implements ng.IDirective {
                 }
             }
         }
-        // } else { /* text attribute provided */
-        //     contentElement.append(ng.element('<span>' + $scope.message + '</span>'));
-        // }
     }
 
     private hasItemContent(clone: ng.IAugmentedJQuery): boolean {
@@ -224,37 +235,20 @@ export class MessageBannerDirective implements ng.IDirective {
     }
 
     /**
-     * sets styles on resize
-     */
-    private _onResize(): void {
-        this._clientWidth = this._messageBanner[0].offsetWidth;
-        if (window.innerWidth >= this.SMALL_BREAK_POINT) {
-            this._resizeRegular();
-        } else {
-            this._resizeSmall();
-        }
-    };
-
-    /**
      * resize above 480 pixel breakpoint
      */
     private _resizeRegular(): void {
         if ((this._clientWidth - this._bufferSize) > this._initTextWidth && this._initTextWidth < this._textContainerMaxWidth) {
             this._textWidth = 'auto';
-            this._chevronButton.addClass('ms-MessageBanner-expand');
-            // this._collapse();
+            this._chevronButton[0].className = 'ms-MessageBanner-expand';
         } else {
             this._textWidth = Math.min((this._clientWidth - this._bufferSize), this._textContainerMaxWidth) + 'px';
-            for (let i: number = 0; i < this._chevronButton.length; i++) {
-                let chevron: ng.IAugmentedJQuery = ng.element(this._chevronButton[i]);
-                if (!chevron.hasClass('is-visible') && !chevron.hasClass('ng-hide')) {
-                    chevron.addClass('is-visible');
-                } else {
-                    chevron.removeClass('is-visible');
-                }
+            if (!this._chevronButton.hasClass('is-visible')) {
+                this._chevronButton[0].className += ' is-visible';
             }
         }
         this._clipper[0].style.width = this._textWidth;
+        this._chevronButton[0].style.height = '52px';
     };
 
     /**
@@ -263,11 +257,11 @@ export class MessageBannerDirective implements ng.IDirective {
     private _resizeSmall(): void {
         if (this._clientWidth - (this._bufferElementsWidthSmall + this._closeButton[0].offsetWidth) > this._initTextWidth) {
             this._textWidth = 'auto';
-            // this._collapse();
         } else {
             this._textWidth = (this._clientWidth - (this._bufferElementsWidthSmall + this._closeButton[0].offsetWidth)) + 'px';
         }
         this._clipper[0].style.width = this._textWidth;
+        this._chevronButton[0].style.height = '85px';
     };
 
     private _toggleExpansion($scope: IMessageBannerScope): void {
