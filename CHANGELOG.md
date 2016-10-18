@@ -1,3 +1,13 @@
+<a name="0.12.8"></a>
+### [0.12.8 - October 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.8)
+
+
+#### Fixes
+
+- **uif-searchbox**
+  - $dirty not being set on uif-searchbox ([d9b6fd3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/d9b6fd3), [#378](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/378))
+
+
 <a name="0.12.7"></a>
 ### [0.12.7 - October 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.7)
 
