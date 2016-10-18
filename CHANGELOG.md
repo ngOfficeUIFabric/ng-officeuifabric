@@ -1,3 +1,31 @@
+<a name="0.12.8"></a>
+### [0.12.8 - October 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.8)
+
+
+#### Fixes
+
+- **uif-searchbox**
+  - $dirty not being set on uif-searchbox ([d9b6fd3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/d9b6fd3), [#378](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/378))
+
+
+<a name="0.12.7"></a>
+### [0.12.7 - October 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.7)
+
+
+#### Fixes
+
+- **build**
+  - update gulp test task to fail on test errors ([f584e4f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/f584e4f))
+- **dependencies**
+  - update dependencies ([ea9235d](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/ea9235d) & [aba7e45](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/aba7e45))
+- **uif-breadcrumb**
+  - updated directive for reliable resize testing ([7b321af](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/7b321af), [#417](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/417))
+- **uif-messagebanner**
+  - responsiveness updates ([95df30a](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/95df30a), [#359](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/359), [#419](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/419))
+- **uif-searchbox**
+  - fix documentation bug ([12dea4a](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/12dea4a), [#413](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/413))
+
+
 <a name="0.12.6"></a>
 ### [0.12.6 - October 3, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.6)
 

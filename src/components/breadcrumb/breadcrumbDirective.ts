@@ -41,11 +41,11 @@ export class BreadcrumbLinkDirective implements ng.IDirective {
   public require: string = '^uifBreadcrumb';
   public transclude: boolean = true;
   public replace: boolean = true;
-  public template: string = '' +
-  '<li class="ms-Breadcrumb-listItem">' +
-  '<a class="ms-Breadcrumb-itemLink" ng-href="{{ngHref}}" tabindex="{{uifTabindex}}" ng-transclude></a>' +
-  '<i class="ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight"></i>' +
-  '</li>';
+  public template: string = `
+  <li class="ms-Breadcrumb-listItem">
+    <a class="ms-Breadcrumb-itemLink" ng-href="{{ngHref}}" tabindex="{{uifTabindex}}" ng-transclude></a>
+    <i class="ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight"></i>
+  </li>`;
   public scope: {} = {
     ngHref: '@'
   };
@@ -105,8 +105,9 @@ export interface IBreadcrumbScope extends ng.IScope {
 
   overflowMenuOpen: boolean;
   openOverflow: (event: ng.IAngularEvent) => void;
-  adjustVisibleElements: () => void;
   isOverflow: () => boolean;
+
+  onResize: () => void;
 }
 
 /**
@@ -119,48 +120,8 @@ export interface IBreadcrumbScope extends ng.IScope {
 export class BreadcrumbController {
   public static $inject: string[] = ['$scope', '$document', '$window'];
 
-  private static _breakingWidth: number = 639;
-  constructor(public $scope: IBreadcrumbScope, public $document: ng.IDocumentService, public $window: ng.IWindowService) {
-    let windowElement: ng.IAugmentedJQuery = ng.element($window);
-
-    $scope.visibleElements = 4;
-    $scope.overflowMenuOpen = false;
-
-    $scope.isOverflow = () => {
-      let overflow: boolean = false;
-      overflow = ng.isDefined($scope.uifBreadcrumbLinks) && $scope.uifBreadcrumbLinks.length > $scope.visibleElements;
-      return overflow;
-    };
-
-    $scope.overflowElements = () => {
-      return $scope.isOverflow() ? $scope.uifBreadcrumbLinks.length - $scope.visibleElements : 0;
-    };
-
-    $scope.openOverflow = (event: ng.IAngularEvent) => {
-      event.stopPropagation();
-      $scope.overflowMenuOpen = true;
-
-    };
-
-    $scope.adjustVisibleElements = () => {
-      let width: number = $window.innerWidth;
-
-      let elementsToShow: number = (width > BreadcrumbController._breakingWidth) ? 4 : 2;
-      if (elementsToShow !== $scope.visibleElements) {
-        $scope.visibleElements = elementsToShow;
-        $scope.$apply();
-      }
-    };
-
-    $document.find('html').on('click', (event: any) => {
-      $scope.overflowMenuOpen = false;
-      $scope.$apply();
-    });
-
-    windowElement.on('resize', () => {
-      $scope.adjustVisibleElements();
-    });
-  }
+  // private static _breakingWidth: number = 639;
+  constructor(public $scope: IBreadcrumbScope, public $document: ng.IDocumentService, public $window: ng.IWindowService) { }
 }
 
 /**
@@ -184,42 +145,87 @@ export class BreadcrumbController {
 export class BreadcrumbDirective implements ng.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
-  public template: string = '' +
-  '<div class="ms-Breadcrumb" ng-class="{\'is-overflow\': isOverflow()}">' +
-  '<div class="ms-Breadcrumb-overflow">' +
-  '<div class="ms-Breadcrumb-overflowButton ms-Icon ms-Icon--ellipsis" ng-click="openOverflow($event)" tabindex="1">' +
-  '</div>' +
-  '<i class="ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight"></i>' +
-  '<div class="ms-Breadcrumb-overflowMenu" ng-class="{\'is-open\': overflowMenuOpen}">' +
-  '<ul class="ms-ContextualMenu is-open">' +
-    '<li class="ms-ContextualMenu-item" ' +
-    'ng-repeat="link in uifBreadcrumbLinks | limitTo:overflowElements()">' +
-    '<a class="ms-ContextualMenu-link" ng-href="{{link.href}}">{{link.linkText}}</a>' +
-    '</li>' +
-  '</ul>' +
-  '</div>' +
-  '</div>' +
-  '<ul class="ms-Breadcrumb-list">' +
-  '<uif-breadcrumb-link ng-repeat="link in uifBreadcrumbLinks | limitTo:-visibleElements" ' +
-  'ng-href="{{link.href}}">{{link.linkText}}</uif-breadcrumb-link>' +
-  '</ul>' +
-  '</div>';
+  public template: string = `
+  <div class="ms-Breadcrumb" ng-class="{\'is-overflow\': isOverflow()}">
+    <div class="ms-Breadcrumb-overflow">
+      <div class="ms-Breadcrumb-overflowButton ms-Icon ms-Icon--ellipsis"
+           ng-click="openOverflow($event)" tabindex="1"></div>
+      <i class="ms-Breadcrumb-chevron ms-Icon ms-Icon--chevronRight"></i>
+      <div class="ms-Breadcrumb-overflowMenu" ng-class="{\'is-open\': overflowMenuOpen}">
+        <ul class="ms-ContextualMenu is-open">
+          <li class="ms-ContextualMenu-item"
+              ng-repeat="link in uifBreadcrumbLinks | limitTo:overflowElements()">
+            <a class="ms-ContextualMenu-link" ng-href="{{link.href}}">{{link.linkText}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <ul class="ms-Breadcrumb-list">
+      <uif-breadcrumb-link ng-repeat="link in uifBreadcrumbLinks | limitTo:-visibleElements"
+                           ng-href="{{link.href}}">{{link.linkText}}</uif-breadcrumb-link>
+    </ul>
+  </div>`;
   public controller: typeof BreadcrumbController = BreadcrumbController;
   public require: string = 'uifBreadcrumb';
   public scope: any = {
     'uifBreadcrumbLinks': '='
   };
+  private SMALL_BREAK_POINT: number = 639;
 
   public static factory(): ng.IDirectiveFactory {
     const directive: ng.IDirectiveFactory = () => new BreadcrumbDirective();
     return directive;
   }
 
-  public link(scope: IBreadcrumbScope, instanceElement: ng.IAugmentedJQuery, attrs: any, breadcrumbController: BreadcrumbController): void {
-    scope.adjustVisibleElements();
-  };
+  public link: ng.IDirectiveLinkFn = (
+    $scope: IBreadcrumbScope,
+    $instanceElement: ng.IAugmentedJQuery,
+    $attrs: any,
+    $breadcrumbController: BreadcrumbController): void => {
 
-};
+    $scope.visibleElements = 4;
+    $scope.overflowMenuOpen = false;
+
+    $scope.isOverflow = () => {
+      let overflow: boolean = false;
+      overflow = ng.isDefined($scope.uifBreadcrumbLinks) && $scope.uifBreadcrumbLinks.length > $scope.visibleElements;
+      return overflow;
+    };
+
+    $scope.overflowElements = () => {
+      return $scope.isOverflow() ? $scope.uifBreadcrumbLinks.length - $scope.visibleElements : 0;
+    };
+
+    $scope.openOverflow = (event: ng.IAngularEvent) => {
+      event.stopPropagation();
+      $scope.overflowMenuOpen = true;
+    };
+
+    ng.element($breadcrumbController.$window).bind('resize', () => {
+      $scope.onResize();
+      $scope.$digest();
+    });
+
+    $breadcrumbController.$document.find('html').on('click', (event: any) => {
+      $scope.overflowMenuOpen = false;
+      $scope.$apply();
+    });
+
+    $scope.onResize = (innerWidth?: number) => {
+      if (innerWidth === undefined) {
+        innerWidth = window.innerWidth;
+      }
+
+      let elementsToShow: number = (innerWidth > this.SMALL_BREAK_POINT) ? 4 : 2;
+      if (elementsToShow !== $scope.visibleElements) {
+        $scope.visibleElements = elementsToShow;
+        $scope.$apply();
+      }
+    };
+
+    $scope.onResize();
+  };
+}
 
 /**
  * @ngdoc module

@@ -17,6 +17,7 @@ interface ISearchBoxScope extends ng.IScope {
   btnMousedown: () => void;
   inputFocus: () => void;
   inputBlur: () => void;
+  inputChange: () => void;
   isActive: boolean;
   isCancel: boolean;
   isFocus: boolean;
@@ -45,16 +46,17 @@ export class SearchBoxDirective implements ng.IDirective {
 
   public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive, \'is-disabled\':isDisabled}">' +
   '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
-  ' ng-model="value" id="{{::\'searchBox_\'+$id}}" ng-disabled="isDisabled" />' +
+  ' ng-model="value" ng-change="inputChange()" id="{{::\'searchBox_\'+$id}}" ng-disabled="isDisabled" />' +
   '<label class="ms-SearchBox-label" for="{{::\'searchBox_\'+$id}}" ng-hide="isLabelHidden">' +
   '<i class="ms-SearchBox-icon ms-Icon ms-Icon--search" ></i> {{placeholder}}</label>' +
   '<button class="ms-SearchBox-closeButton" ng-mousedown="btnMousedown()" type="button"><i class="ms-Icon ms-Icon--x"></i></button>' +
   '</div>';
 
+  public require: string[] = ['?ngModel'];
 
   public scope: any = {
     placeholder: '=?',
-    value: '=?'
+    value: '=?ngModel'
   };
 
   public static factory(): ng.IDirectiveFactory {
@@ -63,7 +65,12 @@ export class SearchBoxDirective implements ng.IDirective {
     return directive;
   }
 
-  public link(scope: ISearchBoxScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
+  public link(scope: ISearchBoxScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, controllers: any[]): void {
+
+    let ngModelCtrl: ng.INgModelController;
+    if (ng.isDefined(controllers) && controllers.length > 0) {
+      ngModelCtrl = controllers[0];
+    }
 
     scope.isFocus = false;
     scope.isCancel = false;
@@ -76,9 +83,20 @@ export class SearchBoxDirective implements ng.IDirective {
       scope.isActive = true;
     };
 
+    scope.inputChange = function(): void {
+      if (ngModelCtrl !== null) {
+        ngModelCtrl.$setDirty();
+      }
+    };
+
     scope.inputBlur = function(): void {
       if (scope.isCancel) {
-        scope.value = '';
+
+        if (ngModelCtrl !== null) {
+          ngModelCtrl.$setViewValue('');
+        } else {
+          scope.value = '';
+        }
         scope.isLabelHidden = false;
       }
       scope.isActive = false;
@@ -87,6 +105,10 @@ export class SearchBoxDirective implements ng.IDirective {
       }
 
       scope.isFocus = scope.isCancel = false;
+
+      if (ngModelCtrl !== null) {
+        ngModelCtrl.$setTouched();
+      }
     };
 
     scope.btnMousedown = function(): void {
@@ -101,6 +123,11 @@ export class SearchBoxDirective implements ng.IDirective {
           scope.isLabelHidden = false;
         }
         scope.value = val;
+        if (ngModelCtrl !== null) {
+          ngModelCtrl.$setViewValue(val);
+        } else {
+          scope.value = val;
+        }
       }
 
     });
