@@ -258,4 +258,74 @@ describe('datepicker: <uif-datepicker />', () => {
 
     }));
 
+    it('Should not set $dirty on ngModel initially', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = new Date(2016, 3, 2);
+
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        // initially should not be disabled
+        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+
+        expect(ngModel.$dirty).toBeFalsy();
+    }));
+
+    it('Should not set $touched on ngModel initially', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = new Date(2016, 3, 2);
+
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        // initially should not be disabled
+        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+
+        expect(ngModel.$touched).toBeFalsy();
+    }));
+
+    it('Should set $dirty on ngModel when date changed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = new Date(2016, 3, 2);
+
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        datepicker = jQuery(datepicker[0]);
+
+        let goToday: JQuery = datepicker.find('.ms-DatePicker-goToday');
+        expect(goToday.length).toBe(1, 'Go to today should be present');
+        goToday.triggerHandler('click');
+        $scope.$digest();
+
+        expect(new Date($scope.value).getUTCDate()).toBe(new Date().getDate(), 'Day Today');
+        expect(new Date($scope.value).getUTCMonth()).toBe(new Date().getMonth(), 'Month Today');
+        expect(new Date($scope.value).getUTCFullYear()).toBe(new Date().getFullYear(), 'Year Today');
+
+        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+
+        expect(ngModel.$dirty).toBeTruthy();
+
+    }));
+
+    it('Should set $touched on ngModel when datepicker opened', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        $scope.value = new Date(2016, 3, 2);
+
+        let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
+        $scope.$digest();
+
+        datepicker = jQuery(datepicker[0]);
+
+        let textField: JQuery = datepicker.find('.ms-TextField-field');
+        expect(textField.length).toBe(1, 'Input should be present');
+        textField.triggerHandler('click');
+        $scope.$digest();
+
+        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+
+        expect(ngModel.$touched).toBeTruthy();
+
+    }));
+
 });
