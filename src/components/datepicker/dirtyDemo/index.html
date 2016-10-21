@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css">
+  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
+    <!-- jquery (pickadate depends on jquery) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <!-- pickadate library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.date.js"></script>
+  <script src="../../../../dist/ngOfficeUiFabric.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="AppController as vm">
+  <h1>Dirty Checking with ngOfficeUiFabric directives</h1>
+
+
+  <form name="dirtyForm" novalidate>
+
+    <input type="text" name="working" ng-model="vm.working" />
+
+    <uif-datepicker ng-model="vm.value" name="notWorking"></uif-datepicker>
+
+    <pre> {{ dirtyForm | json }}</pre>
+
+  </form>
+
+
+
+  <script>
+    angular.module('app', ['officeuifabric.core', 'officeuifabric.components', ]);
+
+    angular.module('app').controller('AppController', ['$scope', function() {
+      var vm = this;
+
+      vm.notWorking = "not working";
+      vm.working = "standard input element";
+
+      vm.value = new Date(2016, 3, 2);
+    }]);
+  </script>
+</body>
+
+</html>
