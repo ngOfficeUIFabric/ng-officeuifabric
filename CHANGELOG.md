@@ -1,3 +1,18 @@
+<a name="0.12.9"></a>
+### [0.12.9 - October 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.9)
+
+
+#### Fixes
+
+- **uif-choicefield**
+  - $dirty not being set on uif-choicefield ([cce5c03](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/cce5c03), [#375](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/375))
+- **uif-table**
+  - resolve selecting all rows ([9e6b2db](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/9e6b2db), [#369](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/369))
+- **dependencies**
+  - update dependencies ([d2246aa](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/d2246aa))
+
+
+
 <a name="0.12.8"></a>
 ### [0.12.8 - October 17, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.8)
 
