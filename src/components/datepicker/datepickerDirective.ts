@@ -90,10 +90,18 @@ export class DatepickerController {
         picker.on({
             open: function (): void {
                 self.scrollUp();
+
+                if (ng.isDefined(ngModel) && ngModel  !== null) {
+                    ngModel.$setTouched();
+                }
+
+                self.$scope.$apply();
             },
             set: function (value: string): void {
                 let formattedValue: string = picker.get('select', 'yyyy-mm-dd');
-                ngModel.$setViewValue(formattedValue);
+                if (ng.isDefined(ngModel) && ngModel  !== null) {
+                    ngModel.$setViewValue(formattedValue);
+                }
             }
         });
     }
@@ -391,16 +399,19 @@ export class DatepickerDirective implements ng.IDirective {
         let ngModel: ng.INgModelController = ctrls[1];
 
         datepickerController.initDatepicker(ngModel);
-        ngModel.$render = function (): void {
-            if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
-                if (typeof ngModel.$modelValue === 'string') {
-                    let date: Date = new Date(ngModel.$modelValue);
-                    datepickerController.setValue(date);
-                } else {
-                  datepickerController.setValue(ngModel.$modelValue);
+        if (ng.isDefined(ngModel) && ngModel !== null) {
+            ngModel.$render = function (): void {
+                if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
+                    if (typeof ngModel.$modelValue === 'string') {
+                        let date: Date = new Date(ngModel.$modelValue);
+                        datepickerController.setValue(date);
+                    } else {
+                    datepickerController.setValue(ngModel.$modelValue);
+                    }
+                    ngModel.$setPristine();
                 }
-            }
-        };
+            };
+        }
     }
 }
 
