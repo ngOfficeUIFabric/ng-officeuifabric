@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 
 /**
@@ -12,7 +12,7 @@ import * as ng from 'angular';
  */
 export class MessageBannerController {
     public static $inject: string[] = ['$scope', '$log', '$window'];
-    constructor(public $scope: IMessageBannerScope, public $log: ng.ILogService, public $window: ng.IWindowService) {
+    constructor(public $scope: IMessageBannerScope, public $log: angular.ILogService, public $window: angular.IWindowService) {
     }
 }
 
@@ -29,7 +29,7 @@ export class MessageBannerController {
  * @property {boolean} isVisible    - Hide or show message banner
  *
  */
-export interface IMessageBannerScope extends ng.IScope {
+export interface IMessageBannerScope extends angular.IScope {
     uifActionLabel: string;
     uifIsVisible: boolean;
 
@@ -52,7 +52,7 @@ export interface IMessageBannerScope extends ng.IScope {
  * @property {Function} uifOnClose      - Expression to be called on message banner close event
  *
  */
-export interface IMessageBannerAttributes extends ng.IAttributes {
+export interface IMessageBannerAttributes extends angular.IAttributes {
     uifAction: () => void;
     uifActionLabel: string;
     uifIsVisible: boolean;
@@ -78,7 +78,7 @@ export interface IMessageBannerAttributes extends ng.IAttributes {
  *  </uif-content>
  * </uif-message-banner>
  */
-export class MessageBannerDirective implements ng.IDirective {
+export class MessageBannerDirective implements angular.IDirective {
     public controller: typeof MessageBannerController = MessageBannerController;
     public restrict: string = 'E';
     public transclude: boolean = true;
@@ -114,36 +114,36 @@ export class MessageBannerDirective implements ng.IDirective {
     };
 
     // ui fabric js variables
-    private _clipper: ng.IAugmentedJQuery;
+    private _clipper: angular.IAugmentedJQuery;
     private _bufferSize: number;
     private _textContainerMaxWidth: number = 700;
     private _clientWidth: number;
     private _textWidth: string;
     private _initTextWidth: number;
-    private _chevronButton: ng.IAugmentedJQuery;
-    private _messageBanner: ng.IAugmentedJQuery;
-    private _actionButton: ng.IAugmentedJQuery;
-    private _closeButton: ng.IAugmentedJQuery;
+    private _chevronButton: angular.IAugmentedJQuery;
+    private _messageBanner: angular.IAugmentedJQuery;
+    private _actionButton: angular.IAugmentedJQuery;
+    private _closeButton: angular.IAugmentedJQuery;
     private _bufferElementsWidth: number = 88;
     private _bufferElementsWidthSmall: number = 35;
     private SMALL_BREAK_POINT: number = 480;
     // ui fabric js variables end
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory =
-            ($log: ng.ILogService, $timeout: ng.ITimeoutService) =>
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory =
+            ($log: angular.ILogService, $timeout: angular.ITimeoutService) =>
                 new MessageBannerDirective($log, $timeout);
         directive.$inject = ['$log', '$timeout'];
         return directive;
     }
 
-    constructor(private $log: ng.ILogService, private $timeout: ng.ITimeoutService) {
+    constructor(private $log: angular.ILogService, private $timeout: angular.ITimeoutService) {
     };
 
-    public link: ng.IDirectiveLinkFn = (
-        $scope: IMessageBannerScope, $elem: ng.IAugmentedJQuery,
+    public link: angular.IDirectiveLinkFn = (
+        $scope: IMessageBannerScope, $elem: angular.IAugmentedJQuery,
         $attrs: IMessageBannerAttributes, $controller: MessageBannerController,
-        $transclude: ng.ITranscludeFunction): void => {
+        $transclude: angular.ITranscludeFunction): void => {
 
         $scope.uifActionLabel = $attrs.uifActionLabel;
         $scope.isExpanded = false;
@@ -166,14 +166,14 @@ export class MessageBannerDirective implements ng.IDirective {
         this._initTextWidth = (this._clipper.children().eq(0))[0].offsetWidth;
 
         // office ui fabric functions bindings
-        ng.element($controller.$window).bind('resize', () => {
+        angular.element($controller.$window).bind('resize', () => {
             $scope.onResize();
             $scope.$digest();
         });
-        ng.element(this._chevronButton).bind('click', () => {
+        angular.element(this._chevronButton).bind('click', () => {
             this._toggleExpansion($scope);
         });
-        ng.element(this._closeButton).bind('click', () => {
+        angular.element(this._closeButton).bind('click', () => {
             this._hideBanner($scope);
         });
 
@@ -181,10 +181,10 @@ export class MessageBannerDirective implements ng.IDirective {
     }
 
     private transcludeChilds(
-        $scope: IMessageBannerScope, $element: ng.IAugmentedJQuery,
-        $transclude: ng.ITranscludeFunction): void {
+        $scope: IMessageBannerScope, $element: angular.IAugmentedJQuery,
+        $transclude: angular.ITranscludeFunction): void {
 
-        $transclude((clone: ng.IAugmentedJQuery) => {
+        $transclude((clone: angular.IAugmentedJQuery) => {
             let hasContent: boolean = this.hasItemContent(clone);
 
             // if (!hasContent && !$scope.message) {
@@ -198,12 +198,12 @@ export class MessageBannerDirective implements ng.IDirective {
         });
     }
 
-    private insertItemContent(clone: ng.IAugmentedJQuery, $scope: IMessageBannerScope, $element: ng.IAugmentedJQuery): void {
+    private insertItemContent(clone: angular.IAugmentedJQuery, $scope: IMessageBannerScope, $element: angular.IAugmentedJQuery): void {
         let contentElement: JQuery = angular.element($element[0].querySelector('.ms-MessageBanner-clipper'));
 
         if (this.hasItemContent(clone)) { /* element provided */
             for (let i: number = 0; i < clone.length; i++) {
-                let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+                let element: angular.IAugmentedJQuery = angular.element(clone[i]);
                 if (element.hasClass('uif-content')) {
                     contentElement.append(element);
                     break;
@@ -212,9 +212,9 @@ export class MessageBannerDirective implements ng.IDirective {
         }
     }
 
-    private hasItemContent(clone: ng.IAugmentedJQuery): boolean {
+    private hasItemContent(clone: angular.IAugmentedJQuery): boolean {
         for (let i: number = 0; i < clone.length; i++) {
-            let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+            let element: angular.IAugmentedJQuery = angular.element(clone[i]);
             if (element.hasClass('uif-content')) {
                 return true;
             }
@@ -225,13 +225,13 @@ export class MessageBannerDirective implements ng.IDirective {
     /**
      * helper for init of local variables
      */
-    private _initLocals($elem: ng.IAugmentedJQuery): void {
-        this._messageBanner = ng.element($elem[0].querySelector('.ms-MessageBanner'));
-        this._clipper = ng.element($elem[0].querySelector('.ms-MessageBanner-clipper'));
-        this._chevronButton = ng.element($elem[0].querySelectorAll('.ms-MessageBanner-expand'));
-        this._actionButton = ng.element($elem[0].querySelector('.ms-MessageBanner-action'));
+    private _initLocals($elem: angular.IAugmentedJQuery): void {
+        this._messageBanner = angular.element($elem[0].querySelector('.ms-MessageBanner'));
+        this._clipper = angular.element($elem[0].querySelector('.ms-MessageBanner-clipper'));
+        this._chevronButton = angular.element($elem[0].querySelectorAll('.ms-MessageBanner-expand'));
+        this._actionButton = angular.element($elem[0].querySelector('.ms-MessageBanner-action'));
         this._bufferSize = this._actionButton[0].offsetWidth + this._bufferElementsWidth;
-        this._closeButton = ng.element($elem[0].querySelector('.ms-MessageBanner-close'));
+        this._closeButton = angular.element($elem[0].querySelector('.ms-MessageBanner-close'));
     }
 
     /**
@@ -295,5 +295,5 @@ export class MessageBannerDirective implements ng.IDirective {
  * MessageBanner
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.messagebanner', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.messagebanner', ['officeuifabric.components'])
     .directive('uifMessageBanner', MessageBannerDirective.factory());

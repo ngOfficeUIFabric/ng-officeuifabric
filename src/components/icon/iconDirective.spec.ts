@@ -1,18 +1,18 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('iconDirective: <uif-icon />', () => {
-  let element: ng.IAugmentedJQuery;
-  let scope: ng.IScope;
+  let element: angular.IAugmentedJQuery;
+  let scope: angular.IScope;
 
   beforeEach(() => {
     angular.mock.module('officeuifabric.core');
     angular.mock.module('officeuifabric.components.icon');
   });
 
-  beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-    element = ng.element('<uif-icon uif-type="arrowDownLeft" />');
+  beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
+    element = angular.element('<uif-icon uif-type="arrowDownLeft" />');
     scope = $rootScope;
     $compile(element)(scope);
     scope.$digest();
@@ -23,7 +23,7 @@ describe('iconDirective: <uif-icon />', () => {
    */
   it('should render correct HTML', () => {
     // get the rendered icon element
-    let iconElement: ng.IAugmentedJQuery = element.find('i');
+    let iconElement: angular.IAugmentedJQuery = element.find('i');
 
     // make sure found the icon
     expect(iconElement.length).toBe(1);
@@ -34,7 +34,7 @@ describe('iconDirective: <uif-icon />', () => {
    */
   it('should render correct Office UI Fabric CSS classes', () => {
     // get the rendered icon element
-    let iconElement: ng.IAugmentedJQuery = element.find('i');
+    let iconElement: angular.IAugmentedJQuery = element.find('i');
 
     // ensure icon has the correct classes
     expect(iconElement.eq(0)).toHaveClass('ms-Icon');
@@ -46,7 +46,7 @@ describe('iconDirective: <uif-icon />', () => {
    */
   it('should render correct aria-hidden attribute', () => {
     // get the rendered icon element
-    let iconElement: ng.IAugmentedJQuery = element.find('i');
+    let iconElement: angular.IAugmentedJQuery = element.find('i');
 
     // ensure icon has aria attribute with correct value
     expect(iconElement.eq(0)).toHaveAttr('aria-hidden');

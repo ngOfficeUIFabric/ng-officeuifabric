@@ -21,7 +21,7 @@ dependencies:
     # install dependencies
     - npm install -g gulp
     - npm install -g typescript
-    - npm install -g typings
+  post:
     # compile typescript
     - npm run build:ts
 

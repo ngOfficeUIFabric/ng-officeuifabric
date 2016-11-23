@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -23,7 +23,7 @@ import * as ng from 'angular';
  * @property {string} ngFalseValue    - Pass a constant for the ng-false-value of the input element
  */
 
-export interface IToggleScope extends ng.IScope {
+export interface IToggleScope extends angular.IScope {
     ngModel: string;
     uifLabelOff: string;
     uifLabelOn: string;
@@ -53,7 +53,7 @@ export interface IToggleScope extends ng.IScope {
  *
  * <uif-toggle ng-model='toggled' />
  */
-export class ToggleDirective implements ng.IDirective {
+export class ToggleDirective implements angular.IDirective {
     public template: string = '<div ng-class="[\'ms-Toggle\', textLocation, {\'is-disabled\': disabled}]">' +
                  '<span class="ms-Toggle-description"><ng-transclude/></span>' +
                 '<input type="checkbox" id="{{::$id}}" class="ms-Toggle-input" ' +
@@ -77,14 +77,14 @@ export class ToggleDirective implements ng.IDirective {
         uifTextLocation: '@'
     };
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ToggleDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ToggleDirective();
         return directive;
     }
 
-    public link(scope: IToggleScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, ctrls: any[]): void {
-        let ngModelCtrl: ng.INgModelController;
-        if (ng.isDefined(ctrls) && ctrls.length > 0) {
+    public link(scope: IToggleScope, elem: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrls: any[]): void {
+        let ngModelCtrl: angular.INgModelController;
+        if (angular.isDefined(ctrls) && ctrls.length > 0) {
             ngModelCtrl = ctrls[0];
         }
 
@@ -100,7 +100,7 @@ export class ToggleDirective implements ng.IDirective {
         scope.disabled = 'disabled' in attrs;
 
         scope.checkboxChange = () => {
-            if (ng.isDefined(ngModelCtrl) && ngModelCtrl  !== null) {
+            if (angular.isDefined(ngModelCtrl) && ngModelCtrl  !== null) {
                 ngModelCtrl.$setDirty();
                 ngModelCtrl.$setTouched();
             }
@@ -116,7 +116,7 @@ export class ToggleDirective implements ng.IDirective {
  * Toggle
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.toggle', [
+export let module: angular.IModule = angular.module('officeuifabric.components.toggle', [
     'officeuifabric.components'
   ])
   .directive('uifToggle', ToggleDirective.factory());

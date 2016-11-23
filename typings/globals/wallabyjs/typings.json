@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/79dcf14a6ba1ae5fd1d2962916201fe45a48c98d/wallabyjs/wallabyjs.d.ts",
-    "raw": "registry:dt/wallabyjs#0.0.0+20160817101616",
-    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/79dcf14a6ba1ae5fd1d2962916201fe45a48c98d/wallabyjs/wallabyjs.d.ts"
-  }
-}

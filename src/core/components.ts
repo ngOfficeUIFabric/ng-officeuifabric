@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import * as breadcrumbModule from '../components/breadcrumb/breadcrumbDirective';
 import * as buttonModule from '../components/button/buttonDirective';
 import * as calloutModule from '../components/callout/calloutDirective';
@@ -42,7 +42,7 @@ import * as peoplePickerModule from '../components/peoplepicker/peoplePickerDire
  * other directives within the library.
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components', [
+export let module: angular.IModule = angular.module('officeuifabric.components', [
   breadcrumbModule.module.name,
   buttonModule.module.name,
   calloutModule.module.name,

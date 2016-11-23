@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('breadcrumb: <uif-breadcrumb />', () => {
   let element: JQuery;
@@ -16,7 +16,7 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
   describe('browser width>=800px', () => {
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $window: ng.IWindowService) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $window: angular.IWindowService) => {
       let html: string = '<uif-breadcrumb uif-breadcrumb-links="breadcrumbLinks"></uif-breadcrumb>';
       scope = $rootScope;
       scope.breadcrumbLinks = [
@@ -34,7 +34,7 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
     it('should not have is-overflow class', () => {
       // get the element scope
-      let directiveScope: any = ng.element(element).isolateScope();
+      let directiveScope: any = angular.element(element).isolateScope();
       // force recalculation on size
       directiveScope.onResize(800);
 
@@ -45,7 +45,7 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
     it('should create correct HTML', () => {
       // get the element scope
-      let directiveScope: any = ng.element(element).isolateScope();
+      let directiveScope: any = angular.element(element).isolateScope();
       // force recalculation on size
       directiveScope.onResize(800);
 
@@ -95,7 +95,7 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
   describe('responsive breadcrumb', () => {
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
 
       let html: string = '<uif-breadcrumb uif-breadcrumb-links="breadcrumbLinks"></uif-breadcrumb>';
       scope = $rootScope.$new();
@@ -116,7 +116,7 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
     it('large screen: max 4 items should be visible', () => {
       // get the element scope
-      let directiveScope: any = ng.element(element).isolateScope();
+      let directiveScope: any = angular.element(element).isolateScope();
       // force recalculation on size
       directiveScope.onResize(800);
 
@@ -133,7 +133,7 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
     it('large screen: max 2 items should be in contextual menu', () => {
       // get the element scope
-      let directiveScope: any = ng.element(element).isolateScope();
+      let directiveScope: any = angular.element(element).isolateScope();
       // force recalculation on size
       directiveScope.onResize(800);
 
@@ -172,10 +172,10 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
 
     it(
       'should display 2 on small screen initially',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService, $window: ng.IWindowService
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService, $window: angular.IWindowService
       ) => {
         // get the element scope
-        let directiveScope: any = ng.element(element).isolateScope();
+        let directiveScope: any = angular.element(element).isolateScope();
         // set size to just under breaker & force recalculation on size
         directiveScope.onResize(620);
 
@@ -202,9 +202,9 @@ describe('breadcrumb: <uif-breadcrumb />', () => {
         expect(overflowLinks.length).toBe(4);
       }));
 
-    it('should change breadcrumb count on resize', inject(($window: ng.IWindowService) => {
+    it('should change breadcrumb count on resize', inject(($window: angular.IWindowService) => {
       // get the element scope
-      let directiveScope: any = ng.element(element).isolateScope();
+      let directiveScope: any = angular.element(element).isolateScope();
 
       // start with normal size
       directiveScope.onResize(800);

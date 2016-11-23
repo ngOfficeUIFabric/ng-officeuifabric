@@ -1,9 +1,9 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('uif-pivot tests', () => {
-  let liteElement: ng.IAugmentedJQuery;
+  let liteElement: angular.IAugmentedJQuery;
   let element: JQuery;
   let scope: any;
 
@@ -17,8 +17,8 @@ describe('uif-pivot tests', () => {
 
     describe('<uif-pivot>', () => {
 
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot></uif-pivot>');
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot></uif-pivot>');
         scope = $rootScope;
 
         $compile(liteElement)(scope);
@@ -39,8 +39,8 @@ describe('uif-pivot tests', () => {
         expect(list[0]).toHaveClass('ms-Pivot');
       });
 
-      it('should render large pivot', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-size="large"></uif-pivot>');
+      it('should render large pivot', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-size="large"></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -49,8 +49,8 @@ describe('uif-pivot tests', () => {
         expect(list).toHaveClass('ms-Pivot--large');
       }));
 
-      it('should render regular pivot', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-size="regular"></uif-pivot>');
+      it('should render regular pivot', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-size="regular"></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -64,8 +64,8 @@ describe('uif-pivot tests', () => {
         expect(ul).not.toHaveClass('ms-Pivot--large');
       });
 
-      it('should log error on invalid size value', inject(($log: ng.ILogService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-size="invalid"></uif-pivot>');
+      it('should log error on invalid size value', inject(($log: angular.ILogService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-size="invalid"></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -83,8 +83,8 @@ describe('uif-pivot tests', () => {
         expect(ul).not.toHaveClass('ms-Pivot--tabs');
       });
 
-      it('should be rendered as tabs', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-type="tabs"></uif-pivot>');
+      it('should be rendered as tabs', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-type="tabs"></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -93,8 +93,8 @@ describe('uif-pivot tests', () => {
         expect(ul).toHaveClass('ms-Pivot--tabs');
       }));
 
-      it('should validate type attribute', inject(($log: ng.ILogService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-type="invalid"></uif-pivot>');
+      it('should validate type attribute', inject(($log: angular.ILogService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-type="invalid"></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -107,8 +107,8 @@ describe('uif-pivot tests', () => {
         expect($log.error.logs[0]).toContain(expectedMessage);
       }));
 
-      it('shold be rendered as regular', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-type="regular"></uif-pivot>');
+      it('shold be rendered as regular', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-type="regular"></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -117,8 +117,8 @@ describe('uif-pivot tests', () => {
         expect(ul).not.toHaveClass('ms-Pivot--tabs');
       }));
 
-      it('should render pivot links', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection"></uif-pivot>');
+      it('should render pivot links', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-pivots="pivotCollection"></uif-pivot>');
         scope.pivotCollection = [
           {title: 'My Files'},
           {title: 'Recent'},
@@ -138,8 +138,8 @@ describe('uif-pivot tests', () => {
         expect(pivots[2]).toContainText('Shared with me');
       }));
 
-      it('should have proper class when selected', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection"></uif-pivot>');
+      it('should have proper class when selected', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-pivots="pivotCollection"></uif-pivot>');
         scope.pivotCollection = [
           {title: 'My Files'},
           {title: 'Recent'},
@@ -158,8 +158,8 @@ describe('uif-pivot tests', () => {
 
       }));
 
-      it('should return proper item when selected', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
+      it('should return proper item when selected', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
           {title: 'My Files'},
@@ -181,8 +181,8 @@ describe('uif-pivot tests', () => {
         expect(scope.selectedPivot.title === 'Recent').toBeTruthy();
       }));
 
-      it('shoudl select proper item when uif-selected set', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
+      it('shoudl select proper item when uif-selected set', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
           {title: 'My Files'},
@@ -204,8 +204,8 @@ describe('uif-pivot tests', () => {
 
       }));
 
-      it('shoudl select only one item when uif-selected matches more elements', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
+      it('shoudl select only one item when uif-selected matches more elements', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
           {title: 'My Files'},
@@ -228,8 +228,8 @@ describe('uif-pivot tests', () => {
 
       }));
 
-      it('should change selection when uif-selected changed', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
+      it('should change selection when uif-selected changed', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot uif-pivots="pivotCollection" uif-selected="selectedPivot"></uif-pivot>');
         scope.selectedPivot = undefined;
         scope.pivotCollection = [
           {title: 'My Files'},
@@ -259,8 +259,8 @@ describe('uif-pivot tests', () => {
     });
 
     describe('<uif-pivot-ellipsis>', () => {
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot-ellipsis></uif-pivot-ellipsis>');
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot-ellipsis></uif-pivot-ellipsis>');
 
         scope = $rootScope.$new();
         $compile(liteElement)(scope);
@@ -290,8 +290,8 @@ describe('uif-pivot tests', () => {
         expect(icon[0]).toHaveClass('ms-Pivot-ellipsis');
       });
 
-      it('should transclude content', inject(($compile: ng.ICompileService) => {
-        liteElement = liteElement = ng.element('<uif-pivot-ellipsis><div>Some sample text</div></uif-pivot-ellipsis>');
+      it('should transclude content', inject(($compile: angular.ICompileService) => {
+        liteElement = liteElement = angular.element('<uif-pivot-ellipsis><div>Some sample text</div></uif-pivot-ellipsis>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();
@@ -304,8 +304,8 @@ describe('uif-pivot tests', () => {
     });
 
     describe('ellipsis transclusion', () => {
-      it('should transclude ellipsis', inject(($compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-pivot><uif-pivot-ellipsis></uif-pivot-ellipsis></uif-pivot>');
+      it('should transclude ellipsis', inject(($compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-pivot><uif-pivot-ellipsis></uif-pivot-ellipsis></uif-pivot>');
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
         scope.$digest();

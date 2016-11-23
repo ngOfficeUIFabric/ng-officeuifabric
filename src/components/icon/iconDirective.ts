@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {IconEnum} from './iconEnum';
 
 /**
@@ -13,7 +13,7 @@ import {IconEnum} from './iconEnum';
  *
  * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
  */
-export interface IIconScope extends ng.IScope {
+export interface IIconScope extends angular.IScope {
   uifType: string;
 }
 
@@ -26,7 +26,7 @@ export interface IIconScope extends ng.IScope {
  */
 class IconController {
   public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) {
+  constructor(public $log: angular.ILogService) {
   }
 }
 
@@ -46,7 +46,7 @@ class IconController {
  *
  * <uif-icon uif-type="arrowDownLeft"></uif-icon>
  */
-export class IconDirective implements ng.IDirective {
+export class IconDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<i class="ms-Icon ms-Icon--{{uifType}}" aria-hidden="true"></i>';
@@ -57,12 +57,12 @@ export class IconDirective implements ng.IDirective {
   public controller: any = IconController;
   public controllerAs: string = 'icon';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new IconDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new IconDirective();
     return directive;
   }
 
-  public link(scope: IIconScope, instanceElement: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: IconController): void {
+  public link(scope: IIconScope, instanceElement: angular.IAugmentedJQuery, attrs: angular.IAttributes, controller: IconController): void {
     // add watcher
     scope.$watch('uifType', (newValue: string, oldValue: string) => {
       // verify a valid icon was passed in
@@ -84,7 +84,7 @@ export class IconDirective implements ng.IDirective {
  * Icon
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.icon', [
+export let module: angular.IModule = angular.module('officeuifabric.components.icon', [
   'officeuifabric.components'
 ])
   .directive('uifIcon', IconDirective.factory());

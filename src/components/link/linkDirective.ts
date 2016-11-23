@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc directive
@@ -21,7 +21,7 @@ import * as ng from 'angular';
  *
  * <uif-link ng-href="http://ngofficeuifabric.com">Link text</uif-link>
  */
-export class LinkDirective implements ng.IDirective {
+export class LinkDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<a ng-href="{{ ngHref }}" class="ms-Link" ng-transclude></a>';
@@ -32,8 +32,8 @@ export class LinkDirective implements ng.IDirective {
   public transclude: boolean = true;
   public replace: boolean = true;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new LinkDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new LinkDirective();
     return directive;
   }
 }
@@ -46,7 +46,7 @@ export class LinkDirective implements ng.IDirective {
  * Link
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.link', [
+export let module: angular.IModule = angular.module('officeuifabric.components.link', [
     'officeuifabric.components'
   ])
   .directive('uifLink', LinkDirective.factory());

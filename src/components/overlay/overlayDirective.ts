@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {OverlayMode} from './overlayModeEnum';
 
 /**
@@ -13,7 +13,7 @@ import {OverlayMode} from './overlayModeEnum';
  *
  * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
  */
-export interface IOverlayScope extends ng.IScope {
+export interface IOverlayScope extends angular.IScope {
     uifMode: OverlayMode;
 }
 
@@ -26,7 +26,7 @@ export interface IOverlayScope extends ng.IScope {
  */
 class OverlayController {
     public static $inject: string[] = ['$log'];
-    constructor(public log: ng.ILogService) {
+    constructor(public log: angular.ILogService) {
     }
 }
 
@@ -47,9 +47,9 @@ class OverlayController {
  * <uif-overlay>html markup goes here</uif-overlay>
  * <uif-overlay uif-overlay-dark="true">html markup goes here</>
  */
-export class OverlayDirective implements ng.IDirective {
+export class OverlayDirective implements angular.IDirective {
 
-    public static log: ng.ILogService;
+    public static log: angular.ILogService;
 
     public restrict: string = 'E';
     public template: string = '<div class="ms-Overlay" ng-class="{\'ms-Overlay--dark\': uifMode == \'dark\'}" ng-transclude></div>';
@@ -58,13 +58,13 @@ export class OverlayDirective implements ng.IDirective {
     };
     public transclude: boolean = true;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = (log: ng.ILogService) => new OverlayDirective(log);
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = (log: angular.ILogService) => new OverlayDirective(log);
         directive.$inject = ['$log'];
         return directive;
     }
 
-    public constructor(public log: ng.ILogService) {
+    public constructor(public log: angular.ILogService) {
         OverlayDirective.log = log;
     }
 
@@ -91,7 +91,7 @@ export class OverlayDirective implements ng.IDirective {
  * Overlay
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.overlay', [
+export let module: angular.IModule = angular.module('officeuifabric.components.overlay', [
     'officeuifabric.components'
 ])
     .directive('uifOverlay', OverlayDirective.factory());

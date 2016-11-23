@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc class
@@ -44,7 +44,7 @@ export class DatepickerController {
         this.changeHighlightedDate(value.getFullYear(), value.getMonth(), value.getDate());
     }
 
-    public initDatepicker(ngModel: ng.INgModelController): void {
+    public initDatepicker(ngModel: angular.INgModelController): void {
         let self: DatepickerController = this;
 
         this.jElement.find('.ms-TextField-field').pickadate({
@@ -91,7 +91,7 @@ export class DatepickerController {
             open: function (): void {
                 self.scrollUp();
 
-                if (ng.isDefined(ngModel) && ngModel  !== null) {
+                if (angular.isDefined(ngModel) && ngModel  !== null) {
                     ngModel.$setTouched();
                 }
 
@@ -99,7 +99,7 @@ export class DatepickerController {
             },
             set: function (value: string): void {
                 let formattedValue: string = picker.get('select', 'yyyy-mm-dd');
-                if (ng.isDefined(ngModel) && ngModel  !== null) {
+                if (angular.isDefined(ngModel) && ngModel  !== null) {
                     ngModel.$setViewValue(formattedValue);
                 }
             }
@@ -277,7 +277,7 @@ export class DatepickerController {
  * @property {string} uifMonths - Comma separated list of all months
  * @property {string} placeholder - The placeholder to display in the text box
  */
-export interface IDatepickerDirectiveScope extends ng.IScope {
+export interface IDatepickerDirectiveScope extends angular.IScope {
     uifMonths: string;
     uifDateFormat: string;
     placeholder: string;
@@ -304,7 +304,7 @@ export interface IDatepickerDirectiveScope extends ng.IScope {
  *      uif-months="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" />
  */
 
-export class DatepickerDirective implements ng.IDirective {
+export class DatepickerDirective implements angular.IDirective {
     public template: string =
         '<div ng-class="{\'ms-DatePicker\': true, \'is-pickingYears\': ctrl.isPickingYears, \'is-pickingMonths\': ctrl.isPickingMonths}">' +
             '<div class="ms-TextField">' +
@@ -358,14 +358,14 @@ export class DatepickerDirective implements ng.IDirective {
     };
     public require: string[] = ['uifDatepicker', '?ngModel'];
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new DatepickerDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new DatepickerDirective();
 
         return directive;
     }
-    public compile (templateElement: ng.IAugmentedJQuery,
-                    templateAttributes: ng.IAttributes,
-                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+    public compile (templateElement: angular.IAugmentedJQuery,
+                    templateAttributes: angular.IAttributes,
+                    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
         return {
             post: this.postLink,
             pre: this.preLink
@@ -373,8 +373,8 @@ export class DatepickerDirective implements ng.IDirective {
     }
 
     private preLink(
-        $scope: IDatepickerDirectiveScope, instanceElement: ng.IAugmentedJQuery,
-        instanceAttributes: ng.IAttributes, ctrls: {}): void {
+        $scope: IDatepickerDirectiveScope, instanceElement: angular.IAugmentedJQuery,
+        instanceAttributes: angular.IAttributes, ctrls: {}): void {
         if (!$scope.uifMonths) {
             $scope.uifMonths = 'Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec';
         }
@@ -396,10 +396,10 @@ export class DatepickerDirective implements ng.IDirective {
 
     private postLink($scope: IDatepickerDirectiveScope, $element: JQuery, attrs: any, ctrls: any[]): void {
         let datepickerController: DatepickerController = ctrls[0];
-        let ngModel: ng.INgModelController = ctrls[1];
+        let ngModel: angular.INgModelController = ctrls[1];
 
         datepickerController.initDatepicker(ngModel);
-        if (ng.isDefined(ngModel) && ngModel !== null) {
+        if (angular.isDefined(ngModel) && ngModel !== null) {
             ngModel.$render = function (): void {
                 if (ngModel.$modelValue !== '' && typeof ngModel.$modelValue !== 'undefined') {
                     if (typeof ngModel.$modelValue === 'string') {
@@ -423,7 +423,7 @@ export class DatepickerDirective implements ng.IDirective {
  * datepicker. Depends on angular-pickadate https://github.com/restorando/angular-pickadate
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.datepicker', [
+export let module: angular.IModule = angular.module('officeuifabric.components.datepicker', [
     'officeuifabric.components'
   ])
   .directive('uifDatepicker', DatepickerDirective.factory());

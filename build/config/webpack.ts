@@ -4,24 +4,24 @@ import * as webpack from 'webpack';
 
 /**
  * Options affecting the normal module.
- * 
+ *
  * @class
  * @implements {webpack.Module}
  * @public
- * 
+ *
  * @property {webpack.Loader[]}   loaders - Array of automatically applied loaders.
  */
-class WebPackModule implements webpack.Module {
+class WebPackModule implements webpack.OldModule {
 
-  public loaders: webpack.Loader[] = [];
+  public loaders: webpack.Rule[] = [];
 
   /**
    * Constructor that creates the collection of loaders.
-   * 
+   *
    * @constructs
    */
   constructor() {
-    this.loaders.push(<webpack.Loader>{
+    this.loaders.push(<webpack.Rule>{
       loader: 'ts-loader',
       test: /\.ts$/
     });
@@ -30,12 +30,12 @@ class WebPackModule implements webpack.Module {
 
 /**
  * Webpack configuration.
- * 
+ *
  * @class
  * @implements {webpack.Configuration}
  * @public
  * @see {link http://webpack.github.io/docs/configuration.html}
- * 
+ *
  * @property  {webpack.Output}  output    - Options affecting the output.
  * @property  {string}          output.libraryTarget    - Which format to export the library.
  * @property  {Object}          externals - Dependencies not resolved by webpack, but become dependencies of the resulting bundle.

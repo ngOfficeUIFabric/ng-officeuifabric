@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {PersonaStyleEnum} from '../../core/personaStyleEnum';
 import {PresenceEnum} from '../../core/personaPresenceEnum';
 import {PersonaInitialsColor} from '../../core/personaInitialsColorEnum';
@@ -26,7 +26,7 @@ import {PersonaSize} from './sizeEnum';
  *  .directive('uifPersonaOptionalText', PersonaTextDirective.factory(''));
  * </pre>
  */
-export class PersonaTextDirective implements ng.IDirective {
+export class PersonaTextDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -39,19 +39,19 @@ export class PersonaTextDirective implements ng.IDirective {
     'tertiary': 'ms-Persona-tertiaryText'
   };
 
-  public static factory(type: string): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaTextDirective(type);
+  public static factory(type: string): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaTextDirective(type);
     return directive;
   }
 
   // template based on the passed type
-  public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: any) => {
+  public template: any = ($element: angular.IAugmentedJQuery, $attrs: any) => {
     let directiveTemplate: string = '<div class="' + this.availableClasses[this.directiveType] + '" ng-transclude></div>';
     return directiveTemplate;
   }
 
   public constructor(private directiveType: string) {
-    if (ng.isUndefined(this.availableClasses[this.directiveType])) {
+    if (angular.isUndefined(this.availableClasses[this.directiveType])) {
       this.directiveType = 'optional';
     }
   }
@@ -72,7 +72,7 @@ export class PersonaTextDirective implements ng.IDirective {
  *  <uif-persona-initials>AL</uif-persona-initials>
  * </uif-persona>
  */
-export class PersonaInitialsDirective implements ng.IDirective {
+export class PersonaInitialsDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -82,25 +82,25 @@ export class PersonaInitialsDirective implements ng.IDirective {
   };
   public template: string = '<div class="ms-Persona-initials ms-Persona-initials--{{uifColor}}" ng-transclude></div> ';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaInitialsDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaInitialsDirective();
     return directive;
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     scope: IPersonaInitialsScope,
-    element: ng.IAugmentedJQuery,
+    element: angular.IAugmentedJQuery,
     attrs: IPersonaInitialsAttributes,
     ctrls: any) => {
 
     let personaController: PersonaController = ctrls[0];
-    if (ng.isUndefined(attrs.uifColor)) {
+    if (angular.isUndefined(attrs.uifColor)) {
       scope.uifColor = PersonaInitialsColor[PersonaInitialsColor.blue];
     }
 
     scope.$watch('uifColor', (newColor: string) => {
 
-      if (ng.isUndefined(PersonaInitialsColor[newColor])) {
+      if (angular.isUndefined(PersonaInitialsColor[newColor])) {
         personaController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.persona - "' + newColor + '"' +
           ' is not a valid value for uifColor.' +
           ' It should be lightBlue, blue, darkBlue, teal, lightGreen, green,' +
@@ -124,7 +124,7 @@ export class PersonaInitialsDirective implements ng.IDirective {
  * @property {string} uifColor Color used for initials
  */
 
-export interface IPersonaInitialsScope extends ng.IScope {
+export interface IPersonaInitialsScope extends angular.IScope {
   uifColor: string;
 }
 
@@ -138,7 +138,7 @@ export interface IPersonaInitialsScope extends ng.IScope {
  *
  * @property {string} uiColor     Determines the color used for initials
  */
-export interface IPersonaInitialsAttributes extends ng.IAttributes {
+export interface IPersonaInitialsAttributes extends angular.IAttributes {
   uifColor: string;
 }
 
@@ -165,7 +165,7 @@ export interface IPersonaInitialsAttributes extends ng.IAttributes {
  * </uif-persona>
  *
  */
-export class PersonaDirective implements ng.IDirective {
+export class PersonaDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
@@ -206,33 +206,33 @@ export class PersonaDirective implements ng.IDirective {
     [PresenceEnum.offline]: 'ms-Persona--offline'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaDirective();
     return directive;
   }
 
-  public link: ng.IDirectiveLinkFn = (scope: IPersonaScope,
-    element: ng.IAugmentedJQuery,
+  public link: angular.IDirectiveLinkFn = (scope: IPersonaScope,
+    element: angular.IAugmentedJQuery,
     attrs: IPersonaAttributes,
     controllers: any,
-    transclude: ng.ITranscludeFunction): void => {
+    transclude: angular.ITranscludeFunction): void => {
 
     let personaController: PersonaController = controllers[0];
 
     // validate attributes
-    if (ng.isDefined(attrs.uifSize) && ng.isUndefined(PersonaSize[attrs.uifSize])) {
+    if (angular.isDefined(attrs.uifSize) && angular.isUndefined(PersonaSize[attrs.uifSize])) {
       personaController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.persona - "' +
         attrs.uifSize + '" is not a valid value for uifSize. It should be tiny, xsmall, small, medium, large, xlarge.');
       return;
     }
 
-    if (ng.isDefined(attrs.uifStyle) && ng.isUndefined(PersonaStyleEnum[attrs.uifStyle])) {
+    if (angular.isDefined(attrs.uifStyle) && angular.isUndefined(PersonaStyleEnum[attrs.uifStyle])) {
       personaController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.persona - "' +
         attrs.uifStyle + '" is not a valid value for uifStyle. It should be round or square.');
       return;
     }
 
-    if (ng.isDefined(attrs.uifPresence) && ng.isUndefined(PresenceEnum[attrs.uifPresence])) {
+    if (angular.isDefined(attrs.uifPresence) && angular.isUndefined(PresenceEnum[attrs.uifPresence])) {
       personaController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.persona - "' +
         attrs.uifPresence + '" is not a valid value for uifPresence. It should be available, away, blocked, busy, dnd or offline.');
       return;
@@ -247,14 +247,14 @@ export class PersonaDirective implements ng.IDirective {
       let personaClasses: string[] = [];
 
       let size: number = PersonaSize[attrs.uifSize];
-      let presence: number = ng.isDefined(attrs.uifPresence) ? PresenceEnum[attrs.uifPresence] : PresenceEnum.offline;
+      let presence: number = angular.isDefined(attrs.uifPresence) ? PresenceEnum[attrs.uifPresence] : PresenceEnum.offline;
 
       if (PersonaStyleEnum[attrs.uifStyle] === PersonaStyleEnum.square) {
         personaClasses.push('ms-Persona--square');
       }
 
       let sizeClass: string = this.uifSizeClasses[size];
-      if (ng.isDefined(sizeClass)) {
+      if (angular.isDefined(sizeClass)) {
         personaClasses.push(sizeClass);
       }
 
@@ -263,10 +263,10 @@ export class PersonaDirective implements ng.IDirective {
       return personaClasses.join(' ');
     };
 
-    transclude((clone: ng.IAugmentedJQuery) => {
+    transclude((clone: angular.IAugmentedJQuery) => {
 
-      let detailsWrapper: ng.IAugmentedJQuery = ng.element(element[0].getElementsByClassName('ms-Persona-details'));
-      let imageArea: ng.IAugmentedJQuery = ng.element(element[0].getElementsByClassName('ms-Persona-imageArea'));
+      let detailsWrapper: angular.IAugmentedJQuery = angular.element(element[0].getElementsByClassName('ms-Persona-details'));
+      let imageArea: angular.IAugmentedJQuery = angular.element(element[0].getElementsByClassName('ms-Persona-imageArea'));
 
       for (let i: number = 0; i < clone.length; i++) {
         let tagName: string = clone[i].tagName;
@@ -303,7 +303,7 @@ export class PersonaDirective implements ng.IDirective {
  */
 export class PersonaController {
   public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) { }
+  constructor(public $log: angular.ILogService) { }
 }
 
 /**
@@ -318,7 +318,7 @@ export class PersonaController {
  * @property {string} uifStyle    Determines round or square size of the component
  * @property {string} uifPresence Indicates presence of the associated user
  */
-export interface IPersonaAttributes extends ng.IAttributes {
+export interface IPersonaAttributes extends angular.IAttributes {
   uifSize: string;
   uifStyle: string;
   uifPresence: string;
@@ -338,7 +338,7 @@ export interface IPersonaAttributes extends ng.IAttributes {
  * @property {function} getImageAreaVisibility  Determines if the image area should be visible based on component size
  * @property {function} getPersonaClasses       Gets CSS classes for persona component based on type, size and presence
  */
-export interface IPersonaScope extends ng.IScope {
+export interface IPersonaScope extends angular.IScope {
   uifPresence: string;
   uifSize: string;
   uifImageUrl: string;
@@ -354,7 +354,7 @@ export interface IPersonaScope extends ng.IScope {
  * @description
  * Persona
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.persona', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.persona', ['officeuifabric.components'])
   .directive('uifPersona', PersonaDirective.factory())
   .directive('uifPersonaInitials', PersonaInitialsDirective.factory())
   .directive('uifPersonaPrimaryText', PersonaTextDirective.factory('primary'))

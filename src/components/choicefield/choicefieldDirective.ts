@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {ChoicefieldType} from './choicefieldTypeEnum';
 
 /**
@@ -18,8 +18,8 @@ import {ChoicefieldType} from './choicefieldTypeEnum';
  * @property {boolean=} disabled         - Set to disable the element
  * @property {choicefieldType=} uifType  - Radio or Checkbox
  */
-export interface IChoicefieldOptionScope extends ng.IScope {
-    ngModel: ng.INgModelController;
+export interface IChoicefieldOptionScope extends angular.IScope {
+    ngModel: angular.INgModelController;
     ngTrueValue: string;
     ngFalseValue: string;
     disabled: boolean;
@@ -39,8 +39,8 @@ export interface IChoicefieldOptionScope extends ng.IScope {
  * @property {string=} ngModel     - Set the ng-model
  * @property {boolean=} disabled   - Set to disable the element
  */
-export interface IChoicefieldGroupScope extends ng.IScope {
-    ngModel: ng.INgModelController;
+export interface IChoicefieldGroupScope extends angular.IScope {
+    ngModel: angular.INgModelController;
     disabled: boolean;
 }
 /**
@@ -53,7 +53,7 @@ export interface IChoicefieldGroupScope extends ng.IScope {
  */
 export class ChoicefieldOptionController {
     public static $inject: string[] = ['$log'];
-    constructor(public $log: ng.ILogService) {}
+    constructor(public $log: angular.ILogService) {}
 }
 
 /**
@@ -72,7 +72,7 @@ export class ChoicefieldOptionController {
  * <uif-choicefield-option uif-type="checkbox" value="Option1"
  *      ng-model="selectedValue" ng-true-value="\'TRUEVALUE\'" ng-false-value="\'FALSEVALUE\'">Option 1</uif-choicefield>
  */
-export class ChoicefieldOptionDirective implements ng.IDirective {
+export class ChoicefieldOptionDirective implements angular.IDirective {
     public template: string = '<div class="ms-ChoiceField">' +
         '<input id="{{::$id}}" class="ms-ChoiceField-input" type="{{uifType}}" value="{{value}}" ng-disabled="disabled"  ' +
             'ng-model="ngModel" ng-true-value="{{ngTrueValue}}" ng-false-value="{{ngFalseValue}}" />' +
@@ -91,17 +91,17 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
     };
     public controller: typeof ChoicefieldOptionController = ChoicefieldOptionController;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () =>
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () =>
             new ChoicefieldOptionDirective();
 
         return directive;
     }
 
-    public compile (templateElement: ng.IAugmentedJQuery,
-                    templateAttributes: ng.IAttributes,
-                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
-            let input: ng.IAugmentedJQuery = templateElement.find('input');
+    public compile (templateElement: angular.IAugmentedJQuery,
+                    templateAttributes: angular.IAttributes,
+                    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
+            let input: angular.IAugmentedJQuery = templateElement.find('input');
             if (!('ngModel' in templateAttributes)) {
                 // remove ng-model, as this is an optional attribute.
                 // if not removed, this will have unwanted side effects
@@ -114,10 +114,10 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
 
     private preLink(
         scope: IChoicefieldOptionScope,
-        instanceElement: ng.IAugmentedJQuery,
+        instanceElement: angular.IAugmentedJQuery,
         attrs: any,
         ctrls: any[],
-        transclude: ng.ITranscludeFunction): void {
+        transclude: angular.ITranscludeFunction): void {
             let choicefieldOptionController: ChoicefieldOptionController = ctrls[0];
             let choicefieldGroupController: ChoicefieldGroupController = ctrls[1];
             scope.$watch('uifType', (newValue: string, oldValue: string) => {
@@ -185,11 +185,11 @@ export class ChoicefieldOptionDirective implements ng.IDirective {
  * to render the title component of a choicefield group
  */
 
-export class ChoicefieldGroupTitleDirective implements ng.IDirective {
+export class ChoicefieldGroupTitleDirective implements angular.IDirective {
     public template: string = '<div class="ms-ChoiceFieldGroup-title"><ng-transclude /></div>';
     public transclude: boolean = true;
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ChoicefieldGroupTitleDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ChoicefieldGroupTitleDirective();
         return directive;
     }
 }
@@ -277,7 +277,7 @@ export class ChoicefieldGroupController {
  *        value="{{option.value}}">{{option.text}}</uif-choicefield-option>
  * </uif-choicefield-group>
  */
-export class ChoicefieldGroupDirective implements ng.IDirective {
+export class ChoicefieldGroupDirective implements angular.IDirective {
     public template: string =
         '<div class="ms-ChoiceFieldGroup">' +
             '<ng-transclude />' +
@@ -291,13 +291,13 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
     // make sure we have an isolate scope
     public scope: {} = {};
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ChoicefieldGroupDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ChoicefieldGroupDirective();
         return directive;
     }
-    public compile (templateElement: ng.IAugmentedJQuery,
-                    templateAttributes: ng.IAttributes,
-                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+    public compile (templateElement: angular.IAugmentedJQuery,
+                    templateAttributes: angular.IAttributes,
+                    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
         return {
             pre: this.preLink
         };
@@ -305,11 +305,11 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
 
     private preLink(
         scope: IChoicefieldGroupScope,
-        instanceElement: ng.IAugmentedJQuery,
-        instanceAttributes: ng.IAttributes,
+        instanceElement: angular.IAugmentedJQuery,
+        instanceAttributes: angular.IAttributes,
         ctrls: {}): void {
             let choicefieldGroupController: ChoicefieldGroupController = ctrls[0];
-            let modelController: ng.INgModelController = ctrls[1];
+            let modelController: angular.INgModelController = ctrls[1];
             scope.ngModel = modelController;
             choicefieldGroupController.init();
 
@@ -328,7 +328,7 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
  * ChoiceField
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.choicefield', [
+export let module: angular.IModule = angular.module('officeuifabric.components.choicefield', [
     'officeuifabric.components'
   ])
   .directive('uifChoicefieldOption', ChoicefieldOptionDirective.factory())

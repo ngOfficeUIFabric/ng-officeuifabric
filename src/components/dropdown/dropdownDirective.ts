@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -13,11 +13,11 @@ import * as ng from 'angular';
  *
  * @property {boolean} disabled - Set to disabled
  */
-export interface IDropdownScope extends ng.IScope {
-    isOpen: boolean;
-    disabled: boolean;
-    selectedTitle: string;
-    ngModel: ng.INgModelController;
+export interface IDropdownScope extends angular.IScope {
+  isOpen: boolean;
+  disabled: boolean;
+  selectedTitle: string;
+  ngModel: angular.INgModelController;
 }
 
 /**
@@ -36,47 +36,48 @@ export interface IDropdownScope extends ng.IScope {
  *   <uif-dropdown-option value="Value">Text</uif-option>
  * </uif-dropdown>
  */
-export class DropdownOptionDirective implements ng.IDirective {
-    public template: string = '<li class="ms-Dropdown-item" ng-transclude></li>';
-    public restrict: string = 'E';
-    public require: string = '^uifDropdown';
-    public replace: boolean = true;
-    public transclude: boolean = true;
+export class DropdownOptionDirective implements angular.IDirective {
+  public template: string = '<li class="ms-Dropdown-item" ng-transclude></li>';
+  public restrict: string = 'E';
+  public require: string = '^uifDropdown';
+  public replace: boolean = true;
+  public transclude: boolean = true;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new DropdownOptionDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DropdownOptionDirective();
 
-        return directive;
+    return directive;
+  }
+  public compile(
+    templateElement: angular.IAugmentedJQuery,
+    templateAttributes: angular.IAttributes,
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
+    return {
+      post: this.postLink
+    };
+  }
+
+  private postLink(
+    scope: angular.IScope,
+    instanceElement: angular.IAugmentedJQuery,
+    attrs: any,
+    dropdownController: DropdownController,
+    transclude: angular.ITranscludeFunction): void {
+
+    if (!dropdownController) {
+      throw 'Dropdown controller not found!';
     }
-    public compile (templateElement: ng.IAugmentedJQuery,
-                    templateAttributes: ng.IAttributes,
-                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
-        return {
-            post: this.postLink
-        };
+    instanceElement
+      .on('click', (ev: JQueryEventObject) => {
+        scope.$apply(() => {
+          dropdownController.setViewValue(instanceElement.find('span').html(), attrs.value, ev);
+        });
+      });
+    let value: string = '' + dropdownController.getViewValue();
+    if (value && value === attrs.value) {
+      dropdownController.setViewValue(attrs.title, attrs.value, null);
     }
-
-    private postLink(
-        scope: ng.IScope,
-        instanceElement: ng.IAugmentedJQuery,
-        attrs: any,
-        dropdownController: DropdownController,
-        transclude: ng.ITranscludeFunction): void {
-
-        if (!dropdownController) {
-            throw 'Dropdown controller not found!';
-        }
-        instanceElement
-            .on('click', (ev: JQueryEventObject) => {
-                scope.$apply(() => {
-                    dropdownController.setViewValue(instanceElement.find('span').html(), attrs.value, ev);
-                });
-            });
-        let value: string = '' + dropdownController.getViewValue();
-        if (value && value === attrs.value) {
-            dropdownController.setViewValue(attrs.title, attrs.value, null);
-        }
-    }
+  }
 }
 
 /**
@@ -91,67 +92,67 @@ export class DropdownOptionDirective implements ng.IDirective {
  *
  */
 export class DropdownController {
-    public static $inject: string[] = ['$element', '$scope', '$document'];
-    public constructor(public $element: JQuery, public $scope: IDropdownScope, public $document: ng.IDocumentService) {
-    }
+  public static $inject: string[] = ['$element', '$scope', '$document'];
+  public constructor(public $element: JQuery, public $scope: IDropdownScope, public $document: angular.IDocumentService) {
+  }
 
-    public init(): void {
-        let self: DropdownController = this;
-        this.$element.on('click', function(e: Event): void {
-            if (!self.$scope.disabled) {
-                self.$scope.isOpen = !self.$scope.isOpen;
-                self.$scope.$apply();
-                let dropdownWidth: number = angular.element(this.querySelector('.ms-Dropdown'))[0].clientWidth;
-                angular.element(this.querySelector('.ms-Dropdown-items'))[0].style.width = dropdownWidth + 'px';
-                e.stopPropagation();
-                if (self.$scope.isOpen) {
-                    let documentClickHandler: () => void = () => {
-                        // when clicking somewhere in the document, close it.
-                        self.$scope.isOpen = false;
-                        self.$scope.$apply();
-                        self.$document.off('click', documentClickHandler);
-                    };
-                    self.$document.on('click', documentClickHandler);
-                    self.$scope.$on('$destroy', function(): void {
-                        self.$document.off('click', documentClickHandler);
-                    });
-                }
-                if (self.$scope.ngModel !== undefined && self.$scope.ngModel != null) {
-                    self.$scope.ngModel.$setTouched();
-                }
-            }
-        });
-        if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
-            this.$scope.ngModel.$render = function(): void {
-                let found: boolean = false;
-                // find option with new value
-                let options: JQuery = self.$element.find('li');
-                for (let i: number = 0; i < options.length; i++) {
-                    let option: HTMLElement = options[i];
-                    let value: string = option.getAttribute('value');
-                    if (value === self.$scope.ngModel.$viewValue) {
-                         self.$scope.selectedTitle = angular.element(option).find('span').html();
-                         found = true;
-                         break;
-                    }
-                }
-                if (!found) {
-                    // no option found
-                    self.$scope.selectedTitle = '';
-                }
-            };
+  public init(): void {
+    let self: DropdownController = this;
+    this.$element.on('click', function (e: Event): void {
+      if (!self.$scope.disabled) {
+        self.$scope.isOpen = !self.$scope.isOpen;
+        self.$scope.$apply();
+        let dropdownWidth: number = angular.element(this.querySelector('.ms-Dropdown'))[0].clientWidth;
+        angular.element(this.querySelector('.ms-Dropdown-items'))[0].style.width = dropdownWidth + 'px';
+        e.stopPropagation();
+        if (self.$scope.isOpen) {
+          let documentClickHandler: () => void = () => {
+            // when clicking somewhere in the document, close it.
+            self.$scope.isOpen = false;
+            self.$scope.$apply();
+            self.$document.off('click', documentClickHandler);
+          };
+          self.$document.on('click', documentClickHandler);
+          self.$scope.$on('$destroy', function (): void {
+            self.$document.off('click', documentClickHandler);
+          });
         }
+        if (self.$scope.ngModel !== undefined && self.$scope.ngModel != null) {
+          self.$scope.ngModel.$setTouched();
+        }
+      }
+    });
+    if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+      this.$scope.ngModel.$render = function (): void {
+        let found: boolean = false;
+        // find option with new value
+        let options: JQuery = self.$element.find('li');
+        for (let i: number = 0; i < options.length; i++) {
+          let option: HTMLElement = options[i];
+          let value: string = option.getAttribute('value');
+          if (value === self.$scope.ngModel.$viewValue) {
+            self.$scope.selectedTitle = angular.element(option).find('span').html();
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          // no option found
+          self.$scope.selectedTitle = '';
+        }
+      };
     }
+  }
 
-    public setViewValue(title: string, value: string, eventType: any): void {
-        this.$scope.selectedTitle = title;
-        this.$scope.ngModel.$setViewValue(value, eventType);
+  public setViewValue(title: string, value: string, eventType: any): void {
+    this.$scope.selectedTitle = title;
+    this.$scope.ngModel.$setViewValue(value, eventType);
+  }
+  public getViewValue(): string {
+    if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+      return this.$scope.ngModel.$viewValue;
     }
-    public getViewValue(): string {
-        if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
-            return  this.$scope.ngModel.$viewValue;
-        }
-    }
+  }
 }
 
 /**
@@ -173,42 +174,47 @@ export class DropdownController {
  *   <uif-option value="Value3">Text 3</uif-option>
  * </uif-dropdown>
  */
-export class DropdownDirective implements ng.IDirective {
-    public template: string = '<div ng-click="dropdownClick" ' +
-        'ng-class="{\'ms-Dropdown\' : true, \'is-open\': isOpen, \'is-disabled\': disabled}" tabindex="0">' +
-        '<i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>' +
-        '<span class="ms-Dropdown-title">{{selectedTitle}}</span><ul class="ms-Dropdown-items"><ng-transclude></ng-transclude></ul></div>';
+export class DropdownDirective implements angular.IDirective {
+  public template: string = '<div ng-click="dropdownClick" ' +
+  'ng-class="{\'ms-Dropdown\' : true, \'is-open\': isOpen, \'is-disabled\': disabled}" tabindex="0">' +
+  '<i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>' +
+  '<span class="ms-Dropdown-title">{{selectedTitle}}</span><ul class="ms-Dropdown-items"><ng-transclude></ng-transclude></ul></div>';
 
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public require: string[] = ['uifDropdown', '?ngModel'];
-    public scope: {} = {};
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public require: string[] = ['uifDropdown', '?ngModel'];
+  public scope: {} = {};
 
-    public controller: typeof DropdownController = DropdownController;
+  public controller: typeof DropdownController = DropdownController;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new DropdownDirective();
-        return directive;
-    }
-    public compile (templateElement: ng.IAugmentedJQuery,
-                    templateAttributes: ng.IAttributes,
-                    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
-        return {
-            pre: this.preLink
-        };
-    }
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DropdownDirective();
+    return directive;
+  }
+  public compile(
+    templateElement: angular.IAugmentedJQuery,
+    templateAttributes: angular.IAttributes,
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
+    return {
+      pre: this.preLink
+    };
+  }
 
-    private preLink(scope: IDropdownScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, ctrls: {}): void {
-        let dropdownController: DropdownController = ctrls[0];
-        let modelController: ng.INgModelController = ctrls[1];
-        scope.ngModel = modelController;
-        dropdownController.init();
+  private preLink(
+    scope: IDropdownScope,
+    instanceElement: angular.IAugmentedJQuery,
+    instanceAttributes: angular.IAttributes,
+    ctrls: {}): void {
+    let dropdownController: DropdownController = ctrls[0];
+    let modelController: angular.INgModelController = ctrls[1];
+    scope.ngModel = modelController;
+    dropdownController.init();
 
-        scope.$watch(
-          () => { return instanceElement.attr('disabled'); },
-          ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; }));
-        scope.disabled = 'disabled' in instanceAttributes;
-    }
+    scope.$watch(
+      () => { return instanceElement.attr('disabled'); },
+      ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; }));
+    scope.disabled = 'disabled' in instanceAttributes;
+  }
 }
 
 /**
@@ -219,8 +225,8 @@ export class DropdownDirective implements ng.IDirective {
  * Dropdown
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.dropdown', [
-    'officeuifabric.components'
-  ])
+export let module: angular.IModule = angular.module('officeuifabric.components.dropdown', [
+  'officeuifabric.components'
+])
   .directive('uifDropdownOption', DropdownOptionDirective.factory())
   .directive('uifDropdown', DropdownDirective.factory());

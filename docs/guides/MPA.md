@@ -35,10 +35,9 @@ Installation of Node.js includes NPM, the package manager for Node.js.
 Many parts of the project are implemented using TypeScript, but more importantly the build process is written in TypeScript. As such, you need to install one NPM package globally:
 
 - [typescript](https://npmjs.com/package/typescript): main TypeScript compiler
-- [typings](https://npmjs.com/package/typings): Typings type definition utility
 
 ```bash
-$ npm install -g typescript typings
+$ npm install -g typescript
 ```
 
 ## Clone the Repository
@@ -94,7 +93,6 @@ Transpile all the TypeScript to JavaScript. The following command will download 
 $ npm run build:ts
 
 # or run this ...
-$ typings install
 $ tsc -p ./
 ```
 

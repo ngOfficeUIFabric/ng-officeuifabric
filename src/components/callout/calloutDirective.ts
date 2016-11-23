@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {CalloutType} from './calloutTypeEnum';
 import {CalloutArrow} from './calloutArrowEnum';
 
@@ -18,7 +18,7 @@ import {CalloutArrow} from './calloutArrowEnum';
  */
 export class CalloutController {
   public static $inject: string[] = ['$scope', '$log'];
-  constructor(public $scope: ICalloutScope, public $log: ng.ILogService) { }
+  constructor(public $scope: ICalloutScope, public $log: angular.ILogService) { }
 }
 
 /**
@@ -37,23 +37,23 @@ export class CalloutController {
  *   <uif-callout-header>All of your favorite people</uif-callout-header>
  * </uif-callout>
  */
-export class CalloutHeaderDirective implements ng.IDirective {
+export class CalloutHeaderDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
   public scope: boolean = false;
   public template: string = '<div class="ms-Callout-header"><p class="ms-Callout-title" ng-transclude></p></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CalloutHeaderDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CalloutHeaderDirective();
     return directive;
   }
 
-  public link(scope: any, instanceElement: ng.IAugmentedJQuery, attrs: any, ctrls: any[]): void {
+  public link(scope: any, instanceElement: angular.IAugmentedJQuery, attrs: any, ctrls: any[]): void {
 
     let mainWrapper: JQuery = instanceElement.parent().parent();
 
-    if (!ng.isUndefined(mainWrapper) && mainWrapper.hasClass('ms-Callout-main')) {
+    if (!angular.isUndefined(mainWrapper) && mainWrapper.hasClass('ms-Callout-main')) {
       let detachedHeader: JQuery = instanceElement.detach();
       mainWrapper.prepend(detachedHeader);
     }
@@ -76,15 +76,15 @@ export class CalloutHeaderDirective implements ng.IDirective {
  *   <uif-callout-content>Consider adding a link to learn more at the bottom.</uif-callout-content>
  * </uif-callout>
  */
-export class CalloutContentDirective implements ng.IDirective {
+export class CalloutContentDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
   public scope: boolean = false;
   public template: string = '<div class="ms-Callout-content"><p class="ms-Callout-subText" ng-transclude></p></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CalloutContentDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CalloutContentDirective();
     return directive;
   }
 
@@ -109,7 +109,7 @@ export class CalloutContentDirective implements ng.IDirective {
  *   </uif-callout-actions>
  * </uif-callout>
  */
-export class CalloutActionsDirective implements ng.IDirective {
+export class CalloutActionsDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -117,14 +117,14 @@ export class CalloutActionsDirective implements ng.IDirective {
   public template: string = '<div class="ms-Callout-actions" ng-transclude></div>';
   public require: string = '^?uifCallout';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CalloutActionsDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CalloutActionsDirective();
     return directive;
   }
 
-  public link(scope: ICalloutScope, instanceElement: ng.IAugmentedJQuery, attrs: any, calloutController: CalloutController): void {
+  public link(scope: ICalloutScope, instanceElement: angular.IAugmentedJQuery, attrs: any, calloutController: CalloutController): void {
 
-    if (ng.isObject(calloutController)) {
+    if (angular.isObject(calloutController)) {
       calloutController.$scope.$watch('hasSeparator', (hasSeparator: boolean) => {
         if (hasSeparator) {
           let actionChildren: JQuery = instanceElement.children().eq(0).children();
@@ -165,7 +165,7 @@ export class CalloutActionsDirective implements ng.IDirective {
  * @property {CalloutArrow} uifArrow - Direction of the arrow
  * @property {boolean} uifClose - Renders close button
  */
-interface ICalloutAttributes extends ng.IAttributes {
+interface ICalloutAttributes extends angular.IAttributes {
   uifSeparator: string;
   uifActionText: string;
   uifArrow: string;
@@ -183,7 +183,7 @@ interface ICalloutAttributes extends ng.IAttributes {
  * @property {CalloutType} uifType - Type of callout to render
  * @property {boolean} ngShow - Callout visible or not.
  */
-interface ICalloutScope extends ng.IScope {
+interface ICalloutScope extends angular.IScope {
   arrowDirection: string;
   hasSeparator: boolean;
   uifType: string;
@@ -210,7 +210,7 @@ interface ICalloutScope extends ng.IScope {
  *   <uif-callout-content>Consider adding a link to learn more at the bottom.</uif-callout-content>
  * </uif-callout>
  */
-export class CalloutDirective implements ng.IDirective {
+export class CalloutDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -229,17 +229,17 @@ export class CalloutDirective implements ng.IDirective {
 
   public controller: typeof CalloutController = CalloutController;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CalloutDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CalloutDirective();
     return directive;
   }
 
-  public link(scope: ICalloutScope, instanceElement: ng.IAugmentedJQuery, attrs: ICalloutAttributes, ctrls: any[]): void {
+  public link(scope: ICalloutScope, instanceElement: angular.IAugmentedJQuery, attrs: ICalloutAttributes, ctrls: any[]): void {
 
     let calloutController: CalloutController = ctrls[0];
 
     attrs.$observe('uifType', (calloutType: string) => {
-      if (ng.isUndefined(CalloutType[calloutType])) {
+      if (angular.isUndefined(CalloutType[calloutType])) {
         calloutController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.callout - "' +
           calloutType + '" is not a valid value for uifType. It should be oobe or peek');
       }
@@ -251,7 +251,7 @@ export class CalloutDirective implements ng.IDirective {
 
     attrs.$observe('uifArrow', (attrArrowDirection: string) => {
 
-      if (ng.isUndefined(CalloutArrow[attrArrowDirection])) {
+      if (angular.isUndefined(CalloutArrow[attrArrowDirection])) {
         calloutController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.callout - "' +
           attrArrowDirection + '" is not a valid value for uifArrow. It should be left, right, top, bottom.');
         return;
@@ -264,12 +264,12 @@ export class CalloutDirective implements ng.IDirective {
 
     });
 
-    scope.hasSeparator = (!ng.isUndefined(attrs.uifActionText) || !ng.isUndefined(attrs.uifSeparator));
+    scope.hasSeparator = (!angular.isUndefined(attrs.uifActionText) || !angular.isUndefined(attrs.uifSeparator));
 
-    if (!ng.isUndefined(attrs.uifClose)) {
+    if (!angular.isUndefined(attrs.uifClose)) {
       scope.closeButton = true;
 
-      let closeButtonElement: ng.IAugmentedJQuery = ng.element(
+      let closeButtonElement: angular.IAugmentedJQuery = angular.element(
         '<button class="ms-Callout-close" type="button">' +
         '<i class="ms-Icon ms-Icon--x"></i>' +
         '</button>');
@@ -329,7 +329,7 @@ export class CalloutDirective implements ng.IDirective {
  * Callout
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.callout', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.callout', ['officeuifabric.components'])
   .directive('uifCallout', CalloutDirective.factory())
   .directive('uifCalloutHeader', CalloutHeaderDirective.factory())
   .directive('uifCalloutContent', CalloutContentDirective.factory())

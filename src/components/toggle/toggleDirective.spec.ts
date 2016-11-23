@@ -3,7 +3,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         angular.mock.module('officeuifabric.components.toggle');
     });
 
-    it('should have unique ids', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should have unique ids', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let toggle1: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled">Test</toggle>')($scope);
         toggle1 = jQuery(toggle1[0]);
@@ -17,7 +17,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         let checkBox2: JQuery = toggle2.find('input.ms-Toggle-input');
         expect(checkBox1[0].id === checkBox2[0].id).toBe(false);
     }));
-    it('should be able to set text location', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to set text location', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.toggled = true;
 
@@ -29,7 +29,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         let mainToggle: JQuery = toggle.find('.ms-Toggle');
         expect(mainToggle.hasClass('ms-Toggle--textRight')).toBe(true);
     }));
-    it('should be able to set labels', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to set labels', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.toggled = true;
 
@@ -47,7 +47,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         expect(descLabel.html()).toBe('Toggle this, or not');
     }));
 
-    it('should be able to toggle', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to toggle', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.toggled = true;
 
@@ -69,7 +69,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         expect($scope.toggled).toBe(true);
     }));
 
-    it('should be able to be disabled', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to be disabled', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.disabled = true;
 
@@ -94,7 +94,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         expect(input.attr('disabled')).toBe(undefined, 'Input element is not disabled');
     }));
 
-    it('should call the function passed to ng-change on toggle', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should call the function passed to ng-change on toggle', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.testValue = false;
         $scope.toggled = false;
@@ -117,7 +117,7 @@ describe('toggleDirective: <uif-toggle />', () => {
 
     }));
 
-    it('display the attribute ng-true-value only if passed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('display the attribute ng-true-value only if passed', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.toggled = false;
 
@@ -135,7 +135,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         expect(input.attr('ng-true-value') === undefined).toBe(true);
     }));
 
-    it('display the attribute ng-false-value only if passed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('display the attribute ng-false-value only if passed', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.toggled = false;
 
@@ -153,7 +153,7 @@ describe('toggleDirective: <uif-toggle />', () => {
         expect(input.attr('ng-false-value') === undefined).toBe(true);
     }));
 
-    it('should set $dirty when value changed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set $dirty when value changed', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.toggled = true;
 
@@ -163,7 +163,7 @@ describe('toggleDirective: <uif-toggle />', () => {
 
         let checkBox: JQuery = toggle.find('input.ms-Toggle-input');
 
-        let ngModel: ng.INgModelController = angular.element(toggle).controller('ngModel');
+        let ngModel: angular.INgModelController = angular.element(toggle).controller('ngModel');
 
         expect(ngModel.$dirty).toBe(false);
         expect(ngModel.$touched).toBe(false);

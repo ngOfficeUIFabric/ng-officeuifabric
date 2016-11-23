@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {InputTypeEnum} from './uifTypeEnum';
 
 /**
@@ -22,7 +22,7 @@ import {InputTypeEnum} from './uifTypeEnum';
  * @property {boolean} uifMultiline   - If true, textbox will be rendered as a multiline text area
  *
  */
-export interface ITextFieldScope extends ng.IScope {
+export interface ITextFieldScope extends angular.IScope {
   uifLabel: string;
   placeholder: string;
   uifDescription: string;
@@ -57,7 +57,7 @@ export interface ITextFieldScope extends ng.IScope {
  * @property {string} uifMultiline   - If true, textbox will be rendered as a multiline text area
  *
  */
-export interface ITextFieldAttributes extends ng.IAttributes {
+export interface ITextFieldAttributes extends angular.IAttributes {
   uifType: InputTypeEnum;
   uifMultiline: string;
 }
@@ -71,7 +71,7 @@ export interface ITextFieldAttributes extends ng.IAttributes {
  */
 class TextFieldController {
   public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) {
+  constructor(public $log: angular.ILogService) {
   }
 }
 
@@ -94,7 +94,7 @@ class TextFieldController {
  *                uif-Underlined
  *                placeholder='This is the placeholder' />
  */
-export class TextFieldDirective implements ng.IDirective {
+export class TextFieldDirective implements angular.IDirective {
   public controller: typeof TextFieldController = TextFieldController;
 
   public template: string =
@@ -123,18 +123,18 @@ export class TextFieldDirective implements ng.IDirective {
   public require: string[] = ['uifTextfield', '?ngModel'];
 
   public restrict: string = 'E';
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new TextFieldDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TextFieldDirective();
 
     return directive;
   }
 
   public link(
-    scope: ITextFieldScope, instanceElement: ng.IAugmentedJQuery,
+    scope: ITextFieldScope, instanceElement: angular.IAugmentedJQuery,
     attrs: ITextFieldAttributes, controllers: any[]): void {
 
     let controller: TextFieldController = controllers[0];
-    let ngModel: ng.INgModelController = controllers[1];
+    let ngModel: angular.INgModelController = controllers[1];
 
     scope.disabled = 'disabled' in attrs;
     scope.$watch(
@@ -176,7 +176,7 @@ export class TextFieldDirective implements ng.IDirective {
       }
       scope.isActive = false;
 
-      if (ng.isDefined(ngModel) && ngModel != null) {
+      if (angular.isDefined(ngModel) && ngModel != null) {
         ngModel.$setTouched();
       }
     };
@@ -189,7 +189,7 @@ export class TextFieldDirective implements ng.IDirective {
     };
 
     scope.inputChange = function (ev: any): void {
-      if (ng.isDefined(ngModel) && ngModel != null) {
+      if (angular.isDefined(ngModel) && ngModel != null) {
         ngModel.$setDirty();
       }
     };
@@ -214,7 +214,7 @@ export class TextFieldDirective implements ng.IDirective {
  * Textfield
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.textfield', [
+export let module: angular.IModule = angular.module('officeuifabric.components.textfield', [
   'officeuifabric.components'
 ])
   .directive('uifTextfield', TextFieldDirective.factory());

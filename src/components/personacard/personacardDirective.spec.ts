@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('uif-persona-card', () => {
 
@@ -12,12 +12,12 @@ describe('uif-persona-card', () => {
   describe('<uif-persona-card-detail-label></uif-persona-card-detail-label>', () => {
 
     describe('HTML rendering', () => {
-      let liteElement: ng.IAugmentedJQuery;
+      let liteElement: angular.IAugmentedJQuery;
       let element: JQuery;
-      let scope: ng.IScope;
+      let scope: angular.IScope;
 
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-persona-card-detail-label>Sample Label</uif-persona-card-detail-label>');
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-persona-card-detail-label>Sample Label</uif-persona-card-detail-label>');
         scope = $rootScope.$new();
         $compile(liteElement)(scope);
         element = jQuery(liteElement[0]);
@@ -42,12 +42,12 @@ describe('uif-persona-card', () => {
   describe('<uif-persona-card-detail-line></uif-persona-card-detail-line>', () => {
 
     describe('HTML rendering', () => {
-      let liteElement: ng.IAugmentedJQuery;
+      let liteElement: angular.IAugmentedJQuery;
       let element: JQuery;
-      let scope: ng.IScope;
+      let scope: angular.IScope;
 
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        liteElement = ng.element(`
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        liteElement = angular.element(`
           <uif-persona-card-detail-line>
             <uif-persona-card-detail-label>Skype:</uif-persona-card-detailLabel> 555 123 456
           </uif-persona-card-detail-line>`);
@@ -79,12 +79,12 @@ describe('uif-persona-card', () => {
   describe('<uif-persona-card-*-text /> directives', () => {
 
     describe('HTML rendering', () => {
-      let liteElement: ng.IAugmentedJQuery;
+      let liteElement: angular.IAugmentedJQuery;
       let element: JQuery;
-      let scope: ng.IScope;
+      let scope: angular.IScope;
 
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-persona-card-primary-text>Alton Lafferty</uif-persona-card-primary-text>' +
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-persona-card-primary-text>Alton Lafferty</uif-persona-card-primary-text>' +
         '<uif-persona-card-secondary-text>Interior Designer, Contoso</uif-persona-card-secondary-text>' +
         '<uif-persona-card-tertiary-text>Office: 7/1234</uif-persona-card-tertiary-text>' +
         '<uif-persona-card-optional-text>Available - Video capable</uif-persona-card-optional-text>');
@@ -128,19 +128,19 @@ describe('uif-persona-card', () => {
   });
 
   describe('<uif-persona-card /> directive', () => {
-      let liteElement: ng.IAugmentedJQuery;
+      let liteElement: angular.IAugmentedJQuery;
       let element: JQuery;
-      let scope: ng.IScope;
-      let _rootScope: ng.IRootScopeService;
-      let _compile: ng.ICompileService;
+      let scope: angular.IScope;
+      let _rootScope: angular.IRootScopeService;
+      let _compile: angular.ICompileService;
 
       describe('HTML rendering', () => {
 
-        beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+        beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
           _rootScope = $rootScope;
           _compile = $compile;
 
-          liteElement = ng.element('<uif-persona-card uif-style="round" uif-size="xlarge"></uif-persona-card>');
+          liteElement = angular.element('<uif-persona-card uif-style="round" uif-size="xlarge"></uif-persona-card>');
           scope = _rootScope.$new();
           _compile(liteElement)(scope);
           scope.$digest();
@@ -169,11 +169,11 @@ describe('uif-persona-card', () => {
         });
 
         it('ms-Persona DIV has CSS for size', () => {
-          let personaCards: ng.IAugmentedJQuery[] = [
-            ng.element('<uif-persona-card uif-size="xsmall"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-size="small"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-size="large"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-size="xlarge"></uif-persona-card>')
+          let personaCards: angular.IAugmentedJQuery[] = [
+            angular.element('<uif-persona-card uif-size="xsmall"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-size="small"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-size="large"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-size="xlarge"></uif-persona-card>')
           ];
 
           let expectedClass: string[] = ['ms-Persona--xs', 'ms-Persona--sm', 'ms-Persona--lg', 'ms-Persona--xl'];
@@ -195,7 +195,7 @@ describe('uif-persona-card', () => {
         });
 
         it('ms-Persona DIV has no CSS for medium size', () => {
-          liteElement = ng.element('<uif-persona-card uif-size="medium"></uif-persona-card>');
+          liteElement = angular.element('<uif-persona-card uif-size="medium"></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
 
@@ -204,13 +204,13 @@ describe('uif-persona-card', () => {
 
           let notExpectedClasses: string[] = ['ms-Persona--xs', 'ms-Persona--sm', 'ms-Persona--lg', 'ms-Persona--xl'];
 
-          ng.forEach(notExpectedClasses, (className: string) => {
+          angular.forEach(notExpectedClasses, (className: string) => {
             expect(innerDiv).not.toHaveClass(className);
           });
         });
 
-        it('should log error when invalid size is used', inject(($log: ng.ILogService) => {
-          liteElement = ng.element('<uif-persona-card uif-size="invalid"></uif-persona-card>');
+        it('should log error when invalid size is used', inject(($log: angular.ILogService) => {
+          liteElement = angular.element('<uif-persona-card uif-size="invalid"></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
 
@@ -224,7 +224,7 @@ describe('uif-persona-card', () => {
         }));
 
         it('ms-Persona DIV has no CSS for size when uif-size not specified', () => {
-          liteElement = ng.element('<uif-persona-card></uif-persona-card>');
+          liteElement = angular.element('<uif-persona-card></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
 
@@ -233,7 +233,7 @@ describe('uif-persona-card', () => {
 
           let notExpectedClasses: string[] = ['ms-Persona--xs', 'ms-Persona--sm', 'ms-Persona--lg', 'ms-Persona--xl'];
 
-          ng.forEach(notExpectedClasses, (className: string) => {
+          angular.forEach(notExpectedClasses, (className: string) => {
             expect(innerDiv).not.toHaveClass(className);
           });
         });
@@ -246,7 +246,7 @@ describe('uif-persona-card', () => {
         });
 
         it('main & ms-Persona DIV has proper CSS when uif-style is square', () => {
-          liteElement = ng.element('<uif-persona-card uif-style="square"></uif-persona-card>');
+          liteElement = angular.element('<uif-persona-card uif-style="square"></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
 
@@ -257,8 +257,8 @@ describe('uif-persona-card', () => {
           expect(personaDiv).toHaveClass('ms-Persona--square');
         });
 
-        it('should log error when uif-style is incorrect', inject(($log: ng.ILogService) => {
-          liteElement = ng.element('<uif-persona-card uif-style="invalid"></uif-persona-card>');
+        it('should log error when uif-style is incorrect', inject(($log: angular.ILogService) => {
+          liteElement = angular.element('<uif-persona-card uif-style="invalid"></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
 
@@ -279,7 +279,7 @@ describe('uif-persona-card', () => {
         });
 
         it('should have IMG with proper source and CSS', () => {
-          liteElement = ng.element('<uif-persona-card uif-image-url="' +
+          liteElement = angular.element('<uif-persona-card uif-image-url="' +
             'http://dev.office.com/Modules/DevOffice.Fabric/Fabric/components/persona/Persona.Person2.png"></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
@@ -317,13 +317,13 @@ describe('uif-persona-card', () => {
         });
 
         it('should have proper CSS class for presence', () => {
-          let personaCards: ng.IAugmentedJQuery[] = [
-            ng.element('<uif-persona-card uif-presence="available"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-presence="away"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-presence="blocked"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-presence="busy"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-presence="dnd"></uif-persona-card>'),
-            ng.element('<uif-persona-card uif-presence="offline"></uif-persona-card>')
+          let personaCards: angular.IAugmentedJQuery[] = [
+            angular.element('<uif-persona-card uif-presence="available"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-presence="away"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-presence="blocked"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-presence="busy"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-presence="dnd"></uif-persona-card>'),
+            angular.element('<uif-persona-card uif-presence="offline"></uif-persona-card>')
           ];
 
           for (let i: number = 0; i < personaCards.length; i++) {
@@ -359,8 +359,8 @@ describe('uif-persona-card', () => {
             expect(personaDiv).toHaveClass('ms-Persona--offline');
         });
 
-        it('should validate presence attribute', inject(($log: ng.ILogService) => {
-          liteElement = ng.element('<uif-persona-card uif-presence="invalid"></uif-persona-card>');
+        it('should validate presence attribute', inject(($log: angular.ILogService) => {
+          liteElement = angular.element('<uif-persona-card uif-presence="invalid"></uif-persona-card>');
           _compile(liteElement)(scope);
           scope.$digest();
 
@@ -380,7 +380,7 @@ describe('uif-persona-card', () => {
         });
 
         it('should transclude uif-persona-card-primary-text inside details DIV', () => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
           '<uif-persona-card-primary-text>Alton Lafferty</uif-persona-card-primary-text>' +
           '<uif-persona-card-secondary-text>Interior Designer, Contoso</uif-persona-card-secondary-text>' +
           '<uif-persona-card-tertiary-text>Office: 7/1234</uif-persona-card-tertiary-text>' +
@@ -425,13 +425,13 @@ describe('uif-persona-card', () => {
 
       describe('<uif-persona-card-action /> directive', () => {
 
-        beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+        beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
           _rootScope = $rootScope;
           _compile = $compile;
 
           scope = $rootScope.$new();
 
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
             '<uif-persona-card-action uif-icon="video" uif-placeholder="regular">' +
               '<p>This should be transcluded.</p>' +
             '</uif-persona-card-action>' +
@@ -475,8 +475,8 @@ describe('uif-persona-card', () => {
 
         });
 
-        it('should throw error on invalid placeholder', inject(($log: ng.ILogService) => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+        it('should throw error on invalid placeholder', inject(($log: angular.ILogService) => {
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
             '<uif-persona-card-action uif-icon="video" uif-placeholder="invalid"></uif-persona-card-action>' +
           '</uif-persona-card>');
           _compile(liteElement)(scope);
@@ -493,7 +493,7 @@ describe('uif-persona-card', () => {
         }));
 
         it('should add list item to actions UL', () => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
             '<uif-persona-card-action uif-icon="video" uif-placeholder="regular">' +
               'This should be transcluded.' +
             '</uif-persona-card-action>' +
@@ -515,7 +515,7 @@ describe('uif-persona-card', () => {
         });
 
         it('actions in detail box should have detail CSS', () => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
            '<uif-persona-card-action uif-icon="chat" uif-placeholder="regular"></uif-persona-card-action>' +
            '<uif-persona-card-action uif-icon="phone" uif-placeholder="regular"></uif-persona-card-action>' +
            '<uif-persona-card-action uif-icon="video" uif-placeholder="regular"></uif-persona-card-action>' +
@@ -540,7 +540,7 @@ describe('uif-persona-card', () => {
         });
 
         it('should render overflow action in actions div', () => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
            '<uif-persona-card-action uif-placeholder="overflow">View profile</uif-persona-card-action>' +
           '</uif-persona-card>');
           _compile(liteElement)(scope);
@@ -560,7 +560,7 @@ describe('uif-persona-card', () => {
         });
 
         it('overflow action should not be in action details box', () => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
            '<uif-persona-card-action uif-placeholder="overflow">View profile</uif-persona-card-action>' +
           '</uif-persona-card>');
           _compile(liteElement)(scope);
@@ -574,7 +574,7 @@ describe('uif-persona-card', () => {
         });
 
         it('overflow action text is transcluded', () => {
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
            '<uif-persona-card-action uif-placeholder="overflow">View profile</uif-persona-card-action>' +
           '</uif-persona-card>');
           _compile(liteElement)(scope);
@@ -591,13 +591,13 @@ describe('uif-persona-card', () => {
 
       describe('<uif-persona-card /> interactins', () => {
 
-        beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+        beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
           _rootScope = $rootScope;
           _compile = $compile;
 
           scope = $rootScope.$new();
 
-          liteElement = ng.element('<uif-persona-card uif-presence="available">' +
+          liteElement = angular.element('<uif-persona-card uif-presence="available">' +
            '<uif-persona-card-action uif-icon="chat" uif-placeholder="regular"></uif-persona-card-action>' +
            '<uif-persona-card-action uif-icon="phone" uif-placeholder="regular"></uif-persona-card-action>' +
            '<uif-persona-card-action uif-icon="video" uif-placeholder="regular"></uif-persona-card-action>' +

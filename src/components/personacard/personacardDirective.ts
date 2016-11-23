@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {PersonaSize} from './sizeEnum';
 import {PlaceholderEnum} from './placeholderEnum';
 import {PersonaStyleEnum} from '../../core/personaStyleEnum';
@@ -37,7 +37,7 @@ import {PresenceEnum} from '../../core/personaPresenceEnum';
  *  </uif-persona-card>
  *
  */
-export class PersonaCardDirective implements ng.IDirective {
+export class PersonaCardDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
@@ -71,37 +71,37 @@ export class PersonaCardDirective implements ng.IDirective {
   '</div>' +
   '</div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaCardDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaCardDirective();
     return directive;
   }
 
-  public link: ng.IDirectiveLinkFn = (scope: IPersonaCardScope,
-    element: ng.IAugmentedJQuery,
+  public link: angular.IDirectiveLinkFn = (scope: IPersonaCardScope,
+    element: angular.IAugmentedJQuery,
     attrs: IPersonaCardAttributes,
     controllers: any,
-    transclude: ng.ITranscludeFunction): void => {
+    transclude: angular.ITranscludeFunction): void => {
 
     let personaCardController: PersonaCardController = controllers[0];
 
     // add class to icon in image area
-    let icon: ng.IAugmentedJQuery = element.find('uif-icon');
+    let icon: angular.IAugmentedJQuery = element.find('uif-icon');
     icon.addClass('ms-Persona-placeholder');
 
     // validate attributes
-    if (ng.isDefined(attrs.uifSize) && ng.isUndefined(PersonaSize[attrs.uifSize])) {
+    if (angular.isDefined(attrs.uifSize) && angular.isUndefined(PersonaSize[attrs.uifSize])) {
       personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
         attrs.uifSize + '" is not a valid value for uifSize. It should be xsmall, small, medium, large, xlarge.');
       return;
     }
 
-    if (ng.isDefined(attrs.uifStyle) && ng.isUndefined(PersonaStyleEnum[attrs.uifStyle])) {
+    if (angular.isDefined(attrs.uifStyle) && angular.isUndefined(PersonaStyleEnum[attrs.uifStyle])) {
       personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
         attrs.uifStyle + '" is not a valid value for uifStyle. It should be round or square.');
       return;
     }
 
-    if (ng.isDefined(attrs.uifPresence) && ng.isUndefined(PresenceEnum[attrs.uifPresence])) {
+    if (angular.isDefined(attrs.uifPresence) && angular.isUndefined(PresenceEnum[attrs.uifPresence])) {
       personaCardController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - "' +
         attrs.uifPresence + '" is not a valid value for uifPresence. It should be available, away, blocked, busy, dnd or offline.');
       return;
@@ -191,13 +191,13 @@ export class PersonaCardDirective implements ng.IDirective {
     };
 
     // move transcluded elements around
-    transclude((clone: ng.IAugmentedJQuery) => {
+    transclude((clone: angular.IAugmentedJQuery) => {
 
-      let detailsWrapper: ng.IAugmentedJQuery = ng.element(element[0].getElementsByClassName('ms-Persona-details'));
-      let actionDetailsBoxList: JQuery = ng.element(element[0].getElementsByClassName('ms-PersonaCard-actionDetailBox'))
+      let detailsWrapper: angular.IAugmentedJQuery = angular.element(element[0].getElementsByClassName('ms-Persona-details'));
+      let actionDetailsBoxList: JQuery = angular.element(element[0].getElementsByClassName('ms-PersonaCard-actionDetailBox'))
         .find('ul').eq(0);
 
-      let actionsList: JQuery = ng.element(element[0].getElementsByClassName('ms-PersonaCard-actions'));
+      let actionsList: JQuery = angular.element(element[0].getElementsByClassName('ms-PersonaCard-actions'));
 
       for (let i: number = 0; i < clone.length; i++) {
         let tagName: string = clone[i].tagName;
@@ -213,7 +213,7 @@ export class PersonaCardDirective implements ng.IDirective {
 
           // actions go to action lists, depending on the placeholder
           case 'UIF-PERSONA-CARD-ACTION':
-            let wrappedAction: ng.IAugmentedJQuery = ng.element(clone[i]);
+            let wrappedAction: angular.IAugmentedJQuery = angular.element(clone[i]);
             let placeholder: string = wrappedAction.attr('uif-placeholder');
 
             // overflow goes to ms-PersonaCard-actions
@@ -233,12 +233,12 @@ export class PersonaCardDirective implements ng.IDirective {
   }
 
   /**
-   * Ensures that proper CSS is attached to the action node and registers action in the controller for rendering.
+   * Ensures that proper CSS is attached to the action node and registers action in the controller for renderiangular.
    */
   private processAction(
-    clone: ng.IAugmentedJQuery,
+    clone: angular.IAugmentedJQuery,
     scope: IPersonaCardScope,
-    personaCardController: PersonaCardController): ng.IAugmentedJQuery {
+    personaCardController: PersonaCardController): angular.IAugmentedJQuery {
     let classToAdd: string = '';
     let placeholder: string = clone.attr('uif-placeholder');
     let icon: string = clone.attr('uif-icon');
@@ -288,7 +288,7 @@ export class PersonaCardController {
     5: 'Org'
   };
 
-  constructor(public $log: ng.ILogService, public $scope: IPersonaCardScope) {
+  constructor(public $log: angular.ILogService, public $scope: IPersonaCardScope) {
     $scope.personaCardActions = new Array<PersonaCardAction>();
     $scope.regularActionsCount = 0;
     $scope.detailClass = 'ms-PersonaCard-detailChat';
@@ -306,7 +306,7 @@ export class PersonaCardController {
   }
 
   /**
-   * Registers the actionin the controller for rendering.
+   * Registers the actionin the controller for renderiangular.
    * Makes sure that first added action is active.
    */
   public addAction(actionToAdd: PersonaCardAction): void {
@@ -330,7 +330,7 @@ export class PersonaCardController {
  * @property {string} uifStyle    Determines round or square size of the component
  * @property {string} uifPresence Indicates presence of the associated user
  */
-export interface IPersonaCardAttributes extends ng.IAttributes {
+export interface IPersonaCardAttributes extends angular.IAttributes {
   uifSize: string;
   uifStyle: string;
   uifPresence: string;
@@ -355,7 +355,7 @@ export interface IPersonaCardAttributes extends ng.IAttributes {
  * @property {function} selectAction          Select proper action when action element is clicked
  * @property {collection} personaCardActions  Actions rendered for regular and topright placeholder
  */
-export interface IPersonaCardScope extends ng.IScope {
+export interface IPersonaCardScope extends angular.IScope {
   uifPresence: string;
   uifSize: string;
   uifImageUrl: string;
@@ -415,7 +415,7 @@ class PersonaCardAction {
  *  .directive('uifPersonaCardOptionalText', PersonaCardTextDirective.factory(''));
  * </pre>
  */
-export class PersonaCardTextDirective implements ng.IDirective {
+export class PersonaCardTextDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -428,19 +428,19 @@ export class PersonaCardTextDirective implements ng.IDirective {
     'tertiary': 'ms-Persona-tertiaryText'
   };
 
-  public static factory(type: string): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaCardTextDirective(type);
+  public static factory(type: string): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaCardTextDirective(type);
     return directive;
   }
 
   // template based on the passed type
-  public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: any) => {
+  public template: any = ($element: angular.IAugmentedJQuery, $attrs: any) => {
     let directiveTemplate: string = '<div class="' + this.availableClasses[this.directiveType] + '" ng-transclude></div>';
     return directiveTemplate;
   }
 
   public constructor(private directiveType: string) {
-    if (ng.isUndefined(this.availableClasses[this.directiveType])) {
+    if (angular.isUndefined(this.availableClasses[this.directiveType])) {
       this.directiveType = 'optional';
     }
   }
@@ -467,23 +467,23 @@ export class PersonaCardTextDirective implements ng.IDirective {
  *   <uif-persona-card-action uif-placeholder="overflow">View profile</uif-persona-card-action>
  * </uif-persona-card>
  */
-export class PersonaCardActionDirective implements ng.IDirective {
+export class PersonaCardActionDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
   public require: string = '^?uifPersonaCard';
   public scope: boolean = false;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new PersonaCardActionDirective($log);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = ($log: angular.ILogService) => new PersonaCardActionDirective($log);
     directive.$inject = ['$log'];
     return directive;
   }
 
-  constructor(private $log: ng.ILogService) { };
+  constructor(private $log: angular.ILogService) { };
 
-  public template: ng.IComponentTemplateFn = (instanceElement: ng.IAugmentedJQuery, actionAttrs: IPersonaCardActionAttributes) => {
-    if (ng.isDefined(actionAttrs.uifPlaceholder) && ng.isUndefined(PlaceholderEnum[actionAttrs.uifPlaceholder])) {
+  public template: any = (instanceElement: angular.IAugmentedJQuery, actionAttrs: IPersonaCardActionAttributes) => {
+    if (angular.isDefined(actionAttrs.uifPlaceholder) && angular.isUndefined(PlaceholderEnum[actionAttrs.uifPlaceholder])) {
       this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.personacard - ' +
         '"' + actionAttrs.uifPlaceholder + '" is not a valid value for uifPlaceholder. It should be regular, topright or overflow.');
       return '';
@@ -509,7 +509,7 @@ export class PersonaCardActionDirective implements ng.IDirective {
  * @property {string} uifIcon Icon to be used for associated action
  * @property {string} uifPlaceholder Indicated where the action should be rendered
  */
-export interface IPersonaCardActionAttributes extends ng.IAttributes {
+export interface IPersonaCardActionAttributes extends angular.IAttributes {
   uifIcon: string;
   uifPlaceholder: string;
 }
@@ -533,15 +533,15 @@ export interface IPersonaCardActionAttributes extends ng.IAttributes {
  *   </uif-persona-card-action>
  * </uif-persona-card>
  */
-export class PersonaCardDetailLabelDirective implements ng.IDirective {
+export class PersonaCardDetailLabelDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public scope: boolean = false;
   public template: string = '<span class="ms-PersonaCard-detailLabel" ng-transclude></span>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaCardDetailLabelDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaCardDetailLabelDirective();
     return directive;
   }
 }
@@ -565,15 +565,15 @@ export class PersonaCardDetailLabelDirective implements ng.IDirective {
  *   </uif-persona-card-action>
  * </uif-persona-card>
  */
-export class PersonaCardDetailLineDirective implements ng.IDirective {
+export class PersonaCardDetailLineDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public scope: boolean = false;
   public template: string = '<div class="ms-PersonaCard-detailLine" ng-transclude></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PersonaCardDetailLineDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PersonaCardDetailLineDirective();
     return directive;
   }
 }
@@ -585,7 +585,7 @@ export class PersonaCardDetailLineDirective implements ng.IDirective {
  * @description
  * PersonaCard
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.personacard', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.personacard', ['officeuifabric.components'])
   .directive('uifPersonaCard', PersonaCardDirective.factory())
   .directive('uifPersonaCardAction', PersonaCardActionDirective.factory())
   .directive('uifPersonaCardDetailLabel', PersonaCardDetailLabelDirective.factory())

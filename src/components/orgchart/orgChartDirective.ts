@@ -1,11 +1,11 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {OrgChartPresenceEnum} from './orgChartPresenceEnum';
 import {OrgChartStyleEnum} from './orgChartStyleEnum';
 import {OrgChartSelectModeEnum} from './orgChartSelectModeEnum';
 
-export interface IOrgChartScope extends ng.IScope {
+export interface IOrgChartScope extends angular.IScope {
   selectMode?: OrgChartSelectModeEnum;
   items: IOrgChartPersonaScope[];
   selectedItems: any[];
@@ -17,7 +17,7 @@ class OrgChartController {
 
   public selectMode: OrgChartSelectModeEnum;
 
-  constructor(public $scope: IOrgChartScope, public $log: ng.ILogService) {
+  constructor(public $scope: IOrgChartScope, public $log: angular.ILogService) {
     this.$scope.selectMode = null;
     this.$scope.items = [];
   }
@@ -38,7 +38,7 @@ class OrgChartController {
 
 }
 
-export interface IOrgChartAttributes extends ng.IAttributes {
+export interface IOrgChartAttributes extends angular.IAttributes {
   uifSelectMode?: string;
 }
 
@@ -86,7 +86,7 @@ export interface IOrgChartAttributes extends ng.IAttributes {
  * About presence: valid presence values are
  *
  */
-export class OrgChartDirective implements ng.IDirective {
+export class OrgChartDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
@@ -96,12 +96,12 @@ export class OrgChartDirective implements ng.IDirective {
     selectedItems: '=?uifSelectedItems'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartDirective();
     return directive;
   }
 
-  public link(scope: IOrgChartScope, elem: ng.IAugmentedJQuery, attrs: IOrgChartAttributes, ctrl: OrgChartController): void {
+  public link(scope: IOrgChartScope, elem: angular.IAugmentedJQuery, attrs: IOrgChartAttributes, ctrl: OrgChartController): void {
 
     if (attrs.uifSelectMode) {
       switch (OrgChartSelectModeEnum[attrs.uifSelectMode]) {
@@ -145,14 +145,14 @@ export class OrgChartDirective implements ng.IDirective {
  * </uif-org-chart-group >
  *
  */
-export class OrgChartGroupDirective implements ng.IDirective {
+export class OrgChartGroupDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public template: string = '<div class="ms-OrgChart-group" ng-transclude ></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartGroupDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartGroupDirective();
     return directive;
   }
 }
@@ -174,14 +174,14 @@ export class OrgChartGroupDirective implements ng.IDirective {
  * <uif-org-chart-group-title>{{group}}</uif-org-chart-group-title>
  *
  */
-export class OrgChartGroupTitleDirective implements ng.IDirective {
+export class OrgChartGroupTitleDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public template: string = '<div class="ms-OrgChart-groupTitle" ng-transclude ></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartGroupTitleDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartGroupTitleDirective();
     return directive;
   }
 }
@@ -206,26 +206,26 @@ export class OrgChartGroupTitleDirective implements ng.IDirective {
  * </uif-org-chart-list>
  *
  */
-export class OrgChartListDirective implements ng.IDirective {
+export class OrgChartListDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public template: string = '<ul class="ms-OrgChart-list" ng-transclude ></ul>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartListDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartListDirective();
     return directive;
   }
 }
 
-export interface IOrgChartPersonaScope extends ng.IScope {
+export interface IOrgChartPersonaScope extends angular.IScope {
   item: any;
   personaClick: (event: any) => void;
   selected: boolean;
   presence: string;
 }
 
-export interface IOrgChartPersonaAttributes extends ng.IAttributes {
+export interface IOrgChartPersonaAttributes extends angular.IAttributes {
   uifStyle: string;
   uifPresence: string;
 }
@@ -260,7 +260,7 @@ export interface IOrgChartPersonaAttributes extends ng.IAttributes {
  * uif-selected: A boolean value. Allows to preselect the item
  *
  */
-export class OrgChartPersonaDirective implements ng.IDirective {
+export class OrgChartPersonaDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public transclude: boolean = true;
@@ -275,19 +275,19 @@ export class OrgChartPersonaDirective implements ng.IDirective {
     selected: '=?uifSelected'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new OrgChartPersonaDirective($log);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = ($log: angular.ILogService) => new OrgChartPersonaDirective($log);
     directive.$inject = ['$log'];
     return directive;
   }
 
-  constructor(private $log: ng.ILogService) {
+  constructor(private $log: angular.ILogService) {
   }
 
   public compile(
-    elem: ng.IAugmentedJQuery,
+    elem: angular.IAugmentedJQuery,
     attrs: IOrgChartPersonaAttributes,
-    transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       post: this.postLink
     };
@@ -295,10 +295,10 @@ export class OrgChartPersonaDirective implements ng.IDirective {
 
   private postLink(
     scope: IOrgChartPersonaScope,
-    elem: ng.IAugmentedJQuery,
+    elem: angular.IAugmentedJQuery,
     attrs: IOrgChartPersonaAttributes,
     ctrl: OrgChartController,
-    transclude: ng.ITranscludeFunction): void {
+    transclude: angular.ITranscludeFunction): void {
 
     // handle selection
     if (scope.selected === undefined) {
@@ -467,7 +467,7 @@ export class OrgChartPersonaDirective implements ng.IDirective {
  * <uif-org-chart-image ng-src="item.imageUrl"></uif-org-chart-image>
  *
  */
-export class OrgChartImageDirective implements ng.IDirective {
+export class OrgChartImageDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public replace: boolean = true;
@@ -482,8 +482,8 @@ export class OrgChartImageDirective implements ng.IDirective {
     ngSrc: '='
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartImageDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartImageDirective();
     return directive;
   }
 
@@ -506,18 +506,18 @@ export class OrgChartImageDirective implements ng.IDirective {
  * <uif-org-chart-presence></uif-org-chart-presence>
  *
  */
-export class OrgChartPresenceDirective implements ng.IDirective {
+export class OrgChartPresenceDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public replace: boolean = true;
   public template: string = '<div class="ms-Persona-presence" ></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartPresenceDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartPresenceDirective();
     return directive;
   }
 
-  public link(scope: any, elem: ng.IAugmentedJQuery, attrs: any, ctrl: any): void {
+  public link(scope: any, elem: angular.IAugmentedJQuery, attrs: any, ctrl: any): void {
 
     if (!scope.$parent.presence) {
       elem.css('display', 'none');
@@ -547,15 +547,15 @@ export class OrgChartPresenceDirective implements ng.IDirective {
  * </uif-org-chart-details>
  *
  */
-export class OrgChartDetailsDirective implements ng.IDirective {
+export class OrgChartDetailsDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public template: string = '<div class="ms-Persona-details" ng-transclude ></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartDetailsDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartDetailsDirective();
     return directive;
   }
 
@@ -578,15 +578,15 @@ export class OrgChartDetailsDirective implements ng.IDirective {
  * <uif-org-chart-primary-text>{{item.name}}</uif-org-chart-primary-text>
  *
  */
-export class OrgChartPrimaryTextDirective implements ng.IDirective {
+export class OrgChartPrimaryTextDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public template: string = '<div class="ms-Persona-primaryText" ng-transclude ></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartPrimaryTextDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartPrimaryTextDirective();
     return directive;
   }
 
@@ -609,15 +609,15 @@ export class OrgChartPrimaryTextDirective implements ng.IDirective {
  * <uif-org-chart-secondary-text>item.title</uif-org-chart-secondary-text>
  *
  */
-export class OrgChartSecondaryTextDirective implements ng.IDirective {
+export class OrgChartSecondaryTextDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
   public template: string = '<div class="ms-Persona-secondaryText" ng-transclude ></div>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new OrgChartSecondaryTextDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new OrgChartSecondaryTextDirective();
     return directive;
   }
 
@@ -667,7 +667,7 @@ export class OrgChartGroupByFilter {
  * @description
  * OrgChart
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.orgchart', [
+export let module: angular.IModule = angular.module('officeuifabric.components.orgchart', [
   'officeuifabric.components'
 ])
   .directive('uifOrgChart', OrgChartDirective.factory())

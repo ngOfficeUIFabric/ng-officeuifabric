@@ -1,7 +1,7 @@
 'use strict';
 
-import * as ng from 'angular';
-import {PanelTypes} from './panelDirectiveEnum';
+import * as angular from 'angular';
+import { PanelTypes } from './panelDirectiveEnum';
 
 /**
  * @ngdoc directive
@@ -18,7 +18,7 @@ import {PanelTypes} from './panelDirectiveEnum';
  * @usage
  *
  */
-export class PanelDirective implements ng.IDirective {
+export class PanelDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = `<div class="ms-Panel">
@@ -40,57 +40,63 @@ export class PanelDirective implements ng.IDirective {
   public controller: any = PanelController;
 
   public scope: {} = {
-      uifIsOpen: '=',
-      uifShowClose: '=',
-      uifShowOverlay: '=',
-      uifType: '@'
-    };
+    uifIsOpen: '=',
+    uifShowClose: '=',
+    uifShowOverlay: '=',
+    uifType: '@'
+  };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ( $log: ng.ILogService,
-                                              $animate: ng.animate.IAnimateService,
-                                              $timeout: ng.ITimeoutService) => new PanelDirective($log, $animate, $timeout);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = ($log: angular.ILogService,
+      $animate: angular.animate.IAnimateService,
+      $timeout: angular.ITimeoutService) => new PanelDirective($log, $animate, $timeout);
     directive.$inject = ['$log', '$animate', '$timeout'];
     return directive;
 
   }
 
-  constructor(private $log: ng.ILogService, private $animate: ng.animate.IAnimateService, private $timeout: ng.ITimeoutService) { }
+  constructor(
+    private $log: angular.ILogService,
+    private $animate: angular.animate.IAnimateService,
+    private $timeout: angular.ITimeoutService
+  ) { }
 
-  public compile(element: ng.IAugmentedJQuery,
-                 attrs: ng.IAttributes,
-                 transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+  public compile(
+    element: angular.IAugmentedJQuery,
+    attrs: angular.IAttributes,
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       pre: this.preLink
     };
   }
 
-  private preLink(scope: IPanelScope,
-                  elem: ng.IAugmentedJQuery,
-                  attrs: ng.IAttributes,
-                  ctrl: PanelController,
-                  transclude: ng.ITranscludeFunction): void {
+  private preLink(
+    scope: IPanelScope,
+    elem: angular.IAugmentedJQuery,
+    attrs: angular.IAttributes,
+    ctrl: PanelController,
+    transclude: angular.ITranscludeFunction): void {
 
-        transclude((clone: ng.IAugmentedJQuery) => {
-          for (let i: number = 0; i < clone.length; i++) {
+    transclude((clone: angular.IAugmentedJQuery) => {
+      for (let i: number = 0; i < clone.length; i++) {
 
-            if (angular.element(clone[i]).hasClass('ms-CommandBar')) {
-              angular.element(elem[0].querySelector('div.ms-Panel-commands')).prepend(clone[i]);
-            } else if (scope.uifType === 'left') {
-              angular.element(elem[0].querySelector('div.ms-Panel-main')).append(clone[i]);
-            } else {
-              angular.element(elem[0].querySelector('div.ms-Panel-contentInner')).append(clone[i]);
-            }
-
-          }
-
-        });
-
-        scope.closePanel = () => {
-            scope.uifIsOpen = false;
-        };
+        if (angular.element(clone[i]).hasClass('ms-CommandBar')) {
+          angular.element(elem[0].querySelector('div.ms-Panel-commands')).prepend(clone[i]);
+        } else if (scope.uifType === 'left') {
+          angular.element(elem[0].querySelector('div.ms-Panel-main')).append(clone[i]);
+        } else {
+          angular.element(elem[0].querySelector('div.ms-Panel-contentInner')).append(clone[i]);
+        }
 
       }
+
+    });
+
+    scope.closePanel = () => {
+      scope.uifIsOpen = false;
+    };
+
+  }
 
 }
 
@@ -105,7 +111,7 @@ export class PanelDirective implements ng.IDirective {
  * @property {boolean} uifIsOpen    -   The string value in the uifPanelSearch input
  * @property {string} uifType           -   The placeholder for the search input
  */
-interface IPanelScope extends ng.IScope {
+interface IPanelScope extends angular.IScope {
   uifIsOpen: boolean;
   uifType: string;
   uifShowOverlay: boolean;
@@ -139,56 +145,56 @@ export class PanelController {
 
   constructor(
     private $scope: IPanelScope,
-    private $animate: ng.animate.IAnimateService,
-    private $element: ng.IAugmentedJQuery,
-    public $log: ng.ILogService,
-    public $timeout: ng.ITimeoutService) {
+    private $animate: angular.animate.IAnimateService,
+    private $element: angular.IAugmentedJQuery,
+    public $log: angular.ILogService,
+    public $timeout: angular.ITimeoutService) {
 
-      if (!$scope.uifType) {
-        $scope.uifType = 'medium';
+    if (!$scope.uifType) {
+      $scope.uifType = 'medium';
+    }
+
+    if (PanelTypes[$scope.uifType] === undefined) {
+      this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.panel - unsupported panel type:\n' +
+        'the type \'' + $scope.uifType + '\' is not supported by ng-Office UI Fabric as valid type for panels.' +
+        'Supported types can be found under PanelTypes enum here:\n' +
+        'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/panel/panel.ts');
+
+      $scope.uifType = 'medium';
+    }
+
+    let size: number = PanelTypes[$scope.uifType];
+    $element.addClass(this.uifPanelSizeClasses[size]);
+
+    $scope.$watch('uifIsOpen', (newValue: boolean) => {
+
+      if (typeof newValue !== 'boolean' && newValue !== undefined) {
+        this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.panel - invalid attribute type: \'uif-is-open\'.\n' +
+          'The type \'' + typeof newValue + '\' is not supported as valid type for \'uif-is-open\' attribute for ' +
+          '<uif-panel/>. The valid type is boolean.');
       }
 
-      if (PanelTypes[$scope.uifType] === undefined) {
-          this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.panel - unsupported panel type:\n' +
-            'the type \'' + $scope.uifType + '\' is not supported by ng-Office UI Fabric as valid type for panels.' +
-            'Supported types can be found under PanelTypes enum here:\n' +
-            'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/panel/panel.ts');
+      if (newValue === true) {
+        $animate.addClass(this.$element, 'ms-Panel-animateIn');
+        $element.addClass('is-open');
 
-          $scope.uifType = 'medium';
+        // forces resize of commandbars
+        if ($element[0].querySelector('.ms-CommandBar')) {
+          angular.element($element[0].querySelector('.ms-CommandBar')).scope().$broadcast('uif-command-bar-resize');
+        }
+
+      } else {
+
+        $animate.addClass(this.$element, 'ms-Panel-animateOut');
+        $timeout(
+          () => {
+            $element.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
+            $element.removeClass('is-open');
+          },
+          500);
       }
 
-      let size: number = PanelTypes[$scope.uifType];
-      $element.addClass(this.uifPanelSizeClasses[size]);
-
-      $scope.$watch('uifIsOpen', (newValue: boolean) => {
-
-        if (typeof newValue !== 'boolean' && newValue !== undefined) {
-          this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.panel - invalid attribute type: \'uif-is-open\'.\n' +
-            'The type \'' + typeof newValue + '\' is not supported as valid type for \'uif-is-open\' attribute for ' +
-            '<uif-panel/>. The valid type is boolean.');
-        }
-
-        if (newValue === true) {
-          $animate.addClass(this.$element, 'ms-Panel-animateIn');
-          $element.addClass('is-open');
-
-          // forces resize of commandbars
-          if ($element[0].querySelector('.ms-CommandBar')) {
-            angular.element($element[0].querySelector('.ms-CommandBar')).scope().$broadcast('uif-command-bar-resize');
-          }
-
-        } else {
-
-          $animate.addClass(this.$element, 'ms-Panel-animateOut');
-          $timeout(
-            () => {
-              $element.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
-              $element.removeClass('is-open');
-            },
-            500);
-        }
-
-      });
+    });
   }
 
 }
@@ -208,7 +214,7 @@ export class PanelController {
  * @usage
  *
  */
-export class PanelHeaderDirective implements ng.IDirective {
+export class PanelHeaderDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<p class="ms-Panel-headerText" ng-transclude></div>';
@@ -219,8 +225,8 @@ export class PanelHeaderDirective implements ng.IDirective {
     uifHeaderText: '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PanelHeaderDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PanelHeaderDirective();
     return directive;
   }
 
@@ -235,8 +241,8 @@ export class PanelHeaderDirective implements ng.IDirective {
  * Flyout Panel
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.panel', [
-    'officeuifabric.components'
-  ])
+export let module: angular.IModule = angular.module('officeuifabric.components.panel', [
+  'officeuifabric.components'
+])
   .directive('uifPanel', PanelDirective.factory())
   .directive('uifPanelHeader', PanelHeaderDirective.factory());

@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -14,7 +14,7 @@ import * as ng from 'angular';
  * @property {string} disabled - If set, renders disabled label.
  * @property {string} required - If set, renders required label.
  */
-interface ILabelAttributes extends ng.IAttributes {
+interface ILabelAttributes extends angular.IAttributes {
   disabled: string;
   required: string;
 }
@@ -34,25 +34,25 @@ interface ILabelAttributes extends ng.IAttributes {
  *
  * <uif-label>Name</uif-label>
  */
-export class LabelDirective implements ng.IDirective {
+export class LabelDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
   public scope: boolean = false;
   public template: string = '<label class="ms-Label"><ng-transclude/></label>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new LabelDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new LabelDirective();
     return directive;
   }
 
-  public link(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, attributes: ILabelAttributes): void {
+  public link(scope: angular.IScope, instanceElement: angular.IAugmentedJQuery, attributes: ILabelAttributes): void {
 
-    if (ng.isDefined(attributes.disabled)) {
+    if (angular.isDefined(attributes.disabled)) {
       instanceElement.find('label').eq(0).addClass('is-disabled');
     }
 
-    if (ng.isDefined(attributes.required)) {
+    if (angular.isDefined(attributes.required)) {
       instanceElement.find('label').eq(0).addClass('is-required');
     }
   }
@@ -65,5 +65,5 @@ export class LabelDirective implements ng.IDirective {
  * @description
  * Label
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.label', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.label', ['officeuifabric.components'])
   .directive('uifLabel', LabelDirective.factory());

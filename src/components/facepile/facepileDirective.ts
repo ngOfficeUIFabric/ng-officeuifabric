@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {IPerson} from '../../core/person';
 
 /**
@@ -16,7 +16,7 @@ import {IPerson} from '../../core/person';
  * @property {string} overflowPanelIsOpen  - Indicates whether the members panel is open
  * @property {IPerson} members             - A collection of members of the facepile
  */
-export interface IFacepileScope extends ng.IScope {
+export interface IFacepileScope extends angular.IScope {
   uifFacepileName: string;
   uifOverflowLimit: Number;
   overflowPanelIsOpen: boolean;
@@ -41,7 +41,7 @@ export interface IFacepileScope extends ng.IScope {
  *    </uif-facepile>
  *
  */
-export class FacepileDirective implements ng.IDirective {
+export class FacepileDirective implements angular.IDirective {
 
   public transclude: boolean = true;
   public replace: boolean = true;
@@ -89,8 +89,8 @@ export class FacepileDirective implements ng.IDirective {
     uifOverflowLimit: '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new FacepileDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new FacepileDirective();
     return directive;
   }
 
@@ -110,7 +110,7 @@ export class FacepileDirective implements ng.IDirective {
  * @property {function} onFacePileSearch         -  The function called to retrieve members from search
  * @property {IFacepileScope} parentScope        -  The parent scope, used to retrieve members
  */
-export interface IFacepileAddIconScope extends ng.IScope {
+export interface IFacepileAddIconScope extends angular.IScope {
   peoplepickerPanelIsOpen: boolean;
   onFacePileSearch: (query: string) => any[];
   parentScope: IFacepileScope;
@@ -132,7 +132,7 @@ export interface IFacepileAddIconScope extends ng.IScope {
  *
  * <uif-facepile-add-icon uif-people="onFacePileSearch" placeholder="Add Members..."></uif-facepile-add-icon>
  */
-export class FacepileAddIconDirective implements ng.IDirective {
+export class FacepileAddIconDirective implements angular.IDirective {
 
   public transclude: boolean = true;
   public restrict: string = 'E';
@@ -170,12 +170,12 @@ export class FacepileAddIconDirective implements ng.IDirective {
     peoplePickerPlaceholder: '@placeholder'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new FacepileAddIconDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new FacepileAddIconDirective();
     return directive;
   }
 
-  public link(scope: IFacepileAddIconScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
+  public link(scope: IFacepileAddIconScope, elem: angular.IAugmentedJQuery, attrs: angular.IAttributes): void {
   {
     scope.parentScope = <IFacepileScope>scope.$parent.$parent;
   }};
@@ -191,7 +191,7 @@ export class FacepileAddIconDirective implements ng.IDirective {
  * Facepile
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.facepile', [
+export let module: angular.IModule = angular.module('officeuifabric.components.facepile', [
   'officeuifabric.components'
 ])
 .directive('uifFacepile', FacepileDirective.factory())

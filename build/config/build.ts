@@ -63,7 +63,6 @@ export class BuildConfig {
   /*
    * TypeScript files
    */
-  public static TYPESCRIPT_DEFINITIONS: string = BuildConfig.ROOT + '/typings/**/*.d.ts';
   public static BUILD_TYPESCRIPT: string[] = [
     BuildConfig.BUILD_PATH + '/*.ts',
     BuildConfig.BUILD_PATH + '/gulp/**/*.ts',
@@ -82,7 +81,7 @@ export class BuildConfig {
     .concat(BuildConfig.LIB_TEST_TYPESCRIPT);
 
   /**
-   * All core files used in testing.
+   * All core files used in testiangular.
    */
   public static CORE_TEST_FILES: string[] = [
     BuildConfig.NODE_MODULES + '/angular/angular.js',

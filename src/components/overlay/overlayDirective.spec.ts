@@ -1,18 +1,18 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('overlayDirective: <uif-overlay />', () => {
-    let element: ng.IAugmentedJQuery;
-    let scope: ng.IScope;
+    let element: angular.IAugmentedJQuery;
+    let scope: angular.IScope;
 
     beforeEach(() => {
         angular.mock.module('officeuifabric.core');
         angular.mock.module('officeuifabric.components.overlay');
     });
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-        element = ng.element('<uif-overlay>hello world</uif-overlay>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
+        element = angular.element('<uif-overlay>hello world</uif-overlay>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -23,7 +23,7 @@ describe('overlayDirective: <uif-overlay />', () => {
      */
     it('should render correct HTML', () => {
         // get the rendered overlay element
-        let overlayElement: ng.IAugmentedJQuery = element.find('div');
+        let overlayElement: angular.IAugmentedJQuery = element.find('div');
 
         // make sure found the overlay
         expect(overlayElement.length).toBe(1);
@@ -35,7 +35,7 @@ describe('overlayDirective: <uif-overlay />', () => {
      */
     it('should render correct Office UI Fabric CSS classes', () => {
         // get the rendered overlay element
-        let overlayElement: ng.IAugmentedJQuery = element.find('div');
+        let overlayElement: angular.IAugmentedJQuery = element.find('div');
 
         // ensure overlay has the correct classes
         expect(overlayElement.eq(0)).toHaveClass('ms-Overlay');
@@ -46,12 +46,12 @@ describe('overlayDirective: <uif-overlay />', () => {
      * Verifies directive generates the correct CSS classes with dark theme.
      */
     it('should render correct Office UI Fabric CSS classes with dark theme', inject(($compile: Function) => {
-        element = ng.element('<uif-overlay uif-mode="dark">hello world</uif-overlay>');
+        element = angular.element('<uif-overlay uif-mode="dark">hello world</uif-overlay>');
         $compile(element)(scope);
         scope.$digest();
 
         // get the rendered overlay element
-        let overlayElement: ng.IAugmentedJQuery = element.find('div');
+        let overlayElement: angular.IAugmentedJQuery = element.find('div');
 
         // ensure overlay has the correct classes
         expect(overlayElement.eq(0)).toHaveClass('ms-Overlay');
@@ -62,12 +62,12 @@ describe('overlayDirective: <uif-overlay />', () => {
      * Verifies directive defaults to light theme if an invalid mode is passed and returns a console error message.
      */
     it('should render default (light) theme if an invalid mode is passed', inject(($compile: Function) => {
-        element = ng.element('<uif-overlay uif-mode="invalid">hello world</uif-overlay>');
+        element = angular.element('<uif-overlay uif-mode="invalid">hello world</uif-overlay>');
         $compile(element)(scope);
         scope.$digest();
 
         // get the rendered overlay element
-        let overlayElement: ng.IAugmentedJQuery = element.find('div');
+        let overlayElement: angular.IAugmentedJQuery = element.find('div');
 
         // ensure overlay has the correct classes
         expect(overlayElement.eq(0)).toHaveClass('ms-Overlay');

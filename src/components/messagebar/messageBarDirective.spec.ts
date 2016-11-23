@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('messageBarDirective: <uif-message-bar />', () => {
     let $element: JQuery;
@@ -11,8 +11,8 @@ describe('messageBarDirective: <uif-message-bar />', () => {
         angular.mock.module('officeuifabric.components.messagebar');
     });
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-        $element = ng.element(`
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
+        $element = angular.element(`
         <uif-message-bar>
             <uif-content>
                 {{message}}
@@ -48,15 +48,15 @@ describe('messageBarDirective: <uif-message-bar />', () => {
     it('should be able to render uif-link', inject(
         (
             $compile: Function,
-            $rootScope: ng.IRootScopeService,
-            $log: ng.ILogService) => {
+            $rootScope: angular.IRootScopeService,
+            $log: angular.ILogService) => {
 
             let scope: any = $rootScope.$new();
             scope.link = {};
             scope.link.url = 'http://ngofficeuifabric.com';
             scope.link.text = 'Lorem ipsum';
 
-            let element: JQuery = ng.element(`
+            let element: JQuery = angular.element(`
             <uif-message-bar>
                 <uif-content>
                     {{message}}
@@ -79,14 +79,14 @@ describe('messageBarDirective: <uif-message-bar />', () => {
     it('should be validating uif-type attribute', inject(
         (
             $compile: Function,
-            $rootScope: ng.IRootScopeService,
-            $log: ng.ILogService) => {
+            $rootScope: angular.IRootScopeService,
+            $log: angular.ILogService) => {
 
             let scope: any = $rootScope.$new();
 
             expect($log.error.logs.length).toBe(0);
 
-            let element: JQuery = ng.element(`
+            let element: JQuery = angular.element(`
             <uif-message-bar uif-type="invalid">
                 <uif-content>
                     {{message}}
@@ -108,12 +108,12 @@ describe('messageBarDirective: <uif-message-bar />', () => {
     it('should be set icons for uif-type attribute', inject(
         (
             $compile: Function,
-            $rootScope: ng.IRootScopeService,
-            $log: ng.ILogService) => {
+            $rootScope: angular.IRootScopeService,
+            $log: angular.ILogService) => {
 
             let scope: any = $rootScope.$new();
 
-            let element: JQuery = ng.element(`
+            let element: JQuery = angular.element(`
             <uif-message-bar uif-type="error">
                 <uif-content>
                     {{message}}
@@ -133,14 +133,14 @@ describe('messageBarDirective: <uif-message-bar />', () => {
     it('should allow to interpolate uif-type value', inject(
         (
             $compile: Function,
-            $rootScope: ng.IRootScopeService,
-            $log: ng.ILogService) => {
+            $rootScope: angular.IRootScopeService,
+            $log: angular.ILogService) => {
 
             let scope: any = $rootScope.$new();
 
             scope.type = 'error';
 
-            let element: JQuery = ng.element(`
+            let element: JQuery = angular.element(`
             <uif-message-bar uif-type="{{type}}">
                 <uif-content>
                     {{message}}

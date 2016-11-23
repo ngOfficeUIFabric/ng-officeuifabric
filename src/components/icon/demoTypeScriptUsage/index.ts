@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {IconEnum} from './../iconEnum';
 
 export class DemoController {
@@ -38,7 +38,7 @@ export class DemoController {
   };
 }
 
-export var module: ng.IModule = ng.module('demoApp', [
+export var module: angular.IModule = angular.module('demoApp', [
     'officeuifabric.core',
     'officeuifabric.components.icon'])
   .controller('demoController', [DemoController]);

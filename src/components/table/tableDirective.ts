@@ -1,8 +1,8 @@
 'use strict';
 
-import * as ng from 'angular';
-import {TableRowSelectModeEnum} from './tableRowSelectModeEnum';
-import {TableTypeEnum} from './tableTypeEnum';
+import * as angular from 'angular';
+import { TableRowSelectModeEnum } from './tableRowSelectModeEnum';
+import { TableTypeEnum } from './tableTypeEnum';
 
 /**
  * @ngdoc interface
@@ -13,77 +13,77 @@ import {TableTypeEnum} from './tableTypeEnum';
  * Scope used by the table controller.
  *
  * @property {string} orderBy   - Specifies the name of the property used to sort the table. Default null
- * @property {boolean} orderAsc - Specifies whether the data in the table should be sort ascending or descending.
+ * @property {boolean} orderAsc - Specifies whether the data in the table should be sort ascending or descendiangular.
  *                                Default `true` (sorting ascending)
  * @property {string} rowSelectMode - Specifies the row selection mode used by the table
  * @property {ITableRowScope[]} - Contains the data rows (all except the header row) that belong to the table
  */
-export interface ITableScope extends ng.IScope {
-    orderBy?: string;
-    orderAsc: boolean;
-    rowSelectMode?: string;
-    rows: ITableRowScope[];
-    tableType: string;
-    tableTypeClass: string;
+export interface ITableScope extends angular.IScope {
+  orderBy?: string;
+  orderAsc: boolean;
+  rowSelectMode?: string;
+  rows: ITableRowScope[];
+  tableType: string;
+  tableTypeClass: string;
 }
 
 class TableController {
-    public static $inject: string[] = ['$scope', '$log'];
+  public static $inject: string[] = ['$scope', '$log'];
 
-    constructor(public $scope: ITableScope, public $log: ng.ILogService) {
-        this.$scope.orderBy = null;
-        this.$scope.orderAsc = true;
-        this.$scope.rows = [];
-    }
+  constructor(public $scope: ITableScope, public $log: angular.ILogService) {
+    this.$scope.orderBy = null;
+    this.$scope.orderAsc = true;
+    this.$scope.rows = [];
+  }
 
-    get orderBy(): string {
-        return this.$scope.orderBy;
-    }
-    set orderBy(property: string) {
-        this.$scope.orderBy = property;
-        this.$scope.$digest();
-    }
+  get orderBy(): string {
+    return this.$scope.orderBy;
+  }
+  set orderBy(property: string) {
+    this.$scope.orderBy = property;
+    this.$scope.$digest();
+  }
 
-    get orderAsc(): boolean {
-        return this.$scope.orderAsc;
-    }
-    set orderAsc(orderAsc: boolean) {
-        this.$scope.orderAsc = orderAsc;
-        this.$scope.$digest();
-    }
+  get orderAsc(): boolean {
+    return this.$scope.orderAsc;
+  }
+  set orderAsc(orderAsc: boolean) {
+    this.$scope.orderAsc = orderAsc;
+    this.$scope.$digest();
+  }
 
-    get rowSelectMode(): string {
-        return this.$scope.rowSelectMode;
-    }
-    set rowSelectMode(rowSelectMode: string) {
-        if (TableRowSelectModeEnum[rowSelectMode] === undefined) {
-            this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
-            '\'' + rowSelectMode + '\' is not a valid option for \'uif-row-select-mode\'. ' +
-            'Valid options are none|single|multiple.');
-        }
-
-        this.$scope.rowSelectMode = rowSelectMode;
-        this.$scope.$digest();
+  get rowSelectMode(): string {
+    return this.$scope.rowSelectMode;
+  }
+  set rowSelectMode(rowSelectMode: string) {
+    if (TableRowSelectModeEnum[rowSelectMode] === undefined) {
+      this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+        '\'' + rowSelectMode + '\' is not a valid option for \'uif-row-select-mode\'. ' +
+        'Valid options are none|single|multiple.');
     }
 
-    get rows(): ITableRowScope[] {
-        return this.$scope.rows;
-    }
-    set rows(rows: ITableRowScope[]) {
-        this.$scope.rows = rows;
+    this.$scope.rowSelectMode = rowSelectMode;
+    this.$scope.$digest();
+  }
+
+  get rows(): ITableRowScope[] {
+    return this.$scope.rows;
+  }
+  set rows(rows: ITableRowScope[]) {
+    this.$scope.rows = rows;
+  }
+
+  get selectedItems(): any[] {
+    let selectedItems: any[] = [];
+
+    for (let i: number = 0; i < this.rows.length; i++) {
+      if (this.rows[i].selected === true) {
+        selectedItems.push(this.rows[i].item);
+      }
     }
 
-    get selectedItems(): any[] {
-        let selectedItems: any[] = [];
-
-        for (let i: number = 0; i < this.rows.length; i++) {
-            if (this.rows[i].selected === true) {
-                selectedItems.push(this.rows[i].item);
-            }
-        }
-
-        return selectedItems;
-    }
+    return selectedItems;
+  }
 }
 
 /**
@@ -103,9 +103,9 @@ class TableController {
  *                                                                    Added with Fabric 2.4.
  *                                                         fluid    - the table style is fluid (Default)
  */
-export interface ITableAttributes extends ng.IAttributes {
-    uifRowSelectMode?: string;
-    uifTableType?: string;
+export interface ITableAttributes extends angular.IAttributes {
+  uifRowSelectMode?: string;
+  uifTableType?: string;
 }
 
 /**
@@ -143,51 +143,51 @@ export interface ITableAttributes extends ng.IAttributes {
  *   </uif-table-body>
  * </uif-table>
  */
-export class TableDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public replace: boolean = true;  // required for correct HTML rendering
-    public template: string = '<table ng-class="[\'ms-Table\', tableTypeClass]" ng-transclude></table>';
-    public controller: any = TableController;
-    public controllerAs: string = 'table';
+export class TableDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public replace: boolean = true;  // required for correct HTML rendering
+  public template: string = '<table ng-class="[\'ms-Table\', tableTypeClass]" ng-transclude></table>';
+  public controller: any = TableController;
+  public controllerAs: string = 'table';
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableDirective();
 
-        return directive;
+    return directive;
+  }
+
+  public link(scope: ITableScope, instanceElement: angular.IAugmentedJQuery, attrs: ITableAttributes, controller: TableController): void {
+    if (attrs.uifRowSelectMode !== undefined && attrs.uifRowSelectMode !== null) {
+      if (TableRowSelectModeEnum[attrs.uifRowSelectMode] === undefined) {
+        controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+          '\'' + attrs.uifRowSelectMode + '\' is not a valid option for \'uif-row-select-mode\'. ' +
+          'Valid options are none|single|multiple.');
+      } else {
+        scope.rowSelectMode = attrs.uifRowSelectMode;
+      }
     }
 
-    public link(scope: ITableScope, instanceElement: ng.IAugmentedJQuery, attrs: ITableAttributes, controller: TableController): void {
-        if (attrs.uifRowSelectMode !== undefined && attrs.uifRowSelectMode !== null) {
-            if (TableRowSelectModeEnum[attrs.uifRowSelectMode] === undefined) {
-                controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
-                '\'' + attrs.uifRowSelectMode + '\' is not a valid option for \'uif-row-select-mode\'. ' +
-                'Valid options are none|single|multiple.');
-            } else {
-                scope.rowSelectMode = attrs.uifRowSelectMode;
-            }
-        }
-
-        if (scope.rowSelectMode === undefined) {
-            scope.rowSelectMode = TableRowSelectModeEnum[TableRowSelectModeEnum.none];
-        }
-
-        if (attrs.uifTableType !== undefined && attrs.uifTableType !== null) {
-            if (TableTypeEnum[attrs.uifTableType] === undefined) {
-                controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
-                '\'' + attrs.uifTableType + '\' is not a valid option for \'uif-table-type\'. ' +
-                'Valid options are fixed|fluid.');
-            } else {
-                scope.tableType = attrs.uifTableType;
-            }
-        }
-        if (scope.tableType === undefined) {
-            scope.tableType = TableTypeEnum[TableTypeEnum.fluid];
-        }
-        if (scope.tableType === TableTypeEnum[TableTypeEnum.fixed]) {
-            scope.tableTypeClass = 'ms-Table--fixed';
-        }
+    if (scope.rowSelectMode === undefined) {
+      scope.rowSelectMode = TableRowSelectModeEnum[TableRowSelectModeEnum.none];
     }
+
+    if (attrs.uifTableType !== undefined && attrs.uifTableType !== null) {
+      if (TableTypeEnum[attrs.uifTableType] === undefined) {
+        controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+          '\'' + attrs.uifTableType + '\' is not a valid option for \'uif-table-type\'. ' +
+          'Valid options are fixed|fluid.');
+      } else {
+        scope.tableType = attrs.uifTableType;
+      }
+    }
+    if (scope.tableType === undefined) {
+      scope.tableType = TableTypeEnum[TableTypeEnum.fluid];
+    }
+    if (scope.tableType === TableTypeEnum[TableTypeEnum.fixed]) {
+      scope.tableTypeClass = 'ms-Table--fixed';
+    }
+  }
 }
 
 /**
@@ -202,33 +202,33 @@ export class TableDirective implements ng.IDirective {
  * @property {(ev: any) => void} rowClick - event handler for clicking the row
  * @property {boolean} selected           - Specifies whether the particular row is selected or not
  */
-export interface ITableRowScope extends ng.IScope {
-    item: any;
-    rowClick: (ev: any) => void;
-    selected: boolean;
+export interface ITableRowScope extends angular.IScope {
+  item: any;
+  rowClick: (ev: any) => void;
+  selected: boolean;
 }
 
 class TableRowController {
-    public static $inject: string[] = ['$scope', '$log'];
+  public static $inject: string[] = ['$scope', '$log'];
 
-    constructor(public $scope: ITableRowScope, public $log: ng.ILogService) {
-    }
+  constructor(public $scope: ITableRowScope, public $log: angular.ILogService) {
+  }
 
-    get item(): any {
-        return this.$scope.item;
-    }
-    set item(item: any) {
-        this.$scope.item = item;
-        this.$scope.$digest();
-    }
+  get item(): any {
+    return this.$scope.item;
+  }
+  set item(item: any) {
+    this.$scope.item = item;
+    this.$scope.$digest();
+  }
 
-    get selected(): boolean {
-        return this.$scope.selected;
-    }
-    set selected(selected: boolean) {
-        this.$scope.selected = selected;
-        this.$scope.$digest();
-    }
+  get selected(): boolean {
+    return this.$scope.selected;
+  }
+  set selected(selected: boolean) {
+    this.$scope.selected = selected;
+    this.$scope.$digest();
+  }
 }
 
 /**
@@ -242,9 +242,9 @@ class TableRowController {
  * @property {string} uifSelected   - Specifies whether the particular row is selected or not
  * @property {any} uifItem          - Data item bound to the row
  */
-export interface ITableRowAttributes extends ng.IAttributes {
-    uifSelected?: string;
-    uifItem?: any;
+export interface ITableRowAttributes extends angular.IAttributes {
+  uifSelected?: string;
+  uifItem?: any;
 }
 
 /**
@@ -269,80 +269,81 @@ export interface ITableRowAttributes extends ng.IAttributes {
  *   <uif-table-cell>{{f.type}}</uif-table-cell>
  * </uif-table-row>
  */
-export class TableRowDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public replace: boolean = true;  // required for correct HTML rendering
-    public template: string = '<tr ng-transclude></tr>';
-    public require: string = '^uifTable';
-    public scope: {} = {
-        item: '=uifItem'
+export class TableRowDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public replace: boolean = true;  // required for correct HTML rendering
+  public template: string = '<tr ng-transclude></tr>';
+  public require: string = '^uifTable';
+  public scope: {} = {
+    item: '=uifItem'
+  };
+  public controller: any = TableRowController;
+
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableRowDirective();
+
+    return directive;
+  }
+
+  public link(
+    scope: ITableRowScope,
+    instanceElement: angular.IAugmentedJQuery,
+    attrs: ITableRowAttributes,
+    table: TableController): void {
+    if (attrs.uifSelected !== undefined &&
+      attrs.uifSelected !== null) {
+      let selectedString: string = attrs.uifSelected.toLowerCase();
+
+      if (selectedString !== 'true' && selectedString !== 'false') {
+        table.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
+          '\'' + attrs.uifSelected + '\' is not a valid boolean value. ' +
+          'Valid options are true|false.');
+      } else {
+        if (selectedString === 'true') {
+          scope.selected = true;
+        }
+      }
+    }
+
+    // don't treat header row as a table row
+    if (scope.item !== undefined) {
+      table.rows.push(scope);
+    }
+
+    scope.rowClick = (ev: any): void => {
+      scope.selected = !scope.selected;
+      scope.$apply();
     };
-    public controller: any = TableRowController;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableRowDirective();
+    scope.$watch('selected', (newValue: boolean, oldValue: boolean, tableRowScope: ITableRowScope): void => {
+      if (newValue === true) {
+        if (table.rowSelectMode === TableRowSelectModeEnum[TableRowSelectModeEnum.single]) {
+          // unselect other items
+          if (table.rows) {
+            for (let i: number = 0; i < table.rows.length; i++) {
+              if (table.rows[i] !== tableRowScope) {
+                table.rows[i].selected = false;
+              }
+            }
+          }
+        }
 
-        return directive;
+        instanceElement.addClass('is-selected');
+      } else {
+        instanceElement.removeClass('is-selected');
+      }
+    });
+
+    if (table.rowSelectMode !== TableRowSelectModeEnum[TableRowSelectModeEnum.none] &&
+      scope.item !== undefined) {
+      instanceElement.on('click', scope.rowClick);
     }
 
-    public link(scope: ITableRowScope,
-                instanceElement: ng.IAugmentedJQuery,
-                attrs: ITableRowAttributes,
-                table: TableController): void {
-        if (attrs.uifSelected !== undefined &&
-            attrs.uifSelected !== null) {
-            let selectedString: string = attrs.uifSelected.toLowerCase();
-
-            if (selectedString !== 'true' && selectedString !== 'false') {
-                table.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
-                    '\'' + attrs.uifSelected + '\' is not a valid boolean value. ' +
-                    'Valid options are true|false.');
-            } else {
-                if (selectedString === 'true') {
-                    scope.selected = true;
-                }
-            }
-        }
-
-        // don't treat header row as a table row
-        if (scope.item !== undefined) {
-            table.rows.push(scope);
-        }
-
-        scope.rowClick = (ev: any): void => {
-            scope.selected = !scope.selected;
-            scope.$apply();
-        };
-
-        scope.$watch('selected', (newValue: boolean, oldValue: boolean, tableRowScope: ITableRowScope): void => {
-            if (newValue === true) {
-                if (table.rowSelectMode === TableRowSelectModeEnum[TableRowSelectModeEnum.single]) {
-                    // unselect other items
-                    if (table.rows) {
-                        for (let i: number = 0; i < table.rows.length; i++) {
-                            if (table.rows[i] !== tableRowScope) {
-                                table.rows[i].selected = false;
-                            }
-                        }
-                    }
-                }
-
-                instanceElement.addClass('is-selected');
-            } else {
-                instanceElement.removeClass('is-selected');
-            }
-        });
-
-        if (table.rowSelectMode !== TableRowSelectModeEnum[TableRowSelectModeEnum.none] &&
-            scope.item !== undefined) {
-            instanceElement.on('click', scope.rowClick);
-        }
-
-        if (table.rowSelectMode === TableRowSelectModeEnum[TableRowSelectModeEnum.none]) {
-            instanceElement.css('cursor', 'default');
-        }
+    if (table.rowSelectMode === TableRowSelectModeEnum[TableRowSelectModeEnum.none]) {
+      instanceElement.css('cursor', 'default');
     }
+  }
 }
 
 /**
@@ -355,9 +356,9 @@ export class TableRowDirective implements ng.IDirective {
  *
  * @property {(ev: any) => void} rowSelectClick - event handler for clicking the row selector
  */
-export interface ITableRowSelectScope extends ng.IScope {
-    rowSelectClick: (ev: any) => void;
-    tagName: string;
+export interface ITableRowSelectScope extends angular.IScope {
+  rowSelectClick: (ev: any) => void;
+  tagName: string;
 }
 
 /**
@@ -382,61 +383,62 @@ export interface ITableRowSelectScope extends ng.IScope {
  *   <uif-table-cell>{{f.type}}</uif-table-cell>
  * </uif-table-row>
  */
-export class TableRowSelectDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public template: string = '<td class="ms-Table-rowCheck"></td>';
-    public replace: boolean = true;  // required for correct HTML rendering
-    public require: string[] = ['^uifTable', '?^uifTableHead', '^uifTableRow'];
+export class TableRowSelectDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public template: string = '<td class="ms-Table-rowCheck"></td>';
+  public replace: boolean = true;  // required for correct HTML rendering
+  public require: string[] = ['^uifTable', '?^uifTableHead', '^uifTableRow'];
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableRowSelectDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableRowSelectDirective();
 
-        return directive;
+    return directive;
+  }
+
+  public link(
+    scope: ITableRowSelectScope,
+    instanceElement: angular.IAugmentedJQuery,
+    attrs: angular.IAttributes,
+    controllers: any[]): void {
+    let thead: TableHeadController = controllers[1];
+    if (thead) {
+      let newElem: angular.IAugmentedJQuery = angular.element('<th class="ms-Table-rowCheck"></th>');
+      instanceElement.replaceWith(newElem);
+      instanceElement = newElem;
     }
 
-    public link(scope: ITableRowSelectScope,
-                instanceElement: ng.IAugmentedJQuery,
-                attrs: ng.IAttributes,
-                controllers: any[]): void {
-        let thead: TableHeadController = controllers[1];
-        if (thead) {
-            let newElem: ng.IAugmentedJQuery = angular.element('<th class="ms-Table-rowCheck"></th>');
-            instanceElement.replaceWith(newElem);
-            instanceElement = newElem;
+    scope.rowSelectClick = (ev: any): void => {
+      let table: TableController = controllers[0];
+      let row: TableRowController = controllers[2];
+
+      if (table.rowSelectMode !== TableRowSelectModeEnum[TableRowSelectModeEnum.multiple]) {
+        return;
+      }
+
+      // clicking on regular rows which have data items bound to them is already
+      // handled by row click event
+      if (row.item === undefined || row.item === null) {
+        // if set to true all rows will be selected. if set to false all rows will be unselected
+        let shouldSelectAll: boolean = false;
+
+        for (let i: number = 0; i < table.rows.length; i++) {
+          if (table.rows[i].selected !== true) {
+            shouldSelectAll = true;
+            break;
+          }
         }
 
-        scope.rowSelectClick = (ev: any): void => {
-            let table: TableController = controllers[0];
-            let row: TableRowController = controllers[2];
+        for (let i: number = 0; i < table.rows.length; i++) {
+          if (table.rows[i].selected !== shouldSelectAll) {
+            table.rows[i].selected = shouldSelectAll;
+          }
+        }
+        scope.$apply();
+      }
+    };
 
-            if (table.rowSelectMode !== TableRowSelectModeEnum[TableRowSelectModeEnum.multiple]) {
-                return;
-            }
-
-            // clicking on regular rows which have data items bound to them is already
-            // handled by row click event
-            if (row.item === undefined || row.item === null) {
-                // if set to true all rows will be selected. if set to false all rows will be unselected
-                let shouldSelectAll: boolean = false;
-
-                for (let i: number = 0; i < table.rows.length; i++) {
-                    if (table.rows[i].selected !== true) {
-                        shouldSelectAll = true;
-                        break;
-                    }
-                }
-
-                for (let i: number = 0; i < table.rows.length; i++) {
-                    if (table.rows[i].selected !== shouldSelectAll) {
-                        table.rows[i].selected = shouldSelectAll;
-                    }
-                }
-                scope.$apply();
-            }
-        };
-
-        instanceElement.on('click', scope.rowSelectClick);
-    }
+    instanceElement.on('click', scope.rowSelectClick);
+  }
 }
 
 /**
@@ -455,17 +457,17 @@ export class TableRowSelectDirective implements ng.IDirective {
  *
  * <uif-table-cell>{{f.fileName}}</uif-table-cell>
  */
-export class TableCellDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public template: string = '<td ng-transclude></td>';
-    public replace: boolean = true;  // required for correct HTML rendering
+export class TableCellDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public template: string = '<td ng-transclude></td>';
+  public replace: boolean = true;  // required for correct HTML rendering
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableCellDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableCellDirective();
 
-        return directive;
-    }
+    return directive;
+  }
 }
 
 /**
@@ -478,8 +480,8 @@ export class TableCellDirective implements ng.IDirective {
  *
  * @property {(ev: any) => void} headerClick - event handler for clicking the header cell
  */
-export interface ITableHeaderScope extends ng.IScope {
-    headerClick: (ev: any) => void;
+export interface ITableHeaderScope extends angular.IScope {
+  headerClick: (ev: any) => void;
 }
 
 /**
@@ -492,8 +494,8 @@ export interface ITableHeaderScope extends ng.IScope {
  *
  * @property {string} uifOrderBy   - Specifies name of the property used to sort the table on
  */
-export interface ITableHeaderAttributes extends ng.IAttributes {
-    uifOrderBy: string;
+export interface ITableHeaderAttributes extends angular.IAttributes {
+  uifOrderBy: string;
 }
 
 /**
@@ -512,59 +514,60 @@ export interface ITableHeaderAttributes extends ng.IAttributes {
  *
  * <uif-table-header>File name</uif-table-header>
  */
-export class TableHeaderDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public replace: boolean = true; // required for correct HTML rendering
-    public template: string = '<th ng-transclude></th>';
-    public require: string = '^uifTable';
+export class TableHeaderDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public replace: boolean = true; // required for correct HTML rendering
+  public template: string = '<th ng-transclude></th>';
+  public require: string = '^uifTable';
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableHeaderDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableHeaderDirective();
 
-        return directive;
-    }
+    return directive;
+  }
 
-    public link(scope: ITableHeaderScope,
-                instanceElement: ng.IAugmentedJQuery,
-                attrs: ITableHeaderAttributes,
-                table: TableController): void {
-        scope.headerClick = (ev: any): void => {
-            if (table.orderBy === attrs.uifOrderBy) {
-                table.orderAsc = !table.orderAsc;
-            } else {
-                table.orderBy = attrs.uifOrderBy;
-                table.orderAsc = true;
-            }
-        };
+  public link(
+    scope: ITableHeaderScope,
+    instanceElement: angular.IAugmentedJQuery,
+    attrs: ITableHeaderAttributes,
+    table: TableController): void {
+    scope.headerClick = (ev: any): void => {
+      if (table.orderBy === attrs.uifOrderBy) {
+        table.orderAsc = !table.orderAsc;
+      } else {
+        table.orderBy = attrs.uifOrderBy;
+        table.orderAsc = true;
+      }
+    };
 
-        scope.$watch('table.orderBy', (newOrderBy: string, oldOrderBy: string, tableHeaderScope: ITableHeaderScope): void => {
-            if (oldOrderBy !== newOrderBy &&
-                newOrderBy === attrs.uifOrderBy) {
-                let cells: JQuery = instanceElement.parent().children();
-                for (let i: number = 0; i < cells.length; i++) {
-                    if (cells.eq(i).children().length === 2) {
-                        cells.eq(i).children().eq(1).remove();
-                    }
-                }
-
-                instanceElement.append('<span class="uif-sort-order">&nbsp;\
-                <i class="ms-Icon ms-Icon--caretDown" aria-hidden="true"></i></span>');
-            }
-        });
-
-        scope.$watch('table.orderAsc', (newOrderAsc: boolean, oldOrderAsc: boolean, tableHeaderScope: ITableHeaderScope): void => {
-           if (instanceElement.children().length === 2) {
-               let oldCssClass: string = oldOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
-               let newCssClass: string = newOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
-               instanceElement.children().eq(1).children().eq(0).removeClass(oldCssClass).addClass(newCssClass);
-           }
-        });
-
-        if ('uifOrderBy' in attrs) {
-            instanceElement.on('click', scope.headerClick);
+    scope.$watch('table.orderBy', (newOrderBy: string, oldOrderBy: string, tableHeaderScope: ITableHeaderScope): void => {
+      if (oldOrderBy !== newOrderBy &&
+        newOrderBy === attrs.uifOrderBy) {
+        let cells: JQuery = instanceElement.parent().children();
+        for (let i: number = 0; i < cells.length; i++) {
+          if (cells.eq(i).children().length === 2) {
+            cells.eq(i).children().eq(1).remove();
+          }
         }
+
+        instanceElement.append('<span class="uif-sort-order">&nbsp;\
+                <i class="ms-Icon ms-Icon--caretDown" aria-hidden="true"></i></span>');
+      }
+    });
+
+    scope.$watch('table.orderAsc', (newOrderAsc: boolean, oldOrderAsc: boolean, tableHeaderScope: ITableHeaderScope): void => {
+      if (instanceElement.children().length === 2) {
+        let oldCssClass: string = oldOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
+        let newCssClass: string = newOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
+        instanceElement.children().eq(1).children().eq(0).removeClass(oldCssClass).addClass(newCssClass);
+      }
+    });
+
+    if ('uifOrderBy' in attrs) {
+      instanceElement.on('click', scope.headerClick);
     }
+  }
 }
 
 class TableHeadController {
@@ -590,18 +593,18 @@ class TableHeadController {
  *   </uif-table-head>
  * </uif-table>
  */
-export class TableHeadDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public template: string = '<thead ng-transclude></thead>';
-    public replace: boolean = true;  // required for correct HTML rendering
-    public controller: any = TableHeadController;
+export class TableHeadDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public template: string = '<thead ng-transclude></thead>';
+  public replace: boolean = true;  // required for correct HTML rendering
+  public controller: any = TableHeadController;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableHeadDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableHeadDirective();
 
-        return directive;
-    }
+    return directive;
+  }
 }
 
 /**
@@ -624,17 +627,17 @@ export class TableHeadDirective implements ng.IDirective {
  *   </uif-table-body>
  * </uif-table>
  */
-export class TableBodyDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public template: string = '<tbody ng-transclude></tbody>';
-    public replace: boolean = true;  // required for correct HTML rendering
+export class TableBodyDirective implements angular.IDirective {
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public template: string = '<tbody ng-transclude></tbody>';
+  public replace: boolean = true;  // required for correct HTML rendering
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new TableBodyDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new TableBodyDirective();
 
-        return directive;
-    }
+    return directive;
+  }
 }
 
 /**
@@ -644,11 +647,11 @@ export class TableBodyDirective implements ng.IDirective {
  * @description
  * Table
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.table', ['officeuifabric.components'])
-    .directive('uifTable', TableDirective.factory())
-    .directive('uifTableRow', TableRowDirective.factory())
-    .directive('uifTableRowSelect', TableRowSelectDirective.factory())
-    .directive('uifTableCell', TableCellDirective.factory())
-    .directive('uifTableHeader', TableHeaderDirective.factory())
-    .directive('uifTableHead', TableHeadDirective.factory())
-    .directive('uifTableBody', TableBodyDirective.factory());
+export let module: angular.IModule = angular.module('officeuifabric.components.table', ['officeuifabric.components'])
+  .directive('uifTable', TableDirective.factory())
+  .directive('uifTableRow', TableRowDirective.factory())
+  .directive('uifTableRowSelect', TableRowSelectDirective.factory())
+  .directive('uifTableCell', TableCellDirective.factory())
+  .directive('uifTableHeader', TableHeaderDirective.factory())
+  .directive('uifTableHead', TableHeadDirective.factory())
+  .directive('uifTableBody', TableBodyDirective.factory());

@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {DialogTypeEnum, DialogActionsPositionEnum} from './dialogEnums';
 
 /**
@@ -15,7 +15,7 @@ import {DialogTypeEnum, DialogActionsPositionEnum} from './dialogEnums';
  * @property {string} uifOverlay - Type of overlay. Possible types are defined in {@link OverlayMode}.
  * @property {string} uifType - Type of dialog. Possible types are defined in {@link DialogTypeEnum}.
  */
-export interface IDialogScope extends ng.IScope {
+export interface IDialogScope extends angular.IScope {
   uifClose: string;
   uifOverlay: string;
   uifType: string;
@@ -28,7 +28,7 @@ export interface IDialogScope extends ng.IScope {
  * @description
  * This scope is used by `<uif-dialog-actions>' element
  */
-export interface IDialogActionsPositionScope extends ng.IScope {
+export interface IDialogActionsPositionScope extends angular.IScope {
   uifPosition: string;
 }
 
@@ -41,7 +41,7 @@ export interface IDialogActionsPositionScope extends ng.IScope {
  */
 export class DialogController {
   public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) {
+  constructor(public $log: angular.ILogService) {
   }
 }
 
@@ -61,7 +61,7 @@ export class DialogController {
  *
  * <uif-dialog uif-type="multiline"></uif-dialog>
  */
-export class DialogDirective implements ng.IDirective {
+export class DialogDirective implements angular.IDirective {
   public restrict: string = 'E';
   public controller: any = DialogController;
   public replace: boolean = true;
@@ -79,12 +79,12 @@ export class DialogDirective implements ng.IDirective {
     uifType: '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DialogDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DialogDirective();
     return directive;
   }
 
-  public link(scope: IDialogScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes, controller: DialogController): void {
+  public link(scope: IDialogScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, controller: DialogController): void {
     scope.$watch('uifType', (newValue: string, oldValue: string) => {
       if (typeof (newValue) !== 'undefined') {
         if (DialogTypeEnum[newValue] === undefined) {
@@ -115,7 +115,7 @@ export class DialogDirective implements ng.IDirective {
  * <uif-dialog><uif-dialog-header></uif-dialog-header></uif-dialog>
  *
  */
-export class DialogHeaderDirective implements ng.IDirective {
+export class DialogHeaderDirective implements angular.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
   public transclude: boolean = true;
@@ -124,8 +124,8 @@ export class DialogHeaderDirective implements ng.IDirective {
   '<button ng-if="$parent.uifClose" class="ms-Dialog-button ms-Dialog-button--close">' +
   '<i class="ms-Icon ms-Icon--x"></i></button>' +
   '<ng-transclude></ng-transclude></div>';
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DialogHeaderDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DialogHeaderDirective();
     return directive;
   }
 
@@ -144,13 +144,13 @@ export class DialogHeaderDirective implements ng.IDirective {
  * <uif-dialog><uif-dialog-content></uif-dialog-content></uif-dialog>
  *
  */
-export class DialogContentDirective implements ng.IDirective {
+export class DialogContentDirective implements angular.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
   public transclude: boolean = true;
   public template: string = '<div class="ms-Dialog-content" ng-transclude></div>';
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DialogContentDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DialogContentDirective();
     return directive;
   }
 
@@ -169,13 +169,13 @@ export class DialogContentDirective implements ng.IDirective {
  * <uif-dialog><uif-dialog-inner></uif-dialog-inner></uif-dialog>
  *
  */
-export class DialogInnerDirective implements ng.IDirective {
+export class DialogInnerDirective implements angular.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
   public transclude: boolean = true;
   public template: string = '<div class="ms-Dialog-inner" ng-transclude></div>';
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DialogInnerDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DialogInnerDirective();
     return directive;
   }
 
@@ -194,14 +194,14 @@ export class DialogInnerDirective implements ng.IDirective {
  * <uif-dialog><uif-dialog-content><uif-dialog-subtext> text here </uif-dialog-subtext></uif-dialog-content></uif-dialog>
  *
  */
-export class DialogSubtextDirective implements ng.IDirective {
+export class DialogSubtextDirective implements angular.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
   public transclude: boolean = true;
   // public require: string = '^uifDialog';
   public template: string = '<p class="ms-Dialog-subText" ng-transclude></p>';
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DialogSubtextDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DialogSubtextDirective();
     return directive;
   }
 
@@ -216,7 +216,7 @@ export class DialogSubtextDirective implements ng.IDirective {
  */
 export class DialogActionsController {
   public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) {
+  constructor(public $log: angular.ILogService) {
   }
 }
 
@@ -234,7 +234,7 @@ export class DialogActionsController {
  * <uif-dialog><uif-dialog-content><uif-dialog-subtext> text here </uif-dialog-subtext></uif-dialog-content></uif-dialog>
  *
  */
-export class DialogActionsDirective implements ng.IDirective {
+export class DialogActionsDirective implements angular.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
   public transclude: boolean = true;
@@ -246,13 +246,13 @@ export class DialogActionsDirective implements ng.IDirective {
     uifPosition: '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DialogActionsDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DialogActionsDirective();
     return directive;
   }
   public link(scope: IDialogActionsPositionScope,
-              element: ng.IAugmentedJQuery,
-              attrs: ng.IAttributes,
+              element: angular.IAugmentedJQuery,
+              attrs: angular.IAttributes,
               controller: DialogActionsController): void {
               scope.$watch('uifPosition', (newValue: string, oldValue: string) => {
                 if (typeof (newValue) !== 'undefined') {
@@ -269,7 +269,7 @@ export class DialogActionsDirective implements ng.IDirective {
   }
 }
 
-export let module: ng.IModule = ng.module('officeuifabric.components.dialog', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.dialog', ['officeuifabric.components'])
   .directive('uifDialog', DialogDirective.factory())
   .directive('uifDialogHeader', DialogHeaderDirective.factory())
   .directive('uifDialogContent', DialogContentDirective.factory())

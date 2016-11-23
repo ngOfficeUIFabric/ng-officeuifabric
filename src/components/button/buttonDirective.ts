@@ -1,14 +1,14 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {ButtonTypeEnum} from './buttonTypeEnum';
 import {ButtonTemplateType} from './buttonTemplateType';
 
-export interface IButtonScope extends ng.IScope {
+export interface IButtonScope extends angular.IScope {
   disabled: boolean;
   uifType: string;
 }
-export interface IButtonAttributes extends ng.IAttributes {
+export interface IButtonAttributes extends angular.IAttributes {
   uifType: string;
   ngHref: string;
   disabled: string;
@@ -23,7 +23,7 @@ export interface IButtonAttributes extends ng.IAttributes {
  */
 class ButtonController {
   public static $inject: string[] = ['$log'];
-  constructor(public $log: ng.ILogService) { }
+  constructor(public $log: angular.ILogService) { }
 }
 
 /**
@@ -75,7 +75,7 @@ class ButtonController {
  *   Lorem Ipsum
  * </uif-button>
  */
-export class ButtonDirective implements ng.IDirective {
+export class ButtonDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public transclude: boolean = true;
@@ -87,19 +87,19 @@ export class ButtonDirective implements ng.IDirective {
   // array of all the possibilities for a button
   private templateOptions: { [buttonTemplateType: number]: string } = {};
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new ButtonDirective($log);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = ($log: angular.ILogService) => new ButtonDirective($log);
     directive.$inject = ['$log'];
     return directive;
   }
 
-  constructor(private $log: ng.ILogService) {
+  constructor(private $log: angular.ILogService) {
     this._populateHtmlTemplates();
   }
 
-  public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IButtonAttributes) => {
+  public template: any = ($element: angular.IAugmentedJQuery, $attrs: IButtonAttributes) => {
     // verify button type is supported
-    if (!ng.isUndefined($attrs.uifType) && ng.isUndefined(ButtonTypeEnum[$attrs.uifType])) {
+    if (!angular.isUndefined($attrs.uifType) && angular.isUndefined(ButtonTypeEnum[$attrs.uifType])) {
       this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.button - Unsupported button: ' +
         'The button (\'' + $attrs.uifType + '\') is not supported by the Office UI Fabric. ' +
         'Supported options are listed here: ' +
@@ -110,35 +110,35 @@ export class ButtonDirective implements ng.IDirective {
     switch ($attrs.uifType) {
       // if hero, return button | link
       case ButtonTypeEnum[ButtonTypeEnum.primary]:
-        return ng.isUndefined($attrs.ngHref)
+        return angular.isUndefined($attrs.ngHref)
           ? this.templateOptions[ButtonTemplateType.primaryButton]
           : this.templateOptions[ButtonTemplateType.primaryLink];
       // if command, return button | link
       case ButtonTypeEnum[ButtonTypeEnum.command]:
-        return ng.isUndefined($attrs.ngHref)
+        return angular.isUndefined($attrs.ngHref)
           ? this.templateOptions[ButtonTemplateType.commandButton]
           : this.templateOptions[ButtonTemplateType.commandLink];
       // if compound, return button | link
       case ButtonTypeEnum[ButtonTypeEnum.compound]:
-        return ng.isUndefined($attrs.ngHref)
+        return angular.isUndefined($attrs.ngHref)
           ? this.templateOptions[ButtonTemplateType.compoundButton]
           : this.templateOptions[ButtonTemplateType.compoundLink];
       // if hero, return button | link
       case ButtonTypeEnum[ButtonTypeEnum.hero]:
-        return ng.isUndefined($attrs.ngHref)
+        return angular.isUndefined($attrs.ngHref)
           ? this.templateOptions[ButtonTemplateType.heroButton]
           : this.templateOptions[ButtonTemplateType.heroLink];
       // else no type specified, so it's an action button
       default:
-        return ng.isUndefined($attrs.ngHref)
+        return angular.isUndefined($attrs.ngHref)
           ? this.templateOptions[ButtonTemplateType.actionButton]
           : this.templateOptions[ButtonTemplateType.actionLink];
     }
   }
 
-  public compile(element: ng.IAugmentedJQuery,
+  public compile(element: angular.IAugmentedJQuery,
                  attrs: IButtonAttributes,
-                 transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+                 transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       post: this.postLink,
       pre: this.preLink
@@ -149,10 +149,10 @@ export class ButtonDirective implements ng.IDirective {
    * Update the scope before linking everything up.
    */
   private preLink(scope: IButtonScope,
-                  element: ng.IAugmentedJQuery,
+                  element: angular.IAugmentedJQuery,
                   attrs: IButtonAttributes,
                   controllers: any,
-                  transclude: ng.ITranscludeFunction): void {
+                  transclude: angular.ITranscludeFunction): void {
 
     attrs.$observe('disabled', (isDisabled) => {
       scope.disabled = !!isDisabled;
@@ -170,14 +170,14 @@ export class ButtonDirective implements ng.IDirective {
    * Check the rendered HTML for anything that is invalid.
    */
   private postLink(scope: IButtonScope,
-                   element: ng.IAugmentedJQuery,
+                   element: angular.IAugmentedJQuery,
                    attrs: IButtonAttributes,
                    controllers: any,
-                   transclude: ng.ITranscludeFunction): void {
+                   transclude: angular.ITranscludeFunction): void {
 
     // if an icon was added to the button's contents for specific button types
     //  that don't support icons, remove the icon
-    if (ng.isUndefined(attrs.uifType) ||
+    if (angular.isUndefined(attrs.uifType) ||
         attrs.uifType === ButtonTypeEnum[ButtonTypeEnum.primary] ||
         attrs.uifType === ButtonTypeEnum[ButtonTypeEnum.compound]) {
       let iconElement: JQuery = element.find('uif-icon');
@@ -191,8 +191,8 @@ export class ButtonDirective implements ng.IDirective {
     }
 
     // create necessary wrappers around inner content in button depending on button type
-    transclude((clone: ng.IAugmentedJQuery) => {
-      let wrapper: ng.IAugmentedJQuery;
+    transclude((clone: angular.IAugmentedJQuery) => {
+      let wrapper: angular.IAugmentedJQuery;
 
       switch (attrs.uifType) {
         // if type === command
@@ -200,13 +200,13 @@ export class ButtonDirective implements ng.IDirective {
           for (let i: number = 0; i < clone.length; i++) {
             // wrap the button label
             if (clone[i].tagName === 'SPAN') {
-              wrapper = ng.element('<span></span>');
+              wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
             }
             // wrap the button's icon
             if (clone[i].tagName === 'UIF-ICON') {
-              wrapper = ng.element('<span></span>');
+              wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-icon').append(clone[i]);
               element.append(wrapper);
             }
@@ -215,7 +215,7 @@ export class ButtonDirective implements ng.IDirective {
         // if type === compound
         case ButtonTypeEnum[ButtonTypeEnum.compound]:
           for (let i: number = 0; i < clone.length; i++) {
-            // if not a span, stop checking...
+            // if not a span, stop checkiangular...
             if (clone[i].tagName !== 'SPAN') {
               continue;
             }
@@ -223,7 +223,7 @@ export class ButtonDirective implements ng.IDirective {
             // wrap the button label
             if (clone[i].classList[0] === 'ng-scope' &&
                 clone[i].classList.length === 1) {
-              wrapper = ng.element('<span></span>');
+              wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
             // add the description... just add it to the button
@@ -237,13 +237,13 @@ export class ButtonDirective implements ng.IDirective {
           for (let i: number = 0; i < clone.length; i++) {
             // wrap the label
             if (clone[i].tagName === 'SPAN') {
-              wrapper = ng.element('<span></span>');
+              wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
             }
             // wrap the icon
             if (clone[i].tagName === 'UIF-ICON') {
-              wrapper = ng.element('<span></span>');
+              wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-icon').append(clone[i]);
               element.append(wrapper);
             }
@@ -314,7 +314,7 @@ export class ButtonDirective implements ng.IDirective {
  *
  * <uif-button-description>Lorem Ipsum</uif-button-description>
  */
-export class ButtonDescriptionDirective implements ng.IDirective {
+export class ButtonDescriptionDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public require: string = '^uifButton';
@@ -323,8 +323,8 @@ export class ButtonDescriptionDirective implements ng.IDirective {
   public scope: boolean = false;
   public template: string = '<span class="ms-Button-description" ng-transclude></span>';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new ButtonDescriptionDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new ButtonDescriptionDirective();
     return directive;
   }
 
@@ -338,7 +338,7 @@ export class ButtonDescriptionDirective implements ng.IDirective {
  * Button
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.button', [
+export let module: angular.IModule = angular.module('officeuifabric.components.button', [
   'officeuifabric.components'
 ])
   .directive('uifButton', ButtonDirective.factory())

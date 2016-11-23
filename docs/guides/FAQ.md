@@ -28,13 +28,13 @@ In working on this library, the contributors have found and reported numerous bu
 
 ## What Version of Angular is Supported?
 
-At the current time ngOfficeUiFabric supports **Angular 1.4+**.
+At the current time ngOfficeUiFabric supports **Angular 1.5+**.
 
 ## What are the Plans for Angular 2 Support?
 
 Angular 2 is absolutely on the roadmap!
 
-Once ngOfficeUiFabric has full coverage of all the components in Office UI Fabric for Angular 1.4+. Once that's finished we will start on Angular 2.
+Once ngOfficeUiFabric has full coverage of all the components in Office UI Fabric for Angular 1.5+. Once that's finished we will start on Angular 2.
 
 ## What is the Release Schedule?
 
@@ -50,9 +50,9 @@ This library has only two dependencies:
 
   In addition, because many CSS issues were solved in v2.*, we depend on the latest CSS libraries.
 
-- Angular 1.4+
+- Angular 1.5+
 
-  The library has been developed against Angular 1.4.x.
+  The library has been developed against Angular 1.5.x.
 
 There is one exception to the dependencies above. The date picker component in the Office UI Fabric has a tight dependency on the [pickadate.js](http://amsul.ca/pickadate.js/) library. Because this library is a [jQuery](http://jquery.com/) plugin & the Office UI Fabric CSS is written for this plugin, when using our date picker component, you will need:
 

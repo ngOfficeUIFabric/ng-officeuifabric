@@ -6,7 +6,7 @@ The **[Minimal Path To Awesome](MPA.md)** walks through this process in a much m
 1. Install global Node.js dependencies:
 
   ```bash
-  $ npm install -g typescript typings
+  $ npm install -g typescript
   ```
 
 1. Clone the repo
@@ -15,11 +15,7 @@ The **[Minimal Path To Awesome](MPA.md)** walks through this process in a much m
   ```bash
   $ npm install
   ```
-1. Download all TypeScript type definitions:
 
-  ```bash
-  $ typings install
-  ```
 1. Transpile all TypeScript
 
   ```bash

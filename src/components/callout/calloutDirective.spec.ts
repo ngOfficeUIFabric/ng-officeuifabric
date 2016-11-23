@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('calloutDirectives:', () => {
   beforeEach(() => {
@@ -10,10 +10,10 @@ describe('calloutDirectives:', () => {
 
   describe('HTML rendering', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout></uif-callout>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout></uif-callout>');
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
@@ -28,8 +28,8 @@ describe('calloutDirectives:', () => {
       expect(calloutElement[0].tagName === 'DIV').toBeTruthy();
     });
 
-    it('should not throw error on mouseenter and leave', inject(($compile: ng.ICompileService) => {
-      let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout></uif-callout>');
+    it('should not throw error on mouseenter and leave', inject(($compile: angular.ICompileService) => {
+      let jqlElement: angular.IAugmentedJQuery = angular.element('<uif-callout></uif-callout>');
       $compile(jqlElement)(scope);
       scope.$digest();
 
@@ -39,8 +39,8 @@ describe('calloutDirectives:', () => {
       expect(() => {
         jqlElement.triggerHandler('mouseleave');
       }).not.toThrow(new Error('[$compile:nonassign] Expression \'undefined\' ' +
-      'used with directive \'uifCallout\' is non-assignable!\n' +
-      'http://errors.angularjs.org/1.4.9/$compile/nonassign?p0=undefined&p1=uifCallout'));
+        'used with directive \'uifCallout\' is non-assignable!\n' +
+        'http://errors.angularjs.org/1.4.9/$compile/nonassign?p0=undefined&p1=uifCallout'));
 
 
     }));
@@ -74,45 +74,47 @@ describe('calloutDirectives:', () => {
       expect(calloutElement[0]).toHaveClass('ms-Callout--arrowLeft');
     });
 
-    it('main element should have proper arrow CSS class', inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout uif-arrow="top"></uif-callout>' +
-        '<uif-callout uif-arrow="bottom"></uif-callout>' +
-        '<uif-callout uif-arrow="left"></uif-callout>' +
-        '<uif-callout uif-arrow="right"></uif-callout>');
-      scope = $rootScope;
-      $compile(element)(scope);
-      scope.$digest();
+    it(
+      'main element should have proper arrow CSS class',
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        element = angular.element('<uif-callout uif-arrow="top"></uif-callout>' +
+          '<uif-callout uif-arrow="bottom"></uif-callout>' +
+          '<uif-callout uif-arrow="left"></uif-callout>' +
+          '<uif-callout uif-arrow="right"></uif-callout>');
+        scope = $rootScope;
+        $compile(element)(scope);
+        scope.$digest();
 
-      element = jQuery(element);
+        element = jQuery(element);
 
-      let topArrowElement: JQuery = element.find('div.ms-Callout').eq(0);
-      let bottomArrowElement: JQuery = element.find('div.ms-Callout').eq(1);
-      let leftArrowElement: JQuery = element.find('div.ms-Callout').eq(2);
-      let rightArrowElement: JQuery = element.find('div.ms-Callout').eq(3);
+        let topArrowElement: JQuery = element.find('div.ms-Callout').eq(0);
+        let bottomArrowElement: JQuery = element.find('div.ms-Callout').eq(1);
+        let leftArrowElement: JQuery = element.find('div.ms-Callout').eq(2);
+        let rightArrowElement: JQuery = element.find('div.ms-Callout').eq(3);
 
-      expect(topArrowElement[0]).toHaveClass('ms-Callout--arrowTop');
-      expect(bottomArrowElement[0]).toHaveClass('ms-Callout--arrowBottom');
-      expect(leftArrowElement[0]).toHaveClass('ms-Callout--arrowLeft');
-      expect(rightArrowElement[0]).toHaveClass('ms-Callout--arrowRight');
-    }));
+        expect(topArrowElement[0]).toHaveClass('ms-Callout--arrowTop');
+        expect(bottomArrowElement[0]).toHaveClass('ms-Callout--arrowBottom');
+        expect(leftArrowElement[0]).toHaveClass('ms-Callout--arrowLeft');
+        expect(rightArrowElement[0]).toHaveClass('ms-Callout--arrowRight');
+      }));
 
     it(
       'empty arrow attribute logs error',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService, $log: ng.ILogService) => {
-        element = ng.element('<uif-callout uif-arrow></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService, $log: angular.ILogService) => {
+        element = angular.element('<uif-callout uif-arrow></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
 
         expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.callout - "' +
-            '" is not a valid value for uifArrow. It should be left, right, top, bottom.');
+          '" is not a valid value for uifArrow. It should be left, right, top, bottom.');
         // expect(calloutElement[0]).toHaveClass('ms-Callout--arrowLeft');
-    }));
+      }));
 
     it(
       'main element has CSS class when uif-separator is present',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout uif-separator></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        element = angular.element('<uif-callout uif-separator></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -121,12 +123,12 @@ describe('calloutDirectives:', () => {
 
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--actionText');
-    }));
+      }));
 
     it(
       'main element has CSS class when uif-action-text is present',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout uif-action-text></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        element = angular.element('<uif-callout uif-action-text></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -135,7 +137,7 @@ describe('calloutDirectives:', () => {
 
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--actionText');
-    }));
+      }));
 
     it('main element has no separator when uif-action-text and uif-separator not present', () => {
       let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
@@ -144,8 +146,8 @@ describe('calloutDirectives:', () => {
 
     it(
       'main element has proper CSS class uif-type=oobe',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout uif-type="oobe"></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        element = angular.element('<uif-callout uif-type="oobe"></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -154,12 +156,12 @@ describe('calloutDirectives:', () => {
 
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--OOBE');
-    }));
+      }));
 
     it(
       'main element has proper CSS class uif-type=peek',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout uif-type="peek"></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        element = angular.element('<uif-callout uif-type="peek"></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -168,21 +170,21 @@ describe('calloutDirectives:', () => {
 
         let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
         expect(calloutElement[0]).toHaveClass('ms-Callout--Peek');
-    }));
+      }));
 
     it(
       'should log error when uif-type empty',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService, $log: ng.ILogService) => {
-        element = ng.element('<uif-callout uif-type></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService, $log: angular.ILogService) => {
+        element = angular.element('<uif-callout uif-type></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
 
         expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.callout - ' +
-        '"" is not a valid value for uifType. It should be oobe or peek');
-    }));
+          '"" is not a valid value for uifType. It should be oobe or peek');
+      }));
 
-    it('main element has no type CSS and no error if uif-type not applied', inject(($log: ng.ILogService) => {
+    it('main element has no type CSS and no error if uif-type not applied', inject(($log: angular.ILogService) => {
       let calloutElement: JQuery = element.find('div.ms-Callout').eq(0);
       expect(calloutElement[0]).not.toHaveClass('ms-Callout--Peek');
       expect(calloutElement[0]).not.toHaveClass('ms-Callout--OOBE');
@@ -191,8 +193,8 @@ describe('calloutDirectives:', () => {
 
     it(
       'main element has proper CSS and HTML when uif-close attribute present',
-      inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout uif-close></uif-callout>');
+      inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        element = angular.element('<uif-callout uif-close></uif-callout>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();
@@ -218,102 +220,102 @@ describe('calloutDirectives:', () => {
     let element: JQuery;
     let scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService) => {
-      element = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService) => {
+      element = angular.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
       scope = $rootScope.$new();
 
       scope.vm = {
-          isOpen: false
-        };
+        isOpen: false
+      };
     }));
 
-    it('intially callout is closed', inject(($compile: ng.ICompileService) => {
-       $compile(element)(scope);
-       scope.$digest();
-       element = jQuery(element[0]);
+    it('intially callout is closed', inject(($compile: angular.ICompileService) => {
+      $compile(element)(scope);
+      scope.$digest();
+      element = jQuery(element[0]);
 
-       let calloutElement: JQuery = element.eq(0);
-       expect(calloutElement[0]).toHaveClass('ng-hide');
+      let calloutElement: JQuery = element.eq(0);
+      expect(calloutElement[0]).toHaveClass('ng-hide');
     }));
 
-    it('intially callout is open', inject(($compile: ng.ICompileService) => {
-       $compile(element)(scope);
-       scope.vm.isOpen = true;
+    it('intially callout is open', inject(($compile: angular.ICompileService) => {
+      $compile(element)(scope);
+      scope.vm.isOpen = true;
 
-       element = jQuery(element[0]);
+      element = jQuery(element[0]);
 
-       scope.$digest();
+      scope.$digest();
 
-       let calloutElement: JQuery = element.eq(0);
-       expect(calloutElement[0]).not.toHaveClass('ng-hide');
+      let calloutElement: JQuery = element.eq(0);
+      expect(calloutElement[0]).not.toHaveClass('ng-hide');
     }));
 
-    it('callout opens/closes on uif-is-open change', inject(($compile: ng.ICompileService) => {
-       scope.vm.isOpen = true;
+    it('callout opens/closes on uif-is-open change', inject(($compile: angular.ICompileService) => {
+      scope.vm.isOpen = true;
 
-       $compile(element)(scope);
-       scope.$digest();
+      $compile(element)(scope);
+      scope.$digest();
 
-       element = jQuery(element[0]);
+      element = jQuery(element[0]);
 
-       // close it
-       scope.vm.isOpen = false;
-       scope.$digest();
+      // close it
+      scope.vm.isOpen = false;
+      scope.$digest();
 
-       let calloutElement: JQuery = element.eq(0);
-       expect(calloutElement[0]).toHaveClass('ng-hide');
+      let calloutElement: JQuery = element.eq(0);
+      expect(calloutElement[0]).toHaveClass('ng-hide');
 
-       // reopen
-       scope.vm.isOpen = true;
-       scope.$digest();
+      // reopen
+      scope.vm.isOpen = true;
+      scope.$digest();
 
-       calloutElement = element.find('div.ms-Callout').eq(0);
-       expect(calloutElement[0]).not.toHaveClass('ng-hide');
+      calloutElement = element.find('div.ms-Callout').eq(0);
+      expect(calloutElement[0]).not.toHaveClass('ng-hide');
     }));
 
-    it('clicking close button closes callout', inject(($compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
+    it('clicking close button closes callout', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
 
-        scope.vm.isOpen = true;
+      scope.vm.isOpen = true;
 
-        $compile(element)(scope);
-        scope.$digest();
+      $compile(element)(scope);
+      scope.$digest();
 
-        element = jQuery(element[0]);
+      element = jQuery(element[0]);
 
-        expect(element[0]).not.toHaveClass('ng-hide');
+      expect(element[0]).not.toHaveClass('ng-hide');
 
-        let closeButton: JQuery = element.find('button.ms-Callout-close').eq(0);
+      let closeButton: JQuery = element.find('button.ms-Callout-close').eq(0);
 
-        closeButton.click();
-        scope.$digest();
+      closeButton.click();
+      scope.$digest();
 
-        expect(element[0]).toHaveClass('ng-hide');
-        expect(scope.vm.isOpen).toBeFalsy();
+      expect(element[0]).toHaveClass('ng-hide');
+      expect(scope.vm.isOpen).toBeFalsy();
     }));
 
-    it('should not close by itself when mouse is over callout', inject(($compile: ng.ICompileService) => {
-        let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
+    it('should not close by itself when mouse is over callout', inject(($compile: angular.ICompileService) => {
+      let jqlElement: angular.IAugmentedJQuery = angular.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
 
-        scope.vm.isOpen = true;
+      scope.vm.isOpen = true;
 
-        $compile(jqlElement)(scope);
-        scope.$digest();
+      $compile(jqlElement)(scope);
+      scope.$digest();
 
-        element = jQuery(jqlElement);
+      element = jQuery(jqlElement);
 
-        jqlElement.triggerHandler('mouseenter');
-        scope.$digest();
+      jqlElement.triggerHandler('mouseenter');
+      scope.$digest();
 
-        scope.vm.isOpen = false;
-        scope.$digest();
+      scope.vm.isOpen = false;
+      scope.$digest();
 
-        expect(element[0]).not.toHaveClass('ng-hide');
+      expect(element[0]).not.toHaveClass('ng-hide');
 
     }));
 
-    it('should close by itself when mouse outside callout', inject(($compile: ng.ICompileService) => {
-      let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
+    it('should close by itself when mouse outside callout', inject(($compile: angular.ICompileService) => {
+      let jqlElement: angular.IAugmentedJQuery = angular.element('<uif-callout ng-show="vm.isOpen"></uif-callout>');
       scope.vm.isOpen = true;
       $compile(jqlElement)(scope);
       scope.$digest();
@@ -331,56 +333,56 @@ describe('calloutDirectives:', () => {
 
     }));
 
-    it('should close itself when mouse over callout and close button clicked', inject(($compile: ng.ICompileService) => {
-        let jqlElement: ng.IAugmentedJQuery = ng.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
-        element = jQuery(jqlElement[0]);
+    it('should close itself when mouse over callout and close button clicked', inject(($compile: angular.ICompileService) => {
+      let jqlElement: angular.IAugmentedJQuery = angular.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
+      element = jQuery(jqlElement[0]);
 
 
-        scope.vm.isOpen = true;
-        $compile(element)(scope);
-        scope.$digest();
+      scope.vm.isOpen = true;
+      $compile(element)(scope);
+      scope.$digest();
 
-        jqlElement.triggerHandler('mouseenter');
-        scope.$digest();
+      jqlElement.triggerHandler('mouseenter');
+      scope.$digest();
 
-        expect(element[0]).not.toHaveClass('ng-hide');
+      expect(element[0]).not.toHaveClass('ng-hide');
 
-        let closeButton: JQuery = jqlElement.find('button').eq(0);
-        closeButton.triggerHandler('click');
-        scope.$digest();
+      let closeButton: JQuery = jqlElement.find('button').eq(0);
+      closeButton.triggerHandler('click');
+      scope.$digest();
 
-        expect(element[0]).toHaveClass('ng-hide');
+      expect(element[0]).toHaveClass('ng-hide');
     }));
 
 
 
 
-    it('should not close when mouse moves outside callout but there is close button', inject(($compile: ng.ICompileService) => {
-        element = ng.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
+    it('should not close when mouse moves outside callout but there is close button', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
 
-        scope.vm.isOpen = true;
+      scope.vm.isOpen = true;
 
-        $compile(element)(scope);
-        scope.$digest();
+      $compile(element)(scope);
+      scope.$digest();
 
-        element.triggerHandler('mouseenter');
-        scope.$digest();
+      element.triggerHandler('mouseenter');
+      scope.$digest();
 
-        expect(element[0]).not.toHaveClass('ng-hide');
+      expect(element[0]).not.toHaveClass('ng-hide');
 
-        element.triggerHandler('mouseleave');
-        scope.$digest();
+      element.triggerHandler('mouseleave');
+      scope.$digest();
 
-        expect(element[0]).not.toHaveClass('ng-hide');
+      expect(element[0]).not.toHaveClass('ng-hide');
     }));
   });
 
   describe('callout header directive tests', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout-header></uif-callout-header>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout-header></uif-callout-header>');
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
@@ -415,8 +417,8 @@ describe('calloutDirectives:', () => {
       expect(headerParagrah[0]).toHaveClass('ms-Callout-title');
     });
 
-    it('should trasnsclude inside P', inject(($compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout-header>Callout header test!</uif-callout-header>');
+    it('should trasnsclude inside P', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout-header>Callout header test!</uif-callout-header>');
       $compile(element)(scope);
 
       element = jQuery(element[0]);
@@ -430,10 +432,10 @@ describe('calloutDirectives:', () => {
 
   describe('callout content directive tests', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout-content></uif-callout-content>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout-content></uif-callout-content>');
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
@@ -468,8 +470,8 @@ describe('calloutDirectives:', () => {
       expect(headerParagrah[0]).toHaveClass('ms-Callout-subText');
     });
 
-    it('should trasnsclude inside P', inject(($compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout-content>Callout content test!</uif-callout-content>');
+    it('should trasnsclude inside P', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout-content>Callout content test!</uif-callout-content>');
       $compile(element)(scope);
 
       element = jQuery(element[0]);
@@ -483,10 +485,10 @@ describe('calloutDirectives:', () => {
 
   describe('callout actions directive tests', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout-actions></uif-callout-actions>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout-actions></uif-callout-actions>');
       scope = $rootScope;
       $compile(element)(scope);
       scope.$digest();
@@ -507,8 +509,8 @@ describe('calloutDirectives:', () => {
       expect(headerDiv[0]).toHaveClass('ms-Callout-actions');
     });
 
-    it('should trasnsclude inside main element', inject(($compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout-actions>Callout actions test!</uif-callout-actions>');
+    it('should trasnsclude inside main element', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout-actions>Callout actions test!</uif-callout-actions>');
       $compile(element)(scope);
 
       element = jQuery(element[0]);
@@ -520,14 +522,14 @@ describe('calloutDirectives:', () => {
 
   describe('callout directives rendering together', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout uif-arrow="left">' +
-      '<uif-callout-header>All of your favorite people</uif-callout-header>' +
-      '<uif-callout-content>Message body is optional. If help documentation is available</uif-callout-content>' +
-      '<uif-callout-actions><a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a></uif-callout-actions>' +
-      '</uif-callout>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout uif-arrow="left">' +
+        '<uif-callout-header>All of your favorite people</uif-callout-header>' +
+        '<uif-callout-content>Message body is optional. If help documentation is available</uif-callout-content>' +
+        '<uif-callout-actions><a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a></uif-callout-actions>' +
+        '</uif-callout>');
 
       scope = $rootScope.$new();
       $compile(element)(scope);
@@ -548,19 +550,19 @@ describe('calloutDirectives:', () => {
       expect(header[0].tagName === 'UIF-CALLOUT-HEADER').toBeTruthy();
     });
 
-    it('action buttons get proper CSS when uif-actiontext is used', inject(($compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout uif-action-text>' +
-      '<uif-callout-actions>' +
-      '<uif-button uif-type="command">' +
-      '<uif-icon uif-type="check"></uif-icon>' +
-      'Save' +
-      '</uif-button>' +
-      '<uif-button uif-type="command">' +
-      '<uif-icon uif-type="x"></uif-icon>' +
-      'Cancel' +
-      '</uif-button>' +
-      '</uif-callout-actions>' +
-      '</uif-callout>');
+    it('action buttons get proper CSS when uif-actiontext is used', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout uif-action-text>' +
+        '<uif-callout-actions>' +
+        '<uif-button uif-type="command">' +
+        '<uif-icon uif-type="check"></uif-icon>' +
+        'Save' +
+        '</uif-button>' +
+        '<uif-button uif-type="command">' +
+        '<uif-icon uif-type="x"></uif-icon>' +
+        'Cancel' +
+        '</uif-button>' +
+        '</uif-callout-actions>' +
+        '</uif-callout>');
 
       $compile(element)(scope);
       scope.$digest();
@@ -587,15 +589,15 @@ describe('calloutDirectives:', () => {
       expect(secondButtonSpans).toHaveClass('ms-Callout-actionText');
     }));
 
-    it('action links get proper CSS when uif-actiontext is used', inject(($compile: ng.ICompileService) => {
-      element = ng.element('<uif-callout uif-action-text>' +
-      '<uif-callout-actions>' +
-      '<uif-button uif-type="command" ng-href="#">' +
-      '<uif-icon uif-type="x"></uif-icon>' +
-      'Cancel' +
-      '</uif-button>' +
-      '</uif-callout-actions>' +
-      '</uif-callout>');
+    it('action links get proper CSS when uif-actiontext is used', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout uif-action-text>' +
+        '<uif-callout-actions>' +
+        '<uif-button uif-type="command" ng-href="#">' +
+        '<uif-icon uif-type="x"></uif-icon>' +
+        'Cancel' +
+        '</uif-button>' +
+        '</uif-callout-actions>' +
+        '</uif-callout>');
 
       $compile(element)(scope);
       scope.$digest();

@@ -2,7 +2,7 @@
 
 /**
  * Enum for supported input types of the uif-table directive
- * This enum is intended to be used as a string.
+ * This enum is intended to be used as a striangular.
  *
  * @readonly
  * @enum {string}

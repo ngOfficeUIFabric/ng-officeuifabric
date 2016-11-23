@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc directive
@@ -32,7 +32,7 @@ import * as ng from 'angular';
  *  </uif-command-main>
  * </uif-command-bar>
  */
-export class CommandBarDirective implements ng.IDirective {
+export class CommandBarDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<div class="ms-CommandBar" ng-transclude></div>';
@@ -44,13 +44,13 @@ export class CommandBarDirective implements ng.IDirective {
     uifSearchTerm: '='
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CommandBarDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CommandBarDirective();
     return directive;
 
   }
 
-  public link(scope: ICommandBarScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
+  public link(scope: ICommandBarScope, elem: angular.IAugmentedJQuery, attrs: angular.IAttributes): void {
   {
 
     // focuses the cursor on the input box
@@ -83,7 +83,7 @@ export class CommandBarDirective implements ng.IDirective {
  * @property {function} focusSearchInput() - Brings the cursor to the search input in mobile mode and when clicking on the search hourglass
  * @property {function} clearSearchTerm()    -  Clears the search term
  */
-interface ICommandBarScope extends ng.IScope {
+interface ICommandBarScope extends angular.IScope {
   uifSearchTerm: string;
   placeholder: string;
   isSearchActive: boolean;
@@ -104,7 +104,7 @@ interface ICommandBarScope extends ng.IScope {
  *
  * <uif-command-bar-search placeholder='Search'></uif-command-bar-search>
  */
-export class CommandBarSearchDirective implements ng.IDirective {
+export class CommandBarSearchDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public replace: boolean = true;
@@ -127,8 +127,8 @@ export class CommandBarSearchDirective implements ng.IDirective {
                               </div>
                             </div>`;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CommandBarSearchDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CommandBarSearchDirective();
     return directive;
   }
 }
@@ -147,15 +147,15 @@ export class CommandBarSearchDirective implements ng.IDirective {
  *
  * <uif-command-bar-side></uif-command-bar-side>
  */
-export class CommandBarSideDirective implements ng.IDirective {
+export class CommandBarSideDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<div class="ms-CommandBar-sideCommands" ng-transclude></div>';
   public replace: boolean = true;
   public transclude: boolean = true;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CommandBarSideDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CommandBarSideDirective();
     return directive;
   }
 }
@@ -174,7 +174,7 @@ export class CommandBarSideDirective implements ng.IDirective {
  *
  * <uif-command-bar-main></uif-command-bar-main>
  */
-export class CommandBarMainDirective implements ng.IDirective {
+export class CommandBarMainDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = `<div class="ms-CommandBar-mainArea">
@@ -198,25 +198,25 @@ export class CommandBarMainDirective implements ng.IDirective {
     uifShowOverflow: '='
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($timeout: ng.ITimeoutService) => new CommandBarMainDirective($timeout);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = ($timeout: angular.ITimeoutService) => new CommandBarMainDirective($timeout);
     directive.$inject = ['$timeout'];
     return directive;
   }
 
-  public compile(element: ng.IAugmentedJQuery,
-                 attrs: ng.IAttributes,
-                 transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+  public compile(element: angular.IAugmentedJQuery,
+                 attrs: angular.IAttributes,
+                 transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       post: this.postLink
     };
   }
 
-  constructor(private $timeout: ng.ITimeoutService) { }
+  constructor(private $timeout: angular.ITimeoutService) { }
 
   private postLink( scope: ICommandBarMainScope,
-                    elem: ng.IAugmentedJQuery,
-                    attrs: ng.IAttributes,
+                    elem: angular.IAugmentedJQuery,
+                    attrs: angular.IAttributes,
                     ctrl: CommandBarMainController): void {
 
         // opens the overflow menu
@@ -387,7 +387,7 @@ export class CommandBarMainDirective implements ng.IDirective {
  * @property {function} openOverflowMenu     -  Opens the overflow menu
  * @property {function} openOverflowItem     -  Adds an item to hiddenItems
  */
-interface ICommandBarMainScope extends ng.IScope {
+interface ICommandBarMainScope extends angular.IScope {
   uifShowOverflow: boolean;
   overflowMenuOpen: boolean;
   overflowVisible: boolean;
@@ -414,9 +414,9 @@ export class CommandBarMainController {
     public static $inject: string[] = ['$scope', '$element', '$compile', '$timeout'];
 
     constructor(private $scope: ICommandBarMainScope,
-                private $element: ng.IAugmentedJQuery,
-                public $compile: ng.ICompileService,
-                public $timeout: ng.ITimeoutService) {
+                private $element: angular.IAugmentedJQuery,
+                public $compile: angular.ICompileService,
+                public $timeout: angular.ITimeoutService) {
     }
 
     public addOverflowItem(item: any): void {
@@ -443,7 +443,7 @@ export class CommandBarMainController {
  *
  * <uif-command-baritem><span>Item</span></uif-command-bar-item>
  */
-export class CommandBarItemDirective implements ng.IDirective {
+export class CommandBarItemDirective implements angular.IDirective {
 
   public restrict: string = 'E';
   public template: string = '<div class="ms-CommandBarItem">' +
@@ -458,26 +458,26 @@ export class CommandBarItemDirective implements ng.IDirective {
   public controller: any = CommandBarMainController;
   public require: string = '^?uifCommandBarMain';
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new CommandBarItemDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new CommandBarItemDirective();
     return directive;
   }
 
-  public compile(element: ng.IAugmentedJQuery,
-                 attrs: ng.IAttributes,
-                 transclude: ng.ITranscludeFunction): ng.IDirectivePrePost {
+  public compile(element: angular.IAugmentedJQuery,
+                 attrs: angular.IAttributes,
+                 transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       post: this.postLink
     };
   }
 
   private postLink( scope: ICommandBarMainScope,
-                    elem: ng.IAugmentedJQuery,
-                    attrs: ng.IAttributes,
+                    elem: angular.IAugmentedJQuery,
+                    attrs: angular.IAttributes,
                     ctrl: CommandBarMainController,
-                    transclude: ng.ITranscludeFunction): void {
+                    transclude: angular.ITranscludeFunction): void {
 
-      transclude((clone: ng.IAugmentedJQuery) => {
+      transclude((clone: angular.IAugmentedJQuery) => {
 
         let hiddenItem: any;
 
@@ -542,7 +542,7 @@ export class CommandBarItemDirective implements ng.IDirective {
  * CommandBar
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.commandbar', [
+export let module: angular.IModule = angular.module('officeuifabric.components.commandbar', [
     'officeuifabric.components'
   ])
   .directive('uifCommandBar', CommandBarDirective.factory())

@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('uif-persona', () => {
   beforeEach(() => {
@@ -11,12 +11,12 @@ describe('uif-persona', () => {
   describe('<uif-persona-text /> directives', () => {
 
     describe('HTML rendering', () => {
-      let liteElement: ng.IAugmentedJQuery;
+      let liteElement: angular.IAugmentedJQuery;
       let element: JQuery;
-      let scope: ng.IScope;
+      let scope: angular.IScope;
 
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
-        liteElement = ng.element('<uif-persona-primary-text>Alton Lafferty</uif-persona-primary-text>' +
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
+        liteElement = angular.element('<uif-persona-primary-text>Alton Lafferty</uif-persona-primary-text>' +
           '<uif-persona-secondary-text>Interior Designer, Contoso</uif-persona-secondary-text>' +
           '<uif-persona-tertiary-text>Office: 7/1234</uif-persona-tertiary-text>' +
           '<uif-persona-optional-text>Available - Video capable</uif-persona-optional-text>');
@@ -61,17 +61,17 @@ describe('uif-persona', () => {
 
   describe('<uif-persona-initials /> directive', () => {
     describe('HTML rendering', () => {
-      let liteElement: ng.IAugmentedJQuery;
+      let liteElement: angular.IAugmentedJQuery;
       let element: JQuery;
-      let scope: ng.IScope;
-      let _rootScope: ng.IRootScopeService;
-      let _compile: ng.ICompileService;
+      let scope: angular.IScope;
+      let _rootScope: angular.IRootScopeService;
+      let _compile: angular.ICompileService;
 
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
         _rootScope = $rootScope;
         _compile = $compile;
 
-        liteElement = ng.element('<uif-persona><uif-persona-initials>AL</uif-persona-initials></uif-persona>');
+        liteElement = angular.element('<uif-persona><uif-persona-initials>AL</uif-persona-initials></uif-persona>');
 
         scope = $rootScope.$new();
         $compile(liteElement)(scope);
@@ -120,22 +120,22 @@ describe('uif-persona', () => {
           'ms-Persona-initials--darkRed'
         ];
 
-        let initials: ng.IAugmentedJQuery[] = [
-          ng.element('<uif-persona><uif-persona-initials uif-color="lightBlue">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="blue">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="darkBlue">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="teal">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="lightGreen">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="green">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="darkGreen">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="lightPink">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="pink">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="magenta">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="purple">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="black">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="orange">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="red">AL</uif-persona-initials></uif-persona>'),
-          ng.element('<uif-persona><uif-persona-initials uif-color="darkRed">AL</uif-persona-initials></uif-persona>')
+        let initials: angular.IAugmentedJQuery[] = [
+          angular.element('<uif-persona><uif-persona-initials uif-color="lightBlue">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="blue">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="darkBlue">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="teal">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="lightGreen">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="green">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="darkGreen">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="lightPink">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="pink">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="magenta">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="purple">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="black">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="orange">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="red">AL</uif-persona-initials></uif-persona>'),
+          angular.element('<uif-persona><uif-persona-initials uif-color="darkRed">AL</uif-persona-initials></uif-persona>')
         ];
 
         scope = _rootScope.$new();
@@ -160,8 +160,8 @@ describe('uif-persona', () => {
         expect(element.find('div.ms-Persona-initials').first()).toHaveClass('ms-Persona-initials--blue');
       });
 
-      it('should validate initials color', inject(($log: ng.ILogService) => {
-        liteElement = ng.element('<uif-persona><uif-persona-initials uif-color="invalid">AL</uif-persona-initials></uif-persona>');
+      it('should validate initials color', inject(($log: angular.ILogService) => {
+        liteElement = angular.element('<uif-persona><uif-persona-initials uif-color="invalid">AL</uif-persona-initials></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -178,18 +178,18 @@ describe('uif-persona', () => {
   });
 
   describe('<uif-persona /> directive', () => {
-    let liteElement: ng.IAugmentedJQuery;
+    let liteElement: angular.IAugmentedJQuery;
     let element: JQuery;
-    let scope: ng.IScope;
-    let _rootScope: ng.IRootScopeService;
-    let _compile: ng.ICompileService;
+    let scope: angular.IScope;
+    let _rootScope: angular.IRootScopeService;
+    let _compile: angular.ICompileService;
 
     describe('HTML rendering', () => {
-      beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: ng.ICompileService) => {
+      beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
         _rootScope = $rootScope;
         _compile = $compile;
 
-        liteElement = ng.element('<uif-persona uif-style="round" uif-size="xlarge"></uif-persona>');
+        liteElement = angular.element('<uif-persona uif-style="round" uif-size="xlarge"></uif-persona>');
         scope = _rootScope.$new();
         _compile(liteElement)(scope);
         scope.$digest();
@@ -205,12 +205,12 @@ describe('uif-persona', () => {
       });
 
       it('should have CSS for size', () => {
-        let personas: ng.IAugmentedJQuery[] = [
-          ng.element('<uif-persona uif-size="tiny"></uif-persona>'),
-          ng.element('<uif-persona uif-size="xsmall"></uif-persona>'),
-          ng.element('<uif-persona uif-size="small"></uif-persona>'),
-          ng.element('<uif-persona uif-size="large"></uif-persona>'),
-          ng.element('<uif-persona uif-size="xlarge"></uif-persona>')
+        let personas: angular.IAugmentedJQuery[] = [
+          angular.element('<uif-persona uif-size="tiny"></uif-persona>'),
+          angular.element('<uif-persona uif-size="xsmall"></uif-persona>'),
+          angular.element('<uif-persona uif-size="small"></uif-persona>'),
+          angular.element('<uif-persona uif-size="large"></uif-persona>'),
+          angular.element('<uif-persona uif-size="xlarge"></uif-persona>')
         ];
 
         let expectedClass: string[] = ['ms-Persona--tiny', 'ms-Persona--xs', 'ms-Persona--sm', 'ms-Persona--lg', 'ms-Persona--xl'];
@@ -231,7 +231,7 @@ describe('uif-persona', () => {
       });
 
       it('should have no CSS for medium size', () => {
-        liteElement = ng.element('<uif-persona uif-size="medium"></uif-persona>');
+        liteElement = angular.element('<uif-persona uif-size="medium"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -240,13 +240,13 @@ describe('uif-persona', () => {
 
         let notExpectedClasses: string[] = ['ms-Persona--tiny', 'ms-Persona--xs', 'ms-Persona--sm', 'ms-Persona--lg', 'ms-Persona--xl'];
 
-        ng.forEach(notExpectedClasses, (className: string) => {
+        angular.forEach(notExpectedClasses, (className: string) => {
           expect(element).not.toHaveClass(className);
         });
       });
 
-      it('should log error when invalid size is used', inject(($log: ng.ILogService) => {
-        liteElement = ng.element('<uif-persona uif-size="invalid"></uif-persona>');
+      it('should log error when invalid size is used', inject(($log: angular.ILogService) => {
+        liteElement = angular.element('<uif-persona uif-size="invalid"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -264,7 +264,7 @@ describe('uif-persona', () => {
       });
 
       it('should have proper CSS when uif-style is square', () => {
-        liteElement = ng.element('<uif-persona uif-style="square"></uif-persona>');
+        liteElement = angular.element('<uif-persona uif-style="square"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -273,8 +273,8 @@ describe('uif-persona', () => {
         expect(element).toHaveClass('ms-Persona--square');
       });
 
-      it('should log error when uif-style is incorrect', inject(($log: ng.ILogService) => {
-        liteElement = ng.element('<uif-persona uif-style="invalid"></uif-persona>');
+      it('should log error when uif-style is incorrect', inject(($log: angular.ILogService) => {
+        liteElement = angular.element('<uif-persona uif-style="invalid"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -295,7 +295,7 @@ describe('uif-persona', () => {
       });
 
       it('should have IMG with proper source and CSS', () => {
-        liteElement = ng.element('<uif-persona uif-image-url="' +
+        liteElement = angular.element('<uif-persona uif-image-url="' +
           'http://dev.office.com/Modules/DevOffice.Fabric/Fabric/components/persona/Persona.Person2.png"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
@@ -317,7 +317,7 @@ describe('uif-persona', () => {
       });
 
       it('should not render image area when size is tiny', () => {
-        liteElement = ng.element('<uif-persona uif-size="tiny"></uif-persona>');
+        liteElement = angular.element('<uif-persona uif-size="tiny"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -338,13 +338,13 @@ describe('uif-persona', () => {
       });
 
       it('should have proper CSS class for presence', () => {
-        let personas: ng.IAugmentedJQuery[] = [
-          ng.element('<uif-persona uif-presence="available"></uif-persona>'),
-          ng.element('<uif-persona uif-presence="away"></uif-persona>'),
-          ng.element('<uif-persona uif-presence="blocked"></uif-persona>'),
-          ng.element('<uif-persona uif-presence="busy"></uif-persona>'),
-          ng.element('<uif-persona uif-presence="dnd"></uif-persona>'),
-          ng.element('<uif-persona uif-presence="offline"></uif-persona>')
+        let personas: angular.IAugmentedJQuery[] = [
+          angular.element('<uif-persona uif-presence="available"></uif-persona>'),
+          angular.element('<uif-persona uif-presence="away"></uif-persona>'),
+          angular.element('<uif-persona uif-presence="blocked"></uif-persona>'),
+          angular.element('<uif-persona uif-presence="busy"></uif-persona>'),
+          angular.element('<uif-persona uif-presence="dnd"></uif-persona>'),
+          angular.element('<uif-persona uif-presence="offline"></uif-persona>')
         ];
 
         for (let i: number = 0; i < personas.length; i++) {
@@ -380,8 +380,8 @@ describe('uif-persona', () => {
         expect(element).toHaveClass('ms-Persona--offline');
       });
 
-      it('should validate presence attribute', inject(($log: ng.ILogService) => {
-        liteElement = ng.element('<uif-persona uif-presence="invalid"></uif-persona>');
+      it('should validate presence attribute', inject(($log: angular.ILogService) => {
+        liteElement = angular.element('<uif-persona uif-presence="invalid"></uif-persona>');
         _compile(liteElement)(scope);
         scope.$digest();
 
@@ -401,7 +401,7 @@ describe('uif-persona', () => {
       });
 
       it('should transclude uif-persona-primary-text inside details DIV', () => {
-        liteElement = ng.element('<uif-persona uif-presence="available">' +
+        liteElement = angular.element('<uif-persona uif-presence="available">' +
           '<uif-persona-primary-text>Alton Lafferty</uif-persona-primary-text>' +
           '<uif-persona-secondary-text>Interior Designer, Contoso</uif-persona-secondary-text>' +
           '<uif-persona-tertiary-text>Office: 7/1234</uif-persona-tertiary-text>' +
@@ -422,7 +422,7 @@ describe('uif-persona', () => {
       });
 
       it('should transclude uif-persona-initials into image area', () => {
-        liteElement = ng.element('<uif-persona uif-presence="available">' +
+        liteElement = angular.element('<uif-persona uif-presence="available">' +
           '<uif-persona-initials>AL</uif-persona-initials>' +
           '</uif-persona>');
         _compile(liteElement)(scope);

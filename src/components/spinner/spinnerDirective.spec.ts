@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('spinnerDirective: <uif-spinner />', () => {
   beforeEach(() => {
@@ -10,10 +10,10 @@ describe('spinnerDirective: <uif-spinner />', () => {
 
   describe('basic tests', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-      element = ng.element('<uif-spinner></uif-spinner>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
+      element = angular.element('<uif-spinner></uif-spinner>');
       scope = $rootScope;
       $compile(element)(scope);
       element = jQuery(element[0]);
@@ -30,7 +30,7 @@ describe('spinnerDirective: <uif-spinner />', () => {
 
     it('should render proper CSS for large spinner', inject(($compile: Function) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-size="large"></uif-spinner>');
+      element = angular.element('<uif-spinner uif-size="large"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
@@ -39,16 +39,16 @@ describe('spinnerDirective: <uif-spinner />', () => {
 
     it('should render proper CSS for small spinner', inject(($compile: Function) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-size="small"></uif-spinner>');
+      element = angular.element('<uif-spinner uif-size="small"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
       expect(element[0]).not.toHaveClass('ms-Spinner--large');
     }));
 
-    it('should throw error when invalid size provided', inject(($compile: Function, $log: ng.ILogService) => {
+    it('should throw error when invalid size provided', inject(($compile: Function, $log: angular.ILogService) => {
       // override default element for suite
-      element = ng.element('<uif-spinner uif-size="invalid"></uif-spinner>');
+      element = angular.element('<uif-spinner uif-size="invalid"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
@@ -66,7 +66,7 @@ describe('spinnerDirective: <uif-spinner />', () => {
     });
 
     it('should wrap content in div with proper CSS', inject(($compile: Function) => {
-      element = ng.element('<uif-spinner>This should be wrapped!</uif-spinner>');
+      element = angular.element('<uif-spinner>This should be wrapped!</uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
@@ -97,13 +97,13 @@ describe('spinnerDirective: <uif-spinner />', () => {
     let element: JQuery;
     let scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService) => {
       scope = $rootScope.$new();
       scope.isVisible = false;
     }));
 
     it('should change visibility after scope value change', inject(($compile: Function) => {
-      element = ng.element('<uif-spinner ng-show="isVisible"></uif-spinner>');
+      element = angular.element('<uif-spinner ng-show="isVisible"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
@@ -117,8 +117,8 @@ describe('spinnerDirective: <uif-spinner />', () => {
       expect(element[0]).not.toHaveClass('ng-hide');
     }));
 
-    it('should animate circles when ng-show not set', inject(($compile: Function, $interval: ng.IIntervalService) => {
-      element = ng.element('<uif-spinner></uif-spinner>');
+    it('should animate circles when ng-show not set', inject(($compile: Function, $interval: angular.IIntervalService) => {
+      element = angular.element('<uif-spinner></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 
@@ -134,10 +134,10 @@ describe('spinnerDirective: <uif-spinner />', () => {
       expect(finalOpacity).toBeGreaterThan(initialOpacity);
     }));
 
-    it('should start/stop animation on ng-show change', inject(($compile: Function, $interval: ng.IIntervalService) => {
+    it('should start/stop animation on ng-show change', inject(($compile: Function, $interval: angular.IIntervalService) => {
       scope.spinnerVisible = false;
 
-      element = ng.element('<uif-spinner ng-show="spinnerVisible"></uif-spinner>');
+      element = angular.element('<uif-spinner ng-show="spinnerVisible"></uif-spinner>');
       $compile(element)(scope);
       scope.$digest();
 

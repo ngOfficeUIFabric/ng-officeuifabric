@@ -1,7 +1,7 @@
 'use strict';
 
-import * as ng from 'angular';
-import {ContextualMenuDirective, ContextualMenuController} from './../contextualmenu/contextualMenu';
+import * as angular from 'angular';
+import { ContextualMenuDirective, ContextualMenuController } from './../contextualmenu/contextualMenu';
 
 /**
  * @ngdoc interface
@@ -15,7 +15,7 @@ import {ContextualMenuDirective, ContextualMenuController} from './../contextual
  * @property {function} openMenu  - Open menu callback
  * @property {function} closeMenu - Close menu callback
  */
-interface INavBarScope extends ng.IScope {
+interface INavBarScope extends angular.IScope {
   overlay: string;
   openMenu: () => void;
   closeMenu: () => void;
@@ -34,9 +34,9 @@ export class NavBarController {
 
   constructor(
     private $scope: INavBarScope,
-    private $animate: ng.animate.IAnimateService,
-    private $element: ng.IAugmentedJQuery,
-    public $log: ng.ILogService) {
+    private $animate: angular.animate.IAnimateService,
+    private $element: angular.IAugmentedJQuery,
+    public $log: angular.ILogService) {
   }
 
   public openMobileMenu(): void {
@@ -55,7 +55,7 @@ export class NavBarController {
     let navBarItems: NodeListOf<Element> = this.$element[0].querySelectorAll('.ms-NavBar-item');
 
     for (let i: number = 0; i < navBarItems.length; i++) {
-      let ngElement: ng.IAugmentedJQuery = angular.element(navBarItems[i]);
+      let ngElement: angular.IAugmentedJQuery = angular.element(navBarItems[i]);
       let navBarItemCtrl: NavBarItemController = ngElement.controller(NavBarItemDirective.directiveName);
       if (navBarItemCtrl) {
         navBarItemCtrl.closeContextualMenu();
@@ -68,7 +68,7 @@ export class NavBarController {
     let navBarItems: NodeListOf<Element> = this.$element[0].querySelectorAll('.ms-NavBar-item--search');
 
     for (let i: number = 0; i < navBarItems.length; i++) {
-      let ngElement: ng.IAugmentedJQuery = angular.element(navBarItems[i]);
+      let ngElement: angular.IAugmentedJQuery = angular.element(navBarItems[i]);
       let navSearchCtrl: NavBarSearchController = ngElement.controller(NavBarSearch.directiveName);
       if (navSearchCtrl) {
         navSearchCtrl.closeSearch();
@@ -104,7 +104,7 @@ export class NavBarController {
  *  </uif-nav-bar-item>
  * </uif-nav-bar>
  */
-export class NavBarDirective implements ng.IDirective {
+export class NavBarDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifNavBar';
   public static overlayValues: string[] = ['light', 'dark'];
@@ -129,32 +129,36 @@ export class NavBarDirective implements ng.IDirective {
     overlay: '@?uifOverlay'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService, $animate: ng.animate.IAnimateService, $document: ng.IDocumentService) =>
-      new NavBarDirective($log, $animate, $document);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = (
+      $log: angular.ILogService,
+      $animate: angular.animate.IAnimateService,
+      $document: angular.IDocumentService
+    ) => new NavBarDirective($log, $animate, $document);
     directive.$inject = ['$log', '$animate', '$document'];
     return directive;
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: INavBarScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     navBarController: NavBarController,
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     this.$document.on('click', () => {
       navBarController.closeAllContextMenus();
       navBarController.hideSearchTextBox();
     });
 
-    $transclude((clone: ng.IAugmentedJQuery) => {
-      let elementToReplace: ng.IAugmentedJQuery = angular.element($element[0].querySelector('.uif-nav-items'));
+    $transclude((clone: angular.IAugmentedJQuery) => {
+      let elementToReplace: angular.IAugmentedJQuery = angular.element($element[0].querySelector('.uif-nav-items'));
       elementToReplace.replaceWith(clone);
     });
   }
 
-  constructor(private $log: ng.ILogService, private $animate: ng.animate.IAnimateService, private $document: ng.IDocumentService) { }
+  constructor(
+    private $log: angular.ILogService, private $animate: angular.animate.IAnimateService, private $document: angular.IDocumentService) { }
 }
 
 /**
@@ -172,7 +176,7 @@ export class NavBarDirective implements ng.IDirective {
  * @property {function} selectItem    - Nav bar item click callback
  * @property {boolean} isDisabled     - Indicates that menu item is disabled
  */
-interface INavBarItemScope extends ng.IScope {
+interface INavBarItemScope extends angular.IScope {
   hasChildMenu: boolean;
   contextMenuCtrl: ContextualMenuController;
   text: string;
@@ -191,7 +195,7 @@ interface INavBarItemScope extends ng.IScope {
  *
  * @property {string} uifType - The type of the nav bar menu item, based on `NavBarItemTypes` enum
  */
-interface INavBarItemAttributes extends ng.IAttributes {
+interface INavBarItemAttributes extends angular.IAttributes {
   uifType: string;
 }
 
@@ -219,7 +223,7 @@ enum NavBarItemTypes {
 export class NavBarItemController {
   public static $inject: string[] = ['$scope', '$element'];
 
-  constructor(private $scope: INavBarItemScope, private $element: ng.IAugmentedJQuery) { }
+  constructor(private $scope: INavBarItemScope, private $element: angular.IAugmentedJQuery) { }
 
   public closeContextualMenu(): void {
     if (this.$scope.hasChildMenu) {
@@ -262,7 +266,7 @@ export class NavBarItemController {
  *   </uif-contextual-menu>
  * </uif-nav-bar-item>
  */
-export class NavBarItemDirective implements ng.IDirective {
+export class NavBarItemDirective implements angular.IDirective {
   public static directiveName: string = 'uifNavBarItem';
 
   public replace: boolean = true;
@@ -280,13 +284,13 @@ export class NavBarItemDirective implements ng.IDirective {
 
   private templateTypes: { [menuType: number]: string } = {};
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = ($log: ng.ILogService) => new NavBarItemDirective($log);
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = ($log: angular.ILogService) => new NavBarItemDirective($log);
     directive.$inject = ['$log'];
     return directive;
   }
 
-  constructor(private $log: ng.ILogService) {
+  constructor(private $log: angular.ILogService) {
     this.templateTypes[NavBarItemTypes.link] = `
     <li class="ms-NavBar-item"
     ng-class="{\'is-disabled\': isDisabled, 'ms-NavBar-item--right': position === 'right'}">
@@ -301,10 +305,10 @@ export class NavBarItemDirective implements ng.IDirective {
     </li>`;
   }
 
-  public template: ng.IComponentTemplateFn = ($element?: ng.IAugmentedJQuery, $attrs?: INavBarItemAttributes): string => {
+  public template: any = ($element?: angular.IAugmentedJQuery, $attrs?: INavBarItemAttributes): string => {
     let type: string = $attrs.uifType;
 
-    if (ng.isUndefined(type)) {
+    if (angular.isUndefined(type)) {
       return this.templateTypes[NavBarItemTypes.link];
     }
 
@@ -319,19 +323,19 @@ export class NavBarItemDirective implements ng.IDirective {
     return this.templateTypes[NavBarItemTypes[type]];
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: INavBarItemScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     navBarController: NavBarController,
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     if ($scope.isDisabled) {
       let navBarLinkEelement: JQuery = angular.element($element[0].querySelector('.ms-NavBar-link'));
       navBarLinkEelement.removeAttr('href');
     }
 
-    if (ng.isUndefined($scope.type)) {
+    if (angular.isUndefined($scope.type)) {
       $scope.type = NavBarItemTypes[NavBarItemTypes.link];
     }
 
@@ -377,8 +381,8 @@ export class NavBarItemDirective implements ng.IDirective {
     }
   }
 
-  private transcludeChilds($scope: INavBarItemScope, $element: ng.IAugmentedJQuery, $transclude: ng.ITranscludeFunction): void {
-    $transclude((clone: ng.IAugmentedJQuery) => {
+  private transcludeChilds($scope: INavBarItemScope, $element: angular.IAugmentedJQuery, $transclude: angular.ITranscludeFunction): void {
+    $transclude((clone: angular.IAugmentedJQuery) => {
       let hasContent: boolean = this.hasItemContent(clone);
 
       if (!hasContent && !$scope.text) {
@@ -392,12 +396,12 @@ export class NavBarItemDirective implements ng.IDirective {
     });
   }
 
-  private insertLink(clone: ng.IAugmentedJQuery, $scope: INavBarItemScope, $element: ng.IAugmentedJQuery): void {
+  private insertLink(clone: angular.IAugmentedJQuery, $scope: INavBarItemScope, $element: angular.IAugmentedJQuery): void {
     let elementToReplace: JQuery = angular.element($element[0].querySelector('.uif-nav-item-content'));
 
     if (this.hasItemContent(clone)) { /* element provided */
       for (let i: number = 0; i < clone.length; i++) {
-        let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+        let element: angular.IAugmentedJQuery = angular.element(clone[i]);
         if (element.hasClass('uif-content')) {
           elementToReplace.replaceWith(element);
           break;
@@ -408,18 +412,18 @@ export class NavBarItemDirective implements ng.IDirective {
     }
   }
 
-  private insertMenu(clone: ng.IAugmentedJQuery, $scope: INavBarItemScope, $element: ng.IAugmentedJQuery): void {
+  private insertMenu(clone: angular.IAugmentedJQuery, $scope: INavBarItemScope, $element: angular.IAugmentedJQuery): void {
     for (let i: number = 0; i < clone.length; i++) {
-      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      let element: angular.IAugmentedJQuery = angular.element(clone[i]);
       if (element.hasClass('ms-ContextualMenu')) {
         angular.element($element[0].querySelector('.uif-submenu')).replaceWith(element);
       }
     }
   }
 
-  private hasItemContent(clone: ng.IAugmentedJQuery): boolean {
+  private hasItemContent(clone: angular.IAugmentedJQuery): boolean {
     for (let i: number = 0; i < clone.length; i++) {
-      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      let element: angular.IAugmentedJQuery = angular.element(clone[i]);
       if (element.hasClass('uif-content')) {
         return true;
       }
@@ -443,7 +447,7 @@ export class NavBarItemDirective implements ng.IDirective {
  * @property {function} onSearchCallback - User defined callback, firing by search event
  * @property {function} skipOnClick      - Helper search div click callback
  */
-interface INavBarSearchScope extends ng.IScope {
+interface INavBarSearchScope extends angular.IScope {
   searchText: string;
   onSearch: ($event: KeyboardEvent | MouseEvent) => void;
   placeholder: string;
@@ -464,10 +468,10 @@ export class NavBarSearchController {
 
   constructor(
     private $scope: INavBarSearchScope,
-    private $element: ng.IAugmentedJQuery,
-    private $document: ng.IDocumentService,
-    private $animate: ng.animate.IAnimateService,
-    private $timeout: ng.ITimeoutService) {
+    private $element: angular.IAugmentedJQuery,
+    private $document: angular.IDocumentService,
+    private $animate: angular.animate.IAnimateService,
+    private $timeout: angular.ITimeoutService) {
   }
 
   public closeSearch(): void {
@@ -498,7 +502,7 @@ export class NavBarSearchController {
  * <uif-nav-bar-search placeholder="search for smth" uif-on-search="onSearch(search)">
  * </uif-nav-bar-search>
  */
-export class NavBarSearch implements ng.IDirective {
+export class NavBarSearch implements angular.IDirective {
   public static directiveName: string = 'uifNavBarSearch';
 
   public replace: boolean = true;
@@ -518,27 +522,27 @@ export class NavBarSearch implements ng.IDirective {
       </div>
     </li>`;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = (
-      $document: ng.IDocumentService,
-      $animate: ng.animate.IAnimateService,
-      $timeout: ng.ITimeoutService) =>
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = (
+      $document: angular.IDocumentService,
+      $animate: angular.animate.IAnimateService,
+      $timeout: angular.ITimeoutService) =>
       new NavBarSearch($document, $animate, $timeout);
     directive.$inject = ['$document', '$animate', '$timeout'];
     return directive;
   }
 
   constructor(
-    private $document: ng.IDocumentService,
-    private $animate: ng.animate.IAnimateService,
-    private $timeout: ng.ITimeoutService) { }
+    private $document: angular.IDocumentService,
+    private $animate: angular.animate.IAnimateService,
+    private $timeout: angular.ITimeoutService) { }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: INavBarSearchScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     ctrls: [NavBarController, NavBarSearchController],
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     this.$document.on('click', () => {
       ctrls[1].closeSearch();
@@ -564,7 +568,7 @@ export class NavBarSearch implements ng.IDirective {
     };
   }
 
-  private applyCssClasses($element: ng.IAugmentedJQuery): void {
+  private applyCssClasses($element: angular.IAugmentedJQuery): void {
     if (!$element.hasClass('is-open')) {
       this.$animate.addClass($element, 'is-open');
 
@@ -587,7 +591,7 @@ export class NavBarSearch implements ng.IDirective {
  * NavBar Module
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.navbar', [
+export let module: angular.IModule = angular.module('officeuifabric.components.navbar', [
   'officeuifabric.components'])
   .directive(NavBarDirective.directiveName, NavBarDirective.factory())
   .directive(NavBarItemDirective.directiveName, NavBarItemDirective.factory())

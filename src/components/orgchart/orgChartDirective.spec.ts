@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {OrgChartPresenceEnum} from './orgChartPresenceEnum';
 import {OrgChartSelectModeEnum} from './orgChartSelectModeEnum';
 
@@ -17,7 +17,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let element: JQuery;
     let scope: any;
     let compile: Function;
-    let log: ng.ILogService;
+    let log: angular.ILogService;
     let sample: any;
 
     let html: string = `
@@ -32,7 +32,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       </uif-org-chart>
       `;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $log: ng.ILogService) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $log: angular.ILogService) => {
       scope = $rootScope;
       compile = $compile;
       log = $log;
@@ -81,7 +81,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
       scope.data = sample;
 
-      element = ng.element(html);
+      element = angular.element(html);
       compile(element)(scope);
       scope.$digest();
 
@@ -99,9 +99,9 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let element: JQuery;
     let scope: any;
     let compile: Function;
-    let log: ng.ILogService;
+    let log: angular.ILogService;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $log: ng.ILogService) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $log: angular.ILogService) => {
       scope = $rootScope;
       compile = $compile;
       log = $log;
@@ -109,7 +109,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should render DIV with class \'ms-OrgChart\'', () => {
 
-      element = ng.element('<uif-org-chart>TEST</uif-org-chart>');
+      element = angular.element('<uif-org-chart>TEST</uif-org-chart>');
       compile(element)(scope);
       scope.$digest();
 
@@ -125,7 +125,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
         .filter((v: any) => isNaN(parseInt(v, 10)))
         .forEach((selectMode: any) => {
 
-          element = ng.element(`<uif-org-chart uif-select-mode="` + selectMode + `"></uif-org-chart`);
+          element = angular.element(`<uif-org-chart uif-select-mode="` + selectMode + `"></uif-org-chart`);
           compile(element)(scope);
           scope.$digest();
 
@@ -137,7 +137,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should log error on invalid select-mode', () => {
 
-        element = ng.element(`<uif-org-chart uif-select-mode="INVALID"></uif-org-chart`);
+        element = angular.element(`<uif-org-chart uif-select-mode="INVALID"></uif-org-chart`);
         compile(element)(scope);
         scope.$digest();
 
@@ -152,11 +152,11 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let element: JQuery;
     let scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
     }));
 
-    it('should render DIV with class \'ms-OrgChart-group\'', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    it('should render DIV with class \'ms-OrgChart-group\'', inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
 
       element = $compile('<uif-org-chart-group>TEST</uif-org-chart-group>')(scope);
       element = jQuery(element[0]);
@@ -175,11 +175,11 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let element: JQuery;
     let scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
     }));
 
-    it('should render DIV with class \'ms-OrgChart-groupTitle\'', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    it('should render DIV with class \'ms-OrgChart-groupTitle\'', inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
 
       element = $compile('<uif-org-chart-group-title>TEST</uif-org-chart-group-title>')(scope);
       element = jQuery(element[0]);
@@ -198,7 +198,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let element: JQuery;
     let scope: any;
     let compile: Function;
-    let log: ng.ILogService;
+    let log: angular.ILogService;
     let sample: any;
 
     let htmlSingleSelect: string = `
@@ -227,7 +227,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       </uif-org-chart>
       `;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $log: ng.ILogService) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $log: angular.ILogService) => {
 
       scope = $rootScope;
       compile = $compile;
@@ -273,7 +273,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should render LI with class \'ms-Orgchart-listItem\' and nested DIV with class \'ms-Persona\'', () => {
 
-      element = ng.element('<uif-org-chart><uif-org-chart-persona>TEST</uif-org-chart-persona></uif-org-chart>');
+      element = angular.element('<uif-org-chart><uif-org-chart-persona>TEST</uif-org-chart-persona></uif-org-chart>');
       compile(element)(scope);
       scope.$digest();
 
@@ -291,7 +291,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should render class \'ms-Persona--square\' when uif-style square', () => {
 
-      element = ng.element('<uif-org-chart><uif-org-chart-persona uif-style="square" >TEST</uif-org-chart-persona></uif-org-chart>');
+      element = angular.element('<uif-org-chart><uif-org-chart-persona uif-style="square" >TEST</uif-org-chart-persona></uif-org-chart>');
       compile(element)(scope);
       scope.$digest();
 
@@ -304,7 +304,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should not render class \'ms-Persona--square\' when uif-style standard', () => {
 
-      element = ng.element('<uif-org-chart><uif-org-chart-persona uif-style="standard" >TEST</uif-org-chart-persona></uif-org-chart>');
+      element = angular.element('<uif-org-chart><uif-org-chart-persona uif-style="standard" >TEST</uif-org-chart-persona></uif-org-chart>');
       compile(element)(scope);
       scope.$digest();
 
@@ -317,7 +317,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should not render class \'ms-Persona--square\' when no uif-style', () => {
 
-      element = ng.element(`<uif-org-chart>
+      element = angular.element(`<uif-org-chart>
                              <uif-org-chart-persona uif-style="standard" >TEST</uif-org-chart-persona>
                             </uif-org-chart>`);
       compile(element)(scope);
@@ -332,7 +332,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should throw error when invalid uif-style', () => {
 
-      element = ng.element(`<uif-org-chart >
+      element = angular.element(`<uif-org-chart >
                               <uif-org-chart-persona uif-style="INVALID" >TEST</uif-org-chart-persona>
                             </uif-org-chart>`);
       compile(element)(scope);
@@ -352,7 +352,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
             status: presence
           };
 
-          element = ng.element(`<uif-org-chart>
+          element = angular.element(`<uif-org-chart>
                                   <uif-org-chart-persona uif-presence="person.status">TEST</uif-org-chart-persona>
                                 </uif-org-chart>`);
           compile(element)(scope);
@@ -375,7 +375,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
         status: 'INVALID'
       };
 
-      element = ng.element(`<uif-org-chart >
+      element = angular.element(`<uif-org-chart >
                                   <uif-org-chart-persona uif-presence="person.status">TEST</uif-org-chart-persona>
                             </uif-org-chart>`);
       compile(element)(scope);
@@ -392,7 +392,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data[2].selected = true;
       scope.selectedItems = [];
 
-      element = ng.element(htmlSingleSelect);
+      element = angular.element(htmlSingleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -407,7 +407,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data[2].selected = true;
       scope.selectedItems = [];
 
-      element = ng.element(htmlMultipleSelect);
+      element = angular.element(htmlMultipleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -420,7 +420,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data = sample.slice(0);
       scope.selectedItems = [];
 
-      element = ng.element(htmlSingleSelect);
+      element = angular.element(htmlSingleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -441,7 +441,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data = sample.slice(0);
       scope.selectedItems = [];
 
-      element = ng.element(htmlSingleSelect);
+      element = angular.element(htmlSingleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -462,7 +462,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data = sample.slice(0);
       scope.selectedItems = [];
 
-      element = ng.element(htmlMultipleSelect);
+      element = angular.element(htmlMultipleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -483,7 +483,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data = sample.slice(0);
       scope.selectedItems = [];
 
-      element = ng.element(htmlSingleSelect);
+      element = angular.element(htmlSingleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -505,7 +505,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       scope.data = sample.slice(0);
       scope.selectedItems = [];
 
-      element = ng.element(htmlMultipleSelect);
+      element = angular.element(htmlMultipleSelect);
       compile(element)(scope);
       scope.$digest();
 
@@ -530,14 +530,14 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let scope: any;
     let compile: Function;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
       compile = $compile;
     }));
 
     it('should render DIV with class \'ms-Persona-imageArea\'', () => {
 
-      element = ng.element('<uif-org-chart-image  ng-src="TEST"></uif-org-chart-image>');
+      element = angular.element('<uif-org-chart-image  ng-src="TEST"></uif-org-chart-image>');
       compile(element)(scope);
       scope.$digest();
 
@@ -548,7 +548,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should contain I with classes \'ms-Persona-placeholder\' and \'ms-Icon\' and \'ms-Icon--person\'', () => {
 
-      element = ng.element('<uif-org-chart-image ng-src="test.jpg"></uif-org-chart-image>');
+      element = angular.element('<uif-org-chart-image ng-src="test.jpg"></uif-org-chart-image>');
       compile(element)(scope);
       scope.$digest();
 
@@ -561,7 +561,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should render IMG with class \'ms-Persona-image\'', () => {
 
-      element = ng.element('<uif-org-chart-image ng-src="test.jpg"></uif-org-chart-image>');
+      element = angular.element('<uif-org-chart-image ng-src="test.jpg"></uif-org-chart-image>');
       compile(element)(scope);
       scope.$digest();
 
@@ -576,7 +576,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
         imageUrl: 'http://test/test.jpg'
       };
 
-      element = ng.element('<uif-org-chart-image ng-src="person.imageUrl"></uif-org-chart-image>');
+      element = angular.element('<uif-org-chart-image ng-src="person.imageUrl"></uif-org-chart-image>');
       compile(element)(scope);
       scope.$digest();
 
@@ -595,7 +595,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let scope: any;
     let compile: Function;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
       compile = $compile;
     }));
@@ -606,7 +606,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
         status: 'away'
       };
 
-      element = ng.element(`
+      element = angular.element(`
         <uif-org-chart>
             <uif-org-chart-persona uif-status="person.status">
               <uif-org-chart-presence></uif-org-chart-presence>
@@ -628,7 +628,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should not render if status is missing', () => {
 
-      element = ng.element(`
+      element = angular.element(`
         <uif-org-chart>
             <uif-org-chart-persona uif-status="person.status">
               <uif-org-chart-presence></uif-org-chart-presence>
@@ -656,13 +656,13 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let element: JQuery;
     let scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
     }));
 
-    it('should render DIV with class \'ms-Persona-details\'', inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    it('should render DIV with class \'ms-Persona-details\'', inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
 
-      element = ng.element('<uif-org-chart-details>TEST</uif-org-chart-details>');
+      element = angular.element('<uif-org-chart-details>TEST</uif-org-chart-details>');
       $compile(element)(scope);
       scope.$digest();
 
@@ -680,14 +680,14 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let scope: any;
     let compile: Function;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
       compile = $compile;
     }));
 
     it('should render DIV with class \'ms-Persona-primaryText\' and transclude', () => {
 
-      element = ng.element('<uif-org-chart-primary-text>TEST</uif-org-chart-primary-text>');
+      element = angular.element('<uif-org-chart-primary-text>TEST</uif-org-chart-primary-text>');
       compile(element)(scope);
       scope.$digest();
 
@@ -705,14 +705,14 @@ describe('orgChartDirective: <uif-org-chart />', () => {
     let scope: any;
     let compile: Function;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       scope = $rootScope;
       compile = $compile;
     }));
 
     it('should render DIV with class \'ms-Persona-secondaryText\' and transclude', () => {
 
-      element = ng.element('<uif-org-chart-secondary-text>TEST</uif-org-chart-secondary-text>');
+      element = angular.element('<uif-org-chart-secondary-text>TEST</uif-org-chart-secondary-text>');
       compile(element)(scope);
       scope.$digest();
 

@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/7de6c3dd94feaeb21f20054b9f30d5dabc5efabd/gulp-istanbul/gulp-istanbul.d.ts",
-    "raw": "registry:dt/gulp-istanbul#0.9.0+20160317120654",
-    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/7de6c3dd94feaeb21f20054b9f30d5dabc5efabd/gulp-istanbul/gulp-istanbul.d.ts"
-  }
-}

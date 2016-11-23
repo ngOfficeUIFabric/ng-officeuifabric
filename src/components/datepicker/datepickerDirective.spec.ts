@@ -4,7 +4,7 @@ describe('datepicker: <uif-datepicker />', () => {
         angular.mock.module('officeuifabric.components.datepicker');
     });
 
-    it('Should be able to configure months', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to configure months', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
         $scope.$digest();
@@ -36,7 +36,7 @@ describe('datepicker: <uif-datepicker />', () => {
         }
         expect(exception).toBe(true, 'Invalid list of months should have failed.');
     }));
-    it('Should be able to use the custom year selector', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to use the custom year selector', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2015, 2, 1);
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
@@ -73,7 +73,7 @@ describe('datepicker: <uif-datepicker />', () => {
 
         expect(year2010).toHaveClass('is-highlighted');
     }));
-    it('Should be able to use the custom month selector', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to use the custom month selector', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
         let $scope: any = $rootScope.$new();
         // important to take the first of the month, as previously this test failed due to time zone issues
@@ -118,7 +118,7 @@ describe('datepicker: <uif-datepicker />', () => {
         expect(mayMonth).toHaveClass('is-highlighted');
         expect(julyMonth).not.toHaveClass('is-highlighted');
     }));
-    it('Should be able to specify custom date format', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to specify custom date format', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
@@ -151,7 +151,7 @@ describe('datepicker: <uif-datepicker />', () => {
 
         expect(textboxValue).toBe(newFormattedValue, 'Custom date format');
     }));
-    it('Should be able to click  next and prev decade', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to click  next and prev decade', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2015, 1, 1);
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
@@ -175,7 +175,7 @@ describe('datepicker: <uif-datepicker />', () => {
         prevDecade.click();
         expect(currentDecade.html()).toBe('1995 - 2005');
     }));
-    it('Should be able to set and retrieve a value', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to set and retrieve a value', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = '';
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
@@ -210,7 +210,7 @@ describe('datepicker: <uif-datepicker />', () => {
 
     }));
 
-    it('Should be able to set placeholder', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to set placeholder', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value"></uif-datepicker>')($scope);
         $scope.$digest();
@@ -228,7 +228,7 @@ describe('datepicker: <uif-datepicker />', () => {
 
     }));
 
-    it('Should be able to disable & enable as needed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be able to disable & enable as needed', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.disabled = false;
 
@@ -245,7 +245,7 @@ describe('datepicker: <uif-datepicker />', () => {
 
     }));
 
-    it('Should be initially be disabled', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should be initially be disabled', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
 
         let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" disabled="disabled"></uif-datepicker>')($scope);
@@ -258,7 +258,7 @@ describe('datepicker: <uif-datepicker />', () => {
 
     }));
 
-    it('Should not set $dirty on ngModel initially', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should not set $dirty on ngModel initially', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2016, 3, 2);
 
@@ -266,12 +266,12 @@ describe('datepicker: <uif-datepicker />', () => {
         $scope.$digest();
 
         // initially should not be disabled
-        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+        let ngModel: angular.INgModelController = angular.element(datepicker).controller('ngModel');
 
         expect(ngModel.$dirty).toBeFalsy();
     }));
 
-    it('Should not set $touched on ngModel initially', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should not set $touched on ngModel initially', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2016, 3, 2);
 
@@ -279,12 +279,12 @@ describe('datepicker: <uif-datepicker />', () => {
         $scope.$digest();
 
         // initially should not be disabled
-        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+        let ngModel: angular.INgModelController = angular.element(datepicker).controller('ngModel');
 
         expect(ngModel.$touched).toBeFalsy();
     }));
 
-    it('Should set $dirty on ngModel when date changed', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should set $dirty on ngModel when date changed', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2016, 3, 2);
 
@@ -302,13 +302,13 @@ describe('datepicker: <uif-datepicker />', () => {
         expect(new Date($scope.value).getUTCMonth()).toBe(new Date().getMonth(), 'Month Today');
         expect(new Date($scope.value).getUTCFullYear()).toBe(new Date().getFullYear(), 'Year Today');
 
-        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+        let ngModel: angular.INgModelController = angular.element(datepicker).controller('ngModel');
 
         expect(ngModel.$dirty).toBeTruthy();
 
     }));
 
-    it('Should set $touched on ngModel when datepicker opened', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('Should set $touched on ngModel when datepicker opened', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.value = new Date(2016, 3, 2);
 
@@ -322,7 +322,7 @@ describe('datepicker: <uif-datepicker />', () => {
         textField.triggerHandler('click');
         $scope.$digest();
 
-        let ngModel: ng.INgModelController = angular.element(datepicker).controller('ngModel');
+        let ngModel: angular.INgModelController = angular.element(datepicker).controller('ngModel');
 
         expect(ngModel.$touched).toBeTruthy();
 

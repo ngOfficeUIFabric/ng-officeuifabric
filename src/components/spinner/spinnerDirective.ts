@@ -1,5 +1,5 @@
 'use strict';
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {SpinnerSize} from './spinnerSizeEnum';
 
 /**
@@ -19,7 +19,7 @@ import {SpinnerSize} from './spinnerSizeEnum';
  *
  * <uif-spinner></uif-Spinner>
  */
-export class SpinnerDirective implements ng.IDirective {
+export class SpinnerDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = true;
@@ -30,20 +30,20 @@ export class SpinnerDirective implements ng.IDirective {
     'uifSize' : '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new SpinnerDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new SpinnerDirective();
     return directive;
   }
 
   public link(
     scope: ISpinnerScope,
-    instanceElement: ng.IAugmentedJQuery,
+    instanceElement: angular.IAugmentedJQuery,
     attrs: ISpinnerAttributes,
     controller: SpinnerController,
-    $transclude: ng.ITranscludeFunction): void {
+    $transclude: angular.ITranscludeFunction): void {
 
-      if (ng.isDefined(attrs.uifSize) ) {
-        if (ng.isUndefined(SpinnerSize[attrs.uifSize])) {
+      if (angular.isDefined(attrs.uifSize) ) {
+        if (angular.isUndefined(SpinnerSize[attrs.uifSize])) {
 
         controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.spinner - Unsupported size: ' +
           'Spinner size (\'' + attrs.uifSize + '\') is not supported by the Office UI Fabric.');
@@ -66,9 +66,9 @@ export class SpinnerDirective implements ng.IDirective {
         scope.start();
       }
 
-      $transclude((clone: ng.IAugmentedJQuery) => {
+      $transclude((clone: angular.IAugmentedJQuery) => {
         if (clone.length > 0) {
-          let wrapper: ng.IAugmentedJQuery = ng.element('<div></div>');
+          let wrapper: angular.IAugmentedJQuery = angular.element('<div></div>');
           wrapper.addClass('ms-Spinner-label').append(clone);
           instanceElement.append(wrapper);
         }
@@ -92,7 +92,7 @@ export class SpinnerDirective implements ng.IDirective {
  * @property {boolean} ngShow     - Controls visibility of the spinner and triggers animation start/top on change.
  * @property {boolean} uifSize    - Size of the spinner.
  */
-interface ISpinnerScope extends ng.IScope {
+interface ISpinnerScope extends angular.IScope {
   start: () => void;
   stop: () => void;
   init: () => void;
@@ -116,14 +116,14 @@ class SpinnerController {
   private _animationSpeed: number = 90;
   private _circles: CircleObject[] = [];
   private _fadeIncrement: number;
-  private _animationInterval: ng.IPromise<any>;
+  private _animationInterval: angular.IPromise<any>;
   private _parentSize: number;
 
   constructor(
     public $scope: ISpinnerScope,
-    private $element: ng.IAugmentedJQuery,
-    private $interval: ng.IIntervalService,
-    public $log: ng.ILogService) {
+    private $element: angular.IAugmentedJQuery,
+    private $interval: angular.IIntervalService,
+    public $log: angular.ILogService) {
 
     $scope.init = (): void => {
       this._parentSize = SpinnerSize[this.$scope.uifSize] === SpinnerSize.large ? 28 : 20;
@@ -156,7 +156,7 @@ class SpinnerController {
     let radius: number = (this._parentSize - offset) * 0.5;
 
     while (i--) {
-      let circle: ng.IAugmentedJQuery = this.createCircle();
+      let circle: angular.IAugmentedJQuery = this.createCircle();
 
       let x: number = Math.round(this._parentSize * 0.5 + radius * Math.cos(angle) - circle[0].clientWidth * 0.5) - offset * 0.5;
       let y: number = Math.round(this._parentSize * 0.5 + radius * Math.sin(angle) - circle[0].clientHeight * 0.5) - offset * 0.5;
@@ -173,8 +173,8 @@ class SpinnerController {
     }
   }
 
-  private createCircle(): ng.IAugmentedJQuery {
-    let circle: ng.IAugmentedJQuery = ng.element('<div></div>');
+  private createCircle(): angular.IAugmentedJQuery {
+    let circle: angular.IAugmentedJQuery = angular.element('<div></div>');
     let dotSize: string = (this._parentSize * this._offsetSize) + 'px';
     circle.addClass('ms-Spinner-circle').css('width', dotSize).css('height', dotSize);
 
@@ -206,7 +206,7 @@ class SpinnerController {
 
 class CircleObject {
   constructor(
-    public circleElement: ng.IAugmentedJQuery,
+    public circleElement: angular.IAugmentedJQuery,
     public circleIndex: number) {
   }
 
@@ -219,7 +219,7 @@ class CircleObject {
   }
 }
 
-interface ISpinnerAttributes extends ng.IAttributes {
+interface ISpinnerAttributes extends angular.IAttributes {
   uifSize?: string;
   ngShow?: any;
 }
@@ -231,5 +231,5 @@ interface ISpinnerAttributes extends ng.IAttributes {
  * @description
  * Spinner
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.spinner', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.spinner', ['officeuifabric.components'])
   .directive('uifSpinner', SpinnerDirective.factory());

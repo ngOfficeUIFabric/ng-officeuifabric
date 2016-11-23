@@ -13,7 +13,7 @@ import {ScriptUtils, ILibraryDependencies} from './ScriptUtils';
 import * as fs from 'fs';
 import * as yargs from 'yargs';
 let xmldom: any = require('xmldom');
-import * as xpath from 'xpath';
+let xpath: any = require('xmldom');
 
 let argKeys: any = {
   pkg: 'pkg',
@@ -37,7 +37,7 @@ let deps: ILibraryDependencies = ScriptUtils.getDependencies(yargs.argv[argKeys.
 let domParser: DOMParser = new xmldom.DOMParser();
 let packageContents: string = fs.readFileSync(nuspecFile).toString();
 let packageManifest: Document = domParser.parseFromString(packageContents, 'text/xml');
-let query: xpath.SelectFn = xpath.useNamespaces({ nuget: 'http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd' });
+let query: any = xpath.useNamespaces({ nuget: 'http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd' });
 
 // update nuspec
 //  update package version

@@ -3,7 +3,7 @@
         angular.mock.module('officeuifabric.components.dropdown');
     });
 
-    it('should render correct html', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render correct html', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
 
         let dropdown: JQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
@@ -21,7 +21,7 @@
         expect(items.length).toBe(4, 'There should be 4 options');
     }));
 
-    it('should be able to set options', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to set options', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 'Option1'},
@@ -39,7 +39,7 @@
         expect(items.length).toBe(4);
         expect(items[2].innerText).toBe('Option 3');
     }));
-    it('should be able to click the dropdown', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to click the dropdown', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         let dropdown: JQuery = $compile('<uif-dropdown></uif-dropdown>')($scope);
         $scope.$digest();
@@ -59,7 +59,7 @@
         $('html').click();
         expect(div.hasClass('is-open')).toBe(false, 'Should not have class is-open after click on HTML');
     }));
-    it('should be able to select an option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to select an option', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 'Option1'},
@@ -98,7 +98,7 @@
         expect(title.text()).toBe('', 'Displayed text should be empty as selectedValue is an unknown value');
     }));
 
-    it('should be able to disable a select', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to disable a select', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 'Option1'},
@@ -148,7 +148,7 @@
         dropdown.click();
         expect(div.hasClass('is-open')).toBe(false, 'Should be closed as the dropdown is disabled again');
     }));
-    it('should be able to pre-select an option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to pre-select an option', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 'Option1'},
@@ -170,7 +170,7 @@
         expect(title.text()).toBe('Option 2', 'Displayed text should be Option 2');
     }));
 
-    it('should be able to pre-select an integer option', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should be able to pre-select an integer option', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 1},
@@ -192,7 +192,7 @@
         expect(title.text()).toBe('Option 2', 'Displayed text should be Option 2');
     }));
 
-    it('should set $touched on blur', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set $touched on blur', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 'Option1'},
@@ -202,14 +202,14 @@
         ];
         $scope.selectedValue = 'Option2';
 
-        let liteDropdown: ng.IAugmentedJQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
+        let liteDropdown: angular.IAugmentedJQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
             '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}"\
               title="{{option.text}}">{{option.text}}</uif-dropdown-option>' +
             '</uif-dropdown>')($scope);
         $scope.$digest();
         let dropdown: JQuery = jQuery(liteDropdown[0]);
 
-        let ngModelCtrl: ng.INgModelController = angular.element(liteDropdown).controller('ngModel');
+        let ngModelCtrl: angular.INgModelController = angular.element(liteDropdown).controller('ngModel');
         expect(ngModelCtrl.$touched).toBe(false);
 
         dropdown.click();
@@ -220,7 +220,7 @@
         expect(ngModelCtrl.$touched).toBe(true);
     }));
 
-    it('should set $dirty on value change', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set $dirty on value change', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
             { text: 'Option 1', value: 'Option1'},
@@ -230,14 +230,14 @@
         ];
         $scope.selectedValue = 'Option2';
 
-        let liteDropdown: ng.IAugmentedJQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
+        let liteDropdown: angular.IAugmentedJQuery = $compile('<uif-dropdown ng-model="selectedValue">' +
             '<uif-dropdown-option ng-repeat="option in options" value="{{option.value}}"\
               title="{{option.text}}">{{option.text}}</uif-dropdown-option>' +
             '</uif-dropdown>')($scope);
         $scope.$digest();
         let dropdown: JQuery = jQuery(liteDropdown[0]);
 
-        let ngModelCtrl: ng.INgModelController = angular.element(liteDropdown).controller('ngModel');
+        let ngModelCtrl: angular.INgModelController = angular.element(liteDropdown).controller('ngModel');
         expect(ngModelCtrl.$dirty).toBe(false);
 
         let option3: JQuery = jQuery(dropdown.find('li')[2]);

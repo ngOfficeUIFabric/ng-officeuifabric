@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {ListItemSelectModeEnum} from './listItemSelectModeEnum';
 import {ListItemTypeEnum} from './listItemTypeEnum';
 import {ListLayoutEnum} from './listLayoutEnum';
@@ -18,7 +18,7 @@ import {ListLayoutEnum} from './listLayoutEnum';
  * @property {IListItemScope[]} items - Contains the data items that belong to the list
  * @property {any[]} selectedItems    - Contains the list of selected items
  */
-export interface IListScope extends ng.IScope {
+export interface IListScope extends angular.IScope {
     itemSelectMode?: string;
     layout?: string;
     items: IListItemScope[];
@@ -35,7 +35,7 @@ export interface IListScope extends ng.IScope {
 class ListController {
     public static $inject: string[] = ['$scope', '$log'];
 
-    constructor(public $scope: IListScope, public $log: ng.ILogService) {
+    constructor(public $scope: IListScope, public $log: angular.ILogService) {
         this.$scope.items = [];
         if (!this.$scope.selectedItems) {
             this.$scope.selectedItems = [];
@@ -73,7 +73,7 @@ class ListController {
  * @property {string} uifSelectedItems    - Specifies the name of the array used to keep track of the
  *                                          selected items
  */
-export interface IListAttributes extends ng.IAttributes {
+export interface IListAttributes extends angular.IAttributes {
     uifLayout?: string;
     uifItemSelectMode?: string;
     uifSelectedItems?: string;
@@ -118,7 +118,7 @@ export interface IListAttributes extends ng.IAttributes {
  *   </uif-list-item>
  * </uif-list>
  */
-export class ListDirective implements ng.IDirective {
+export class ListDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public replace: boolean = false;
@@ -129,13 +129,13 @@ export class ListDirective implements ng.IDirective {
         selectedItems: '=?uifSelectedItems'
     };
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListDirective();
 
         return directive;
     }
 
-    public link(scope: IListScope, instanceElement: ng.IAugmentedJQuery, attrs: IListAttributes, controller: ListController): void {
+    public link(scope: IListScope, instanceElement: angular.IAugmentedJQuery, attrs: IListAttributes, controller: ListController): void {
         if (attrs.uifLayout !== undefined && attrs.uifLayout !== null) {
             if (ListLayoutEnum[attrs.uifLayout] === undefined) {
                 controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.list. ' +
@@ -185,7 +185,7 @@ export class ListDirective implements ng.IDirective {
  * @property (boolean) unseen              - Specifies whether the particular list item is seen or not
  * @property {(ev: any) => void} itemClick - event handler for clicking the list item
  */
-export interface IListItemScope extends ng.IScope {
+export interface IListItemScope extends angular.IScope {
     item: any;
     selected: boolean;
     type: ListItemTypeEnum;
@@ -204,7 +204,7 @@ export interface IListItemScope extends ng.IScope {
 class ListItemController {
     public static $inject: string[] = ['$scope', '$log'];
 
-    constructor(public $scope: IListItemScope, public $log: ng.ILogService) {
+    constructor(public $scope: IListItemScope, public $log: angular.ILogService) {
     }
 }
 
@@ -222,7 +222,7 @@ class ListItemController {
  * @property {string} uifUnread   - Specifies whether the particular item is read or not
  * @property {string} uifUnseen   - Specifies whether the particular item is seen or not
  */
-export interface IListItemAttributes extends ng.IAttributes {
+export interface IListItemAttributes extends angular.IAttributes {
     uifItem: any;
     uifSelected?: string;
     uifType?: string;
@@ -269,7 +269,7 @@ export interface IListItemAttributes extends ng.IAttributes {
  *   </uif-list-item>
  * </uif-list>
  */
-export class ListItemDirective implements ng.IDirective {
+export class ListItemDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public replace: boolean = false;
@@ -280,13 +280,13 @@ export class ListItemDirective implements ng.IDirective {
     };
     public controller: any = ListItemController;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemDirective();
 
         return directive;
     }
 
-    public link(scope: IListItemScope, instanceElement: ng.IAugmentedJQuery, attrs: IListItemAttributes, list: ListController): void {
+    public link(scope: IListItemScope, instanceElement: angular.IAugmentedJQuery, attrs: IListItemAttributes, list: ListController): void {
         if (attrs.uifSelected !== undefined &&
             attrs.uifSelected !== null) {
             let selectedString: string = attrs.uifSelected.toLowerCase();
@@ -459,14 +459,14 @@ export class ListItemDirective implements ng.IDirective {
  *   <uif-list-item-primary-text>{{message.sender.name}}</uif-list-item-primary-text>
  * </uif-list-item>
  */
-export class ListItemPrimaryTextDirective implements ng.IDirective {
+export class ListItemPrimaryTextDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<span class="ms-ListItem-primaryText" ng-transclude></span>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemPrimaryTextDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemPrimaryTextDirective();
 
         return directive;
     }
@@ -490,14 +490,14 @@ export class ListItemPrimaryTextDirective implements ng.IDirective {
  *   <uif-list-item-secondary-text>{{message.sender.name}}</uif-list-item-secondary-text>
  * </uif-list-item>
  */
-export class ListItemSecondaryTextDirective implements ng.IDirective {
+export class ListItemSecondaryTextDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<span class="ms-ListItem-secondaryText" ng-transclude></span>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemSecondaryTextDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemSecondaryTextDirective();
 
         return directive;
     }
@@ -521,14 +521,14 @@ export class ListItemSecondaryTextDirective implements ng.IDirective {
  *   <uif-list-item-tertiary-text>{{message.sender.name}}</uif-list-item-tertiary-text>
  * </uif-list-item>
  */
-export class ListItemTertiaryTextDirective implements ng.IDirective {
+export class ListItemTertiaryTextDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<span class="ms-ListItem-tertiaryText" ng-transclude></span>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemTertiaryTextDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemTertiaryTextDirective();
 
         return directive;
     }
@@ -552,14 +552,14 @@ export class ListItemTertiaryTextDirective implements ng.IDirective {
  *   <uif-list-item-meta-text>{{message.sender.name}}</uif-list-item-meta-text>
  * </uif-list-item>
  */
-export class ListItemMetaTextDirective implements ng.IDirective {
+export class ListItemMetaTextDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<span class="ms-ListItem-metaText" ng-transclude></span>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemMetaTextDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemMetaTextDirective();
 
         return directive;
     }
@@ -587,14 +587,14 @@ export class ListItemMetaTextDirective implements ng.IDirective {
  *   </uif-list-item-image>
  * </uif-list-item>
  */
-export class ListItemImageDirective implements ng.IDirective {
+export class ListItemImageDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<div class="ms-ListItem-image" ng-transclude></div>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemImageDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemImageDirective();
 
         return directive;
     }
@@ -622,14 +622,14 @@ export class ListItemImageDirective implements ng.IDirective {
  *   </uif-list-item-icon>
  * </uif-list-item>
  */
-export class ListItemIconDirective implements ng.IDirective {
+export class ListItemIconDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<div class="ms-ListItem-itemIcon" ng-transclude></div>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemIconDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemIconDirective();
 
         return directive;
     }
@@ -654,14 +654,14 @@ export class ListItemIconDirective implements ng.IDirective {
  *   <uif-list-item-selection-target></uif-list-item-selection-target>
  * </uif-list-item>
  */
-export class ListItemSelectionTargetDirective implements ng.IDirective {
+export class ListItemSelectionTargetDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<div class="ms-ListItem-selectionTarget" ng-transclude></div>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemSelectionTargetDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemSelectionTargetDirective();
 
         return directive;
     }
@@ -696,14 +696,14 @@ export class ListItemSelectionTargetDirective implements ng.IDirective {
  *   </uif-list-item-actions>
  * </uif-list-item>
  */
-export class ListItemActionsDirective implements ng.IDirective {
+export class ListItemActionsDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<div class="ms-ListItem-actions" ng-transclude></div>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemActionsDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemActionsDirective();
 
         return directive;
     }
@@ -732,14 +732,14 @@ export class ListItemActionsDirective implements ng.IDirective {
  *   </uif-list-item-actions>
  * </uif-list-item>
  */
-export class ListItemActionDirective implements ng.IDirective {
+export class ListItemActionDirective implements angular.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<div class="ms-ListItem-action" ng-transclude></div>';
     public replace: boolean = false;
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = () => new ListItemActionDirective();
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = () => new ListItemActionDirective();
 
         return directive;
     }
@@ -752,7 +752,7 @@ export class ListItemActionDirective implements ng.IDirective {
  * @description
  * List
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.list', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.list', ['officeuifabric.components'])
     .directive('uifList', ListDirective.factory())
     .directive('uifListItem', ListItemDirective.factory())
     .directive('uifListItemPrimaryText', ListItemPrimaryTextDirective.factory())

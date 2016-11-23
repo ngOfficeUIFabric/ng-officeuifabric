@@ -1,7 +1,7 @@
 
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import { MessageBarTypeEnum } from './messageBarTypeEnum';
 
 
@@ -14,7 +14,7 @@ import { MessageBarTypeEnum } from './messageBarTypeEnum';
  */
 export class MessageBarController {
   public static $inject: string[] = ['$scope', '$log'];
-  constructor(public $scope: IMessageBarScope, public $log: ng.ILogService) {
+  constructor(public $scope: IMessageBarScope, public $log: angular.ILogService) {
   }
 }
 
@@ -31,7 +31,7 @@ export class MessageBarController {
  * @property {String} iconType                  - Conditional class for adding type specific icons
  *
  */
-export interface IMessageBarScope extends ng.IScope {
+export interface IMessageBarScope extends angular.IScope {
   uifType: MessageBarTypeEnum;
   classType: string;
   iconType: string;
@@ -48,7 +48,7 @@ export interface IMessageBarScope extends ng.IScope {
  * @property {MessageBarTypeEnum} uifType       - Type of the message bar - Possible types are defined in {@link MessageBarTypeEnum}
  *
  */
-export interface IMessageBarAttributes extends ng.IAttributes {
+export interface IMessageBarAttributes extends angular.IAttributes {
   uifType: MessageBarTypeEnum;
 }
 
@@ -72,7 +72,7 @@ export interface IMessageBarAttributes extends ng.IAttributes {
  *  <uif-link ng-href="http://ngofficeuifabric.com">Link text</uif-link>
  * </uif-message-bar>
  */
-export class MessageBarDirective implements ng.IDirective {
+export class MessageBarDirective implements angular.IDirective {
   public controller: typeof MessageBarController = MessageBarController;
 
   public restrict: string = 'E';
@@ -95,21 +95,21 @@ export class MessageBarDirective implements ng.IDirective {
   };
 
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory =
-      ($log: ng.ILogService, $timeout: ng.ITimeoutService) =>
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory =
+      ($log: angular.ILogService, $timeout: angular.ITimeoutService) =>
         new MessageBarDirective($log, $timeout);
     directive.$inject = ['$log', '$timeout'];
     return directive;
   }
 
-  constructor(private $log: ng.ILogService, private $timeout: ng.ITimeoutService) {
+  constructor(private $log: angular.ILogService, private $timeout: angular.ITimeoutService) {
   };
 
-  public link: ng.IDirectiveLinkFn = (
-    $scope: IMessageBarScope, $element: ng.IAugmentedJQuery,
+  public link: angular.IDirectiveLinkFn = (
+    $scope: IMessageBarScope, $element: angular.IAugmentedJQuery,
     $attrs: IMessageBarAttributes, $controller: MessageBarController,
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     // setting defaults
     $scope.iconType = 'ms-Icon--infoCircle';
@@ -157,10 +157,10 @@ export class MessageBarDirective implements ng.IDirective {
 
   private transcludeChilds(
     $scope: IMessageBarScope,
-    $element: ng.IAugmentedJQuery,
-    $transclude: ng.ITranscludeFunction): void {
+    $element: angular.IAugmentedJQuery,
+    $transclude: angular.ITranscludeFunction): void {
 
-    $transclude((clone: ng.IAugmentedJQuery) => {
+    $transclude((clone: angular.IAugmentedJQuery) => {
 
       let hasContent: boolean = this.hasItemContent(clone, 'uif-content');
 
@@ -176,14 +176,14 @@ export class MessageBarDirective implements ng.IDirective {
   }
 
   private insertItemContent(
-    clone: ng.IAugmentedJQuery, $scope: IMessageBarScope,
-    $element: ng.IAugmentedJQuery): void {
+    clone: angular.IAugmentedJQuery, $scope: IMessageBarScope,
+    $element: angular.IAugmentedJQuery): void {
 
     let contentElement: JQuery = angular.element($element[0].querySelector('.ms-MessageBar-text'));
 
     if (this.hasItemContent(clone, 'uif-content')) { /* content element provided */
       for (let i: number = 0; i < clone.length; i++) {
-        let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+        let element: angular.IAugmentedJQuery = angular.element(clone[i]);
         if (element.hasClass('uif-content')) {
           contentElement.append(element);
           break;
@@ -193,7 +193,7 @@ export class MessageBarDirective implements ng.IDirective {
 
     if (this.hasItemContent(clone, 'ms-Link')) { /* link element provided */
       for (let i: number = 0; i < clone.length; i++) {
-        let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+        let element: angular.IAugmentedJQuery = angular.element(clone[i]);
         if (element.hasClass('ms-Link')) {
           contentElement.append(angular.element('<br />'));
           contentElement.append(element);
@@ -204,10 +204,10 @@ export class MessageBarDirective implements ng.IDirective {
   }
 
   private hasItemContent(
-    clone: ng.IAugmentedJQuery,
+    clone: angular.IAugmentedJQuery,
     selector: string): boolean {
     for (let i: number = 0; i < clone.length; i++) {
-      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      let element: angular.IAugmentedJQuery = angular.element(clone[i]);
       if (element.hasClass(selector)) {
         return true;
       }
@@ -227,6 +227,6 @@ export class MessageBarDirective implements ng.IDirective {
  * @requires OfficeUiFabric > 2.6.0
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.messagebar', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.messagebar', ['officeuifabric.components'])
   .directive('uifMessageBar', MessageBarDirective.factory());
 

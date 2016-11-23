@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -12,7 +12,7 @@ import * as ng from 'angular';
  *
  * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
  */
-export interface IProgressIndicatorScope extends ng.IScope {
+export interface IProgressIndicatorScope extends angular.IScope {
     uifName: string;
     uifDescription: string;
     uifPercentComplete: number;
@@ -35,9 +35,9 @@ export interface IProgressIndicatorScope extends ng.IScope {
  * <uif-progress-indicator uif-name="MyDocument.docx" uif-description="This is a sample document."
  *  uif-percent-complete="65"></uif-progress-indicator>
  */
-export class ProgressIndicatorDirective implements ng.IDirective {
+export class ProgressIndicatorDirective implements angular.IDirective {
 
-    public static log: ng.ILogService;
+    public static log: angular.ILogService;
 
     public restrict: string = 'E';
     public template: string = '<div class="ms-ProgressIndicator">' +
@@ -54,13 +54,13 @@ export class ProgressIndicatorDirective implements ng.IDirective {
         uifPercentComplete: '@'
     };
 
-    public static factory(): ng.IDirectiveFactory {
-        const directive: ng.IDirectiveFactory = (log: ng.ILogService) => new ProgressIndicatorDirective(log);
+    public static factory(): angular.IDirectiveFactory {
+        const directive: angular.IDirectiveFactory = (log: angular.ILogService) => new ProgressIndicatorDirective(log);
         directive.$inject = ['$log'];
         return directive;
     }
 
-    public constructor(public log: ng.ILogService) {
+    public constructor(public log: angular.ILogService) {
         ProgressIndicatorDirective.log = log;
     }
 
@@ -95,7 +95,7 @@ export class ProgressIndicatorDirective implements ng.IDirective {
  * Overlay
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.progressindicator', [
+export let module: angular.IModule = angular.module('officeuifabric.components.progressindicator', [
     'officeuifabric.components'
 ])
     .directive('uifProgressIndicator', ProgressIndicatorDirective.factory());

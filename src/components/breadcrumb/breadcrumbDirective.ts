@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -13,7 +13,7 @@ import * as ng from 'angular';
  * @property {string} ngHref          - The link target
  *
  */
-export interface IBreadcrumbLinkScope extends ng.IScope {
+export interface IBreadcrumbLinkScope extends angular.IScope {
   ngHref: string;
   uifTabindex: number;
 }
@@ -35,7 +35,7 @@ export interface IBreadcrumbLinkScope extends ng.IScope {
  *   <uif-breadcrumb-link ng-href="https://office.com">Office</uif-breadcrumb-link>
  * </uif-breadcrumb>
  */
-export class BreadcrumbLinkDirective implements ng.IDirective {
+export class BreadcrumbLinkDirective implements angular.IDirective {
   public restrict: string = 'E';
   public require: string = '^uifBreadcrumb';
   public transclude: boolean = true;
@@ -49,16 +49,16 @@ export class BreadcrumbLinkDirective implements ng.IDirective {
     ngHref: '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new BreadcrumbLinkDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new BreadcrumbLinkDirective();
     return directive;
   }
   public link(
     scope: IBreadcrumbLinkScope,
-    instanceElement: ng.IAugmentedJQuery,
+    instanceElement: angular.IAugmentedJQuery,
     attributes: any,
     ctrl: BreadcrumbController,
-    transclude: ng.ITranscludeFunction): void {
+    transclude: angular.ITranscludeFunction): void {
 
     let tabindex: number = Array.prototype.indexOf.call(instanceElement.parent().children(), instanceElement[0]) + 2;
     scope.uifTabindex = tabindex;
@@ -97,13 +97,13 @@ export class BreadcrumbLink {
  *                                          Returns true if there are such elements, false otherwise.
  * @property {function} adjustVisibleElements - Determine visible elements count based on size
  */
-export interface IBreadcrumbScope extends ng.IScope {
+export interface IBreadcrumbScope extends angular.IScope {
   uifBreadcrumbLinks: BreadcrumbLink[];
   visibleElements: number;
   overflowElements: () => number;
 
   overflowMenuOpen: boolean;
-  openOverflow: (event: ng.IAngularEvent) => void;
+  openOverflow: (event: angular.IAngularEvent) => void;
   isOverflow: () => boolean;
 
   onResize: () => void;
@@ -120,7 +120,7 @@ export class BreadcrumbController {
   public static $inject: string[] = ['$scope', '$document', '$window'];
 
   // private static _breakingWidth: number = 639;
-  constructor(public $scope: IBreadcrumbScope, public $document: ng.IDocumentService, public $window: ng.IWindowService) { }
+  constructor(public $scope: IBreadcrumbScope, public $document: angular.IDocumentService, public $window: angular.IWindowService) { }
 }
 
 /**
@@ -141,7 +141,7 @@ export class BreadcrumbController {
  * </uif-breadcrumb>
  */
 
-export class BreadcrumbDirective implements ng.IDirective {
+export class BreadcrumbDirective implements angular.IDirective {
   public restrict: string = 'E';
   public replace: boolean = true;
   public template: string = `
@@ -171,14 +171,14 @@ export class BreadcrumbDirective implements ng.IDirective {
   };
   private SMALL_BREAK_POINT: number = 639;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new BreadcrumbDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new BreadcrumbDirective();
     return directive;
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: IBreadcrumbScope,
-    $instanceElement: ng.IAugmentedJQuery,
+    $instanceElement: angular.IAugmentedJQuery,
     $attrs: any,
     $breadcrumbController: BreadcrumbController): void => {
 
@@ -187,7 +187,7 @@ export class BreadcrumbDirective implements ng.IDirective {
 
     $scope.isOverflow = () => {
       let overflow: boolean = false;
-      overflow = ng.isDefined($scope.uifBreadcrumbLinks) && $scope.uifBreadcrumbLinks.length > $scope.visibleElements;
+      overflow = angular.isDefined($scope.uifBreadcrumbLinks) && $scope.uifBreadcrumbLinks.length > $scope.visibleElements;
       return overflow;
     };
 
@@ -195,12 +195,12 @@ export class BreadcrumbDirective implements ng.IDirective {
       return $scope.isOverflow() ? $scope.uifBreadcrumbLinks.length - $scope.visibleElements : 0;
     };
 
-    $scope.openOverflow = (event: ng.IAngularEvent) => {
+    $scope.openOverflow = (event: angular.IAngularEvent) => {
       event.stopPropagation();
       $scope.overflowMenuOpen = true;
     };
 
-    ng.element($breadcrumbController.$window).bind('resize', () => {
+    angular.element($breadcrumbController.$window).bind('resize', () => {
       $scope.onResize();
       $scope.$digest();
     });
@@ -233,6 +233,6 @@ export class BreadcrumbDirective implements ng.IDirective {
  * @description
  * Breadcrumb
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.breadcrumb', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.breadcrumb', ['officeuifabric.components'])
   .directive('uifBreadcrumb', BreadcrumbDirective.factory())
   .directive('uifBreadcrumbLink', BreadcrumbLinkDirective.factory());

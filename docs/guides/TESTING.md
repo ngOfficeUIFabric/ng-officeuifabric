@@ -36,15 +36,19 @@ This will setup watcher and open Chrome for convenient debugging.
 ## Using jQuery in tests
 We are not relying on jQuery in our library, that's why all elements in directives are wrapped in jqLite object and not jQuery. jqLite has limited functionality in comparison to jQuery and we made it possible to use jQuery and jasmine-jquery library in your specs.
 In Karma jQuery loaded after angular.js and is accessible from your code. For easier DOM manipulation and assertions you can wrap element in jQuery object manually:
+
 ```javascript
 let $element = $compile('<your directive>')($scope);// <<---- $element is jqLite instance
 $element = jQuery($element[0]);// <<---- $element is jQuery instance
 ```
+
 manipulate your jQuery object:
+
 ```javascript
 let child = $element.find('div.child');// <<--- works with jQuery, not works with jqLite
 expect(child).toHaveClass('active');// <<---- jasmine-jquery assertion
 ```
+
 **Note** on using mouse events with jQuery in your specs. For handling mouse events from jQuery object we included a special fix for PhantomJS browser, because it has an issue with raising this events. If you are experience a problem with raising event from jQuery object, you still can use native angular's jqLite event trigger, i.e. `$element.triggerHandler('click')`.
 
 ## Test Validation

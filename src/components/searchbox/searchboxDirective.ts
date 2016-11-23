@@ -1,5 +1,5 @@
 ﻿'use strict';
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -12,7 +12,7 @@ import * as ng from 'angular';
  * @property {string} placeholder - A placeholder to display over the input. Will hide as soon as a user clicks on the input.
  * @property {string} value       - The scope variable to bind to the text input.
  */
-interface ISearchBoxScope extends ng.IScope {
+interface ISearchBoxScope extends angular.IScope {
 
   btnMousedown: () => void;
   inputFocus: () => void;
@@ -42,7 +42,7 @@ interface ISearchBoxScope extends ng.IScope {
  *
  * <uif-searchbox value="" placeholder="" />
  */
-export class SearchBoxDirective implements ng.IDirective {
+export class SearchBoxDirective implements angular.IDirective {
 
   public template: string = '<div class="ms-SearchBox" ng-class="{\'is-active\':isActive, \'is-disabled\':isDisabled}">' +
   '<input class="ms-SearchBox-field" ng-focus="inputFocus()" ng-blur="inputBlur()"' +
@@ -59,16 +59,16 @@ export class SearchBoxDirective implements ng.IDirective {
     value: '=?ngModel'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new SearchBoxDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new SearchBoxDirective();
 
     return directive;
   }
 
-  public link(scope: ISearchBoxScope, elem: ng.IAugmentedJQuery, attrs: ng.IAttributes, controllers: any[]): void {
+  public link(scope: ISearchBoxScope, elem: angular.IAugmentedJQuery, attrs: angular.IAttributes, controllers: any[]): void {
 
-    let ngModelCtrl: ng.INgModelController;
-    if (ng.isDefined(controllers) && controllers.length > 0) {
+    let ngModelCtrl: angular.INgModelController;
+    if (angular.isDefined(controllers) && controllers.length > 0) {
       ngModelCtrl = controllers[0];
     }
 
@@ -151,5 +151,5 @@ export class SearchBoxDirective implements ng.IDirective {
  * Searchbox
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
   .directive('uifSearchbox', SearchBoxDirective.factory());

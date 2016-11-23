@@ -2,7 +2,7 @@
 
 /**
  * Enum for supported styles of persona-based components: Persona, PersonaCard & OrgChart.
- * This enum is intended to be used as a string.
+ * This enum is intended to be used as a striangular.
  *
  * @readonly
  * @enum {string}

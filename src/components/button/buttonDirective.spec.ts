@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {ButtonTypeEnum} from './buttonTypeEnum';
 
 describe('buttonDirective: <uif-button />', () => {
@@ -19,9 +19,9 @@ describe('buttonDirective: <uif-button />', () => {
    */
   describe('buttonDescriptionDirective: <uif-button-description />', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       let html: string = '<uif-button-description>Lorem Ipsum</uif-button>';
       scope = $rootScope;
 
@@ -66,9 +66,9 @@ describe('buttonDirective: <uif-button />', () => {
    */
   describe('rendered as <button>', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       let html: string = '<uif-button>Lorem Ipsum</uif-button>';
       scope = $rootScope;
 
@@ -107,7 +107,7 @@ describe('buttonDirective: <uif-button />', () => {
     });
 
     // should not throw an error when null button type enum passed in
-    it('should not log error on null button types', inject(($log: ng.ILogService, $compile: Function) => {
+    it('should not log error on null button types', inject(($log: angular.ILogService, $compile: Function) => {
       // create button with no attributes
       let html: string = '<uif-button>Lorem Ipsum</uif-button>';
       $compile(html)(scope);
@@ -118,7 +118,7 @@ describe('buttonDirective: <uif-button />', () => {
     }));
 
     // should not throw an error when valid button type enum passed in
-    it('should not log error on valid button types', inject(($log: ng.ILogService, $compile: Function) => {
+    it('should not log error on valid button types', inject(($log: angular.ILogService, $compile: Function) => {
       let html: string = '';
 
       // create buttons for each enum option
@@ -134,7 +134,7 @@ describe('buttonDirective: <uif-button />', () => {
     }));
 
     // should log an error when invalid button type passed specified
-    it('should log error on invalid button types', inject(($log: ng.ILogService, $compile: Function) => {
+    it('should log error on invalid button types', inject(($log: angular.ILogService, $compile: Function) => {
       // check no error when no type specified
       let html: string = '<uif-button uif-type="INVALID">Lorem Ipsum</uif-button>';
       $compile(html)(scope);
@@ -294,7 +294,7 @@ describe('buttonDirective: <uif-button />', () => {
       }));
 
       // the icon specified should not be rendered (primary doesn't support icon)
-      it('should log error when icon specified', inject(($log: ng.ILogService, $compile: Function) => {
+      it('should log error when icon specified', inject(($log: angular.ILogService, $compile: Function) => {
         // expected rendered HTML:
         // <button class="ms-Button ms-Button--primary">
         //   <span class="ms-Button-label">Button as &lt;button&gt;</span>
@@ -355,7 +355,7 @@ describe('buttonDirective: <uif-button />', () => {
         expect(buttonElement.children('span.ms-Button-icon').length).toBe(1);
       }));
 
-      it('should not log error when icon specified', inject(($log: ng.ILogService, $compile: Function) => {
+      it('should not log error when icon specified', inject(($log: angular.ILogService, $compile: Function) => {
         // expected rendered HTML:
         // <button class="ms-Button ms-Button--command">
         //   <span class="ms-Button-icon"><uif-icon uif-type="plus"></uif-icon></span>
@@ -497,9 +497,9 @@ describe('buttonDirective: <uif-button />', () => {
    */
   describe('rendered as <a>', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
       let html: string = '<uif-button ng-href="http://ngOfficeUiFabric.com">Lorem Ipsum</uif-button>';
       scope = $rootScope;
 
@@ -540,7 +540,7 @@ describe('buttonDirective: <uif-button />', () => {
     });
 
     // should not throw an error when valid button type enum passed in
-    it('should not log error on null button types', inject(($log: ng.ILogService, $compile: Function) => {
+    it('should not log error on null button types', inject(($log: angular.ILogService, $compile: Function) => {
       // check no error when no type specified
       let html: string = '<uif-button ng-href="http://ngOfficeUiFabric.com">Lorem Ipsum</uif-button>';
       $compile(html)(scope);
@@ -550,7 +550,7 @@ describe('buttonDirective: <uif-button />', () => {
     }));
 
     // should not throw an error when valid button type enum passed in
-    it('should not log error on valid button types', inject(($log: ng.ILogService, $compile: Function) => {
+    it('should not log error on valid button types', inject(($log: angular.ILogService, $compile: Function) => {
       let html: string = '';
       // for all enum options...
       // check no error when no type specified
@@ -566,7 +566,7 @@ describe('buttonDirective: <uif-button />', () => {
     }));
 
     // should throw an error when invalid button type passed in
-    it('should log error on invalid button types', inject(($log: ng.ILogService, $compile: Function) => {
+    it('should log error on invalid button types', inject(($log: angular.ILogService, $compile: Function) => {
       // check no error when no type specified
       let html: string = '<uif-button uif-type="INVALID" ng-href="http://ngOfficeUiFabric.com">Lorem Ipsum</uif-button>';
       $compile(html)(scope);
@@ -725,7 +725,7 @@ describe('buttonDirective: <uif-button />', () => {
       }));
 
       // the icon specified should not be rendered (primary doesn't support icon)
-      it('should log error when icon specified', inject(($log: ng.ILogService, $compile: Function) => {
+      it('should log error when icon specified', inject(($log: angular.ILogService, $compile: Function) => {
         // expected rendered HTML:
         // <a class="ms-Button ms-Button--primary">
         //   <span class="ms-Button-label">Button as &lt;button&gt;</span>
@@ -783,7 +783,7 @@ describe('buttonDirective: <uif-button />', () => {
         expect(linkElement.children('span.ms-Button-icon').length).toBe(1);
       }));
 
-      it('should not log error when icon specified', inject(($log: ng.ILogService, $compile: Function) => {
+      it('should not log error when icon specified', inject(($log: angular.ILogService, $compile: Function) => {
         // expected rendered HTML:
         // <button class="ms-Button ms-Button--command">
         //   <span class="ms-Button-icon"><uif-icon uif-type="plus"></uif-icon></span>

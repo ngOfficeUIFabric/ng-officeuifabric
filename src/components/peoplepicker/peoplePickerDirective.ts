@@ -1,4 +1,4 @@
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 import { PersonaStyleEnum } from '../../core/personaStyleEnum';
 import { PersonaSize } from '../persona/sizeEnum';
@@ -69,8 +69,8 @@ export class PeoplePickerController {
 
   constructor(
     private $scope: IPeoplePickerScope,
-    private $filter: ng.IFilterService,
-    private $element: ng.IAugmentedJQuery) {
+    private $filter: angular.IFilterService,
+    private $element: angular.IAugmentedJQuery) {
   }
 
   public getSelectedPersons(): IPersonPicker[] {
@@ -80,7 +80,7 @@ export class PeoplePickerController {
   public pickerType(): string {
     let type: string = this.$scope.type;
 
-    if (ng.isUndefined(type)) {
+    if (angular.isUndefined(type)) {
       return PeoplePickerTypes[PeoplePickerTypes.grouped];
     }
 
@@ -97,7 +97,7 @@ export class PeoplePickerController {
   }
 
   public bindPeople(query?: string): void {
-    let peopleData: IPersonPicker[] | ng.IPromise<IPersonPicker[]> = this.$scope.peopleCallback()(query);
+    let peopleData: IPersonPicker[] | angular.IPromise<IPersonPicker[]> = this.$scope.peopleCallback()(query);
     peopleData = peopleData || [];
 
     if (peopleData instanceof Array) {                                    // array
@@ -172,7 +172,7 @@ enum PeoplePickerTypes {
  * @property {string} uifType     - People picker type
  * @property {string} ngDisabled  - Disabled state varible name
  */
-interface IPeoplePickerAttributes extends ng.IAttributes {
+interface IPeoplePickerAttributes extends angular.IAttributes {
   uifType: string;
   ngDisabled: string;
 }
@@ -201,9 +201,9 @@ interface IPeoplePickerAttributes extends ng.IAttributes {
  * @property {string} facePileHeader                     - FacePile header, used only in face pile mode
  * @property {boolean} ngDisabled                        - Support for ng-disabled directive
  */
-export interface IPeoplePickerScope extends ng.IScope {
-  ngModel: ng.INgModelController;
-  peopleCallback: () => (query: string) => IPersonPicker[] | ng.IPromise<IPersonPicker[]>;
+export interface IPeoplePickerScope extends angular.IScope {
+  ngModel: angular.INgModelController;
+  peopleCallback: () => (query: string) => IPersonPicker[] | angular.IPromise<IPersonPicker[]>;
   searchQuery: string;
   placeholder: string;
   type: string;
@@ -244,7 +244,7 @@ export interface IPeoplePickerScope extends ng.IScope {
  *   </uif-people-search-more>
  * </uif-people-picker>
  */
-export class PeoplePickerDirective implements ng.IDirective {
+export class PeoplePickerDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifPeoplePicker';
 
@@ -267,19 +267,19 @@ export class PeoplePickerDirective implements ng.IDirective {
 
   private templateTypes: { [peoplePickerType: number]: string } = {};
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = (
-      $document: ng.IDocumentService, $timeout: ng.ITimeoutService, $log: ng.ILogService, $window: ng.IWindowService) =>
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = (
+      $document: angular.IDocumentService, $timeout: angular.ITimeoutService, $log: angular.ILogService, $window: angular.IWindowService) =>
       new PeoplePickerDirective($document, $timeout, $log, $window);
     directive.$inject = ['$document', '$timeout', '$log', '$window'];
     return directive;
   }
 
   constructor(
-    private $document: ng.IDocumentService,
-    private $timeout: ng.ITimeoutService,
-    private $log: ng.ILogService,
-    private $window: ng.IWindowService) {
+    private $document: angular.IDocumentService,
+    private $timeout: angular.ITimeoutService,
+    private $log: angular.ILogService,
+    private $window: angular.IWindowService) {
     this.templateTypes[PeoplePickerTypes.grouped] =
       `<div class="ms-PeoplePicker">
         <div class="ms-PeoplePicker-searchBox">
@@ -421,10 +421,10 @@ export class PeoplePickerDirective implements ng.IDirective {
       </div>`;
   }
 
-  public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: IPeoplePickerAttributes) => {
+  public template: any = ($element: angular.IAugmentedJQuery, $attrs: IPeoplePickerAttributes) => {
     let type: string = $attrs.uifType;
 
-    if (ng.isUndefined(type)) {
+    if (angular.isUndefined(type)) {
       return this.templateTypes[PeoplePickerTypes.grouped];
     }
 
@@ -439,14 +439,14 @@ export class PeoplePickerDirective implements ng.IDirective {
     return this.templateTypes[PeoplePickerTypes[type]];
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: IPeoplePickerScope,
-    $element: ng.IAugmentedJQuery,
+    $element: angular.IAugmentedJQuery,
     $attrs: IPeoplePickerAttributes,
-    ctrls: [ng.INgModelController, PeoplePickerController],
-    $transclude: ng.ITranscludeFunction): void => {
+    ctrls: [angular.INgModelController, PeoplePickerController],
+    $transclude: angular.ITranscludeFunction): void => {
 
-    let ngModelCtrl: ng.INgModelController = ctrls[0];
+    let ngModelCtrl: angular.INgModelController = ctrls[0];
     let peoplePickerCtrl: PeoplePickerController = ctrls[1];
 
     this.initDisabledState($element, $scope, $attrs);
@@ -468,7 +468,7 @@ export class PeoplePickerDirective implements ng.IDirective {
 
     peoplePickerCtrl.search();
 
-    let searchTimeout: ng.IPromise<void> = null;
+    let searchTimeout: angular.IPromise<void> = null;
     $scope.onSearchKeyUp = ($event: KeyboardEvent) => {
       let $searchMore: JQuery = angular.element($element[0].querySelector('.ms-PeoplePicker-searchMore'));
       if ($searchMore.length !== 0) {
@@ -537,7 +537,7 @@ export class PeoplePickerDirective implements ng.IDirective {
     });
 
     if ($scope.type === PeoplePickerTypes[PeoplePickerTypes.facePile]) {
-      $transclude((clone: ng.IAugmentedJQuery) => {
+      $transclude((clone: angular.IAugmentedJQuery) => {
         this.insertFacePileHeader(clone, $scope, $element);
         this.insertFacePileSearchMore(clone, $scope, $element);
       });
@@ -632,11 +632,11 @@ export class PeoplePickerDirective implements ng.IDirective {
     }
   }
 
-  private insertFacePileHeader(clone: ng.IAugmentedJQuery, $scope: IPeoplePickerScope, $element: ng.IAugmentedJQuery): void {
+  private insertFacePileHeader(clone: angular.IAugmentedJQuery, $scope: IPeoplePickerScope, $element: angular.IAugmentedJQuery): void {
     let elementToReplace: JQuery = angular.element($element[0].querySelector('.uif-people-header'));
 
     for (let i: number = 0; i < clone.length; i++) {
-      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      let element: angular.IAugmentedJQuery = angular.element(clone[i]);
       if (element.hasClass('ms-PeoplePicker-selectedCount')) {
         elementToReplace.replaceWith(element);
         break;
@@ -644,11 +644,11 @@ export class PeoplePickerDirective implements ng.IDirective {
     }
   }
 
-  private insertFacePileSearchMore(clone: ng.IAugmentedJQuery, $scope: IPeoplePickerScope, $element: ng.IAugmentedJQuery): void {
+  private insertFacePileSearchMore(clone: angular.IAugmentedJQuery, $scope: IPeoplePickerScope, $element: angular.IAugmentedJQuery): void {
     let elementToReplace: JQuery = angular.element($element[0].querySelector('.uif-search-more'));
 
     for (let i: number = 0; i < clone.length; i++) {
-      let element: ng.IAugmentedJQuery = angular.element(clone[i]);
+      let element: angular.IAugmentedJQuery = angular.element(clone[i]);
       if (element.hasClass('ms-PeoplePicker-searchMore')) {
         elementToReplace.replaceWith(element);
         break;
@@ -698,7 +698,7 @@ export class PeoplePickerDirective implements ng.IDirective {
  * @property {array} people                     - Persons in search results
  * @property {function} expandAdditionalData    - Callback when clicking on "expand" button under search results
  */
-export interface IPeoplePickerResultListScope extends ng.IScope {
+export interface IPeoplePickerResultListScope extends angular.IScope {
   people: IPersonPicker[];
   expandAdditionalData: ($event: MouseEvent) => void;
 }
@@ -725,7 +725,7 @@ export interface IPeoplePickerResultListScope extends ng.IScope {
  *   uif-size="${PersonaSize[PersonaSize.medium]}">
  * </uif-people-picker-result-list>
  */
-export class PeoplePickerResultListDirective implements ng.IDirective {
+export class PeoplePickerResultListDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifPeoplePickerResultList';
 
@@ -780,8 +780,8 @@ export class PeoplePickerResultListDirective implements ng.IDirective {
     pickerType: '@uifPickerType'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PeoplePickerResultListDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PeoplePickerResultListDirective();
 
     return directive;
   }
@@ -790,12 +790,12 @@ export class PeoplePickerResultListDirective implements ng.IDirective {
     //
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: IPeoplePickerResultListScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     peoplePickerCtrl: PeoplePickerController,
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     $scope.expandAdditionalData = ($event: MouseEvent) => {
       $event.stopPropagation();
@@ -827,7 +827,7 @@ export class PeoplePickerResultListDirective implements ng.IDirective {
  * @property {string} pickerType        - Determines people picker type (from parent directive people picker)
  * @property {boolean} disconnected     - Boolean indicating disconnected scenario
  */
-export interface IPeopleSearchMoreScope extends ng.IScope {
+export interface IPeopleSearchMoreScope extends angular.IScope {
   onSearch: ($event: MouseEvent) => void;
   processing: boolean;
   pickerType: string;
@@ -849,7 +849,7 @@ export class PeopleSearchMoreController {
 
   constructor(
     private $scope: IPeopleSearchMoreScope,
-    private $element: ng.IAugmentedJQuery) {
+    private $element: angular.IAugmentedJQuery) {
   }
 
   public isSearching(searching: boolean): void {
@@ -858,7 +858,7 @@ export class PeopleSearchMoreController {
   }
 }
 
-export class PeopleSearchMoreDirective implements ng.IDirective {
+export class PeopleSearchMoreDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifPeopleSearchMore';
 
@@ -907,8 +907,8 @@ export class PeopleSearchMoreDirective implements ng.IDirective {
     disconnected: '=uifDisconnected'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PeopleSearchMoreDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PeopleSearchMoreDirective();
 
     return directive;
   }
@@ -917,12 +917,12 @@ export class PeopleSearchMoreDirective implements ng.IDirective {
     //
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: IPeopleSearchMoreScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     peoplePickerCtrl: PeoplePickerController,
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     $scope.pickerType = peoplePickerCtrl.pickerType();
     $scope.onSearch = ($event: MouseEvent) => {
@@ -945,7 +945,7 @@ export class PeopleSearchMoreDirective implements ng.IDirective {
  * @property {string} searchingForText    - Template for label "Search for"
  * @property {string} searchQuery         - Search query from parent directive, i.e. people picker
  */
-export interface IPrimaryTextScope extends ng.IScope {
+export interface IPrimaryTextScope extends angular.IScope {
   searchingForText: string;
   searchQuery: string;
 }
@@ -963,7 +963,7 @@ export class PrimaryTextController {
 
   constructor(
     private $scope: IPrimaryTextScope) {
-    this.$scope.$on(peopleSearchEventName, ($event: ng.IAngularEvent, query: string) => {
+    this.$scope.$on(peopleSearchEventName, ($event: angular.IAngularEvent, query: string) => {
       this.$scope.searchQuery = query;
     });
   }
@@ -985,7 +985,7 @@ export class PrimaryTextController {
  *
  * <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
  */
-export class PrimaryTextDirective implements ng.IDirective {
+export class PrimaryTextDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifPrimaryText';
 
@@ -1004,8 +1004,8 @@ export class PrimaryTextDirective implements ng.IDirective {
     searchingForText: '@?uifSearchForText'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PrimaryTextDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PrimaryTextDirective();
 
     return directive;
   }
@@ -1014,12 +1014,12 @@ export class PrimaryTextDirective implements ng.IDirective {
     //
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: IPrimaryTextScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     ctrls: [PeopleSearchMoreController, PeoplePickerController],
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
 
     $scope.searchingForText = $scope.searchingForText || 'Searching for';
   }
@@ -1041,7 +1041,7 @@ export class PrimaryTextDirective implements ng.IDirective {
  *
  * <uif-secondary-text>Showing {{sourcePeople.length}} results</uif-secondary-text>
  */
-export class SecondaryTextDirective implements ng.IDirective {
+export class SecondaryTextDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifSecondaryText';
 
@@ -1055,8 +1055,8 @@ export class SecondaryTextDirective implements ng.IDirective {
 
   public scope: boolean = true;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new SecondaryTextDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new SecondaryTextDirective();
 
     return directive;
   }
@@ -1084,7 +1084,7 @@ export class SecondaryTextDirective implements ng.IDirective {
  *             <br> Please try again in a few minutes.
  * </uif-disconnected-text>
  */
-export class DisconnectedTextDirective implements ng.IDirective {
+export class DisconnectedTextDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifDisconnectedText';
 
@@ -1098,8 +1098,8 @@ export class DisconnectedTextDirective implements ng.IDirective {
 
   public scope: boolean = true;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new DisconnectedTextDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new DisconnectedTextDirective();
 
     return directive;
   }
@@ -1129,7 +1129,7 @@ export class DisconnectedTextDirective implements ng.IDirective {
  *      <ng-transclude></ng-transclude>
  * </uif-people-picker-selected>
  */
-export class PeoplePickerSelectedDirective implements ng.IDirective {
+export class PeoplePickerSelectedDirective implements angular.IDirective {
 
   public static directiveName: string = 'uifPeoplePickerSelected';
 
@@ -1167,8 +1167,8 @@ export class PeoplePickerSelectedDirective implements ng.IDirective {
     selectedPeople: '=ngModel'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PeoplePickerSelectedDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PeoplePickerSelectedDirective();
 
     return directive;
   }
@@ -1188,7 +1188,7 @@ export class PeoplePickerSelectedDirective implements ng.IDirective {
  *
  * @property {Array} selectedPersons   - Persons selected in people picker
  */
-export interface ISelectedPeopleHeaderScope extends ng.IScope {
+export interface ISelectedPeopleHeaderScope extends angular.IScope {
   selectedPersons: IPersonPicker[];
 }
 
@@ -1208,7 +1208,7 @@ export interface ISelectedPeopleHeaderScope extends ng.IScope {
  *
  * <uif-selected-people-header>{{selectedPeople.length}} selected person(s)</uif-selected-people-header>
  */
-export class SelectedPeopleHeaderDirective implements ng.IDirective {
+export class SelectedPeopleHeaderDirective implements angular.IDirective {
   public static directiveName: string = 'uifSelectedPeopleHeader';
 
   public require: string = `^^${PeoplePickerDirective.directiveName}`;
@@ -1218,22 +1218,22 @@ export class SelectedPeopleHeaderDirective implements ng.IDirective {
   public scope: boolean = true;
   public template: string = `<span class="ms-PeoplePicker-selectedCount" ng-transclude></span>`;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new SelectedPeopleHeaderDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new SelectedPeopleHeaderDirective();
     return directive;
   }
 
-  public link: ng.IDirectiveLinkFn = (
+  public link: angular.IDirectiveLinkFn = (
     $scope: ISelectedPeopleHeaderScope,
-    $element: ng.IAugmentedJQuery,
-    $attrs: ng.IAttributes,
+    $element: angular.IAugmentedJQuery,
+    $attrs: angular.IAttributes,
     peoplePickerCtrl: PeoplePickerController,
-    $transclude: ng.ITranscludeFunction): void => {
+    $transclude: angular.ITranscludeFunction): void => {
     $scope.selectedPersons = peoplePickerCtrl.getSelectedPersons();
   }
 }
 
-export let module: ng.IModule = ng.module('officeuifabric.components.peoplepicker', [
+export let module: angular.IModule = angular.module('officeuifabric.components.peoplepicker', [
   'officeuifabric.components'])
   .directive(PeoplePickerDirective.directiveName, PeoplePickerDirective.factory())
   .directive(PrimaryTextDirective.directiveName, PrimaryTextDirective.factory())

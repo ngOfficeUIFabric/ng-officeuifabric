@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('messageBannerDirective: <uif-message-banner />', () => {
     let $element: JQuery;
@@ -11,14 +11,14 @@ describe('messageBannerDirective: <uif-message-banner />', () => {
         angular.mock.module('officeuifabric.components.messagebanner');
     });
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-        $element = ng.element(`
-        <uif-message-banner uif-is-visible="toggle" uif-action-label="{{label}}" 
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
+        $element = angular.element(`
+        <uif-message-banner uif-is-visible="toggle" uif-action-label="{{label}}"
         uif-action="customFunction()" uif-on-close="customCloseFunction()">
             <uif-content>
                 {{message}}
             </uif-content>
-        </uif-message-banner>  
+        </uif-message-banner>
         `);
         $scope = $rootScope;
         $compile($element)($scope);
@@ -98,29 +98,29 @@ describe('messageBannerDirective: <uif-message-banner />', () => {
 
     it('should be able to resize the messageBanner', inject(
         (
-            $rootScope: ng.IRootScopeService,
+            $rootScope: angular.IRootScopeService,
             $compile: Function,
-            $window: ng.IWindowService,
-            $controller: ng.IControllerService) => {
+            $window: angular.IWindowService,
+            $controller: angular.IControllerService) => {
 
             let element: JQuery;
 
             let scope: any = $rootScope.$new();
 
-            element = ng.element(`
-        <uif-message-banner uif-is-visible="toggle" uif-action-label="{{label}}" 
+            element = angular.element(`
+        <uif-message-banner uif-is-visible="toggle" uif-action-label="{{label}}"
         uif-action="customFunction()" uif-on-close="customCloseFunction()">
             <uif-content>
                 {{message}}
             </uif-content>
-        </uif-message-banner>  
+        </uif-message-banner>
         `);
             $compile(element)(scope);
             scope.message = 'Lorem ipsum message';
             scope.$digest();
             element = jQuery(element[0]);
 
-            let directiveScope: any = ng.element(element).isolateScope();
+            let directiveScope: any = angular.element(element).isolateScope();
 
             // narrow down window
             directiveScope.onResize(470);

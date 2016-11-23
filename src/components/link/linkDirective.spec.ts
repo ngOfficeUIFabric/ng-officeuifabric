@@ -1,18 +1,18 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('linkDirective: <uif-link />', () => {
     let element: JQuery;
-    let scope: ng.IScope;
+    let scope: angular.IScope;
 
     beforeEach(() => {
         angular.mock.module('officeuifabric.core');
         angular.mock.module('officeuifabric.components.link');
     });
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function) => {
-        element = ng.element('<uif-link ng-href="http://ngofficeuifabric.com">Link Text</uif-link>');
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function) => {
+        element = angular.element('<uif-link ng-href="http://ngofficeuifabric.com">Link Text</uif-link>');
         scope = $rootScope;
         $compile(element)(scope);
         scope.$digest();

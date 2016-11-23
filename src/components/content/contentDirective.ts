@@ -1,4 +1,4 @@
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 /**
  * @ngdoc directive
@@ -17,7 +17,7 @@ import * as ng from 'angular';
  *     <uif-icon uif-type="arrowLeft"></uif-icon>
  * </uif-content>
  */
-export class ContentDirective implements ng.IDirective {
+export class ContentDirective implements angular.IDirective {
   public static directiveName: string = 'uifContent';
 
   public replace: boolean = true;
@@ -26,8 +26,8 @@ export class ContentDirective implements ng.IDirective {
   public scope: boolean = true;
   public template: string = `<span class="uif-content" ng-transclude></span>`;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new ContentDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new ContentDirective();
     return directive;
   }
 }
@@ -40,6 +40,6 @@ export class ContentDirective implements ng.IDirective {
  * Content Module
  *
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.content', [
+export let module: angular.IModule = angular.module('officeuifabric.components.content', [
   'officeuifabric.components'])
   .directive(ContentDirective.directiveName, ContentDirective.factory());

@@ -1,17 +1,17 @@
-import * as ng from 'angular';
+import * as angular from 'angular';
 
 describe('peoplepicker: <uif-people-picker />', () => {
   beforeEach(() => {
-    ng.mock.module('officeuifabric.core');
-    ng.mock.module('officeuifabric.components.peoplepicker');
+    angular.mock.module('officeuifabric.core');
+    angular.mock.module('officeuifabric.components.peoplepicker');
   });
 
   describe('People picker - grouped mode', () => {
     let $element: JQuery;
     let $scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $q: ng.IQService) => {
-      $element = ng.element(`
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $q: angular.IQService) => {
+      $element = angular.element(`
        <uif-people-picker
          ng-disabled="disabled"
          uif-people="onSearch"
@@ -65,7 +65,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
         if (!query) {
           return $scope.people;
         }
-        let deferred: ng.IDeferred<any> = $q.defer();
+        let deferred: angular.IDeferred<any> = $q.defer();
 
         deferred.resolve([$scope.people[1]]);
 
@@ -76,11 +76,11 @@ describe('peoplepicker: <uif-people-picker />', () => {
       $scope.$apply();
     }));
 
-    it('should render .ms-PeoplePicker', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render .ms-PeoplePicker', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       expect($element).toHaveClass('ms-PeoplePicker');
     }));
 
-    it('should add and remove acitve class', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should add and remove acitve class', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();
@@ -93,7 +93,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($element).not.toHaveClass('is-active');
     }));
 
-    it('should render valid disabled states for input', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render valid disabled states for input', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       $scope.disabled = true;
       $scope.$apply();
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
@@ -106,8 +106,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($searchInput).not.toHaveAttr('disabled');
     }));
 
-    it('should not run delayed search', inject(($compile: Function, $rootScope: ng.IRootScopeService,
-      $timeout: ng.ITimeoutService) => {
+    it('should not run delayed search', inject(($compile: Function, $rootScope: angular.IRootScopeService,
+      $timeout: angular.ITimeoutService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
 
       spyOn($scope, 'onSearch');
@@ -121,7 +121,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.onSearch).not.toHaveBeenCalled();
     }));
 
-    it('should fire person click event', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should fire person click event', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();
@@ -139,17 +139,17 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.personClicked).toHaveBeenCalled();
     }));
 
-    it('should set initial selected persons', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set initial selected persons', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       $scope.selectedPeople = [$scope.people[1]];
       $scope.$apply();
       expect($element.find('.ms-PeoplePicker-searchBox .ms-PeoplePicker-persona').length).toBe(1);
     }));
 
-    it('should work with async data', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should work with async data', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchMore: JQuery = $element.find('.ms-PeoplePicker-searchMoreBtn').first();
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.val('search query');
-      ng.element($searchInput[0]).triggerHandler('input');
+      angular.element($searchInput[0]).triggerHandler('input');
       $scope.$apply();
       $searchMore.click();
       $scope.$apply();
@@ -159,7 +159,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
     }));
 
     it('should write an error - invalid people picker type', inject(($compile: Function,
-      $rootScope: ng.IRootScopeService, $log: ng.ILogService) => {
+      $rootScope: angular.IRootScopeService, $log: angular.ILogService) => {
       try {
         $scope = $rootScope.$new();
 
@@ -167,7 +167,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
         $scope.onSearch = () => {
           //
         };
-        $compile(ng.element(`<uif-people-picker uif-people="onSearch" uif-type="undef" ng-model="selected">
+        $compile(angular.element(`<uif-people-picker uif-people="onSearch" uif-type="undef" ng-model="selected">
                           </uif-people-picker>`
         ))($scope);
         $scope.$apply();
@@ -177,14 +177,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
     }));
 
     it('should set disabled on input', inject(($compile: Function,
-      $rootScope: ng.IRootScopeService) => {
+      $rootScope: angular.IRootScopeService) => {
 
       $scope = $rootScope.$new();
 
       $scope.onSearch = () => {
         return [];
       };
-      let $newElement: JQuery = ng.element(`
+      let $newElement: JQuery = angular.element(`
                            <uif-people-picker ng-disabled="true" uif-people="onSearch" ng-model="selected">
                           </uif-people-picker>`);
       $compile($newElement)($scope);
@@ -197,14 +197,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
 
     }));
 
-    it('should set active state for people picker', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should set active state for people picker', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();
       expect($element).toHaveClass('is-active');
     }));
 
-    it('should add person to selected', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should add person to selected', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
@@ -217,7 +217,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.selectedPeople.length).toBe(1);
     }));
 
-    it('should not add person to selected twice', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should not add person to selected twice', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
@@ -233,7 +233,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.selectedPeople.length).toBe(1);
     }));
 
-    it('should remove person from selected', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should remove person from selected', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
@@ -250,7 +250,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.selectedPeople.length).toBe(0);
     }));
 
-    it('should remove person from search results', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should remove person from search results', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       let $searchResultCloseBtn: JQuery = $element.find('.ms-PeoplePicker-resultAction.js-resultRemove').last();
       $searchResultCloseBtn.click();
@@ -259,7 +259,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($results.length).toBe(2);
     }));
 
-    it('should open additional data', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should open additional data', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchResultCloseBtn: JQuery = $element.find('.ms-PeoplePicker-resultAction.js-resultRemove').first();
       $searchResultCloseBtn.click();
       $scope.$apply();
@@ -272,8 +272,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
     let $element: JQuery;
     let $scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $q: ng.IQService) => {
-      $element = ng.element(`
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $q: angular.IQService) => {
+      $element = angular.element(`
        <uif-people-picker uif-type="compact" uif-search-delay="50"
          uif-people="onSearch"
          ng-model="selectedPeople"
@@ -322,7 +322,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
         if (!query) {
           return $scope.people;
         }
-        let deferred: ng.IDeferred<any> = $q.defer();
+        let deferred: angular.IDeferred<any> = $q.defer();
 
         deferred.resolve([$scope.people[1]]);
 
@@ -333,8 +333,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
       $scope.$apply();
     }));
 
-    it('should run delayed search', inject(($compile: Function, $rootScope: ng.IRootScopeService,
-      $timeout: ng.ITimeoutService) => {
+    it('should run delayed search', inject(($compile: Function, $rootScope: angular.IRootScopeService,
+      $timeout: angular.ITimeoutService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
 
       spyOn($scope, 'onSearch');
@@ -348,7 +348,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.onSearch).toHaveBeenCalled();
     }));
 
-    it('should render valid root class', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render valid root class', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       expect($element).toHaveClass('ms-PeoplePicker--compact');
     }));
   });
@@ -357,8 +357,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
     let $element: JQuery;
     let $scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $q: ng.IQService) => {
-      $element = ng.element(`
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $q: angular.IQService) => {
+      $element = angular.element(`
        <uif-people-picker
          uif-people="onSearch"
          ng-model="selectedPeople"
@@ -410,7 +410,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
         if (!query) {
           return $scope.people;
         }
-        let deferred: ng.IDeferred<any> = $q.defer();
+        let deferred: angular.IDeferred<any> = $q.defer();
 
         deferred.resolve([$scope.people[1]]);
 
@@ -421,7 +421,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       $scope.$apply();
     }));
 
-    it('should render valid disconnected class', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render valid disconnected class', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $diconnected: JQuery = $element.find('.ms-PeoplePicker-searchMore.ms-PeoplePicker-searchMore--disconnected');
       expect($diconnected.length).toBe(1);
     }));
@@ -431,8 +431,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
     let $element: JQuery;
     let $scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $q: ng.IQService) => {
-      $element = ng.element(`
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $q: angular.IQService) => {
+      $element = angular.element(`
        <uif-people-picker uif-type="memberList"
          uif-people="onSearch"
          ng-model="selectedPeople"
@@ -468,7 +468,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
         if (!query) {
           return $scope.people;
         }
-        let deferred: ng.IDeferred<any> = $q.defer();
+        let deferred: angular.IDeferred<any> = $q.defer();
 
         deferred.resolve([$scope.people[1]]);
 
@@ -479,7 +479,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
       $scope.$apply();
     }));
 
-    it('should render people list', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render people list', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $diconnected: JQuery = $element.find('.ms-PeoplePicker-selectedPeople');
       expect($diconnected.length).toBe(1);
     }));
@@ -489,8 +489,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
     let $element: JQuery;
     let $scope: any;
 
-    beforeEach(inject(($rootScope: ng.IRootScopeService, $compile: Function, $q: ng.IQService) => {
-      $element = ng.element(`
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $q: angular.IQService) => {
+      $element = angular.element(`
        <uif-people-picker uif-type="facePile"
          uif-people="onSearch"
          ng-model="selectedPeople"
@@ -529,7 +529,7 @@ describe('peoplepicker: <uif-people-picker />', () => {
         if (!query) {
           return $scope.people;
         }
-        let deferred: ng.IDeferred<any> = $q.defer();
+        let deferred: angular.IDeferred<any> = $q.defer();
 
         deferred.resolve([$scope.people[1]]);
 
@@ -540,11 +540,11 @@ describe('peoplepicker: <uif-people-picker />', () => {
       $scope.$apply();
     }));
 
-    it('should render valid markup', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should render valid markup', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       expect($element).toHaveClass('ms-PeoplePicker--Facepile');
     }));
 
-    it('should animate selected people when acitve', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+    it('should animate selected people when acitve', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();

@@ -2,7 +2,7 @@
 
 /**
  * Enum for all possible button types supported by Office UI Fabric. Enums in JavaScript are always indexed but this enum is
- * intended to be used as a string.
+ * intended to be used as a striangular.
  * 
  * @readonly
  * @enum {string}

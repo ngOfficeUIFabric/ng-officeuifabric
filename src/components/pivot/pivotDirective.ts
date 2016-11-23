@@ -1,6 +1,6 @@
 'use strict';
 
-import * as ng from 'angular';
+import * as angular from 'angular';
 import {PivotSize} from './pivotSizeEnum';
 import {PivotType} from './pivotTypeEnum';
 
@@ -15,7 +15,7 @@ import {PivotType} from './pivotTypeEnum';
 export class PivotController {
   public static $inject: string[] = ['$log', '$scope'];
 
-  constructor(public $log: ng.ILogService, public $scope: IPivotScope) {
+  constructor(public $log: angular.ILogService, public $scope: IPivotScope) {
 
     $scope.pivotClick = (index: number) => {
       $scope.uifPivots.forEach((pivotItem: PivotItem, pivotIndex: number) => {
@@ -61,7 +61,7 @@ export class PivotItem {
  *
  * <uif-pivot-ellipsis></uif-pivot-ellipsis>
  */
-export class PivotEllipsisDirective implements ng.IDirective {
+export class PivotEllipsisDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -71,8 +71,8 @@ export class PivotEllipsisDirective implements ng.IDirective {
   '</li>';
   public scope: boolean = false;
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PivotEllipsisDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PivotEllipsisDirective();
     return directive;
   }
 }
@@ -94,7 +94,7 @@ export class PivotEllipsisDirective implements ng.IDirective {
  *
  * <uif-pivot></uif-pivot>
  */
-export class PivotDirective implements ng.IDirective {
+export class PivotDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
@@ -115,31 +115,31 @@ export class PivotDirective implements ng.IDirective {
     uifType: '@'
   };
 
-  public static factory(): ng.IDirectiveFactory {
-    const directive: ng.IDirectiveFactory = () => new PivotDirective();
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new PivotDirective();
     return directive;
   }
 
-  public link(scope: IPivotScope, intanceElement: ng.IAugmentedJQuery, attrs: any, controllers: any): void {
+  public link(scope: IPivotScope, intanceElement: angular.IAugmentedJQuery, attrs: any, controllers: any): void {
 
     let pivotController: PivotController = controllers[0];
 
     scope.$watch('uifSize', (newSize: string) => {
-      if (ng.isDefined(newSize) && ng.isUndefined(PivotSize[newSize])) {
+      if (angular.isDefined(newSize) && angular.isUndefined(PivotSize[newSize])) {
         pivotController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.pivot - Unsupported size: ' +
           '"' + newSize + '" is not a valid value for uifSize. It should be regular or large.');
       }
     });
 
     scope.$watch('uifType', (newType: string) => {
-      if (ng.isDefined(newType) && ng.isUndefined(PivotType[newType])) {
+      if (angular.isDefined(newType) && angular.isUndefined(PivotType[newType])) {
         pivotController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.pivot - Unsupported size: ' +
           '"' + newType + '" is not a valid value for uifType. It should be regular or tabs.');
       }
     });
 
     scope.$watch('uifSelected', (newValue: PivotItem, oldValue: PivotItem) => {
-      if (ng.isDefined(newValue)) {
+      if (angular.isDefined(newValue)) {
 
         scope.uifPivots.forEach((currentPivot: PivotItem) => {
           currentPivot.selected = currentPivot.title === newValue.title;
@@ -185,7 +185,7 @@ export class PivotDirective implements ng.IDirective {
  * @property {function} pivotClick    - click-event handler for pivot elements for selecting proper elements.
  * @property {function} getClasses    - function for dynamic determination of classes for pivot element.
  */
-export interface IPivotScope extends ng.IScope {
+export interface IPivotScope extends angular.IScope {
   uifPivots: PivotItem[];
   uifSelected: PivotItem;
   uifSize: string;
@@ -202,6 +202,6 @@ export interface IPivotScope extends ng.IScope {
  * @description
  * Pivot module
  */
-export let module: ng.IModule = ng.module('officeuifabric.components.pivot', ['officeuifabric.components'])
+export let module: angular.IModule = angular.module('officeuifabric.components.pivot', ['officeuifabric.components'])
   .directive('uifPivot', PivotDirective.factory())
   .directive('uifPivotEllipsis', PivotEllipsisDirective.factory());
