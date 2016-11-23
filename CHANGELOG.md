@@ -1,3 +1,17 @@
+<a name="0.12.10"></a>
+### [0.12.10 - November 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.10)
+
+
+#### Fixes
+
+- **uif-datepicker**
+  - $dirty and $touched handling for uif-datepicker ([620aeb9](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/620aeb9), [#377](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/377) & [#410](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/410))
+- **dependencies**
+  - update dependencies ([04e87f9](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/04e87f9))
+- **type definitions**
+  - removed typings dependency in favor of TypeScript 2+ native typing support ([4abf631](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/4abf631))
+
+
 <a name="0.12.9"></a>
 ### [0.12.9 - October 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.9)
 
@@ -10,7 +24,6 @@
   - resolve selecting all rows ([9e6b2db](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/9e6b2db), [#369](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/369))
 - **dependencies**
   - update dependencies ([d2246aa](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/d2246aa))
-
 
 
 <a name="0.12.8"></a>
