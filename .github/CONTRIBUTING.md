@@ -12,7 +12,7 @@ Please do not open issues for general support questions as the GitHub issues lis
 
 Typos are embarrassing! Most PR's that fix typos will be accepted. In order to make it easier to review the PR, please narrow the focus instead of sending a huge PR of fixes.
 
-Be sure to review the **[Pull Requests](docs/guides/PULL-REQUESTS.md)** page before submitting PRs.
+Be sure to review the **[Pull Requests](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/docs/guides/PULL-REQUESTS.md)** page before submitting PRs.
 
 ## Think You've Found a Bug?
 
@@ -26,8 +26,8 @@ To submit a big or issue, use the [Issues](https://github.com/ngOfficeUIFabric/n
 
 ## DO's & DON'Ts
 
-- **DO** follow the coding style described in the [CODING](docs/guides/CODING.md).
-- **DO** follow the directive checklist described in the [DIRECTIVE-CHECKLIST](docs/guides/DIRECTIVE-CHECKLIST.md); we will check it when you submit a PR that includes a new / updated directive.
+- **DO** follow the coding style described in the [CODING](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/docs/guides/CODING.md).
+- **DO** follow the directive checklist described in the [DIRECTIVE-CHECKLIST](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/docs/guides/DIRECTIVE-CHECKLIST.md); we will check it when you submit a PR that includes a new / updated directive.
 - **DO** follow the same project and test structure as the existing project.
 - **DO** include tests when adding new functionality and features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
 - **DO** keep discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the conversation.
