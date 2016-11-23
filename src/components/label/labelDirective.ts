@@ -65,5 +65,5 @@ export class LabelDirective implements ng.IDirective {
  * @description
  * Label
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.label', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.label', ['officeuifabric.components'])
   .directive('uifLabel', LabelDirective.factory());

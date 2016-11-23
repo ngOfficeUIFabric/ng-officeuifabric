@@ -328,7 +328,7 @@ export class ChoicefieldGroupDirective implements ng.IDirective {
  * ChoiceField
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.choicefield', [
+export let module: ng.IModule = ng.module('officeuifabric.components.choicefield', [
     'officeuifabric.components'
   ])
   .directive('uifChoicefieldOption', ChoicefieldOptionDirective.factory())

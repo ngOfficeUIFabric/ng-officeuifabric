@@ -1,9 +1,9 @@
 import * as ng from 'angular';
 
-import {PersonaStyleEnum} from '../../core/personaStyleEnum';
-import {PersonaSize} from '../persona/sizeEnum';
-import {IPerson} from '../../core/person';
-import {IconEnum} from '../icon/iconEnum';
+import { PersonaStyleEnum } from '../../core/personaStyleEnum';
+import { PersonaSize } from '../persona/sizeEnum';
+import { IPerson } from '../../core/person';
+import { IconEnum } from '../icon/iconEnum';
 
 
 let peopleSearchEventName: string = 'uif-people-search';
@@ -437,7 +437,7 @@ export class PeoplePickerDirective implements ng.IDirective {
     }
 
     return this.templateTypes[PeoplePickerTypes[type]];
-  };
+  }
 
   public link: ng.IDirectiveLinkFn = (
     $scope: IPeoplePickerScope,
@@ -542,8 +542,7 @@ export class PeoplePickerDirective implements ng.IDirective {
         this.insertFacePileSearchMore(clone, $scope, $element);
       });
     }
-
-  };
+  }
 
   private initDisabledState($element: JQuery, $scope: IPeoplePickerScope, $attrs: IPeoplePickerAttributes): void {
     let $searchField: JQuery = angular.element($element[0].querySelector('.ms-PeoplePicker-searchField'));
@@ -812,7 +811,7 @@ export class PeoplePickerResultListDirective implements ng.IDirective {
         $button = $parent;
       }
     };
-  };
+  }
 }
 
 /**
@@ -932,7 +931,7 @@ export class PeopleSearchMoreDirective implements ng.IDirective {
 
       $scope.$broadcast(peopleSearchEventName, peoplePickerCtrl.searchQuery());
     };
-  };
+  }
 }
 
 /**
@@ -1023,7 +1022,7 @@ export class PrimaryTextDirective implements ng.IDirective {
     $transclude: ng.ITranscludeFunction): void => {
 
     $scope.searchingForText = $scope.searchingForText || 'Searching for';
-  };
+  }
 }
 
 /**
@@ -1231,10 +1230,10 @@ export class SelectedPeopleHeaderDirective implements ng.IDirective {
     peoplePickerCtrl: PeoplePickerController,
     $transclude: ng.ITranscludeFunction): void => {
     $scope.selectedPersons = peoplePickerCtrl.getSelectedPersons();
-  };
+  }
 }
 
-export var module: ng.IModule = ng.module('officeuifabric.components.peoplepicker', [
+export let module: ng.IModule = ng.module('officeuifabric.components.peoplepicker', [
   'officeuifabric.components'])
   .directive(PeoplePickerDirective.directiveName, PeoplePickerDirective.factory())
   .directive(PrimaryTextDirective.directiveName, PrimaryTextDirective.factory())

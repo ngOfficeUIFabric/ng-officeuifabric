@@ -42,7 +42,7 @@ import * as peoplePickerModule from '../components/peoplepicker/peoplePickerDire
  * other directives within the library.
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components', [
+export let module: ng.IModule = ng.module('officeuifabric.components', [
   breadcrumbModule.module.name,
   buttonModule.module.name,
   calloutModule.module.name,

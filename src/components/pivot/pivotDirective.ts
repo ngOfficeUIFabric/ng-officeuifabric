@@ -202,6 +202,6 @@ export interface IPivotScope extends ng.IScope {
  * @description
  * Pivot module
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.pivot', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.pivot', ['officeuifabric.components'])
   .directive('uifPivot', PivotDirective.factory())
   .directive('uifPivotEllipsis', PivotEllipsisDirective.factory());

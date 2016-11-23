@@ -231,5 +231,5 @@ interface ISpinnerAttributes extends ng.IAttributes {
  * @description
  * Spinner
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.spinner', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.spinner', ['officeuifabric.components'])
   .directive('uifSpinner', SpinnerDirective.factory());

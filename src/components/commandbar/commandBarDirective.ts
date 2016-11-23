@@ -542,7 +542,7 @@ export class CommandBarItemDirective implements ng.IDirective {
  * CommandBar
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.commandbar', [
+export let module: ng.IModule = ng.module('officeuifabric.components.commandbar', [
     'officeuifabric.components'
   ])
   .directive('uifCommandBar', CommandBarDirective.factory())

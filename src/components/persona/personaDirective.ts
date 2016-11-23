@@ -33,10 +33,10 @@ export class PersonaTextDirective implements ng.IDirective {
   public scope: boolean = false;
 
   private availableClasses: { [directiveType: string]: string } = {
+    'optional': 'ms-Persona-optionalText',
     'primary': 'ms-Persona-primaryText',
     'secondary': 'ms-Persona-secondaryText',
-    'tertiary': 'ms-Persona-tertiaryText',
-    'optional': 'ms-Persona-optionalText'
+    'tertiary': 'ms-Persona-tertiaryText'
   };
 
   public static factory(type: string): ng.IDirectiveFactory {
@@ -48,7 +48,7 @@ export class PersonaTextDirective implements ng.IDirective {
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: any) => {
     let directiveTemplate: string = '<div class="' + this.availableClasses[this.directiveType] + '" ng-transclude></div>';
     return directiveTemplate;
-  };
+  }
 
   public constructor(private directiveType: string) {
     if (ng.isUndefined(this.availableClasses[this.directiveType])) {
@@ -109,7 +109,7 @@ export class PersonaInitialsDirective implements ng.IDirective {
 
     });
 
-  };
+  }
 
 }
 
@@ -174,9 +174,9 @@ export class PersonaDirective implements ng.IDirective {
 
 
   public scope: {} = {
+    'uifImageUrl': '@',
     'uifPresence': '@',
-    'uifSize': '@',
-    'uifImageUrl': '@'
+    'uifSize': '@'
   };
 
   public template: string = '<div class="ms-Persona" ng-class="getPersonaClasses()">' +
@@ -290,7 +290,7 @@ export class PersonaDirective implements ng.IDirective {
         }
       }
     });
-  };
+  }
 }
 
 /**
@@ -354,7 +354,7 @@ export interface IPersonaScope extends ng.IScope {
  * @description
  * Persona
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.persona', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.persona', ['officeuifabric.components'])
   .directive('uifPersona', PersonaDirective.factory())
   .directive('uifPersonaInitials', PersonaInitialsDirective.factory())
   .directive('uifPersonaPrimaryText', PersonaTextDirective.factory('primary'))

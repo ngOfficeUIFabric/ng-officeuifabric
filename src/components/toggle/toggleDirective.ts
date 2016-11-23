@@ -116,7 +116,7 @@ export class ToggleDirective implements ng.IDirective {
  * Toggle
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.toggle', [
+export let module: ng.IModule = ng.module('officeuifabric.components.toggle', [
     'officeuifabric.components'
   ])
   .directive('uifToggle', ToggleDirective.factory());

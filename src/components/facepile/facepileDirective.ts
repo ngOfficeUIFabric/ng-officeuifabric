@@ -191,7 +191,7 @@ export class FacepileAddIconDirective implements ng.IDirective {
  * Facepile
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.facepile', [
+export let module: ng.IModule = ng.module('officeuifabric.components.facepile', [
   'officeuifabric.components'
 ])
 .directive('uifFacepile', FacepileDirective.factory())

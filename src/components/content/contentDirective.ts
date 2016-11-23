@@ -40,6 +40,6 @@ export class ContentDirective implements ng.IDirective {
  * Content Module
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.content', [
+export let module: ng.IModule = ng.module('officeuifabric.components.content', [
   'officeuifabric.components'])
   .directive(ContentDirective.directiveName, ContentDirective.factory());

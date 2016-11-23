@@ -9,10 +9,10 @@ import {ListLayoutEnum} from './listLayoutEnum';
  * @ngdoc interface
  * @name IListScope
  * @module officeuifabric.components.list
- * 
- * @description 
- * Scope used by the list controller. 
- * 
+ *
+ * @description
+ * Scope used by the list controller.
+ *
  * @property {string} itemSelectMode  - Specifies the list item selection mode used by the list
  * @property {string} layout          - Specifies how the list should be rendered
  * @property {IListItemScope[]} items - Contains the data items that belong to the list
@@ -59,10 +59,10 @@ class ListController {
  * @ngdoc interface
  * @name IListAttributes
  * @module officeuifabric.components.list
- * 
- * @description 
- * Attributes used by the list directive. 
- * 
+ *
+ * @description
+ * Attributes used by the list directive.
+ *
  * @property {string} uifLayout           - Specifies how the list is rendered.
  *                                          Possible values: list - items are rendered as a list
  *                                                           grid - items are rendered as a grid
@@ -174,10 +174,10 @@ export class ListDirective implements ng.IDirective {
  * @ngdoc interface
  * @name IListItemScope
  * @module officeuifabric.components.list
- * 
- * @description 
- * Scope used by the list item controller. 
- * 
+ *
+ * @description
+ * Scope used by the list item controller.
+ *
  * @property {any} item                    - Contains data item bound to the list item
  * @property {boolean} selected            - Specifies whether the particular list item is selected or not
  * @property {ListItemTypeEnum} type       - Specifies how the list item should be rendered
@@ -212,15 +212,15 @@ class ListItemController {
  * @ngdoc interface
  * @name IListItemAttributes
  * @module officeuifabric.components.list
- * 
- * @description 
- * Attributes used by the list item directive. 
- * 
+ *
+ * @description
+ * Attributes used by the list item directive.
+ *
  * @property {any} uifItem        - Data item bound to the item
  * @property {string} uifSelected - Specifies whether the particular item is selected or not
  * @property {string} uifType     - Specifies how the item should be rendered
  * @property {string} uifUnread   - Specifies whether the particular item is read or not
- * @property {string} uifUnseen   - Specifies whether the particular item is seen or not 
+ * @property {string} uifUnseen   - Specifies whether the particular item is seen or not
  */
 export interface IListItemAttributes extends ng.IAttributes {
     uifItem: any;
@@ -748,11 +748,11 @@ export class ListItemActionDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.list
- * 
- * @description 
+ *
+ * @description
  * List
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.list', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.list', ['officeuifabric.components'])
     .directive('uifList', ListDirective.factory())
     .directive('uifListItem', ListItemDirective.factory())
     .directive('uifListItemPrimaryText', ListItemPrimaryTextDirective.factory())

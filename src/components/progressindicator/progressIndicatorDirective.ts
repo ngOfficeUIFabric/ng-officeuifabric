@@ -95,7 +95,7 @@ export class ProgressIndicatorDirective implements ng.IDirective {
  * Overlay
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.progressindicator', [
+export let module: ng.IModule = ng.module('officeuifabric.components.progressindicator', [
     'officeuifabric.components'
 ])
     .directive('uifProgressIndicator', ProgressIndicatorDirective.factory());

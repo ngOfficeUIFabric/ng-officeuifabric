@@ -329,7 +329,7 @@ export class CalloutDirective implements ng.IDirective {
  * Callout
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.callout', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.callout', ['officeuifabric.components'])
   .directive('uifCallout', CalloutDirective.factory())
   .directive('uifCalloutHeader', CalloutHeaderDirective.factory())
   .directive('uifCalloutContent', CalloutContentDirective.factory())

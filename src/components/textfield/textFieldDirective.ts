@@ -214,7 +214,7 @@ export class TextFieldDirective implements ng.IDirective {
  * Textfield
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.textfield', [
+export let module: ng.IModule = ng.module('officeuifabric.components.textfield', [
   'officeuifabric.components'
 ])
   .directive('uifTextfield', TextFieldDirective.factory());

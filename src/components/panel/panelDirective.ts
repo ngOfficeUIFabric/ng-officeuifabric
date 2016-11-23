@@ -235,7 +235,7 @@ export class PanelHeaderDirective implements ng.IDirective {
  * Flyout Panel
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.panel', [
+export let module: ng.IModule = ng.module('officeuifabric.components.panel', [
     'officeuifabric.components'
   ])
   .directive('uifPanel', PanelDirective.factory())

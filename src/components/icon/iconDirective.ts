@@ -84,7 +84,7 @@ export class IconDirective implements ng.IDirective {
  * Icon
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.icon', [
+export let module: ng.IModule = ng.module('officeuifabric.components.icon', [
   'officeuifabric.components'
 ])
   .directive('uifIcon', IconDirective.factory());

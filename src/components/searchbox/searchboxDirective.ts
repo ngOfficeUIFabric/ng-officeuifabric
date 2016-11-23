@@ -151,5 +151,5 @@ export class SearchBoxDirective implements ng.IDirective {
  * Searchbox
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.searchbox', ['officeuifabric.components'])
   .directive('uifSearchbox', SearchBoxDirective.factory());

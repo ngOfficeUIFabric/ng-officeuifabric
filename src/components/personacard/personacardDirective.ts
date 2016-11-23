@@ -45,9 +45,9 @@ export class PersonaCardDirective implements ng.IDirective {
   public controller: any = PersonaCardController;
 
   public scope: {} = {
+    'uifImageUrl': '@',
     'uifPresence': '@',
-    'uifSize': '@',
-    'uifImageUrl': '@'
+    'uifSize': '@'
   };
 
   public template: string = '<div class="ms-PersonaCard" ng-class="getPersonaCardClasses()">' +
@@ -230,8 +230,7 @@ export class PersonaCardDirective implements ng.IDirective {
         }
       }
     });
-
-  };
+  }
 
   /**
    * Ensures that proper CSS is attached to the action node and registers action in the controller for rendering.
@@ -423,10 +422,10 @@ export class PersonaCardTextDirective implements ng.IDirective {
   public scope: boolean = false;
 
   private availableClasses: { [directiveType: string]: string } = {
+    'optional': 'ms-Persona-optionalText',
     'primary': 'ms-Persona-primaryText',
     'secondary': 'ms-Persona-secondaryText',
-    'tertiary': 'ms-Persona-tertiaryText',
-    'optional': 'ms-Persona-optionalText'
+    'tertiary': 'ms-Persona-tertiaryText'
   };
 
   public static factory(type: string): ng.IDirectiveFactory {
@@ -438,7 +437,7 @@ export class PersonaCardTextDirective implements ng.IDirective {
   public template: ng.IComponentTemplateFn = ($element: ng.IAugmentedJQuery, $attrs: any) => {
     let directiveTemplate: string = '<div class="' + this.availableClasses[this.directiveType] + '" ng-transclude></div>';
     return directiveTemplate;
-  };
+  }
 
   public constructor(private directiveType: string) {
     if (ng.isUndefined(this.availableClasses[this.directiveType])) {
@@ -495,7 +494,7 @@ export class PersonaCardActionDirective implements ng.IDirective {
     }
 
     return '<li class="ms-PersonaCard-actionDetails" ng-transclude></li>';
-  };
+  }
 
 }
 
@@ -586,7 +585,7 @@ export class PersonaCardDetailLineDirective implements ng.IDirective {
  * @description
  * PersonaCard
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.personacard', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.personacard', ['officeuifabric.components'])
   .directive('uifPersonaCard', PersonaCardDirective.factory())
   .directive('uifPersonaCardAction', PersonaCardActionDirective.factory())
   .directive('uifPersonaCardDetailLabel', PersonaCardDetailLabelDirective.factory())

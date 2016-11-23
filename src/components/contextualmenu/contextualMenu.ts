@@ -109,7 +109,7 @@ export class ContextualMenuItemDirective implements ng.IDirective {
     }
 
     return this.templateTypes[MenuItemTypes[type]];
-  };
+  }
 
   public link: ng.IDirectiveLinkFn = (
     $scope: IContextualMenuItemScope,
@@ -172,7 +172,7 @@ export class ContextualMenuItemDirective implements ng.IDirective {
         $scope.childMenuCtrl.closeMenu();
       }
     });
-  };
+  }
 
   private transcludeChilds($scope: IContextualMenuItemScope, $element: ng.IAugmentedJQuery, $transclude: ng.ITranscludeFunction): void {
     $transclude((clone: ng.IAugmentedJQuery) => {
@@ -464,7 +464,7 @@ export class ContextualMenuController {
  * Contextual Menu Module
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.contextualmenu', [
+export let module: ng.IModule = ng.module('officeuifabric.components.contextualmenu', [
   'officeuifabric.components'])
   .directive(ContextualMenuDirective.directiveName, ContextualMenuDirective.factory())
   .directive(ContextualMenuItemDirective.directiveName, ContextualMenuItemDirective.factory());

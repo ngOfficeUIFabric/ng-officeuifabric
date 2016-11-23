@@ -667,7 +667,7 @@ export class OrgChartGroupByFilter {
  * @description
  * OrgChart
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.orgchart', [
+export let module: ng.IModule = ng.module('officeuifabric.components.orgchart', [
   'officeuifabric.components'
 ])
   .directive('uifOrgChart', OrgChartDirective.factory())

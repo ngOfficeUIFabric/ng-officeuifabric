@@ -152,7 +152,7 @@ export class NavBarDirective implements ng.IDirective {
       let elementToReplace: ng.IAugmentedJQuery = angular.element($element[0].querySelector('.uif-nav-items'));
       elementToReplace.replaceWith(clone);
     });
-  };
+  }
 
   constructor(private $log: ng.ILogService, private $animate: ng.animate.IAnimateService, private $document: ng.IDocumentService) { }
 }
@@ -317,7 +317,7 @@ export class NavBarItemDirective implements ng.IDirective {
     }
 
     return this.templateTypes[NavBarItemTypes[type]];
-  };
+  }
 
   public link: ng.IDirectiveLinkFn = (
     $scope: INavBarItemScope,
@@ -375,7 +375,7 @@ export class NavBarItemDirective implements ng.IDirective {
         $element.removeClass('is-selected');
       });
     }
-  };
+  }
 
   private transcludeChilds($scope: INavBarItemScope, $element: ng.IAugmentedJQuery, $transclude: ng.ITranscludeFunction): void {
     $transclude((clone: ng.IAugmentedJQuery) => {
@@ -562,7 +562,7 @@ export class NavBarSearch implements ng.IDirective {
 
       $event.stopPropagation();
     };
-  };
+  }
 
   private applyCssClasses($element: ng.IAugmentedJQuery): void {
     if (!$element.hasClass('is-open')) {
@@ -587,7 +587,7 @@ export class NavBarSearch implements ng.IDirective {
  * NavBar Module
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.navbar', [
+export let module: ng.IModule = ng.module('officeuifabric.components.navbar', [
   'officeuifabric.components'])
   .directive(NavBarDirective.directiveName, NavBarDirective.factory())
   .directive(NavBarItemDirective.directiveName, NavBarItemDirective.factory())

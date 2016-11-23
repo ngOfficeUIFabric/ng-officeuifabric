@@ -134,7 +134,7 @@ export class ButtonDirective implements ng.IDirective {
           ? this.templateOptions[ButtonTemplateType.actionButton]
           : this.templateOptions[ButtonTemplateType.actionLink];
     }
-  };
+  }
 
   public compile(element: ng.IAugmentedJQuery,
                  attrs: IButtonAttributes,
@@ -338,7 +338,7 @@ export class ButtonDescriptionDirective implements ng.IDirective {
  * Button
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.button', [
+export let module: ng.IModule = ng.module('officeuifabric.components.button', [
   'officeuifabric.components'
 ])
   .directive('uifButton', ButtonDirective.factory())

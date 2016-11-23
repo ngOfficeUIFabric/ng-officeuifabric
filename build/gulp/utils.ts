@@ -55,6 +55,6 @@ export class Utils {
     }
 
     return childProcess.spawn(command, ['-c', args], { env: process.env, stdio: 'inherit' });
-  };
+  }
 
 }

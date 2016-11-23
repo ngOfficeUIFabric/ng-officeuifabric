@@ -91,7 +91,7 @@ export class OverlayDirective implements ng.IDirective {
  * Overlay
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.overlay', [
+export let module: ng.IModule = ng.module('officeuifabric.components.overlay', [
     'officeuifabric.components'
 ])
     .directive('uifOverlay', OverlayDirective.factory());

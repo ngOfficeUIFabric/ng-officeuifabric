@@ -46,7 +46,7 @@ export class LinkDirective implements ng.IDirective {
  * Link
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.link', [
+export let module: ng.IModule = ng.module('officeuifabric.components.link', [
     'officeuifabric.components'
   ])
   .directive('uifLink', LinkDirective.factory());

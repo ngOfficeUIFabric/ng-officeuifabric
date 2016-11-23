@@ -8,10 +8,10 @@ import {TableTypeEnum} from './tableTypeEnum';
  * @ngdoc interface
  * @name ITableScope
  * @module officeuifabric.components.table
- * 
- * @description 
- * Scope used by the table controller. 
- * 
+ *
+ * @description
+ * Scope used by the table controller.
+ *
  * @property {string} orderBy   - Specifies the name of the property used to sort the table. Default null
  * @property {boolean} orderAsc - Specifies whether the data in the table should be sort ascending or descending.
  *                                Default `true` (sorting ascending)
@@ -90,10 +90,10 @@ class TableController {
  * @ngdoc interface
  * @name ITableAttributes
  * @module officeuifabric.components.table
- * 
- * @description 
- * Attributes used by the table directive. 
- * 
+ *
+ * @description
+ * Attributes used by the table directive.
+ *
  * @property {string} uifRowSelectMode   - Specifies whether the table supports selecting rows.
  *                                         Possible values: none - selecting rows is not possible;
  *                                                          single - only one row can be selected;
@@ -112,16 +112,16 @@ export interface ITableAttributes extends ng.IAttributes {
  * @ngdoc directive
  * @name uifTable
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table>` is a table directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table>
  *   <uif-table-head>
  *     <uif-table-row>
@@ -194,10 +194,10 @@ export class TableDirective implements ng.IDirective {
  * @ngdoc interface
  * @name ITableRowScope
  * @module officeuifabric.components.table
- * 
- * @description 
- * Scope used by the table row controller. 
- * 
+ *
+ * @description
+ * Scope used by the table row controller.
+ *
  * @property {any} item                   - Contains data item bound to the table row
  * @property {(ev: any) => void} rowClick - event handler for clicking the row
  * @property {boolean} selected           - Specifies whether the particular row is selected or not
@@ -235,10 +235,10 @@ class TableRowController {
  * @ngdoc interface
  * @name ITableRowAttributes
  * @module officeuifabric.components.table
- * 
- * @description 
- * Attributes used by the table row directive. 
- * 
+ *
+ * @description
+ * Attributes used by the table row directive.
+ *
  * @property {string} uifSelected   - Specifies whether the particular row is selected or not
  * @property {any} uifItem          - Data item bound to the row
  */
@@ -251,16 +251,16 @@ export interface ITableRowAttributes extends ng.IAttributes {
  * @ngdoc directive
  * @name uifTableRow
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table-row>` is a table row directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}}">
  *   <uif-table-row-select></uif-table-row-select>
  *   <uif-table-cell>{{f.fileName}}</uif-table-cell>
@@ -272,7 +272,7 @@ export interface ITableRowAttributes extends ng.IAttributes {
 export class TableRowDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
-    public replace: boolean = true;  // required for correct HTML rendering    
+    public replace: boolean = true;  // required for correct HTML rendering
     public template: string = '<tr ng-transclude></tr>';
     public require: string = '^uifTable';
     public scope: {} = {
@@ -349,10 +349,10 @@ export class TableRowDirective implements ng.IDirective {
  * @ngdoc interface
  * @name ITableRowSelectScope
  * @module officeuifabric.components.table
- * 
- * @description 
- * Scope used by the table row select directive. 
- * 
+ *
+ * @description
+ * Scope used by the table row select directive.
+ *
  * @property {(ev: any) => void} rowSelectClick - event handler for clicking the row selector
  */
 export interface ITableRowSelectScope extends ng.IScope {
@@ -364,16 +364,16 @@ export interface ITableRowSelectScope extends ng.IScope {
  * @ngdoc directive
  * @name uifTableRowSelect
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table-row-select>` is a directive for the control used to select table rows.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table-row ng-repeat="f in files" uif-selected="{{f.isSelected}}">
  *   <uif-table-row-select></uif-table-row-select>
  *   <uif-table-cell>{{f.fileName}}</uif-table-cell>
@@ -443,23 +443,23 @@ export class TableRowSelectDirective implements ng.IDirective {
  * @ngdoc directive
  * @name uifTableCell
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table-cell>` is a table cell directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table-cell>{{f.fileName}}</uif-table-cell>
  */
 export class TableCellDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<td ng-transclude></td>';
-    public replace: boolean = true;  // required for correct HTML rendering    
+    public replace: boolean = true;  // required for correct HTML rendering
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new TableCellDirective();
@@ -472,10 +472,10 @@ export class TableCellDirective implements ng.IDirective {
  * @ngdoc interface
  * @name ITableHeaderScope
  * @module officeuifabric.components.table
- * 
- * @description 
- * Scope used by the table header directive. 
- * 
+ *
+ * @description
+ * Scope used by the table header directive.
+ *
  * @property {(ev: any) => void} headerClick - event handler for clicking the header cell
  */
 export interface ITableHeaderScope extends ng.IScope {
@@ -486,10 +486,10 @@ export interface ITableHeaderScope extends ng.IScope {
  * @ngdoc interface
  * @name ITableHeaderAttributes
  * @module officeuifabric.components.table
- * 
- * @description 
- * Attributes used by the table header directive. 
- * 
+ *
+ * @description
+ * Attributes used by the table header directive.
+ *
  * @property {string} uifOrderBy   - Specifies name of the property used to sort the table on
  */
 export interface ITableHeaderAttributes extends ng.IAttributes {
@@ -500,16 +500,16 @@ export interface ITableHeaderAttributes extends ng.IAttributes {
  * @ngdoc directive
  * @name uifTableHeader
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table-header>` is a table header cell directive.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table-header>File name</uif-table-header>
  */
 export class TableHeaderDirective implements ng.IDirective {
@@ -574,16 +574,16 @@ class TableHeadController {
  * @ngdoc directive
  * @name uifTableHead
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table-head>` is a table head directive that denotes table head rows.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table>
  *   <uif-table-head>
  *     <uif-table-row>...</uif-table-row>
@@ -608,16 +608,16 @@ export class TableHeadDirective implements ng.IDirective {
  * @ngdoc directive
  * @name uifTableBody
  * @module officeuifabric.components.table
- * 
+ *
  * @restrict E
- * 
- * @description 
+ *
+ * @description
  * `<uif-table-body>` is a table body directive that denotes table body rows.
- * 
+ *
  * @see {link http://dev.office.com/fabric/components/table}
- * 
+ *
  * @usage
- * 
+ *
  * <uif-table>
  *   <uif-table-body>
  *     <uif-table-row>...</uif-table-row>
@@ -628,7 +628,7 @@ export class TableBodyDirective implements ng.IDirective {
     public restrict: string = 'E';
     public transclude: boolean = true;
     public template: string = '<tbody ng-transclude></tbody>';
-    public replace: boolean = true;  // required for correct HTML rendering    
+    public replace: boolean = true;  // required for correct HTML rendering
 
     public static factory(): ng.IDirectiveFactory {
         const directive: ng.IDirectiveFactory = () => new TableBodyDirective();
@@ -640,11 +640,11 @@ export class TableBodyDirective implements ng.IDirective {
 /**
  * @ngdoc module
  * @name officeuifabric.components.table
- * 
- * @description 
+ *
+ * @description
  * Table
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.table', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.table', ['officeuifabric.components'])
     .directive('uifTable', TableDirective.factory())
     .directive('uifTableRow', TableRowDirective.factory())
     .directive('uifTableRowSelect', TableRowSelectDirective.factory())

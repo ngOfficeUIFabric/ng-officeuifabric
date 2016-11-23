@@ -219,7 +219,7 @@ export class DropdownDirective implements ng.IDirective {
  * Dropdown
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.dropdown', [
+export let module: ng.IModule = ng.module('officeuifabric.components.dropdown', [
     'officeuifabric.components'
   ])
   .directive('uifDropdownOption', DropdownOptionDirective.factory())

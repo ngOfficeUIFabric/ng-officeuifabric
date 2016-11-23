@@ -269,7 +269,7 @@ export class DialogActionsDirective implements ng.IDirective {
   }
 }
 
-export var module: ng.IModule = ng.module('officeuifabric.components.dialog', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.dialog', ['officeuifabric.components'])
   .directive('uifDialog', DialogDirective.factory())
   .directive('uifDialogHeader', DialogHeaderDirective.factory())
   .directive('uifDialogContent', DialogContentDirective.factory())

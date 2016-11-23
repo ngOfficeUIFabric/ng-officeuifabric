@@ -178,7 +178,7 @@ export class MessageBannerDirective implements ng.IDirective {
         });
 
         $scope.onResize();
-    };
+    }
 
     private transcludeChilds(
         $scope: IMessageBannerScope, $element: ng.IAugmentedJQuery,
@@ -295,5 +295,5 @@ export class MessageBannerDirective implements ng.IDirective {
  * MessageBanner
  *
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.messagebanner', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.messagebanner', ['officeuifabric.components'])
     .directive('uifMessageBanner', MessageBannerDirective.factory());

@@ -2,7 +2,6 @@
 
 import * as ng from 'angular';
 
-
 /**
  * @ngdoc interface
  * @name IBreadcrumbLinkScope
@@ -224,7 +223,7 @@ export class BreadcrumbDirective implements ng.IDirective {
     };
 
     $scope.onResize();
-  };
+  }
 }
 
 /**
@@ -234,6 +233,6 @@ export class BreadcrumbDirective implements ng.IDirective {
  * @description
  * Breadcrumb
  */
-export var module: ng.IModule = ng.module('officeuifabric.components.breadcrumb', ['officeuifabric.components'])
+export let module: ng.IModule = ng.module('officeuifabric.components.breadcrumb', ['officeuifabric.components'])
   .directive('uifBreadcrumb', BreadcrumbDirective.factory())
   .directive('uifBreadcrumbLink', BreadcrumbLinkDirective.factory());
