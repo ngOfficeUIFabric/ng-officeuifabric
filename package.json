@@ -92,6 +92,7 @@
     "@types/vinyl": "1.2.30",
     "@types/wallabyjs": "0.0.4",
     "@types/webpack": "2.0.0",
+    "@types/xmldom": "^0.1.28",
     "@types/yargs": "6.3.2",
     "angular-animate": "1.5.8",
     "angular-mocks": "1.5.8",

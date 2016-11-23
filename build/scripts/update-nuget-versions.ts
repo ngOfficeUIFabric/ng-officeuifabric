@@ -12,8 +12,8 @@
 import {ScriptUtils, ILibraryDependencies} from './ScriptUtils';
 import * as fs from 'fs';
 import * as yargs from 'yargs';
-let xmldom: any = require('xmldom');
-let xpath: any = require('xmldom');
+import * as xmldom from 'xmldom';
+let xpath: any = require('xpath');
 
 let argKeys: any = {
   pkg: 'pkg',
