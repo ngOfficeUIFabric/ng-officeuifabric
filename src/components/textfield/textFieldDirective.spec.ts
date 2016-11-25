@@ -301,4 +301,21 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
       expect(ngModelCtrl.$touched).toBe(true);
     }));
+
+    // input should be able to be of type password
+    // multiline (textbox) is not able to be set of type password
+    it('input should be able to be of type password', inject(($compile: Function, $rootScope: ng.IRootScopeService) => {
+        let $scope: any = $rootScope.$new();
+        let textBox: JQuery = $compile('<uif-textfield ng-model="value" uif-type="password"></uif-textfield>')($scope);
+        textBox = jQuery(textBox[0]);
+        $scope.$apply();
+
+        let textInput: JQuery = textBox.find('input.ms-TextField-field');
+        textInput = jQuery(textInput);
+        expect(textInput.attr('type')).toBe('password', 'input is of type password');
+
+        let textArea: JQuery = textBox.find('textarea.ms-TextField-field');
+        textArea = jQuery(textArea);
+        expect(textArea.attr('type')).toBe(undefined, 'textarea can not be set of type password');
+    }));
 });
