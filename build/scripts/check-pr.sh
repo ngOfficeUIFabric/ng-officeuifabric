@@ -60,7 +60,7 @@ rm -rf dist
 
 # get all modules
 echo ".. installing node modules"
-npm install
+yarn install
 
 # compile typescript (to run the gulp clean command)
 echo ".. compile TypeScript"
