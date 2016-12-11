@@ -363,9 +363,11 @@ export class DatepickerDirective implements angular.IDirective {
 
     return directive;
   }
-  public compile(templateElement: angular.IAugmentedJQuery,
+  public compile(
+    templateElement: angular.IAugmentedJQuery,
     templateAttributes: angular.IAttributes,
-    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
+    transclude: angular.ITranscludeFunction
+  ): angular.IDirectivePrePost {
     return {
       post: this.postLink,
       pre: this.preLink
