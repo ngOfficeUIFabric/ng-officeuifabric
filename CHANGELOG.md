@@ -21,7 +21,7 @@
 
 
 <a name="0.12.10"></a>
-### [0.12.10 - November 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.10)
+### [0.12.10 - November 23, 2016](https://github.com/ngOfficgueUIFabric/ng-officeuifabric/releases/tag/0.12.10)
 
 
 #### Fixes

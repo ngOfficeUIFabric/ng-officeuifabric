@@ -126,7 +126,7 @@ describe('panel: <uif-panel />', () => {
       $scope.isOpen = true;
       $scope.isLightDismiss = false;
 
-      panel = $compile(`<uif-panel uif-type="small" uif-is-open="isOpen" uif-show-overlay="true" uif-show-close="true" 
+      panel = $compile(`<uif-panel uif-type="small" uif-is-open="isOpen" uif-show-overlay="true" uif-show-close="true"
                           uif-is-light-dismiss="isLightDismiss">
                               <uif-panel-header>Header</uif-panel-header>
                               <uif-content>
