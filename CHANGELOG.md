@@ -1,3 +1,15 @@
+<a name="0.12.11"></a>
+### [0.12.11 - November 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.11)
+
+
+#### Fixes
+
+- **uif-datepicker**
+  - added gate to check for null value submitted ([5bcf1b0](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5bcf1b0), [#372](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/372) 
+- **uif-choicefield**
+  - updated demo usage ([b1c4fc3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b1c4fc3), [#416](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/416)
+
+
 <a name="0.12.10"></a>
 ### [0.12.10 - November 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.10)
 
