@@ -29,14 +29,22 @@
     <h1 class="ms-font-su">uifPanel Demo | &lt;uif-panel&gt;</h1>
     <em class="ms-font-m">In order for this demo to work you must first build the library in dev mode. (gulp build-lib --dev)</em>
 
+    <p><em class="ms-font-m">Use this toggle to toggle the value of the 'uif-is-light-dismiss' property. If set to true, clicking on the overlay will close the Panel. The default value is false.</em><uif-toggle uif-label-off="isLightDismiss=false" uif-label-on="isLightDismiss=true" ng-model="isLightDismiss"/></p>
+
+
     <h2 class="ms-font-xl">Basic Usage</h2>
+
     <ng-include src="'basic.html'"></ng-include>
     <h4><i class="ms-font-m">Code:</i></h4>
     <raw src="'basic.html'"></raw>
 
     <script type="text/ng-template" id="basic.html">
       <uif-button  ng-click="vm.isOpen1 = !vm.isOpen1">Toggle Menu</uif-button>
-      <uif-panel uif-type="small" uif-is-open="vm.isOpen1" uif-show-overlay="true" uif-show-close="true">
+        <uif-panel uif-type="small"
+                   uif-is-open="vm.isOpen1"
+                   uif-show-overlay="true"
+                   uif-show-close="true"
+                   uif-is-light-dismiss="isLightDismiss">
         <uif-panel-header>Header</uif-panel-header>
         <uif-content>
         <span class="ms-font-m">Place your content in here!</span>
@@ -51,7 +59,7 @@
 
     <script type="text/ng-template" id="withcommandbar.html">
       <uif-button  ng-click="vm.isOpen2 = !vm.isOpen2">Toggle Menu</uif-button>
-      <uif-panel uif-type="large" uif-is-open="vm.isOpen2" uif-show-overlay="true">
+      <uif-panel uif-type="large" uif-is-open="vm.isOpen2" uif-show-overlay="true" uif-is-light-dismiss="isLightDismiss">
         <uif-command-bar uif-search-term="searchValue" placeholder="Search here...">
           <uif-command-bar-main uif-show-overflow='true'>
           <uif-command-bar-item>
