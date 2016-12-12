@@ -23,7 +23,7 @@ export class PanelDirective implements angular.IDirective {
   public restrict: string = 'E';
   public template: string = `<div class="ms-Panel">
                               <div  class="ms-Overlay"
-                                    ng-click="closePanel()"
+                                    ng-click="uifIsLightDismiss && closePanel()"
                                     ng-class="uifShowOverlay === true ? \'ms-Overlay--dark\' : \'\';"></div>
                               <div class="ms-Panel-main">
                                 <div class="ms-Panel-commands">
@@ -40,6 +40,7 @@ export class PanelDirective implements angular.IDirective {
   public controller: any = PanelController;
 
   public scope: {} = {
+    uifIsLightDismiss: '=',
     uifIsOpen: '=',
     uifShowClose: '=',
     uifShowOverlay: '=',
@@ -112,6 +113,7 @@ export class PanelDirective implements angular.IDirective {
  * @property {string} uifType           -   The placeholder for the search input
  */
 interface IPanelScope extends angular.IScope {
+  uifIsLightDismiss: boolean;
   uifIsOpen: boolean;
   uifType: string;
   uifShowOverlay: boolean;
