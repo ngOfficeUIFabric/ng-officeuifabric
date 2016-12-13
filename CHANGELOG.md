@@ -1,5 +1,15 @@
+<a name="0.12.12"></a>
+### [0.12.12 - December 13, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.12)
+
+
+#### Fixes
+
+- **uif-panel**
+  - add uifIsLightDismiss attribute ([b24592d](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b24592d), [#434](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/434)
+
+
 <a name="0.12.11"></a>
-### [0.12.11 - November 23, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.11)
+### [0.12.11 - December 12, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.11)
 
 
 #### Fixes
