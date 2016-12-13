@@ -40,10 +40,10 @@ export class PanelDirective implements angular.IDirective {
   public controller: any = PanelController;
 
   public scope: {} = {
+    uifIsLightDismiss: '=',
     uifIsOpen: '=',
     uifShowClose: '=',
     uifShowOverlay: '=',
-    uifIsLightDismiss: '=',
     uifType: '@'
   };
 
@@ -113,11 +113,11 @@ export class PanelDirective implements angular.IDirective {
  * @property {string} uifType           -   The placeholder for the search input
  */
 interface IPanelScope extends angular.IScope {
+  uifIsLightDismiss: boolean;
   uifIsOpen: boolean;
   uifType: string;
   uifShowOverlay: boolean;
   uifShowClose: boolean;
-  uifIsLightDismiss: boolean;
   closePanel: () => void;
 }
 

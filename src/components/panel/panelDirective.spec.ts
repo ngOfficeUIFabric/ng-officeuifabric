@@ -93,7 +93,9 @@ describe('panel: <uif-panel />', () => {
       expect(closeButton).toHaveAttr('type', 'button');
     });
 
-    it('clicking on the Overlay should not close the panel when no value is supplied to uif-is-light-dismiss', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+    it(
+      'clicking on the Overlay should not close the panel when no value is supplied to uif-is-light-dismiss',
+      inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       $scope.isOpen = true;
       $rootScope.$digest();
@@ -124,7 +126,8 @@ describe('panel: <uif-panel />', () => {
       $scope.isOpen = true;
       $scope.isLightDismiss = false;
 
-      panel = $compile(`<uif-panel uif-type="small" uif-is-open="isOpen" uif-show-overlay="true" uif-show-close="true" uif-is-light-dismiss="isLightDismiss">
+      panel = $compile(`<uif-panel uif-type="small" uif-is-open="isOpen" uif-show-overlay="true" uif-show-close="true" 
+                          uif-is-light-dismiss="isLightDismiss">
                               <uif-panel-header>Header</uif-panel-header>
                               <uif-content>
                               <span class="ms-font-m">Place your content in here!</span>
@@ -136,7 +139,9 @@ describe('panel: <uif-panel />', () => {
       panel = jQuery(panel[0]);
     }));
 
-    it('clicking on the Overlay should not close the panel when uif-is-light-dismiss is false', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+    it(
+      'clicking on the Overlay should not close the panel when uif-is-light-dismiss is false',
+      inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       $scope.isOpen = true;
       $rootScope.$digest();
@@ -149,7 +154,9 @@ describe('panel: <uif-panel />', () => {
       expect($scope.isOpen).toEqual(true);
     }));
 
-    it('clicking on the Overlay should close the panel when uif-is-light-dismiss is true', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+    it(
+      'clicking on the Overlay should close the panel when uif-is-light-dismiss is true',
+      inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
       $scope.isOpen = true;
       $scope.isLightDismiss = true;
