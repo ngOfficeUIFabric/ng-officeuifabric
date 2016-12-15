@@ -174,26 +174,27 @@ export class PanelController {
         this.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.panel - invalid attribute type: \'uif-is-open\'.\n' +
           'The type \'' + typeof newValue + '\' is not supported as valid type for \'uif-is-open\' attribute for ' +
           '<uif-panel/>. The valid type is boolean.');
-      }
-
-      if (newValue === true) {
-        $animate.addClass(this.$element, 'ms-Panel-animateIn');
-        $element.addClass('is-open');
-
-        // forces resize of commandbars
-        if ($element[0].querySelector('.ms-CommandBar')) {
-          angular.element($element[0].querySelector('.ms-CommandBar')).scope().$broadcast('uif-command-bar-resize');
-        }
-
       } else {
 
-        $animate.addClass(this.$element, 'ms-Panel-animateOut');
-        $timeout(
-          () => {
-            $element.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
-            $element.removeClass('is-open');
-          },
-          500);
+        if (newValue === true) {
+          $animate.addClass(this.$element, 'ms-Panel-animateIn');
+          $element.addClass('is-open');
+
+          // forces resize of commandbars
+          if ($element[0].querySelector('.ms-CommandBar')) {
+            angular.element($element[0].querySelector('.ms-CommandBar')).scope().$broadcast('uif-command-bar-resize');
+          }
+
+        } else {
+          $animate.addClass(this.$element, 'ms-Panel-animateOut');
+          $timeout(
+            () => {
+              $element.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
+              $element.removeClass('is-open');
+              $scope.uifIsOpen = false;
+            },
+            500);
+        }
       }
 
     });
