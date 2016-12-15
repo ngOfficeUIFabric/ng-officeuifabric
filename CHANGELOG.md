@@ -1,3 +1,13 @@
+<a name="0.12.13"></a>
+### [0.12.13 - December 15, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.13)
+
+
+#### Fixes
+
+- **uif-panel**
+  - uif-is-open link is not working correctly ([5c5e69c](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5c5e69c), [#373](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/373)
+
+
 <a name="0.12.12"></a>
 ### [0.12.12 - December 14, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.12)
 
