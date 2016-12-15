@@ -186,14 +186,14 @@ export class PanelController {
         }
 
       } else {
-
         $animate.addClass(this.$element, 'ms-Panel-animateOut');
         $timeout(
-          () => {
-            $element.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
-            $element.removeClass('is-open');
-          },
-          500);
+           () => {
+             $element.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
+             $element.removeClass('is-open');
+             $scope.uifIsOpen = false;
+           },
+           500);
       }
 
     });
