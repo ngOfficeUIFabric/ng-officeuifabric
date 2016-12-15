@@ -94,7 +94,7 @@
   </p>
   <p>
     <input type="checkbox" ng-model="disabled" />Disabled
-    </p>
+  </p>
 
   <h2>Disabled</h2>
   <p>
@@ -111,7 +111,7 @@
   </p>
 
   <h2>Placeholder</h2>
-   <p>
+  <p>
     This markup: <br />
     <code>
       &lt;uif-textfield placeholder=&quot;This is the placeholder&quot; /&gt;
@@ -137,6 +137,23 @@
     <br />
     <uif-textfield uif-label="This is the label" uif-type="password" />
   </p>
+
+  <h2>Dynamically change type</h2>
+  <div ng-controller="demoController">
+    <p>
+      This markup: <br />
+      <code>
+      &lt;uif-textfield uif-label=&quot;This is the label&quot; uif-type=&quot;{{fieldType}}&quot; /&gt;
+    </code>
+    </p>
+
+    <p>
+      <br />Renders this:
+      <br />
+      <uif-textfield nguif-label="This is the label" uif-type="{{fieldType}}"></uif-textfield>
+      <br /><button ng-click="switchToPassword()">switch to password</button>&nbsp;<button ng-click="switchToText()">switch to text</button>
+    </p>
+  </div>
 </body>
 
 </html>

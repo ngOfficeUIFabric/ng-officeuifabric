@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 import * as angular from 'angular';
-import {InputTypeEnum} from './uifTypeEnum';
+import { InputTypeEnum } from './uifTypeEnum';
 
 /**
  * @ngdoc interface
@@ -117,7 +117,8 @@ export class TextFieldDirective implements angular.IDirective {
     placeholder: '@',
     step: '@',
     uifDescription: '@',
-    uifLabel: '@'
+    uifLabel: '@',
+    uifType: '@'
   };
 
   public require: string[] = ['uifTextfield', '?ngModel'];

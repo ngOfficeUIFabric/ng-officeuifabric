@@ -301,4 +301,41 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
       expect(ngModelCtrl.$touched).toBe(true);
     }));
+
+  it(
+    'should allow to interpolate uif-type value',
+    inject((
+      $compile: angular.ICompileService,
+      $rootScope: angular.IRootScopeService,
+      $log: angular.ILogService) => {
+
+      let inputElement: JQuery = null;
+      let scope: any = $rootScope.$new();
+      let html: string = `<uif-textfield uif-label='some label' uif-type='{{type}}'></uif-textfield>`;
+      let element: JQuery = angular.element(html);
+
+      scope.type = 'password';
+
+      // compile with scope = password
+      $compile(element)(scope);
+      scope.$digest();
+      element = jQuery(element[0]);
+
+      // test that password is listed
+      inputElement = element.find('input');
+      expect(inputElement.attr('type')).toBe('password');
+
+
+      // change scope
+      scope.type = 'number';
+
+      // compile with scope = password
+      scope.$digest();
+      element = jQuery(element[0]);
+
+      // test that password is listed
+      inputElement = element.find('input');
+      expect(inputElement.attr('type')).toBe('number');
+    })
+  );
 });
