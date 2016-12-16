@@ -18,4 +18,15 @@ function demoController($scope) {
     { id: 'question', name: 'question' }
   ];
   $scope.selectedIcon = $scope.icons[3];
+
+  $scope.iconType = 'arrowLeft';
+  $scope.switchToArrowLeft = function () {
+    $scope.iconType = 'arrowLeft';
+  };
+  $scope.switchToArrowRight = function () {
+    $scope.iconType = 'arrowRight';
+  };
+  $scope.switchToArrowFake = function () {
+    $scope.iconType = 'fake';
+  };
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 import * as angular from 'angular';
+import { IconEnum } from './iconEnum';
 
 describe('iconDirective: <uif-icon />', () => {
   let element: angular.IAugmentedJQuery;
@@ -42,7 +43,7 @@ describe('iconDirective: <uif-icon />', () => {
   });
 
   /**
-   * Verifies directive generates the aria-hidden attribute. 
+   * Verifies directive generates the aria-hidden attribute.
    */
   it('should render correct aria-hidden attribute', () => {
     // get the rendered icon element
@@ -52,5 +53,51 @@ describe('iconDirective: <uif-icon />', () => {
     expect(iconElement.eq(0)).toHaveAttr('aria-hidden');
     expect(iconElement.eq(0).attr('aria-hidden')).toBe('true');
   });
+
+  /**
+   * Verify the icon responds to changes in the uif-type attribute.
+   */
+  it(
+    'should allow to interpolate uif-type value',
+    inject((
+      $compile: angular.ICompileService,
+      $rootScope: angular.IRootScopeService
+    ) => {
+      let htmlElement: JQuery = null;
+      let localScope: any = $rootScope.$new();
+      let html: string = '<uif-icon uif-type="{{type}}"></uif-icon>';
+      let iconElement: JQuery = angular.element(html);
+      let iconType: string = '';
+
+      $compile(iconElement)(localScope);
+
+      // >>> test 1
+      // set to one icon in scope
+      iconType = IconEnum[IconEnum.arrowDownLeft];
+      localScope.type = iconType;
+
+      // run digest cycle
+      localScope.$digest();
+      iconElement = jQuery(iconElement[0]);
+
+      // test correct icon is used
+      htmlElement = iconElement.find('i');
+      expect(htmlElement).toHaveClass('ms-Icon--' + iconType);
+
+
+      // >>> test 2
+      // change icon type in scope
+      iconType = IconEnum[IconEnum.arrowDownRight];
+      localScope.type = iconType;
+
+      // run digest cycle
+      localScope.$digest();
+      iconElement = jQuery(iconElement[0]);
+
+      // test that new type is there
+      htmlElement = iconElement.find('i');
+      expect(htmlElement).toHaveClass('ms-Icon--' + iconType);
+    })
+  );
 
 });

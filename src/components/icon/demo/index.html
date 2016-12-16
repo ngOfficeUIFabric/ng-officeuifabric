@@ -17,7 +17,7 @@
 
 <body ng-app="demoApp">
 
-  <h1 class="ms-font-su">Icon Demo | &lt;uif-icon&gt;</h1> 
+  <h1 class="ms-font-su">Icon Demo | &lt;uif-icon&gt;</h1>
   <em>In order for this demo to work you must first build the library in debug mode.</em>
 
   <p>
@@ -42,19 +42,19 @@
     Change the size &amp; color using standard CSS sizing techniques: <code>style="font-size:32px; color:red;"</code>:<br />
     <uif-icon uif-type="arrowDownLeft" style="font-size:32px; color:red;"></uif-icon>
   </p>
-  
+
   <h2>Changing the Icon</h2>
   <div ng-controller="demoController">
     <select ng-model="selectedIcon"
             ng-options="icon.name for icon in icons track by icon.id">
     </select>
-    
+
     <div>
       Selected icon = <code>{{selectedIcon}}</code><br />
       Rendered icon = <uif-icon uif-type="{{selectedIcon.id}}"></uif-icon>
     </div>
   </div>
-  
+
   <h2>Errors When Unsupported Icons Specified</h2>
   <p>
     Wouldn't you like to see an error when you specify an icon that's not supported? Open the JavaScript console to see an error for an icon like this: <br />
@@ -62,9 +62,28 @@
     <code>
       &lt;uif-icon uif-type="ngOfficeUiFabric"&gt;&lt;/uif-icon&gt;
     </code>
-    
+
     <uif-icon uif-type="ngOfficeUiFabric"></uif-icon>
   </p>
+
+  <h2>Dynamically change type</h2>
+  <div ng-controller="demoController">
+    <p>
+      This markup: <br />
+      <code>
+        &lt;uif-icon uif-type="{{iconType}}"&gt;&lt;/uif-icon&gt;
+      </code>
+    </p>
+
+    <p>
+      <br />Renders this:
+      <br />
+      icon type: {{iconType}}: <uif-icon uif-type="{{iconType}}"></uif-icon>
+      <br /><button ng-click="switchToArrowLeft()">switch to arrowLeft</button>&nbsp;
+      <button ng-click="switchToArrowRight()">switch to arrowRight</button>&nbsp;
+      <button ng-click="switchToArrowFake()">switch to fake</button>
+    </p>
+  </div>
 
 </body>
 
