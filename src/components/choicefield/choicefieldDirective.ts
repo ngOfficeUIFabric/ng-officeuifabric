@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 import * as angular from 'angular';
-import {ChoicefieldType} from './choicefieldTypeEnum';
+import { ChoicefieldType } from './choicefieldTypeEnum';
 
 /**
  * @ngdoc interface
@@ -19,12 +19,11 @@ import {ChoicefieldType} from './choicefieldTypeEnum';
  * @property {choicefieldType=} uifType  - Radio or Checkbox
  */
 export interface IChoicefieldOptionScope extends angular.IScope {
-    ngModel: angular.INgModelController;
-    ngTrueValue: string;
-    ngFalseValue: string;
-    disabled: boolean;
-    uifType: ChoicefieldType;
-
+  ngModel: angular.INgModelController;
+  ngTrueValue: string;
+  ngFalseValue: string;
+  disabled: boolean;
+  uifType: ChoicefieldType;
 }
 
 /**
@@ -40,8 +39,8 @@ export interface IChoicefieldOptionScope extends angular.IScope {
  * @property {boolean=} disabled   - Set to disable the element
  */
 export interface IChoicefieldGroupScope extends angular.IScope {
-    ngModel: angular.INgModelController;
-    disabled: boolean;
+  ngModel: angular.INgModelController;
+  disabled: boolean;
 }
 /**
  * @ngdoc class
@@ -52,8 +51,8 @@ export interface IChoicefieldGroupScope extends angular.IScope {
  * This is the controller for the <uif-choicefield-option> directive
  */
 export class ChoicefieldOptionController {
-    public static $inject: string[] = ['$log'];
-    constructor(public $log: angular.ILogService) {}
+  public static $inject: string[] = ['$log'];
+  constructor(public $log: angular.ILogService) { }
 }
 
 /**
@@ -73,104 +72,106 @@ export class ChoicefieldOptionController {
  *      ng-model="selectedValue" ng-true-value="\'TRUEVALUE\'" ng-false-value="\'FALSEVALUE\'">Option 1</uif-choicefield>
  */
 export class ChoicefieldOptionDirective implements angular.IDirective {
-    public template: string = '<div class="ms-ChoiceField">' +
-        '<input id="{{::$id}}" class="ms-ChoiceField-input" type="{{uifType}}" value="{{value}}" ng-disabled="disabled"  ' +
-            'ng-model="ngModel" ng-true-value="{{ngTrueValue}}" ng-false-value="{{ngFalseValue}}" />' +
-            '<label for="{{::$id}}" class="ms-ChoiceField-field"><span class="ms-Label" ng-transclude></span></label>' +
-        '</div>';
-    public restrict: string = 'E';
-    public require: string[] = ['uifChoicefieldOption', '^?uifChoicefieldGroup'];
-    public replace: boolean = true;
-    public transclude: boolean = true;
-    public scope: {} = {
-        ngFalseValue: '@',
-        ngModel: '=',
-        ngTrueValue: '@',
-        uifType: '@',
-        value: '@'
+  public template: string = '<div class="ms-ChoiceField">' +
+  '<input id="{{::$id}}" class="ms-ChoiceField-input" type="{{uifType}}" value="{{value}}" ng-disabled="disabled"  ' +
+  'ng-model="ngModel" ng-true-value="{{ngTrueValue}}" ng-false-value="{{ngFalseValue}}" />' +
+  '<label for="{{::$id}}" class="ms-ChoiceField-field"><span class="ms-Label" ng-transclude></span></label>' +
+  '</div>';
+  public restrict: string = 'E';
+  public require: string[] = ['uifChoicefieldOption', '^?uifChoicefieldGroup'];
+  public replace: boolean = true;
+  public transclude: boolean = true;
+  public scope: {} = {
+    ngFalseValue: '@',
+    ngModel: '=',
+    ngTrueValue: '@',
+    uifType: '@',
+    value: '@'
+  };
+  public controller: typeof ChoicefieldOptionController = ChoicefieldOptionController;
+
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () =>
+      new ChoicefieldOptionDirective();
+
+    return directive;
+  }
+
+  public compile(
+    templateElement: angular.IAugmentedJQuery,
+    templateAttributes: angular.IAttributes,
+    transclude: angular.ITranscludeFunction
+  ): angular.IDirectivePrePost {
+    let input: angular.IAugmentedJQuery = templateElement.find('input');
+    if (!('ngModel' in templateAttributes)) {
+      // remove ng-model, as this is an optional attribute.
+      // if not removed, this will have unwanted side effects
+      input.removeAttr('ng-model');
+    }
+    return {
+      pre: this.preLink
     };
-    public controller: typeof ChoicefieldOptionController = ChoicefieldOptionController;
+  }
 
-    public static factory(): angular.IDirectiveFactory {
-        const directive: angular.IDirectiveFactory = () =>
-            new ChoicefieldOptionDirective();
-
-        return directive;
+  private preLink(
+    scope: IChoicefieldOptionScope,
+    instanceElement: angular.IAugmentedJQuery,
+    attrs: any,
+    ctrls: any[],
+    transclude: angular.ITranscludeFunction): void {
+    let choicefieldOptionController: ChoicefieldOptionController = ctrls[0];
+    let choicefieldGroupController: ChoicefieldGroupController = ctrls[1];
+    scope.$watch('uifType', (newValue: string, oldValue: string) => {
+      if (ChoicefieldType[newValue] === undefined) {
+        choicefieldOptionController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.choicefield - "' +
+          newValue + '" is not a valid value for uifType. ' +
+          'Supported options are listed here: ' +
+          'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/choicefield/choicefieldTypeEnum.ts');
+      }
+    });
+    if (choicefieldGroupController != null) {
+      let render: () => void = (): void => {
+        let checked: boolean = (choicefieldGroupController.getViewValue() === attrs.value);
+        instanceElement.find('input').prop('checked', checked);
+      };
+      choicefieldGroupController.addRender(render);
+      attrs.$observe('value', render);
+      instanceElement
+        .on('$destroy', function (): void {
+          choicefieldGroupController.removeRender(render);
+        });
     }
 
-    public compile (templateElement: angular.IAugmentedJQuery,
-                    templateAttributes: angular.IAttributes,
-                    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
-            let input: angular.IAugmentedJQuery = templateElement.find('input');
-            if (!('ngModel' in templateAttributes)) {
-                // remove ng-model, as this is an optional attribute.
-                // if not removed, this will have unwanted side effects
-                input.removeAttr('ng-model');
-            }
-            return {
-                pre: this.preLink
-            };
-    }
+    let parentScope: IChoicefieldGroupScope = <IChoicefieldGroupScope>scope.$parent.$parent;
+    let checkDisabled: () => void = () => {
+      scope.disabled = 'disabled' in attrs && attrs.disabled;
+      scope.disabled = scope.disabled || (parentScope != null && parentScope.disabled);
+    };
+    scope.$watch(
+      () => { return instanceElement.attr('disabled'); },
+      ((newValue) => {
+        checkDisabled();
+      }));
+    scope.$watch(
+      () => { return parentScope == null ? '' : parentScope.disabled; },
+      ((newValue) => { checkDisabled(); }));
 
-    private preLink(
-        scope: IChoicefieldOptionScope,
-        instanceElement: angular.IAugmentedJQuery,
-        attrs: any,
-        ctrls: any[],
-        transclude: angular.ITranscludeFunction): void {
-            let choicefieldOptionController: ChoicefieldOptionController = ctrls[0];
-            let choicefieldGroupController: ChoicefieldGroupController = ctrls[1];
-            scope.$watch('uifType', (newValue: string, oldValue: string) => {
-                if (ChoicefieldType[newValue] === undefined) {
-                    choicefieldOptionController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.choicefield - "' +
-                        newValue + '" is not a valid value for uifType. ' +
-                    'Supported options are listed here: ' +
-                    'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/choicefield/choicefieldTypeEnum.ts');
-              }
-            });
-            if (choicefieldGroupController != null) {
-                let render: () => void = (): void => {
-                    let checked: boolean = (choicefieldGroupController.getViewValue() === attrs.value);
-                    instanceElement.find('input').prop('checked', checked);
-                };
-                choicefieldGroupController.addRender(render);
-                attrs.$observe('value', render);
-                instanceElement
-                    .on('$destroy', function(): void {
-                        choicefieldGroupController.removeRender(render);
-                    });
-            }
-
-            let parentScope: IChoicefieldGroupScope = <IChoicefieldGroupScope> scope.$parent.$parent;
-            let checkDisabled: () => void = () => {
-                scope.disabled = 'disabled' in attrs && attrs.disabled;
-                scope.disabled = scope.disabled || (parentScope != null && parentScope.disabled);
-            };
-            scope.$watch(
-              () => { return instanceElement.attr('disabled'); },
-              ((newValue) => {
-                  checkDisabled();
-              }));
-            scope.$watch(
-              () => { return parentScope == null ? '' : parentScope.disabled; },
-              ((newValue) => { checkDisabled(); }));
-
-            checkDisabled();
-            instanceElement
-                .on('click', (ev: JQueryEventObject) => {
-                    if (scope.disabled) {
-                        return;
-                    }
-                    if (choicefieldGroupController != null) {
-                        choicefieldGroupController.setTouched();
-                    }
-                    scope.$apply(() => {
-                        if (choicefieldGroupController != null) {
-                            choicefieldGroupController.setViewValue(attrs.value, ev);
-                        }
-                    });
-                });
-    }
+    checkDisabled();
+    instanceElement
+      .on('click', (ev: JQueryEventObject) => {
+        if (scope.disabled) {
+          return;
+        }
+        if (choicefieldGroupController != null) {
+          choicefieldGroupController.setTouched();
+        }
+        scope.$apply(() => {
+          if (choicefieldGroupController != null) {
+            choicefieldGroupController.setViewValue(attrs.value, ev);
+          }
+        });
+      });
+  }
 }
 
 /**
@@ -186,12 +187,12 @@ export class ChoicefieldOptionDirective implements angular.IDirective {
  */
 
 export class ChoicefieldGroupTitleDirective implements angular.IDirective {
-    public template: string = '<div class="ms-ChoiceFieldGroup-title"><ng-transclude /></div>';
-    public transclude: boolean = true;
-    public static factory(): angular.IDirectiveFactory {
-        const directive: angular.IDirectiveFactory = () => new ChoicefieldGroupTitleDirective();
-        return directive;
-    }
+  public template: string = '<div class="ms-ChoiceFieldGroup-title"><ng-transclude /></div>';
+  public transclude: boolean = true;
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new ChoicefieldGroupTitleDirective();
+    return directive;
+  }
 }
 
 
@@ -207,55 +208,55 @@ export class ChoicefieldGroupTitleDirective implements angular.IDirective {
  *
  */
 export class ChoicefieldGroupController {
-    public static $inject: string[] = ['$element', '$scope'];
+  public static $inject: string[] = ['$element', '$scope'];
 
-    private renderFns: Function[] = [];
+  private renderFns: Function[] = [];
 
-    public constructor(public $element: JQuery, public $scope: IChoicefieldGroupScope) {
+  public constructor(public $element: JQuery, public $scope: IChoicefieldGroupScope) {
+  }
+
+  public init(): void {
+    if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+      this.$scope.ngModel.$render = () => {
+        this.render();
+      };
+      this.render();
     }
+  }
 
-    public init(): void {
-        if (typeof this.$scope.ngModel !== 'undefined'  && this.$scope.ngModel != null) {
-            this.$scope.ngModel.$render = () => {
-               this.render();
-            };
-            this.render();
-        }
-    }
+  public addRender(fn: Function): void {
+    this.renderFns.push(fn);
+  }
 
-    public addRender(fn: Function): void {
-        this.renderFns.push(fn);
-    }
+  public removeRender(fn: Function): void {
+    this.renderFns.splice(this.renderFns.indexOf(fn));
+  }
 
-    public removeRender(fn: Function): void {
-        this.renderFns.splice(this.renderFns.indexOf(fn));
+  public setViewValue(value: string, eventType: any): void {
+    if (this.getViewValue() !== value) {
+      this.$scope.ngModel.$setDirty();
     }
+    this.$scope.ngModel.$setViewValue(value, eventType);
+    this.render(); // update all inputs checked/not checked
+  }
 
-    public setViewValue(value: string, eventType: any): void {
-        if (this.getViewValue() !== value) {
-            this.$scope.ngModel.$setDirty();
-        }
-        this.$scope.ngModel.$setViewValue(value, eventType);
-        this.render(); // update all inputs checked/not checked
+  public setTouched(): void {
+    if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+      this.$scope.ngModel.$setTouched();
     }
+  }
 
-    public setTouched(): void {
-        if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
-            this.$scope.ngModel.$setTouched();
-        }
+  public getViewValue(): string {
+    if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+      return this.$scope.ngModel.$viewValue;
     }
+  }
 
-    public getViewValue(): string {
-        if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
-            return  this.$scope.ngModel.$viewValue;
-        }
+  private render(): void {
+    for (let i: number = 0; i < this.renderFns.length; i++) {
+      this.renderFns[i]();
     }
-
-    private render(): void {
-        for (let i: number = 0; i < this.renderFns.length; i++) {
-            this.renderFns[i]();
-        }
-    }
+  }
 }
 
 /**
@@ -278,46 +279,48 @@ export class ChoicefieldGroupController {
  * </uif-choicefield-group>
  */
 export class ChoicefieldGroupDirective implements angular.IDirective {
-    public template: string =
-        '<div class="ms-ChoiceFieldGroup">' +
-            '<ng-transclude />' +
-        '</div>';
+  public template: string =
+  '<div class="ms-ChoiceFieldGroup">' +
+  '<ng-transclude />' +
+  '</div>';
 
-    public restrict: string = 'E';
-    public transclude: boolean = true;
-    public require: string[] = ['uifChoicefieldGroup', '?ngModel'];
-    public controller: typeof ChoicefieldGroupController = ChoicefieldGroupController;
+  public restrict: string = 'E';
+  public transclude: boolean = true;
+  public require: string[] = ['uifChoicefieldGroup', '?ngModel'];
+  public controller: typeof ChoicefieldGroupController = ChoicefieldGroupController;
 
-    // make sure we have an isolate scope
-    public scope: {} = {};
+  // make sure we have an isolate scope
+  public scope: {} = {};
 
-    public static factory(): angular.IDirectiveFactory {
-        const directive: angular.IDirectiveFactory = () => new ChoicefieldGroupDirective();
-        return directive;
-    }
-    public compile (templateElement: angular.IAugmentedJQuery,
-                    templateAttributes: angular.IAttributes,
-                    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
-        return {
-            pre: this.preLink
-        };
-    }
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = () => new ChoicefieldGroupDirective();
+    return directive;
+  }
+  public compile(
+    templateElement: angular.IAugmentedJQuery,
+    templateAttributes: angular.IAttributes,
+    transclude: angular.ITranscludeFunction
+  ): angular.IDirectivePrePost {
+    return {
+      pre: this.preLink
+    };
+  }
 
-    private preLink(
-        scope: IChoicefieldGroupScope,
-        instanceElement: angular.IAugmentedJQuery,
-        instanceAttributes: angular.IAttributes,
-        ctrls: {}): void {
-            let choicefieldGroupController: ChoicefieldGroupController = ctrls[0];
-            let modelController: angular.INgModelController = ctrls[1];
-            scope.ngModel = modelController;
-            choicefieldGroupController.init();
+  private preLink(
+    scope: IChoicefieldGroupScope,
+    instanceElement: angular.IAugmentedJQuery,
+    instanceAttributes: angular.IAttributes,
+    ctrls: {}): void {
+    let choicefieldGroupController: ChoicefieldGroupController = ctrls[0];
+    let modelController: angular.INgModelController = ctrls[1];
+    scope.ngModel = modelController;
+    choicefieldGroupController.init();
 
-            scope.$watch(
-                () => { return instanceElement.attr('disabled'); },
-                ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; }));
-            scope.disabled = 'disabled' in instanceAttributes;
-    }
+    scope.$watch(
+      () => { return instanceElement.attr('disabled'); },
+      ((newValue) => { scope.disabled = typeof newValue !== 'undefined'; }));
+    scope.disabled = 'disabled' in instanceAttributes;
+  }
 }
 
 /**
@@ -329,8 +332,8 @@ export class ChoicefieldGroupDirective implements angular.IDirective {
  *
  */
 export let module: angular.IModule = angular.module('officeuifabric.components.choicefield', [
-    'officeuifabric.components'
-  ])
+  'officeuifabric.components'
+])
   .directive('uifChoicefieldOption', ChoicefieldOptionDirective.factory())
   .directive('uifChoicefieldGroup', ChoicefieldGroupDirective.factory())
   .directive('uifChoicefieldGroupTitle', ChoicefieldGroupTitleDirective.factory());

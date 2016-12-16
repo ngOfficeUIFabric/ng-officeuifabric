@@ -6,11 +6,19 @@ var demoApp = angular.module('demoApp', [
 ]);
 
 demoApp.controller('demoController', [
-  '$scope', function($scope) {      
-      $scope.selectedValue2 = '';
-      $scope.changed = false;
-      $scope.change = function() {          
-          $scope.changed = true;
-      }    
+  '$scope', function ($scope) {
+    $scope.selectedValue2 = '';
+    $scope.changed = false;
+    $scope.change = function () {
+      $scope.changed = true;
+    };
+
+    $scope.choiceFieldType = 'radio';
+    $scope.switchToRadio = function () {
+      $scope.choiceFieldType = 'radio';
+    };
+    $scope.switchToCheckbox = function () {
+      $scope.choiceFieldType = 'checkbox';
+    };
   }]);
 

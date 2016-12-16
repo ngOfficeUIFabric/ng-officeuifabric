@@ -1,4 +1,9 @@
-﻿describe('choicefieldDirective <uif-choicefield />', () => {
+﻿'use strict';
+
+import * as angular from 'angular';
+import { ChoicefieldType } from './choicefieldTypeEnum';
+
+describe('choicefieldDirective <uif-choicefield />', () => {
   beforeEach(() => {
     angular.mock.module('officeuifabric.components.choicefield');
   });
@@ -51,6 +56,7 @@
     let input3: JQuery = jQuery(choicefield.find('input')[2]);
     expect(input3.attr('checked')).not.toBe('checked', 'Other inputs should not be checked.');
   }));
+
   it('should be able to select an option in a group', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
     let $scope: any = $rootScope.$new();
     $scope.options = [
@@ -264,5 +270,55 @@
     expect(ngModel.$dirty).toBeFalsy();
     expect(ngModel.$touched).toBeFalsy();
   }));
-});
 
+  /**
+   * Verify the field responds to changes in the uif-type attribute.
+   */
+  it(
+    'should allow to interpolate uif-type value',
+    inject((
+      $compile: angular.ICompileService,
+      $rootScope: angular.IRootScopeService) => {
+
+      let inputElement: JQuery = null;
+      let scope: any = $rootScope.$new();
+      let html: string =
+        `<uif-choicefield-group>
+          <uif-choicefield-option uif-type="{{type}}" value="value1">value1</uif-choicefield-option>
+         </uif-choicefield-group>`;
+      let element: JQuery = angular.element(html);
+
+      let choiceType: string = '';
+
+      $compile(element)(scope);
+
+      // >>> test 1
+      // set to one icon in scope
+      choiceType = ChoicefieldType[ChoicefieldType.radio];
+      scope.type = choiceType;
+
+      // run digest cycle
+      scope.$digest();
+      element = jQuery(element[0]);
+
+      // test correct icon is used
+      inputElement = element.find('input');
+      expect(inputElement.attr('type')).toBe(choiceType);
+
+
+      // >>> test 2
+      // change icon type in scope
+      choiceType = ChoicefieldType[ChoicefieldType.checkbox];
+      scope.type = choiceType;
+
+      // run digest cycle
+      scope.$digest();
+      element = jQuery(element[0]);
+
+      // test that new type is there
+      inputElement = element.find('input');
+      expect(inputElement.attr('type')).toBe(choiceType);
+    })
+  );
+
+});

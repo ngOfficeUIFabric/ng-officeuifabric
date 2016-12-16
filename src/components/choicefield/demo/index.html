@@ -154,6 +154,32 @@
         <span>selectedValue: {{selectedValue}}</span>
     </p>
 
+  <h2>Dynamically change type</h2>
+  <p>
+    This markup: <br />
+    <pre>
+    &lt;uif-choicefield-group&gt;
+      &lt;uif-choicefield-option uif-type=&quot;{{choiceFieldType}}&quot; value=&quot;value1&quot;&gt;Text 1&lt;&#x2F;uif-choicefield-option&gt;
+      &lt;uif-choicefield-option uif-type=&quot;{{choiceFieldType}}&quot; value=&quot;value2&quot;&gt;Text 2&lt;&#x2F;uif-choicefield-option&gt;
+      &lt;uif-choicefield-option uif-type=&quot;{{choiceFieldType}}&quot; value=&quot;value3&quot;&gt;Text 3&lt;&#x2F;uif-choicefield-option&gt;
+      &lt;uif-choicefield-option uif-type=&quot;{{choiceFieldType}}&quot; value=&quot;value4&quot;&gt;Text 4&lt;&#x2F;uif-choicefield-option&gt;
+    &lt;&#x2F;uif-choicefield-group&gt;
+    </pre>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-choicefield-group>
+      <uif-choicefield-option uif-type="{{choiceFieldType}}" value="value1">Text 1</uif-choicefield-option>
+      <uif-choicefield-option uif-type="{{choiceFieldType}}" value="value2">Text 2</uif-choicefield-option>
+      <uif-choicefield-option uif-type="{{choiceFieldType}}" value="value3">Text 3</uif-choicefield-option>
+      <uif-choicefield-option uif-type="{{choiceFieldType}}" value="value4">Text 4</uif-choicefield-option>
+    </uif-choicefield-group>
+    <br /><button ng-click="switchToRadio()">switch to radio</button>&nbsp;
+    <button ng-click="switchToCheckbox()">switch to checkbox</button>
+  </p>
+
 </body>
 
 </html>
