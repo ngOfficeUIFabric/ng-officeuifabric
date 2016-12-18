@@ -1,6 +1,10 @@
 'use strict';
 
 import * as angular from 'angular';
+import { ListItemSelectModeEnum } from './listItemSelectModeEnum';
+import { ListItemTypeEnum } from './listItemTypeEnum';
+import { ListLayoutEnum } from './listLayoutEnum';
+
 
 describe('listDirective: <uif-list />', () => {
   let element: JQuery;
@@ -138,10 +142,9 @@ describe('listDirective: <uif-list />', () => {
       $compile(element)(scope);
       scope.$digest();
 
-      let items: JQuery = element.children().eq(0).children();
-      expect(items.length).toEqual(2);
-      expect(items.eq(0).children().eq(0)).toHaveClass('ms-ListItem--document');
-      expect(items.eq(1).children().eq(0)).not.toHaveClass('ms-ListItem--document');
+      expect(element.find('li').length).toEqual(2);
+      expect(element.find('li')[0]).toHaveClass('ms-ListItem--document');
+      expect(element.find('li')[1]).not.toHaveClass('ms-ListItem--document');
     }));
 
   it(
@@ -177,10 +180,9 @@ describe('listDirective: <uif-list />', () => {
       $compile(element)(scope);
       scope.$digest();
 
-      let items: JQuery = element.children().eq(0).children();
-      expect(items.length).toEqual(2);
-      expect(items.eq(0).children().eq(0)).toHaveClass('ms-ListItem--image');
-      expect(items.eq(1).children().eq(0)).not.toHaveClass('ms-ListItem--image');
+      expect(element.find('li').length).toEqual(2);
+      expect(element.find('li')[0]).toHaveClass('ms-ListItem--image');
+      expect(element.find('li')[1]).not.toHaveClass('ms-ListItem--image');
     }));
 
   it(
@@ -727,5 +729,150 @@ describe('listDirective: <uif-list />', () => {
         .children().eq(0) // div.ms-ListItem-actions
         .children().eq(0) // uif-list-item-action
         .children().eq(0)).toHaveClass('ms-ListItem-action');
+    }));
+
+  /**
+   * test different selection modes: single / multiple
+   */
+  it(
+    'should allow interpolation of list select mode value',
+    inject((
+      $compile: angular.ICompileService,
+      $rootScope: angular.IRootScopeService) => {
+
+      let subjectElement: JQuery,
+        firstListItem: JQuery,
+        secondListItem: JQuery = null;
+      let html: string = `
+        <uif-list uif-item-select-mode="{{type}}" uif-selected-items="selectedItems">
+          <uif-list-item ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-list-item>
+        </uif-list>`;
+      let ngElement: JQuery = angular.element(html);
+      let localScope: any = $rootScope.$new();
+      $compile(ngElement)(localScope);
+
+      // setup scope
+      localScope.type = undefined;
+      localScope.selectedItems = [];
+
+
+      // >>> test 1
+      localScope.type = ListItemSelectModeEnum[ListItemSelectModeEnum.single];
+      localScope.selectedItems = [];
+
+      // run digest cycle
+      localScope.$digest();
+      subjectElement = jQuery(ngElement[0]);
+
+      // test for correct setting
+      // >>>> try to select two+ items...
+      firstListItem = subjectElement.children().eq(0).children().eq(0);
+      firstListItem.click();
+      secondListItem = subjectElement.children().eq(0).children().eq(1);
+      secondListItem.click();
+      // >>>> ... test how many selected
+      expect(localScope.selectedItems.length).toEqual(1);
+
+      // >>> test 2
+      localScope.type = ListItemSelectModeEnum[ListItemSelectModeEnum.multiple];
+      localScope.selectedItems = [];
+
+      // run digest cycle
+      scope.$digest();
+      element = jQuery(ngElement[0]);
+
+      // test for correct setting
+      // >>>> try to select two+ items...
+      firstListItem = subjectElement.children().eq(0).children().eq(0);
+      firstListItem.click();
+      secondListItem = subjectElement.children().eq(0).children().eq(1);
+      secondListItem.click();
+      // >>>> ... test how many selected
+      expect(localScope.selectedItems.length).toEqual(2);
+    }));
+
+  /**
+   * test two layout types: grid / list
+   */
+  it(
+    'should allow interpolation of list display mode value',
+    inject((
+      $compile: angular.ICompileService,
+      $rootScope: angular.IRootScopeService) => {
+
+      let subjectElement: JQuery = null;
+      let html: string = `
+        <uif-list uif-layout="{{type}}">
+          <uif-list-item ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-list-item>
+        </uif-list>`;
+      let ngElement: JQuery = angular.element(html);
+      let localScope: any = $rootScope.$new();
+      $compile(ngElement)(localScope);
+
+
+      // >>> test 1
+      localScope.type = ListLayoutEnum[ListLayoutEnum.list];
+
+      // run digest cycle
+      localScope.$digest();
+      subjectElement = jQuery(ngElement[0]).find('ul');
+
+      // test for correct setting
+      expect(subjectElement).toHaveClass('ms-List');
+      expect(subjectElement).not.toHaveClass('ms-List--grid');
+
+
+      // >>> test 2
+      localScope.type = ListLayoutEnum[ListLayoutEnum.grid];
+
+      // run digest cycle
+      localScope.$digest();
+      subjectElement = jQuery(ngElement[0]).find('ul');
+
+      // test for correct setting
+      expect(subjectElement).toHaveClass('ms-List');
+      expect(subjectElement).toHaveClass('ms-List--grid');
+    }));
+
+  /**
+   * test different ways to render list items: with icon / image
+   */
+  it(
+    'should allow interpolation of list item display mode value',
+    inject((
+      $compile: angular.ICompileService,
+      $rootScope: angular.IRootScopeService) => {
+
+      let subjectElement: JQuery = null;
+      let html: string = `
+        <uif-list>
+          <uif-list-item-image><img ng-src="image.png" /></uif-list-item-image>
+          <uif-list-item-icon><uif-icon uif-type="mail"></uif-icon></uif-list-item-icon>
+          <uif-list-item uif-type="{{type}}"></uif-list-item>
+        </uif-list>`;
+      let ngElement: JQuery = angular.element(html);
+      let localScope: any = $rootScope.$new();
+      $compile(ngElement)(localScope);
+
+      // >>> test 1
+      localScope.type = ListItemTypeEnum[ListItemTypeEnum.itemWithIcon];
+
+      // run digest cycle
+      localScope.$digest();
+      subjectElement = jQuery(ngElement[0]);
+      // test for correct setting
+      expect(subjectElement.find('li')).toHaveClass('ms-ListItem--document');
+
+
+      // >>> test 2
+      localScope.type = ListItemTypeEnum[ListItemTypeEnum.itemWithImage];
+
+      // run digest cycle
+      localScope.$digest();
+      subjectElement = jQuery(ngElement[0]);
+
+      // test for correct setting
+      expect(subjectElement.children().eq(0).children().eq(2).children().eq(0)).toHaveClass('ms-ListItem--image');
+      expect(subjectElement.find('li')).toHaveClass('ms-ListItem--image');
     }));
 });
