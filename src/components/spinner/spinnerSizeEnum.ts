@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  *
  * Enum for spinner sizes supported by Office UI Fabric.

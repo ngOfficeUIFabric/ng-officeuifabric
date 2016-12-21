@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Enum for all icons supported by Office UI Fabric. Enums in JavaScript are always number indexed, but this enum is
  * intended to be used as a striangular.

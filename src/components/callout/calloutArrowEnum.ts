@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Enum for callout arrow direction. It is intended to use as string as `uif-arrow` attribute value on `uif-callout` directive.
  *

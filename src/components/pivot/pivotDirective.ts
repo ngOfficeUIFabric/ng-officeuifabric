@@ -1,8 +1,6 @@
-'use strict';
-
 import * as angular from 'angular';
-import {PivotSize} from './pivotSizeEnum';
-import {PivotType} from './pivotTypeEnum';
+import { PivotSize } from './pivotSizeEnum';
+import { PivotType } from './pivotTypeEnum';
 
 /**
  * @ngdoc controller
@@ -41,7 +39,7 @@ export class PivotController {
  */
 export class PivotItem {
   public selected: boolean;
-  constructor(public title: string) {}
+  constructor(public title: string) { }
 }
 
 /**
@@ -66,8 +64,8 @@ export class PivotEllipsisDirective implements angular.IDirective {
   public transclude: boolean = true;
   public replace: boolean = false;
   public template: string = '<li class="ms-Pivot-link ms-Pivot-link--overflow">' +
-    '<uif-icon uif-type="ellipsis" class="ms-Pivot-ellipsis"></uif-icon>' +
-    '<ng-transclude></ng-transclude>' +
+  '<uif-icon uif-type="ellipsis" class="ms-Pivot-ellipsis"></uif-icon>' +
+  '<ng-transclude></ng-transclude>' +
   '</li>';
   public scope: boolean = false;
 
@@ -101,12 +99,12 @@ export class PivotDirective implements angular.IDirective {
   public controller: typeof PivotController = PivotController;
   public require: string[] = ['uifPivot'];
   public template: string = '<ul class="ms-Pivot" ng-class="getClasses()" >' +
-    '<span ng-repeat-start="pivot in uifPivots"></span>' +
-    '<li class="ms-Pivot-link" ng-click="pivotClick($index)" ' +
-      'ng-class="{\'is-selected\': pivot.selected}">{{pivot.title}}</li> ' +
-    '<span ng-repeat-end></span>' +
-    '<ng-transclude></ng-transclude>' +
-    '</ul>';
+  '<span ng-repeat-start="pivot in uifPivots"></span>' +
+  '<li class="ms-Pivot-link" ng-click="pivotClick($index)" ' +
+  'ng-class="{\'is-selected\': pivot.selected}">{{pivot.title}}</li> ' +
+  '<span ng-repeat-end></span>' +
+  '<ng-transclude></ng-transclude>' +
+  '</ul>';
 
   public scope: any = {
     uifPivots: '=?',

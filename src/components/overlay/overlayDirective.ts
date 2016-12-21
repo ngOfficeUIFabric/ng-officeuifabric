@@ -1,7 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
-import {OverlayMode} from './overlayModeEnum';
+import { OverlayMode } from './overlayModeEnum';
 
 /**
  * @ngdoc interface
@@ -14,7 +12,7 @@ import {OverlayMode} from './overlayModeEnum';
  * @property {string} uifType - Icon to display. Possible types are defined in {@link IconEnum}.
  */
 export interface IOverlayScope extends angular.IScope {
-    uifMode: OverlayMode;
+  uifMode: OverlayMode;
 }
 
 /**
@@ -25,9 +23,9 @@ export interface IOverlayScope extends angular.IScope {
  * Used to more easily inject the Angular $log service into the directive.
  */
 class OverlayController {
-    public static $inject: string[] = ['$log'];
-    constructor(public log: angular.ILogService) {
-    }
+  public static $inject: string[] = ['$log'];
+  constructor(public log: angular.ILogService) {
+  }
 }
 
 /**
@@ -49,38 +47,38 @@ class OverlayController {
  */
 export class OverlayDirective implements angular.IDirective {
 
-    public static log: angular.ILogService;
+  public static log: angular.ILogService;
 
-    public restrict: string = 'E';
-    public template: string = '<div class="ms-Overlay" ng-class="{\'ms-Overlay--dark\': uifMode == \'dark\'}" ng-transclude></div>';
-    public scope: {} = {
-        uifMode: '@'
-    };
-    public transclude: boolean = true;
+  public restrict: string = 'E';
+  public template: string = '<div class="ms-Overlay" ng-class="{\'ms-Overlay--dark\': uifMode == \'dark\'}" ng-transclude></div>';
+  public scope: {} = {
+    uifMode: '@'
+  };
+  public transclude: boolean = true;
 
-    public static factory(): angular.IDirectiveFactory {
-        const directive: angular.IDirectiveFactory = (log: angular.ILogService) => new OverlayDirective(log);
-        directive.$inject = ['$log'];
-        return directive;
-    }
+  public static factory(): angular.IDirectiveFactory {
+    const directive: angular.IDirectiveFactory = (log: angular.ILogService) => new OverlayDirective(log);
+    directive.$inject = ['$log'];
+    return directive;
+  }
 
-    public constructor(public log: angular.ILogService) {
-        OverlayDirective.log = log;
-    }
+  public constructor(public log: angular.ILogService) {
+    OverlayDirective.log = log;
+  }
 
-    public link(scope: IOverlayScope): void {
+  public link(scope: IOverlayScope): void {
 
-        scope.$watch('uifMode', (newValue: string, oldValue: string) => {
+    scope.$watch('uifMode', (newValue: string, oldValue: string) => {
 
-            // verify a valid overlay mode was passed in
-            if (OverlayMode[newValue] === undefined) {
-                OverlayDirective.log.error('Error [ngOfficeUiFabric] officeuifabric.components.overlay - Unsupported overlay mode: ' +
-                    'The overlay mode (\'' + scope.uifMode + '\') is not supported by the Office UI Fabric. ' +
-                    'Supported options are listed here: ' +
-                    'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/overlay/overlayModeEnum.ts');
-            }
-        });
-    };
+      // verify a valid overlay mode was passed in
+      if (OverlayMode[newValue] === undefined) {
+        OverlayDirective.log.error('Error [ngOfficeUiFabric] officeuifabric.components.overlay - Unsupported overlay mode: ' +
+          'The overlay mode (\'' + scope.uifMode + '\') is not supported by the Office UI Fabric. ' +
+          'Supported options are listed here: ' +
+          'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/overlay/overlayModeEnum.ts');
+      }
+    });
+  };
 }
 
 /**
@@ -92,6 +90,6 @@ export class OverlayDirective implements angular.IDirective {
  *
  */
 export let module: angular.IModule = angular.module('officeuifabric.components.overlay', [
-    'officeuifabric.components'
+  'officeuifabric.components'
 ])
-    .directive('uifOverlay', OverlayDirective.factory());
+  .directive('uifOverlay', OverlayDirective.factory());

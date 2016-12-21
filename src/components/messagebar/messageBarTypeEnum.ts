@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Enum for supported types of the uif-messagebar directive
  * This enum is intended to be used as a striangular.

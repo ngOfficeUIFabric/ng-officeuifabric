@@ -1,6 +1,5 @@
-﻿'use strict';
-
 import * as angular from 'angular';
+
 import { ChoicefieldType } from './choicefieldTypeEnum';
 
 /**
@@ -100,8 +99,7 @@ export class ChoicefieldOptionDirective implements angular.IDirective {
   public compile(
     templateElement: angular.IAugmentedJQuery,
     templateAttributes: angular.IAttributes,
-    transclude: angular.ITranscludeFunction
-  ): angular.IDirectivePrePost {
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     let input: angular.IAugmentedJQuery = templateElement.find('input');
     if (!('ngModel' in templateAttributes)) {
       // remove ng-model, as this is an optional attribute.
@@ -299,8 +297,7 @@ export class ChoicefieldGroupDirective implements angular.IDirective {
   public compile(
     templateElement: angular.IAugmentedJQuery,
     templateAttributes: angular.IAttributes,
-    transclude: angular.ITranscludeFunction
-  ): angular.IDirectivePrePost {
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       pre: this.preLink
     };

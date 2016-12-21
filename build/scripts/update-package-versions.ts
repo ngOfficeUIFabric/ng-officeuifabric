@@ -7,9 +7,7 @@
 // --src = location of the cloned source repo (ng-officeuifabric)
 // --pkg = location of the cloned package repo (ngofficeuifabric)
 
-'use strict';
-
-import {ScriptUtils, ILibraryDependencies} from './ScriptUtils';
+import { ScriptUtils, ILibraryDependencies } from './ScriptUtils';
 import * as fs from 'fs';
 import * as yargs from 'yargs';
 

@@ -1,6 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
+
 describe('uifDialog: <uif-dialog />', () => {
   let element: JQuery;
   let scope: any;

@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 
 /**
@@ -47,6 +45,6 @@ export class LinkDirective implements angular.IDirective {
  *
  */
 export let module: angular.IModule = angular.module('officeuifabric.components.link', [
-    'officeuifabric.components'
-  ])
+  'officeuifabric.components'
+])
   .directive('uifLink', LinkDirective.factory());

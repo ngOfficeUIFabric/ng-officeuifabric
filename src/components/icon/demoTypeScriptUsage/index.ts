@@ -1,7 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
-import {IconEnum} from './../iconEnum';
+import { IconEnum } from './../iconEnum';
 
 export class DemoController {
   public icons: string[] = [];
@@ -17,7 +15,7 @@ export class DemoController {
   /**
    * @description
    * Populates the icon collection using the provided enum.
-   * 
+   *
    * @returns {string[]}  - Array of icons as strings.
    */
   private _fillIconCollection(): string[] {
@@ -39,6 +37,6 @@ export class DemoController {
 }
 
 export var module: angular.IModule = angular.module('demoApp', [
-    'officeuifabric.core',
-    'officeuifabric.components.icon'])
+  'officeuifabric.core',
+  'officeuifabric.components.icon'])
   .controller('demoController', [DemoController]);

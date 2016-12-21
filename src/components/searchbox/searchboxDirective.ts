@@ -1,5 +1,4 @@
-﻿'use strict';
-import * as angular from 'angular';
+﻿import * as angular from 'angular';
 
 /**
  * @ngdoc interface
@@ -13,7 +12,6 @@ import * as angular from 'angular';
  * @property {string} value       - The scope variable to bind to the text input.
  */
 interface ISearchBoxScope extends angular.IScope {
-
   btnMousedown: () => void;
   inputFocus: () => void;
   inputBlur: () => void;
@@ -26,6 +24,7 @@ interface ISearchBoxScope extends angular.IScope {
   placeholder: string;
   value: string;
 }
+
 /**
  * @ngdoc directive
  * @name uifSearchbox

@@ -1,5 +1,3 @@
-'use strict';
-
 /** @class */
 export class BaseGulpTask {
 

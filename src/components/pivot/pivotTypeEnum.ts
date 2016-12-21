@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  *
  * Enum for pivot type supported by Office UI Fabric.

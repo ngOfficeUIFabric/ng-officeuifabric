@@ -1,6 +1,3 @@
-'use strict';
-
-
 /**
  * Enum for supported sizes of the Persona component.
  * This enum is intended to be used as a striangular.

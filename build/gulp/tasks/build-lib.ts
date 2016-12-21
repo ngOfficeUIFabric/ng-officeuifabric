@@ -1,8 +1,6 @@
-'use strict';
-
-import {BaseGulpTask} from '../BaseGulpTask';
-import {BuildConfig} from '../../config/build';
-import {Utils} from '../utils';
+import { BaseGulpTask } from '../BaseGulpTask';
+import { BuildConfig } from '../../config/build';
+import { Utils } from '../utils';
 import * as gulp from 'gulp';
 import * as yargs from 'yargs';
 import * as webpack from 'webpack';

@@ -1,5 +1,3 @@
-'use strict';
-
 export enum PersonaSize {
   xsmall,
   small,

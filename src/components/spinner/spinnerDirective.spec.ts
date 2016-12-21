@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 
 describe('spinnerDirective: <uif-spinner />', () => {

@@ -1,7 +1,5 @@
-'use strict';
-
-import {BaseGulpTask} from '../BaseGulpTask';
-import {Utils} from '../utils';
+import { BaseGulpTask } from '../BaseGulpTask';
+import { Utils } from '../utils';
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
 
@@ -16,7 +14,7 @@ export class GulpTask extends BaseGulpTask {
    * @property  {string}  description   - Help description for the task.
    */
   public static description: string = 'Validates the build runs \'vet\', \'transpile-ts\', \'build-lib\' and \'test\' in a sequence'
-                                      + GulpTask.helpMargin;
+  + GulpTask.helpMargin;
 
   /**
    * @property  {string[]}  dependencies  - Array of all tasks that should be run before this one.

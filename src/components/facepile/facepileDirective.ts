@@ -1,7 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
-import {IPerson} from '../../core/person';
+import { IPerson } from '../../core/person';
 
 /**
  * @ngdoc interface
@@ -176,9 +174,10 @@ export class FacepileAddIconDirective implements angular.IDirective {
   }
 
   public link(scope: IFacepileAddIconScope, elem: angular.IAugmentedJQuery, attrs: angular.IAttributes): void {
-  {
-    scope.parentScope = <IFacepileScope>scope.$parent.$parent;
-  }};
+    {
+      scope.parentScope = <IFacepileScope>scope.$parent.$parent;
+    }
+  };
 
 }
 
@@ -194,5 +193,5 @@ export class FacepileAddIconDirective implements angular.IDirective {
 export let module: angular.IModule = angular.module('officeuifabric.components.facepile', [
   'officeuifabric.components'
 ])
-.directive('uifFacepile', FacepileDirective.factory())
-.directive('uifFacepileAddIcon', FacepileAddIconDirective.factory());
+  .directive('uifFacepile', FacepileDirective.factory())
+  .directive('uifFacepileAddIcon', FacepileAddIconDirective.factory());

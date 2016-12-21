@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Enumeration of the different dialog types supported by the dialog directive.
  *

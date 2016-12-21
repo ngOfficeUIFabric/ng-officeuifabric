@@ -1,8 +1,6 @@
-'use strict';
-
 import * as angular from 'angular';
-import {OrgChartPresenceEnum} from './orgChartPresenceEnum';
-import {OrgChartSelectModeEnum} from './orgChartSelectModeEnum';
+import { OrgChartPresenceEnum } from './orgChartPresenceEnum';
+import { OrgChartSelectModeEnum } from './orgChartSelectModeEnum';
 
 describe('orgChartDirective: <uif-org-chart />', () => {
 
@@ -40,36 +38,36 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       // sample data
       sample = [
         {
-            country: 'Denmark',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Kevin Magnussen',
-            presence: 'available',
-            selected: false,
-            team: 'Renault'
+          country: 'Denmark',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Kevin Magnussen',
+          presence: 'available',
+          selected: false,
+          team: 'Renault'
         },
         {
-            country: '	Germany',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Sebastian Vettel',
-            presence: 'busy',
-            selected: false,
-            team: 'Ferrari'
+          country: '	Germany',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Sebastian Vettel',
+          presence: 'busy',
+          selected: false,
+          team: 'Ferrari'
         },
         {
-            country: '	United Kingdom',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Jolyon Palmer',
-            presence: 'away',
-            selected: false,
-            team: 'Renault'
+          country: '	United Kingdom',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Jolyon Palmer',
+          presence: 'away',
+          selected: false,
+          team: 'Renault'
         },
         {
-            country: 'United Kingdom',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Lewis Hamilton',
-            presence: 'blocked',
-            selected: false,
-            team: '	Mercedes'
+          country: 'United Kingdom',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Lewis Hamilton',
+          presence: 'blocked',
+          selected: false,
+          team: '	Mercedes'
         }
       ];
 
@@ -137,11 +135,11 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
     it('should log error on invalid select-mode', () => {
 
-        element = angular.element(`<uif-org-chart uif-select-mode="INVALID"></uif-org-chart`);
-        compile(element)(scope);
-        scope.$digest();
+      element = angular.element(`<uif-org-chart uif-select-mode="INVALID"></uif-org-chart`);
+      compile(element)(scope);
+      scope.$digest();
 
-        expect(log.error.logs.length).toEqual(1);
+      expect(log.error.logs.length).toEqual(1);
 
     });
 
@@ -236,36 +234,36 @@ describe('orgChartDirective: <uif-org-chart />', () => {
       // sample data
       sample = [
         {
-            country: 'Denmark',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Kevin Magnussen',
-            presence: 'available',
-            selected: false,
-            team: 'Renault'
+          country: 'Denmark',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Kevin Magnussen',
+          presence: 'available',
+          selected: false,
+          team: 'Renault'
         },
         {
-            country: '	Germany',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Sebastian Vettel',
-            presence: 'busy',
-            selected: false,
-            team: 'Ferrari'
+          country: '	Germany',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Sebastian Vettel',
+          presence: 'busy',
+          selected: false,
+          team: 'Ferrari'
         },
         {
-            country: '	United Kingdom',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Jolyon Palmer',
-            presence: 'away',
-            selected: false,
-            team: 'Renault'
+          country: '	United Kingdom',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Jolyon Palmer',
+          presence: 'away',
+          selected: false,
+          team: 'Renault'
         },
         {
-            country: 'United Kingdom',
-            imageUrl: 'Persona.Person2.png',
-            name: 'Lewis Hamilton',
-            presence: 'blocked',
-            selected: false,
-            team: '	Mercedes'
+          country: 'United Kingdom',
+          imageUrl: 'Persona.Person2.png',
+          name: 'Lewis Hamilton',
+          presence: 'blocked',
+          selected: false,
+          team: '	Mercedes'
         }
       ];
 
@@ -645,7 +643,7 @@ describe('orgChartDirective: <uif-org-chart />', () => {
 
       expect(presenceElement.prop('tagName')).toEqual('DIV');
       expect(presenceElement).toHaveClass('ms-Persona-presence');
-      expect(presenceElement).toHaveCss({display: 'none'});
+      expect(presenceElement).toHaveCss({ display: 'none' });
 
     });
 
