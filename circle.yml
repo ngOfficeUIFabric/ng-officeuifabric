@@ -27,8 +27,12 @@ dependencies:
 
 test:
   pre:
-    # vet all code
+    # vet all TypeScript build code
+    - gulp vet-build-ts --verbose
+    # vet all TypeScript library code
     - gulp vet-lib-ts --verbose
+    # vet all non-generated JavaScript code
+    - gulp vet-lib-js --verbose
   post:
     # move junit test report => build artifacts
     - mkdir $CIRCLE_TEST_REPORTS/junit

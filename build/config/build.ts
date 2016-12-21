@@ -42,7 +42,7 @@ export class BuildConfig {
   ];
   public static LIB_JS: string[] = [
     BuildConfig.SOURCE + '/core/**/*.js',
-    BuildConfig.SOURCE + '/components/*/*.js'
+    BuildConfig.SOURCE + '/components/**/*.js'
   ];
   public static LIB_TEST_JS: string[] = [
     BuildConfig.SOURCE + '/core/**/*.spec.js',
@@ -56,6 +56,11 @@ export class BuildConfig {
   public static BUILD_KEEP_JS: string[] = [];
   public static LIB_KEEP_JS: string[] = [
     BuildConfig.SOURCE + '/core/jquery.phantomjs.fix.js'
+  ];
+
+  // files that sould be excluded from JavaScript linting
+  public static LIB_EXCLUDE_LINT_JS: string[] = [
+    '!' + BuildConfig.SOURCE + '/components/icon/demoTypeScriptUsage/*.js'
   ];
 
   /*
