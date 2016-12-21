@@ -58,6 +58,11 @@ export class BuildConfig {
     BuildConfig.SOURCE + '/core/jquery.phantomjs.fix.js'
   ];
 
+  // files that sould be excluded from JavaScript linting
+  public static LIB_EXCLUDE_LINT_JS: string[] = [
+    '!' + BuildConfig.SOURCE + '/components/icon/demoTypeScriptUsage/*.js'
+  ];
+
   /*
    * TypeScript files
    */
