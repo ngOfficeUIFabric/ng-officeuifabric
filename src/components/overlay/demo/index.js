@@ -9,5 +9,5 @@ demoApp.controller('demoController', [
   '$scope', demoController]);
 
 function demoController($scope) {
-    $scope.vm = { overlayMode: 'light' };
+  $scope.vm = { overlayMode: 'light' };
 }

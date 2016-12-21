@@ -6,12 +6,12 @@ var demoApp = angular.module('demoApp', [
 ]);
 
 demoApp.controller('demoController', [
-    '$scope', demoController]);
+  '$scope', demoController]);
 
 function demoController($scope) {
-    $scope.values = {
-      'round': 'Round',
-      'square': 'Square'
-    };
-    $scope.value = 'round';
-};
+  $scope.values = {
+    'round': 'Round',
+    'square': 'Square'
+  };
+  $scope.value = 'round';
+}

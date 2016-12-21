@@ -14,7 +14,7 @@
         },
         template: '<pre class="code" ng-bind-html="data"></pre>',
         restrict: 'E',
-        link: function (scope, element, attrs, controller, $transclude) {
+        link: function (scope, element) {
           var template = angular.element(document.getElementById(scope.src));
           scope.data = $sce.trustAsHtml(element.text(template.html()).html());
         }
@@ -25,31 +25,31 @@
 
   angular.module('regularSample', ['demo'])
     .controller('demoController',
-      ['$scope', function ($scope) {
-        $scope.isOpen = true;
-        $scope.colors = ['Green', 'Yellow', 'Red', 'White', 'Blue'];
+    ['$scope', function ($scope) {
+      $scope.isOpen = true;
+      $scope.colors = ['Green', 'Yellow', 'Red', 'White', 'Blue'];
 
-        $scope.logColor = function (color) {
-          console.log(color);
-        }
+      $scope.logColor = function (color) {
+        console.log(color);
+      };
 
-        $scope.logClick = function (logData) {
-          console.log(logData);
-        }
+      $scope.logClick = function (logData) {
+        console.log(logData);
+      };
 
-        $scope.onSearch = function(search){
-          alert('You searched for "' + search + '"');
-        }
-      }]);
+      $scope.onSearch = function (search) {
+        alert('You searched for "' + search + '"');
+      };
+    }]);
 
   angular.module('animateSample', [
     'ngAnimate',
     'demo'
   ])
     .controller('demoController',
-      ['$scope', function ($scope) {
-        $scope.isOpen = true;
-      }]);
+    ['$scope', function ($scope) {
+      $scope.isOpen = true;
+    }]);
 })();
 
 angular.element(document).ready(function () {

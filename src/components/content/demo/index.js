@@ -2,5 +2,5 @@
 
 angular.module('demoApp', [
   'officeuifabric.core',
-  'officeuifabric.components.label'
+  'officeuifabric.components.content'
 ]);

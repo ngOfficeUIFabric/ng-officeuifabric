@@ -1,20 +1,20 @@
 (function () {
-    'use strict';
-    
-    var demoApp = angular.module('demoApp', [
-        'officeuifabric.core',
-        'officeuifabric.components.contextualmenu'
-    ]);
+  'use strict';
 
-    demoApp.controller('demoController', [
-        '$scope', demoController]);
+  var demoApp = angular.module('demoApp', [
+    'officeuifabric.core',
+    'officeuifabric.components.contextualmenu'
+  ]);
 
-    function demoController($scope) {
-        $scope.isOpen = true;
-        $scope.colors = ['Green', 'Yellow', 'Red', 'White', 'Blue'];
+  demoApp.controller('demoController', [
+    '$scope', demoController]);
 
-        $scope.logColor = function (color) {
-            console.log(color);
-        }
-    }
+  function demoController($scope) {
+    $scope.isOpen = true;
+    $scope.colors = ['Green', 'Yellow', 'Red', 'White', 'Blue'];
+
+    $scope.logColor = function (color) {
+      console.log(color);
+    };
+  }
 })();
