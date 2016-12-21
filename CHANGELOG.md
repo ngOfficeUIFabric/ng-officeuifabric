@@ -1,3 +1,26 @@
+<a name="0.13.0"></a>
+### [0.13.0 - December 21, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.13.0)
+
+
+#### Features
+
+- **uif-choicefield**
+  - added tests to verify `uif-type` responding to dynamic changes ([327a8a1](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/327a8a1), [#358](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/358) & [#445](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/445))
+- **uif-icon**
+  - added tests to verify `uif-type` responding to dynamic changes ([ebc4ac8](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/ebc4ac8), [#358](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/358) & [#441](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/441))
+
+#### Fixes
+
+- **uif-list**
+  - `uif-selection-mode` & `uif-layout` not responding to dynamic changes ([2350d6f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/2350d6f), [#358](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/358) & [#446](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/446))
+- **uif-list-item**
+  - `uif-type` not responding to dynamic changes ([2350d6f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/2350d6f), [#358](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/358) & [#446](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/446))
+- **uif-textfield**
+  - `uif-type` not responding to dynamic changes ([2350d6f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/2350d6f), [#358](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/358) & [#440](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/440))
+- **dependencies**
+  - update dependencies ([69a0b00](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/69a0b00))
+
+
 <a name="0.12.13"></a>
 ### [0.12.13 - December 15, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.12.13)
 
@@ -5,7 +28,7 @@
 #### Fixes
 
 - **uif-panel**
-  - uif-is-open link is not working correctly ([5c5e69c](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5c5e69c), [#373](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/373)
+  - uif-is-open link is not working correctly ([5c5e69c](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5c5e69c), [#373](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/373))
 
 
 <a name="0.12.12"></a>
@@ -15,7 +38,7 @@
 #### Fixes
 
 - **uif-panel**
-  - add uifIsLightDismiss attribute ([dfaf05b](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/dfaf05b), [#434](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/434)
+  - add uifIsLightDismiss attribute ([dfaf05b](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/dfaf05b), [#434](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/434))
 
 
 <a name="0.12.11"></a>
@@ -25,9 +48,9 @@
 #### Fixes
 
 - **uif-datepicker**
-  - added gate to check for null value submitted ([5bcf1b0](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5bcf1b0), [#372](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/372) 
+  - added gate to check for null value submitted ([5bcf1b0](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5bcf1b0), [#372](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/372)) 
 - **uif-choicefield**
-  - updated demo usage ([b1c4fc3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b1c4fc3), [#416](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/416)
+  - updated demo usage ([b1c4fc3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b1c4fc3), [#416](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/416))
 
 
 <a name="0.12.10"></a>
