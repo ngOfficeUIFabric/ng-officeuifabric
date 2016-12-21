@@ -9,8 +9,9 @@ demoApp.controller('demoController', [
   '$scope', demoController]);
 
 function demoController($scope) {
-    $scope.vm = {
-        name: 'MyDocument.docx',
-        description: 'This is a sample document.',
-        percentComplete: 25 };
+  $scope.vm = {
+    name: 'MyDocument.docx',
+    description: 'This is a sample document.',
+    percentComplete: 25
+  };
 }

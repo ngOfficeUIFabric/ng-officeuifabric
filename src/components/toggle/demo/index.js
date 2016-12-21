@@ -8,5 +8,5 @@ var demoApp = angular.module('demoApp', [
 demoApp.controller('demoController', [
   '$scope', demoController]);
 
-function demoController($scope) {   
+function demoController() {
 }

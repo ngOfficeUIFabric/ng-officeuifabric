@@ -1,6 +1,6 @@
 'use strict';
 
-var demoApp = angular.module('demoApp', [
+angular.module('demoApp', [
   'officeuifabric.core',
   'officeuifabric.components.pivot',
 ]).controller('pivotController', ['$scope', pivotController]);
@@ -8,9 +8,9 @@ var demoApp = angular.module('demoApp', [
 function pivotController($scope) {
   $scope.vm = {
     pivots: [
-      {title: "My files"},
-      {title: "Recent"},
-      {title: "Shared with me"}
+      { title: 'My files' },
+      { title: 'Recent' },
+      { title: 'Shared with me' }
     ]
   };
 }

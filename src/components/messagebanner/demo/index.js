@@ -5,20 +5,20 @@ var demoApp = angular.module('demoApp', [
   'officeuifabric.components.messagebanner'
 ]);
 
-demoApp.controller('messageBannerDemoController', ['$scope', '$log', '$window', messageBannerDemoController]);
+demoApp.controller('messageBannerDemoController', ['$scope', messageBannerDemoController]);
 
-function messageBannerDemoController($scope, $log, $window) {
+function messageBannerDemoController($scope) {
   $scope.customFunction = function () {
     alert('this is a test message');
-  }
+  };
 
   $scope.customCloseFunction = function () {
     alert('message banner closed');
-  }
+  };
 
   $scope.vm = {
     bannerToggle: true,
     label: 'test button'
-  }
+  };
 }
 

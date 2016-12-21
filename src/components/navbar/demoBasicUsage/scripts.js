@@ -15,14 +15,14 @@
 
     $scope.logColor = function (color) {
       console.log(color);
-    }
+    };
 
     $scope.logClick = function (logData) {
       console.log(logData);
-    }
+    };
 
     $scope.onSearch = function (search) {
       alert('You searched for "' + search + '"');
-    }
+    };
   }
 })();
