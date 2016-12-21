@@ -1,5 +1,3 @@
-'use strict';
-
 import {BaseGulpTask} from '../BaseGulpTask';
 import * as gulp from 'gulp';
 import {Utils} from '../utils';

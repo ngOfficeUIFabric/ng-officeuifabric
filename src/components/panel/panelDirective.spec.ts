@@ -1,5 +1,3 @@
-'use strict';
-
 describe('panel: <uif-panel />', () => {
   beforeEach(() => {
     angular.mock.module('officeuifabric.core');
@@ -12,7 +10,7 @@ describe('panel: <uif-panel />', () => {
     let $scope: any;
 
     afterEach(() => {
-        this.$timeoutservice.verifyNoPendingTasks();
+      this.$timeoutservice.verifyNoPendingTasks();
     });
 
     beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $timeout: angular.ITimeoutService) => {
@@ -97,16 +95,16 @@ describe('panel: <uif-panel />', () => {
       'clicking on the Overlay should not close the panel when no value is supplied to uif-is-light-dismiss',
       inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
-      $scope.isOpen = true;
-      $rootScope.$digest();
-      expect(panel).toHaveClass('is-open');
+        $scope.isOpen = true;
+        $rootScope.$digest();
+        expect(panel).toHaveClass('is-open');
 
-      // attempt to close the panel by clicking on the background overlay
-      panel.find('.ms-Overlay.ms-Overlay--dark').trigger('click');
-      $rootScope.$digest();
-      this.$timeoutservice.flush();
-      expect($scope.isOpen).toEqual(true);
-    }));
+        // attempt to close the panel by clicking on the background overlay
+        panel.find('.ms-Overlay.ms-Overlay--dark').trigger('click');
+        $rootScope.$digest();
+        this.$timeoutservice.flush();
+        expect($scope.isOpen).toEqual(true);
+      }));
 
   });
 
@@ -143,32 +141,32 @@ describe('panel: <uif-panel />', () => {
       'clicking on the Overlay should not close the panel when uif-is-light-dismiss is false',
       inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
-      $scope.isOpen = true;
-      $rootScope.$digest();
-      expect(panel).toHaveClass('is-open');
+        $scope.isOpen = true;
+        $rootScope.$digest();
+        expect(panel).toHaveClass('is-open');
 
-      // attempt to close the panel by clicking on the background overlay
-      panel.find('.ms-Overlay.ms-Overlay--dark').trigger('click');
-      $rootScope.$digest();
-      this.$timeoutservice.flush();
-      expect($scope.isOpen).toEqual(true);
-    }));
+        // attempt to close the panel by clicking on the background overlay
+        panel.find('.ms-Overlay.ms-Overlay--dark').trigger('click');
+        $rootScope.$digest();
+        this.$timeoutservice.flush();
+        expect($scope.isOpen).toEqual(true);
+      }));
 
     it(
       'clicking on the Overlay should close the panel when uif-is-light-dismiss is true',
       inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
 
-      $scope.isOpen = true;
-      $scope.isLightDismiss = true;
-      $rootScope.$digest();
-      expect(panel).toHaveClass('is-open');
+        $scope.isOpen = true;
+        $scope.isLightDismiss = true;
+        $rootScope.$digest();
+        expect(panel).toHaveClass('is-open');
 
-      // attempt to close the panel by clicking on the background overlay
-      panel.find('.ms-Overlay.ms-Overlay--dark').trigger('click');
-      $rootScope.$digest();
-      this.$timeoutservice.flush();
-      expect($scope.isOpen).toEqual(false);
-    }));
+        // attempt to close the panel by clicking on the background overlay
+        panel.find('.ms-Overlay.ms-Overlay--dark').trigger('click');
+        $rootScope.$digest();
+        this.$timeoutservice.flush();
+        expect($scope.isOpen).toEqual(false);
+      }));
 
   });
 
@@ -221,7 +219,7 @@ describe('panel: <uif-panel />', () => {
     }));
 
 
-    });
+  });
 
   describe('Ensure default is applied when no uif-type is supplied', () => {
     let panel: JQuery;

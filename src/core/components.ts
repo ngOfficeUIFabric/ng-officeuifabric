@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 import * as breadcrumbModule from '../components/breadcrumb/breadcrumbDirective';
 import * as buttonModule from '../components/button/buttonDirective';

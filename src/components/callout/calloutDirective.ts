@@ -1,8 +1,6 @@
-'use strict';
-
 import * as angular from 'angular';
-import {CalloutType} from './calloutTypeEnum';
-import {CalloutArrow} from './calloutArrowEnum';
+import { CalloutType } from './calloutTypeEnum';
+import { CalloutArrow } from './calloutArrowEnum';
 
 
 /**

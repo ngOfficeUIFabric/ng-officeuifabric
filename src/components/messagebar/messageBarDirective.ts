@@ -1,9 +1,5 @@
-
-'use strict';
-
 import * as angular from 'angular';
 import { MessageBarTypeEnum } from './messageBarTypeEnum';
-
 
 /**
  * @controller

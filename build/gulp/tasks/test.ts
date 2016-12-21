@@ -1,5 +1,3 @@
-'use strict';
-
 import { BaseGulpTask } from '../BaseGulpTask';
 import { Utils } from '../utils';
 import { BuildConfig } from '../../config/build';

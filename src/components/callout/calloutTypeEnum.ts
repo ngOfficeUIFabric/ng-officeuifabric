@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  *
  * Enum for callout type. It is intended to use as string as `uif-type` attribute value on `uif-callout` directive.

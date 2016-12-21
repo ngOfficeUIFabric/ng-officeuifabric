@@ -1,6 +1,4 @@
-'use strict';
-
-import {BuildConfig} from './build';
+import { BuildConfig } from './build';
 import * as karma from 'karma';
 import * as webpack from 'webpack';
 import * as webpackConfig from './webpack';

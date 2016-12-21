@@ -1,5 +1,3 @@
-'use strict';
-
 import * as yargs from 'yargs';
 
 export class BuildConfig {

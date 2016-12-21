@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 import { TableRowSelectModeEnum } from './tableRowSelectModeEnum';
 import { TableTypeEnum } from './tableTypeEnum';

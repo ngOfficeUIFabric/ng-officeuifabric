@@ -1,10 +1,8 @@
-'use strict';
-
 import * as angular from 'angular';
-import {PersonaSize} from './sizeEnum';
-import {PlaceholderEnum} from './placeholderEnum';
-import {PersonaStyleEnum} from '../../core/personaStyleEnum';
-import {PresenceEnum} from '../../core/personaPresenceEnum';
+import { PersonaSize } from './sizeEnum';
+import { PlaceholderEnum } from './placeholderEnum';
+import { PersonaStyleEnum } from '../../core/personaStyleEnum';
+import { PresenceEnum } from '../../core/personaPresenceEnum';
 
 /**
  * @ngdoc directive

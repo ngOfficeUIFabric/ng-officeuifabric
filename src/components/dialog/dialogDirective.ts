@@ -1,7 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
-import {DialogTypeEnum, DialogActionsPositionEnum} from './dialogEnums';
+import { DialogTypeEnum, DialogActionsPositionEnum } from './dialogEnums';
 
 /**
  * @ngdoc interface
@@ -250,21 +248,22 @@ export class DialogActionsDirective implements angular.IDirective {
     const directive: angular.IDirectiveFactory = () => new DialogActionsDirective();
     return directive;
   }
-  public link(scope: IDialogActionsPositionScope,
-              element: angular.IAugmentedJQuery,
-              attrs: angular.IAttributes,
-              controller: DialogActionsController): void {
-              scope.$watch('uifPosition', (newValue: string, oldValue: string) => {
-                if (typeof (newValue) !== 'undefined') {
-                  if (DialogActionsPositionEnum[newValue] === undefined) {
-                    controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.dialog - Unsupported type:' +
-                      'The type (\'' + scope.uifPosition + '\') is not supported by the Office UI Fabric.' +
-                      'Supported options are listed here: ' +
-                      'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/dialog/dialogEnums.ts'
-                    );
+  public link(
+    scope: IDialogActionsPositionScope,
+    element: angular.IAugmentedJQuery,
+    attrs: angular.IAttributes,
+    controller: DialogActionsController): void {
+    scope.$watch('uifPosition', (newValue: string, oldValue: string) => {
+      if (typeof (newValue) !== 'undefined') {
+        if (DialogActionsPositionEnum[newValue] === undefined) {
+          controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.dialog - Unsupported type:' +
+            'The type (\'' + scope.uifPosition + '\') is not supported by the Office UI Fabric.' +
+            'Supported options are listed here: ' +
+            'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/dialog/dialogEnums.ts'
+          );
 
-                  }
-                }
+        }
+      }
     });
   }
 }

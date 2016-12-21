@@ -1,8 +1,6 @@
-'use strict';
-
 import * as angular from 'angular';
-import {ButtonTypeEnum} from './buttonTypeEnum';
-import {ButtonTemplateType} from './buttonTemplateType';
+import { ButtonTypeEnum } from './buttonTypeEnum';
+import { ButtonTemplateType } from './buttonTemplateType';
 
 export interface IButtonScope extends angular.IScope {
   disabled: boolean;
@@ -136,9 +134,10 @@ export class ButtonDirective implements angular.IDirective {
     }
   }
 
-  public compile(element: angular.IAugmentedJQuery,
-                 attrs: IButtonAttributes,
-                 transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
+  public compile(
+    element: angular.IAugmentedJQuery,
+    attrs: IButtonAttributes,
+    transclude: angular.ITranscludeFunction): angular.IDirectivePrePost {
     return {
       post: this.postLink,
       pre: this.preLink
@@ -148,11 +147,12 @@ export class ButtonDirective implements angular.IDirective {
   /**
    * Update the scope before linking everything up.
    */
-  private preLink(scope: IButtonScope,
-                  element: angular.IAugmentedJQuery,
-                  attrs: IButtonAttributes,
-                  controllers: any,
-                  transclude: angular.ITranscludeFunction): void {
+  private preLink(
+    scope: IButtonScope,
+    element: angular.IAugmentedJQuery,
+    attrs: IButtonAttributes,
+    controllers: any,
+    transclude: angular.ITranscludeFunction): void {
 
     attrs.$observe('disabled', (isDisabled) => {
       scope.disabled = !!isDisabled;
@@ -169,17 +169,18 @@ export class ButtonDirective implements angular.IDirective {
   /**
    * Check the rendered HTML for anything that is invalid.
    */
-  private postLink(scope: IButtonScope,
-                   element: angular.IAugmentedJQuery,
-                   attrs: IButtonAttributes,
-                   controllers: any,
-                   transclude: angular.ITranscludeFunction): void {
+  private postLink(
+    scope: IButtonScope,
+    element: angular.IAugmentedJQuery,
+    attrs: IButtonAttributes,
+    controllers: any,
+    transclude: angular.ITranscludeFunction): void {
 
     // if an icon was added to the button's contents for specific button types
     //  that don't support icons, remove the icon
     if (angular.isUndefined(attrs.uifType) ||
-        attrs.uifType === ButtonTypeEnum[ButtonTypeEnum.primary] ||
-        attrs.uifType === ButtonTypeEnum[ButtonTypeEnum.compound]) {
+      attrs.uifType === ButtonTypeEnum[ButtonTypeEnum.primary] ||
+      attrs.uifType === ButtonTypeEnum[ButtonTypeEnum.compound]) {
       let iconElement: JQuery = element.find('uif-icon');
       if (iconElement.length !== 0) {
         iconElement.remove();
@@ -222,11 +223,11 @@ export class ButtonDirective implements angular.IDirective {
 
             // wrap the button label
             if (clone[i].classList[0] === 'ng-scope' &&
-                clone[i].classList.length === 1) {
+              clone[i].classList.length === 1) {
               wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
-            // add the description... just add it to the button
+              // add the description... just add it to the button
             } else {
               element.append(clone[i]);
             }

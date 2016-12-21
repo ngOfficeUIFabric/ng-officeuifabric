@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Enum for supported presence statuses of persona-based components: Persona, PersonaCard & OrgChart.
  * This enum is intended to be used as a striangular.

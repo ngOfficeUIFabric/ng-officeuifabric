@@ -1,5 +1,3 @@
-'use strict';
-
 import * as webpack from 'webpack';
 
 /**

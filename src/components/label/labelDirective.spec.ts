@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 
 describe('<uif-label></uif-label>', () => {
@@ -93,7 +91,7 @@ describe('<uif-label></uif-label>', () => {
 
         expect(label).not.toHaveClass('is-required');
         expect(label).not.toHaveClass('is-disabled');
-    }));
+      }));
 
 
   });

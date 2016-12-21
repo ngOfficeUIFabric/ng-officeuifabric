@@ -1,5 +1,3 @@
-'use strict';
-
 import * as events from 'events';
 import * as childProcess from 'child_process';
 let $: any = require('gulp-load-plugins')({ lazy: true });

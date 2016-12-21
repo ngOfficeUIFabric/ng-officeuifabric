@@ -1,7 +1,5 @@
-'use strict';
-
-import {BaseGulpTask} from '../BaseGulpTask';
-import {Utils} from '../utils';
+import { BaseGulpTask } from '../BaseGulpTask';
+import { Utils } from '../utils';
 
 /**
  * Vets all built files as the gulp task 'vet'.

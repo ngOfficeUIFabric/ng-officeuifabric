@@ -1,7 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
-import {IconEnum} from './iconEnum';
+import { IconEnum } from './iconEnum';
 
 /**
  * @ngdoc interface

@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 import { ContextualMenuDirective, ContextualMenuController } from './../contextualmenu/contextualMenu';
 

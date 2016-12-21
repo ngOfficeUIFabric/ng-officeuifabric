@@ -1,6 +1,5 @@
-﻿'use strict';
-
 import * as angular from 'angular';
+
 import { InputTypeEnum } from './uifTypeEnum';
 
 /**

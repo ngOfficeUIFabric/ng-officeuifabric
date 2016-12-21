@@ -1,9 +1,7 @@
-'use strict';
-
 import * as angular from 'angular';
-import {OrgChartPresenceEnum} from './orgChartPresenceEnum';
-import {OrgChartStyleEnum} from './orgChartStyleEnum';
-import {OrgChartSelectModeEnum} from './orgChartSelectModeEnum';
+import { OrgChartPresenceEnum } from './orgChartPresenceEnum';
+import { OrgChartStyleEnum } from './orgChartStyleEnum';
+import { OrgChartSelectModeEnum } from './orgChartSelectModeEnum';
 
 export interface IOrgChartScope extends angular.IScope {
   selectMode?: OrgChartSelectModeEnum;
@@ -302,7 +300,7 @@ export class OrgChartPersonaDirective implements angular.IDirective {
 
     // handle selection
     if (scope.selected === undefined) {
-        scope.selected = false;
+      scope.selected = false;
     }
 
     // handle status-attribute
@@ -641,7 +639,7 @@ export class OrgChartGroupByFilter {
 
   public static factory(): any {
 
-    return function(collection: any[], key: string): any[] {
+    return function (collection: any[], key: string): any[] {
       let result: any[] = [];
       if (!collection) {
         return;

@@ -1,6 +1,5 @@
-'use strict';
 import * as angular from 'angular';
-import {SpinnerSize} from './spinnerSizeEnum';
+import { SpinnerSize } from './spinnerSizeEnum';
 
 /**
  * @ngdoc directive
@@ -27,7 +26,7 @@ export class SpinnerDirective implements angular.IDirective {
   public controller: any = SpinnerController;
   public scope: any = {
     'ngShow': '=',
-    'uifSize' : '@'
+    'uifSize': '@'
   };
 
   public static factory(): angular.IDirectiveFactory {
@@ -42,39 +41,39 @@ export class SpinnerDirective implements angular.IDirective {
     controller: SpinnerController,
     $transclude: angular.ITranscludeFunction): void {
 
-      if (angular.isDefined(attrs.uifSize) ) {
-        if (angular.isUndefined(SpinnerSize[attrs.uifSize])) {
+    if (angular.isDefined(attrs.uifSize)) {
+      if (angular.isUndefined(SpinnerSize[attrs.uifSize])) {
 
         controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.spinner - Unsupported size: ' +
           'Spinner size (\'' + attrs.uifSize + '\') is not supported by the Office UI Fabric.');
-        }
-
-        if (SpinnerSize[attrs.uifSize] === SpinnerSize.large) {
-          instanceElement.addClass('ms-Spinner--large');
-        }
       }
 
-      if (attrs.ngShow != null) {
-        scope.$watch('ngShow', (newVisible: boolean, oldVisible: boolean, spinnerScope: ISpinnerScope): void => {
-            if (newVisible) {
-              spinnerScope.start();
-            } else {
-              spinnerScope.stop();
-            }
-        });
-      } else {
-        scope.start();
+      if (SpinnerSize[attrs.uifSize] === SpinnerSize.large) {
+        instanceElement.addClass('ms-Spinner--large');
       }
+    }
 
-      $transclude((clone: angular.IAugmentedJQuery) => {
-        if (clone.length > 0) {
-          let wrapper: angular.IAugmentedJQuery = angular.element('<div></div>');
-          wrapper.addClass('ms-Spinner-label').append(clone);
-          instanceElement.append(wrapper);
+    if (attrs.ngShow != null) {
+      scope.$watch('ngShow', (newVisible: boolean, oldVisible: boolean, spinnerScope: ISpinnerScope): void => {
+        if (newVisible) {
+          spinnerScope.start();
+        } else {
+          spinnerScope.stop();
         }
       });
+    } else {
+      scope.start();
+    }
 
-      scope.init();
+    $transclude((clone: angular.IAugmentedJQuery) => {
+      if (clone.length > 0) {
+        let wrapper: angular.IAugmentedJQuery = angular.element('<div></div>');
+        wrapper.addClass('ms-Spinner-label').append(clone);
+        instanceElement.append(wrapper);
+      }
+    });
+
+    scope.init();
   }
 }
 
@@ -133,13 +132,13 @@ class SpinnerController {
 
     $scope.start = (): void => {
       this._animationInterval = $interval(
-      () => {
-        let i: number = this._circles.length;
-        while (i--) {
-          this.fadeCircle(this._circles[i]);
-        }
-       },
-      this._animationSpeed);
+        () => {
+          let i: number = this._circles.length;
+          while (i--) {
+            this.fadeCircle(this._circles[i]);
+          }
+        },
+        this._animationSpeed);
     };
 
     $scope.stop = (): void => {
@@ -183,13 +182,13 @@ class SpinnerController {
 
   private setInitialOpacity(): void {
 
-        let opcaityToSet: number;
-        this._fadeIncrement = 1 / this._numCircles;
+    let opcaityToSet: number;
+    this._fadeIncrement = 1 / this._numCircles;
 
-        this._circles.forEach((circle: CircleObject, index: number) => {
-          opcaityToSet = (this._fadeIncrement * (index + 1));
-          circle.opacity = opcaityToSet;
-        });
+    this._circles.forEach((circle: CircleObject, index: number) => {
+      opcaityToSet = (this._fadeIncrement * (index + 1));
+      circle.opacity = opcaityToSet;
+    });
   }
 
   private fadeCircle(circle: CircleObject): void {

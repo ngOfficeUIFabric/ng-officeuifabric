@@ -1,5 +1,3 @@
-'use strict';
-
 import * as angular from 'angular';
 
 describe('overlayDirective: <uif-overlay />', () => {

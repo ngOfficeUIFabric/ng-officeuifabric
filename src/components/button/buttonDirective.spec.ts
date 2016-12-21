@@ -1,7 +1,5 @@
-'use strict';
-
 import * as angular from 'angular';
-import {ButtonTypeEnum} from './buttonTypeEnum';
+import { ButtonTypeEnum } from './buttonTypeEnum';
 
 describe('buttonDirective: <uif-button />', () => {
 

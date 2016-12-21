@@ -1,6 +1,4 @@
-'use strict';
-
-import {BaseGulpTask} from '../BaseGulpTask';
+import { BaseGulpTask } from '../BaseGulpTask';
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
 

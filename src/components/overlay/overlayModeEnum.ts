@@ -1,8 +1,6 @@
-'use strict';
-
 /**
  * Enum for the modules supported by the Overlay directive.
- * 
+ *
  * @ngdoc enum
  * @readonly
  * @enum {string}
