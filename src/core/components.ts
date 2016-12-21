@@ -17,8 +17,10 @@ import * as listModule from '../components/list/listDirective';
 import * as messageBannerModule from '../components/messagebanner/messageBannerDirective';
 import * as messageBarModule from '../components/messagebar/messageBarDirective';
 import * as navBarModule from '../components/navbar/navbarDirective';
+import * as orgChartModule from '../components/orgchart/orgChartDirective';
 import * as overlayModule from '../components/overlay/overlayDirective';
 import * as panelModule from '../components/panel/panelDirective';
+import * as peoplePickerModule from '../components/peoplepicker/peoplePickerDirective';
 import * as personacardModule from '../components/personacard/personacardDirective';
 import * as personaModule from '../components/persona/personaDirective';
 import * as pivotModule from '../components/pivot/pivotDirective';
@@ -28,8 +30,6 @@ import * as spinnerModule from '../components/spinner/spinnerDirective';
 import * as tableModule from '../components/table/tableDirective';
 import * as textFieldModule from '../components/textfield/textFieldDirective';
 import * as toggleModule from '../components/toggle/toggleDirective';
-import * as orgChartModule from '../components/orgchart/orgChartDirective';
-import * as peoplePickerModule from '../components/peoplepicker/peoplePickerDirective';
 
 /**
  * @ngdoc module
@@ -59,6 +59,7 @@ export let module: angular.IModule = angular.module('officeuifabric.components',
   messageBannerModule.module.name,
   messageBarModule.module.name,
   navBarModule.module.name,
+  orgChartModule.module.name,
   overlayModule.module.name,
   panelModule.module.name,
   peoplePickerModule.module.name,
@@ -70,6 +71,5 @@ export let module: angular.IModule = angular.module('officeuifabric.components',
   spinnerModule.module.name,
   tableModule.module.name,
   textFieldModule.module.name,
-  toggleModule.module.name,
-  orgChartModule.module.name
+  toggleModule.module.name
 ]);
