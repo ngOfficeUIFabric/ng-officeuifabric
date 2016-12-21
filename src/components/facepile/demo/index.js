@@ -4,22 +4,22 @@ var demoApp = angular.module('demoApp', [
   'officeuifabric.core',
   'officeuifabric.components.facepile'
 ])
-.directive('raw', ['$sce', function ($sce) {
-  var directive = {
-    replace: true,
-    scope: {
-      src: '='
-    },
-    template: '<pre class="code" ng-bind-html="data"></pre>',
-    restrict: 'E',
-    link: function (scope, element, attrs, controller, $transclude) {
-      var template = angular.element(document.getElementById(scope.src));
-      scope.data = $sce.trustAsHtml(element.text(template.html()).html());
-    }
-  };
+  .directive('raw', ['$sce', function ($sce) {
+    var directive = {
+      replace: true,
+      scope: {
+        src: '='
+      },
+      template: '<pre class="code" ng-bind-html="data"></pre>',
+      restrict: 'E',
+      link: function (scope, element) {
+        var template = angular.element(document.getElementById(scope.src));
+        scope.data = $sce.trustAsHtml(element.text(template.html()).html());
+      }
+    };
 
-  return directive;
-}]);
+    return directive;
+  }]);
 
 
 demoApp.controller('demoAppController', [
@@ -34,7 +34,7 @@ function demoAppController($scope) {
   $scope.BasicMembers = membersList;
   $scope.PeoplePickerMembers = peoplePickerList;
 
-  $scope.onFacePileSearch = function(querytext) {
+  $scope.onFacePileSearch = function () {
     return defaultPeople;
-  }
+  };
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-var demoApp = angular.module('demoApp', [
+angular.module('demoApp', [
   'officeuifabric.core',
   'officeuifabric.components.personacard',
   'officeuifabric.components.dropdown'
@@ -8,7 +8,7 @@ var demoApp = angular.module('demoApp', [
 
 function personaCardDemoController($scope) {
   $scope.vm = {
-    presence: "dnd",
+    presence: 'dnd',
     size: 'small',
     style: 'round',
     presenceOptions: {
@@ -31,6 +31,5 @@ function personaCardDemoController($scope) {
       'square' : 'Square'
     }
   };
-
 
 }

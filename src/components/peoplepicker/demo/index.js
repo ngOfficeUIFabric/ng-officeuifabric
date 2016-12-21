@@ -14,7 +14,7 @@
         },
         template: '<pre class="code" ng-bind-html="data"></pre>',
         restrict: 'E',
-        link: function (scope, element, attrs, controller, $transclude) {
+        link: function (scope, element) {
           var template = angular.element(document.getElementById(scope.src));
           scope.data = $sce.trustAsHtml(element.text(template.html()).html());
         }
@@ -31,10 +31,10 @@
         if (!searchQuery) {
           return [];
         }
-        console.log("Searching for " + searchQuery);
+        console.log('Searching for ' + searchQuery);
 
         return people;
-      }
+      };
 
       $scope.disabled = true;
       $scope.connected = false;
@@ -46,38 +46,37 @@
       var autoSearchPeople = JSON.parse(JSON.stringify(window.demo.people));
       var asyncPeople = JSON.parse(JSON.stringify(window.demo.people));
       var disconnectedPeople = JSON.parse(JSON.stringify(window.demo.people));
-      var disabledPeople = JSON.parse(JSON.stringify(window.demo.people));
       var memberList = JSON.parse(JSON.stringify(window.demo.membersList));
       var facePileList = JSON.parse(JSON.stringify(window.demo.facePile));
 
       $scope.getPeopleForDefaultDemo = function (searchQuery) {
         $scope.defaultSearchResults = getPeople(defaultPeople, searchQuery);
         return $scope.defaultSearchResults;
-      }
+      };
 
       $scope.getPeopleForCompactDemo = function (searchQuery) {
         $scope.compactSearchResults = getPeople(compactPeople, searchQuery);
         return $scope.compactSearchResults;
-      }
+      };
 
       $scope.getDisconnectedPeopleDemo = function (searchQuery) {
         $scope.diconnectedSearchResults = getPeople(disconnectedPeople, searchQuery);
         return $scope.diconnectedSearchResults;
-      }
+      };
 
       $scope.getDisabledPeopleDemo = function (searchQuery) {
         $scope.disabledSearchPeople = getPeople(disconnectedPeople, searchQuery);
         return $scope.disabledSearchPeople;
-      }
+      };
 
       $scope.getPeopleForAutoSearch = function (searchQuery) {
         $scope.autoSearchResults = getPeople(autoSearchPeople, searchQuery);
         return $scope.autoSearchResults;
-      }
+      };
 
-      $scope.onMembersSearch = function (searchQuery) {
+      $scope.onMembersSearch = function () {
         return memberList;
-      }
+      };
 
       $scope.getPeopleAsync = function (query) {
         var deferred = $q.defer();
@@ -90,26 +89,26 @@
         }, 1000 * 3);
 
         return deferred.promise;
-      }
+      };
 
       $scope.onFacePileSearch = function (query) {
         var deferred = $q.defer();
         $scope.facePileSearchResults = getPeople(facePileList, query);
         if (!$scope.facePileSearchResults || $scope.facePileSearchResults.length === 0) {
           $scope.facePileSearchResults = facePileList;
-          return $scope.facePileSearchResults
+          return $scope.facePileSearchResults;
         }
         $timeout(function () {
           deferred.resolve($scope.facePileSearchResults);
         }, 1000 * 2);
 
         return deferred.promise;
-      }
+      };
 
       $scope.removePerson = function (person) {
         var indx = $scope.selectedPeopleDefault.indexOf(person);
         $scope.selectedPeopleDefault.splice(indx, 1);
-      }
+      };
 
     }]);
 })();

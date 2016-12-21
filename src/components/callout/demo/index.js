@@ -16,7 +16,7 @@ function calloutDemoController($scope, $timeout){
 
   $scope.toggleClick = function(){
     $scope.vm.secondVisible = !$scope.vm.secondVisible;
-  }
+  };
 
   $scope.thirdToggleClick = function(){
     $timeout(function(){

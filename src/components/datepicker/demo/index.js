@@ -8,7 +8,7 @@ var demoApp = angular.module('demoApp', [
 demoApp.controller('demoController', [
   '$scope', demoController]);
 
-function demoController($scope) {   
-    $scope.value = new Date(2016, 3, 2);
-    $scope.vvv = "XXX";
+function demoController($scope) {
+  $scope.value = new Date(2016, 3, 2);
+  $scope.vvv = 'XXX';
 }
