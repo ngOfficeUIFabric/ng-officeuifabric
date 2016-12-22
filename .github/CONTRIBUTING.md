@@ -32,9 +32,9 @@ To submit a big or issue, use the [Issues](https://github.com/ngOfficeUIFabric/n
 - **DO** include tests when adding new functionality and features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
 - **DO** keep discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the conversation.
 - **DO NOT** submit PR's for coding style changes.
-- **DO NOT** surprise is with big PR's. Instead file an issue & start a discussion so we can agree on a direction before you invest a large amount of time.
+- **DO NOT** surprise us with big PR's. Instead file an issue & start a discussion so we can agree on a direction before you invest a large amount of time.
 - **DO NOT** commit code you didn't write.
-- **DO NOT** submit PR's that refactoring existing code without a discussion first. 
+- **DO NOT** submit PR’s that refactor existing code without a discussion first.
 
 ## Submitting Feature Requests & Design Change Requests
 Feature requests and Design Change Requests (DCRs) are an important part of the life cycle of any software project. Please log these as [Issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) in the repo. 
