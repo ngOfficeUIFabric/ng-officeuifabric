@@ -26,7 +26,8 @@ class WallabyConfig implements IWallabyConfig {
 
   public env: IWallabyEnvironment = <IWallabyEnvironment>{
     params: { runner: '--web-security=false' },
-    runner: require('phantomjs2-ext').path
+    runner: require('phantomjs2-ext').path,
+    viewportSize: { width: 600 }
   };
 
   public postprocessor: IWallabyProcessor;
