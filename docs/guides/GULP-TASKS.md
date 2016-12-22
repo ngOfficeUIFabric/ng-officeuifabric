@@ -70,7 +70,7 @@ Validates the build by running `vet`, `transpile-ts`, `build-lib`, `test` in a s
 
 ### `gulp live-dev`
 
-If you want automatically run vet, test and build on file save, use this task.
+If you want to automatically run vet, test and build on file save, use this task.
 
 By default, it setups watchers on typescript source files (`src/**/*.ts`), test files (`src/**/*.spec.ts`) and build files (`gulpfile.ts, build/**/*.ts`).
 
@@ -80,7 +80,7 @@ When saving build file, only typescript transpilation and vetting will be run.
 
 `gulp live-dev` supports all common params which are used by other tasks (`debug`, `specs`, `verbose`, `version`, `dev`).
 
-Also supports `--serve` flag - it automatically reloads connected browsers when sources for demo changed. Starts static server at `http://localhost:3000/`. To connect browser you need to explicitly open your demo with url, such as `http://localhost:3000/src/components/icon/demo/index.html`
+Also supports `--serve` flag - it automatically reloads connected browsers when sources for demo changed. Starts static server at `http://localhost:3000/`. To connect browser you need to explicitly open your demo with URL, such as `http://localhost:3000/src/components/icon/demo/index.html`
 
 ### `gulp clean`
 
@@ -100,7 +100,7 @@ Deletes all generated JavaScript files for the Angular directives, except those 
 
 ### `gulp test`
 
-Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the karma test runner. The Karma configuration is defined in `/config/karma.ts` file.
+Runs all unit tests defined in the `/src/components/**/*.spec.ts` files using the Karma test runner. The Karma configuration is defined in `/config/karma.ts` file.
 
 If you specify the argument `--specs` the tests (and their results) will be written to the console as they are run. By default the *progress* reporter is used which just summarizes the results and writes out any failing tests.
 

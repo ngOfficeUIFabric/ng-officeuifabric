@@ -49,7 +49,7 @@ let child = $element.find('div.child');// <<--- works with jQuery, not works wit
 expect(child).toHaveClass('active');// <<---- jasmine-jquery assertion
 ```
 
-**Note** on using mouse events with jQuery in your specs. For handling mouse events from jQuery object we included a special fix for PhantomJS browser, because it has an issue with raising this events. If you are experience a problem with raising event from jQuery object, you still can use native angular's jqLite event trigger, i.e. `$element.triggerHandler('click')`.
+**Note** on using mouse events with jQuery in your specs: for handling mouse events from jQuery object we included a special fix for PhantomJS browser, because it has an issue with raising this events. If you are experiencing a problem with raising event from jQuery object, you still can use native angular's jqLite event trigger, i.e. `$element.triggerHandler('click')`.
 
 ## Test Validation
 
@@ -67,6 +67,6 @@ You can also view the code coverage reports within the CircleCI builds by inspec
 
 > This is simply an addition to the project... you are not required to have WallabyJS installed to test or build for this project. WallabyJS is a productivity tool and we've added support for it if you have purchased a WallabyJS license.
 
-To use Wallaby in this project, first must install the plugin for your editor / IDE. Then compile all project build related TypeScript: `npm run build:ts`. Now configure Wallaby to use the config file for this project: `wallaby.config.js`.
+To use Wallaby in this project, first you must install the plugin for your editor/IDE. Then compile all project build related TypeScript: `npm run build:ts`. Now configure Wallaby to use the config file for this project: `wallaby.config.js`.
 
 See the Wallaby.js site for more details: https://wallabyjs.com.

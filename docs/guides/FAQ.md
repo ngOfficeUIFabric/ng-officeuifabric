@@ -34,7 +34,7 @@ At the current time ngOfficeUiFabric supports **Angular 1.5+**.
 
 Angular 2 is absolutely on the roadmap!
 
-Once ngOfficeUiFabric has full coverage of all the components in Office UI Fabric for Angular 1.5+. Once that's finished we will start on Angular 2.
+ngOfficeUiFabric has full coverage of all the components in Office UI Fabric for Angular 1.5+. Once that's finished we will start on Angular 2.
 
 ## What is the Release Schedule?
 
