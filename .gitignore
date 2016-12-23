@@ -12,3 +12,6 @@ reports/
 *.js.map
 
 !src/core/jquery.phantomjs.fix.js
+
+# Visual Studio
+/.vs

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -178,7 +178,7 @@
       </uif-callout>
     </div>
 
-    <!-- fifth example -->
+    <!-- sixth example -->
 
     <p>Callout can have close button, with help of <em>uif-close</em> attribute.
       <br/>
@@ -200,12 +200,15 @@
         <uif-callout-header>All of your favorite people</uif-callout-header>
         <uif-callout-content>Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.</uif-callout-content>
         <uif-callout-actions>
-          <a href="#" class="ms-Callout-link ms-Link ms-Link--hero">Learn more</a>
+          <uif-button uif-type="command" ng-click="vm.secondVisible = false">
+            <uif-icon uif-type="x"></uif-icon>
+            Close
+          </uif-button>
         </uif-callout-actions>
       </uif-callout>
     </div>
 
-    <!-- sixth example -->
+    <!-- seventh example -->
 
     <p>When <em>ngShow</em> is used without <em>uif-close</em>, callout is closed when mouse leaves from callout:
       <br/>
