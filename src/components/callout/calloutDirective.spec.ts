@@ -352,9 +352,6 @@ describe('calloutDirectives:', () => {
       expect(element[0]).toHaveClass('ng-hide');
     }));
 
-
-
-
     it('should not close when mouse moves outside callout but there is close button', inject(($compile: angular.ICompileService) => {
       element = angular.element('<uif-callout ng-show="vm.isOpen" uif-close></uif-callout>');
 
@@ -520,7 +517,7 @@ describe('calloutDirectives:', () => {
 
   describe('callout directives rendering together', () => {
     let element: JQuery;
-    let scope: angular.IScope;
+    let scope: any;
 
     beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
       element = angular.element('<uif-callout uif-arrow="left">' +
@@ -620,6 +617,35 @@ describe('calloutDirectives:', () => {
       expect(deepestSpan).not.toHaveClass('ms-Callout-actionText');
     }));
 
+    it('clicking close button inside callout actions directive closes callout', inject(($compile: angular.ICompileService) => {
+      element = angular.element('<uif-callout ng-show="vm.isOpen" uif-close>' +
+        '<uif-callout-actions>' +
+        '<uif-button uif-type="command" ng-click="vm.isOpen = false">' +
+        '<uif-icon uif-type="x"></uif-icon>' +
+        'Cancel' +
+        '</uif-button>' +
+        '</uif-callout-actions>' +
+        '</uif-callout>');
+
+      // intially callout is open
+      scope.vm = {
+        isOpen: true
+      };
+
+      $compile(element)(scope);
+      scope.$digest();
+
+      element = jQuery(element[0]);
+      expect(element[0]).not.toHaveClass('ng-hide');
+
+      // close
+      let cancelButton: JQuery = element.find('button.ms-Button.ms-Button--command').eq(0);
+      cancelButton.click();
+      scope.$digest();
+
+      let calloutElement: JQuery = element.eq(0);
+      expect(element[0]).toHaveClass('ng-hide');
+    }));
 
   });
 

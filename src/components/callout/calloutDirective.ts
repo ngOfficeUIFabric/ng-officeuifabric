@@ -2,7 +2,6 @@ import * as angular from 'angular';
 import { CalloutType } from './calloutTypeEnum';
 import { CalloutArrow } from './calloutArrowEnum';
 
-
 /**
  * @ngdoc class
  * @name CalloutController
@@ -87,7 +86,6 @@ export class CalloutContentDirective implements angular.IDirective {
   }
 
 }
-
 
 /**
  * @ngdoc directive
@@ -293,7 +291,6 @@ export class CalloutDirective implements angular.IDirective {
       scope.$apply();
     });
 
-
     scope.$watch('ngShow', (newValue: boolean, oldValue: boolean) => {
       // close button closes everytime
       let isClosingByButtonClick: boolean = !newValue && scope.closeButtonClicked;
@@ -302,8 +299,12 @@ export class CalloutDirective implements angular.IDirective {
         return;
       }
 
-      if (!newValue) {
+      if (!newValue && angular.isUndefined(attrs.uifClose)) {
+        // callout visible on mouse over
         scope.ngShow = scope.isMouseOver;
+      } else {
+        // callout visiblity controlled by ng-show
+        scope.ngShow = newValue;
       }
     });
 
