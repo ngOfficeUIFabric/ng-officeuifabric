@@ -1,6 +1,6 @@
 {
   "name": "ng-officeuifabric-source",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "description": "Angular directives for Microsoft's Office UI Fabric.",
   "license": "MIT",
   "author": {
@@ -19,6 +19,7 @@
     "Molberg, Steen <stm@globeteam.com>",
     "Oldengarm, Roland <me@rolandoldengarm.com>",
     "Sergeev, Sergei <sergeev.srg@gmail.com>",
+    "Sharshenov, Rustam <github@sub.rustam.guru>",
     "Struyf, Elio <info@estruyf.be>",
     "West, Tobias <tobiaswest83>",
     "White, Thomas <tdwhite0@gmail.com>"
@@ -33,7 +34,9 @@
   },
   "keywords": [
     "angular",
+    "angularjs",
     "directives",
+    "fabric",
     "office",
     "office-ui-fabric",
     "ngofficeuifabric",

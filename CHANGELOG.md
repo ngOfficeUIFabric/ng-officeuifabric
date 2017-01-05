@@ -1,3 +1,14 @@
+<a name="0.13.2"></a>
+### [0.13.2 - January 5, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.13.2)
+
+#### Fixes
+
+- `uif-callout`
+  - add support to close callout with close link / button inside callout ([8f6c835](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8f6c835), [#450](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/450))
+- **dependencies**
+  - update dependencies ([7767bcf](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/7767bcf))
+
+
 <a name="0.13.1"></a>
 ### [0.13.1 - December 21, 2016](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.13.1)
 
