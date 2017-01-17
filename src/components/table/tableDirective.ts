@@ -77,14 +77,6 @@ class TableController {
   }
 
   get selectedItems(): any[] {
-  /*  let selectedItems: any[] = [];
-    debugger;
-    for (let i: number = 0; i < this.rows.length; i++) {
-      if (this.rows[i].selected === true) {
-        selectedItems.push(this.rows[i].item);
-      }
-    }
-*/
     return this.$scope.selectedItems;
   }
 }
@@ -126,7 +118,7 @@ export interface ITableAttributes extends angular.IAttributes {
  *
  * @usage
  *
- * <uif-table>
+ * <uif-table uif-selected-items="selectedItems">
  *   <uif-table-head>
  *     <uif-table-row>
  *       <uif-table-row-select></uif-table-row-select>
@@ -165,7 +157,6 @@ export class TableDirective implements angular.IDirective {
   }
 
   public link(scope: ITableScope, instanceElement: angular.IAugmentedJQuery, attrs: ITableAttributes, controller: TableController): void {
-    debugger;
     if (attrs.uifRowSelectMode !== undefined && attrs.uifRowSelectMode !== null) {
       if (TableRowSelectModeEnum[attrs.uifRowSelectMode] === undefined) {
         controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
@@ -333,15 +324,10 @@ export class TableRowDirective implements angular.IDirective {
               if (table.rows[i] !== tableRowScope) {
                 table.rows[i].selected = false;
 
-                for (let j: number = 0; j < table.selectedItems.length; i++) {
-                  if (table.selectedItems[j] === table.rows[i].item) {
-                    table.selectedItems.splice(j, 1);
-                    break;
-                  }
-                }
-
               }
             }
+            table.selectedItems.splice(0, table.selectedItems.length - 1);
+            table.selectedItems.push(tableRowScope.item);
           }
         }
 
