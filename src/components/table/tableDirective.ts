@@ -23,6 +23,7 @@ export interface ITableScope extends angular.IScope {
   rows: ITableRowScope[];
   tableType: string;
   tableTypeClass: string;
+  selectedItems: any[];
 }
 
 class TableController {
@@ -32,6 +33,10 @@ class TableController {
     this.$scope.orderBy = null;
     this.$scope.orderAsc = true;
     this.$scope.rows = [];
+
+    if (!this.$scope.selectedItems) {
+      this.$scope.selectedItems = [];
+    }
   }
 
   get orderBy(): string {
@@ -72,15 +77,15 @@ class TableController {
   }
 
   get selectedItems(): any[] {
-    let selectedItems: any[] = [];
-
+  /*  let selectedItems: any[] = [];
+    debugger;
     for (let i: number = 0; i < this.rows.length; i++) {
       if (this.rows[i].selected === true) {
         selectedItems.push(this.rows[i].item);
       }
     }
-
-    return selectedItems;
+*/
+    return this.$scope.selectedItems;
   }
 }
 
@@ -104,6 +109,7 @@ class TableController {
 export interface ITableAttributes extends angular.IAttributes {
   uifRowSelectMode?: string;
   uifTableType?: string;
+  uifSelectedItems?: any[];
 }
 
 /**
@@ -148,6 +154,9 @@ export class TableDirective implements angular.IDirective {
   public template: string = '<table ng-class="[\'ms-Table\', tableTypeClass]" ng-transclude></table>';
   public controller: any = TableController;
   public controllerAs: string = 'table';
+  public scope: {} = {
+    selectedItems: '=?uifSelectedItems'
+  };
 
   public static factory(): angular.IDirectiveFactory {
     const directive: angular.IDirectiveFactory = () => new TableDirective();
@@ -156,6 +165,7 @@ export class TableDirective implements angular.IDirective {
   }
 
   public link(scope: ITableScope, instanceElement: angular.IAugmentedJQuery, attrs: ITableAttributes, controller: TableController): void {
+    debugger;
     if (attrs.uifRowSelectMode !== undefined && attrs.uifRowSelectMode !== null) {
       if (TableRowSelectModeEnum[attrs.uifRowSelectMode] === undefined) {
         controller.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.table. ' +
@@ -304,7 +314,7 @@ export class TableRowDirective implements angular.IDirective {
       }
     }
 
-    // don't treat header row as a table row
+     // don't treat header row as a table row
     if (scope.item !== undefined) {
       table.rows.push(scope);
     }
@@ -322,15 +332,46 @@ export class TableRowDirective implements angular.IDirective {
             for (let i: number = 0; i < table.rows.length; i++) {
               if (table.rows[i] !== tableRowScope) {
                 table.rows[i].selected = false;
+
+                for (let j: number = 0; j < table.selectedItems.length; i++) {
+                  if (table.selectedItems[j] === table.rows[i].item) {
+                    table.selectedItems.splice(j, 1);
+                    break;
+                  }
+                }
+
               }
             }
           }
         }
 
+        // only add to the list if not yet exists. prevents conflicts
+        // with preselected items
+        let itemAlreadySelected: boolean = false;
+        for (let i: number = 0; i < table.selectedItems.length; i++) {
+          if (table.selectedItems[i] === tableRowScope.item) {
+            itemAlreadySelected = true;
+            break;
+          }
+        }
+        if (!itemAlreadySelected) {
+          table.selectedItems.push(tableRowScope.item);
+        }
+
         instanceElement.addClass('is-selected');
       } else {
+
+        for (let i: number = 0; i < table.selectedItems.length; i++) {
+          if (table.selectedItems[i] === tableRowScope.item) {
+            table.selectedItems.splice(i, 1);
+            break;
+          }
+        }
+
         instanceElement.removeClass('is-selected');
       }
+
+
     });
 
     if (table.rowSelectMode !== TableRowSelectModeEnum[TableRowSelectModeEnum.none] &&
