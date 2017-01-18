@@ -8,7 +8,8 @@ var demoApp = angular.module('demoApp', [
 demoApp.controller('demoController', [
   '$scope', demoController]);
 
-function demoController($scope) {
+function demoController($scope) {  
+  $scope.selectedFiles = [];
   $scope.files = [
     {
       fileName: 'file1.txt',
