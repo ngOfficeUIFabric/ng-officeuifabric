@@ -445,7 +445,7 @@ describe('tableDirective: <uif-table />', () => {
     'for row select mode \'none\' shouldn\'t select a row on mouse click',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       scope.selectedItems = [];
-      element = angular.element('<uif-table uif-row-select-mode="none" uif-selected-items="selectedItems">' +      
+      element = angular.element('<uif-table uif-row-select-mode="none" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
