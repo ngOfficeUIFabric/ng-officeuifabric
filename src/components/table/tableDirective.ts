@@ -160,7 +160,7 @@ export class TableDirective implements angular.IDirective {
       let currentscope: angular.IScope = scope;
 
       // get selected items of parent scope the scope value should not be empty before use
-      while (currentscope.$parent !== undefined || currentscope.$parent !== null) {
+      while (currentscope.$parent !== undefined && currentscope.$parent !== null) {
           selectedItems = currentscope.$parent.$eval(attrs.uifSelectedItems);
 
           if (selectedItems !== undefined && selectedItems !== null) {
