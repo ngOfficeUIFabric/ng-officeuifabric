@@ -292,7 +292,11 @@ export class PeoplePickerDirective implements angular.IDirective {
                 <uif-persona-initials uif-color="{{person.color}}">{{person.initials}}</uif-persona-initials>
                 <uif-persona-primary-text>{{person.primaryText}}</uif-persona-primary-text>
               </uif-persona>
-              <button type="button" ng-click="removePersonFromSelectedPeople(person, $event)" class="ms-PeoplePicker-personaRemove">
+              <button 
+                ng-if="!ngDisabled" 
+                type="button" 
+                ng-click="removePersonFromSelectedPeople(person, $event)" 
+                class="ms-PeoplePicker-personaRemove">
                 <uif-icon uif-type="${IconEnum[IconEnum.x]}"></uif-icon>
               </button>
             </div>
@@ -332,7 +336,11 @@ export class PeoplePickerDirective implements angular.IDirective {
                 <uif-persona-initials uif-color="{{person.color}}">{{person.initials}}</uif-persona-initials>
                 <uif-persona-primary-text>{{person.primaryText}}</uif-persona-primary-text>
               </uif-persona>
-              <button type="button" ng-click="removePersonFromSelectedPeople(person, $event)" class="ms-PeoplePicker-personaRemove">
+              <button 
+                ng-if="!ngDisabled" 
+                type="button" 
+                ng-click="removePersonFromSelectedPeople(person, $event)" 
+                class="ms-PeoplePicker-personaRemove">
                 <uif-icon uif-type="${IconEnum[IconEnum.x]}"></uif-icon>
               </button>
             </div>
