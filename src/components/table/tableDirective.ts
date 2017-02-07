@@ -15,6 +15,8 @@ import { TableTypeEnum } from './tableTypeEnum';
  *                                Default `true` (sorting ascending)
  * @property {string} rowSelectMode - Specifies the row selection mode used by the table
  * @property {ITableRowScope[]} - Contains the data rows (all except the header row) that belong to the table
+ * @property {any} selectedItems - Contains an array with the selected items that belong to the table
+ *                                
  */
 export interface ITableScope extends angular.IScope {
   orderBy?: string;
@@ -97,6 +99,8 @@ class TableController {
  *                                        Possible values: fixed    - the table is rendered in fixed style.
  *                                                                    Added with Fabric 2.4.
  *                                                         fluid    - the table style is fluid (Default)
+ * @property {any} uifSelectedItems     - Specifies the array which will be used to store the selected items 
+ *                                        of the table
  */
 export interface ITableAttributes extends angular.IAttributes {
   uifRowSelectMode?: string;
@@ -157,18 +161,9 @@ export class TableDirective implements angular.IDirective {
     // add support for selected items but due to not able to use isolate scope a workaround is used
     if (attrs.uifSelectedItems !== undefined && attrs.uifSelectedItems !== null) {
       let selectedItems: any = null;
-      let currentscope: angular.IScope = scope;
 
-      // get selected items of parent scope the scope value should not be empty before use
-      while (currentscope.$parent !== undefined && currentscope.$parent !== null) {
-          selectedItems = currentscope.$parent.$eval(attrs.uifSelectedItems);
-
-          if (selectedItems !== undefined && selectedItems !== null) {
-            break;
-          }
-
-          currentscope = currentscope.$parent;
-      }
+      // check currentscope if it contains the selected item property
+      selectedItems = scope.$eval(attrs.uifSelectedItems);
 
       // just to make sure it doesn't fail when not used
       if (selectedItems === undefined || selectedItems === null) {
