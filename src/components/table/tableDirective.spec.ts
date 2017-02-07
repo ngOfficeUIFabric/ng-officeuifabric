@@ -334,7 +334,8 @@ describe('tableDirective: <uif-table />', () => {
   it(
     'for row select mode \'single\' should allow to select single row',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="single">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="single" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -357,12 +358,14 @@ describe('tableDirective: <uif-table />', () => {
       }
 
       expect(numSelectedItems).toEqual(1);
+      expect(scope.selectedItems.length).toEqual(1);
     }));
 
   it(
     'for row mode select \'multiple\' should allow to select multiple rows',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="multiple">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="multiple" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -385,6 +388,7 @@ describe('tableDirective: <uif-table />', () => {
       }
 
       expect(numSelectedItems).toEqual(2);
+      expect(scope.selectedItems.length).toEqual(2);
     }));
 
   it(
@@ -400,7 +404,8 @@ describe('tableDirective: <uif-table />', () => {
     }));
 
   it('shouldn\'t allow selecting the header row', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-    element = angular.element('<uif-table uif-row-select-mode="single">' +
+    scope.selectedItems = [];
+    element = angular.element('<uif-table uif-row-select-mode="single" uif-selected-items="selectedItems">' +
       '<uif-table-row></uif-table-row>' +
       '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
     $compile(element)(scope);
@@ -420,6 +425,7 @@ describe('tableDirective: <uif-table />', () => {
     }
 
     expect(numSelectedItems).toEqual(0);
+    expect(scope.selectedItems.length).toEqual(0);
   }));
 
   it(
@@ -438,7 +444,8 @@ describe('tableDirective: <uif-table />', () => {
   it(
     'for row select mode \'none\' shouldn\'t select a row on mouse click',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="none">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="none" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -449,12 +456,14 @@ describe('tableDirective: <uif-table />', () => {
       tableRow.click();
       expect(tableRow).not.toHaveClass('is-selected');
       expect(scope.rows[1].selected).toBeFalsy();
+      expect(scope.selectedItems.length).toEqual(0);
     }));
 
   it(
     'for row select mode \'none\' shouldn\'t select all rows when clicking the table row selector in the header',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="none">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="none" uif-selected-items="selectedItems">' +
         '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -473,6 +482,7 @@ describe('tableDirective: <uif-table />', () => {
       }
 
       expect(numSelectedItems).toEqual(0);
+      expect(scope.selectedItems.length).toEqual(0);
     }));
 
   it(
@@ -492,7 +502,8 @@ describe('tableDirective: <uif-table />', () => {
   it(
     'for row select mode \'single\' when clicking a row should select that row and deselect other selected row',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="single">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="single" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -509,12 +520,14 @@ describe('tableDirective: <uif-table />', () => {
 
       expect(scope.rows[0].selected).toBeFalsy();
       expect(scope.rows[1].selected).toBeTruthy();
+      expect(scope.selectedItems.length).toEqual(1);
     }));
 
   it(
     'for row select mode \'single\' when clicking an already selected row should unselect that row',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="single">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="single" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -527,12 +540,14 @@ describe('tableDirective: <uif-table />', () => {
 
       expect(firstDataRow).not.toHaveClass('is-selected');
       expect(scope.rows[0].selected).toBeFalsy();
+      expect(scope.selectedItems.length).toEqual(0);
     }));
 
   it(
     'for row select mode \'single\' when clicking the row selector in the header shouldn\'t do anything',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="single">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="single" uif-selected-items="selectedItems">' +
         '<uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -551,6 +566,7 @@ describe('tableDirective: <uif-table />', () => {
       }
 
       expect(numSelectedItems).toEqual(0);
+      expect(scope.selectedItems.length).toEqual(0);
     }));
 
   it(
@@ -570,7 +586,8 @@ describe('tableDirective: <uif-table />', () => {
   it(
     'for row select mode \'multiple\' clicking an unselected row should select that row',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="multiple">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="multiple" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -582,12 +599,14 @@ describe('tableDirective: <uif-table />', () => {
 
       expect(tableRow).toHaveClass('is-selected');
       expect(scope.rows[0].selected).toBeTruthy();
+      expect(scope.selectedItems.length).toEqual(1);
     }));
 
   it(
     'for row select mode \'multiple\' clicking an already selected row should unselect that row',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="multiple">' +
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="multiple" uif-selected-items="selectedItems">' +
         '<uif-table-row></uif-table-row>' +
         '<uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"></uif-table-row></uif-table>');
       $compile(element)(scope);
@@ -600,12 +619,14 @@ describe('tableDirective: <uif-table />', () => {
 
       expect(tableRow).not.toHaveClass('is-selected');
       expect(scope.rows[0].selected).toBeFalsy();
+      expect(scope.selectedItems.length).toEqual(0);
     }));
 
   it(
     'for row select mode \'multiple\' clicking the row selected in the header should select all rows if not all rows are selected',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="multiple">\
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="multiple" uif-selected-items="selectedItems">\
         <uif-table-head><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-head>\
         <uif-table-body>\
         <uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row>\
@@ -626,12 +647,14 @@ describe('tableDirective: <uif-table />', () => {
       }
 
       expect(numSelectedItems).toEqual(3);
+      expect(scope.selectedItems.length).toEqual(3);
     }));
 
   it(
     'for row select mode \'multiple\' clicking the row selected in the header should unselect all rows if all rows are selected',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      element = angular.element('<uif-table uif-row-select-mode="multiple">\
+      scope.selectedItems = [];
+      element = angular.element('<uif-table uif-row-select-mode="multiple" uif-selected-items="selectedItems">\
         <uif-table-head><uif-table-row><uif-table-row-select></uif-table-row-select></uif-table-row></uif-table-head>\
         <uif-table-body>\
         <uif-table-row ng-repeat="n in [1, 2, 3]" uif-item="n"><uif-table-row-select></uif-table-row-select></uif-table-row>\
@@ -657,5 +680,6 @@ describe('tableDirective: <uif-table />', () => {
       }
 
       expect(numSelectedItems).toEqual(0);
+      expect(scope.selectedItems.length).toEqual(0);
     }));
 });
