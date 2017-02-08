@@ -1,3 +1,14 @@
+<a name="0.13.3"></a>
+### [0.13.3 - February 8, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.13.3)
+
+#### Features
+
+- `uif-choicefield`
+  - update docs in demo ([07d92fd](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/07d92fd), [#462](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/462))
+- `uif-table`
+  - add ability to get selected items from table ([8f0f1f8](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8f0f1f8))
+
+
 <a name="0.13.2"></a>
 ### [0.13.2 - January 5, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.13.2)
 
