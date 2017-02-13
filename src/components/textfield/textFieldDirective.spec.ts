@@ -74,6 +74,19 @@ describe('textFieldDirective: <uif-textfield />', () => {
 
     let div: JQuery = getMainDiv(textBox);
     expect(div.hasClass('is-required')).toBe(true, 'textfield should have is-required');
+
+    // ng-required
+    textBox = $compile('<uif-textfield ng-required="isRequired"></uif-textfield>')($scope);
+    textBox = jQuery(textBox[0]);
+    let ngRequiredDiv: JQuery = getMainDiv(textBox);
+
+    $scope.isRequired = true;
+    $scope.$apply();
+    expect(ngRequiredDiv.hasClass('is-required')).toBe(true, 'textfield should have is-required');
+
+    $scope.isRequired = false;
+    $scope.$apply();
+    expect(ngRequiredDiv.hasClass('is-required')).toBe(false, 'textfield should not have is-required');
   }));
 
   it('should be able to set disabled', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {

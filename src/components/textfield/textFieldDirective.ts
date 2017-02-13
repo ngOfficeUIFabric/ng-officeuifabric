@@ -113,6 +113,7 @@ export class TextFieldDirective implements angular.IDirective {
     min: '@',
     ngChange: '=?',
     ngModel: '=?',
+    ngRequired: '<?',
     placeholder: '@',
     step: '@',
     uifDescription: '@',
@@ -159,6 +160,16 @@ export class TextFieldDirective implements angular.IDirective {
         } else {
           // default value
           scope.uifType = InputTypeEnum.text;
+        }
+      }
+    );
+    scope.$watch(
+      'ngRequired',
+      (newValue: string, oldValue: string) => {
+        if (newValue) {
+          scope.required = true;
+        } else if (typeof newValue !== 'undefined') {
+          scope.required = false;
         }
       }
     );
