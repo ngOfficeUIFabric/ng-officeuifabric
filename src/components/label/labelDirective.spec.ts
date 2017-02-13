@@ -77,6 +77,36 @@ describe('<uif-label></uif-label>', () => {
       expect(label).toHaveClass('is-required');
     }));
 
+    /**
+     * Verify that CSS responds to changes in the ng-required attribute.
+     */
+
+    it(
+      'should have proper CSS depending in ng-required',
+      inject((
+        $rootScope: angular.IRootScopeService,
+        $compile: angular.ICompileService
+      ) => {
+        labelElement = angular.element('<uif-label ng-required="isRequired"></uif-label>');
+        labelJQuery = jQuery(labelElement[0]);
+        let label: JQuery;
+
+        let localScope: any = $rootScope.$new();
+        $compile(labelElement)(localScope);
+
+        // set ng-required to true
+        localScope.isRequired = true;
+        localScope.$digest();
+        label = labelJQuery.find('label');
+        expect(label).toHaveClass('is-required');
+
+        // set ng-required to false
+        localScope.isRequired = false;
+        localScope.$digest();
+        localScope = labelJQuery.find('label');
+        expect(label).not.toHaveClass('is-required');
+      }));
+
     it(
       'should not have CSS when required and disabled not used',
       inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService) => {
@@ -92,7 +122,6 @@ describe('<uif-label></uif-label>', () => {
         expect(label).not.toHaveClass('is-required');
         expect(label).not.toHaveClass('is-disabled');
       }));
-
 
   });
 

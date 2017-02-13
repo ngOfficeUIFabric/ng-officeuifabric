@@ -36,7 +36,9 @@ export class LabelDirective implements angular.IDirective {
   public restrict: string = 'E';
   public transclude: boolean = true;
   public replace: boolean = false;
-  public scope: boolean = false;
+  public scope: {} = {
+    ngRequired: '<?'
+  };
   public template: string = '<label class="ms-Label"><ng-transclude/></label>';
 
   public static factory(): angular.IDirectiveFactory {
@@ -45,14 +47,24 @@ export class LabelDirective implements angular.IDirective {
   }
 
   public link(scope: angular.IScope, instanceElement: angular.IAugmentedJQuery, attributes: ILabelAttributes): void {
+    let label: JQuery = instanceElement.find('label').eq(0);
 
     if (angular.isDefined(attributes.disabled)) {
-      instanceElement.find('label').eq(0).addClass('is-disabled');
+      label.addClass('is-disabled');
     }
 
     if (angular.isDefined(attributes.required)) {
-      instanceElement.find('label').eq(0).addClass('is-required');
+      label.addClass('is-required');
     }
+
+    // add ng-required watcher
+    scope.$watch('ngRequired', (newValue: string, oldValue: string) => {
+      if (newValue) {
+        label.addClass('is-required');
+      } else if (newValue !== undefined && !newValue) {
+        label.removeClass('is-required');
+      }
+    });
   }
 }
 
