@@ -585,8 +585,12 @@ export class TableHeaderDirective implements angular.IDirective {
         newOrderBy === attrs.uifOrderBy) {
         let cells: JQuery = instanceElement.parent().children();
         for (let i: number = 0; i < cells.length; i++) {
-          if (cells.eq(i).children().length === 2) {
-            cells.eq(i).children().eq(1).remove();
+          let _children: JQuery = cells.eq(i).children();
+          if (_children.length > 0) {
+            let _sorter: JQuery = _children.eq(_children.length - 1);
+            if (_sorter.hasClass('uif-sort-order')) {
+              _sorter.remove();
+            }
           }
         }
 
@@ -596,10 +600,13 @@ export class TableHeaderDirective implements angular.IDirective {
     });
 
     scope.$watch('table.orderAsc', (newOrderAsc: boolean, oldOrderAsc: boolean, tableHeaderScope: ITableHeaderScope): void => {
-      if (instanceElement.children().length === 2) {
-        let oldCssClass: string = oldOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
-        let newCssClass: string = newOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
-        instanceElement.children().eq(1).children().eq(0).removeClass(oldCssClass).addClass(newCssClass);
+      if (instanceElement.children().length > 0) {
+        let _sorter: JQuery = instanceElement.children().eq(instanceElement.children().length - 1);
+        if (_sorter.hasClass('uif-sort-order')) {
+          let oldCssClass: string = oldOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
+          let newCssClass: string = newOrderAsc ? 'ms-Icon--caretDown' : 'ms-Icon--caretUp';
+          _sorter.children().eq(0).removeClass(oldCssClass).addClass(newCssClass);
+        }
       }
     });
 
