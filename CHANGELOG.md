@@ -1,3 +1,24 @@
+<a name="0.14.0"></a>
+### [0.14.0 - February 20, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.14.0)
+
+#### Features
+
+- `uif-label`
+  - add support ng-required attribute ([a266426](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/a266426))
+- `uif-textfield`
+  - add support ng-required attribute ([b6518e2](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/b6518e2))
+
+#### Fixes
+
+- `uif-peoplepicker`
+  - do not display button to remove items when picker disabled ([d618f74](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/d618f74), [#461](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/461))
+- `uif-table`
+  - resolve dupe of uif-sort-order icon ([e4666b8](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/e4666b8), [#475](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/475))
+  - update test for table from recent PR ([139f653](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/139f653), [#468](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/468))
+- **dependencies**
+  - update dependencies ([1721bb7](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1721bb7))
+
+
 <a name="0.13.3"></a>
 ### [0.13.3 - February 8, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.13.3)
 

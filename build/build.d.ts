@@ -1,6 +1,6 @@
 /**
  * Specifies the current node web environment variables.
- * 
+ *
  * @typedef nodeEnvironment
  * @type {Object}
  * @property {number}   port      - Port where the server should run.
@@ -13,8 +13,8 @@ interface INodeEnvironment {
 }
 
 /**
- * Settings for the node enviroment on startup for nodemon. 
- * 
+ * Settings for the node enviroment on startup for nodemon.
+ *
  * @typedef nodeOptions
  * @type {Object}
  * @property {string}           script    - Relative path to the script to start the node server.

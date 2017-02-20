@@ -1,6 +1,6 @@
 /**
  * Describes a dynamic gulp file contents.
- * 
+ *
  * @typedef gulpTaskFile
  * @type  {Object}
  * @property  {string}    name      - Name of the gulp task.
@@ -14,7 +14,7 @@ interface IGulpTaskFile {
 /**
  * Describes a gulp task that is dynamically loaded. Implementatin of the task resides within
  * the implementation of the the class' constructor.
- * 
+ *
  * @typedef gulpTask
  * @type  {Object}
  * @property  {string}    description   - Help description for the task.
@@ -31,7 +31,7 @@ interface IGulpTask {
 
 /**
  * Error object coming from gulp
- * 
+ *
  * @typedef gulpErrorulp
  * @type {Object}
  * @property  {string}  message         - Error message.

@@ -7,10 +7,10 @@
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
 [![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 
-[![bitHound Overall Score](https://www.bithound.io/github/Rus7am/ng-officeuifabric/badges/score.svg)](https://www.bithound.io/github/Rus7am/ng-officeuifabric)
-[![bitHound Dependencies](https://www.bithound.io/github/Rus7am/ng-officeuifabric/badges/dependencies.svg)](https://www.bithound.io/github/Rus7am/ng-officeuifabric/issues450-closeCalloutFromInside/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/Rus7am/ng-officeuifabric/badges/devDependencies.svg)](https://www.bithound.io/github/Rus7am/ng-officeuifabric/issues450-closeCalloutFromInside/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/Rus7am/ng-officeuifabric/badges/code.svg)](https://www.bithound.io/github/Rus7am/ng-officeuifabric)
+[![bitHound Overall Score](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/score.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric)
+[![bitHound Dependencies](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/dependencies.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/devDependencies.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/code.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric)
 
 ## Branch Status
 
