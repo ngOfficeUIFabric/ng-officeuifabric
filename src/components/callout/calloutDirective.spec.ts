@@ -66,10 +66,13 @@ describe('calloutDirectives:', () => {
       expect(parentElement[0]).toHaveClass('ms-Callout-main');
     });
 
-    it('plain callout should have left arrow', () => {
+    it('plain callout should have no arrow', () => {
       let calloutElement: JQuery = element.find('div').first();
 
-      expect(calloutElement[0]).toHaveClass('ms-Callout--arrowLeft');
+      expect(calloutElement[0]).not.toHaveClass('ms-Callout--arrowRight');
+      expect(calloutElement[0]).not.toHaveClass('ms-Callout--arrowLeft');
+      expect(calloutElement[0]).not.toHaveClass('ms-Callout--arrowTop');
+      expect(calloutElement[0]).not.toHaveClass('ms-Callout--arrowBottom');
     });
 
     it(
@@ -97,7 +100,7 @@ describe('calloutDirectives:', () => {
       }));
 
     it(
-      'empty arrow attribute logs error',
+      'empty arrow attribute log error',
       inject(($rootScope: angular.IRootScopeService, $compile: angular.ICompileService, $log: angular.ILogService) => {
         element = angular.element('<uif-callout uif-arrow></uif-callout>');
         scope = $rootScope;
@@ -105,8 +108,7 @@ describe('calloutDirectives:', () => {
         scope.$digest();
 
         expect($log.error.logs[0]).toContain('Error [ngOfficeUiFabric] officeuifabric.components.callout - "' +
-          '" is not a valid value for uifArrow. It should be left, right, top, bottom.');
-        // expect(calloutElement[0]).toHaveClass('ms-Callout--arrowLeft');
+           '" is not a valid value for uifArrow. It should be left, right, top, bottom.');
       }));
 
     it(
