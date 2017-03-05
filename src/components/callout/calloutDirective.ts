@@ -187,6 +187,7 @@ interface ICalloutScope extends angular.IScope {
   closeButton: boolean;
   isMouseOver: boolean;
   closeButtonClicked: boolean;
+  getCalloutClasses: () => string;
 }
 
 /**
@@ -211,9 +212,8 @@ export class CalloutDirective implements angular.IDirective {
   public transclude: boolean = true;
   public replace: boolean = false;
   public template: string =
-  '<div class="ms-Callout ms-Callout--arrow{{arrowDirection}}" ' +
-  'ng-class="{\'ms-Callout--actionText\': hasSeparator, \'ms-Callout--OOBE\': uifType==\'oobe\',' +
-  ' \'ms-Callout--Peek\': uifType==\'peek\', \'ms-Callout--close\': closeButton}">' +
+  '<div class="ms-Callout" ' +
+  'ng-class="getCalloutClasses()"> ' +
   '<div class="ms-Callout-main"><div class="ms-Callout-inner" ng-transclude></div></div></div>';
 
   public require: string[] = ['uifCallout'];
@@ -224,6 +224,20 @@ export class CalloutDirective implements angular.IDirective {
   };
 
   public controller: typeof CalloutController = CalloutController;
+
+  // mapping CSS classes for arrow types
+  private uifArrowClasses: { [index: number]: string } = {
+    [CalloutArrow.bottom] : 'ms-Callout--arrowBottom',
+    [CalloutArrow.left] : 'ms-Callout--arrowLeft',
+    [CalloutArrow.right] : 'ms-Callout--arrowRight',
+    [CalloutArrow.top] : 'ms-Callout--arrowTop'
+  };
+
+  // mapping CSS classes for type
+  private uifTypeClasses: {[index: number]: string} = {
+    [CalloutType.oobe] : 'ms-Callout--OOBE',
+    [CalloutType.peek] : 'ms-Callout--Peek'
+  };
 
   public static factory(): angular.IDirectiveFactory {
     const directive: angular.IDirectiveFactory = () => new CalloutDirective();
@@ -241,22 +255,15 @@ export class CalloutDirective implements angular.IDirective {
       }
     });
 
-    if (!attrs.uifArrow) {
-      scope.arrowDirection = 'Left';
-    }
-
     attrs.$observe('uifArrow', (attrArrowDirection: string) => {
 
-      if (angular.isUndefined(CalloutArrow[attrArrowDirection])) {
+      if (angular.isDefined(attrArrowDirection) && angular.isUndefined(CalloutArrow[attrArrowDirection])) {
         calloutController.$log.error('Error [ngOfficeUiFabric] officeuifabric.components.callout - "' +
           attrArrowDirection + '" is not a valid value for uifArrow. It should be left, right, top, bottom.');
         return;
       }
 
-      let capitalizedDirection: string = (attrArrowDirection.charAt(0)).toUpperCase();
-      capitalizedDirection += (attrArrowDirection.slice(1)).toLowerCase();
-
-      scope.arrowDirection = capitalizedDirection;
+      scope.arrowDirection = attrArrowDirection;
 
     });
 
@@ -317,6 +324,33 @@ export class CalloutDirective implements angular.IDirective {
         }
       }
     });
+
+    scope.getCalloutClasses = () => {
+      let calloutClasses: string[] = [];
+
+      let calloutType: number = CalloutType[scope.uifType];
+      let calloutArrow: number = angular.isDefined(scope.arrowDirection) ? CalloutArrow[scope.arrowDirection] : undefined;
+
+      if (angular.isDefined(calloutType)) {
+        calloutClasses.push(this.uifTypeClasses[calloutType]);
+      }
+
+      if (angular.isDefined(calloutArrow)) {
+        calloutClasses.push(this.uifArrowClasses[calloutArrow]);
+      }
+
+      if (scope.closeButton) {
+        calloutClasses.push('ms-Callout--close');
+      }
+
+      if (scope.hasSeparator) {
+        calloutClasses.push('ms-Callout--actionText');
+      }
+
+      return calloutClasses.join(' ');
+    };
+
+
   }
 }
 
