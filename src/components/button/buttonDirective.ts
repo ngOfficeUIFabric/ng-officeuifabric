@@ -200,7 +200,7 @@ export class ButtonDirective implements angular.IDirective {
         case ButtonTypeEnum[ButtonTypeEnum.command]:
           for (let i: number = 0; i < clone.length; i++) {
             // wrap the button label
-            if (clone[i].tagName === 'SPAN') {
+            if (this._isValidLabel(clone[i])) {
               wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
@@ -216,14 +216,13 @@ export class ButtonDirective implements angular.IDirective {
         // if type === compound
         case ButtonTypeEnum[ButtonTypeEnum.compound]:
           for (let i: number = 0; i < clone.length; i++) {
-            // if not a span, stop checkiangular...
-            if (clone[i].tagName !== 'SPAN') {
+            // icon is not supported on compound button
+            if (clone[i].tagName === 'UIF-ICON') {
               continue;
             }
 
             // wrap the button label
-            if (clone[i].classList[0] === 'ng-scope' &&
-              clone[i].classList.length === 1) {
+            if (this._isValidLabel(clone[i])) {
               wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
@@ -237,7 +236,7 @@ export class ButtonDirective implements angular.IDirective {
         case ButtonTypeEnum[ButtonTypeEnum.hero]:
           for (let i: number = 0; i < clone.length; i++) {
             // wrap the label
-            if (clone[i].tagName === 'SPAN') {
+            if (this._isValidLabel(clone[i])) {
               wrapper = angular.element('<span></span>');
               wrapper.addClass('ms-Button-label').append(clone[i]);
               element.append(wrapper);
@@ -255,6 +254,10 @@ export class ButtonDirective implements angular.IDirective {
       }
     });
 
+  }
+
+  private _isValidLabel(clone: HTMLElement): boolean {
+    return clone.nodeType === Node.TEXT_NODE && clone.nodeValue.trim().length > 0;
   }
 
   private _populateHtmlTemplates(): void {

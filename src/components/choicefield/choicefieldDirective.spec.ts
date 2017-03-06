@@ -33,7 +33,7 @@ describe('choicefieldDirective <uif-choicefield />', () => {
     let input1: JQuery = jQuery(items[0]);
     expect(input1.attr('type')).toBe('radio', 'Type should be radio');
 
-    let span1: JQuery = container.find('label[for="' + input1.attr('id') + '"] span span.ng-scope');
+    let span1: JQuery = container.find('label[for="' + input1.attr('id') + '"] span');
     expect(span1.html()).toBe('Text 1', 'Label should be Text 1');
   }));
 

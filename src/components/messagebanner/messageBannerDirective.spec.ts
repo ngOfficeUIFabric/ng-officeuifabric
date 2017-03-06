@@ -38,7 +38,7 @@ describe('messageBannerDirective: <uif-message-banner />', () => {
     it('should be able to render ui-content message', (): void => {
         $scope.message = 'Lorem ipsum message';
         $scope.$digest();
-        let content: JQuery = $element.find('.uif-content>span.ng-scope');
+        let content: JQuery = $element.find('span.uif-content');
         expect(content.html()).toContain('Lorem ipsum message', 'Message should be placed in uif-content block.');
     });
 

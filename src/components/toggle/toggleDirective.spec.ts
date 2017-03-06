@@ -34,17 +34,17 @@ describe('toggleDirective: <uif-toggle />', () => {
         $scope.toggled = true;
 
         let toggle: JQuery = $compile('<uif-toggle uif-label-off="No" uif-label-on="Yes" ' +
-                                                  'ng-model="toggled">Toggle this, or not</toggle>')($scope);
+                                                  'ng-model="toggled">Toggle this, or not</uif-toggle>')($scope);
         toggle = jQuery(toggle[0]);
         $scope.$apply();
 
         let labelOff: JQuery = toggle.find('.ms-Label--off');
         let labelOn: JQuery = toggle.find('.ms-Label--on');
-        let descLabel: JQuery = toggle.find('.ms-Toggle-description span');
+        let descLabel: JQuery = toggle.find('span.ms-Toggle-description');
 
         expect(labelOff.html()).toBe('No');
         expect(labelOn.html()).toBe('Yes');
-        expect(descLabel.html()).toBe('Toggle this, or not');
+        expect(descLabel.html()).toContain('Toggle this, or not');
     }));
 
     it('should be able to toggle', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {

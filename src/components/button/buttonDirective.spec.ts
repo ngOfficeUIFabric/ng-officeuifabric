@@ -50,9 +50,9 @@ describe('buttonDirective: <uif-button />', () => {
       // expected rendered HTML:
       // <span class="ms-Button-description">Lorem Ipsum</span>
 
-      // check value of the span
-      let spanElement: JQuery = element.find('span');
-      expect(spanElement[0].innerText).toBe('Lorem Ipsum');
+      // check value of the element
+      expect(element[0].tagName).toBe('SPAN');
+      expect(element[0].innerText).toBe('Lorem Ipsum');
     });
   });
 
