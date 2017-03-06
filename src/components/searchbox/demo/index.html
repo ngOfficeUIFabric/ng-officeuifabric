@@ -21,7 +21,7 @@
     <em>In order for this demo to work you must first build the library in debug mode.</em>
 
     <p>
-        Use the attributes <code>value</code> to specify the value of the search field.
+        Use the attributes <code>ng-model</code> to specify the value of the search field.
     </p>
     <p>
         Use the attributes <code>placeholder</code> to specify the placeholder of the search field.
@@ -44,7 +44,9 @@
         <p>
             Example using a controller
         </p>
-        <uif-searchbox value="value" placeholder="placeholder"></uif-searchbox>
+        <uif-searchbox ng-model="value" placeholder="placeholder"></uif-searchbox>
+        <br/>
+        Controller text: <pre>scope.value: {{value}}</pre>
         <br/>
         Searchbox can be disabled with <em>disabled</em> attribute or <em>ng-disabled</em> directive:
 
