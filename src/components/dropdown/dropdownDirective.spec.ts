@@ -59,6 +59,7 @@
         $('html').click();
         expect(div.hasClass('is-open')).toBe(false, 'Should not have class is-open after click on HTML');
     }));
+
     it('should be able to select an option', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
         let $scope: any = $rootScope.$new();
         $scope.options = [
