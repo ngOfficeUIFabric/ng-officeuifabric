@@ -610,11 +610,6 @@ describe('calloutDirectives:', () => {
       let firstActionSpans: JQuery = firstAction.children('span');
       expect(firstActionSpans.length).toBe(2);
       expect(firstActionSpans).toHaveClass('ms-Callout-actionText');
-
-      // deepest span should not have the ms-Callout-actionText class
-      let deepestSpan: JQuery = firstActionSpans.children('span');
-      expect(deepestSpan.length).toBe(1);
-      expect(deepestSpan).not.toHaveClass('ms-Callout-actionText');
     }));
 
     it('clicking close button inside callout actions directive closes callout', inject(($compile: angular.ICompileService) => {
