@@ -221,9 +221,10 @@ describe('tableDirective: <uif-table />', () => {
     scope.$digest();
 
     let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
+
     fileNameHeader.click();
     fileNameHeader.click();
-    let sortingIndicatorWrapper: JQuery = fileNameHeader.children().eq(1);
+    let sortingIndicatorWrapper: JQuery = fileNameHeader.children().eq(0);
     let sortingIndicator: JQuery = sortingIndicatorWrapper.children().eq(0);
     expect(sortingIndicator).toHaveClass('ms-Icon--caretUp');
   }));
@@ -273,8 +274,8 @@ describe('tableDirective: <uif-table />', () => {
       let fileNameHeader: JQuery = element.children().eq(0).children().eq(1);
       idHeader.click(); // sort id:asc
       fileNameHeader.click(); // sort fileName:asc
-      expect(idHeader.children().length).toEqual(1, 'Sorting indicator not removed from column previously used for sorting');
-      expect(fileNameHeader.children().length).toEqual(2, 'Sorting indicator not added to the column used for sorting');
+      expect(idHeader.children().length).toEqual(0, 'Sorting indicator not removed from column previously used for sorting');
+      expect(fileNameHeader.children().length).toEqual(1, 'Sorting indicator not added to the column used for sorting');
     }));
 
   it(
