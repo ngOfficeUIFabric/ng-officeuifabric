@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "angular": "1.6.2",
-    "office-ui-fabric": "2.6.2"
+    "office-ui-fabric": "2.6.3"
   },
   "devDependencies": {
     "@types/angular": "1.6.7",
@@ -133,7 +133,7 @@
     "jasmine-core": "2.5.2",
     "jasmine-jquery": "2.1.1",
     "jquery": "3.1.1",
-    "karma": "1.4.1",
+    "karma": "1.5.0",
     "karma-chrome-launcher": "2.0.0",
     "karma-coverage": "1.1.1",
     "karma-jasmine": "1.1.0",
