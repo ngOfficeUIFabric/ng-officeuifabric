@@ -17,14 +17,14 @@
 
 <body ng-app="demoApp">
 
-  <h1 class="ms-font-su">Toggle Demo | &lt;uif-toggle&gt;</h1> 
+  <h1 class="ms-font-su">Toggle Demo | &lt;uif-toggle&gt;</h1>
   <em>In order for this demo to work you must first build the library in debug mode.</em>
-  
+
   <h2>Default Toggle</h2>
   <p>
     This markup: <br />
     <code>
-    &lt;uif-toggle uif-label-off=&quot;Label off&quot; uif-label-on=&quot;Label on&quot; ng-model=&quot;toggled&quot;/&gt;  
+    &lt;uif-toggle uif-label-off=&quot;Label off&quot; uif-label-on=&quot;Label on&quot; ng-model=&quot;toggled&quot;/&gt;
     </code>
   </p>
 
@@ -32,10 +32,10 @@
     Renders this:
     <br />
     <uif-toggle uif-label-off="Label off" uif-label-on="Label on" ng-model="toggled"/>
-    
+
   </p>
   <p>
-    Toggled: {{toggled}}  
+    Toggled: {{toggled}}
   </p>
 
   <h2>Default Toogle with text location left</h2>
@@ -52,7 +52,22 @@
     <br />
     <uif-label>Toggle Control</uif-label>
     <uif-toggle uif-label-off="Label off" uif-label-on="Label on" uif-text-location="left"/>
-    
+
+  </p>
+
+  <h2>Toggle with transcluded label</h2>
+
+  <p>
+    This markup: <br />
+    <code>
+      &lt;uif-toggle uif-label-off=&quot;No&quot; uif-label-on=&quot;Yes&quot; ng-model=&quot;toggled&quot;&gt;Toggle this, or not&lt;/uif-toggle&gt;
+    </code>
+  </p>
+
+  <p>
+    Renders this:
+    <br />
+    <uif-toggle uif-label-off="No" uif-label-on="Yes" ng-model="toggled">Toggle this, or not</uif-toggle>
   </p>
 
   <h2>Disabled Toggle</h2>
@@ -67,11 +82,12 @@
     Renders this:
     <br />
     <uif-toggle uif-label-off="Label off" uif-label-on="Label on" ng-disabled="disabled"/>
-    
+
   </p>
   <p>
     <input type="checkbox" ng-model="disabled" />Disabled
   </p>
+
 </body>
 
 </html>
