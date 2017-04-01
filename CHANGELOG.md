@@ -1,3 +1,16 @@
+<a name="0.15.0"></a>
+### [0.15.0 - April 1, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.0)
+
+#### Features
+
+- `uif-callout`
+  - make `uif-arrow` attribute optional with default value ([962f999](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/962f999), [#477](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/477))
+- `uif-searchbox`
+  - Updated docs in uif-searchbox demo. `value` attribute is deprecated, `ng-model` should be used instead. ([e1cc7b4](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/e1cc7b4), [#479](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/479))
+- **dependencies**
+  - updated library to Angular 1.6.2 & fixed corresponding unit tests ([05609cb](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/05609cb), [#431](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/431))
+  - updated multiple dependencies including Office UI Fabric MDL1 ([8f87231](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8f87231))
+
 <a name="0.14.0"></a>
 ### [0.14.0 - February 20, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.14.0)
 
