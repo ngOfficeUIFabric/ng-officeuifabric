@@ -15,7 +15,11 @@ The **[Minimal Path To Awesome](MPA.md)** walks through this process in a much m
   ```bash
   $ npm install
   ```
+1. Download all TypeScript type definitions:
 
+  ```bash
+  $ tsd install -r -o --save-dev
+  ```
 1. Transpile all TypeScript
 
   ```bash
