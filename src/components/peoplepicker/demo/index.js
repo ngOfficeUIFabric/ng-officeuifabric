@@ -110,6 +110,11 @@
         $scope.selectedPeopleDefault.splice(indx, 1);
       };
 
+      $scope.removePerson = function (person) {
+        var indx = $scope.selectedPeopleDefault.indexOf(person);
+        $scope.selectedPeopleDefault.splice(indx, 1);
+      }
+
     }]);
 })();
 
