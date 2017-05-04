@@ -68,7 +68,7 @@ export class DropdownOptionDirective implements angular.IDirective {
     instanceElement
       .on('click', (ev: JQueryEventObject) => {
         scope.$apply(() => {
-          dropdownController.setViewValue(instanceElement.html(), attrs.value, ev);
+          dropdownController.setViewValue(instanceElement.text(), attrs.value, ev);
         });
       });
     let value: string = '' + dropdownController.getViewValue();
@@ -129,7 +129,7 @@ export class DropdownController {
           let option: HTMLElement = options[i];
           let value: string = option.getAttribute('value');
           if (value === self.$scope.ngModel.$viewValue) {
-            self.$scope.selectedTitle = angular.element(option).html();
+            self.$scope.selectedTitle = angular.element(option).text();
             found = true;
             break;
           }

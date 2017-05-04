@@ -1,4 +1,13 @@
 <a name="0.15.0"></a>
+### [0.15.1 - May 8, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.1)
+
+#### Fixes
+
+- `uif-dropdown`
+  - address rendering of markup in drop down option ([#487](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/487))
+
+
+<a name="0.15.0"></a>
 ### [0.15.0 - April 1, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.0)
 
 #### Features
@@ -10,6 +19,7 @@
 - **dependencies**
   - updated library to Angular 1.6.2 & fixed corresponding unit tests ([05609cb](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/05609cb), [#431](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/431))
   - updated multiple dependencies including Office UI Fabric MDL1 ([8f87231](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8f87231))
+
 
 <a name="0.14.0"></a>
 ### [0.14.0 - February 20, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.14.0)
