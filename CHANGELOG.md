@@ -4,7 +4,7 @@
 #### Fixes
 
 - `uif-dropdown`
-  - address rendering of markup in drop down option ([#487](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/487))
+  - address rendering of markup in drop down option ([1085be1](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/1085be1), [#487](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/487))
 
 
 <a name="0.15.0"></a>
