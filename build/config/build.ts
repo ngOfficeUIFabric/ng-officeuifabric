@@ -19,7 +19,7 @@ export class BuildConfig {
   public static BANNER_JS: string =
   'ngOfficeUIFabric\n' +
   'http://ngofficeuifabric.com\n' +
-  'Angular 1.x directives for Microsoft\'s Office UI Fabric\n' +
+  'AngularJS (v1.6.x+) directives for Microsoft\'s Office UI Fabric\n' +
   'https://angularjs.org & https://dev.office.com/fabric\n' +
   'v' + BuildConfig.VERSION;
 
