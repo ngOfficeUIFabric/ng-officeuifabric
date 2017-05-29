@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { BaseGulpTask } from '../BaseGulpTask';
 import { BuildConfig } from '../../config/build';
 import { Utils } from '../utils';
@@ -33,10 +34,10 @@ export class GulpTask extends BaseGulpTask {
    * @property  {Object}  options   - Any command line flags that can be passed to the task.
    */
   public static options: any = {
-    'dev':     'Create unminified version of the library with source maps & comments (otherwise, production' + GulpTask.helpMargin +
-               'bundle created)',
-    'verbose': 'Output all TypeScript files being compiled & JavaScript files included in the external library',
-    'version': 'Version number to set build library (if omitted, version from package.json is used)'
+    'dev'     : 'Create unminified version of the library with source maps & comments (otherwise, production' + GulpTask.helpMargin +
+    'bundle created)',
+    'verbose' : 'Output all TypeScript files being compiled & JavaScript files included in the external library',
+    'version' : 'Version number to set build library (if omitted, version from package.json is used)'
   };
 
   /**
@@ -65,17 +66,20 @@ export class GulpTask extends BaseGulpTask {
 
     // add banner to the generated file
     webpackPlugins.push(
-      new webpack.BannerPlugin(BuildConfig.BANNER_JS, null)
+      new webpack.BannerPlugin(BuildConfig.BANNER_JS)
     );
 
     // add plugins to config
     config.plugins = webpackPlugins;
 
-    let rootSource: string = __dirname + '/../../../' + BuildConfig.SOURCE;
+    let rootSource: string = path.join(__dirname, '../../..', BuildConfig.SOURCE);
 
     // build webpack bundle
-    return gulp.src([rootSource + '/core/core.ts', rootSource + '/core/components.ts'])
-      .pipe(webpackStream(config))
+    return gulp.src([
+      path.join(rootSource, 'core/core.ts'),
+      path.join(rootSource, 'core/components.ts')
+    ])
+      .pipe(webpackStream(config, webpack))
       .pipe(gulp.dest(BuildConfig.OUTPUT_PATH));
   }
 }
