@@ -274,9 +274,15 @@
     "@types/tapable" "*"
     "@types/uglify-js" "*"
 
+<<<<<<< HEAD
 "@types/xmldom@^0.1.29":
   version "0.1.29"
   resolved "https://registry.yarnpkg.com/@types/xmldom/-/xmldom-0.1.29.tgz#c4428b0ca86d3b881475726fd94980b38a27c381"
+=======
+"@types/xmldom@0.1.28":
+  version "0.1.28"
+  resolved "https://registry.yarnpkg.com/@types/xmldom/-/xmldom-0.1.28.tgz#52fabbeccc4f1806365d253b6c7b9673dda0f514"
+>>>>>>> b84a8da... chore(build): update dependencies
 
 "@types/yargs@6.6.0":
   version "6.6.0"
@@ -4222,9 +4228,15 @@ loud-rejection@^1.0.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
+<<<<<<< HEAD
 lru-cache@2, lru-cache@~2.5.0:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.5.2.tgz#1fddad938aae1263ce138680be1b3f591c0ab41c"
+=======
+lru-cache@2:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+>>>>>>> b84a8da... chore(build): update dependencies
 
 lru-cache@2.2.x:
   version "2.2.4"
