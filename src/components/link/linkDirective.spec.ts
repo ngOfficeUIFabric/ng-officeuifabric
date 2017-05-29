@@ -22,7 +22,7 @@ describe('linkDirective: <uif-link />', () => {
 
     let aElement: JQuery = element;
 
-    expect(aElement).toEqual('a');
+    expect(aElement.eq(0).prop('tagName')).toBe('A');
 
   });
 
