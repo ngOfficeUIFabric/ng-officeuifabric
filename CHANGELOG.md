@@ -1,4 +1,15 @@
-<a name="0.15.0"></a>
+<a name="0.15.2"></a>
+### [0.15.2 - May 8, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.2)
+
+#### Fixes
+
+- **documentation**
+  - docs(version): update CDN references and Angular docs ([fa1bbf9](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/fa1bbf9), [#494](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/494), [#489](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/489))
+- **dependencies**
+  - update dependencies ([ecf4185](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/ecf4185), [5a749f3](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/5a749f3), [8829c7f](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/8829c7f), [e7dd7c2](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/e7dd7c2))
+
+
+<a name="0.15.1"></a>
 ### [0.15.1 - May 8, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.1)
 
 #### Fixes
