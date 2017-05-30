@@ -178,7 +178,7 @@ class SpinnerController {
     circle.addClass('ms-Spinner-circle').css('width', dotSize).css('height', dotSize);
 
     return circle;
-  };
+  }
 
   private setInitialOpacity(): void {
 

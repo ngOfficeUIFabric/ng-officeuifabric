@@ -352,4 +352,4 @@ export enum IconEnum {
   wrench,
   x,
   xCircle
-};
+}

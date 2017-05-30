@@ -63,7 +63,7 @@ export class CommandBarDirective implements angular.IDirective {
         scope.isSearchActive = false;
     };
 
-  }};
+  }}
 
 }
 
@@ -359,9 +359,7 @@ export class CommandBarMainDirective implements angular.IDirective {
           scope.toggleItemVisibility();
         });
 
-
-
-    };
+    }
 }
 
 

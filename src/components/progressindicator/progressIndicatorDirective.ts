@@ -82,7 +82,7 @@ export class ProgressIndicatorDirective implements angular.IDirective {
                 scope.uifPercentComplete = Math.max(Math.min(newPercentComplete, 100), 0);
             }
         });
-    };
+    }
 }
 
 /**

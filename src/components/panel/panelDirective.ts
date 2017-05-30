@@ -46,7 +46,8 @@ export class PanelDirective implements angular.IDirective {
   };
 
   public static factory(): angular.IDirectiveFactory {
-    const directive: angular.IDirectiveFactory = ($log: angular.ILogService,
+    const directive: angular.IDirectiveFactory = (
+      $log: angular.ILogService,
       $animate: angular.animate.IAnimateService,
       $timeout: angular.ITimeoutService) => new PanelDirective($log, $animate, $timeout);
     directive.$inject = ['$log', '$animate', '$timeout'];

@@ -48,14 +48,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
         primaryText: 'Russel Miller',
         secondaryText: 'Sales'
       },
-        {
-          color: 'magenta',
-          group: defaultGroup,
-          icon: 'Persona.Person2.png',
-          presence: 'available',
-          primaryText: 'Russel Miller',
-          secondaryText: 'Sales'
-        }];
+      {
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      }];
 
       $scope.personClicked = () => {
         return;
@@ -106,7 +106,9 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($searchInput).not.toHaveAttr('disabled');
     }));
 
-    it('should not run delayed search', inject(($compile: Function, $rootScope: angular.IRootScopeService,
+    it('should not run delayed search', inject((
+      $compile: Function,
+      $rootScope: angular.IRootScopeService,
       $timeout: angular.ITimeoutService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
 
@@ -158,8 +160,10 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($results.length).toBe(1);
     }));
 
-    it('should write an error - invalid people picker type', inject(($compile: Function,
-      $rootScope: angular.IRootScopeService, $log: angular.ILogService) => {
+    it('should write an error - invalid people picker type', inject((
+      $compile: Function,
+      $rootScope: angular.IRootScopeService,
+      $log: angular.ILogService) => {
       try {
         $scope = $rootScope.$new();
 
@@ -176,7 +180,8 @@ describe('peoplepicker: <uif-people-picker />', () => {
       }
     }));
 
-    it('should set disabled on input', inject(($compile: Function,
+    it('should set disabled on input', inject((
+      $compile: Function,
       $rootScope: angular.IRootScopeService) => {
 
       $scope = $rootScope.$new();
@@ -309,14 +314,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
         primaryText: 'Russel Miller',
         secondaryText: 'Sales'
       },
-        {
-          color: 'magenta',
-          group: defaultGroup,
-          icon: 'Persona.Person2.png',
-          presence: 'available',
-          primaryText: 'Russel Miller',
-          secondaryText: 'Sales'
-        }];
+      {
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      }];
 
       $scope.onSearch = (query) => {
         if (!query) {
@@ -333,7 +338,9 @@ describe('peoplepicker: <uif-people-picker />', () => {
       $scope.$apply();
     }));
 
-    it('should run delayed search', inject(($compile: Function, $rootScope: angular.IRootScopeService,
+    it('should run delayed search', inject((
+      $compile: Function,
+      $rootScope: angular.IRootScopeService,
       $timeout: angular.ITimeoutService) => {
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
 
@@ -397,14 +404,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
         primaryText: 'Russel Miller',
         secondaryText: 'Sales'
       },
-        {
-          color: 'magenta',
-          group: defaultGroup,
-          icon: 'Persona.Person2.png',
-          presence: 'available',
-          primaryText: 'Russel Miller',
-          secondaryText: 'Sales'
-        }];
+      {
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      }];
 
       $scope.onSearch = (query) => {
         if (!query) {
@@ -455,14 +462,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
         primaryText: 'Russel Miller',
         secondaryText: 'Sales'
       },
-        {
-          color: 'magenta',
-          group: defaultGroup,
-          icon: 'Persona.Person2.png',
-          presence: 'available',
-          primaryText: 'Russel Miller',
-          secondaryText: 'Sales'
-        }];
+      {
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      }];
 
       $scope.onSearch = (query) => {
         if (!query) {
@@ -516,14 +523,14 @@ describe('peoplepicker: <uif-people-picker />', () => {
         primaryText: 'Russel Miller',
         secondaryText: 'Sales'
       },
-        {
-          color: 'magenta',
-          group: defaultGroup,
-          icon: 'Persona.Person2.png',
-          presence: 'available',
-          primaryText: 'Russel Miller',
-          secondaryText: 'Sales'
-        }];
+      {
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      }];
 
       $scope.onSearch = (query) => {
         if (!query) {

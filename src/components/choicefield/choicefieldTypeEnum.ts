@@ -12,4 +12,4 @@
 export enum ChoicefieldType {
     radio,
     checkbox
-};
+}

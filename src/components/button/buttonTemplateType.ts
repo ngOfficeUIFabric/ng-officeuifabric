@@ -17,4 +17,4 @@ export enum ButtonTemplateType {
   compoundLink,
   heroButton,
   heroLink
-};
+}

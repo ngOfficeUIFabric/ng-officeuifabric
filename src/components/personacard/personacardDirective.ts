@@ -74,7 +74,8 @@ export class PersonaCardDirective implements angular.IDirective {
     return directive;
   }
 
-  public link: angular.IDirectiveLinkFn = (scope: IPersonaCardScope,
+  public link: angular.IDirectiveLinkFn = (
+    scope: IPersonaCardScope,
     element: angular.IAugmentedJQuery,
     attrs: IPersonaCardAttributes,
     controllers: any,
@@ -262,7 +263,7 @@ export class PersonaCardDirective implements angular.IDirective {
     personaCardController.addAction(actionToAdd);
 
     return clone;
-  };
+  }
 
 }
 
@@ -478,7 +479,7 @@ export class PersonaCardActionDirective implements angular.IDirective {
     return directive;
   }
 
-  constructor(private $log: angular.ILogService) { };
+  constructor(private $log: angular.ILogService) { }
 
   public template: any = (instanceElement: angular.IAugmentedJQuery, actionAttrs: IPersonaCardActionAttributes) => {
     if (angular.isDefined(actionAttrs.uifPlaceholder) && angular.isUndefined(PlaceholderEnum[actionAttrs.uifPlaceholder])) {

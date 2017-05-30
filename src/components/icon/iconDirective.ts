@@ -71,7 +71,7 @@ export class IconDirective implements angular.IDirective {
           'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/icon/iconEnum.ts');
       }
     });
-  };
+  }
 }
 
 /**

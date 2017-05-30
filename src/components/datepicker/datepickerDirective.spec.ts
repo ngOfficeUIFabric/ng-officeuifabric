@@ -333,7 +333,7 @@ describe('datepicker: <uif-datepicker />', () => {
     let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
     $scope.$digest();
     datepicker = jQuery(datepicker[0]);
-    expect($scope.value).toBeNull;
+    expect($scope.value).toBeNull();
   }));
 
   it('should handle setting undefined for value', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
@@ -342,7 +342,7 @@ describe('datepicker: <uif-datepicker />', () => {
     let datepicker: JQuery = $compile('<uif-datepicker ng-model="value" placeholder="TEST"></uif-datepicker>')($scope);
     $scope.$digest();
     datepicker = jQuery(datepicker[0]);
-    expect($scope.value).toBeUndefined;
+    expect($scope.value).toBeUndefined();
   }));
 
   it('should handle setting empty string for value', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {

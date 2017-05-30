@@ -30,4 +30,4 @@ export enum PersonaInitialsColor {
   orange,
   red,
   darkRed
-};
+}
