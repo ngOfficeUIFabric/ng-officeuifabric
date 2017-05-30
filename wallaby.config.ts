@@ -1,4 +1,11 @@
-import { IWallaby, IWallabyConfig, IWallabyCompilers, IWallabyProcessor, IWallabyFilePattern, IWallabyEnvironment } from 'wallabyjs';
+import {
+  IWallaby,
+  IWallabyConfig,
+  IWallabyCompilers,
+  IWallabyProcessor,
+  IWallabyFilePattern,
+  IWallabyEnvironment
+} from 'wallabyjs';
 import { BuildConfig } from './build/config/build';
 import { WebPackConfig } from './build/config/webpack';
 
@@ -17,7 +24,8 @@ class WallabyConfig implements IWallabyConfig {
   ];
 
   public tests: IWallabyFilePattern[] = [
-    { load: false, pattern: 'src/**/*.spec.ts' }
+    { load: false, pattern: 'src/**/*.spec.ts' },
+    { load: false, pattern: 'src/**/*.ts' }
   ];
 
   public compilers: IWallabyCompilers = {
@@ -33,10 +41,10 @@ class WallabyConfig implements IWallabyConfig {
   public postprocessor: IWallabyProcessor;
 
   /**
-   * Configure testing framework / sandbox environbment just before a test run starts.
+   * Configure testing framework / sandbox environment just before a test run starts.
    */
   public setup: any = function (): void {
-    // required to trigger test loadingr
+    // required to trigger test loader
     let moduleBundle: string = '__moduleBundler';
     window[moduleBundle].loadTests();
   };
@@ -61,8 +69,8 @@ class WallabyConfig implements IWallabyConfig {
       // can't use same resolve from webpack config because with regular
       // webpack, need to load TS then JS, but with Wallaby, need JS then TS
       resolve: {
-        extensions: ['', '.js', '.ts'],
-        root: webpackConfig.resolve.root
+        extensions: ['.js', '.ts'],
+        modules: webpackConfig.resolve.modules
       }
     });
   }
