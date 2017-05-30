@@ -21,4 +21,4 @@ export enum PresenceEnum {
   busy,
   dnd,
   offline
-};
+}

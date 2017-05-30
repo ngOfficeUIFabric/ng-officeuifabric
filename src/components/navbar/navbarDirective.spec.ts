@@ -169,7 +169,8 @@ describe('navbar: <uif-nav-bar />', () => {
       expect(link.find('.ms-ContextualMenu').first()).not.toHaveClass('is-open');
     }));
 
-    it('should write an error - invalid overlay type', inject(($compile: Function,
+    it('should write an error - invalid overlay type', inject((
+      $compile: Function,
       $rootScope: angular.IRootScopeService,
       /* tslint:disable:variable-name */
       _$log_: any) => {
@@ -188,7 +189,8 @@ describe('navbar: <uif-nav-bar />', () => {
       expect(_$log_.error).toHaveBeenCalled();
     }));
 
-    it('should write an error - invalid item type', inject(($compile: Function,
+    it('should write an error - invalid item type', inject((
+      $compile: Function,
       $rootScope: angular.IRootScopeService,
       /* tslint:disable:variable-name */
       _$log_: any) => {
@@ -207,7 +209,8 @@ describe('navbar: <uif-nav-bar />', () => {
       expect(_$log_.error).toHaveBeenCalled();
     }));
 
-    it('should write an error - no text for menu item provided', inject(($compile: Function,
+    it('should write an error - no text for menu item provided', inject((
+      $compile: Function,
       $rootScope: angular.IRootScopeService,
       /* tslint:disable:variable-name */
       _$log_: any) => {

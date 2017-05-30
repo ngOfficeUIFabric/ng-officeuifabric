@@ -209,7 +209,8 @@ export class PersonaDirective implements angular.IDirective {
     return directive;
   }
 
-  public link: angular.IDirectiveLinkFn = (scope: IPersonaScope,
+  public link: angular.IDirectiveLinkFn = (
+    scope: IPersonaScope,
     element: angular.IAugmentedJQuery,
     attrs: IPersonaAttributes,
     controllers: any,

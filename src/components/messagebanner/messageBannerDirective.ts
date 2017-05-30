@@ -135,7 +135,7 @@ export class MessageBannerDirective implements angular.IDirective {
     }
 
     constructor(private $log: angular.ILogService, private $timeout: angular.ITimeoutService) {
-    };
+    }
 
     public link: angular.IDirectiveLinkFn = (
         $scope: IMessageBannerScope, $elem: angular.IAugmentedJQuery,
@@ -246,7 +246,7 @@ export class MessageBannerDirective implements angular.IDirective {
         }
         this._clipper[0].style.width = this._textWidth;
         this._chevronButton[0].style.height = '52px';
-    };
+    }
 
     /**
      * resize below 480 pixel breakpoint
@@ -259,13 +259,13 @@ export class MessageBannerDirective implements angular.IDirective {
         }
         this._clipper[0].style.width = this._textWidth;
         this._chevronButton[0].style.height = '85px';
-    };
+    }
 
     private _toggleExpansion($scope: IMessageBannerScope): void {
         $scope.isExpanded = !$scope.isExpanded;
         $scope.$digest();
         this._messageBanner.toggleClass('is-expanded');
-    };
+    }
 
     /**
      * hides banner when close button is clicked
@@ -281,7 +281,7 @@ export class MessageBannerDirective implements angular.IDirective {
                 },
                 500);
         }
-    };
+    }
 }
 
 /**

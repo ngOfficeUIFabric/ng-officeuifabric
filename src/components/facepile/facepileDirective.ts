@@ -177,7 +177,7 @@ export class FacepileAddIconDirective implements angular.IDirective {
     {
       scope.parentScope = <IFacepileScope>scope.$parent.$parent;
     }
-  };
+  }
 
 }
 

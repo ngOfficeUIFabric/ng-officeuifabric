@@ -1,17 +1,25 @@
-import * as webpack from 'webpack';
+// import * as webpack from 'webpack';
+import {
+  Configuration,
+  ExternalsElement,
+  NewModule,
+  NewLoaderRule,
+  NewResolve,
+  Output
+ } from 'webpack';
 
 /**
  * Options affecting the normal module.
  *
  * @class
- * @implements {webpack.Module}
+ * @implements {NewModule}
  * @public
  *
- * @property {webpack.Loader[]}   loaders - Array of automatically applied loaders.
+ * @property {NewLoaderRule[]}   rules - Array of automatically applied loader rules.
  */
-class WebPackModule implements webpack.OldModule {
+class WebPackModule implements NewModule {
 
-  public loaders: webpack.Rule[] = [];
+  public rules: NewLoaderRule[] = [];
 
   /**
    * Constructor that creates the collection of loaders.
@@ -19,7 +27,8 @@ class WebPackModule implements webpack.OldModule {
    * @constructs
    */
   constructor() {
-    this.loaders.push(<webpack.Rule>{
+    this.rules.push(<NewLoaderRule>{
+      exclude: /node_modules/,
       loader: 'ts-loader',
       test: /\.ts$/
     });
@@ -30,35 +39,33 @@ class WebPackModule implements webpack.OldModule {
  * Webpack configuration.
  *
  * @class
- * @implements {webpack.Configuration}
+ * @implements {Configuration}
  * @public
  * @see {link http://webpack.github.io/docs/configuration.html}
  *
- * @property  {webpack.Output}  output    - Options affecting the output.
- * @property  {string}          output.libraryTarget    - Which format to export the library.
- * @property  {Object}          externals - Dependencies not resolved by webpack, but become dependencies of the resulting bundle.
- * @property  {string}          target    - Compile for usage in a browser-like environment.
- * @property  {Object}          resolve   - Options affecting the resolving of modules.
- * @property  {string[]}        resolve.extensions  - Extensions that should be used to resolve modules.
- * @property  {string}          resolve.root  - Absolute path that contains the modules.
+ * @property  {Output}          output        - Options affecting the output.
+ * @property  {string}          libraryTarget - Which format to export the library.
+ * @property  {Object}          externals     - Dependencies not resolved by webpack, but become dependencies of the resulting bundle.
+ * @property  {string}          target        - Compile for usage in a browser-like environment.
+ * @property  {Object}          NewResolve    - Options affecting the resolving of modules.
  */
-export class WebPackConfig implements webpack.Configuration {
+export class WebPackConfig implements Configuration {
 
-  public output: webpack.Output = <webpack.Output>{
+  public output: Output = <Output>{
     // export to AMD, CommonJS2 or as property in root
     libraryTarget: 'umd'
   };
 
-  public externals: any = {
+  public externals: ExternalsElement = {
     'angular': 'angular'
   };
 
   public target: string = 'web';
 
-  public resolve: any = {
-    extensions: ['', '.ts', '.js'],
-    root: './src'
+  public resolve: NewResolve = {
+    extensions: ['.ts', '.js']
   };
 
-  public module: webpack.Module = new WebPackModule();
+  public module: NewModule = new WebPackModule();
+
 }

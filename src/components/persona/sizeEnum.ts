@@ -16,4 +16,4 @@ export enum PersonaSize {
   medium,
   large,
   xlarge
-};
+}

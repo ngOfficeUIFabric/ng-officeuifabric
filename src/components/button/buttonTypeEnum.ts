@@ -16,4 +16,4 @@ export enum ButtonTypeEnum {
   command,
   compound,
   hero
-};
+}

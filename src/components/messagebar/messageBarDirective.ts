@@ -100,7 +100,7 @@ export class MessageBarDirective implements angular.IDirective {
   }
 
   constructor(private $log: angular.ILogService, private $timeout: angular.ITimeoutService) {
-  };
+  }
 
   public link: angular.IDirectiveLinkFn = (
     $scope: IMessageBarScope, $element: angular.IAugmentedJQuery,

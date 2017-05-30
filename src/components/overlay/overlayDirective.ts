@@ -78,7 +78,7 @@ export class OverlayDirective implements angular.IDirective {
           'https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/src/components/overlay/overlayModeEnum.ts');
       }
     });
-  };
+  }
 }
 
 /**
