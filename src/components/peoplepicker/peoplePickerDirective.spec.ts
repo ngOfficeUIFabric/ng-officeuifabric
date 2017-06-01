@@ -210,7 +210,6 @@ describe('peoplepicker: <uif-people-picker />', () => {
     }));
 
     it('should add person to selected', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();
@@ -223,7 +222,6 @@ describe('peoplepicker: <uif-people-picker />', () => {
     }));
 
     it('should not add person to selected twice', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();
@@ -239,7 +237,6 @@ describe('peoplepicker: <uif-people-picker />', () => {
     }));
 
     it('should remove person from selected', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-
       let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
       $searchInput.click();
       $scope.$apply();
@@ -255,8 +252,25 @@ describe('peoplepicker: <uif-people-picker />', () => {
       expect($scope.selectedPeople.length).toBe(0);
     }));
 
-    it('should remove person from search results', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+    it('should not remove person from selected if disabled', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+      $scope.disabled = true;
+      $scope.$apply();
+      let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
+      $searchInput.click();
+      $scope.$apply();
+      let $btn: JQuery = $element.find('.ms-PeoplePicker-resultBtn').first();
 
+      $btn.click();
+      $scope.$apply();
+
+      let $personRemove: JQuery = $element.find('.ms-PeoplePicker-persona .ms-PeoplePicker-personaRemove');
+      $personRemove.click();
+      $scope.$apply();
+
+      expect($scope.selectedPeople.length).not.toBe(0);
+    }));
+
+    it('should remove person from search results', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
       let $searchResultCloseBtn: JQuery = $element.find('.ms-PeoplePicker-resultAction.js-resultRemove').last();
       $searchResultCloseBtn.click();
       $scope.$apply();

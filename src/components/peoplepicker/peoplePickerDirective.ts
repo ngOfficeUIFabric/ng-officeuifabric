@@ -527,10 +527,11 @@ export class PeoplePickerDirective implements angular.IDirective {
     };
 
     $scope.removePersonFromSelectedPeople = (person: IPersonPicker, $event: MouseEvent) => {
-      let indx: number = $scope.selectedPersons.indexOf(person);
-      $scope.selectedPersons.splice(indx, 1);
-      ngModelCtrl.$setViewValue($scope.selectedPersons);
-
+      if (!$scope.ngDisabled) {
+        let indx: number = $scope.selectedPersons.indexOf(person);
+        $scope.selectedPersons.splice(indx, 1);
+        ngModelCtrl.$setViewValue($scope.selectedPersons);
+      }
       $event.stopPropagation();
     };
 
