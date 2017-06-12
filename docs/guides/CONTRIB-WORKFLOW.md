@@ -45,4 +45,4 @@ The following is recommended for contributing to the repo:
   > **NOTE**: Refer to the **[PULL-REQUESTS](PULL-REQUESTS.md)** page for more details on this.
 
 
-It is OK to create your PR as a "WIP" (work in progress) on the upstream repo before the implementation is done. This can be useful if you'd like to start the feedback process concurrent with your implementation. **State this this is the case in the initial PR comment.**
+It is OK to create your PR as a "WIP" (work in progress) on the upstream repo before the implementation is done. This can be useful if you'd like to start the feedback process concurrent with your implementation. **State that this is the case in the initial PR comment.**

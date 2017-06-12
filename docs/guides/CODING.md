@@ -25,7 +25,7 @@ The components within the ngOfficeUIFabric are organized as follows:
 │   │   │   ├── index.html
 │   │   │   └── index.ts
 │   │   ├── <component>Directive.spec.ts
-│   │   ├── <component>Directive.ts
+│   │   └── <component>Directive.ts
 │   └── icon
 │       ├── demo
 │       │   ├── index.html
@@ -42,7 +42,7 @@ The components within the ngOfficeUIFabric are organized as follows:
     └── core.ts
 ```
 
-All components will depend on the `core.ts` file which contains the shared assets in the library. The `components.ts` file contains the `officeuidabric.components` module declaration which consumers can use to import all components rather than one at a time.
+All components will depend on the `core.ts` file which contains the shared assets in the library. The `components.ts` file contains the `officeuifabric.components` module declaration which consumers can use to import all components rather than one at a time.
 
 Each component should have at least a `demo` folder that contains the HTML & script that demonstrates how the component can be used. This should be a fully working sample. Additional demo folders can be provided for alternate implementations of the component. use the naming convention `demo[..]` for these alternate implementations. In addition, feel free to include a `README.md` within the demo folders for additional explanation when warranted.
 
@@ -152,7 +152,7 @@ The type must be one of the following options. This is used to explain what was 
 
 ### Scope
 
-Anything specifying the place of the commit change. This is not always required and can be left blank, but in those causes leave an empty parents `()`.
+Anything specifying the place of the commit change. This is not always required and can be left blank, but in those cases leave an empty parents `()`.
 
 ### Subject
 
