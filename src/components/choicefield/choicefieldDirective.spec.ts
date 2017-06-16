@@ -246,6 +246,34 @@ describe('choicefieldDirective <uif-choicefield />', () => {
       expect(ngModel.$touched).toBeTruthy();
     }));
 
+  it(
+    'should be validating presence of ng-model when value is changed',
+    inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+      let $scope: angular.IScope = $rootScope.$new();
+      $scope.options = [
+        { text: 'Option 1', value: 'Option1' },
+        { text: 'Option 2', value: 'Option2' },
+        { text: 'Option 3', value: 'Option3' },
+        { text: 'Option 4', value: 'Option4' }
+      ];
+
+      let choicefield: JQuery = $compile('<uif-choicefield-group ng-disabled="disabled" uif-type="radio">' +
+        '<uif-choicefield-option ng-repeat="option in options" ng-disabled="disabledChild" ' +
+        'value="{{option.value}}">{{option.text}}</uif-choicefield-option></uif-choicefield-group>')($scope);
+
+      choicefield = jQuery(choicefield[0]);
+      choicefield.appendTo(document.body);
+
+      $scope.$digest();
+
+      let option3: JQuery = jQuery(choicefield.find('input')[2]);
+
+      option3.click();
+
+      let ngModel: angular.INgModelController = angular.element(choicefield).controller('ngModel');
+      expect(ngModel).toBeUndefined();
+    }));
+
   it('should not set $dirty & $touched on ng-model intially', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
     let $scope: any = $rootScope.$new();
     $scope.options = [

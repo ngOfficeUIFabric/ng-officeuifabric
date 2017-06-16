@@ -231,11 +231,13 @@ export class ChoicefieldGroupController {
   }
 
   public setViewValue(value: string, eventType: any): void {
-    if (this.getViewValue() !== value) {
-      this.$scope.ngModel.$setDirty();
+    if (typeof this.$scope.ngModel !== 'undefined' && this.$scope.ngModel != null) {
+      if (this.getViewValue() !== value) {
+        this.$scope.ngModel.$setDirty();
+      }
+      this.$scope.ngModel.$setViewValue(value, eventType);
+      this.render(); // update all inputs checked/not checked
     }
-    this.$scope.ngModel.$setViewValue(value, eventType);
-    this.render(); // update all inputs checked/not checked
   }
 
   public setTouched(): void {
