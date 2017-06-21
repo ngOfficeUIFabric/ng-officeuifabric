@@ -1,3 +1,13 @@
+<a name="0.15.3"></a>
+### [0.15.3 - June 21, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.3)
+
+#### Fixes
+
+- **documentation**
+  - docs(): fix typos in documentation ([75651cc](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/75651cc))
+- `uif-choicefield`
+  - fix(choicefield): fix error on dirty setting ([467d7b5](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/467d7b5), [#500](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/500))
+
 <a name="0.15.2"></a>
 ### [0.15.2 - May 8, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.2)
 
