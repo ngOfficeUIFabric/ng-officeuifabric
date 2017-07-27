@@ -192,7 +192,7 @@ export class DatepickerController {
       let currentDate: Pickadate.DateItem = $picker.get('highlight');
       let newYear: number = currentDate.year;
       let newMonth: number = +$(this).attr('data-month');
-      let newDay: number = currentDate.day;
+      let newDay: number = currentDate.date;
 
       /** Update the date. */
       self.changeHighlightedDate(newYear, newMonth, newDay);
@@ -212,7 +212,7 @@ export class DatepickerController {
       let currentDate: Pickadate.DateItem = $picker.get('highlight');
       let newYear: number = +$(this).attr('data-year');
       let newMonth: number = currentDate.month;
-      let newDay: number = currentDate.day;
+      let newDay: number = currentDate.date;
 
       /** Update the date. */
       self.changeHighlightedDate(newYear, newMonth, newDay);
