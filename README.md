@@ -5,7 +5,6 @@
 [![NuGet version](https://badge.fury.io/nu/ng-office-ui-fabric.svg)](https://badge.fury.io/nu/ng-office-ui-fabric)
 
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
-[![Slack Network](http://ngofficeuifabric-slackin.azurewebsites.net/badge.svg)](http://ngofficeuifabric-slackin.azurewebsites.net/)
 
 [![bitHound Overall Score](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/score.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric)
 [![bitHound Dependencies](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/dependencies.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/master/dependencies/npm)
@@ -120,14 +119,10 @@ All directives in ng-OfficeUIFabric will work against the same versions that are
 - Edge
 - Safari
 
-### Need Help
-
-Jump into the [ngOfficeUIFabric Slack team](http://ngofficeuifabric.slack.com) to join the discussion... if you aren't a member [ask for an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
-
 ### Think You Found a Bug
 
 First check the [issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) list to see if someone else has already found it and there's an ongoing discussion. If not, create an [issue](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) or jump in the .
 
 ## Contributing to the Project
 
-We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.github/CONTRIBUTING.md) for guidance and jump in the Slack team to discuss how you can help: [http://ngofficeuifabric.slack.com](http://ngofficeuifabric.slack.com)... if you aren't a member of the Slack team yet, [ask for an invite](http://ngofficeuifabric-slackin.azurewebsites.net).
+We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.github/CONTRIBUTING.md) for guidance.
