@@ -1,3 +1,12 @@
+<a name="0.15.4"></a>
+### [0.15.4 - August 14, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.4)
+
+#### Fixes
+
+- `uif-datepicker`
+  - fix(datepicker): pickadate library expects day of month value ([c4c5bae](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/c4c5bae), [#485](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/485))
+
+
 <a name="0.15.3"></a>
 ### [0.15.3 - June 21, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.3)
 
