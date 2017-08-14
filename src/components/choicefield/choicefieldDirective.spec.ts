@@ -249,7 +249,7 @@ describe('choicefieldDirective <uif-choicefield />', () => {
   it(
     'should be validating presence of ng-model when value is changed',
     inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
-      let $scope: angular.IScope = $rootScope.$new();
+      let $scope: any = $rootScope.$new();
       $scope.options = [
         { text: 'Option 1', value: 'Option1' },
         { text: 'Option 2', value: 'Option2' },
