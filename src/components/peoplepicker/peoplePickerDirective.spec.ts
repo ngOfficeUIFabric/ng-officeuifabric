@@ -360,6 +360,97 @@ describe('peoplepicker: <uif-people-picker />', () => {
     }));
   });
 
+  describe('People picker - single mode', () => {
+    let $element: JQuery;
+    let $scope: any;
+
+    beforeEach(inject(($rootScope: angular.IRootScopeService, $compile: Function, $q: angular.IQService) => {
+      $element = angular.element(`
+       <uif-people-picker uif-single uif-type="compact"
+         uif-people="onSearch"
+         ng-model="selectedPeople"
+         ng-change="onChange()"
+         placeholder="Search for people"
+         uif-selected-person-click="personClicked">
+          <uif-people-search-more>
+            <uif-secondary-text>Showing {{sourcePeople.length}} results</uif-secondary-text>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>`);
+
+      $scope = $rootScope;
+
+      let defaultGroup: any = {
+        name: 'default', order: 1
+      };
+
+      $scope.people = [{
+        additionalData: [
+          {
+            color: 'magenta',
+            group: defaultGroup,
+            icon: 'Persona.Person2.png',
+            presence: 'available',
+            primaryText: 'Joseph Pena',
+            secondaryText: 'Contoso Inc.'
+          }
+        ],
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      },
+      {
+        color: 'magenta',
+        group: defaultGroup,
+        icon: 'Persona.Person2.png',
+        presence: 'available',
+        primaryText: 'Russel Miller',
+        secondaryText: 'Sales'
+      }];
+
+      $scope.onSearch = (query) => {
+        if (!query) {
+          return $scope.people;
+        }
+        let deferred: angular.IDeferred<any> = $q.defer();
+
+        deferred.resolve([$scope.people[1]]);
+
+        return deferred.promise;
+      };
+      $compile($element)($scope);
+      $element = jQuery($element[0]);
+      $scope.$apply();
+    }));
+
+    it('should replace selected person', inject(($compile: Function, $rootScope: angular.IRootScopeService) => {
+      // add initial selected person
+      $scope.selectedPeople = [$scope.people[1]];
+      let timesChanged: number = 0;
+      $scope.onChange = () => {
+        timesChanged++;
+      };
+      $scope.$apply();
+      // check that initial person selected
+      expect($element.find('.ms-PeoplePicker-searchBox .ms-PeoplePicker-persona').length).toBe(1);
+      timesChanged = 0;
+      // select another person
+      let $searchInput: JQuery = $element.find('input.ms-PeoplePicker-searchField').first();
+      $searchInput.click();
+      $scope.$apply();
+      let $btn: JQuery = $element.find('.ms-PeoplePicker-resultBtn').first();
+      $btn.click();
+      $scope.$apply();
+      // check that initial person replaced with selected one
+      expect($scope.selectedPeople.length).toBe(1);
+      // check that onChange was executed once
+      expect(timesChanged).toBe(1);
+    }));
+  });
+
   describe('People picker - disconnected', () => {
     let $element: JQuery;
     let $scope: any;

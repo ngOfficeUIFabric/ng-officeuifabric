@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -66,6 +66,21 @@
       <br>
       <script type="text/ng-template" id="compact.html">
         <uif-people-picker uif-people="getPeopleForCompactDemo" ng-model="selectedPeopleCompact" uif-type="compact" placeholder="Search for people">
+          <uif-people-search-more>
+            <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
+          </uif-people-search-more>
+        </uif-people-picker>
+      </script>
+
+      <h2>People Picker - Single mode</h2>
+      <div class="usage">Allow selecting only one person with <b><i>uif-single</i></b> attribute.</div>
+      <br>
+      <ng-include src="'single.html'"></ng-include>
+      <h4><i>Code:</i></h4>
+      <raw src="'single.html'"></raw>
+      <br>
+      <script type="text/ng-template" id="single.html">
+        <uif-people-picker uif-people="getPeopleForCompactDemo" ng-model="selectedPeopleCompact" uif-single uif-type="compact" placeholder="Search for people">
           <uif-people-search-more>
             <uif-primary-text uif-search-for-text="You are searching for: ">Search organization people</uif-primary-text>
           </uif-people-search-more>

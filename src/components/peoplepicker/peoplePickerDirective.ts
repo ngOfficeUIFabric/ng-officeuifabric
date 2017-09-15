@@ -171,10 +171,12 @@ enum PeoplePickerTypes {
  *
  * @property {string} uifType     - People picker type
  * @property {string} ngDisabled  - Disabled state varible name
+ * @property {string} uifSingle   - Allow only one person to be selected
  */
 interface IPeoplePickerAttributes extends angular.IAttributes {
   uifType: string;
   ngDisabled: string;
+  uifSingle: string;
 }
 
 /**
@@ -200,6 +202,7 @@ interface IPeoplePickerAttributes extends angular.IAttributes {
  * @property {function} onSearchKeyUp                    - Callback for the keyup event
  * @property {string} facePileHeader                     - FacePile header, used only in face pile mode
  * @property {boolean} ngDisabled                        - Support for ng-disabled directive
+ * @property {string} ngChange                           - Expression to evaluate when selectedPersons changes
  */
 export interface IPeoplePickerScope extends angular.IScope {
   ngModel: angular.INgModelController;
@@ -217,6 +220,7 @@ export interface IPeoplePickerScope extends angular.IScope {
   onSearchKeyUp: ($event: KeyboardEvent) => void;
   facePileHeader: string;
   ngDisabled: boolean;
+  ngChange: () => () => void;
 }
 
 /**
@@ -257,6 +261,7 @@ export class PeoplePickerDirective implements angular.IDirective {
   public scope: {} = {
     delay: '@uifSearchDelay',
     facePileHeader: '@?uifFacepileHeader',
+    ngChange: '&?',
     ngDisabled: '=?',
     ngModel: '=',
     onSelectedPersonClick: '&?uifSelectedPersonClick',
@@ -463,6 +468,10 @@ export class PeoplePickerDirective implements angular.IDirective {
 
     $scope.$watchCollection('selectedPersons', (data: any, data2: any, data3: any) => {
       this.resizeSearchField($element);
+
+      if ($scope.ngChange) {
+        $scope.ngChange();
+      }
     });
 
     ngModelCtrl.$render = () => {
@@ -522,6 +531,9 @@ export class PeoplePickerDirective implements angular.IDirective {
         return;
       }
 
+      if (angular.isDefined($attrs.uifSingle) && $scope.selectedPersons.length > 0) {
+        $scope.selectedPersons.length = 0;
+      }
       $scope.selectedPersons.push(person);
       ngModelCtrl.$setViewValue($scope.selectedPersons);
     };
