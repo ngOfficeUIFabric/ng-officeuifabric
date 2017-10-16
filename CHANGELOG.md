@@ -1,3 +1,10 @@
+<a name="0.16.0"></a>
+### [0.16.0 - October 16, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.16.0)
+
+#### Features
+- `uif-peoplepicker`
+  - feat(peoplepicker): add single mode to allow only one person to be selected ([760476c](https://github.com/ngOfficeUIFabric/ng-officeuifabric/commit/760476c), [#473](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues/473))
+
 <a name="0.15.4"></a>
 ### [0.15.4 - August 14, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.15.4)
 
