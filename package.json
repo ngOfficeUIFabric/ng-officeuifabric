@@ -53,7 +53,7 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "angular": "1.6.4",
+    "angular": "1.6.10",
     "office-ui-fabric": "2.6.3"
   },
   "devDependencies": {
