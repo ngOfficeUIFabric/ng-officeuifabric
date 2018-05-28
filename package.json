@@ -53,11 +53,11 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "angular": "1.6.4",
+    "angular": "1.6.10",
     "office-ui-fabric": "2.6.3"
   },
   "devDependencies": {
-    "@types/angular": "^1.6.17",
+    "@types/angular": "1.6.17",
     "@types/angular-animate": "1.5.6",
     "@types/angular-mocks": "1.5.9",
     "@types/bluebird": "3.5.4",
@@ -91,13 +91,14 @@
     "@types/run-sequence": "0.0.29",
     "@types/serve-static": "1.7.31",
     "@types/source-map": "0.5.0",
+    "@types/tapable": "0.2.3",
     "@types/through2": "2.0.33",
     "@types/tmp": "0.0.33",
     "@types/uglify-js": "2.6.28",
     "@types/vinyl": "2.0.0",
     "@types/wallabyjs": "0.0.5",
     "@types/webpack": "2.2.15",
-    "@types/xmldom": "^0.1.29",
+    "@types/xmldom": "0.1.29",
     "@types/yargs": "6.6.0",
     "angular-animate": "1.6.4",
     "angular-mocks": "1.6.4",

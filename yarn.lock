@@ -32,7 +32,7 @@
   dependencies:
     "@types/angular" "*"
 
-"@types/angular@*", "@types/angular@^1.6.17":
+"@types/angular@*", "@types/angular@1.6.17":
   version "1.6.17"
   resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.17.tgz#5bd59e77350943ffbffb8bb98dfe718acbb6ed27"
   dependencies:
@@ -230,7 +230,7 @@
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@types/source-map/-/source-map-0.5.0.tgz#dd34bbd8e32fe4e74f2e3d8ac07f8aa5b45a47ac"
 
-"@types/tapable@*":
+"@types/tapable@*", "@types/tapable@0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-0.2.3.tgz#0888b0f20cc7e58e1c22a1888b4e963eefaa810a"
 
@@ -274,7 +274,7 @@
     "@types/tapable" "*"
     "@types/uglify-js" "*"
 
-"@types/xmldom@^0.1.29":
+"@types/xmldom@0.1.29":
   version "0.1.29"
   resolved "https://registry.yarnpkg.com/@types/xmldom/-/xmldom-0.1.29.tgz#c4428b0ca86d3b881475726fd94980b38a27c381"
 
@@ -370,9 +370,9 @@ angular-sanitize@1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.6.4.tgz#60a37ea96fb0d4a322a3ccb64ee4a5cf3b154f0c"
 
-angular@1.6.4:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.4.tgz#03b7b15c01a0802d7e2cf593240e604054dc77fb"
+angular@1.6.10:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.10.tgz#eed3080a34d29d0f681ff119b18ce294e3f74826"
 
 ansi-escapes@^1.1.0:
   version "1.4.0"
