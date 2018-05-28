@@ -19,11 +19,11 @@ general:
 dependencies:
   pre:
     # install dependencies
-    - npm install -g gulp
-    - npm install -g typescript
+    - yarn install -g gulp
+    - yarn install -g typescript
   post:
     # compile typescript
-    - npm run build:ts
+    - yarn run build:ts
 
 test:
   pre:
