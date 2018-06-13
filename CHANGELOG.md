@@ -1,3 +1,9 @@
+<a name="0.16.1"></a>
+### [0.16.1 - June 13, 2018](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.16.1)
+
+- **dependencies**
+  - updated to support AngularJS 1.6.10
+
 <a name="0.16.0"></a>
 ### [0.16.0 - October 16, 2017](https://github.com/ngOfficeUIFabric/ng-officeuifabric/releases/tag/0.16.0)
 
