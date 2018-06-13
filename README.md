@@ -1,4 +1,4 @@
-# [AngularJS (v1.x)](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric)
+# [AngularJS (v1.6.10)](https://angularjs.org) directives specific to the [Office UI Fabric](https://github.com/OfficeDev/office-ui-fabric)
 
 [![npm version](https://badge.fury.io/js/ng-office-ui-fabric.svg)](https://badge.fury.io/js/ng-office-ui-fabric)
 [![bower version](https://badge.fury.io/bo/ng-office-ui-fabric.svg)](https://github.com/ngOfficeUIFabric/package-ngofficeuifabric)
@@ -6,10 +6,11 @@
 
 [![MIT license](https://img.shields.io/npm/l/express.svg)](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/LICENSE)
 
-[![bitHound Overall Score](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/score.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric)
-[![bitHound Dependencies](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/dependencies.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/devDependencies.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric/badges/code.svg)](https://www.bithound.io/github/ngOfficeUIFabric/ng-officeuifabric)
+## June 2018 - Now in Archive Mode
+
+As of June 2018, this project is now in archive mode. This means there are is no planned work / updates for this project going forward. This project was 100% run and maintained by the community. As most of the world has moved on from AngularJS (v1.x) to Angular (v6) at the time of this update, we have decided to archive this project. There will be no more updates.
+
+At this time there are no updates planned on supporting Angitgular 6.
 
 ## Branch Status
 
@@ -18,7 +19,7 @@ master | dev
 [![Circle CI](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/master.svg?style=svg)](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/master) | [![Circle CI](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/dev.svg?style=svg)](https://circleci.com/gh/ngOfficeUIFabric/ng-officeuifabric/tree/dev)
 [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=master&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=master) | [![Coverage Status](https://coveralls.io/repos/ngOfficeUIFabric/ng-officeuifabric/badge.svg?branch=dev&service=github)](https://coveralls.io/github/ngOfficeUIFabric/ng-officeuifabric?branch=dev)
 
-This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of AngularJS 1.6.x directives to make it easier to use in Angular-based applications.
+This project, **ng-OfficeUIFabric**, is a community effort to build the [Office UI Fabric](http://dev.office.com/fabric) components as a suite of AngularJS 1.6.10 directives to make it easier to use in Angular-based applications.
 
 > This library is intended to be used with AngularJS v1.6. It is not intended for Angular (*aka Angular 2 or Angular 4*). Please refer to issue #405 for a discussion on moving to future versions of Angular. At the moment, this repo is only focused on AngularJS but would like to move to Angular (ng2/ng4) as soon as this project is complete.
 
@@ -69,7 +70,7 @@ Install-Package ng-office-ui-fabric
 
 ## Direct Download
 
-You can also directly download the built library if you wish. Grab either the unminified `ngOfficeUiFabric.js` or minified `ngOfficeUiFabric.min.js` from the [package-ngofficeuifabric](https://github.com/ngOfficeUIFabric/package-ngofficeuifabric) repo. You will need to also grab copies of [Angular 1.4.*](https://angularjs.org/) and [Office UI Fabric](http://dev.office.com/fabric/getting-started) (*you only need the CSS from Office UI Fabric*). Installing from NPM, Bower or NuGet includes the dependencies.
+You can also directly download the built library if you wish. Grab either the unminified `ngOfficeUiFabric.js` or minified `ngOfficeUiFabric.min.js` from the [package-ngofficeuifabric](https://github.com/ngOfficeUIFabric/package-ngofficeuifabric) repo. You will need to also grab copies of [Angular 1.6.10](https://angularjs.org/) and [Office UI Fabric](http://dev.office.com/fabric/getting-started) (*you only need the CSS from Office UI Fabric*). Installing from NPM, Bower or NuGet includes the dependencies.
 
 ## CDN
 
@@ -96,7 +97,7 @@ At the present time, use the MDL1 version of the Office UI Fabric Core CSS files
 
 > This assumes you are using the recommended Office UI Fabric CDN reference & not a local reference.
 
-### Add Reference to ngOfficeUIFabric LIbrary
+### Add Reference to ngOfficeUIFabric LLibrary
 
 We recommend using the CDN option when including the ngOfficeUIFabric in your projects:
 
@@ -111,7 +112,7 @@ We recommend using the CDN option when including the ngOfficeUIFabric in your pr
 
 ### Supported Browsers
 
-All directives in ng-OfficeUIFabric will work against the same versions that are commonly supported between the [Office UI Fabric](http://dev.office.com/fabric/resources-and-faq) & [AngularJS 1.6.x](https://docs.angularjs.org/guide/ie).
+All directives in ng-OfficeUIFabric will work against the same versions that are commonly supported between the [Office UI Fabric](http://dev.office.com/fabric/resources-and-faq) & [AngularJS 1.6.10](https://docs.angularjs.org/guide/ie).
 
 - Google Chrome
 - Firefox
@@ -124,5 +125,7 @@ All directives in ng-OfficeUIFabric will work against the same versions that are
 First check the [issues](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) list to see if someone else has already found it and there's an ongoing discussion. If not, create an [issue](https://github.com/ngOfficeUIFabric/ng-officeuifabric/issues) or jump in the .
 
 ## Contributing to the Project
+
+This project is currently in maintenance mode. There are no planned updates to this project going forward. If you are interested in taking the project over, please submit a issue to the issue list expressing your interest.
 
 We want help! Please take a look at the [Contribution Guide](https://github.com/ngOfficeUIFabric/ng-officeuifabric/blob/master/.github/CONTRIBUTING.md) for guidance.
